@@ -487,6 +487,7 @@ static	int	alx_ncur_usr_sel	(WINDOW *win,
 			break;
 
 		/* '\r' is Enter key in Windows */
+		case KEY_ENTER:
 		case '\r':
 		case '\n':
 		case ' ':
