@@ -24,6 +24,44 @@
 	 * Comparison function. Receives two items under comparison.
 	 * return int
 	 */
+int	compare_int		(const void *a, const void *b)
+{
+	int	r;
+
+	if (*(int *)a < *(int *)b) {
+		r = -1;
+	} else if (*(int *)a > *(int *)b) {
+		r = 1;
+	} else if (*(int *)a == *(int *)b) {
+		r = 0;
+	}
+
+	return	r;
+}
+
+	/*
+	 * Comparison function. Receives two items under comparison.
+	 * return int
+	 */
+int	compare_uint8		(const void *a, const void *b)
+{
+	int	r;
+
+	if (*(uint8_t *)a < *(uint8_t *)b) {
+		r = -1;
+	} else if (*(uint8_t *)a > *(uint8_t *)b) {
+		r = 1;
+	} else if (*(uint8_t *)a == *(uint8_t *)b) {
+		r = 0;
+	}
+
+	return	r;
+}
+
+	/*
+	 * Comparison function. Receives two items under comparison.
+	 * return int
+	 */
 int	compare_int64		(const void *a, const void *b)
 {
 	int	r;

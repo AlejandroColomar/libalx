@@ -10,7 +10,7 @@ SRC_DIR = $(LIBALX_DIR)/src/
 # dependencies
 
 _ALL	= alx_cmp.o alx_file.o alx_input.o alx_mask.o alx_math.o alx_ncur.o alx_seed.o
-ALL	= $(_ALL) alx_lib.o
+ALL	= $(_ALL)
 
 CMP_INC		= alx_cmp.h
 CMP_DEPS	= $(SRC_DIR)/alx_cmp.c $(patsubst %,$(INC_DIR)/%,$(CMP_INC))
@@ -44,12 +44,6 @@ SEED_INC_DIRS	= -I $(INC_DIR)
 #	action
 
 all: $(ALL)
-
-
-alx_lib.o: $(_ALL)
-	$(Q)$(LD) -r $^ -o $@
-	@echo  "	LD	$@"
-	@echo  ""
 
 
 alx_cmp.s: $(CMP_DEPS)
