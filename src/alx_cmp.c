@@ -32,7 +32,8 @@ int	compare_int		(const void *a, const void *b)
 		r = -1;
 	} else if (*(int *)a > *(int *)b) {
 		r = 1;
-	} else if (*(int *)a == *(int *)b) {
+	} else {
+		/*  (*(int *)a == *(int *)b)  */
 		r = 0;
 	}
 
@@ -51,7 +52,8 @@ int	compare_uint8		(const void *a, const void *b)
 		r = -1;
 	} else if (*(uint8_t *)a > *(uint8_t *)b) {
 		r = 1;
-	} else if (*(uint8_t *)a == *(uint8_t *)b) {
+	} else {
+		/*  (*(uint8_t *)a == *(uint8_t *)b)  */
 		r = 0;
 	}
 
@@ -70,7 +72,8 @@ int	compare_int64		(const void *a, const void *b)
 		r = -1;
 	} else if (*(int64_t *)a > *(int64_t *)b) {
 		r = 1;
-	} else if (*(int64_t *)a == *(int64_t *)b) {
+	} else {
+		/*  (*(int64_t *)a == *(int64_t *)b)  */
 		r = 0;
 	}
 

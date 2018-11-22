@@ -394,13 +394,12 @@ void	alx_w_getfname		(const char *fpath, char *fname, bool exist,
 void	alx_ncur_prn_title	(WINDOW *win, const char *title)
 {
 	/* Find size of window */
-	int	h;
 	int	w;
-	getmaxyx(win, h, w);
+	w	= getmaxx(win);
 
 	/* Find length of title */
 	int	len;
-	len =	strlen(title);
+	len	= strlen(title);
 
 	/* Print title centered */
 	mvwaddch(win, 0, (w - (len + 2))/2 - 1, ACS_RTEE);
@@ -413,11 +412,12 @@ void	alx_ncur_prn_subtitle	(WINDOW *win, const char *subtitle)
 	/* Find size of window */
 	int	h;
 	int	w;
-	getmaxyx(win, h, w);
+	h	= getmaxy(win);
+	w	= getmaxx(win);
 
 	/* Find length of title */
 	int	len;
-	len =	strlen(subtitle);
+	len	= strlen(subtitle);
 
 	/* Print subtitle centered */
 	mvwaddch(win, h - 1, (w - (len + 2))/2 - 1, ACS_RTEE);
@@ -432,11 +432,6 @@ void	alx_ncur_prn_subtitle	(WINDOW *win, const char *subtitle)
 static	void	alx_ncur_prn_menu	(WINDOW *win,
 					int N, struct Alx_Menu mnu[N])
 {
-	/* Find size of window */
-	int	h;
-	int	w;
-	getmaxyx(win, h, w);
-
 	/* Print all menu items */
 	int	i;
 	for (i = 0; i < N; i++) {
