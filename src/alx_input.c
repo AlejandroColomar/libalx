@@ -219,6 +219,8 @@ static	double	loop_getdbl	(double m, double def, double M)
 	double	R;
 	int	err;
 
+	R	= def;
+
 	for (i = 0; i < MAX_TRIES; i++) {
 		x	= fgets(buff, BUFF_SIZE, stdin);
 
@@ -245,6 +247,8 @@ static	int64_t	loop_getint	(double m, int64_t def, double M)
 	char	*x;
 	int64_t	Z;
 	int	err;
+
+	Z	= def;
 
 	for (i = 0; i < MAX_TRIES; i++) {
 		x	= fgets(buff, BUFF_SIZE, stdin);
