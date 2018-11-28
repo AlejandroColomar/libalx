@@ -12,7 +12,7 @@
 	#include <stdlib.h>
 
 /* libalx --------------------------------------------------------------------*/
-		/* compare_uint8() */
+		/* compare_u8() */
 	#include "alx_cmp.h"
 
 /* Module --------------------------------------------------------------------*/
@@ -54,11 +54,11 @@ double	alx_bin_coef		(int64_t a, int64_t b)
 	 * Median
 	 * - If even array, return the mean of the two central values
 	 */
-uint8_t	alx_median_uint8	(int n, uint8_t x[n])
+uint8_t	alx_median_u8		(int n, uint8_t x[n])
 {
 	uint8_t	median;
 
-	qsort(x, n, sizeof(x[0]), compare_uint8);
+	qsort(x, n, sizeof(x[0]), compare_u8);
 
 	if (n % 2) {
 		median	= x[n/2];
@@ -67,6 +67,26 @@ uint8_t	alx_median_uint8	(int n, uint8_t x[n])
 	}
 
 	return	median;
+}
+
+	/*
+	 * Maximum element of an array
+	 * - Return position containing the maximum element of the array
+	 */
+int	alx_maximum_u8		(int n, uint8_t x[n])
+{
+	int	pos	= 0;
+	uint8_t	val	= 0;
+
+	int	i;
+	for (i = 0; i < n; i++) {
+		if (x[i] >= val) {
+			val	= x[i];
+			pos	= i;
+		}
+	}
+
+	return	pos;
 }
 
 

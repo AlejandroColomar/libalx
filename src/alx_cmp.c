@@ -44,7 +44,7 @@ int	compare_int		(const void *a, const void *b)
 	 * Comparison function. Receives two items under comparison.
 	 * return int
 	 */
-int	compare_uint8		(const void *a, const void *b)
+int	compare_u8		(const void *a, const void *b)
 {
 	int	r;
 
@@ -64,7 +64,7 @@ int	compare_uint8		(const void *a, const void *b)
 	 * Comparison function. Receives two items under comparison.
 	 * return int
 	 */
-int	compare_int64		(const void *a, const void *b)
+int	compare_i64		(const void *a, const void *b)
 {
 	int	r;
 

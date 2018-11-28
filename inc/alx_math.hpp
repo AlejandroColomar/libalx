@@ -28,19 +28,25 @@ extern	"C" {
 	/*
 	 * Factorial
 	 */
-double	alx_fact		(int64_t n);
+double	alx_fact	(int64_t n);
 
 	/*
 	 * Binomial coefficient (a b):				--!!!  a > b  !!!--
 	 * - Bugs: If !(a > b), returns 1.
 	 */
-double	alx_bin_coef		(int64_t a, int64_t b);
+double	alx_bin_coef	(int64_t a, int64_t b);
 
 	/*
 	 * Median
 	 * - If even array, return the mean of the two central values
 	 */
-uint8_t	alx_median_uint8	(int n, uint8_t x[]);
+uint8_t	alx_median_u8	(int n, uint8_t x[]);
+
+	/*
+	 * Maximum element of an array
+	 * - Return position containing the maximum element of the array
+	 */
+int	alx_maximum_u8	(int n, uint8_t x[]);
 
 
 /******************************************************************************
