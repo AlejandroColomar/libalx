@@ -89,6 +89,56 @@ int	alx_maximum_u8		(int n, uint8_t x[n])
 	return	pos;
 }
 
+	/**
+	 * @brief	Linear scale transform.
+	 *			Values can be out of range [in_min, in_max].
+	 * @param	input:		value to be transformed.
+	 * @param	in_min:		input min value.
+	 * @param	in_max:		input max value.
+	 * @param	out_min:	output value that corresponds to in_min.
+	 * @param	out_max:	output value that corresponds to in_max.
+	 * @return	output:		transformed value.
+	 */
+double	scale_linear		(double input,
+				double in_min, double in_max,
+				double out_min, double out_max)
+{
+	double	normalized;
+	double	output;
+
+	normalized	= (input - in_min) / (in_max - in_min);
+	output		= out_min + normalized * (out_max - out_min);
+
+	return	output;
+}
+
+float	scale_linear_f		(float input,
+				float in_min, float in_max,
+				float out_min, float out_max)
+{
+	float	normalized;
+	float	output;
+
+	normalized	= (input - in_min) / (in_max - in_min);
+	output		= out_min + normalized * (out_max - out_min);
+
+	return	output;
+}
+
+int16_t	scale_linear_i16	(int16_t input,
+				int16_t in_min, int16_t in_max,
+				int16_t out_min, int16_t out_max)
+{
+	int16_t	output;
+
+	output		= (int16_t)((int32_t)out_min +
+					(int32_t)(input - in_min) *
+					(int32_t)(out_max - out_min) /
+					(int32_t)(in_max - in_min));
+
+	return	output;
+}
+
 
 /******************************************************************************
  ******* end of file **********************************************************
