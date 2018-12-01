@@ -50,16 +50,6 @@ export	BUILD_VERBOSE
 MAKEFLAGS += --no-print-directory
 
 ################################################################################
-# Make variables (CC, etc...)
-  CC		= gcc
-  AS		= as
-  AR		= ar
-
-export	CC
-export	AS
-export	AR
-
-################################################################################
 # cflags
 CFLAGS_STD	= -std=c11
 
@@ -93,16 +83,20 @@ export	CFLAGS
 ################################################################################
 # directories
 
-TMP_DIR = $(LIBALX_DIR)/tmp/
+LIBALX_DIR	= $(CURDIR)
+
+TMP_DIR	= $(LIBALX_DIR)/tmp/
 LIB_DIR = $(LIBALX_DIR)/lib/
 
+export	LIBALX_DIR
 
+################################################################################
 # target: dependencies
 #	action
 
 all:
-	$(Q)cd $(TMP_DIR) && $(MAKE) && cd ..
-	$(Q)cd $(LIB_DIR) && $(MAKE) && cd ..
+	$(Q)make -C $(TMP_DIR)
+	$(Q)make -C $(LIB_DIR)
 
 
 clean:
@@ -110,3 +104,7 @@ clean:
 	$(Q)find . -type f -name '*.s' -exec rm '{}' '+'
 	$(Q)find . -type f -name '*.a' -exec rm '{}' '+'
 	@echo  "Clean libalx"
+
+################################################################################
+######## End of file ###########################################################
+################################################################################

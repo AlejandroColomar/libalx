@@ -1,4 +1,4 @@
-# -*- MakeFile -*-
+#!/usr/bin/make -f
 
 # MACRO = substitute with this
 

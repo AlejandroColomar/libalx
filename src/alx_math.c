@@ -99,7 +99,7 @@ int	alx_maximum_u8		(int n, uint8_t x[n])
 	 * @param	out_max:	output value that corresponds to in_max.
 	 * @return	output:		transformed value.
 	 */
-double	scale_linear		(double input,
+double	alx_scale_linear	(double input,
 				double in_min, double in_max,
 				double out_min, double out_max)
 {
@@ -112,7 +112,7 @@ double	scale_linear		(double input,
 	return	output;
 }
 
-float	scale_linear_f		(float input,
+float	alx_scale_linear_f	(float input,
 				float in_min, float in_max,
 				float out_min, float out_max)
 {
@@ -125,7 +125,7 @@ float	scale_linear_f		(float input,
 	return	output;
 }
 
-int16_t	scale_linear_i16	(int16_t input,
+int16_t	alx_scale_linear_i16	(int16_t input,
 				int16_t in_min, int16_t in_max,
 				int16_t out_min, int16_t out_max)
 {
