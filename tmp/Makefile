@@ -45,7 +45,7 @@ SEED_INC_DIRS	= -I $(INC_DIR)
 
 all: $(BASE)
 
-basic: $(BASE)
+base: $(BASE)
 
 curses: $(CURSES)
 

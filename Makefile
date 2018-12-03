@@ -63,13 +63,24 @@ export	LIBALX_DIR
 # target: dependencies
 #	action
 
-all:
-	$(Q)make -C $(TMP_DIR)
-	$(Q)make -C $(LIB_DIR)
+all: base
+
+
+base:
+	@echo  "	MAKE	base"
+	$(Q)make base -C $(TMP_DIR)
+	$(Q)make base -C $(LIB_DIR)
+	@echo  ""
+
+curses:
+	@echo  "	MAKE	curses"
+	$(Q)make curses -C $(TMP_DIR)
+	$(Q)make curses -C $(LIB_DIR)
+	@echo  ""
 
 
 clean:
-	@echo  "	CLEAN	*.o *.s *.a"
+	@echo  "	RM	*.o *.s *.a"
 	$(Q)find . -type f -name '*.o' -exec rm '{}' '+'
 	$(Q)find . -type f -name '*.s' -exec rm '{}' '+'
 	$(Q)find . -type f -name '*.a' -exec rm '{}' '+'

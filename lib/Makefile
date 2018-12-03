@@ -23,13 +23,10 @@ LIBALX_OBJS_CURSES	= $(patsubst %,$(LIBALX_TMP_DIR)/%,$(_CURSES))
 #	action
 
 all: $(BASE)
-	@echo  ""
 
 base: $(BASE)
-	@echo  ""
 
 curses: $(CURSES)
-	@echo  ""
 
 
 libalx-base.a: $(LIBALX_OBJS_BASE)
