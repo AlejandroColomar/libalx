@@ -9,8 +9,8 @@ SRC_DIR = $(LIBALX_DIR)/src/
 
 # dependencies
 
-_ALL	= alx_cmp.o alx_file.o alx_input.o alx_mask.o alx_math.o alx_ncur.o alx_seed.o
-ALL	= $(_ALL)
+BASE	= alx_cmp.o alx_file.o alx_input.o alx_mask.o alx_math.o alx_seed.o
+CURSES	= alx_ncur.o
 
 CMP_INC		= alx_cmp.h
 CMP_DEPS	= $(SRC_DIR)/alx_cmp.c $(patsubst %,$(INC_DIR)/%,$(CMP_INC))
@@ -43,7 +43,11 @@ SEED_INC_DIRS	= -I $(INC_DIR)
 # target: dependencies
 #	action
 
-all: $(ALL)
+all: $(BASE)
+
+basic: $(BASE)
+
+curses: $(CURSES)
 
 
 alx_cmp.s: $(CMP_DEPS)
@@ -82,7 +86,7 @@ alx_math.o: alx_math.s
 	@echo  "	AS	$@"
 
 alx_ncur.s: $(NCUR_DEPS)
-	$(Q)$(CC) $(CFLAGS) $(NCUR_INC_DIRS) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) `pkg-config --cflags ncurses` $(NCUR_INC_DIRS) -S $< -o $@
 	@echo  "	CC	$@"
 alx_ncur.o: alx_ncur.s
 	$(Q)$(AS) $< -o $@

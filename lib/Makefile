@@ -11,18 +11,31 @@ SRC_DIR = $(LIBALX_DIR)/src/
 
 # dependencies
 
-_ALL	= alx_cmp.o alx_file.o alx_input.o alx_mask.o alx_math.o alx_ncur.o alx_seed.o
-ALL	= libalx.a
+_BASE	= alx_cmp.o alx_file.o alx_input.o alx_mask.o alx_math.o alx_seed.o
+_CURSES	= alx_ncur.o
+BASE	= libalx-base.a
+CURSES	= libalx-curses.a
 
-LIBALX_OBJS	= $(patsubst %,$(LIBALX_TMP_DIR)/%,$(_ALL))
+LIBALX_OBJS_BASE	= $(patsubst %,$(LIBALX_TMP_DIR)/%,$(_BASE))
+LIBALX_OBJS_CURSES	= $(patsubst %,$(LIBALX_TMP_DIR)/%,$(_CURSES))
 
 # target: dependencies
 #	action
 
-all: $(ALL)
+all: $(BASE)
+	@echo  ""
+
+base: $(BASE)
+	@echo  ""
+
+curses: $(CURSES)
+	@echo  ""
 
 
-libalx.a: $(LIBALX_OBJS)
+libalx-base.a: $(LIBALX_OBJS_BASE)
 	$(Q)$(AR) -r -c -s -o $@ $^
 	@echo  "	AR	$@"
-	@echo  ""
+
+libalx-curses.a: $(LIBALX_OBJS_CURSES)
+	$(Q)$(AR) -r -c -s -o $@ $^
+	@echo  "	AR	$@"

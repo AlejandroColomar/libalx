@@ -50,37 +50,6 @@ export	BUILD_VERBOSE
 MAKEFLAGS += --no-print-directory
 
 ################################################################################
-# cflags
-CFLAGS_STD	= -std=c11
-
-CFLAGS_OPT	= -O3
-CFLAGS_OPT     += -march=native
-
-CFLAGS_W	= -Wall
-CFLAGS_W       += -Wextra
-CFLAGS_W       += -Wstrict-prototypes
-CFLAGS_W       += -Werror
-CFLAGS_W       += -Wno-format-truncation
-CFLAGS_W       += -Wno-format-zero-length
-#CFLAGS_W       += -Wno-unused-function
-
-CFLAGS_PKG	= `pkg-config --cflags ncurses`
-
-CFLAGS_D	= -D PROG_VERSION=\"$(PROGRAMVERSION)\"
-CFLAGS_D       += -D INSTALL_SHARE_DIR=\"$(INSTALL_SHARE_DIR)\"
-CFLAGS_D       += -D SHARE_DIR=\"$(SHARE_DIR)\"
-CFLAGS_D       += -D INSTALL_VAR_DIR=\"$(INSTALL_VAR_DIR)\"
-CFLAGS_D       += -D VAR_DIR=\"$(VAR_DIR)\"
-
-CFLAGS		= $(CFLAGS_STD)
-CFLAGS         += $(CFLAGS_OPT)
-CFLAGS         += $(CFLAGS_W)
-CFLAGS         += $(CFLAGS_PKG)
-CFLAGS         += $(CFLAGS_D)
-
-export	CFLAGS
-
-################################################################################
 # directories
 
 LIBALX_DIR	= $(CURDIR)
@@ -100,10 +69,10 @@ all:
 
 
 clean:
+	@echo  "	CLEAN	*.o *.s *.a"
 	$(Q)find . -type f -name '*.o' -exec rm '{}' '+'
 	$(Q)find . -type f -name '*.s' -exec rm '{}' '+'
 	$(Q)find . -type f -name '*.a' -exec rm '{}' '+'
-	@echo  "Clean libalx"
 
 ################################################################################
 ######## End of file ###########################################################
