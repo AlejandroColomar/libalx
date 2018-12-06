@@ -132,8 +132,8 @@ int16_t	alx_scale_linear_i16	(int16_t input,
 	int16_t	output;
 
 	output		= (int16_t)((int32_t)out_min +
-					(int32_t)(input - in_min) *
-					(int32_t)(out_max - out_min) /
+					(int32_t)((input - in_min) *
+					(int32_t)(out_max - out_min)) /
 					(int32_t)(in_max - in_min));
 
 	return	output;
