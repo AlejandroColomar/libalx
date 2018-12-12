@@ -54,6 +54,25 @@ double	alx_bin_coef		(int64_t a, int64_t b)
 	 * Median
 	 * - If even array, return the mean of the two central values
 	 */
+double	alx_median		(int n, double x[n])
+{
+	double	median;
+
+	qsort(x, n, sizeof(x[0]), compare_u8);
+
+	if (n % 2) {
+		median	= x[n/2];
+	} else {
+		median	= (x[n/2] + x[n/2 - 1]) / 2.0;
+	}
+
+	return	median;
+}
+
+	/*
+	 * Median
+	 * - If even array, return the mean of the two central values
+	 */
 uint8_t	alx_median_u8		(int n, uint8_t x[n])
 {
 	uint8_t	median;
@@ -63,7 +82,7 @@ uint8_t	alx_median_u8		(int n, uint8_t x[n])
 	if (n % 2) {
 		median	= x[n/2];
 	} else {
-		median	= (x[n/2] + x[n/2 - 1]) / 2.0;
+		median	= (x[n/2] + x[n/2 - 1]) / 2;
 	}
 
 	return	median;

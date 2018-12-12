@@ -34,6 +34,7 @@ double	alx_bin_coef		(int64_t a, int64_t b);
 	 * Median
 	 * - If even array, return the mean of the two central values
 	 */
+double	alx_median		(int n, double x[n]);
 uint8_t	alx_median_u8		(int n, uint8_t x[n]);
 
 	/*
