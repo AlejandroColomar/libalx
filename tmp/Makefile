@@ -9,7 +9,8 @@ SRC_DIR = $(LIBALX_DIR)/src/
 
 # dependencies
 
-BASE	= alx_cmp.o alx_file.o alx_input.o alx_mask.o alx_math.o alx_seed.o
+BASE	= alx_cmp.o alx_mask.o alx_math.o alx_seed.o
+IO	= alx_file.o alx_input.o
 CURSES	= alx_ncur.o
 
 CMP_INC		= alx_cmp.h
@@ -46,6 +47,8 @@ SEED_INC_DIRS	= -I $(INC_DIR)
 all: $(BASE)
 
 base: $(BASE)
+
+io: $(IO)
 
 curses: $(CURSES)
 

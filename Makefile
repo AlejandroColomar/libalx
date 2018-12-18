@@ -72,6 +72,12 @@ base:
 	$(Q)make base -C $(LIB_DIR)
 	@echo  ""
 
+io:
+	@echo  "	MAKE	io"
+	$(Q)make io -C $(TMP_DIR)
+	$(Q)make io -C $(LIB_DIR)
+	@echo  ""
+
 curses:
 	@echo  "	MAKE	curses"
 	$(Q)make curses -C $(TMP_DIR)
