@@ -9,6 +9,7 @@
 /* Standard C ----------------------------------------------------------------*/
 	#include <inttypes.h>
 	#include <stdbool.h>
+	#include <stddef.h>
 	#include <stdio.h>
 		/* strlen() */
 	#include <string.h>
