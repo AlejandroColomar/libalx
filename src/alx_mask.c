@@ -30,6 +30,16 @@ uint32_t	alx_maskgen_u32	(int bit)
 	return	(UINT32_C(1) << bit);
 }
 
+uint16_t	alx_maskgen_u16	(int bit)
+{
+	return	(UINT16_C(1) << bit);
+}
+
+uint8_t		alx_maskgen_u8	(int bit)
+{
+	return	(UINT8_C(1) << bit);
+}
+
 
 /******************************************************************************
  ******* end of file **********************************************************
