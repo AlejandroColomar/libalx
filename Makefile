@@ -64,7 +64,7 @@ export	LIBALX_DIR
 #	action
 
 PHONY := all
-all: base
+all: base io curses
 
 
 PHONY += base
