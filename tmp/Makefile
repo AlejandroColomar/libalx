@@ -44,64 +44,80 @@ SEED_INC_DIRS	= -I $(INC_DIR)
 # target: dependencies
 #	action
 
-all: $(BASE)
+PHONY := all
+all: base io curses
 
+PHONY += base
 base: $(BASE)
 
+PHONY += io
 io: $(IO)
 
+PHONY += curses
 curses: $(CURSES)
 
 
 alx_cmp.s: $(CMP_DEPS)
+	@echo	"	CC	$@"
 	$(Q)$(CC) $(CFLAGS) $(CMP_INC_DIRS) -S $< -o $@
-	@echo  "	CC	$@"
 alx_cmp.o: alx_cmp.s
+	@echo	"	AS	$@"
 	$(Q)$(AS) $< -o $@
-	@echo  "	AS	$@"
 
 alx_file.s: $(FILE_DEPS)
+	@echo	"	CC	$@"
 	$(Q)$(CC) $(CFLAGS) $(FILE_INC_DIRS) -S $< -o $@
-	@echo  "	CC	$@"
 alx_file.o: alx_file.s
+	@echo	"	AS	$@"
 	$(Q)$(AS) $< -o $@
-	@echo  "	AS	$@"
 
 alx_input.s: $(INPUT_DEPS)
+	@echo	"	CC	$@"
 	$(Q)$(CC) $(CFLAGS) $(INPUT_INC_DIRS) -S $< -o $@
-	@echo  "	CC	$@"
 alx_input.o: alx_input.s
+	@echo	"	AS	$@"
 	$(Q)$(AS) $< -o $@
-	@echo  "	AS	$@"
 
 alx_mask.s: $(MASK_DEPS)
+	@echo	"	CC	$@"
 	$(Q)$(CC) $(CFLAGS) $(MASK_INC_DIRS) -S $< -o $@
-	@echo  "	CC	$@"
 alx_mask.o: alx_mask.s
+	@echo	"	AS	$@"
 	$(Q)$(AS) $< -o $@
-	@echo  "	AS	$@"
 
 alx_math.s: $(MATH_DEPS)
+	@echo	"	CC	$@"
 	$(Q)$(CC) $(CFLAGS) $(MATH_INC_DIRS) -S $< -o $@
-	@echo  "	CC	$@"
 alx_math.o: alx_math.s
+	@echo	"	AS	$@"
 	$(Q)$(AS) $< -o $@
-	@echo  "	AS	$@"
 
 alx_ncur.s: $(NCUR_DEPS)
+	@echo	"	CC	$@"
 	$(Q)$(CC) $(CFLAGS) `pkg-config --cflags ncurses` $(NCUR_INC_DIRS) -S $< -o $@
-	@echo  "	CC	$@"
 alx_ncur.o: alx_ncur.s
+	@echo	"	AS	$@"
 	$(Q)$(AS) $< -o $@
-	@echo  "	AS	$@"
 
 alx_seed.s: $(SEED_DEPS)
+	@echo	"	CC	$@"
 	$(Q)$(CC) $(CFLAGS) $(SEED_INC_DIRS) -S $< -o $@
-	@echo  "	CC	$@"
 alx_seed.o: alx_seed.s
+	@echo	"	AS	$@"
 	$(Q)$(AS) $< -o $@
-	@echo  "	AS	$@"
 
 
+PHONY += clean
 clean:
 	$(Q)rm -f *.o *.s
+
+################################################################################
+# Declare the contents of the .PHONY variable as phony.
+.PHONY: $(PHONY)
+
+
+
+
+################################################################################
+######## End of file ###########################################################
+################################################################################

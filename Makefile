@@ -63,33 +63,42 @@ export	LIBALX_DIR
 # target: dependencies
 #	action
 
+PHONY := all
 all: base
 
 
+PHONY += base
 base:
 	@echo  "	MAKE	base"
-	$(Q)make base -C $(TMP_DIR)
-	$(Q)make base -C $(LIB_DIR)
-	@echo  ""
+	$(Q)$(MAKE) base	-C $(TMP_DIR)
+	$(Q)$(MAKE) base	-C $(LIB_DIR)
 
+PHONY += io
 io: base
 	@echo  "	MAKE	io"
-	$(Q)make io -C $(TMP_DIR)
-	$(Q)make io -C $(LIB_DIR)
-	@echo  ""
+	$(Q)$(MAKE) io		-C $(TMP_DIR)
+	$(Q)$(MAKE) io		-C $(LIB_DIR)
 
+PHONY += curses
 curses: io
 	@echo  "	MAKE	curses"
-	$(Q)make curses -C $(TMP_DIR)
-	$(Q)make curses -C $(LIB_DIR)
-	@echo  ""
+	$(Q)$(MAKE) curses	-C $(TMP_DIR)
+	$(Q)$(MAKE) curses	-C $(LIB_DIR)
 
 
+PHONY += clean
 clean:
 	@echo  "	RM	*.o *.s *.a"
 	$(Q)find . -type f -name '*.o' -exec rm '{}' '+'
 	$(Q)find . -type f -name '*.s' -exec rm '{}' '+'
 	$(Q)find . -type f -name '*.a' -exec rm '{}' '+'
+
+################################################################################
+# Declare the contents of the .PHONY variable as phony.
+.PHONY: $(PHONY)
+
+
+
 
 ################################################################################
 ######## End of file ###########################################################

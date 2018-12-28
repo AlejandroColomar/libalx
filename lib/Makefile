@@ -25,12 +25,16 @@ LIBALX_OBJS_CURSES	= $(patsubst %,$(LIBALX_TMP_DIR)/%,$(_CURSES))
 # target: dependencies
 #	action
 
-all: $(BASE)
+PHONY := all
+all: base io curses
 
+PHONY += base
 base: $(BASE)
 
+PHONY += io
 io: $(IO)
 
+PHONY += curses
 curses: $(CURSES)
 
 
@@ -45,3 +49,19 @@ libalx-io.a: $(LIBALX_OBJS_IO)
 libalx-curses.a: $(LIBALX_OBJS_CURSES)
 	$(Q)$(AR) -r -c -s -o $@ $^
 	@echo  "	AR	$@"
+
+
+PHONY += clean
+clean:
+	$(Q)rm -f *.a
+
+################################################################################
+# Declare the contents of the .PHONY variable as phony.
+.PHONY: $(PHONY)
+
+
+
+
+################################################################################
+######## End of file ###########################################################
+################################################################################
