@@ -67,22 +67,19 @@ all: base
 
 
 base:
-	@echo  "	MAKE	base"
+	@echo	"	MAKE	base"
 	$(Q)make base -C $(TMP_DIR)
 	$(Q)make base -C $(LIB_DIR)
-	@echo  ""
 
 io:
-	@echo  "	MAKE	io"
+	@echo	"	MAKE	io"
 	$(Q)make io -C $(TMP_DIR)
 	$(Q)make io -C $(LIB_DIR)
-	@echo  ""
 
 curses:
-	@echo  "	MAKE	curses"
+	@echo	"	MAKE	curses"
 	$(Q)make curses -C $(TMP_DIR)
 	$(Q)make curses -C $(LIB_DIR)
-	@echo  ""
 
 
 clean:
