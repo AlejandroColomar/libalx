@@ -74,13 +74,13 @@ base:
 	$(Q)$(MAKE) base	-C $(LIB_DIR)
 
 PHONY += io
-io: base
+io:
 	@echo  "	MAKE	io"
 	$(Q)$(MAKE) io		-C $(TMP_DIR)
 	$(Q)$(MAKE) io		-C $(LIB_DIR)
 
 PHONY += curses
-curses: io
+curses:
 	@echo  "	MAKE	curses"
 	$(Q)$(MAKE) curses	-C $(TMP_DIR)
 	$(Q)$(MAKE) curses	-C $(LIB_DIR)
