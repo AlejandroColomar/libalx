@@ -144,6 +144,20 @@ float	alx_scale_linear_f	(float input,
 	return	output;
 }
 
+int8_t	alx_scale_linear_i8	(int8_t input,
+				int8_t in_min, int8_t in_max,
+				int8_t out_min, int8_t out_max)
+{
+	int8_t	output;
+
+	output		= (int8_t)((int16_t)out_min +
+					(int16_t)((input - in_min) *
+					(int16_t)(out_max - out_min)) /
+					(int16_t)(in_max - in_min));
+
+	return	output;
+}
+
 int16_t	alx_scale_linear_i16	(int16_t input,
 				int16_t in_min, int16_t in_max,
 				int16_t out_min, int16_t out_max)

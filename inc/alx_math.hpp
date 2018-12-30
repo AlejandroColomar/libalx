@@ -65,6 +65,9 @@ double	alx_scale_linear	(double input,
 float	alx_scale_linear_f	(float input,
 					float in_min, float in_max,
 					float out_min, float out_max);
+int8_t	alx_scale_linear_i8	(int8_t input,
+					int8_t in_min, int8_t in_max,
+					int8_t out_min, int8_t out_max);
 int16_t	alx_scale_linear_i16	(int16_t input,
 					int16_t in_min, int16_t in_max,
 					int16_t out_min, int16_t out_max);
