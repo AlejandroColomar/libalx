@@ -1,5 +1,6 @@
 /******************************************************************************
  *	Copyright (C) 2017	Alejandro Colomar Andrés		      *
+ *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
 
@@ -44,6 +45,7 @@ void	alx_snprint_file	(char *dest, int destsize, const char *filepath)
 {
 	char	buff [BUFF_SIZE_TEXT];
 	FILE	*fp;
+	long	len;
 
 	/* Open file */
 	fp	= fopen(filepath, "r");
@@ -65,7 +67,6 @@ void	alx_snprint_file	(char *dest, int destsize, const char *filepath)
 		printf(" errno = %i;\n", errno);
 	}
 #else
-	long	len;
 	if (fp) {
 		/* File lenght */
 		fseek(fp, 0, SEEK_END);

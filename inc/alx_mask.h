@@ -19,10 +19,10 @@
 /******************************************************************************
  ******* functions ************************************************************
  ******************************************************************************/
-	uint64_t	alx_maskgen_u64		(int bit);
-	uint32_t	alx_maskgen_u32		(int bit);
-	uint16_t	alx_maskgen_u16		(int bit);
-	uint8_t		alx_maskgen_u8		(int bit);
+uint64_t	alx_maskgen_u64		(int bit);
+uint32_t	alx_maskgen_u32		(int bit);
+uint16_t	alx_maskgen_u16		(int bit);
+uint8_t		alx_maskgen_u8		(int bit);
 
 
 /******************************************************************************

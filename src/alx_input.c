@@ -1,5 +1,6 @@
 /******************************************************************************
  *	Copyright (C) 2017	Alejandro Colomar Andrés		      *
+ *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
 
@@ -34,7 +35,8 @@
  ******* static functions *****************************************************
  ******************************************************************************/
 static	double	loop_getdbl	(double m, double def, double M);
-static	int64_t	loop_getint	(double m, int64_t def, double M);
+static	int	loop_getint	(double m, int def, double M);
+static	int64_t	loop_getint_i64	(double m, int64_t def, double M);
 static	void	manage_error	(int err);
 
 
@@ -46,7 +48,8 @@ static	void	manage_error	(int err);
 	 * return:	0	if correct
 	 *		non 0	if there is an error
 	 */
-int	alx_sscan_dbl	(double *dest, double m, double def, double M, const char *str)
+int	alx_sscan_dbl	(double *dest, double m, double def, double M,
+			const char *str)
 {
 	int	err;
 
@@ -70,7 +73,8 @@ int	alx_sscan_dbl	(double *dest, double m, double def, double M, const char *str
 	 * return:	0	if correct
 	 *		non 0	if there is an error
 	 */
-int	alx_sscan_int	(int *dest, double m, int def, double M, const char *str)
+int	alx_sscan_int	(int *dest, double m, int def, double M,
+			const char *str)
 {
 	int	err;
 
@@ -94,7 +98,8 @@ int	alx_sscan_int	(int *dest, double m, int def, double M, const char *str)
 	 * return:	0	if correct
 	 *		non 0	if there is an error
 	 */
-int	alx_sscan_int64	(int64_t *dest, double m, int64_t def, double M, const char *str)
+int	alx_sscan_i64	(int64_t *dest, double m, int64_t def, double M,
+			const char *str)
 {
 	int	err;
 
@@ -118,7 +123,8 @@ int	alx_sscan_int64	(int64_t *dest, double m, int64_t def, double M, const char 
 	 * return:	0	if correct
 	 *		non 0	if there is an error
 	 */
-int	alx_sscan_fname	(const char *fpath, char *fname, bool exist, const char *str)
+int	alx_sscan_fname	(const char *fpath, char *fname, bool exist,
+			const char *str)
 {
 	char	buff [FILENAME_MAX];
 	char	file_path [FILENAME_MAX];
@@ -183,13 +189,32 @@ double	alx_getdbl	(double m, double def, double M,
 }
 
 	/*
-	 * Ask for an int64_t in the range [m, M].
+	 * Ask for an int in the range [m, M].
 	 *
 	 * If the user enters a non valid number, it repeats to ask for
 	 * the number two more times. After that, it uses the default
 	 * value.
 	 */
-int64_t	alx_getint	(double m, int64_t def, double M,
+int	alx_getint	(double m, int def, double M,
+			const char *title, const char *help)
+{
+	int	Z;
+
+	if (title != NULL) {
+		puts(title);
+	}
+	if (help == NULL) {
+		printf("Introduce an integer number [%lf U %lf] (default %i):...\t", m, M, def);
+	} else {
+		puts(help);
+	}
+
+	Z = loop_getint(m, def, M);
+
+	return	Z;
+}
+
+int64_t	alx_getint_i64	(double m, int64_t def, double M,
 			const char *title, const char *help)
 {
 	int64_t	Z;
@@ -203,7 +228,7 @@ int64_t	alx_getint	(double m, int64_t def, double M,
 		puts(help);
 	}
 
-	Z = loop_getint(m, def, M);
+	Z = loop_getint_i64(m, def, M);
 
 	return	Z;
 }
@@ -241,7 +266,36 @@ static	double	loop_getdbl	(double m, double def, double M)
 	return	R;
 }
 
-static	int64_t	loop_getint	(double m, int64_t def, double M)
+static	int	loop_getint	(double m, int def, double M)
+{
+	int	i;
+	char	buff [BUFF_SIZE];
+	char	*x;
+	int	Z;
+	int	err;
+
+	Z	= def;
+
+	for (i = 0; i < MAX_TRIES; i++) {
+		x	= fgets(buff, BUFF_SIZE, stdin);
+
+		if (x == NULL) {
+			err	= ERR_FGETS;
+		} else {
+			err	= alx_sscan_int(&Z, m, def, M, buff);
+		}
+
+		if (err) {
+			manage_error(err);
+		} else {
+			break;
+		}
+	}
+
+	return	Z;
+}
+
+static	int64_t	loop_getint_i64	(double m, int64_t def, double M)
 {
 	int	i;
 	char	buff [BUFF_SIZE];
@@ -257,7 +311,7 @@ static	int64_t	loop_getint	(double m, int64_t def, double M)
 		if (x == NULL) {
 			err	= ERR_FGETS;
 		} else {
-			err	= alx_sscan_int64(&Z, m, def, M, buff);
+			err	= alx_sscan_i64(&Z, m, def, M, buff);
 		}
 
 		if (err) {
@@ -272,6 +326,7 @@ static	int64_t	loop_getint	(double m, int64_t def, double M)
 
 static	void	manage_error	(int err)
 {
+
 	switch (err) {
 	case ERR_RANGE:
 		puts(ERR_RANGE_MSG);

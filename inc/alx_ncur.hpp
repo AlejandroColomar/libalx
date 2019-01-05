@@ -1,5 +1,6 @@
 /******************************************************************************
  *	Copyright (C) 2017	Alejandro Colomar Andrés		      *
+ *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
 
@@ -41,59 +42,59 @@ extern	"C" {
 /******************************************************************************
  ******* functions ************************************************************
  ******************************************************************************/
-	void	alx_start_curses	(void);
-	void	alx_pause_curses	(void);
-	void	alx_resume_curses	(void);
-	void	alx_end_curses		(void);
-	void	alx_win_del		(WINDOW		*win);
+void	alx_start_curses	(void);
+void	alx_pause_curses	(void);
+void	alx_resume_curses	(void);
+void	alx_end_curses		(void);
+void	alx_win_del		(WINDOW		*win);
 
-	int	alx_menu		(int		h,
-					int		w,
-					int		N,
-					struct Alx_Menu	mnu[],
-					const char	*str);
+int	alx_menu		(int		h,
+				int		w,
+				int		N,
+				const struct Alx_Menu	mnu[],
+				const char	*str);
 
-	int	alx_menu_2		(WINDOW		*win,
-					int		N,
-					struct Alx_Menu	mnu[],
-					const char	*str);
+int	alx_menu_2		(WINDOW		*win,
+				int		N,
+				const struct Alx_Menu	mnu[],
+				const char	*str);
 
-	double	alx_w_getdbl		(int		w,
-					int		r,
-					const char	*title,
-					double		m,
-					double		def,
-					double		M,
-					const char	*help);
+double	alx_w_getdbl		(int		w,
+				int		r,
+				const char	*title,
+				double		m,
+				double		def,
+				double		M,
+				const char	*help);
 
-	int64_t	alx_w_getint		(int		w,
-					int		r,
-					const char	*title,
-					double		m,
-					int64_t		def,
-					double		M,
-					const char	*help);
+int64_t	alx_w_getint		(int		w,
+				int		r,
+				const char	*title,
+				double		m,
+				int64_t		def,
+				double		M,
+				const char	*help);
 
-	void	alx_w_getstr		(char		*dest,
-					int		destsize,
-					int		w,
-					int		r,
-					const char	*title,
-					const char	*help);
+void	alx_w_getstr		(char		*dest,
+				int		destsize,
+				int		w,
+				int		r,
+				const char	*title,
+				const char	*help);
 
-	void	alx_w_getfname		(const char	*fpath,
-					char		*fname,
-					bool		exist,
-					int		w,
-					int		r,
-					const char	*title,
-					const char	*help);
+void	alx_w_getfname		(const char	*fpath,
+				char		*fname,
+				bool		exist,
+				int		w,
+				int		r,
+				const char	*title,
+				const char	*help);
 
-	void	alx_ncur_prn_title	(WINDOW		*win,
-					const char	*title);
+void	alx_ncur_prn_title	(WINDOW		*win,
+				const char	*title);
 
-	void	alx_ncur_prn_subtitle	(WINDOW		*win,
-					const char	*subtitle);
+void	alx_ncur_prn_subtitle	(WINDOW		*win,
+				const char	*subtitle);
 
 
 /******************************************************************************

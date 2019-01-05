@@ -1,5 +1,6 @@
 /******************************************************************************
  *	Copyright (C) 2017	Alejandro Colomar Andrés		      *
+ *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
 
@@ -31,40 +32,26 @@
 /******************************************************************************
  ******* functions ************************************************************
  ******************************************************************************/
-	int	alx_sscan_dbl	(double		*dest,
-				double		m,
-				double		def,
-				double		M,
-				const char	*str);
+int	alx_sscan_dbl	(double *dest, double m, double def, double M,
+			const char *str);
 
-	int	alx_sscan_int	(int		*dest,
-				double		m,
-				int		def,
-				double		M,
-				const char	*str);
+int	alx_sscan_int	(int *dest, double m, int def, double M,
+			const char *str);
 
-	int	alx_sscan_int64	(int64_t	*dest,
-				double		m,
-				int64_t		def,
-				double		M,
-				const char	*str);
+int	alx_sscan_i64	(int64_t *dest, double m, int64_t def, double M,
+			const char *str);
 
-	int	alx_sscan_fname	(const char	*fpath,
-				char		*fname,
-				bool		exist,
-				const char	*str);
+int	alx_sscan_fname	(const char *fpath, char *fname, bool exist,
+			const char *str);
 
-	double	alx_getdbl	(double		m,
-				double		def,
-				double		M,
-				const char	*title,
-				const char	*help);
+double	alx_getdbl	(double m, double def, double M,
+			const char *title, const char *help);
 
-	int64_t	alx_getint	(double		m,
-				int64_t		def,
-				double		M,
-				const char	*title,
-				const char	*help);
+int	alx_getint	(double m, int def, double M,
+			const char *title, const char *help);
+
+int64_t	alx_getint_i64	(double m, int64_t def, double M,
+			const char *title, const char *help);
 
 
 /******************************************************************************
