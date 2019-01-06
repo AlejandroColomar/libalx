@@ -27,7 +27,7 @@
 	struct	Alx_Menu {
 		int	r;
 		int	c;
-		char	*t;
+		const char	*t;
 	};
 
 
