@@ -27,6 +27,7 @@
 	 */
 double	alx_fact		(int64_t n)
 {
+
 	if (n < 1) {
 		return	1;
 	} else {
@@ -40,8 +41,11 @@ double	alx_fact		(int64_t n)
 	 */
 double	alx_bin_coef		(int64_t a, int64_t b)
 {
-	int64_t	i = 1;
-	double	c = 1;
+	int64_t	i;
+	double	c;
+
+	i	= 1;
+	c	= 1;
 
 	while (a > b) {
 		c = c * a-- / i++;
@@ -94,10 +98,13 @@ uint8_t	alx_median_u8		(int n, uint8_t x[n])
 	 */
 int	alx_maximum_u8		(int n, uint8_t x[n])
 {
-	int	pos	= 0;
-	uint8_t	val	= 0;
-
+	int	pos;
+	uint8_t	val;
 	int	i;
+
+	pos	= 0;
+	val	= 0;
+
 	for (i = 0; i < n; i++) {
 		if (x[i] >= val) {
 			val	= x[i];
