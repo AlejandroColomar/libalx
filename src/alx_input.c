@@ -175,12 +175,13 @@ double	alx_getdbl	(double m, double def, double M,
 	double	R;
 
 	if (title != NULL) {
-		puts(title);
+		printf("%s\n", title);
 	}
 	if (help == NULL) {
-		printf("Introduce a real number [%lf U %lf] (default %lf):...\t", m, M, def);
+		printf("Introduce a real number [%lf U %lf] (default %lf):...\t",
+								m, M, def);
 	} else {
-		puts(help);
+		printf("%s\n", help);
 	}
 
 	R = loop_getdbl(m, def, M);
@@ -201,12 +202,13 @@ int	alx_getint	(double m, int def, double M,
 	int	Z;
 
 	if (title != NULL) {
-		puts(title);
+		printf("%s\n", title);
 	}
 	if (help == NULL) {
-		printf("Introduce an integer number [%lf U %lf] (default %i):...\t", m, M, def);
+		printf("Introduce an integer number [%lf U %lf] (default %i):...\t",
+								m, M, def);
 	} else {
-		puts(help);
+		printf("%s\n", help);
 	}
 
 	Z = loop_getint(m, def, M);
@@ -220,12 +222,13 @@ int64_t	alx_getint_i64	(double m, int64_t def, double M,
 	int64_t	Z;
 
 	if (title != NULL) {
-		puts(title);
+		printf("%s\n", title);
 	}
 	if (help == NULL) {
-		printf("Introduce an integer number [%lf U %lf] (default %"PRIi64"):...\t", m, M, def);
+		printf("Introduce an integer number [%lf U %lf] (default %"PRIi64"):...\t",
+								m, M, def);
 	} else {
-		puts(help);
+		printf("%s\n", help);
 	}
 
 	Z = loop_getint_i64(m, def, M);

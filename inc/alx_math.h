@@ -25,7 +25,7 @@
 double	alx_fact		(int64_t n);
 
 	/*
-	 * Binomial coefficient (a b):				--!!!  a > b  !!!--
+	 * Binomial coefficient (a b):		--!!!  a > b  !!!--
 	 * - Bugs: If !(a > b), returns 1.
 	 */
 double	alx_bin_coef		(int64_t a, int64_t b);
@@ -43,15 +43,14 @@ uint8_t	alx_median_u8		(int n, uint8_t x[n]);
 	 */
 int	alx_maximum_u8		(int n, uint8_t x[n]);
 
-	/**
-	 * @brief	Linear scale transform.
-	 *			Values can be out of range [in_min, in_max].
-	 * @param	input:		value to be transformed.
-	 * @param	in_min:		input min value.
-	 * @param	in_max:		input max value.
-	 * @param	out_min:	output value that corresponds to in_min.
-	 * @param	out_max:	output value that corresponds to in_max.
-	 * @return	output:		transformed value.
+	/*
+	 * Linear scale transform.  Values can be out of range [in_min, in_max]
+	 * input:	value to be transformed.
+	 * in_min:	input min value.
+	 * in_max:	input max value.
+	 * out_min:	output value that corresponds to in_min.
+	 * out_max:	output value that corresponds to in_max.
+	 * output:	transformed value.
 	 */
 double	alx_scale_linear	(double input,
 					double in_min, double in_max,

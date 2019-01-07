@@ -513,7 +513,7 @@ static	int	alx_ncur_usr_sel	(WINDOW *win,
 
 		default:
 			if ((ch >= '0') && (ch < N + '0')) {
-				/* Input is a number, move to that item & end menu */
+				/* Input is a number, move to item & end menu */
 				i = ch - '0';
 				wmove(win, mnu[i].r, mnu[i].c + 1);
 				wh = false;
