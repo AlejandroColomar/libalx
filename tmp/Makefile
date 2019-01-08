@@ -17,11 +17,11 @@ CMP_INC		= libalx/alx_cmp.h
 CMP_DEPS	= $(SRC_DIR)/alx_cmp.c $(patsubst %,$(INC_DIR)/%,$(CMP_INC))
 CMP_INC_DIRS	= -I $(INC_DIR)
 
-FILE_INC	= libalx/alx_file.h
+FILE_INC	= libalx/io/alx_file.h
 FILE_DEPS	= $(SRC_DIR)/alx_file.c $(patsubst %,$(INC_DIR)/%,$(FILE_INC))
 FILE_INC_DIRS	= -I $(INC_DIR)
 
-INPUT_INC	= libalx/alx_input.h
+INPUT_INC	= libalx/io/alx_input.h
 INPUT_DEPS	= $(SRC_DIR)/alx_input.c $(patsubst %,$(INC_DIR)/%,$(INPUT_INC))
 INPUT_INC_DIRS	= -I $(INC_DIR)
 
@@ -33,7 +33,7 @@ MATH_INC	= libalx/alx_math.h
 MATH_DEPS	= $(SRC_DIR)/alx_math.c $(patsubst %,$(INC_DIR)/%,$(MATH_INC))
 MATH_INC_DIRS	= -I $(INC_DIR)
 
-NCUR_INC	= libalx/alx_ncur.h	libalx/alx_input.h
+NCUR_INC	= libalx/curses/alx_ncur.h	libalx/io/alx_input.h
 NCUR_DEPS	= $(SRC_DIR)/alx_ncur.c $(patsubst %,$(INC_DIR)/%,$(NCUR_INC))
 NCUR_INC_DIRS	= -I $(INC_DIR)
 

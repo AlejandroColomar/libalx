@@ -17,8 +17,8 @@
 /* Packages ------------------------------------------------------------------*/
 	#include <ncurses.h>
 /* libalx --------------------------------------------------------------------*/
-	#include "libalx/alx_input.h"
-	#include "libalx/alx_ncur.h"
+	#include "libalx/io/alx_input.h"
+	#include "libalx/curses/alx_ncur.h"
 
 
 /******************************************************************************
