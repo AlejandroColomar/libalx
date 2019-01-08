@@ -14,16 +14,11 @@
 	#include <stdio.h>
 		/* strlen() */
 	#include <string.h>
-		/* wchar_t */
-	#include <wchar.h>
-
 /* Packages ------------------------------------------------------------------*/
 	#include <ncurses.h>
-
 /* libalx --------------------------------------------------------------------*/
-	#include "alx_input.h"
-
-	#include "alx_ncur.h"
+	#include "libalx/alx_input.h"
+	#include "libalx/alx_ncur.h"
 
 
 /******************************************************************************
@@ -465,7 +460,7 @@ static	int	alx_ncur_usr_sel	(WINDOW *win,
 {
 	int	i;
 	bool	wh;
-	wchar_t	ch;
+	int	c;
 
 	/* default item */
 	i	= 1;
@@ -475,9 +470,9 @@ static	int	alx_ncur_usr_sel	(WINDOW *win,
 	wh	= true;
 	while (wh) {
 		/* Input */
-		ch = wgetch(win);
+		c = wgetch(win);
 
-		switch (ch) {
+		switch (c) {
 		case KEY_UP:
 		case 'w':
 		case 'k':
@@ -512,9 +507,9 @@ static	int	alx_ncur_usr_sel	(WINDOW *win,
 			break;
 
 		default:
-			if ((ch >= '0') && (ch < N + '0')) {
-				/* Input is a number, move to that item & end menu */
-				i = ch - '0';
+			if ((c >= '0') && (c < N + '0')) {
+				/* Input is a number, move to item & end menu */
+				i = c - '0';
 				wmove(win, mnu[i].r, mnu[i].c + 1);
 				wh = false;
 			}
