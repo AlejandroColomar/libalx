@@ -13,31 +13,31 @@ BASE	= alx_cmp.o alx_mask.o alx_math.o alx_seed.o
 IO	= alx_file.o alx_input.o
 CURSES	= alx_ncur.o
 
-CMP_INC		= alx_cmp.h
+CMP_INC		= libalx/alx_cmp.h
 CMP_DEPS	= $(SRC_DIR)/alx_cmp.c $(patsubst %,$(INC_DIR)/%,$(CMP_INC))
 CMP_INC_DIRS	= -I $(INC_DIR)
 
-FILE_INC	= alx_file.h
+FILE_INC	= libalx/alx_file.h
 FILE_DEPS	= $(SRC_DIR)/alx_file.c $(patsubst %,$(INC_DIR)/%,$(FILE_INC))
 FILE_INC_DIRS	= -I $(INC_DIR)
 
-INPUT_INC	= alx_input.h
+INPUT_INC	= libalx/alx_input.h
 INPUT_DEPS	= $(SRC_DIR)/alx_input.c $(patsubst %,$(INC_DIR)/%,$(INPUT_INC))
 INPUT_INC_DIRS	= -I $(INC_DIR)
 
-MASK_INC	= alx_mask.h
+MASK_INC	= libalx/alx_mask.h
 MASK_DEPS	= $(SRC_DIR)/alx_mask.c $(patsubst %,$(INC_DIR)/%,$(MASK_INC))
 MASK_INC_DIRS	= -I $(INC_DIR)
 
-MATH_INC	= alx_math.h
+MATH_INC	= libalx/alx_math.h
 MATH_DEPS	= $(SRC_DIR)/alx_math.c $(patsubst %,$(INC_DIR)/%,$(MATH_INC))
 MATH_INC_DIRS	= -I $(INC_DIR)
 
-NCUR_INC	= alx_ncur.h	alx_input.h
+NCUR_INC	= libalx/alx_ncur.h	libalx/alx_input.h
 NCUR_DEPS	= $(SRC_DIR)/alx_ncur.c $(patsubst %,$(INC_DIR)/%,$(NCUR_INC))
 NCUR_INC_DIRS	= -I $(INC_DIR)
 
-SEED_INC	= alx_seed.h
+SEED_INC	= libalx/alx_seed.h
 SEED_DEPS	= $(SRC_DIR)/alx_seed.c $(patsubst %,$(INC_DIR)/%,$(SEED_INC))
 SEED_INC_DIRS	= -I $(INC_DIR)
 
