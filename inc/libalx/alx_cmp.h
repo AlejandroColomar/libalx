@@ -13,9 +13,9 @@
 /******************************************************************************
  ******* functions ************************************************************
  ******************************************************************************/
-int	compare_int		(const void *a, const void *b);
-int	compare_u8		(const void *a, const void *b);
-int	compare_i64		(const void *a, const void *b);
+int	compare_int		(const void *a_ptr, const void *b_ptr);
+int	compare_u8		(const void *a_ptr, const void *b_ptr);
+int	compare_i64		(const void *a_ptr, const void *b_ptr);
 
 
 /******************************************************************************

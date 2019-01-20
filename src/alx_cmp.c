@@ -6,9 +6,8 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-/* Standard C ----------------------------------------------------------------*/
 	#include <stdint.h>
-/* libalx --------------------------------------------------------------------*/
+
 	#include "libalx/alx_cmp.h"
 
 
@@ -19,60 +18,43 @@
 	 * Comparison function. Receives two items under comparison.
 	 * return int
 	 */
-int	compare_int		(const void *a, const void *b)
+int	compare_int		(const void *a_ptr, const void *b_ptr)
 {
-	int	r;
+	int	a =	*(int *)a_ptr;
+	int	b =	*(int *)b_ptr;
 
-	if (*(int *)a < *(int *)b) {
-		r = -1;
-	} else if (*(int *)a > *(int *)b) {
-		r = 1;
-	} else {
-		/*  (*(int *)a == *(int *)b)  */
-		r = 0;
-	}
-
-	return	r;
+	if (a < b)
+		return	-1;
+	else if (a > b)
+		return	1;
+	else
+		return	0;
 }
 
-	/*
-	 * Comparison function. Receives two items under comparison.
-	 * return int
-	 */
-int	compare_u8		(const void *a, const void *b)
+int	compare_u8		(const void *a_ptr, const void *b_ptr)
 {
-	int	r;
+	uint8_t	a =	*(uint8_t *)a_ptr;
+	uint8_t	b =	*(uint8_t *)b_ptr;
 
-	if (*(uint8_t *)a < *(uint8_t *)b) {
-		r = -1;
-	} else if (*(uint8_t *)a > *(uint8_t *)b) {
-		r = 1;
-	} else {
-		/*  (*(uint8_t *)a == *(uint8_t *)b)  */
-		r = 0;
-	}
-
-	return	r;
+	if (a < b)
+		return	-1;
+	else if (a > b)
+		return	1;
+	else
+		return	0;
 }
 
-	/*
-	 * Comparison function. Receives two items under comparison.
-	 * return int
-	 */
-int	compare_i64		(const void *a, const void *b)
+int	compare_i64		(const void *a_ptr, const void *b_ptr)
 {
-	int	r;
+	int64_t	a =	*(int64_t *)a_ptr;
+	int64_t	b =	*(int64_t *)b_ptr;
 
-	if (*(int64_t *)a < *(int64_t *)b) {
-		r = -1;
-	} else if (*(int64_t *)a > *(int64_t *)b) {
-		r = 1;
-	} else {
-		/*  (*(int64_t *)a == *(int64_t *)b)  */
-		r = 0;
-	}
-
-	return	r;
+	if (a < b)
+		return	-1;
+	else if (a > b)
+		return	1;
+	else
+		return	0;
 }
 
 
