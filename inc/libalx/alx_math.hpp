@@ -37,6 +37,12 @@ double	alx_fact		(int64_t n);
 double	alx_bin_coef		(int64_t a, int64_t b);
 
 	/*
+	 * Mean
+	 */
+double	alx_mean		(int n, double x[n]);
+double	alx_mean_int		(int n, int x[n]);
+
+	/*
 	 * Median
 	 * - If even array, return the mean of the two central values
 	 */

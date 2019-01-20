@@ -52,6 +52,44 @@ double	alx_bin_coef		(int64_t a, int64_t b)
 }
 
 	/*
+	 * Mean
+	 */
+double	alx_mean		(int n, double x[n])
+{
+	double	sum;
+	double	mean;
+	int	i;
+
+	sum	= 0;
+	for (i = 0; i < n; i++) {
+		sum	+= x[i];
+	}
+
+	mean	= sum / n;
+
+	return	mean;
+}
+
+	/*
+	 * Mean
+	 */
+double	alx_mean_int		(int n, int x[n])
+{
+	double	sum;
+	double	mean;
+	int	i;
+
+	sum	= 0;
+	for (i = 0; i < n; i++) {
+		sum	+= x[i];
+	}
+
+	mean	= sum / n;
+
+	return	mean;
+}
+
+	/*
 	 * Median
 	 * - If even array, return the mean of the two central values
 	 */
@@ -70,10 +108,6 @@ double	alx_median		(int n, double x[n])
 	return	median;
 }
 
-	/*
-	 * Median
-	 * - If even array, return the mean of the two central values
-	 */
 uint8_t	alx_median_u8		(int n, uint8_t x[n])
 {
 	uint8_t	median;
