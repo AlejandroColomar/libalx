@@ -104,7 +104,6 @@ int	alx_sscan_fname	(const char *fpath, char *fname, bool exist,
 {
 	char	buff [FILENAME_MAX];
 	char	file_path [FILENAME_MAX];
-	int	err;
 	FILE	*fp;
 
 	if (sscanf(str, " %s ", buff) != 1)
