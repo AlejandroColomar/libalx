@@ -19,7 +19,7 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-	# define	BUFF_SIZE	(1024)
+	# define	BUFF_SIZE	(FILENAME_MAX)
 
 	# define	MAX_TRIES	(2)
 
@@ -42,76 +42,54 @@ static	void	manage_error	(int err);
  ******* main *****************************************************************
  ******************************************************************************/
 	/*
-	 * Scan a double in the range [m, M].
+	 * Scan a number in the range [m, M].
 	 * return:	0	if correct
 	 *		non 0	if there is an error
 	 */
 int	alx_sscan_dbl	(double *dest, double m, double def, double M,
 			const char *str)
 {
-	int	err;
+	int	err	= ERR_OK;
 
-	if (sscanf(str, " %lf", dest) != 1) {
+	if (sscanf(str, " %lf", dest) != 1)
 		err	= ERR_SSCANF;
-	} else if ((*dest < m) || (*dest > M)) {
+	else if ((*dest < m) || (*dest > M))
 		err	= ERR_RANGE;
-	} else {
-		err	= ERR_OK;
-	}
 
-	if (err) {
+	if (err)
 		*dest = def;
-	}
 
 	return	err;
 }
 
-	/*
-	 * Scan an int64_t in the range [m, M].
-	 * return:	0	if correct
-	 *		non 0	if there is an error
-	 */
 int	alx_sscan_int	(int *dest, double m, int def, double M,
 			const char *str)
 {
-	int	err;
+	int	err	= ERR_OK;
 
-	if (sscanf(str, " %i", dest) != 1) {
+	if (sscanf(str, " %i", dest) != 1)
 		err	= ERR_SSCANF;
-	} else if ((*dest < m) || (*dest > M)) {
+	else if ((*dest < m) || (*dest > M))
 		err	= ERR_RANGE;
-	} else {
-		err	= ERR_OK;
-	}
 
-	if (err) {
+	if (err)
 		*dest = def;
-	}
 
 	return	err;
 }
 
-	/*
-	 * Scan an int64_t in the range [m, M].
-	 * return:	0	if correct
-	 *		non 0	if there is an error
-	 */
 int	alx_sscan_i64	(int64_t *dest, double m, int64_t def, double M,
 			const char *str)
 {
-	int	err;
+	int	err	= ERR_OK;
 
-	if (sscanf(str, " %"SCNi64"", dest) != 1) {
+	if (sscanf(str, " %"SCNi64"", dest) != 1)
 		err	= ERR_SSCANF;
-	} else if ((*dest < m) || (*dest > M)) {
+	else if ((*dest < m) || (*dest > M))
 		err	= ERR_RANGE;
-	} else {
-		err	= ERR_OK;
-	}
 
-	if (err) {
+	if (err)
 		*dest = def;
-	}
 
 	return	err;
 }
@@ -129,35 +107,24 @@ int	alx_sscan_fname	(const char *fpath, char *fname, bool exist,
 	int	err;
 	FILE	*fp;
 
-	if (sscanf(str, " %s ", buff) != 1) {
-		err	= ERR_SSCANF;
+	if (sscanf(str, " %s ", buff) != 1)
+		return	ERR_SSCANF;
+
+	snprintf(file_path, FILENAME_MAX, "%s%s", fpath, buff);
+
+	fp	= fopen(file_path, "r");
+	if (fp) {
+		fclose(fp);
+		if (!exist)
+			return	ERR_FPTR;
 	} else {
-		snprintf(file_path, FILENAME_MAX, "%s%s", fpath, buff);
-
-		fp	= fopen(file_path, "r");
-
-		if (exist) {
-			if (fp == NULL) {
-				err	= ERR_FPTR;
-			} else {
-				err	= ERR_OK;
-				fclose(fp);
-			}
-		} else {
-			if (fp == NULL) {
-				err	= ERR_OK;
-			} else {
-				err	= ERR_FPTR;
-				fclose(fp);
-			}
-		}
+		if (exist)
+			return	ERR_FPTR;
 	}
 
-	if (!err) {
-		snprintf(fname, FILENAME_MAX, "%s", buff);
-	}
+	snprintf(fname, FILENAME_MAX, "%s", buff);
 
-	return	err;
+	return	ERR_OK;
 }
 
 	/*
@@ -172,15 +139,13 @@ double	alx_getdbl	(double m, double def, double M,
 {
 	double	R;
 
-	if (title != NULL) {
+	if (title)
 		printf("%s\n", title);
-	}
-	if (help == NULL) {
+	if (help)
+		printf("%s\n", help);
+	else
 		printf("Introduce a real number [%lf U %lf] (default %lf):...\t",
 								m, M, def);
-	} else {
-		printf("%s\n", help);
-	}
 
 	R = loop_getdbl(m, def, M);
 
@@ -199,15 +164,13 @@ int	alx_getint	(double m, int def, double M,
 {
 	int	Z;
 
-	if (title != NULL) {
+	if (title)
 		printf("%s\n", title);
-	}
-	if (help == NULL) {
+	if (help)
+		printf("%s\n", help);
+	else
 		printf("Introduce an integer number [%lf U %lf] (default %i):...\t",
 								m, M, def);
-	} else {
-		printf("%s\n", help);
-	}
 
 	Z = loop_getint(m, def, M);
 
@@ -219,15 +182,13 @@ int64_t	alx_getint_i64	(double m, int64_t def, double M,
 {
 	int64_t	Z;
 
-	if (title != NULL) {
+	if (title)
 		printf("%s\n", title);
-	}
-	if (help == NULL) {
+	if (help)
+		printf("%s\n", help);
+	else
 		printf("Introduce an integer number [%lf U %lf] (default %"PRIi64"):...\t",
 								m, M, def);
-	} else {
-		printf("%s\n", help);
-	}
 
 	Z = loop_getint_i64(m, def, M);
 
@@ -242,26 +203,26 @@ static	double	loop_getdbl	(double m, double def, double M)
 {
 	int	i;
 	char	buff [BUFF_SIZE];
-	char	*x;
 	double	R;
 	int	err;
 
 	R	= def;
 
 	for (i = 0; i < MAX_TRIES; i++) {
-		x	= fgets(buff, BUFF_SIZE, stdin);
+		if (!fgets(buff, BUFF_SIZE, stdin))
+			goto err_fgets;
 
-		if (x == NULL) {
-			err	= ERR_FGETS;
-		} else {
-			err	= alx_sscan_dbl(&R, m, def, M, buff);
-		}
+		err	= alx_sscan_dbl(&R, m, def, M, buff);
+		if (err)
+			goto err_sscan;
 
-		if (err) {
-			manage_error(err);
-		} else {
-			break;
-		}
+		break;
+
+err_fgets:
+		err	= ERR_FGETS;
+err_sscan:
+		manage_error(err);
+		continue;
 	}
 
 	return	R;
@@ -271,26 +232,26 @@ static	int	loop_getint	(double m, int def, double M)
 {
 	int	i;
 	char	buff [BUFF_SIZE];
-	char	*x;
 	int	Z;
 	int	err;
 
 	Z	= def;
 
 	for (i = 0; i < MAX_TRIES; i++) {
-		x	= fgets(buff, BUFF_SIZE, stdin);
+		if (!fgets(buff, BUFF_SIZE, stdin))
+			goto err_fgets;
 
-		if (x == NULL) {
-			err	= ERR_FGETS;
-		} else {
-			err	= alx_sscan_int(&Z, m, def, M, buff);
-		}
+		err	= alx_sscan_int(&Z, m, def, M, buff);
+		if (err)
+			goto err_sscan;
 
-		if (err) {
-			manage_error(err);
-		} else {
-			break;
-		}
+		break;
+
+err_fgets:
+		err	= ERR_FGETS;
+err_sscan:
+		manage_error(err);
+		continue;
 	}
 
 	return	Z;
@@ -300,26 +261,26 @@ static	int64_t	loop_getint_i64	(double m, int64_t def, double M)
 {
 	int	i;
 	char	buff [BUFF_SIZE];
-	char	*x;
 	int64_t	Z;
 	int	err;
 
 	Z	= def;
 
 	for (i = 0; i < MAX_TRIES; i++) {
-		x	= fgets(buff, BUFF_SIZE, stdin);
+		if (!fgets(buff, BUFF_SIZE, stdin))
+			goto err_fgets;
 
-		if (x == NULL) {
-			err	= ERR_FGETS;
-		} else {
-			err	= alx_sscan_i64(&Z, m, def, M, buff);
-		}
+		err	= alx_sscan_i64(&Z, m, def, M, buff);
+		if (err)
+			goto err_sscan;
 
-		if (err) {
-			manage_error(err);
-		} else {
-			break;
-		}
+		break;
+
+err_fgets:
+		err	= ERR_FGETS;
+err_sscan:
+		manage_error(err);
+		continue;
 	}
 
 	return	Z;
@@ -330,13 +291,13 @@ static	void	manage_error	(int err)
 
 	switch (err) {
 	case ERR_RANGE:
-		puts(ERR_RANGE_MSG);
+		printf("%s\n", ERR_RANGE_MSG);
 		break;
 	case ERR_SSCANF:
-		puts(ERR_SSCANF_MSG);
+		printf("%s\n", ERR_SSCANF_MSG);
 		break;
 	case ERR_FGETS:
-		puts(ERR_FGETS_MSG);
+		printf("%s\n", ERR_FGETS_MSG);
 		break;
 	}
 }
