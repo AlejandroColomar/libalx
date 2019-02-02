@@ -595,7 +595,7 @@ static	int	loop_w_getstr		(char *dest, int destsize, WINDOW *win)
 			err_val	= ERR_GETSTR;
 			goto err;
 		}
-		if (snprintf(dest, destsize, "%s", buff) < 0) {
+		if (snprintf(dest, destsize, "%s", buff) >= destsize) {
 			err_val	= ERR_SNPRINTF;
 			goto err;
 		}

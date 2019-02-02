@@ -39,8 +39,8 @@ double	alx_bin_coef		(int64_t a, int64_t b);
 	/*
 	 * Mean
 	 */
-double	alx_mean		(int n, double x[n]);
-double	alx_mean_int		(int n, int x[n]);
+double	alx_mean		(int n, double x[]);
+double	alx_mean_int		(int n, int x[]);
 
 	/*
 	 * Median

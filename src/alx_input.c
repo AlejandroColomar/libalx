@@ -118,7 +118,8 @@ int	alx_sscan_fname	(const char *fpath, char *fname, bool exist,
 	if (sscanf(str, " %s", buff) != 1)
 		return	ERR_SSCANF;
 
-	snprintf(file_path, FILENAME_MAX, "%s%s", fpath, buff);
+	if (snprintf(file_path, FILENAME_MAX, "%s%s", fpath, buff) < 0)
+		return	ERR_SNPRINTF;
 
 	fp	= fopen(file_path, "r");
 	if (fp) {
