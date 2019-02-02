@@ -21,12 +21,20 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-	# define	ERR_OK		(0)
-	# define	ERR_RANGE	(1)
-	# define	ERR_SSCANF	(2)
-	# define	ERR_FPTR	(3)
-	# define	ERR_FGETS	(4)
-	# define	ERR_GETSTR	(5)
+#define ERR_OK			(0)
+#define ERR_RANGE		(1)
+#define ERR_SSCANF		(2)
+#define ERR_FPTR		(3)
+#define ERR_FGETS		(4)
+#define ERR_GETSTR		(5)
+#define ERR_SNPRINTF		(6)
+
+#define ERR_RANGE_MSG		"¡ Number is out of range !"
+#define ERR_SSCANF_MSG		"¡ sscanf() error !"
+#define ERR_FPTR_MSG		"¡ FILE error !"
+#define ERR_FGETS_MSG		"¡ fgets() error !"
+#define ERR_GETSTR_MSG		"¡ wgetstr() error !"
+#define ERR_SNPRINTF_MSG	"¡ snprintf() error !"
 
 
 /******************************************************************************

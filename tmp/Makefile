@@ -9,7 +9,7 @@ SRC_DIR = $(LIBALX_DIR)/src/
 
 # dependencies
 
-BASE	= alx_cmp.o alx_mask.o alx_math.o alx_seed.o
+BASE	= alx_cmp.o alx_math.o alx_seed.o
 IO	= alx_file.o alx_input.o
 CURSES	= alx_ncur.o
 
@@ -24,10 +24,6 @@ FILE_INC_DIRS	= -I $(INC_DIR)
 INPUT_INC	= libalx/io/alx_input.h
 INPUT_DEPS	= $(SRC_DIR)/alx_input.c $(patsubst %,$(INC_DIR)/%,$(INPUT_INC))
 INPUT_INC_DIRS	= -I $(INC_DIR)
-
-MASK_INC	= libalx/alx_mask.h
-MASK_DEPS	= $(SRC_DIR)/alx_mask.c $(patsubst %,$(INC_DIR)/%,$(MASK_INC))
-MASK_INC_DIRS	= -I $(INC_DIR)
 
 MATH_INC	= libalx/alx_math.h
 MATH_DEPS	= $(SRC_DIR)/alx_math.c $(patsubst %,$(INC_DIR)/%,$(MATH_INC))
@@ -75,13 +71,6 @@ alx_input.s: $(INPUT_DEPS)
 	@echo	"	CC	$@"
 	$(Q)$(CC) $(CFLAGS) $(INPUT_INC_DIRS) -S $< -o $@
 alx_input.o: alx_input.s
-	@echo	"	AS	$@"
-	$(Q)$(AS) $< -o $@
-
-alx_mask.s: $(MASK_DEPS)
-	@echo	"	CC	$@"
-	$(Q)$(CC) $(CFLAGS) $(MASK_INC_DIRS) -S $< -o $@
-alx_mask.o: alx_mask.s
 	@echo	"	AS	$@"
 	$(Q)$(AS) $< -o $@
 

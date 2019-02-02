@@ -7,16 +7,13 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-/* Standard C ----------------------------------------------------------------*/
 	#include <inttypes.h>
 	#include <stdbool.h>
 	#include <stddef.h>
 	#include <stdio.h>
-		/* strlen() */
 	#include <string.h>
-/* Packages ------------------------------------------------------------------*/
+
 	#include <ncurses.h>
-/* libalx --------------------------------------------------------------------*/
 	#include "libalx/io/alx_input.h"
 	#include "libalx/curses/alx_ncur.h"
 
@@ -24,14 +21,9 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-	# define	BUFF_SIZE	(1024)
+#define BUFF_SIZE	(1024)
 
-	# define	MAX_TRIES	(2)
-
-	# define	ERR_RANGE_MSG	"¡ Number is out of range !"
-	# define	ERR_SSCANF_MSG	"¡ sscanf() error !"
-	# define	ERR_FPTR_MSG	"¡ FILE error !"
-	# define	ERR_GETSTR_MSG	"¡ wgetstr() error !"
+#define MAX_TRIES	(2)
 
 
 /******************************************************************************
@@ -45,9 +37,9 @@ static	double	loop_w_getdbl		(WINDOW *win,
 					double m, double def, double M);
 static	int64_t	loop_w_getint		(WINDOW *win,
 					double m, int64_t def, double M);
-static	void	loop_w_getstr		(char *dest, int destsize, WINDOW *win);
+static	int	loop_w_getstr		(char *dest, int destsize, WINDOW *win);
 
-static	void	loop_w_getfname		(const char *fpath, char *fname,
+static	int	loop_w_getfname		(const char *fpath, char *fname,
 					bool exist, WINDOW *win);
 static	void	manage_w_error		(WINDOW *win, int err);
 
@@ -190,12 +182,11 @@ double	alx_w_getdbl		(int w, int r, const char *title,
 
 	/* Help */
 	win2	= newwin(h2, w2, r2, c2);
-	if (help == NULL) {
+	if (help)
+		wprintw(win2, "%s", help);
+	else
 		wprintw(win2, "Introduce a real number [%lf U %lf] (default %lf)",
 								m, M, def);
-	} else {
-		wprintw(win2, "%s", help);
-	}
 	wrefresh(win2);
 
 	/* Input */
@@ -256,12 +247,11 @@ int64_t	alx_w_getint		(int w, int r, const char *title,
 
 	/* Help */
 	win2	= newwin(h2, w2, r2, c2);
-	if (help == NULL) {
+	if (help)
+		wprintw(win2, "%s", help);
+	else
 		wprintw(win2, "Introduce an integer number [%lf U %lf] (default %"PRIi64")",
 								m, M, def);
-	} else {
-		wprintw(win2, "%s", help);
-	}
 	wrefresh(win2);
 
 	/* Input */
@@ -321,11 +311,10 @@ void	alx_w_getstr		(char *dest, int destsize,
 
 	/* Help */
 	win2	= newwin(h2, w2, r2, c2);
-	if (help == NULL) {
-		waddstr(win2, "Introduce a string");
-	} else {
+	if (help)
 		wprintw(win2, "%s", help);
-	}
+	else
+		waddstr(win2, "Introduce a string");
 	wrefresh(win2);
 
 	/* Input */
@@ -383,11 +372,10 @@ void	alx_w_getfname		(const char *fpath, char *fname, bool exist,
 
 	/* Help */
 	win2	= newwin(h2, w2, r2, c2);
-	if (help == NULL) {
-		waddstr(win2, "Introduce a file name");
-	} else {
+	if (help)
 		wprintw(win2, "%s", help);
-	}
+	else
+		waddstr(win2, "Introduce a file name");
 	wrefresh(win2);
 
 	/* Input */
@@ -477,11 +465,10 @@ static	int	alx_ncur_usr_sel	(WINDOW *win,
 		case 'w':
 		case 'k':
 			/* KEY_UP, move one item up */
-			if (i) {
+			if (i)
 				i--;
-			} else {
+			else
 				i = N - 1;
-			}
 			wmove(win, mnu[i].r, mnu[i].c + 1);
 			break;
 
@@ -489,11 +476,10 @@ static	int	alx_ncur_usr_sel	(WINDOW *win,
 		case 's':
 		case 'j':
 			/* KEY_DOWN, move one item down */
-			if (i != N - 1) {
+			if (i != N - 1)
 				i++;
-			} else {
+			else
 				i = 0;
-			}
 			wmove(win, mnu[i].r, mnu[i].c + 1);
 			break;
 
@@ -529,7 +515,7 @@ static	double	loop_w_getdbl		(WINDOW *win,
 	char	buff [BUFF_SIZE];
 	int	x;
 	double	R;
-	int	err;
+	int	err_val;
 
 	for (i = 0; i < MAX_TRIES; i++) {
 		echo();
@@ -539,16 +525,18 @@ static	double	loop_w_getdbl		(WINDOW *win,
 		wrefresh(win);
 
 		if (x == ERR) {
-			err	= ERR_GETSTR;
-		} else {
-			err	= alx_sscan_dbl(&R, m, def, M, buff);
+			err_val	= ERR_GETSTR;
+			goto err;
 		}
+		err_val	= alx_sscan_dbl(&R, m, def, M, buff);
+		if (err_val)
+			goto err;
 
-		if (err) {
-			manage_w_error(win, err);
-		} else {
-			break;
-		}
+		break;
+
+err:
+		manage_w_error(win, err_val);
+		R	= def;
 	}
 
 	return	R;
@@ -561,7 +549,7 @@ static	int64_t	loop_w_getint		(WINDOW *win,
 	char	buff [BUFF_SIZE];
 	int	x;
 	int64_t	Z;
-	int	err;
+	int	err_val;
 
 	for (i = 0; i < MAX_TRIES; i++) {
 		echo();
@@ -571,63 +559,68 @@ static	int64_t	loop_w_getint		(WINDOW *win,
 		wrefresh(win);
 
 		if (x == ERR) {
-			err	= ERR_GETSTR;
-		} else {
-			err	= alx_sscan_i64(&Z, m, def, M, buff);
+			err_val	= ERR_GETSTR;
+			goto err;
 		}
+		err_val	= alx_sscan_i64(&Z, m, def, M, buff);
+		if (err_val)
+			goto err;
 
-		if (err) {
-			manage_w_error(win, err);
-		} else {
-			break;
-		}
+		break;
+
+err:
+		manage_w_error(win, err_val);
+		Z	= def;
 	}
 
 	return	Z;
 }
 
-static	void	loop_w_getstr		(char *dest, int destsize, WINDOW *win)
+static	int	loop_w_getstr		(char *dest, int destsize, WINDOW *win)
 {
 	int	i;
 	char	buff [BUFF_SIZE];
 	int	x;
-	int	err;
+	int	err_val;
 
 	for (i = 0; i < MAX_TRIES; i++) {
+		err_val	= ERR_OK;
+
 		echo();
 		x	= mvwgetnstr(win, 0, 0, buff, BUFF_SIZE);
 		noecho();
 		wclear(win);
 		wrefresh(win);
 
-		err	= ERR_OK;
 		if (x == ERR) {
-			err	= ERR_GETSTR;
-		} else {
-			break;
+			err_val	= ERR_GETSTR;
+			goto err;
+		}
+		if (snprintf(dest, destsize, "%s", buff) < 0) {
+			err_val	= ERR_SNPRINTF;
+			goto err;
 		}
 
-		if (err) {
-			manage_w_error(win, err);
-		} else {
-			break;
-		}
+		break;
+
+err:
+		manage_w_error(win, err_val);
 	}
 
-	if (!err) {
-		snprintf(dest, destsize, "%s", buff);
-	}
+	return	err_val;
 }
 
-static	void	loop_w_getfname		(const char *fpath, char *fname,
+static	int	loop_w_getfname		(const char *fpath, char *fname,
 					bool exist, WINDOW *win)
 {
 	int	i;
 	char	buff [FILENAME_MAX];
 	int	x;
-	int	err;
+	int	err_val;
 
 	for (i = 0; i < MAX_TRIES; i++) {
+		err_val	= ERR_OK;
+
 		echo();
 		x	= mvwgetnstr(win, 0, 0, buff, FILENAME_MAX);
 		noecho();
@@ -635,17 +628,20 @@ static	void	loop_w_getfname		(const char *fpath, char *fname,
 		wrefresh(win);
 
 		if (x == ERR) {
-			err	= ERR_GETSTR;
-		} else {
-			err	= alx_sscan_fname(fpath, fname, exist, buff);
+			err_val	= ERR_GETSTR;
+			goto err;
 		}
+		err_val	= alx_sscan_fname(fpath, fname, exist, buff);
+		if (err_val)
+			goto err;
 
-		if (err) {
-			manage_w_error(win, err);
-		} else {
-			break;
-		}
+		break;
+
+err:
+		manage_w_error(win, err_val);
 	}
+
+	return	err_val;
 }
 
 static	void	manage_w_error		(WINDOW *win, int err)
@@ -661,8 +657,14 @@ static	void	manage_w_error		(WINDOW *win, int err)
 	case ERR_FPTR:
 		mvwaddstr(win, 0, 0, ERR_FPTR_MSG);
 		break;
+	case ERR_FGETS:
+		mvwaddstr(win, 0, 0, ERR_FGETS_MSG);
+		break;
 	case ERR_GETSTR:
 		mvwaddstr(win, 0, 0, ERR_GETSTR_MSG);
+		break;
+	case ERR_SNPRINTF:
+		mvwaddstr(win, 0, 0, ERR_SNPRINTF_MSG);
 		break;
 	}
 	wrefresh(win);

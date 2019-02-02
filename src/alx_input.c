@@ -7,12 +7,11 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-/* Standard C ----------------------------------------------------------------*/
 	#include <inttypes.h>
 	#include <stdbool.h>
 	#include <stddef.h>
 	#include <stdio.h>
-/* libalx --------------------------------------------------------------------*/
+
 	#include "libalx/io/alx_input.h"
 
 
@@ -22,11 +21,6 @@
 	# define	BUFF_SIZE	(FILENAME_MAX)
 
 	# define	MAX_TRIES	(2)
-
-	# define	ERR_RANGE_MSG	"¡ Number is out of range !"
-	# define	ERR_SSCANF_MSG	"¡ sscanf() error !"
-	# define	ERR_FPTR_MSG	"¡ FILE error !"
-	# define	ERR_FGETS_MSG	"¡ fgets() error !"
 
 
 /******************************************************************************
@@ -49,49 +43,64 @@ static	void	manage_error	(int err);
 int	alx_sscan_dbl	(double *dest, double m, double def, double M,
 			const char *str)
 {
-	int	err	= ERR_OK;
+	int	ret;
 
-	if (sscanf(str, " %lf", dest) != 1)
-		err	= ERR_SSCANF;
-	else if ((*dest < m) || (*dest > M))
-		err	= ERR_RANGE;
+	if (sscanf(str, " %lf", dest) != 1) {
+		ret	= ERR_SSCANF;
+		goto err;
+	}
+	if ((*dest < m) || (*dest > M)) {
+		ret	= ERR_RANGE;
+		goto err;
+	}
 
-	if (err)
-		*dest = def;
+	return	ERR_OK;
 
-	return	err;
+err:
+	*dest	= def;
+	return	ret;
 }
 
 int	alx_sscan_int	(int *dest, double m, int def, double M,
 			const char *str)
 {
-	int	err	= ERR_OK;
+	int	ret;
 
-	if (sscanf(str, " %i", dest) != 1)
-		err	= ERR_SSCANF;
-	else if ((*dest < m) || (*dest > M))
-		err	= ERR_RANGE;
+	if (sscanf(str, " %i", dest) != 1) {
+		ret	= ERR_SSCANF;
+		goto err;
+	}
+	if ((*dest < m) || (*dest > M)) {
+		ret	= ERR_RANGE;
+		goto err;
+	}
 
-	if (err)
-		*dest = def;
+	return	ERR_OK;
 
-	return	err;
+err:
+	*dest	= def;
+	return	ret;
 }
 
 int	alx_sscan_i64	(int64_t *dest, double m, int64_t def, double M,
 			const char *str)
 {
-	int	err	= ERR_OK;
+	int	ret;
 
-	if (sscanf(str, " %"SCNi64"", dest) != 1)
-		err	= ERR_SSCANF;
-	else if ((*dest < m) || (*dest > M))
-		err	= ERR_RANGE;
+	if (sscanf(str, " %"SCNi64"", dest) != 1) {
+		ret	= ERR_SSCANF;
+		goto err;
+	}
+	if ((*dest < m) || (*dest > M)) {
+		ret	= ERR_RANGE;
+		goto err;
+	}
 
-	if (err)
-		*dest = def;
+	return	ERR_OK;
 
-	return	err;
+err:
+	*dest	= def;
+	return	ret;
 }
 
 	/*
@@ -106,7 +115,7 @@ int	alx_sscan_fname	(const char *fpath, char *fname, bool exist,
 	char	file_path [FILENAME_MAX];
 	FILE	*fp;
 
-	if (sscanf(str, " %s ", buff) != 1)
+	if (sscanf(str, " %s", buff) != 1)
 		return	ERR_SSCANF;
 
 	snprintf(file_path, FILENAME_MAX, "%s%s", fpath, buff);
@@ -121,7 +130,8 @@ int	alx_sscan_fname	(const char *fpath, char *fname, bool exist,
 			return	ERR_FPTR;
 	}
 
-	snprintf(fname, FILENAME_MAX, "%s", buff);
+	if (snprintf(fname, FILENAME_MAX, "%s", buff) < 0)
+		return	ERR_SNPRINTF;
 
 	return	ERR_OK;
 }
@@ -203,24 +213,24 @@ static	double	loop_getdbl	(double m, double def, double M)
 	int	i;
 	char	buff [BUFF_SIZE];
 	double	R;
-	int	err;
+	int	err_val;
 
 	R	= def;
 
 	for (i = 0; i < MAX_TRIES; i++) {
-		if (!fgets(buff, BUFF_SIZE, stdin))
-			goto err_fgets;
+		if (!fgets(buff, BUFF_SIZE, stdin)) {
+			err_val	= ERR_FGETS;
+			goto err;
+		}
 
-		err	= alx_sscan_dbl(&R, m, def, M, buff);
-		if (err)
-			goto err_sscan;
+		err_val	= alx_sscan_dbl(&R, m, def, M, buff);
+		if (err_val)
+			goto err;
 
 		break;
 
-err_fgets:
-		err	= ERR_FGETS;
-err_sscan:
-		manage_error(err);
+err:
+		manage_error(err_val);
 		continue;
 	}
 
@@ -232,24 +242,24 @@ static	int	loop_getint	(double m, int def, double M)
 	int	i;
 	char	buff [BUFF_SIZE];
 	int	Z;
-	int	err;
+	int	err_val;
 
 	Z	= def;
 
 	for (i = 0; i < MAX_TRIES; i++) {
-		if (!fgets(buff, BUFF_SIZE, stdin))
-			goto err_fgets;
+		if (!fgets(buff, BUFF_SIZE, stdin)) {
+			err_val	= ERR_FGETS;
+			goto err;
+		}
 
-		err	= alx_sscan_int(&Z, m, def, M, buff);
-		if (err)
-			goto err_sscan;
+		err_val	= alx_sscan_int(&Z, m, def, M, buff);
+		if (err_val)
+			goto err;
 
 		break;
 
-err_fgets:
-		err	= ERR_FGETS;
-err_sscan:
-		manage_error(err);
+err:
+		manage_error(err_val);
 		continue;
 	}
 
@@ -261,24 +271,24 @@ static	int64_t	loop_getint_i64	(double m, int64_t def, double M)
 	int	i;
 	char	buff [BUFF_SIZE];
 	int64_t	Z;
-	int	err;
+	int	err_val;
 
 	Z	= def;
 
 	for (i = 0; i < MAX_TRIES; i++) {
-		if (!fgets(buff, BUFF_SIZE, stdin))
-			goto err_fgets;
+		if (!fgets(buff, BUFF_SIZE, stdin)) {
+			err_val	= ERR_FGETS;
+			goto err;
+		}
 
-		err	= alx_sscan_i64(&Z, m, def, M, buff);
-		if (err)
-			goto err_sscan;
+		err_val	= alx_sscan_i64(&Z, m, def, M, buff);
+		if (err_val)
+			goto err;
 
 		break;
 
-err_fgets:
-		err	= ERR_FGETS;
-err_sscan:
-		manage_error(err);
+err:
+		manage_error(err_val);
 		continue;
 	}
 
@@ -295,8 +305,14 @@ static	void	manage_error	(int err)
 	case ERR_SSCANF:
 		printf("%s\n", ERR_SSCANF_MSG);
 		break;
+	case ERR_FPTR:
+		printf("%s\n", ERR_FPTR_MSG);
+		break;
 	case ERR_FGETS:
 		printf("%s\n", ERR_FGETS_MSG);
+		break;
+	case ERR_SNPRINTF:
+		printf("%s\n", ERR_SNPRINTF_MSG);
 		break;
 	}
 }

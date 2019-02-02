@@ -11,7 +11,7 @@ SRC_DIR = $(LIBALX_DIR)/src/
 
 # dependencies
 
-_BASE	= alx_cmp.o alx_mask.o alx_math.o alx_seed.o
+_BASE	= alx_cmp.o alx_math.o alx_seed.o
 _IO	= alx_input.o alx_file.o
 _CURSES	= alx_ncur.o
 BASE	= libalx-base.a
