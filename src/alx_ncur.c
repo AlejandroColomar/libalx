@@ -435,10 +435,9 @@ static	void	alx_ncur_prn_menu	(WINDOW *win,
 {
 	int	i;
 
-	/* Print all menu items */
-	for (i = 0; i < N; i++) {
+	/* Print menu items */
+	for (i = 0; i < N; i++)
 		mvwaddstr(win, mnu[i].r, mnu[i].c, mnu[i].t);
-	}
 
 	wrefresh(win);
 }

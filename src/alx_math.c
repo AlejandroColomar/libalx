@@ -6,7 +6,6 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-/* Standard C ----------------------------------------------------------------*/
 	#include <stdint.h>
 	#include <stdlib.h>
 
@@ -23,11 +22,10 @@
 double	alx_fact		(int64_t n)
 {
 
-	if (n < 1) {
+	if (n < 1)
 		return	1;
-	} else {
+	else
 		return	n * alx_fact(n - 1);
-	}
 }
 
 	/*
@@ -42,9 +40,8 @@ double	alx_bin_coef		(int64_t a, int64_t b)
 	i	= 1;
 	c	= 1;
 
-	while (a > b) {
+	while (a > b)
 		c = c * a-- / i++;
-	}
 
 	return	c;
 }
@@ -59,9 +56,8 @@ double	alx_mean		(int n, double x[n])
 	int	i;
 
 	sum	= 0;
-	for (i = 0; i < n; i++) {
+	for (i = 0; i < n; i++)
 		sum	+= x[i];
-	}
 
 	mean	= sum / n;
 
@@ -78,9 +74,8 @@ double	alx_mean_int		(int n, int x[n])
 	int	i;
 
 	sum	= 0;
-	for (i = 0; i < n; i++) {
+	for (i = 0; i < n; i++)
 		sum	+= x[i];
-	}
 
 	mean	= sum / n;
 
@@ -97,11 +92,10 @@ double	alx_median		(int n, double x[n])
 
 	qsort(x, n, sizeof(x[0]), compare_u8);
 
-	if (n % 2) {
+	if (n % 2)
 		median	= x[n/2];
-	} else {
+	else
 		median	= (x[n/2] + x[n/2 - 1]) / 2.0;
-	}
 
 	return	median;
 }
@@ -112,11 +106,10 @@ uint8_t	alx_median_u8		(int n, uint8_t x[n])
 
 	qsort(x, n, sizeof(x[0]), compare_u8);
 
-	if (n % 2) {
+	if (n % 2)
 		median	= x[n/2];
-	} else {
+	else
 		median	= (x[n/2] + x[n/2 - 1]) / 2;
-	}
 
 	return	median;
 }
@@ -133,7 +126,6 @@ int	alx_maximum_u8		(int n, uint8_t x[n])
 
 	pos	= 0;
 	val	= 0;
-
 	for (i = 0; i < n; i++) {
 		if (x[i] >= val) {
 			val	= x[i];
@@ -186,7 +178,7 @@ int8_t	alx_scale_linear_i8	(int8_t input,
 {
 	int8_t	output;
 
-	output		= (int8_t)((int16_t)out_min +
+	output		= ((int16_t)out_min +
 					(int16_t)((input - in_min) *
 					(int16_t)(out_max - out_min)) /
 					(int16_t)(in_max - in_min));
@@ -200,7 +192,7 @@ int16_t	alx_scale_linear_i16	(int16_t input,
 {
 	int16_t	output;
 
-	output		= (int16_t)((int32_t)out_min +
+	output		= ((int32_t)out_min +
 					(int32_t)((input - in_min) *
 					(int32_t)(out_max - out_min)) /
 					(int32_t)(in_max - in_min));
