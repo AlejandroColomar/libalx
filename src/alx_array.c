@@ -22,8 +22,7 @@ void	alx_local_maxima(int rows, int cols, int arr_in[rows][cols],
 	int	i, j;
 	int	k, l;
 
-	memset(arr_out, 0, rows * cols * sizeof(int));
-//	memset(arr_out, 0, sizeof(arr_out));  I think this doesn't work :(
+	memset(arr_out, 0, rows * cols * sizeof(arr_out[0][0]));
 
 	for (i = 0; i < rows; i++) {
 		for (j = 0; j < cols; j++) {
