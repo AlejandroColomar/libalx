@@ -10,24 +10,42 @@
 ################################################################################
 
 ################################################################################
+# dependencies
+OBJ		=							\
+		alx_file.o						\
+		alx_input.o
+
+FILE_INC	=							\
+		$(INC_DIR)/libalx/io/alx_file.h
+FILE_SRC	=							\
+		$(SRC_DIR)/io/alx_file.c
+
+INPUT_INC	=							\
+		$(INC_DIR)/libalx/io/alx_input.h
+INPUT_SRC	=							\
+		$(SRC_DIR)/io/alx_input.c
+
+################################################################################
 # target: dependencies
 #	action
 
 PHONY := all
-all: base io curses
+all: $(OBJ)
 
 
-PHONY += base
-base:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/
+alx_file.s: $(FILE_SRC) $(FILE_INC)
+	@echo	"	CC	libalx/tmp/io/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+alx_file.o: alx_file.s
+	@echo	"	AS	libalx/tmp/io/$@"
+	$(Q)$(AS) $< -o $@
 
-PHONY += io
-io:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/io/
-
-PHONY += curses
-curses:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/curses/
+alx_input.s: $(INPUT_SRC) $(INPUT_INC)
+	@echo	"	CC	libalx/tmp/io/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+alx_input.o: alx_input.s
+	@echo	"	AS	libalx/tmp/io/$@"
+	$(Q)$(AS) $< -o $@
 
 
 PHONY += clean

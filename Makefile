@@ -1,10 +1,14 @@
 #!/usr/bin/make -f
 
 ################################################################################
+# Copyright (C) 2019	Alejandro Colomar Andrés
+# SPDX-License-Identifier:	LGPL-2.0-only
+################################################################################
 # *AUTHOR*
 
-# EMAIL		"1903716@gmail.com"
 # FULL NAME	"Alejandro Colomar Andrés"
+# EMAIL		"1903716@gmail.com"
+################################################################################
 
 ################################################################################
 # Beautify output
@@ -44,20 +48,76 @@ export	Q
 export	BUILD_VERBOSE
 
 ################################################################################
-# Do not print "Entering directory ...",
-# but we want to display it when entering to the output directory
-# so that IDEs/editors are able to understand relative filenames.
+# Do not print "Entering directory ..."
 MAKEFLAGS += --no-print-directory
+
+################################################################################
+# Make variables (CC, etc...)
+  CC	= gcc
+  CXX	= g++
+  AS	= as
+  AR	= ar
+  LD	= ld
+  SZ	= size
+
+export	CC
+export	CXX
+export	AS
+export	AR
+export	LD
+export	SZ
+
+################################################################################
+# cflags
+CFLAGS_STD	= -std=c17
+CFLAGS_STD	= -Wpedantic
+
+CFLAGS_OPT	= -O3
+CFLAGS_OPT     += -march=native
+
+CFLAGS_W	= -Wall
+CFLAGS_W       += -Wextra
+CFLAGS_W       += -Wstrict-prototypes
+CFLAGS_W       += -Werror
+
+CFLAGS		= $(CFLAGS_STD)
+CFLAGS         += $(CFLAGS_OPT)
+CFLAGS         += $(CFLAGS_W)
+
+export	CFLAGS
+
+################################################################################
+# c++flags
+CXXFLAGS_STD	= -std=c++17
+
+CXXFLAGS_OPT	= -O3
+CXXFLAGS_OPT   += -march=native
+
+CXXFLAGS_W	= -Wall
+CXXFLAGS_W     += -Wextra
+CXXFLAGS_W     += -Werror
+
+CXXFLAGS	= $(CXXFLAGS_STD)
+CXXFLAGS       += $(CXXFLAGS_OPT)
+CXXFLAGS       += $(CXXFLAGS_W)
+
+export	CXXFLAGS
 
 ################################################################################
 # directories
 
 LIBALX_DIR	= $(CURDIR)
 
+INC_DIR = $(LIBALX_DIR)/inc/
+SRC_DIR = $(LIBALX_DIR)/src/
 TMP_DIR	= $(LIBALX_DIR)/tmp/
 LIB_DIR = $(LIBALX_DIR)/lib/
 
 export	LIBALX_DIR
+export	INC_DIR
+export	SRC_DIR
+export	TMP_DIR
+export	LIB_DIR
 
 ################################################################################
 # target: dependencies
@@ -69,29 +129,31 @@ all: base io curses
 
 PHONY += base
 base:
-	@echo  "	MAKE	base"
+	@echo	"	MKDIR	libalx/lib/libalx"
+	$(Q)mkdir -p		$(LIB_DIR)/libalx/
+	@echo	"	MAKE	base"
 	$(Q)$(MAKE) base	-C $(TMP_DIR)
 	$(Q)$(MAKE) base	-C $(LIB_DIR)
 
 PHONY += io
 io: base
-	@echo  "	MAKE	io"
+	@echo	"	MAKE	io"
 	$(Q)$(MAKE) io		-C $(TMP_DIR)
 	$(Q)$(MAKE) io		-C $(LIB_DIR)
 
 PHONY += curses
 curses: base io
-	@echo  "	MAKE	curses"
+	@echo	"	MAKE	curses"
 	$(Q)$(MAKE) curses	-C $(TMP_DIR)
 	$(Q)$(MAKE) curses	-C $(LIB_DIR)
 
 
 PHONY += clean
 clean:
-	@echo  "	RM	*.o *.s *.a"
-	$(Q)find . -type f -name '*.o' -exec rm '{}' '+'
-	$(Q)find . -type f -name '*.s' -exec rm '{}' '+'
-	$(Q)find . -type f -name '*.a' -exec rm '{}' '+'
+	@echo	"	RM	*.o *.s *.a"
+	$(Q)find $(TMP_DIR) -type f -name '*.o' -exec rm '{}' '+'
+	$(Q)find $(TMP_DIR) -type f -name '*.s' -exec rm '{}' '+'
+	$(Q)find $(LIB_DIR) -type f -name '*.a' -exec rm '{}' '+'
 
 ################################################################################
 # Declare the contents of the .PHONY variable as phony.

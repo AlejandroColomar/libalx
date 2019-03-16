@@ -10,24 +10,34 @@
 ################################################################################
 
 ################################################################################
+# dependencies
+OBJ		=							\
+		alx_ncur.o
+
+NCUR_INC	=							\
+		$(INC_DIR)/libalx/curses/alx_ncur.h			\
+		$(INC_DIR)/libalx/io/alx_input.h
+NCUR_SRC	=							\
+		$(SRC_DIR)/curses/alx_ncur.c
+
+################################################################################
+# CFLAGS
+CFLAGS	+= `pkg-config --cflags ncurses`
+
+################################################################################
 # target: dependencies
 #	action
 
 PHONY := all
-all: base io curses
+all: $(OBJ)
 
 
-PHONY += base
-base:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/
-
-PHONY += io
-io:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/io/
-
-PHONY += curses
-curses:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/curses/
+alx_ncur.s: $(NCUR_SRC) $(NCUR_INC)
+	@echo	"	CC	libalx/tmp/curses/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+alx_ncur.o: alx_ncur.s
+	@echo	"	AS	libalx/tmp/curses/$@"
+	$(Q)$(AS) $< -o $@
 
 
 PHONY += clean

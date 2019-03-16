@@ -2,25 +2,33 @@
 
 # MACRO = substitute with this
 
-# directories
-
-LIBALX_TMP_DIR	= $(LIBALX_DIR)/tmp/
-
-INC_DIR = $(LIBALX_DIR)/inc/
-SRC_DIR = $(LIBALX_DIR)/src/
-
 # dependencies
 
-_BASE	= alx_cmp.o alx_math.o alx_seed.o
-_IO	= alx_input.o alx_file.o
-_CURSES	= alx_ncur.o
-BASE	= libalx-base.a
-IO	= libalx-io.a
-CURSES	= libalx-curses.a
+BASE_MATH_OBJ	=							\
+		$(TMP_DIR)/base/math/arithmetic_mean.o			\
+		$(TMP_DIR)/base/math/binomial_coefficient.o		\
+		$(TMP_DIR)/base/math/factorial.o			\
+		$(TMP_DIR)/base/math/median.o				\
+		$(TMP_DIR)/base/math/pascal_triangle.o			\
+		$(TMP_DIR)/base/math/prime.o				\
+		$(TMP_DIR)/base/math/prime_factors.o			\
+		$(TMP_DIR)/base/math/scale_linear.o
+BASE_STDLIB_OBJ	=							\
+		$(TMP_DIR)/base/stdlib/compare.o			\
+		$(TMP_DIR)/base/stdlib/find.o				\
+		$(TMP_DIR)/base/stdlib/local_maxima.o			\
+		$(TMP_DIR)/base/stdlib/maximum.o			\
+		$(TMP_DIR)/base/stdlib/popcnt.o				\
+		$(TMP_DIR)/base/stdlib/seed_mix.o
 
-LIBALX_OBJS_BASE	= $(patsubst %,$(LIBALX_TMP_DIR)/%,$(_BASE))
-LIBALX_OBJS_IO		= $(patsubst %,$(LIBALX_TMP_DIR)/%,$(_IO))
-LIBALX_OBJS_CURSES	= $(patsubst %,$(LIBALX_TMP_DIR)/%,$(_CURSES))
+BASE_OBJ	=							\
+		$(BASE_MATH_OBJ)					\
+		$(BASE_STDLIB_OBJ)
+IO_OBJ		=							\
+		$(TMP_DIR)/io/alx_input.o				\
+		$(TMP_DIR)/io/alx_file.o
+CURSES_OBJ	=							\
+		$(TMP_DIR)/curses/alx_ncur.o
 
 # target: dependencies
 #	action
@@ -29,26 +37,26 @@ PHONY := all
 all: base io curses
 
 PHONY += base
-base: $(BASE)
+base: libalx/libalx-base.a
 
 PHONY += io
-io: $(IO)
+io: libalx/libalx-io.a
 
 PHONY += curses
-curses: $(CURSES)
+curses: libalx/libalx-curses.a
 
 
-libalx-base.a: $(LIBALX_OBJS_BASE)
+libalx/libalx-base.a: $(BASE_OBJ)
+	@echo	"	AR	libalx/lib/$@"
 	$(Q)$(AR) -r -c -s -o $@ $^
-	@echo  "	AR	$@"
 
-libalx-io.a: $(LIBALX_OBJS_IO)
+libalx/libalx-io.a: $(IO_OBJ)
+	@echo	"	AR	libalx/lib/$@"
 	$(Q)$(AR) -r -c -s -o $@ $^
-	@echo  "	AR	$@"
 
-libalx-curses.a: $(LIBALX_OBJS_CURSES)
+libalx/libalx-curses.a: $(CURSES_OBJ)
+	@echo	"	AR	libalx/lib/$@"
 	$(Q)$(AR) -r -c -s -o $@ $^
-	@echo  "	AR	$@"
 
 
 PHONY += clean

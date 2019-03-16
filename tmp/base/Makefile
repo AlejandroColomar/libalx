@@ -14,20 +14,9 @@
 #	action
 
 PHONY := all
-all: base io curses
-
-
-PHONY += base
-base:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/
-
-PHONY += io
-io:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/io/
-
-PHONY += curses
-curses:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/curses/
+all: $(OBJ)
+	$(Q)$(MAKE)	-C $(TMP_DIR)/base/math/
+	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stdlib/
 
 
 PHONY += clean
