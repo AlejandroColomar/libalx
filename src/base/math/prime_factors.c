@@ -118,6 +118,9 @@ bool	alx_prime_factors_s16	(int16_t n,
 	ssize_t	prime_index;
 	int	tmp;
 
+	if (!alx_prime_s16[0])
+		alx_prime_s16_init();
+
 	memset(*pf, 0, sizeof(*pf));
 
 	if (n < 2)
@@ -150,6 +153,9 @@ bool	alx_prime_factors_u16	(uint16_t n,
 {
 	ssize_t		prime_index;
 	unsigned	tmp;
+
+	if (!alx_prime_u16[0])
+		alx_prime_u16_init();
 
 	memset(*pf, 0, sizeof(*pf));
 

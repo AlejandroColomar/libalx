@@ -18,6 +18,7 @@ BASE_STDLIB_OBJ	=							\
 		$(TMP_DIR)/base/stdlib/search.o				\
 		$(TMP_DIR)/base/stdlib/local_maxima.o			\
 		$(TMP_DIR)/base/stdlib/matrix_addition.o		\
+		$(TMP_DIR)/base/stdlib/matrix_subtraction.o		\
 		$(TMP_DIR)/base/stdlib/maximum.o			\
 		$(TMP_DIR)/base/stdlib/popcnt.o				\
 		$(TMP_DIR)/base/stdlib/pow.o				\
