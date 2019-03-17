@@ -17,6 +17,7 @@ OBJ		=							\
 		search.o						\
 		local_maxima.o						\
 		matrix_addition.o					\
+		matrix_subtraction.o					\
 		maximum.o						\
 		popcnt.o						\
 		pow.o							\
@@ -41,6 +42,11 @@ MATRIX_ADDITION_INC	=						\
 		$(INC_DIR)/libalx/base/stdlib/matrix_addition.h
 MATRIX_ADDITION_SRC	=						\
 		$(SRC_DIR)/base/stdlib/matrix_addition.c
+
+MATRIX_SUBTRACTION_INC	=						\
+		$(INC_DIR)/libalx/base/stdlib/matrix_subtraction.h
+MATRIX_SUBTRACTION_SRC	=						\
+		$(SRC_DIR)/base/stdlib/matrix_subtraction.c
 
 MAXIMUM_INC	=							\
 		$(INC_DIR)/libalx/base/stdlib/maximum.h
@@ -96,6 +102,13 @@ matrix_addition.s: $(MATRIX_ADDITION_SRC) $(MATRIX_ADDITION_INC)
 	@echo	"	CC	libalx/tmp/base/stdlib/$@"
 	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
 matrix_addition.o: matrix_addition.s
+	@echo	"	AS	libalx/tmp/base/stdlib/$@"
+	$(Q)$(AS) $< -o $@
+
+matrix_subtraction.s: $(MATRIX_SUBTRACTION_SRC) $(MATRIX_SUBTRACTION_INC)
+	@echo	"	CC	libalx/tmp/base/stdlib/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+matrix_subtraction.o: matrix_subtraction.s
 	@echo	"	AS	libalx/tmp/base/stdlib/$@"
 	$(Q)$(AS) $< -o $@
 
