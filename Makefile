@@ -72,6 +72,8 @@ export	SZ
 CFLAGS_STD	= -std=c17
 CFLAGS_STD	= -Wpedantic
 
+CFLAGS_BSD	= `pkg-config --libs libbsd-overlay`
+
 CFLAGS_OPT	= -O3
 CFLAGS_OPT     += -march=native
 
@@ -81,6 +83,7 @@ CFLAGS_W       += -Wstrict-prototypes
 CFLAGS_W       += -Werror
 
 CFLAGS		= $(CFLAGS_STD)
+CFLAGS         += $(CFLAGS_BSD)
 CFLAGS         += $(CFLAGS_OPT)
 CFLAGS         += $(CFLAGS_W)
 
@@ -90,6 +93,8 @@ export	CFLAGS
 # c++flags
 CXXFLAGS_STD	= -std=c++17
 
+CXXFLAGS_BSD	= `pkg-config --libs libbsd-overlay`
+
 CXXFLAGS_OPT	= -O3
 CXXFLAGS_OPT   += -march=native
 
@@ -98,6 +103,7 @@ CXXFLAGS_W     += -Wextra
 CXXFLAGS_W     += -Werror
 
 CXXFLAGS	= $(CXXFLAGS_STD)
+CXXFLAGS       += $(CXXFLAGS_BSD)
 CXXFLAGS       += $(CXXFLAGS_OPT)
 CXXFLAGS       += $(CXXFLAGS_W)
 

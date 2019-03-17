@@ -7,21 +7,39 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_BASE_STDLIB_FIND_H
-#define ALX_BASE_STDLIB_FIND_H
+#ifndef ALX_BASE_STDINT_CONSTANTS_HPP
+#define ALX_BASE_STDINT_CONSTANTS_HPP
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <stdint.h>
+#include <cstdint>
 
-#include <sys/types.h>
+
+/******************************************************************************
+ ******* typedefs *************************************************************
+ ******************************************************************************/
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+#define SQRT_UINT8_MIN		(UINT8_C( 0xF))
+#define SQRT_INT8_MIN		( INT8_C( 0xB))
+
+#define SQRT_UINT16_MIN		(UINT16_C(0xFF))
+#define SQRT_INT16_MIN		( INT16_C(0xB5))
+
+#define SQRT_UINT32_MIN		(UINT32_C(0xFFFF))
+#define SQRT_INT32_MIN		( INT32_C(0xB504))
+
+#define SQRT_UINT64_MIN		(UINT64_C(0xFFFFFFFF))
+#define SQRT_INT64_MIN		( INT64_C(0xB504F333))
+
+/* Caution with these.  Especially with SQRT_INT128_MIN, which is unsigned */
+#define SQRT_UINT128_MIN	(UINT64_C(0xFFFFFFFFFFFFFFFF))
+#define SQRT_INT128_MIN		(UINT64_C(0xB504F333F9DE6800))
 
 
 /******************************************************************************
@@ -42,37 +60,6 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
-ssize_t	alx_find_uint	(ssize_t n, const unsigned arr[restrict n], unsigned x);
-ssize_t	alx_find_int	(ssize_t n, const int arr[restrict n], int x);
-ssize_t	alx_find_u8	(ssize_t n, const uint8_t arr[restrict n], uint8_t x);
-ssize_t	alx_find_s8	(ssize_t n, const int8_t arr[restrict n], int8_t x);
-ssize_t	alx_find_u16	(ssize_t n, const uint16_t arr[restrict n], uint16_t x);
-ssize_t	alx_find_s16	(ssize_t n, const int16_t arr[restrict n], int16_t x);
-ssize_t	alx_find_u32	(ssize_t n, const uint32_t arr[restrict n], uint32_t x);
-ssize_t	alx_find_s32	(ssize_t n, const int32_t arr[restrict n], int32_t x);
-ssize_t	alx_find_u64	(ssize_t n, const uint64_t arr[restrict n], uint64_t x);
-ssize_t	alx_find_s64	(ssize_t n, const int64_t arr[restrict n], int64_t x);
-
-ssize_t	alx_find_sorted_uint	(ssize_t n, const unsigned arr[restrict n],
-				unsigned x);
-ssize_t	alx_find_sorted_int	(ssize_t n, const int arr[restrict n],
-				int x);
-ssize_t	alx_find_sorted_u8	(ssize_t n, const uint8_t arr[restrict n],
-				uint8_t x);
-ssize_t	alx_find_sorted_s8	(ssize_t n, const int8_t arr[restrict n],
-				int8_t x);
-ssize_t	alx_find_sorted_u16	(ssize_t n, const uint16_t arr[restrict n],
-				uint16_t x);
-ssize_t	alx_find_sorted_s16	(ssize_t n, const int16_t arr[restrict n],
-				int16_t x);
-ssize_t	alx_find_sorted_u32	(ssize_t n, const uint32_t arr[restrict n],
-				uint32_t x);
-ssize_t	alx_find_sorted_s32	(ssize_t n, const int32_t arr[restrict n],
-				int32_t x);
-ssize_t	alx_find_sorted_u64	(ssize_t n, const uint64_t arr[restrict n],
-				uint64_t x);
-ssize_t	alx_find_sorted_s64	(ssize_t n, const int64_t arr[restrict n],
-				int64_t x);
 
 
 /******************************************************************************
@@ -88,7 +75,7 @@ ssize_t	alx_find_sorted_s64	(ssize_t n, const int64_t arr[restrict n],
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/base/stdlib/find.h */
+#endif		/* libalx/base/stdint/constants.hpp */
 
 
 /******************************************************************************

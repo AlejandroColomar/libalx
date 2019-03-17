@@ -7,8 +7,8 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_BASE_MATH_PRIME_HPP
-#define ALX_BASE_MATH_PRIME_HPP
+#ifndef ALX_BASE_STDLIB_POW_HPP
+#define ALX_BASE_STDLIB_POW_HPP
 
 
 /******************************************************************************
@@ -16,20 +16,10 @@
  ******************************************************************************/
 #include <cstdint>
 
-#include <sys/types.h>
-
-#include "libalx/base/stdlib/search.hpp"
-
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-#define	PRIME_NUMBERS_QTY_S8	(31)
-#define	PRIME_NUMBERS_QTY_U8	(54)
-#define	PRIME_NUMBERS_QTY_S16	(3512)
-#define	PRIME_NUMBERS_QTY_U16	(6542)
-#define	PRIME_NUMBERS_QTY_S32	(105097565)
-#define	PRIME_NUMBERS_QTY_U32	(203280221)
 
 
 /******************************************************************************
@@ -45,12 +35,6 @@
 /******************************************************************************
  ******* variables ************************************************************
  ******************************************************************************/
-/* extern --------------------------------------------------------------------*/
-extern const	int8_t		alx_prime_s8 [PRIME_NUMBERS_QTY_S8];
-extern const	uint8_t		alx_prime_u8 [PRIME_NUMBERS_QTY_U8];
-extern		int16_t		alx_prime_s16 [PRIME_NUMBERS_QTY_S16];
-extern		uint16_t	alx_prime_u16 [PRIME_NUMBERS_QTY_U16];
-/* static const --------------------------------------------------------------*/
 
 
 /******************************************************************************
@@ -58,52 +42,31 @@ extern		uint16_t	alx_prime_u16 [PRIME_NUMBERS_QTY_U16];
  ******************************************************************************/
 extern	"C"
 {
-void	alx_prime_s16_init	(void);
-void	alx_prime_u16_init	(void);
+uint8_t		alx_pow_u8	(uint8_t base, uint8_t exp);
+int8_t		alx_pow_s8	(int8_t base, uint8_t exp);
+uint16_t	alx_pow_u16	(uint16_t base, uint8_t exp);
+int16_t		alx_pow_s16	(int16_t base, uint8_t exp);
+uint32_t	alx_pow_u32	(uint32_t base, uint8_t exp);
+int32_t		alx_pow_s32	(int32_t base, uint8_t exp);
+uint64_t	alx_pow_u64	(uint64_t base, uint8_t exp);
+int64_t		alx_pow_s64	(int64_t base, uint8_t exp);
 }
 
 
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
-static inline	ssize_t	alx_prime_index_s8	(int8_t n);
-static inline	ssize_t	alx_prime_index_u8	(int8_t n);
-static inline	ssize_t	alx_prime_index_s16	(int8_t n);
-static inline	ssize_t	alx_prime_index_u16	(int8_t n);
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
-static inline
-ssize_t	alx_prime_index_s8	(int8_t n)
-{
-	return	alx_bsearch_s8(PRIME_NUMBERS_QTY_S8, alx_prime_s8, n);
-}
-
-static inline
-ssize_t	alx_prime_index_u8	(int8_t n)
-{
-	return	alx_bsearch_u8(PRIME_NUMBERS_QTY_U8, alx_prime_u8, n);
-}
-
-static inline
-ssize_t	alx_prime_index_s16	(int8_t n)
-{
-	return	alx_bsearch_s16(PRIME_NUMBERS_QTY_S16, alx_prime_s16, n);
-}
-
-static inline
-ssize_t	alx_prime_index_u16	(int8_t n)
-{
-	return	alx_bsearch_u16(PRIME_NUMBERS_QTY_U16, alx_prime_u16, n);
-}
 
 
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/base/math/prime.hpp */
+#endif		/* libalx/base/stdlib/pow.hpp */
 
 
 /******************************************************************************

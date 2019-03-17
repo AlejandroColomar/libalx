@@ -18,7 +18,7 @@
 
 #include <sys/types.h>
 
-#include "libalx/base/stdlib/find.h"
+#include "libalx/base/stdlib/search.h"
 
 
 /******************************************************************************
@@ -75,25 +75,25 @@ static inline	ssize_t	alx_prime_index_u16	(int8_t n);
 static inline
 ssize_t	alx_prime_index_s8	(int8_t n)
 {
-	return	alx_find_sorted_s8(PRIME_NUMBERS_QTY_S8, alx_prime_s8, n);
+	return	alx_bsearch_s8(PRIME_NUMBERS_QTY_S8, alx_prime_s8, n);
 }
 
 static inline
 ssize_t	alx_prime_index_u8	(int8_t n)
 {
-	return	alx_find_sorted_u8(PRIME_NUMBERS_QTY_U8, alx_prime_u8, n);
+	return	alx_bsearch_u8(PRIME_NUMBERS_QTY_U8, alx_prime_u8, n);
 }
 
 static inline
 ssize_t	alx_prime_index_s16	(int8_t n)
 {
-	return	alx_find_sorted_s16(PRIME_NUMBERS_QTY_S16, alx_prime_s16, n);
+	return	alx_bsearch_s16(PRIME_NUMBERS_QTY_S16, alx_prime_s16, n);
 }
 
 static inline
 ssize_t	alx_prime_index_u16	(int8_t n)
 {
-	return	alx_find_sorted_u16(PRIME_NUMBERS_QTY_U16, alx_prime_u16, n);
+	return	alx_bsearch_u16(PRIME_NUMBERS_QTY_U16, alx_prime_u16, n);
 }
 
 

@@ -7,29 +7,21 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_BASE_MATH_PRIME_HPP
-#define ALX_BASE_MATH_PRIME_HPP
+#ifndef ALX_BASE_STDLIB_SEARCH_H
+#define ALX_BASE_STDLIB_SEARCH_H
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <cstdint>
+#include <stdint.h>
 
 #include <sys/types.h>
-
-#include "libalx/base/stdlib/search.hpp"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-#define	PRIME_NUMBERS_QTY_S8	(31)
-#define	PRIME_NUMBERS_QTY_U8	(54)
-#define	PRIME_NUMBERS_QTY_S16	(3512)
-#define	PRIME_NUMBERS_QTY_U16	(6542)
-#define	PRIME_NUMBERS_QTY_S32	(105097565)
-#define	PRIME_NUMBERS_QTY_U32	(203280221)
 
 
 /******************************************************************************
@@ -45,65 +37,48 @@
 /******************************************************************************
  ******* variables ************************************************************
  ******************************************************************************/
-/* extern --------------------------------------------------------------------*/
-extern const	int8_t		alx_prime_s8 [PRIME_NUMBERS_QTY_S8];
-extern const	uint8_t		alx_prime_u8 [PRIME_NUMBERS_QTY_U8];
-extern		int16_t		alx_prime_s16 [PRIME_NUMBERS_QTY_S16];
-extern		uint16_t	alx_prime_u16 [PRIME_NUMBERS_QTY_U16];
-/* static const --------------------------------------------------------------*/
 
 
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
-extern	"C"
-{
-void	alx_prime_s16_init	(void);
-void	alx_prime_u16_init	(void);
-}
+ssize_t	alx_search_uint	(ssize_t n, const unsigned arr[restrict n], unsigned x);
+ssize_t	alx_search_int	(ssize_t n, const int arr[restrict n], int x);
+ssize_t	alx_search_u8	(ssize_t n, const uint8_t arr[restrict n], uint8_t x);
+ssize_t	alx_search_s8	(ssize_t n, const int8_t arr[restrict n], int8_t x);
+ssize_t	alx_search_u16	(ssize_t n, const uint16_t arr[restrict n], uint16_t x);
+ssize_t	alx_search_s16	(ssize_t n, const int16_t arr[restrict n], int16_t x);
+ssize_t	alx_search_u32	(ssize_t n, const uint32_t arr[restrict n], uint32_t x);
+ssize_t	alx_search_s32	(ssize_t n, const int32_t arr[restrict n], int32_t x);
+ssize_t	alx_search_u64	(ssize_t n, const uint64_t arr[restrict n], uint64_t x);
+ssize_t	alx_search_s64	(ssize_t n, const int64_t arr[restrict n], int64_t x);
+
+ssize_t	alx_bsearch_uint(ssize_t n, const unsigned arr[restrict n], unsigned x);
+ssize_t	alx_bsearch_int	(ssize_t n, const int arr[restrict n], int x);
+ssize_t	alx_bsearch_u8	(ssize_t n, const uint8_t arr[restrict n], uint8_t x);
+ssize_t	alx_bsearch_s8	(ssize_t n, const int8_t arr[restrict n], int8_t x);
+ssize_t	alx_bsearch_u16	(ssize_t n, const uint16_t arr[restrict n], uint16_t x);
+ssize_t	alx_bsearch_s16	(ssize_t n, const int16_t arr[restrict n], int16_t x);
+ssize_t	alx_bsearch_u32	(ssize_t n, const uint32_t arr[restrict n], uint32_t x);
+ssize_t	alx_bsearch_s32	(ssize_t n, const int32_t arr[restrict n], int32_t x);
+ssize_t	alx_bsearch_u64	(ssize_t n, const uint64_t arr[restrict n], uint64_t x);
+ssize_t	alx_bsearch_s64	(ssize_t n, const int64_t arr[restrict n], int64_t x);
 
 
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
-static inline	ssize_t	alx_prime_index_s8	(int8_t n);
-static inline	ssize_t	alx_prime_index_u8	(int8_t n);
-static inline	ssize_t	alx_prime_index_s16	(int8_t n);
-static inline	ssize_t	alx_prime_index_u16	(int8_t n);
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
-static inline
-ssize_t	alx_prime_index_s8	(int8_t n)
-{
-	return	alx_bsearch_s8(PRIME_NUMBERS_QTY_S8, alx_prime_s8, n);
-}
-
-static inline
-ssize_t	alx_prime_index_u8	(int8_t n)
-{
-	return	alx_bsearch_u8(PRIME_NUMBERS_QTY_U8, alx_prime_u8, n);
-}
-
-static inline
-ssize_t	alx_prime_index_s16	(int8_t n)
-{
-	return	alx_bsearch_s16(PRIME_NUMBERS_QTY_S16, alx_prime_s16, n);
-}
-
-static inline
-ssize_t	alx_prime_index_u16	(int8_t n)
-{
-	return	alx_bsearch_u16(PRIME_NUMBERS_QTY_U16, alx_prime_u16, n);
-}
 
 
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/base/math/prime.hpp */
+#endif		/* libalx/base/stdlib/search.h */
 
 
 /******************************************************************************

@@ -7,17 +7,14 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_BASE_STDLIB_FIND_HPP
-#define ALX_BASE_STDLIB_FIND_HPP
+#ifndef ALX_BASE_STDLIB_POW_H
+#define ALX_BASE_STDLIB_POW_H
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <cstddef>
-#include <cstdint>
-
-#include <sys/types.h>
+#include <stdint.h>
 
 
 /******************************************************************************
@@ -43,40 +40,14 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
-extern	"C"
-{
-ssize_t	alx_find_uint	(ssize_t n, const unsigned arr[restrict], unsigned x);
-ssize_t	alx_find_int	(ssize_t n, const int arr[restrict], int x);
-ssize_t	alx_find_u8	(ssize_t n, const uint8_t arr[restrict], uint8_t x);
-ssize_t	alx_find_s8	(ssize_t n, const int8_t arr[restrict], int8_t x);
-ssize_t	alx_find_u16	(ssize_t n, const uint16_t arr[restrict], uint16_t x);
-ssize_t	alx_find_s16	(ssize_t n, const int16_t arr[restrict], int16_t x);
-ssize_t	alx_find_u32	(ssize_t n, const uint32_t arr[restrict], uint32_t x);
-ssize_t	alx_find_s32	(ssize_t n, const int32_t arr[restrict], int32_t x);
-ssize_t	alx_find_u64	(ssize_t n, const uint64_t arr[restrict], uint64_t x);
-ssize_t	alx_find_s64	(ssize_t n, const int64_t arr[restrict], int64_t x);
-
-ssize_t	alx_find_sorted_uint	(ssize_t n, const unsigned arr[restrict],
-				unsigned x);
-ssize_t	alx_find_sorted_int	(ssize_t n, const int arr[restrict],
-				int x);
-ssize_t	alx_find_sorted_u8	(ssize_t n, const uint8_t arr[restrict],
-				uint8_t x);
-ssize_t	alx_find_sorted_s8	(ssize_t n, const int8_t arr[restrict],
-				int8_t x);
-ssize_t	alx_find_sorted_u16	(ssize_t n, const uint16_t arr[restrict],
-				uint16_t x);
-ssize_t	alx_find_sorted_s16	(ssize_t n, const int16_t arr[restrict],
-				int16_t x);
-ssize_t	alx_find_sorted_u32	(ssize_t n, const uint32_t arr[restrict],
-				uint32_t x);
-ssize_t	alx_find_sorted_s32	(ssize_t n, const int32_t arr[restrict],
-				int32_t x);
-ssize_t	alx_find_sorted_u64	(ssize_t n, const uint64_t arr[restrict],
-				uint64_t x);
-ssize_t	alx_find_sorted_s64	(ssize_t n, const int64_t arr[restrict],
-				int64_t x);
-}
+uint8_t		alx_pow_u8	(uint8_t base, uint8_t exp);
+int8_t		alx_pow_s8	(int8_t base, uint8_t exp);
+uint16_t	alx_pow_u16	(uint16_t base, uint8_t exp);
+int16_t		alx_pow_s16	(int16_t base, uint8_t exp);
+uint32_t	alx_pow_u32	(uint32_t base, uint8_t exp);
+int32_t		alx_pow_s32	(int32_t base, uint8_t exp);
+uint64_t	alx_pow_u64	(uint64_t base, uint8_t exp);
+int64_t		alx_pow_s64	(int64_t base, uint8_t exp);
 
 
 /******************************************************************************
@@ -92,7 +63,7 @@ ssize_t	alx_find_sorted_s64	(ssize_t n, const int64_t arr[restrict],
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/base/stdlib/find.hpp */
+#endif		/* libalx/base/stdlib/pow.h */
 
 
 /******************************************************************************

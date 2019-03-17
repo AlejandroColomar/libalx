@@ -14,10 +14,12 @@
 
 OBJ		=							\
 		compare.o						\
-		find.o							\
+		search.o						\
 		local_maxima.o						\
+		matrix_addition.o					\
 		maximum.o						\
 		popcnt.o						\
+		pow.o							\
 		seed_mix.o
 
 COMPARE_INC	=							\
@@ -25,15 +27,20 @@ COMPARE_INC	=							\
 COMPARE_SRC	=							\
 		$(SRC_DIR)/base/stdlib/compare.c
 
-FIND_INC	=							\
-		$(INC_DIR)/libalx/base/stdlib/find.h
-FIND_SRC	=							\
-		$(SRC_DIR)/base/stdlib/find.c
+SEARCH_INC	=							\
+		$(INC_DIR)/libalx/base/stdlib/search.h
+SEARCH_SRC	=							\
+		$(SRC_DIR)/base/stdlib/search.c
 
 LOCAL_MAXIMA_INC	=						\
 		$(INC_DIR)/libalx/base/stdlib/local_maxima.h
 LOCAL_MAXIMA_SRC	=						\
 		$(SRC_DIR)/base/stdlib/local_maxima.c
+
+MATRIX_ADDITION_INC	=						\
+		$(INC_DIR)/libalx/base/stdlib/matrix_addition.h
+MATRIX_ADDITION_SRC	=						\
+		$(SRC_DIR)/base/stdlib/matrix_addition.c
 
 MAXIMUM_INC	=							\
 		$(INC_DIR)/libalx/base/stdlib/maximum.h
@@ -44,6 +51,12 @@ POPCNT_INC	=							\
 		$(INC_DIR)/libalx/base/stdlib/popcnt.h
 POPCNT_SRC	=							\
 		$(SRC_DIR)/base/stdlib/popcnt.c
+
+POW_INC		=							\
+		$(INC_DIR)/libalx/base/stdlib/pow.h			\
+		$(INC_DIR)/libalx/base/stdint/constants.h
+POW_SRC		=							\
+		$(SRC_DIR)/base/stdlib/pow.c
 
 SEED_MIX_INC	=							\
 		$(INC_DIR)/libalx/base/stdlib/seed_mix.h
@@ -65,10 +78,10 @@ compare.o: compare.s
 	@echo	"	AS	libalx/tmp/base/stdlib/$@"
 	$(Q)$(AS) $< -o $@
 
-find.s: $(FIND_SRC) $(FIND_INC)
+search.s: $(SEARCH_SRC) $(SEARCH_INC)
 	@echo	"	CC	libalx/tmp/base/stdlib/$@"
 	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
-find.o: find.s
+search.o: search.s
 	@echo	"	AS	libalx/tmp/base/stdlib/$@"
 	$(Q)$(AS) $< -o $@
 
@@ -76,6 +89,13 @@ local_maxima.s: $(LOCAL_MAXIMA_SRC) $(LOCAL_MAXIMA_INC)
 	@echo	"	CC	libalx/tmp/base/stdlib/$@"
 	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
 local_maxima.o: local_maxima.s
+	@echo	"	AS	libalx/tmp/base/stdlib/$@"
+	$(Q)$(AS) $< -o $@
+
+matrix_addition.s: $(MATRIX_ADDITION_SRC) $(MATRIX_ADDITION_INC)
+	@echo	"	CC	libalx/tmp/base/stdlib/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+matrix_addition.o: matrix_addition.s
 	@echo	"	AS	libalx/tmp/base/stdlib/$@"
 	$(Q)$(AS) $< -o $@
 
@@ -90,6 +110,13 @@ popcnt.s: $(POPCNT_SRC) $(POPCNT_INC)
 	@echo	"	CC	libalx/tmp/base/stdlib/$@"
 	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
 popcnt.o: popcnt.s
+	@echo	"	AS	libalx/tmp/base/stdlib/$@"
+	$(Q)$(AS) $< -o $@
+
+pow.s: $(POW_SRC) $(POW_INC)
+	@echo	"	CC	libalx/tmp/base/stdlib/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+pow.o: pow.s
 	@echo	"	AS	libalx/tmp/base/stdlib/$@"
 	$(Q)$(AS) $< -o $@
 
