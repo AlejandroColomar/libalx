@@ -56,6 +56,9 @@ void	alx_strlgrep	(ssize_t buff_size,
 	ssize_t	pos_src;
 	ssize_t	line_len;
 
+	if (!buff_size)
+		return;
+
 	pos_dest	= 0;
 	pos_src		= 0;
 
