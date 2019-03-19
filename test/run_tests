@@ -10,32 +10,28 @@
 
 
 ################################################################################
-#	constants							       #
+#	headers								       #
 ################################################################################
-BOLD='\033[1m'
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-COLOR_OFF='\033[0m'
+source	"../sh/escape_sequences.sh"
 
 
 ################################################################################
 #	functions							       #
 ################################################################################
-find_tests()
+function	find_tests()
 {
 
 	tests="$(find . -type f -name '*test')"
 }
 
-run_test()
+function	run_test()
 {
 	local	cmd=$1
 	local	ret
 
 	eval	"${cmd}"
 	ret=$?
-	if ((!${ret})); then
+	if [ "${ret}" -eq 0 ]; then
 		printf	"  ${GREEN}${BOLD}[OK]${COLOR_OFF}	%s\n"	"${cmd}"
 	else
 		printf	" ${RED}${BOLD}[FAIL]${COLOR_OFF}	%s\n"	"${cmd}"

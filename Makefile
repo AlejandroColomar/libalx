@@ -1,4 +1,4 @@
-#!/usr/bin/make -f
+#! /usr/bin/make -f
 
 ################################################################################
 # Copyright (C) 2019	Alejandro Colomar Andrés
@@ -72,7 +72,7 @@ export	SZ
 CFLAGS_STD	= -std=c17
 CFLAGS_STD	= -Wpedantic
 
-CFLAGS_BSD	= `pkg-config --libs libbsd-overlay`
+CFLAGS_BSD	= `pkg-config --cflags libbsd-overlay`
 
 CFLAGS_OPT	= -O3
 CFLAGS_OPT     += -march=native
@@ -93,7 +93,7 @@ export	CFLAGS
 # c++flags
 CXXFLAGS_STD	= -std=c++17
 
-CXXFLAGS_BSD	= `pkg-config --libs libbsd-overlay`
+CXXFLAGS_BSD	= `pkg-config --cflags libbsd-overlay`
 
 CXXFLAGS_OPT	= -O3
 CXXFLAGS_OPT   += -march=native
@@ -130,25 +130,41 @@ export	LIB_DIR
 #	action
 
 PHONY := all
-all: base io curses
+all: math stdint stdlib string io curses
 
 
-PHONY += base
-base:
-	@echo	"	MKDIR	libalx/lib/libalx"
-	$(Q)mkdir -p		$(LIB_DIR)/libalx/
-	@echo	"	MAKE	base"
-	$(Q)$(MAKE) base	-C $(TMP_DIR)
-	$(Q)$(MAKE) base	-C $(LIB_DIR)
+PHONY += math
+math: stdint stdlib
+	@echo	"	MAKE	math"
+	$(Q)$(MAKE) math	-C $(TMP_DIR)
+	$(Q)$(MAKE) math	-C $(LIB_DIR)
+
+PHONY += stdint
+stdint:
+	@echo	"	MAKE	stdint"
+	$(Q)$(MAKE) stdint	-C $(TMP_DIR)
+	$(Q)$(MAKE) stdint	-C $(LIB_DIR)
+
+PHONY += stdlib
+stdlib: stdint
+	@echo	"	MAKE	stdlib"
+	$(Q)$(MAKE) stdlib	-C $(TMP_DIR)
+	$(Q)$(MAKE) stdlib	-C $(LIB_DIR)
+
+PHONY += string
+string:
+	@echo	"	MAKE	string"
+	$(Q)$(MAKE) string	-C $(TMP_DIR)
+	$(Q)$(MAKE) string	-C $(LIB_DIR)
 
 PHONY += io
-io: base
+io: stdlib
 	@echo	"	MAKE	io"
 	$(Q)$(MAKE) io		-C $(TMP_DIR)
 	$(Q)$(MAKE) io		-C $(LIB_DIR)
 
 PHONY += curses
-curses: base io
+curses: stdlib io
 	@echo	"	MAKE	curses"
 	$(Q)$(MAKE) curses	-C $(TMP_DIR)
 	$(Q)$(MAKE) curses	-C $(LIB_DIR)

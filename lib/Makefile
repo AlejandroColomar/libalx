@@ -1,32 +1,37 @@
-#!/usr/bin/make -f
+#! /usr/bin/make -f
 
 # MACRO = substitute with this
 
 # dependencies
 
-BASE_MATH_OBJ	=							\
-		$(TMP_DIR)/base/math/arithmetic_mean.o			\
-		$(TMP_DIR)/base/math/binomial_coefficient.o		\
-		$(TMP_DIR)/base/math/factorial.o			\
-		$(TMP_DIR)/base/math/median.o				\
-		$(TMP_DIR)/base/math/pascal_triangle.o			\
-		$(TMP_DIR)/base/math/prime.o				\
-		$(TMP_DIR)/base/math/prime_factors.o			\
-		$(TMP_DIR)/base/math/scale_linear.o
-BASE_STDLIB_OBJ	=							\
-		$(TMP_DIR)/base/stdlib/compare.o			\
-		$(TMP_DIR)/base/stdlib/search.o				\
-		$(TMP_DIR)/base/stdlib/local_maxima.o			\
-		$(TMP_DIR)/base/stdlib/matrix_addition.o		\
-		$(TMP_DIR)/base/stdlib/matrix_subtraction.o		\
-		$(TMP_DIR)/base/stdlib/maximum.o			\
-		$(TMP_DIR)/base/stdlib/popcnt.o				\
-		$(TMP_DIR)/base/stdlib/pow.o				\
-		$(TMP_DIR)/base/stdlib/seed_mix.o
-
-BASE_OBJ	=							\
-		$(BASE_MATH_OBJ)					\
-		$(BASE_STDLIB_OBJ)
+MATH_OBJ	=							\
+		$(TMP_DIR)/math/arithmetic_mean.o			\
+		$(TMP_DIR)/math/array_division.o			\
+		$(TMP_DIR)/math/array_multiplication.o			\
+		$(TMP_DIR)/math/binomial_coefficient.o			\
+		$(TMP_DIR)/math/factorial.o				\
+		$(TMP_DIR)/math/matrix_addition.o			\
+		$(TMP_DIR)/math/matrix_subtraction.o			\
+		$(TMP_DIR)/math/median.o				\
+		$(TMP_DIR)/math/pascal_triangle.o			\
+		$(TMP_DIR)/math/prime.o					\
+		$(TMP_DIR)/math/prime_factorization.o			\
+		$(TMP_DIR)/math/scale_linear.o
+STDINT_OBJ	=							\
+		$(TMP_DIR)/stdint/constants.o				\
+		$(TMP_DIR)/stdint/int128.o
+STDLIB_OBJ	=							\
+		$(TMP_DIR)/stdlib/array_split_pos_neg.o			\
+		$(TMP_DIR)/stdlib/compare.o				\
+		$(TMP_DIR)/stdlib/local_maxima.o			\
+		$(TMP_DIR)/stdlib/maximum.o				\
+		$(TMP_DIR)/stdlib/popcnt.o				\
+		$(TMP_DIR)/stdlib/pow.o					\
+		$(TMP_DIR)/stdlib/search.o				\
+		$(TMP_DIR)/stdlib/seed_mix.o
+STRING_OBJ	=							\
+		$(TMP_DIR)/string/strchr.o				\
+		$(TMP_DIR)/string/strgrep.o
 IO_OBJ		=							\
 		$(TMP_DIR)/io/alx_input.o				\
 		$(TMP_DIR)/io/alx_file.o
@@ -37,19 +42,44 @@ CURSES_OBJ	=							\
 #	action
 
 PHONY := all
-all: base io curses
+all: libalx math stdint stdlib string io curses
 
-PHONY += base
-base: libalx/libalx-base.a
+PHONY += math
+math: libalx libalx/libalx-math.a
+
+PHONY += stdint
+stdint: libalx libalx/libalx-stdint.a
+
+PHONY += stdlib
+stdlib: libalx libalx/libalx-stdlib.a
+
+PHONY += string
+string: libalx libalx/libalx-string.a
 
 PHONY += io
-io: libalx/libalx-io.a
+io: libalx libalx/libalx-io.a
 
 PHONY += curses
-curses: libalx/libalx-curses.a
+curses: libalx libalx/libalx-curses.a
 
 
-libalx/libalx-base.a: $(BASE_OBJ)
+libalx:
+	@echo	"	MKDIR	libalx/lib/$@"
+	$(Q)mkdir -p		$(LIB_DIR)/$@/
+
+libalx/libalx-math.a: $(MATH_OBJ)
+	@echo	"	AR	libalx/lib/$@"
+	$(Q)$(AR) -r -c -s -o $@ $^
+
+libalx/libalx-stdint.a: $(STDINT_OBJ)
+	@echo	"	AR	libalx/lib/$@"
+	$(Q)$(AR) -r -c -s -o $@ $^
+
+libalx/libalx-stdlib.a: $(STDLIB_OBJ)
+	@echo	"	AR	libalx/lib/$@"
+	$(Q)$(AR) -r -c -s -o $@ $^
+
+libalx/libalx-string.a: $(STRING_OBJ)
 	@echo	"	AR	libalx/lib/$@"
 	$(Q)$(AR) -r -c -s -o $@ $^
 

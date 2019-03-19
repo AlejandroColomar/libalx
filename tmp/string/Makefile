@@ -10,36 +10,44 @@
 ################################################################################
 
 ################################################################################
+# dependencies
+
+OBJ		=							\
+		strchr.o						\
+		strgrep.o
+
+STRCHR_INC	=							\
+		$(INC_DIR)/libalx/string/strchr.h
+STRCHR_SRC	=							\
+		$(SRC_DIR)/string/strchr.c
+
+STRGREP_INC	=							\
+		$(INC_DIR)/libalx/string/strgrep.h			\
+		$(INC_DIR)/libalx/string/strchr.h
+STRGREP_SRC	=							\
+		$(SRC_DIR)/string/strgrep.c
+
+################################################################################
 # target: dependencies
 #	action
 
 PHONY := all
-all: math stdint stdlib string io curses
+all: $(OBJ)
 
 
-PHONY += math
-math:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/math/
+strchr.s: $(STRCHR_SRC) $(STRCHR_INC)
+	@echo	"	CC	libalx/tmp/string/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+strchr.o: strchr.s
+	@echo	"	AS	libalx/tmp/string/$@"
+	$(Q)$(AS) $< -o $@
 
-PHONY += stdint
-stdint:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/stdint/
-
-PHONY += stdlib
-stdlib:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/stdlib/
-
-PHONY += string
-string:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/string/
-
-PHONY += io
-io:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/io/
-
-PHONY += curses
-curses:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/curses/
+strgrep.s: $(STRGREP_SRC) $(STRGREP_INC)
+	@echo	"	CC	libalx/tmp/string/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+strgrep.o: strgrep.s
+	@echo	"	AS	libalx/tmp/string/$@"
+	$(Q)$(AS) $< -o $@
 
 
 PHONY += clean

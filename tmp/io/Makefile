@@ -1,4 +1,4 @@
-#!/usr/bin/make -f
+#! /usr/bin/make -f
 
 ################################################################################
 # Copyright (C) 2019	Alejandro Colomar Andrés

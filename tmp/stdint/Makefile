@@ -10,36 +10,43 @@
 ################################################################################
 
 ################################################################################
+# dependencies
+
+OBJ		=							\
+		constants.o						\
+		int128.o
+
+CONSTANTS_INC	=							\
+		$(INC_DIR)/libalx/stdint/constants.h
+CONSTANTS_SRC	=							\
+		$(SRC_DIR)/stdint/constants.c
+
+INT128_INC	=							\
+		$(INC_DIR)/libalx/stdint/int128.h
+INT128_SRC	=							\
+		$(SRC_DIR)/stdint/int128.c
+
+################################################################################
 # target: dependencies
 #	action
 
 PHONY := all
-all: math stdint stdlib string io curses
+all: $(OBJ)
 
 
-PHONY += math
-math:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/math/
+constants.s: $(CONSTANTS_SRC) $(CONSTANTS_INC)
+	@echo	"	CC	libalx/tmp/stdint/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+constants.o: constants.s
+	@echo	"	AS	libalx/tmp/stdint/$@"
+	$(Q)$(AS) $< -o $@
 
-PHONY += stdint
-stdint:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/stdint/
-
-PHONY += stdlib
-stdlib:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/stdlib/
-
-PHONY += string
-string:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/string/
-
-PHONY += io
-io:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/io/
-
-PHONY += curses
-curses:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/curses/
+int128.s: $(INT128_SRC) $(INT128_INC)
+	@echo	"	CC	libalx/tmp/stdint/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+int128.o: int128.s
+	@echo	"	AS	libalx/tmp/stdint/$@"
+	$(Q)$(AS) $< -o $@
 
 
 PHONY += clean
