@@ -42,11 +42,9 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
-void	alx_strlgrep	(ssize_t buff_size,
-			char dest[restrict buff_size],
-			const char src[restrict buff_size],
-			ssize_t key_size,
-			const char key[restrict key_size]);
+ssize_t	alx_strlfgrep	(ssize_t buff_size, char dest[restrict buff_size],
+					const char src[restrict buff_size],
+					const char *restrict pattern);
 
 
 /******************************************************************************

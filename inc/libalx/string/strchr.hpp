@@ -47,32 +47,51 @@
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
-static inline	char	*alx_strnchr	(const char *restrict str, char c,
-					ssize_t size);
-static inline	char	*alx_strnchrnul	(const char *restrict str, char c,
-					ssize_t size);
+static inline	ssize_t	alx_strnchr	(const char *restrict str,
+					char c, ssize_t size);
+/* Missing memrchr() */
+#if 0
+static inline	ssize_t	alx_strnrchr	(const char *restrict str,
+					char c, ssize_t size);
+#endif
+static inline	ssize_t	alx_strnchrnul	(const char *restrict str,
+					char c, ssize_t size);
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
 static inline
-char	*alx_strnchr	(const char *restrict str, char c, ssize_t size)
+ssize_t	alx_strnchr	(const char *restrict str, char c, ssize_t size)
 {
+	const char	*p = memchr(str, c, strnlen(str, size));
 
-	return	memchr(str, c, strnlen(str, size));
+	if (!p)
+		return	-1;
+	return	p - str;
 }
 
+/* Missing memrchr() */
+#if 0
 static inline
-char	*alx_strnchrnul	(const char *restrict str, char c, ssize_t size)
+ssize_t	alx_strnrchr	(const char *restrict str, char c, ssize_t size)
 {
-	char	*tmp;
+	const char	*p = memrchr(str, c, strnlen(str, size));
 
-	tmp	= memchr(str, c, strnlen(str, size));
-	if (!tmp)
-		return	str + size;
+	if (!p)
+		return	-1;
+	return	p - str;
+}
+#endif
 
-	return	tmp;
+static inline
+ssize_t	alx_strnchrnul	(const char *restrict str, char c, ssize_t size)
+{
+	const char	*p = memchr(str, c, strnlen(str, size));
+
+	if (!p)
+		return	size;
+	return	p - str;
 }
 
 

@@ -1,0 +1,70 @@
+ALX_STRGREP(3libalx)		libalx manual		ALX_STRGREP(3libalx)
+
+NAME
+	alx_strlfgrep — size-bounded string fgrep on "C" strings
+
+LIBRARY
+	Utility functions (libalx-string, -l alx-string)
+
+SYNOPSIS
+	#include "libalx/string/strgrep.h"
+		or
+	#include "libalx/string.h"
+
+	ssize_t alx_strlfgrep(ssize_t buff_size,
+					char dest[restrict buff_size],
+					const char src[restrict buff_size],
+					const char *restrict pattern);
+
+DESCRIPTION
+	The 'alx_strlfgrep()' function searches the input string 'str' for
+	lines containing a match to the given 'pattern'.  No more than
+	'buff_size' characters are searched.  'alx_strlfgrep()' prints the
+	matching lines into the provided buffer 'dest'.  It intends to be a
+	"C" clone of the program 'fgrep' {a.k.a. 'grep -f'}, but works with
+	"C" strings instead of files.  As 'strlcpy' and derivatives, the l
+	in the name means that it is designed to work with strings instead
+	of non-NUL-terminated buffers.  'alx_strlfgrep()' takes the full
+	size of the buffer (not just the length) and guarantees to
+	NUL-terminate the result (as long as 'buff_size' is larger than 0).
+	Note that a byte for the NUL should be included in 'buff_size'.
+	Also note that 'alx_strlfgrep()' only operates on true "C" strings.
+	This means that for 'alx_strlfgrep()' both 'src' and 'pattern' must
+	be NUL-terminated.
+	
+	If 'pattern' is not NUL-terminated, the behavior is Undefined.
+	If 'src' is not NUL-terminated, 'alx_strlfgrep()' will read exactly
+	'buff_size' characters, and the string will be truncated.  The
+	resulting string is stored in 'dest' and is NUL-terminated, even
+	if 'src' wasn't.
+
+RETURN VALUES
+	The 'alx_strlfgrep()' function returns the total length of the
+	string it created.  That means the length of 'dest'.
+
+EXAMPLES
+	The following code fragment illustrates the simple case:
+
+		char str[BUFSIZ];
+		char buf[BUFSIZ];
+
+		...
+
+		(void)alx_strlfgrep(sizeof(buf), buf, str, "Find this!");
+
+BUGS
+	If 'pattern' is not NUL-terminated, the behavior is Undefined.
+
+SEE ALSO
+	memcpy(3), memset(3), strnstr(3), alx_strnchrnul(3libalx)
+
+HISTORY
+	The alx_strlfgrep() function first appeared in libalx 1~b2.
+
+COLOPHON
+	This page is part of the libalx project.  A description of the
+	project, information about reporting bugs, and the latest version
+	of this page and of the source code of the project, can be found at
+	https://github.com/alejandro-colomar/libalx/.
+
+LIBALX				2019-03-20				LIBALX

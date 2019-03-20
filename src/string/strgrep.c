@@ -10,6 +10,7 @@
 #include "libalx/string/strgrep.h"
 
 #include <stdbool.h>
+#include <stddef.h>
 #include <string.h>
 
 #include <sys/types.h>
@@ -45,35 +46,36 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-void	alx_strlgrep	(ssize_t buff_size,
-			char dest[restrict buff_size],
-			const char src[restrict buff_size],
-			ssize_t key_size,
-			const char key[restrict key_size])
+ssize_t	alx_strlfgrep	(ssize_t buff_size,
+					char dest[restrict buff_size],
+					const char src[restrict buff_size],
+					const char *restrict pattern)
 {
-	const ssize_t	key_len = strnlen(key, key_size);
 	ssize_t	pos_dest;
 	ssize_t	pos_src;
 	ssize_t	line_len;
 
 	if (!buff_size)
-		return;
+		return	0;
 
 	pos_dest	= 0;
 	pos_src		= 0;
 
 	while (pos_src < buff_size) {
-		line_len = alx_strnchrnul(src, '\n', buff_size - pos_src) + 1 -
-									src;
-		if (strnstr(&(src[pos_src]), key, key_len)) {
+		line_len = alx_strnchrnul(src, '\n', buff_size - pos_src) + 1;
+		if (strnstr(&(src[pos_src]), pattern, line_len)) {
 			memcpy(&(dest[pos_dest]), &(src[pos_src]), line_len);
 			pos_dest += line_len;
 		}
 		pos_src += line_len;
+		if (src[pos_src - 1] == '\0')
+			break;
 	}
 
-	memset(&(dest[pos_dest]), 0, buff_size - pos_dest);
+	dest[pos_dest]		= '\0';
 	dest[buff_size - 1]	= '\0';
+
+	return	pos_dest;
 }
 
 
