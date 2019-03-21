@@ -16,6 +16,7 @@
 #include <sys/types.h>
 
 #include "libalx/string/strchr.h"
+#include "libalx/string/strstr.h"
 
 
 /******************************************************************************
@@ -41,47 +42,140 @@
 /******************************************************************************
  ******* static functions (prototypes) ****************************************
  ******************************************************************************/
+static	ssize_t	_strngrepF_line		(ssize_t len,
+					char dest[restrict len],
+					const char src[restrict len],
+					const char pattern[restrict]);
+static	ssize_t	_strncasegrepF_line	(ssize_t len,
+					char dest[restrict len],
+					const char src[restrict len],
+					const char pattern[restrict]);
 
 
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-ssize_t	alx_strlfgrep	(ssize_t buff_size,
-					char dest[restrict buff_size],
-					const char src[restrict buff_size],
-					const char *restrict pattern)
+ssize_t	alx_strngrepF		(ssize_t size,
+					char dest[restrict size],
+					const char src[restrict size],
+					const char pattern[restrict])
 {
 	ssize_t	pos_dest;
 	ssize_t	pos_src;
 	ssize_t	line_len;
 
-	if (!buff_size)
-		return	0;
-
 	pos_dest	= 0;
 	pos_src		= 0;
 
-	while (pos_src < buff_size) {
-		line_len = alx_strnchrnul(src, '\n', buff_size - pos_src) + 1;
-		if (strnstr(&(src[pos_src]), pattern, line_len)) {
-			memcpy(&(dest[pos_dest]), &(src[pos_src]), line_len);
-			pos_dest += line_len;
-		}
+	while (pos_src < size) {
+		line_len = alx_strnchrnul(size - pos_src, &src[pos_src], '\n');
+		if (line_len < size - pos_src)
+			line_len++;
+		pos_dest += _strngrepF_line(line_len, &dest[pos_dest],
+						&src[pos_src], pattern);
 		pos_src += line_len;
 		if (src[pos_src - 1] == '\0')
 			break;
 	}
 
-	dest[pos_dest]		= '\0';
-	dest[buff_size - 1]	= '\0';
+	return	pos_dest;
+}
+
+ssize_t	alx_strlgrepF		(ssize_t size,
+					char dest[restrict size],
+					const char src[restrict size],
+					const char pattern[restrict])
+{
+	ssize_t	dest_len;
+
+	if (!size)
+		return	0;
+
+	dest_len	= alx_strngrepF(size, dest, src, pattern) + 1;
+
+	if (dest_len <= size)
+		dest[dest_len - 1]	= '\0';
+	else
+		dest[size - 1]		= '\0';
+
+	return	dest_len;
+}
+
+ssize_t	alx_strncasegrepF	(ssize_t size,
+					char dest[restrict size],
+					const char src[restrict size],
+					const char pattern[restrict])
+{
+	ssize_t	pos_dest;
+	ssize_t	pos_src;
+	ssize_t	line_len;
+
+	pos_dest	= 0;
+	pos_src		= 0;
+
+	while (pos_src < size) {
+		line_len = alx_strnchrnul(size - pos_src, &src[pos_src], '\n');
+		if (line_len < size - pos_src)
+			line_len++;
+		pos_dest += _strncasegrepF_line(line_len, &dest[pos_dest],
+						&src[pos_src], pattern);
+		pos_src += line_len;
+		if (src[pos_src - 1] == '\0')
+			break;
+	}
 
 	return	pos_dest;
+}
+
+ssize_t	alx_strlcasegrepF	(ssize_t size,
+					char dest[restrict size],
+					const char src[restrict size],
+					const char pattern[restrict])
+{
+	ssize_t	dest_len;
+
+	if (!size)
+		return	0;
+
+	dest_len	= alx_strncasegrepF(size, dest, src, pattern) + 1;
+
+	if (dest_len <= size)
+		dest[dest_len - 1]	= '\0';
+	else
+		dest[size - 1]		= '\0';
+
+	return	dest_len;
 }
 
 
 /******************************************************************************
  ******* static functions (definitions) ***************************************
  ******************************************************************************/
+static	ssize_t	_strngrepF_line		(ssize_t len,
+					char dest[restrict len],
+					const char src[restrict len],
+					const char pattern[restrict])
+{
+
+	if (!strnstr(src, pattern, len))
+		return	0;
+
+	memcpy(dest, src, len);
+	return	len;
+}
+
+static	ssize_t	_strncasegrepF_line	(ssize_t len,
+					char dest[restrict len],
+					const char src[restrict len],
+					const char pattern[restrict])
+{
+
+	if (alx_strncasestr(len, src, pattern) < 0)
+		return	0;
+
+	memcpy(dest, src, len);
+	return	len;
+}
 
 
 /******************************************************************************
