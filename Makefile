@@ -118,12 +118,14 @@ INC_DIR = $(LIBALX_DIR)/inc/
 SRC_DIR = $(LIBALX_DIR)/src/
 TMP_DIR	= $(LIBALX_DIR)/tmp/
 LIB_DIR = $(LIBALX_DIR)/lib/
+TST_DIR = $(LIBALX_DIR)/test/
 
 export	LIBALX_DIR
 export	INC_DIR
 export	SRC_DIR
 export	TMP_DIR
 export	LIB_DIR
+export	TST_DIR
 
 ################################################################################
 # target: dependencies
@@ -170,12 +172,19 @@ curses: stdlib io
 	$(Q)$(MAKE) curses	-C $(LIB_DIR)
 
 
+PHONY += tst
+tst: all
+	@echo	"	MAKE	tst"
+	$(Q)$(MAKE)		-C $(TST_DIR)
+
+
 PHONY += clean
 clean:
-	@echo	"	RM	*.o *.s *.a"
+	@echo	"	RM	*.o *.s *.a *-test"
 	$(Q)find $(TMP_DIR) -type f -name '*.o' -exec rm '{}' '+'
 	$(Q)find $(TMP_DIR) -type f -name '*.s' -exec rm '{}' '+'
 	$(Q)find $(LIB_DIR) -type f -name '*.a' -exec rm '{}' '+'
+	$(Q)find $(TST_DIR) -type f -name '*-test' -exec rm '{}' '+'
 
 ################################################################################
 # Declare the contents of the .PHONY variable as phony.

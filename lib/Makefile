@@ -30,8 +30,10 @@ STDLIB_OBJ	=							\
 		$(TMP_DIR)/stdlib/search.o				\
 		$(TMP_DIR)/stdlib/seed_mix.o
 STRING_OBJ	=							\
+		$(TMP_DIR)/string/memcpy.o				\
 		$(TMP_DIR)/string/strchr.o				\
-		$(TMP_DIR)/string/strgrep.o
+		$(TMP_DIR)/string/strgrep.o				\
+		$(TMP_DIR)/string/strstr.o
 IO_OBJ		=							\
 		$(TMP_DIR)/io/alx_input.o				\
 		$(TMP_DIR)/io/alx_file.o

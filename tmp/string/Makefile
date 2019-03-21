@@ -13,8 +13,16 @@
 # dependencies
 
 OBJ		=							\
+		memcpy.o						\
 		strchr.o						\
-		strgrep.o
+		strgrep.o						\
+		strgrep-test.o						\
+		strstr.o
+
+MEMCPY_INC	=							\
+		$(INC_DIR)/libalx/string/memcpy.h
+MEMCPY_SRC	=							\
+		$(SRC_DIR)/string/memcpy.c
 
 STRCHR_INC	=							\
 		$(INC_DIR)/libalx/string/strchr.h
@@ -23,9 +31,21 @@ STRCHR_SRC	=							\
 
 STRGREP_INC	=							\
 		$(INC_DIR)/libalx/string/strgrep.h			\
-		$(INC_DIR)/libalx/string/strchr.h
+		$(INC_DIR)/libalx/string/strchr.h			\
+		$(INC_DIR)/libalx/string/strstr.h
 STRGREP_SRC	=							\
 		$(SRC_DIR)/string/strgrep.c
+TST_STRGREP_INC	=							\
+		$(INC_DIR)/libalx/string/strgrep.h			\
+		$(INC_DIR)/libalx/../../test/test.h
+TST_STRGREP_SRC	=							\
+		$(SRC_DIR)/string/strgrep-test.c			\
+		$(SRC_DIR)/string/strgrep.c
+
+STRSTR_INC	=							\
+		$(INC_DIR)/libalx/string/strstr.h
+STRSTR_SRC	=							\
+		$(SRC_DIR)/string/strstr.c
 
 ################################################################################
 # target: dependencies
@@ -34,6 +54,13 @@ STRGREP_SRC	=							\
 PHONY := all
 all: $(OBJ)
 
+
+memcpy.s: $(MEMCPY_SRC) $(MEMCPY_INC)
+	@echo	"	CC	libalx/tmp/string/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+memcpy.o: memcpy.s
+	@echo	"	AS	libalx/tmp/string/$@"
+	$(Q)$(AS) $< -o $@
 
 strchr.s: $(STRCHR_SRC) $(STRCHR_INC)
 	@echo	"	CC	libalx/tmp/string/$@"
@@ -46,6 +73,19 @@ strgrep.s: $(STRGREP_SRC) $(STRGREP_INC)
 	@echo	"	CC	libalx/tmp/string/$@"
 	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
 strgrep.o: strgrep.s
+	@echo	"	AS	libalx/tmp/string/$@"
+	$(Q)$(AS) $< -o $@
+strgrep-test.s: $(TST_STRGREP_SRC) $(TST_STRGREP_INC)
+	@echo	"	CC	libalx/tmp/string/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+strgrep-test.o: strgrep-test.s
+	@echo	"	AS	libalx/tmp/string/$@"
+	$(Q)$(AS) $< -o $@
+
+strstr.s: $(STRSTR_SRC) $(STRSTR_INC)
+	@echo	"	CC	libalx/tmp/string/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+strstr.o: strstr.s
 	@echo	"	AS	libalx/tmp/string/$@"
 	$(Q)$(AS) $< -o $@
 
