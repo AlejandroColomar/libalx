@@ -42,11 +42,22 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
-void	alx_strlgrep	(ssize_t buff_size,
-			char dest[restrict],
-			const char src[restrict],
-			ssize_t key_size,
-			const char key[restrict]);
+ssize_t	alx_strngrepF		(ssize_t size,
+					char dest[restrict],
+					const char src[restrict],
+					const char pattern[restrict]);
+ssize_t	alx_strlgrepF		(ssize_t size,
+					char dest[restrict],
+					const char src[restrict],
+					const char pattern[restrict]);
+ssize_t	alx_strncasegrepF	(ssize_t size,
+					char dest[restrict],
+					const char src[restrict],
+					const char pattern[restrict]);
+ssize_t	alx_strlcasegrepF	(ssize_t size,
+					char dest[restrict],
+					const char src[restrict],
+					const char pattern[restrict]);
 
 
 /******************************************************************************

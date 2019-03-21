@@ -5,18 +5,9 @@
 
 
 /******************************************************************************
- ******* include guard ********************************************************
- ******************************************************************************/
-#ifndef ALX_STRING_STRCHR_H
-#define ALX_STRING_STRCHR_H
-
-
-/******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <string.h>
-
-#include <sys/types.h>
+#include "libalx/string/memcpy.h"
 
 
 /******************************************************************************
@@ -40,65 +31,18 @@
 
 
 /******************************************************************************
- ******* extern functions *****************************************************
+ ******* static functions (prototypes) ****************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* static inline functions (prototypes) *********************************
+ ******* global functions *****************************************************
  ******************************************************************************/
-static inline	ssize_t	alx_strnchr	(ssize_t size,
-					const char str[restrict size], char c);
-/* Missing memrchr() */
-#if 0
-static inline	ssize_t	alx_strnrchr	(const char *restrict str,
-					char c, ssize_t size);
-#endif
-static inline	ssize_t	alx_strnchrnul	(ssize_t size,
-					const char str[restrict size], char c);
 
 
 /******************************************************************************
- ******* static inline functions (definitions) ********************************
+ ******* static functions (definitions) ***************************************
  ******************************************************************************/
-static inline
-ssize_t	alx_strnchr	(ssize_t size, const char str[restrict size], char c)
-{
-	const char	*p = memchr(str, c, strnlen(str, size));
-
-	if (!p)
-		return	-1;
-	return	p - str;
-}
-
-/* Missing memrchr() */
-#if 0
-static inline
-ssize_t	alx_strnrchr	(const char *restrict str, char c, ssize_t size)
-{
-	const char	*p = memrchr(str, c, strnlen(str, size));
-
-	if (!p)
-		return	-1;
-	return	p - str;
-}
-#endif
-
-static inline
-ssize_t	alx_strnchrnul	(ssize_t size, const char str[restrict size], char c)
-{
-	const char	*p = memchr(str, c, strnlen(str, size));
-
-	if (!p)
-		return	size;
-	return	p - str;
-}
-
-
-/******************************************************************************
- ******* include guard ********************************************************
- ******************************************************************************/
-#endif		/* libalx/string/strchr.h */
 
 
 /******************************************************************************

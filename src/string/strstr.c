@@ -5,15 +5,11 @@
 
 
 /******************************************************************************
- ******* include guard ********************************************************
- ******************************************************************************/
-#ifndef ALX_STRING_STRCHR_H
-#define ALX_STRING_STRCHR_H
-
-
-/******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include "libalx/string/strstr.h"
+
+#include <ctype.h>
 #include <string.h>
 
 #include <sys/types.h>
@@ -40,65 +36,48 @@
 
 
 /******************************************************************************
- ******* extern functions *****************************************************
+ ******* static functions (prototypes) ****************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* static inline functions (prototypes) *********************************
+ ******* global functions *****************************************************
  ******************************************************************************/
-static inline	ssize_t	alx_strnchr	(ssize_t size,
-					const char str[restrict size], char c);
-/* Missing memrchr() */
-#if 0
-static inline	ssize_t	alx_strnrchr	(const char *restrict str,
-					char c, ssize_t size);
-#endif
-static inline	ssize_t	alx_strnchrnul	(ssize_t size,
-					const char str[restrict size], char c);
-
-
-/******************************************************************************
- ******* static inline functions (definitions) ********************************
- ******************************************************************************/
-static inline
-ssize_t	alx_strnchr	(ssize_t size, const char str[restrict size], char c)
+ssize_t	alx_strncasestr		(ssize_t buff_size,
+					const char str[restrict buff_size],
+					const char pattern[restrict])
 {
-	const char	*p = memchr(str, c, strnlen(str, size));
+	char	str_lower[buff_size];
+	char	pat_lower[buff_size];
+	char	*p;
+
+	if (!buff_size)
+		return	-1;
+	if (!pattern[0])
+		return	0;
+
+	for (ssize_t i = 0; i < buff_size; i++) {
+		str_lower[i]	= tolower(str[i]);
+		if (!str_lower[i])
+			break;
+	}
+	for (ssize_t i = 0; i < buff_size; i++) {
+		pat_lower[i]	= tolower(pattern[i]);
+		if (!pat_lower[i])
+			break;
+	}
+
+	p	= strnstr(str_lower, pat_lower, buff_size);
 
 	if (!p)
 		return	-1;
-	return	p - str;
-}
-
-/* Missing memrchr() */
-#if 0
-static inline
-ssize_t	alx_strnrchr	(const char *restrict str, char c, ssize_t size)
-{
-	const char	*p = memrchr(str, c, strnlen(str, size));
-
-	if (!p)
-		return	-1;
-	return	p - str;
-}
-#endif
-
-static inline
-ssize_t	alx_strnchrnul	(ssize_t size, const char str[restrict size], char c)
-{
-	const char	*p = memchr(str, c, strnlen(str, size));
-
-	if (!p)
-		return	size;
-	return	p - str;
+	return	p - str_lower;
 }
 
 
 /******************************************************************************
- ******* include guard ********************************************************
+ ******* static functions (definitions) ***************************************
  ******************************************************************************/
-#endif		/* libalx/string/strchr.h */
 
 
 /******************************************************************************

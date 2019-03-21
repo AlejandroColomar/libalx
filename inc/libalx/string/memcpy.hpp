@@ -7,15 +7,13 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_STRING_STRCHR_H
-#define ALX_STRING_STRCHR_H
+#ifndef ALX_STRING_MEMCPY_HPP
+#define ALX_STRING_MEMCPY_HPP
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <string.h>
-
 #include <sys/types.h>
 
 
@@ -47,58 +45,67 @@
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
-static inline	ssize_t	alx_strnchr	(ssize_t size,
-					const char str[restrict size], char c);
-/* Missing memrchr() */
-#if 0
-static inline	ssize_t	alx_strnrchr	(const char *restrict str,
-					char c, ssize_t size);
-#endif
-static inline	ssize_t	alx_strnchrnul	(ssize_t size,
-					const char str[restrict size], char c);
+static inline	void	alx_memcpy_vds	(volatile void *restrict dest,
+					const volatile void *restrict src,
+					ssize_t n);
+static inline	void	alx_memcpy_vd	(volatile void *restrict dest,
+					const void *restrict src,
+					ssize_t n);
+static inline	void	alx_memcpy_vs	(void *restrict dest,
+					const volatile void *restrict src,
+					ssize_t n);
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
 static inline
-ssize_t	alx_strnchr	(ssize_t size, const char str[restrict size], char c)
+void	alx_memcpy_vds	(volatile void *restrict dest,
+			const volatile void *restrict src,
+			ssize_t n)
 {
-	const char	*p = memchr(str, c, strnlen(str, size));
+	volatile unsigned char		*dest_c	= dest;
+	const volatile unsigned char	*src_c	= src;
 
-	if (!p)
-		return	-1;
-	return	p - str;
+	while (n) {
+		n--;
+		dest_c[n] = src_c[n];
+	}
 }
 
-/* Missing memrchr() */
-#if 0
 static inline
-ssize_t	alx_strnrchr	(const char *restrict str, char c, ssize_t size)
+void	alx_memcpy_vd	(volatile void *restrict dest,
+			const void *restrict src,
+			ssize_t n)
 {
-	const char	*p = memrchr(str, c, strnlen(str, size));
+	volatile unsigned char	*dest_c	= dest;
+	const unsigned char	*src_c	= src;
 
-	if (!p)
-		return	-1;
-	return	p - str;
+	while (n) {
+		n--;
+		dest_c[n] = src_c[n];
+	}
 }
-#endif
 
 static inline
-ssize_t	alx_strnchrnul	(ssize_t size, const char str[restrict size], char c)
+void	alx_memcpy_vs	(void *restrict dest,
+			const volatile void *restrict src,
+			ssize_t n)
 {
-	const char	*p = memchr(str, c, strnlen(str, size));
+	unsigned char			*dest_c	= dest;
+	const volatile unsigned char	*src_c	= src;
 
-	if (!p)
-		return	size;
-	return	p - str;
+	while (n) {
+		n--;
+		dest_c[n] = src_c[n];
+	}
 }
 
 
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/string/strchr.h */
+#endif		/* libalx/string/memcpy.hpp */
 
 
 /******************************************************************************
