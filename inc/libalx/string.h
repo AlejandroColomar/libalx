@@ -16,8 +16,10 @@
  ******************************************************************************/
 #include <string.h>
 
+#include "libalx/string/memcpy.h"
 #include "libalx/string/strchr.h"
 #include "libalx/stdlib/strgrep.h"
+#include "libalx/stdlib/strstr.h"
 
 
 /******************************************************************************

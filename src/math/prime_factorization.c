@@ -9,6 +9,7 @@
  ******************************************************************************/
 #include "libalx/math/prime_factorization.h"
 
+#include <errno.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <string.h>
@@ -46,7 +47,7 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-bool	alx_prime_factorization_s8	(int8_t n,
+int	alx_prime_factorization_s8	(int8_t n,
 				int8_t (*restrict pf)[PRIME_NUMBERS_QTY_S8])
 {
 	ssize_t	prime_index;
@@ -54,12 +55,20 @@ bool	alx_prime_factorization_s8	(int8_t n,
 
 	memset(*pf, 0, sizeof(*pf));
 
-	if (n < 2)
-		return	false;
+	if (!n) {
+		errno	= EDOM;
+		return	-1;
+	}
+	if (n < 0) {
+		errno	= EDOM;
+		n	= -n;
+	}
+	if (n == 1)
+		return	0;
 	prime_index	= alx_prime_index_s8(n);
 	if (prime_index != -1) {
 		(*pf)[prime_index]	= 1;
-		return	true;
+		return	0;
 	}
 
 	tmp	= n;
@@ -69,30 +78,34 @@ bool	alx_prime_factorization_s8	(int8_t n,
 			tmp	/= alx_prime_s8[i];
 
 			if (tmp == 1)
-				return	true;
+				return	0;
 			prime_index = alx_prime_index_s8(tmp);
 			if (prime_index != -1) {
 				(*pf)[prime_index]	= 1;
-				return	true;
+				return	0;
 			}
 		}
 	}
 }
 
-bool	alx_prime_factorization_u8	(uint8_t n,
-				uint8_t (*restrict pf)[PRIME_NUMBERS_QTY_U8])
+int	alx_prime_factorization_u8	(uint8_t n,
+				int8_t (*restrict pf)[PRIME_NUMBERS_QTY_U8])
 {
 	ssize_t		prime_index;
 	unsigned	tmp;
 
 	memset(*pf, 0, sizeof(*pf));
 
-	if (n < 2)
-		return	false;
+	if (!n) {
+		errno	= EDOM;
+		return	-1;
+	}
+	if (n == 1)
+		return	0;
 	prime_index	= alx_prime_index_u8(n);
 	if (prime_index != -1) {
 		(*pf)[prime_index]	= 1;
-		return	true;
+		return	0;
 	}
 
 	tmp	= n;
@@ -102,18 +115,18 @@ bool	alx_prime_factorization_u8	(uint8_t n,
 			tmp	/= alx_prime_u8[i];
 
 			if (tmp == 1)
-				return	true;
+				return	0;
 			prime_index = alx_prime_index_u8(tmp);
 			if (prime_index != -1) {
 				(*pf)[prime_index]	= 1;
-				return	true;
+				return	0;
 			}
 		}
 	}
 }
 
-bool	alx_prime_factorization_s16	(int16_t n,
-				int16_t (*restrict pf)[PRIME_NUMBERS_QTY_S16])
+int	alx_prime_factorization_s16	(int16_t n,
+				int8_t (*restrict pf)[PRIME_NUMBERS_QTY_S16])
 {
 	ssize_t	prime_index;
 	int	tmp;
@@ -123,12 +136,20 @@ bool	alx_prime_factorization_s16	(int16_t n,
 
 	memset(*pf, 0, sizeof(*pf));
 
-	if (n < 2)
-		return	false;
+	if (!n) {
+		errno	= EDOM;
+		return	-1;
+	}
+	if (n < 0) {
+		errno	= EDOM;
+		n	= -n;
+	}
+	if (n == 1)
+		return	0;
 	prime_index	= alx_prime_index_s16(n);
 	if (prime_index != -1) {
 		(*pf)[prime_index]	= 1;
-		return	true;
+		return	0;
 	}
 
 	tmp	= n;
@@ -138,18 +159,18 @@ bool	alx_prime_factorization_s16	(int16_t n,
 			tmp	/= alx_prime_s16[i];
 
 			if (tmp == 1)
-				return	true;
+				return	0;
 			prime_index = alx_prime_index_s16(tmp);
 			if (prime_index != -1) {
 				(*pf)[prime_index]	= 1;
-				return	true;
+				return	0;
 			}
 		}
 	}
 }
 
-bool	alx_prime_factorization_u16	(uint16_t n,
-				uint16_t (*restrict pf)[PRIME_NUMBERS_QTY_U16])
+int	alx_prime_factorization_u16	(uint16_t n,
+				int8_t (*restrict pf)[PRIME_NUMBERS_QTY_U16])
 {
 	ssize_t		prime_index;
 	unsigned	tmp;
@@ -159,12 +180,16 @@ bool	alx_prime_factorization_u16	(uint16_t n,
 
 	memset(*pf, 0, sizeof(*pf));
 
-	if (n < 2)
-		return	false;
+	if (!n) {
+		errno	= EDOM;
+		return	-1;
+	}
+	if (n == 1)
+		return	0;
 	prime_index	= alx_prime_index_u16(n);
 	if (prime_index != -1) {
 		(*pf)[prime_index]	= 1;
-		return	true;
+		return	0;
 	}
 
 	tmp	= n;
@@ -174,11 +199,11 @@ bool	alx_prime_factorization_u16	(uint16_t n,
 			tmp	/= alx_prime_u16[i];
 
 			if (tmp == 1)
-				return	true;
+				return	0;
 			prime_index = alx_prime_index_u16(tmp);
 			if (prime_index != -1) {
 				(*pf)[prime_index]	= 1;
-				return	true;
+				return	0;
 			}
 		}
 	}

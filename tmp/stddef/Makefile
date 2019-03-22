@@ -10,40 +10,30 @@
 ################################################################################
 
 ################################################################################
+# dependencies
+
+OBJ		=							\
+		ssizeof.o
+
+SSIZEOF_INC	=							\
+		$(INC_DIR)/libalx/stddef/ssizeof.h
+SSIZEOF_SRC	=							\
+		$(SRC_DIR)/stddef/ssizeof.c
+
+################################################################################
 # target: dependencies
 #	action
 
 PHONY := all
-all: math stddef stdint stdlib string io curses
+all: $(OBJ)
 
 
-PHONY += math
-math:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/math/
-
-PHONY += stddef
-stddef:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/stddef/
-
-PHONY += stdint
-stdint:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/stdint/
-
-PHONY += stdlib
-stdlib:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/stdlib/
-
-PHONY += string
-string:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/string/
-
-PHONY += io
-io:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/io/
-
-PHONY += curses
-curses:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/curses/
+ssizeof.s: $(SSIZEOF_SRC) $(SSIZEOF_INC)
+	@echo	"	CC	libalx/tmp/stdint/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+ssizeof.o: ssizeof.s
+	@echo	"	AS	libalx/tmp/stdint/$@"
+	$(Q)$(AS) $< -o $@
 
 
 PHONY += clean

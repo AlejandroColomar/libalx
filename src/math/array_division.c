@@ -9,6 +9,7 @@
  ******************************************************************************/
 #include "libalx/math/array_division.h"
 
+#include <errno.h>
 #include <stdint.h>
 
 #include <sys/types.h>
@@ -49,8 +50,10 @@ int	alx_array_division_uint	(ssize_t n,
 {
 
 	for (ssize_t i = 0; i < n; i++) {
-		if (!src2[i])
-			return	1;
+		if (!src2[i]) {
+			errno	= ERANGE;
+			return	-1;
+		}
 		dest[i]	= src1[i] / src2[i];
 	}
 
@@ -64,8 +67,10 @@ int	alx_array_division_int	(ssize_t n,
 {
 
 	for (ssize_t i = 0; i < n; i++) {
-		if (!src2[i])
-			return	1;
+		if (!src2[i]) {
+			errno	= ERANGE;
+			return	-1;
+		}
 		dest[i]	= src1[i] / src2[i];
 	}
 
@@ -79,8 +84,10 @@ int	alx_array_division_u8	(ssize_t n,
 {
 
 	for (ssize_t i = 0; i < n; i++) {
-		if (!src2[i])
-			return	1;
+		if (!src2[i]) {
+			errno	= ERANGE;
+			return	-1;
+		}
 		dest[i]	= src1[i] / src2[i];
 	}
 
@@ -94,8 +101,10 @@ int	alx_array_division_s8	(ssize_t n,
 {
 
 	for (ssize_t i = 0; i < n; i++) {
-		if (!src2[i])
-			return	1;
+		if (!src2[i]) {
+			errno	= ERANGE;
+			return	-1;
+		}
 		dest[i]	= src1[i] / src2[i];
 	}
 
@@ -109,8 +118,10 @@ int	alx_array_division_u16	(ssize_t n,
 {
 
 	for (ssize_t i = 0; i < n; i++) {
-		if (!src2[i])
-			return	1;
+		if (!src2[i]) {
+			errno	= ERANGE;
+			return	-1;
+		}
 		dest[i]	= src1[i] / src2[i];
 	}
 
@@ -124,8 +135,10 @@ int	alx_array_division_s16	(ssize_t n,
 {
 
 	for (ssize_t i = 0; i < n; i++) {
-		if (!src2[i])
-			return	1;
+		if (!src2[i]) {
+			errno	= ERANGE;
+			return	-1;
+		}
 		dest[i]	= src1[i] / src2[i];
 	}
 
@@ -139,8 +152,10 @@ int	alx_array_division_u32	(ssize_t n,
 {
 
 	for (ssize_t i = 0; i < n; i++) {
-		if (!src2[i])
-			return	1;
+		if (!src2[i]) {
+			errno	= ERANGE;
+			return	-1;
+		}
 		dest[i]	= src1[i] / src2[i];
 	}
 
@@ -154,8 +169,10 @@ int	alx_array_division_s32	(ssize_t n,
 {
 
 	for (ssize_t i = 0; i < n; i++) {
-		if (!src2[i])
-			return	1;
+		if (!src2[i]) {
+			errno	= ERANGE;
+			return	-1;
+		}
 		dest[i]	= src1[i] / src2[i];
 	}
 
@@ -169,8 +186,10 @@ int	alx_array_division_u64	(ssize_t n,
 {
 
 	for (ssize_t i = 0; i < n; i++) {
-		if (!src2[i])
-			return	1;
+		if (!src2[i]) {
+			errno	= ERANGE;
+			return	-1;
+		}
 		dest[i]	= src1[i] / src2[i];
 	}
 
@@ -184,8 +203,10 @@ int	alx_array_division_s64	(ssize_t n,
 {
 
 	for (ssize_t i = 0; i < n; i++) {
-		if (!src2[i])
-			return	1;
+		if (!src2[i]) {
+			errno	= ERANGE;
+			return	-1;
+		}
 		dest[i]	= src1[i] / src2[i];
 	}
 

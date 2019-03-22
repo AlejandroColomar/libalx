@@ -39,7 +39,7 @@ function	main()
 	find_tests
 
 	for test in ${tests}; do
-		eval	${test}
+		${test}
 	done
 }
 

@@ -8,6 +8,7 @@ MATH_OBJ	=							\
 		$(TMP_DIR)/math/arithmetic_mean.o			\
 		$(TMP_DIR)/math/array_division.o			\
 		$(TMP_DIR)/math/array_multiplication.o			\
+		$(TMP_DIR)/math/array_sum.o				\
 		$(TMP_DIR)/math/binomial_coefficient.o			\
 		$(TMP_DIR)/math/factorial.o				\
 		$(TMP_DIR)/math/matrix_addition.o			\
@@ -15,8 +16,11 @@ MATH_OBJ	=							\
 		$(TMP_DIR)/math/median.o				\
 		$(TMP_DIR)/math/pascal_triangle.o			\
 		$(TMP_DIR)/math/prime.o					\
+		$(TMP_DIR)/math/prime_defactorization.o			\
 		$(TMP_DIR)/math/prime_factorization.o			\
 		$(TMP_DIR)/math/scale_linear.o
+STDDEF_OBJ	=							\
+		$(TMP_DIR)/stddef/ssizeof.o
 STDINT_OBJ	=							\
 		$(TMP_DIR)/stdint/constants.o				\
 		$(TMP_DIR)/stdint/int128.o
@@ -44,10 +48,13 @@ CURSES_OBJ	=							\
 #	action
 
 PHONY := all
-all: libalx math stdint stdlib string io curses
+all: libalx math stddef stdint stdlib string io curses
 
 PHONY += math
 math: libalx libalx/libalx-math.a
+
+PHONY += stddef
+stddef: libalx libalx/libalx-stddef.a
 
 PHONY += stdint
 stdint: libalx libalx/libalx-stdint.a
@@ -70,6 +77,10 @@ libalx:
 	$(Q)mkdir -p		$(LIB_DIR)/$@/
 
 libalx/libalx-math.a: $(MATH_OBJ)
+	@echo	"	AR	libalx/lib/$@"
+	$(Q)$(AR) -r -c -s -o $@ $^
+
+libalx/libalx-stddef.a: $(STDDEF_OBJ)
 	@echo	"	AR	libalx/lib/$@"
 	$(Q)$(AR) -r -c -s -o $@ $^
 

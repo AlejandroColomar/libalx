@@ -13,9 +13,10 @@
 # dependencies
 
 OBJ		=							\
+		arithmetic_mean.o					\
 		array_division.o					\
 		array_multiplication.o					\
-		arithmetic_mean.o					\
+		array_sum.o						\
 		binomial_coefficient.o					\
 		factorial.o						\
 		matrix_addition.o					\
@@ -23,6 +24,7 @@ OBJ		=							\
 		median.o						\
 		pascal_triangle.o					\
 		prime.o							\
+		prime_defactorization.o					\
 		prime_factorization.o					\
 		scale_linear.o
 
@@ -41,17 +43,28 @@ ARRAY_MULTIPLICATION_INC	=					\
 ARRAY_MULTIPLICATION_SRC	=					\
 		$(SRC_DIR)/math/array_multiplication.c
 
+ARRAY_SUM_INC	=							\
+		$(INC_DIR)/libalx/math/array_sum.h			\
+		$(INC_DIR)/libalx/stdlib/compare.h
+ARRAY_SUM_SRC	=							\
+		$(SRC_DIR)/math/array_sum.c
+
 BINOMIAL_COEFFICIENT_INC	=					\
 		$(INC_DIR)/libalx/math/binomial_coefficient.h		\
-		$(INC_DIR)/libalx/stdint/int128.h			\
-		$(INC_DIR)/libalx/math/common.h
+		$(INC_DIR)/libalx/math/matrix_addition.h		\
+		$(INC_DIR)/libalx/math/matrix_subtraction.h		\
+		$(INC_DIR)/libalx/math/prime.h				\
+		$(INC_DIR)/libalx/math/prime_defactorization.h		\
+		$(INC_DIR)/libalx/math/prime_factorization.h
 BINOMIAL_COEFFICIENT_SRC	=					\
 		$(SRC_DIR)/math/binomial_coefficient.c
 
 FACTORIAL_INC	=							\
 		$(INC_DIR)/libalx/math/factorial.h			\
-		$(INC_DIR)/libalx/stdint/int128.h			\
-		$(INC_DIR)/libalx/math/common.h
+		$(INC_DIR)/libalx/math/matrix_addition.h		\
+		$(INC_DIR)/libalx/math/prime.h				\
+		$(INC_DIR)/libalx/math/prime_defactorization.h		\
+		$(INC_DIR)/libalx/math/prime_factorization.h
 FACTORIAL_SRC	=							\
 		$(SRC_DIR)/math/factorial.c
 
@@ -73,8 +86,11 @@ MEDIAN_SRC	=							\
 
 PASCAL_TRIANGLE_INC	=						\
 		$(INC_DIR)/libalx/math/pascal_triangle.h		\
-		$(INC_DIR)/libalx/stdint/int128.h			\
-		$(INC_DIR)/libalx/math/common.h
+		$(INC_DIR)/libalx/math/matrix_addition.h		\
+		$(INC_DIR)/libalx/math/matrix_subtraction.h		\
+		$(INC_DIR)/libalx/math/prime.h				\
+		$(INC_DIR)/libalx/math/prime_defactorization.h		\
+		$(INC_DIR)/libalx/math/prime_factorization.h
 PASCAL_TRIANGLE_SRC	=						\
 		$(SRC_DIR)/math/pascal_triangle.c
 
@@ -83,6 +99,13 @@ PRIME_INC	=							\
 		$(INC_DIR)/libalx/stdlib/search.h
 PRIME_SRC	=							\
 		$(SRC_DIR)/math/prime.c
+
+PRIME_DEFACTORIZATION_INC	=					\
+		$(INC_DIR)/libalx/math/prime_defactorization.h		\
+		$(INC_DIR)/libalx/math/prime.h				\
+		$(INC_DIR)/libalx/stddef/ssizeof.h
+PRIME_DEFACTORZATION_SRC	=					\
+		$(SRC_DIR)/math/prime_defactorization.c
 
 PRIME_FACTORIZATION_INC	=						\
 		$(INC_DIR)/libalx/math/prime_factorization.h		\
@@ -121,6 +144,13 @@ array_multiplication.s: $(ARRAY_MULTIPLICATION_SRC) $(ARRAY_MULTIPLICATION_INC)
 	@echo	"	CC	libalx/tmp/math/$@"
 	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
 array_multiplication.o: array_multiplication.s
+	@echo	"	AS	libalx/tmp/math/$@"
+	$(Q)$(AS) $< -o $@
+
+array_sum.s: $(ARRAY_SUM_SRC) $(ARRAY_SUM_INC)
+	@echo	"	CC	libalx/tmp/math/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+array_sum.o: array_sum.s
 	@echo	"	AS	libalx/tmp/math/$@"
 	$(Q)$(AS) $< -o $@
 
@@ -170,6 +200,13 @@ prime.s: $(PRIME_SRC) $(PRIME_INC)
 	@echo	"	CC	libalx/tmp/math/$@"
 	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
 prime.o: prime.s
+	@echo	"	AS	libalx/tmp/math/$@"
+	$(Q)$(AS) $< -o $@
+
+prime_defactorization.s: $(PRIME_DEFACTORZATION_SRC) $(PRIME_DEFACTORZATION_INC)
+	@echo	"	CC	libalx/tmp/math/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+prime_defactorization.o: prime_defactorization.s
 	@echo	"	AS	libalx/tmp/math/$@"
 	$(Q)$(AS) $< -o $@
 

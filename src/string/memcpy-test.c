@@ -7,20 +7,18 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/math/prime.h"
+#include "libalx/string/memcpy.h"
 
-#include <math.h>
 #include <stdbool.h>
-#include <stdint.h>
+#include <stdio.h>
 
-#include <sys/types.h>
-
-#include "libalx/stdlib/search.h"
+#include "libalx/../../test/test.h"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+#define BUFF_SIZE	(8)
 
 
 /******************************************************************************
@@ -36,95 +34,81 @@
 /******************************************************************************
  ******* variables ************************************************************
  ******************************************************************************/
-/* global --------------------------------------------------------------------*/
-const	int8_t		alx_prime_s8 [PRIME_NUMBERS_QTY_S8] = {
-		2, 3, 5, 7, 11,			13, 17, 19, 23, 29,
-		31, 37, 41, 43, 47,		53, 59, 61, 67, 71,
-		73, 79, 83, 89, 97,		101, 103, 107, 109, 113,
-		127
-	};
-const	uint8_t		alx_prime_u8 [PRIME_NUMBERS_QTY_U8] = {
-		2, 3, 5, 7, 11,			13, 17, 19, 23, 29,
-		31, 37, 41, 43, 47,		53, 59, 61, 67, 71,
-		73, 79, 83, 89, 97,		101, 103, 107, 109, 113,
-		127, 131, 137, 139, 149,	151, 157, 163, 167, 173,
-		179, 181, 191, 193, 197,	199, 211, 223, 227, 229,
-		233, 239, 241, 251
-	};
-	int16_t		alx_prime_s16 [PRIME_NUMBERS_QTY_S16];
-	uint16_t	alx_prime_u16 [PRIME_NUMBERS_QTY_U16];
-/* static --------------------------------------------------------------------*/
+static	volatile	double	src_v = 6.7;
+static			double	src_nv = 6.8;
+static	volatile	double	dest_v = 6.9;
+static			double	dest_nv = 7.0;
 
 
 /******************************************************************************
  ******* static functions (prototypes) ****************************************
  ******************************************************************************/
-static bool	is_prime_s16	(int n);
-static bool	is_prime_u16	(unsigned n);
+int	test_alx_memcpy_vds(void);
+int	test_alx_memcpy_vd(void);
+int	test_alx_memcpy_vs(void);
 
 
 /******************************************************************************
- ******* global functions *****************************************************
+ ******* main *****************************************************************
  ******************************************************************************/
-void	alx_prime_s16_init	(void)
+int main(void)
 {
-	ssize_t	i;
+	int	fail = false;
 
-	i	= 0;
-	alx_prime_s16[i++]	= 2;
+	if (test_alx_memcpy_vds())
+		fail = true;
+	if (test_alx_memcpy_vd())
+		fail = true;
+	if (test_alx_memcpy_vs())
+		fail = true;
 
-	for (int n = 3; n < INT16_MAX; n++) {
-		if (is_prime_s16(n))
-			alx_prime_s16[i++]	= n;
-	}
+	if (!fail)
+		print_ok("	libalx/string/memcpy\n");
+
+	return	0;
 }
-
-void	alx_prime_u16_init	(void)
-{
-	ssize_t	i;
-
-	i	= 0;
-	alx_prime_u16[i++]	= 2;
-
-	for (unsigned n = 3; n < UINT16_MAX; n++) {
-		if (is_prime_u16(n))
-			alx_prime_u16[i++]	= n;
-	}
-}
-
 
 
 /******************************************************************************
  ******* static functions (definitions) ***************************************
  ******************************************************************************/
-static bool	is_prime_s16	(int n)
+int	test_alx_memcpy_vds(void)
 {
-	int	sqrt_n;
 
-	sqrt_n	= sqrt(n) + 1;
-
-	for (ssize_t i = 0; (alx_prime_s16[i] <= sqrt_n) &&
-					(i < PRIME_NUMBERS_QTY_S16); i++) {
-		if (!(n % alx_prime_s16[i]))
-			return	false;
+	src_v	= 1.5;
+	alx_memcpy_vds(&dest_v, &src_v, sizeof(dest_v));
+	if (dest_v != src_v) {
+		print_fail("	libalx/string/memcpy:	alx_memcpy_vds()\n");
+		return	1;
 	}
 
-	return	true;
+	return	0;
 }
 
-static bool	is_prime_u16	(unsigned n)
+int	test_alx_memcpy_vd(void)
 {
-	int	sqrt_n;
 
-	sqrt_n	= sqrt(n) + 1;
-
-	for (ssize_t i = 0; (alx_prime_s16[i] <= sqrt_n) &&
-					(i < PRIME_NUMBERS_QTY_U16); i++) {
-		if (!(n % alx_prime_s16[i]))
-			return	false;
+	src_nv	= 2.2;
+	alx_memcpy_vd(&dest_v, &src_nv, sizeof(dest_v));
+	if (dest_v != src_nv) {
+		print_fail("	libalx/string/memcpy:	alx_memcpy_vd()\n");
+		return	1;
 	}
 
-	return	true;
+	return	0;
+}
+
+int	test_alx_memcpy_vs(void)
+{
+
+	src_v	= 3.7;
+	alx_memcpy_vs(&dest_nv, &src_v, sizeof(dest_nv));
+	if (dest_nv != src_v) {
+		print_fail("	libalx/string/memcpy:	alx_memcpy_vs()\n");
+		return	1;
+	}
+
+	return	0;
 }
 
 

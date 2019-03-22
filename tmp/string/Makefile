@@ -14,6 +14,7 @@
 
 OBJ		=							\
 		memcpy.o						\
+		memcpy-test.o						\
 		strchr.o						\
 		strgrep.o						\
 		strgrep-test.o						\
@@ -22,6 +23,12 @@ OBJ		=							\
 MEMCPY_INC	=							\
 		$(INC_DIR)/libalx/string/memcpy.h
 MEMCPY_SRC	=							\
+		$(SRC_DIR)/string/memcpy.c
+TST_MEMCPY_INC	=							\
+		$(INC_DIR)/libalx/string/memcpy.h			\
+		$(INC_DIR)/libalx/../../test/test.h
+TST_MEMCPY_SRC	=							\
+		$(SRC_DIR)/string/memcpy-test.c				\
 		$(SRC_DIR)/string/memcpy.c
 
 STRCHR_INC	=							\
@@ -59,6 +66,12 @@ memcpy.s: $(MEMCPY_SRC) $(MEMCPY_INC)
 	@echo	"	CC	libalx/tmp/string/$@"
 	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
 memcpy.o: memcpy.s
+	@echo	"	AS	libalx/tmp/string/$@"
+	$(Q)$(AS) $< -o $@
+memcpy-test.s: $(TST_MEMCPY_SRC) $(TST_MEMCPY_INC)
+	@echo	"	CC	libalx/tmp/string/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+memcpy-test.o: memcpy-test.s
 	@echo	"	AS	libalx/tmp/string/$@"
 	$(Q)$(AS) $< -o $@
 

@@ -81,6 +81,7 @@ CFLAGS_W	= -Wall
 CFLAGS_W       += -Wextra
 CFLAGS_W       += -Wstrict-prototypes
 CFLAGS_W       += -Werror
+CFLAGS_W       += -Wno-error=pedantic
 
 CFLAGS		= $(CFLAGS_STD)
 CFLAGS         += $(CFLAGS_BSD)
@@ -132,7 +133,7 @@ export	TST_DIR
 #	action
 
 PHONY := all
-all: math stdint stdlib string io curses
+all: math stddef stdint stdlib string io curses
 
 
 PHONY += math
@@ -140,6 +141,12 @@ math: stdint stdlib
 	@echo	"	MAKE	math"
 	$(Q)$(MAKE) math	-C $(TMP_DIR)
 	$(Q)$(MAKE) math	-C $(LIB_DIR)
+
+PHONY += stddef
+stddef:
+	@echo	"	MAKE	stddef"
+	$(Q)$(MAKE) stddef	-C $(TMP_DIR)
+	$(Q)$(MAKE) stddef	-C $(LIB_DIR)
 
 PHONY += stdint
 stdint:

@@ -14,9 +14,9 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <cstdint>
+#include <stdint.h>
 
-#include "libalx/math/common.hpp"
+#include "libalx/math/prime.hpp"
 
 
 /******************************************************************************
@@ -44,7 +44,11 @@
  ******************************************************************************/
 extern	"C"
 {
-struct Math_Sol		alx_pascal_triangle(int16_t n, int16_t k);
+long double	alx_ldbl_pascal_triangle	(int16_t n, int16_t k);
+double		alx_pascal_triangle		(int16_t n, int16_t k);
+float		alx_flt_pascal_triangle		(int16_t n, int16_t k);
+int		alx_pascal_triangle_factorized	(int16_t n, int16_t k,
+				int8_t (*restrict pf)[PRIME_NUMBERS_QTY_S16]);
 }
 
 

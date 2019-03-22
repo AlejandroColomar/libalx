@@ -9,6 +9,7 @@
  ******************************************************************************/
 #include "libalx/math/array_sum.h"
 
+#include <errno.h>
 #include <limits.h>
 #include <math.h>
 #include <stdint.h>
@@ -44,32 +45,31 @@
  ******* static functions (prototypes) ****************************************
  ******************************************************************************/
 
-
+// FIXME TODO
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_array_sum_uint	(unsigned *restrict sum,
-				ssize_t n,
-				const unsigned arr[restrict n])
+unsigned	alx_array_sum_uint(ssize_t n, const unsigned arr[restrict n])
 {
 	double_t	tmp;
+	unsigned	sum;
 
 	tmp	= 0;
 	for (ssize_t i = 0; i < n; i++)
 		tmp += arr[i];
-	if (nextafter(tmp, tmp + 1) > UINT_MAX)
-		return	1;
+	if (nextafter(tmp, tmp + 1) > UINT_MAX) {
+		errno	= ERANGE;
+		return	UINT_MAX;
+	}
 
 	*sum	= 0;
 	for (ssize_t i = 0; i < n; i++)
 		*sum += arr[i];
 
-	return	0;
+	return	sum;
 }
 
-ssize_t	alx_array_sum_int	(int *restrict sum,
-				ssize_t n,
-				const int arr[restrict n])
+int		alx_array_sum_int	(ssize_t n, const int arr[restrict n])
 {
 	int		sorted[n];
 	ssize_t		i, j;
@@ -86,16 +86,24 @@ ssize_t	alx_array_sum_int	(int *restrict sum,
 			tmp += arr[i++];
 		else
 			tmp += arr[j--];
-		if (nextafter(tmp, tmp + 1) > INT_MAX)
+		if (nextafter(tmp, tmp + 1) > INT_MAX) {
+			errno	= ERANGE;
 			return	1;
-		if (nextafter(tmp, tmp - 1) < INT_MIN)
+		}
+		if (nextafter(tmp, tmp - 1) < INT_MIN) {
+			errno	= ERANGE;
 			return	-1;
+		}
 	}
 	tmp += arr[i];
-	if (nextafter(tmp, tmp + 1) > INT_MAX)
+	if (nextafter(tmp, tmp + 1) > INT_MAX) {
+		errno	= ERANGE;
 		return	1;
-	if (nextafter(tmp, tmp - 1) < INT_MIN)
+	}
+	if (nextafter(tmp, tmp - 1) < INT_MIN) {
+		errno	= ERANGE;
 		return	-1;
+	}
 
 	*sum	= 0;
 	i	= 0;
@@ -120,8 +128,10 @@ ssize_t	alx_array_sum_u8	(uint8_t *restrict sum,
 	tmp	= 0;
 	for (ssize_t i = 0; i < n; i++)
 		tmp += arr[i];
-	if (nextafter(tmp, tmp + 1) > UINT8_MAX)
+	if (nextafter(tmp, tmp + 1) > UINT8_MAX) {
+		errno	= ERANGE;
 		return	1;
+	}
 
 	*sum	= 0;
 	for (ssize_t i = 0; i < n; i++)
@@ -150,16 +160,24 @@ ssize_t	alx_array_sum_s8	(int8_t *restrict sum,
 			tmp += arr[i++];
 		else
 			tmp += arr[j--];
-		if (nextafter(tmp, tmp + 1) > INT8_MAX)
+		if (nextafter(tmp, tmp + 1) > INT8_MAX) {
+			errno	= ERANGE;
 			return	1;
-		if (nextafter(tmp, tmp - 1) < INT8_MIN)
+		}
+		if (nextafter(tmp, tmp - 1) < INT8_MIN) {
+			errno	= ERANGE;
 			return	-1;
+		}
 	}
 	tmp += arr[i];
-	if (nextafter(tmp, tmp + 1) > INT8_MAX)
+	if (nextafter(tmp, tmp + 1) > INT8_MAX) {
+		errno	= ERANGE;
 		return	1;
-	if (nextafter(tmp, tmp - 1) < INT8_MIN)
+	}
+	if (nextafter(tmp, tmp - 1) < INT8_MIN) {
+		errno	= ERANGE;
 		return	-1;
+	}
 
 	*sum	= 0;
 	i	= 0;
@@ -184,8 +202,10 @@ ssize_t	alx_array_sum_u16	(uint16_t *restrict sum,
 	tmp	= 0;
 	for (ssize_t i = 0; i < n; i++)
 		tmp += arr[i];
-	if (nextafter(tmp, tmp + 1) > UINT16_MAX)
+	if (nextafter(tmp, tmp + 1) > UINT16_MAX) {
+		errno	= ERANGE;
 		return	1;
+	}
 
 	*sum	= 0;
 	for (ssize_t i = 0; i < n; i++)
@@ -214,16 +234,24 @@ ssize_t	alx_array_sum_s16	(int16_t *restrict sum,
 			tmp += arr[i++];
 		else
 			tmp += arr[j--];
-		if (nextafter(tmp, tmp + 1) > INT16_MAX)
+		if (nextafter(tmp, tmp + 1) > INT16_MAX) {
+			errno	= ERANGE;
 			return	1;
-		if (nextafter(tmp, tmp - 1) < INT16_MIN)
+		}
+		if (nextafter(tmp, tmp - 1) < INT16_MIN) {
+			errno	= ERANGE;
 			return	-1;
+		}
 	}
 	tmp += arr[i];
-	if (nextafter(tmp, tmp + 1) > INT16_MAX)
+	if (nextafter(tmp, tmp + 1) > INT16_MAX) {
+		errno	= ERANGE;
 		return	1;
-	if (nextafter(tmp, tmp - 1) < INT16_MIN)
+	}
+	if (nextafter(tmp, tmp - 1) < INT16_MIN) {
+		errno	= ERANGE;
 		return	-1;
+	}
 
 	*sum	= 0;
 	i	= 0;
@@ -248,8 +276,10 @@ ssize_t	alx_array_sum_u32	(uint32_t *restrict sum,
 	tmp	= 0;
 	for (ssize_t i = 0; i < n; i++)
 		tmp += arr[i];
-	if (nextafter(tmp, tmp + 1) > UINT32_MAX)
+	if (nextafter(tmp, tmp + 1) > UINT32_MAX) {
+		errno	= ERANGE;
 		return	1;
+	}
 
 	*sum	= 0;
 	for (ssize_t i = 0; i < n; i++)
@@ -278,16 +308,24 @@ ssize_t	alx_array_sum_s32	(int32_t *restrict sum,
 			tmp += arr[i++];
 		else
 			tmp += arr[j--];
-		if (nextafter(tmp, tmp + 1) > INT32_MAX)
+		if (nextafter(tmp, tmp + 1) > INT32_MAX) {
+			errno	= ERANGE;
 			return	1;
-		if (nextafter(tmp, tmp - 1) < INT32_MIN)
+		}
+		if (nextafter(tmp, tmp - 1) < INT32_MIN) {
+			errno	= ERANGE;
 			return	-1;
+		}
 	}
 	tmp += arr[i];
-	if (nextafter(tmp, tmp + 1) > INT32_MAX)
+	if (nextafter(tmp, tmp + 1) > INT32_MAX) {
+		errno	= ERANGE;
 		return	1;
-	if (nextafter(tmp, tmp - 1) < INT32_MIN)
+	}
+	if (nextafter(tmp, tmp - 1) < INT32_MIN) {
+		errno	= ERANGE;
 		return	-1;
+	}
 
 	*sum	= 0;
 	i	= 0;
@@ -312,8 +350,10 @@ ssize_t	alx_array_sum_u64	(uint64_t *restrict sum,
 	tmp	= 0;
 	for (ssize_t i = 0; i < n; i++)
 		tmp += arr[i];
-	if (nextafter(tmp, tmp + 1) > UINT64_MAX)
+	if (nextafter(tmp, tmp + 1) > UINT64_MAX) {
+		errno	= ERANGE;
 		return	1;
+	}
 
 	*sum	= 0;
 	for (ssize_t i = 0; i < n; i++)
@@ -342,16 +382,24 @@ ssize_t	alx_array_sum_s64	(int64_t *restrict sum,
 			tmp += arr[i++];
 		else
 			tmp += arr[j--];
-		if (nextafter(tmp, tmp + 1) > INT64_MAX)
+		if (nextafter(tmp, tmp + 1) > INT64_MAX) {
+			errno	= ERANGE;
 			return	1;
-		if (nextafter(tmp, tmp - 1) < INT64_MIN)
+		}
+		if (nextafter(tmp, tmp - 1) < INT64_MIN) {
+			errno	= ERANGE;
 			return	-1;
+		}
 	}
 	tmp += arr[i];
-	if (nextafter(tmp, tmp + 1) > INT64_MAX)
+	if (nextafter(tmp, tmp + 1) > INT64_MAX) {
+		errno	= ERANGE;
 		return	1;
-	if (nextafter(tmp, tmp - 1) < INT64_MIN)
+	}
+	if (nextafter(tmp, tmp - 1) < INT64_MIN) {
+		errno	= ERANGE;
 		return	-1;
+	}
 
 	*sum	= 0;
 	i	= 0;

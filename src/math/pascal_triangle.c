@@ -9,10 +9,16 @@
  ******************************************************************************/
 #include "libalx/math/pascal_triangle.h"
 
+#include <errno.h>
+#include <math.h>
 #include <stdint.h>
+#include <string.h>
 
-#include "libalx/stdint.h"
-#include "libalx/math/common.h"
+#include "libalx/math/matrix_addition.h"
+#include "libalx/math/matrix_subtraction.h"
+#include "libalx/math/prime.h"
+#include "libalx/math/prime_defactorization.h"
+#include "libalx/math/prime_factorization.h"
 
 
 /******************************************************************************
@@ -38,70 +44,97 @@
 /******************************************************************************
  ******* static functions (prototypes) ****************************************
  ******************************************************************************/
-static	long double	pascal_triangle_ldbl	(int16_t n, int16_t k);
-static	int128_t	pascal_triangle_s128	(int16_t n, int16_t k);
 
 
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-struct Math_Sol		alx_pascal_triangle	(int16_t n, int16_t k)
+long double	alx_ldbl_pascal_triangle	(int16_t n, int16_t k)
 {
-	long double	sol_ldbl;
-	int128_t	sol_s128;
+	int8_t	pf[PRIME_NUMBERS_QTY_S16];
 
-	if ((n < 0) || (k < 0) || (k > n))
-		return	(struct Math_Sol){.code = MATH_ERROR};
+	if ((n < 0) || (k < 0) || (k > n)) {
+		errno	= EDOM;
+		return	nanl("");
+	}
 	if (!k)
-		return	(struct Math_Sol){.code = EXACT, .sol.exact = 1};
+		return	1;
+	if (k > (n / 2))
+		return	alx_ldbl_pascal_triangle(n, n - k);
+
+	alx_pascal_triangle_factorized(n, k, &pf);
+
+	return	alx_ldbl_prime_defactorization_s16((const int8_t (*)[])&pf);
+}
+
+double		alx_pascal_triangle		(int16_t n, int16_t k)
+{
+	int8_t	pf[PRIME_NUMBERS_QTY_S16];
+
+	if ((n < 0) || (k < 0) || (k > n)) {
+		errno	= EDOM;
+		return	nanl("");
+	}
+	if (!k)
+		return	1;
 	if (k > (n / 2))
 		return	alx_pascal_triangle(n, n - k);
 
-	sol_ldbl	= pascal_triangle_ldbl(n, k);
-	if ((sol_ldbl * n)  >  INT128_MAX) {
-		return	(struct Math_Sol){
-			.code		= APROX,
-			.sol.aprox	= sol_ldbl
-		};
+	alx_pascal_triangle_factorized(n, k, &pf);
+
+	return	alx_prime_defactorization_s16((const int8_t (*)[])&pf);
+}
+
+float		alx_flt_pascal_triangle		(int16_t n, int16_t k)
+{
+	int8_t	pf[PRIME_NUMBERS_QTY_S16];
+
+	if ((n < 0) || (k < 0) || (k > n)) {
+		errno	= EDOM;
+		return	nanl("");
+	}
+	if (!k)
+		return	1;
+	if (k > (n / 2))
+		return	alx_flt_pascal_triangle(n, n - k);
+
+	alx_pascal_triangle_factorized(n, k, &pf);
+
+	return	alx_flt_prime_defactorization_s16((const int8_t (*)[])&pf);
+}
+
+int		alx_pascal_triangle_factorized	(int16_t n, int16_t k,
+				int8_t (*restrict pf)[PRIME_NUMBERS_QTY_S16])
+{
+	int8_t	tmp[PRIME_NUMBERS_QTY_S16];
+
+	if ((n < 0) || (k < 0) || (k > n)) {
+		errno	= EDOM;
+		return	-1;
 	}
 
-	sol_s128	= pascal_triangle_s128(n, k);
-	return	(struct Math_Sol){
-		.code		= EXACT,
-		.sol.exact	= sol_s128
-	};
+	if (k > (n / 2))
+		return	alx_pascal_triangle_factorized(n, n - k, pf);
+
+	memset(pf, 0, sizeof(*pf));
+
+	if (!k)
+		return	0;
+
+	for (int_fast16_t i = 0; i < k; i++) {
+		alx_prime_factorization_s16(i + 1, &tmp);
+		alx_matrix_subtraction_s8(sizeof(*pf), *pf, *pf, tmp);
+		alx_prime_factorization_s16(n - i, &tmp);
+		alx_matrix_addition_s8(sizeof(*pf), *pf, *pf, tmp);
+	}
+
+	return	0;
 }
 
 
 /******************************************************************************
  ******* static functions (definitions) ***************************************
  ******************************************************************************/
-static	long double	pascal_triangle_ldbl	(int16_t n, int16_t k)
-{
-	long double	tmp;
-
-	tmp = 1;
-	for (int i = 0; i < k; i++)
-		tmp = tmp / (i + 1) * (n - i);
-
-	return	tmp;
-}
-
-static	int128_t	pascal_triangle_s128	(int16_t n, int16_t k)
-{
-	int128_t	tmp;
-
-	tmp = 1;
-	for (int i = 0; i < k; i++) {
-		if (!(tmp % (i+1)))
-			tmp	= tmp / (i + 1) * (n - i);
-		else
-			tmp	= tmp * (n - i) / (i + 1);
-		tmp = tmp * (n - i) / (i + 1);
-	}
-
-	return	tmp;
-}
 
 
 /******************************************************************************

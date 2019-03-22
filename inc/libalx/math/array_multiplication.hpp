@@ -43,6 +43,7 @@
  ******* extern functions *****************************************************
  ******************************************************************************/
 extern	"C"
+{
 int	alx_array_multiplication_uint	(ssize_t n,
 					unsigned dest[restrict],
 					const unsigned src1[restrict],

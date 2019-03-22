@@ -9,6 +9,7 @@
  ******************************************************************************/
 #include "libalx/math/array_multiplication.h"
 
+#include <errno.h>
 #include <limits.h>
 #include <math.h>
 #include <stdint.h>
@@ -53,8 +54,10 @@ int	alx_array_multiplication_uint	(ssize_t n,
 
 	for (ssize_t i = 0; i < n; i++) {
 		tmp	= (double_t)src1[i] * (double_t)src2[i];
-		if (nextafter(tmp, tmp + 1) > UINT_MAX)
+		if (nextafter(tmp, tmp + 1) > UINT_MAX) {
+			errno	= ERANGE;
 			return	1;
+		}
 		dest[i]	= src1[i] * src2[i];
 	}
 
@@ -70,10 +73,14 @@ int	alx_array_multiplication_int	(ssize_t n,
 
 	for (ssize_t i = 0; i < n; i++) {
 		tmp	= (double_t)src1[i] * (double_t)src2[i];
-		if (nextafter(tmp, tmp + 1) > INT_MAX)
+		if (nextafter(tmp, tmp + 1) > INT_MAX) {
+			errno	= ERANGE;
 			return	1;
-		if (nextafter(tmp, tmp - 1) < INT_MIN)
+		}
+		if (nextafter(tmp, tmp - 1) < INT_MIN) {
+			errno	= ERANGE;
 			return	-1;
+		}
 		dest[i]	= src1[i] * src2[i];
 	}
 
@@ -89,8 +96,10 @@ int	alx_array_multiplication_u8	(ssize_t n,
 
 	for (ssize_t i = 0; i < n; i++) {
 		tmp	= (uint_fast16_t)src1[i] * (uint_fast16_t)src2[i];
-		if (tmp > UINT8_MAX)
+		if (tmp > UINT8_MAX) {
+			errno	= ERANGE;
 			return	1;
+		}
 		dest[i]	= tmp;
 	}
 
@@ -106,10 +115,14 @@ int	alx_array_multiplication_s8	(ssize_t n,
 
 	for (ssize_t i = 0; i < n; i++) {
 		tmp	= (int_fast16_t)src1[i] * (int_fast16_t)src2[i];
-		if (tmp > INT8_MAX)
+		if (tmp > INT8_MAX) {
+			errno	= ERANGE;
 			return	1;
-		if (tmp < INT8_MIN)
+		}
+		if (tmp < INT8_MIN) {
+			errno	= ERANGE;
 			return	-1;
+		}
 		dest[i]	= tmp;
 	}
 
@@ -125,8 +138,10 @@ int	alx_array_multiplication_u16	(ssize_t n,
 
 	for (ssize_t i = 0; i < n; i++) {
 		tmp	= (uint_fast32_t)src1[i] * (uint_fast32_t)src2[i];
-		if (tmp > UINT16_MAX)
+		if (tmp > UINT16_MAX) {
+			errno	= ERANGE;
 			return	1;
+		}
 		dest[i]	= tmp;
 	}
 
@@ -142,10 +157,14 @@ int	alx_array_multiplication_s16	(ssize_t n,
 
 	for (ssize_t i = 0; i < n; i++) {
 		tmp	= (int_fast32_t)src1[i] * (int_fast32_t)src2[i];
-		if (tmp > INT16_MAX)
+		if (tmp > INT16_MAX) {
+			errno	= ERANGE;
 			return	1;
-		if (tmp < INT16_MIN)
+		}
+		if (tmp < INT16_MIN) {
+			errno	= ERANGE;
 			return	-1;
+		}
 		dest[i]	= tmp;
 	}
 
@@ -161,8 +180,10 @@ int	alx_array_multiplication_u32	(ssize_t n,
 
 	for (ssize_t i = 0; i < n; i++) {
 		tmp	= (uint_fast64_t)src1[i] * (uint_fast64_t)src2[i];
-		if (tmp > UINT32_MAX)
+		if (tmp > UINT32_MAX) {
+			errno	= ERANGE;
 			return	1;
+		}
 		dest[i]	= tmp;
 	}
 
@@ -178,10 +199,14 @@ int	alx_array_multiplication_s32	(ssize_t n,
 
 	for (ssize_t i = 0; i < n; i++) {
 		tmp	= (int_fast64_t)src1[i] * (int_fast64_t)src2[i];
-		if (tmp > INT32_MAX)
+		if (tmp > INT32_MAX) {
+			errno	= ERANGE;
 			return	1;
-		if (tmp < INT32_MIN)
+		}
+		if (tmp < INT32_MIN) {
+			errno	= ERANGE;
 			return	-1;
+		}
 		dest[i]	= tmp;
 	}
 
@@ -197,8 +222,10 @@ int	alx_array_multiplication_u64	(ssize_t n,
 
 	for (ssize_t i = 0; i < n; i++) {
 		tmp	= (double_t)src1[i] * (double_t)src2[i];
-		if (nextafter(tmp, tmp + 1) > UINT64_MAX)
+		if (nextafter(tmp, tmp + 1) > UINT64_MAX) {
+			errno	= ERANGE;
 			return	1;
+		}
 		dest[i]	= src1[i] * src2[i];
 	}
 
@@ -214,10 +241,14 @@ int	alx_array_multiplication_s64	(ssize_t n,
 
 	for (ssize_t i = 0; i < n; i++) {
 		tmp	= (double_t)src1[i] * (double_t)src2[i];
-		if (nextafter(tmp, tmp + 1) > INT64_MAX)
+		if (nextafter(tmp, tmp + 1) > INT64_MAX) {
+			errno	= ERANGE;
 			return	1;
-		if (nextafter(tmp, tmp - 1) < INT64_MIN)
+		}
+		if (nextafter(tmp, tmp - 1) < INT64_MIN) {
+			errno	= ERANGE;
 			return	-1;
+		}
 		dest[i]	= src1[i] * src2[i];
 	}
 

@@ -25,10 +25,14 @@
  ******* enums ****************************************************************
  ******************************************************************************/
 enum	Tests {
-	TEST_ALX_STRNGREPF,
-	TEST_ALX_STRLGREPF,
-	TEST_ALX_STRNCASEGREPF,
-	TEST_ALX_STRLCASEGREPF,
+	TEST_ALX_STRNFGREP,
+	TEST_ALX_STRLFGREP,
+	TEST_ALX_STRNCASEFGREP,
+	TEST_ALX_STRLCASEFGREP,
+	TEST_ALX_STRNFGREPV,
+	TEST_ALX_STRLFGREPV,
+	TEST_ALX_STRNCASEFGREPV,
+	TEST_ALX_STRLCASEFGREPV,
 
 	TESTS
 };
@@ -49,17 +53,25 @@ static	const char	*const expected[TESTS] = {
 	"asdffff\tgh\n  asd \"\n",
 	"asdffff\tgh\n  asd \"\n",
 	"asdffff\tgh\nAsDfFfF gh\n  asd \"\n",
-	"asdffff\tgh\nAsDfFfF gh\n  asd \"\n"
+	"asdffff\tgh\nAsDfFfF gh\n  asd \"\n",
+	"abcdefghi\nAsDfFfF gh\n...    \n x",
+	"abcdefghi\nAsDfFfF gh\n...    \n x",
+	"abcdefghi\n...    \n x",
+	"abcdefghi\n...    \n x"
 };
 
 
 /******************************************************************************
  ******* static functions (prototypes) ****************************************
  ******************************************************************************/
-int	test_alx_strngrepF(void);
-int	test_alx_strlgrepF(void);
-int	test_alx_strncasegrepF(void);
-int	test_alx_strlcasegrepF(void);
+int	test_alx_strnfgrep(void);
+int	test_alx_strlfgrep(void);
+int	test_alx_strncasefgrep(void);
+int	test_alx_strlcasefgrep(void);
+int	test_alx_strnfgrepv(void);
+int	test_alx_strlfgrepv(void);
+int	test_alx_strncasefgrepv(void);
+int	test_alx_strlcasefgrepv(void);
 
 
 /******************************************************************************
@@ -69,13 +81,21 @@ int main(void)
 {
 	int	fail = false;
 
-	if (test_alx_strngrepF())
+	if (test_alx_strnfgrep())
 		fail = true;
-	if (test_alx_strlgrepF())
+	if (test_alx_strlfgrep())
 		fail = true;
-	if (test_alx_strncasegrepF())
+	if (test_alx_strncasefgrep())
 		fail = true;
-	if (test_alx_strlcasegrepF())
+	if (test_alx_strlcasefgrep())
+		fail = true;
+	if (test_alx_strnfgrepv())
+		fail = true;
+	if (test_alx_strlfgrepv())
+		fail = true;
+	if (test_alx_strncasefgrepv())
+		fail = true;
+	if (test_alx_strlcasefgrepv())
 		fail = true;
 
 	if (!fail)
@@ -88,60 +108,120 @@ int main(void)
 /******************************************************************************
  ******* static functions (definitions) ***************************************
  ******************************************************************************/
-int	test_alx_strngrepF(void)
+int	test_alx_strnfgrep(void)
 {
 	char	buff[BUFF_SIZE];
 	int	cmp;
 
-	alx_strngrepF(sizeof(buff), buff, str, pattern);
-	cmp	= strncmp(buff, expected[TEST_ALX_STRNGREPF], sizeof(buff));
+	alx_strnfgrep(sizeof(buff), buff, str, pattern);
+	cmp	= strncmp(buff, expected[TEST_ALX_STRNFGREP], sizeof(buff));
 	if (cmp) {
-		print_fail("	libalx/string/strgrep:	alx_strngrepF()\n");
+		print_fail("	libalx/string/strgrep:	alx_strnfgrep()\n");
 		return	1;
 	}
 
 	return	0;
 }
 
-int	test_alx_strlgrepF(void)
+int	test_alx_strlfgrep(void)
 {
 	char	buff[BUFF_SIZE];
 	int	cmp;
 
-	alx_strlgrepF(sizeof(buff), buff, str, pattern);
-	cmp	= strncmp(buff, expected[TEST_ALX_STRLGREPF], sizeof(buff));
+	alx_strlfgrep(sizeof(buff), buff, str, pattern);
+	cmp	= strncmp(buff, expected[TEST_ALX_STRLFGREP], sizeof(buff));
 	if (cmp) {
-		print_fail("	libalx/string/strgrep:	alx_strlgrepF()\n");
+		print_fail("	libalx/string/strgrep:	alx_strlfgrep()\n");
 		return	1;
 	}
 
 	return	0;
 }
 
-int	test_alx_strncasegrepF(void)
+int	test_alx_strncasefgrep(void)
 {
 	char	buff[BUFF_SIZE];
 	int	cmp;
 
-	alx_strncasegrepF(sizeof(buff), buff, str, pattern);
-	cmp	= strncmp(buff, expected[TEST_ALX_STRNCASEGREPF], sizeof(buff));
+	alx_strncasefgrep(sizeof(buff), buff, str, pattern);
+	cmp	= strncmp(buff, expected[TEST_ALX_STRNCASEFGREP], sizeof(buff));
 	if (cmp) {
-		print_fail("	libalx/string/strgrep:	alx_strncasegrepF()\n");
+		print_fail("	libalx/string/strgrep:	alx_strncasefgrep()\n");
 		return	1;
 	}
 
 	return	0;
 }
 
-int	test_alx_strlcasegrepF(void)
+int	test_alx_strlcasefgrep(void)
 {
 	char	buff[BUFF_SIZE];
 	int	cmp;
 
-	alx_strlcasegrepF(sizeof(buff), buff, str, pattern);
-	cmp	= strncmp(buff, expected[TEST_ALX_STRLCASEGREPF], sizeof(buff));
+	alx_strlcasefgrep(sizeof(buff), buff, str, pattern);
+	cmp	= strncmp(buff, expected[TEST_ALX_STRLCASEFGREP], sizeof(buff));
 	if (cmp) {
-		print_fail("	libalx/string/strgrep:	alx_strlcasegrepF()\n");
+		print_fail("	libalx/string/strgrep:	alx_strlcasefgrep()\n");
+		return	1;
+	}
+
+	return	0;
+}
+
+int	test_alx_strnfgrepv(void)
+{
+	char	buff[BUFF_SIZE];
+	int	cmp;
+
+	alx_strnfgrepv(sizeof(buff), buff, str, pattern);
+	cmp	= strncmp(buff, expected[TEST_ALX_STRNFGREPV], sizeof(buff));
+	if (cmp) {
+		print_fail("	libalx/string/strgrep:	alx_strnfgrepv()\n");
+		return	1;
+	}
+
+	return	0;
+}
+
+int	test_alx_strlfgrepv(void)
+{
+	char	buff[BUFF_SIZE];
+	int	cmp;
+
+	alx_strlfgrepv(sizeof(buff), buff, str, pattern);
+	cmp	= strncmp(buff, expected[TEST_ALX_STRLFGREPV], sizeof(buff));
+	if (cmp) {
+		print_fail("	libalx/string/strgrep:	alx_strlfgrepv()\n");
+		return	1;
+	}
+
+	return	0;
+}
+
+int	test_alx_strncasefgrepv(void)
+{
+	char	buff[BUFF_SIZE];
+	int	cmp;
+
+	alx_strncasefgrepv(sizeof(buff), buff, str, pattern);
+	cmp	= strncmp(buff, expected[TEST_ALX_STRNCASEFGREPV], sizeof(buff));
+	if (cmp) {
+		print_fail("	libalx/string/strgrep:	alx_strncasefgrepv()\n");
+		return	1;
+	}
+
+	return	0;
+}
+
+int	test_alx_strlcasefgrepv(void)
+{
+	char	buff[BUFF_SIZE];
+	int	cmp;
+
+	alx_strlcasefgrepv(sizeof(buff), buff, str, pattern);
+	cmp	= strncmp(buff, expected[TEST_ALX_STRLCASEFGREPV], sizeof(buff));
+	if (cmp) {
+		print_fail("	libalx/string/strgrep:	alx_strlcasefgrepv()\n");
 		return	1;
 	}
 

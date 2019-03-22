@@ -16,7 +16,7 @@
  ******************************************************************************/
 #include <stdint.h>
 
-#include "libalx/math/common.h"
+#include "libalx/math/prime.h"
 
 
 /******************************************************************************
@@ -42,7 +42,11 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
-struct Math_Sol		alx_binomial_coefficient(int16_t n, int16_t k);
+long double	alx_ldbl_binomial_coefficient		(int16_t n, int16_t k);
+double		alx_binomial_coefficient		(int16_t n, int16_t k);
+float		alx_flt_binomial_coefficient		(int16_t n, int16_t k);
+int		alx_binomial_coefficient_factorized	(int16_t n, int16_t k,
+				int8_t (*restrict pf)[PRIME_NUMBERS_QTY_S16]);
 
 
 /******************************************************************************

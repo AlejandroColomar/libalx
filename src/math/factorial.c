@@ -9,10 +9,15 @@
  ******************************************************************************/
 #include "libalx/math/factorial.h"
 
+#include <errno.h>
+#include <math.h>
 #include <stdint.h>
+#include <string.h>
 
-#include "libalx/stdint.h"
-#include "libalx/math/common.h"
+#include "libalx/math/matrix_addition.h"
+#include "libalx/math/prime.h"
+#include "libalx/math/prime_defactorization.h"
+#include "libalx/math/prime_factorization.h"
 
 
 /******************************************************************************
@@ -38,63 +43,86 @@
 /******************************************************************************
  ******* static functions (prototypes) ****************************************
  ******************************************************************************/
-static	long double	factorial_ldbl	(int16_t n);
-static	int128_t	factorial_s128	(int16_t n);
 
 
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-struct Math_Sol		alx_factorial	(int16_t n)
+long double	alx_ldbl_factorial		(int16_t n)
 {
-	long double	sol_ldbl;
-	int128_t	sol_s128;
+	int8_t	pf[PRIME_NUMBERS_QTY_S16];
 
-	if (n < 0)
-		return	(struct Math_Sol){.code = MATH_ERROR};
+	if (n < 0) {
+		errno	= EDOM;
+		return	nanl("");
+	}
 	if (!n)
-		return	(struct Math_Sol){.code = EXACT, .sol.exact = 1};
+		return	1;
 
-	sol_ldbl	= factorial_ldbl(n);
-	if (sol_ldbl  >  INT128_MAX) {
-		return	(struct Math_Sol){
-			.code		= APROX,
-			.sol.aprox	= sol_ldbl
-		};
+	alx_factorial_factorized(n, &pf);
+
+	return	alx_ldbl_prime_defactorization_s16((const int8_t (*)[])&pf);
+}
+
+double		alx_factorial			(int16_t n)
+{
+	int8_t	pf[PRIME_NUMBERS_QTY_S16];
+
+	if (n < 0) {
+		errno	= EDOM;
+		return	nan("");
+	}
+	if (!n)
+		return	1;
+
+	alx_factorial_factorized(n, &pf);
+
+	return	alx_prime_defactorization_s16((const int8_t (*)[])&pf);
+}
+
+float		alx_flt_factorial		(int16_t n)
+{
+	int8_t	pf[PRIME_NUMBERS_QTY_S16];
+
+	if (n < 0) {
+		errno	= EDOM;
+		return	nanf("");
+	}
+	if (!n)
+		return	1;
+
+	alx_factorial_factorized(n, &pf);
+
+	return	alx_flt_prime_defactorization_s16((const int8_t (*)[])&pf);
+}
+
+int		alx_factorial_factorized	(int16_t n,
+				int8_t (*restrict pf)[PRIME_NUMBERS_QTY_S16])
+{
+	int8_t	tmp[PRIME_NUMBERS_QTY_S16];
+
+	if (n < 0) {
+		errno	= EDOM;
+		return	-1;
 	}
 
-	sol_s128	= factorial_s128(n);
-	return	(struct Math_Sol){
-		.code		= EXACT,
-		.sol.exact	= sol_s128
-	};
+	memset(pf, 0, sizeof(*pf));
+
+	if (!n)
+		return	0;
+
+	for (int_fast16_t i = n; i > 1; i--) {
+		alx_prime_factorization_s16(i, &tmp);
+		alx_matrix_addition_s8(sizeof(*pf), *pf, *pf, tmp);
+	}
+
+	return	0;
 }
 
 
 /******************************************************************************
  ******* static functions (definitions) ***************************************
  ******************************************************************************/
-static	long double	factorial_ldbl	(int16_t n)
-{
-	long double	tmp;
-
-	tmp = 1;
-	for (int i = 1; i <= n; i++)
-		tmp *= i;
-
-	return	tmp;
-}
-
-static	int128_t	factorial_s128	(int16_t n)
-{
-	int128_t	tmp;
-
-	tmp = 1;
-	for (int i = 1; i <= n; i++)
-		tmp *= i;
-
-	return	tmp;
-}
 
 
 /******************************************************************************

@@ -16,7 +16,7 @@
  ******************************************************************************/
 #include <cstdint>
 
-#include "libalx/math/common.hpp"
+#include "libalx/math/prime.hpp"
 
 
 /******************************************************************************
@@ -44,7 +44,11 @@
  ******************************************************************************/
 extern	"C"
 {
-struct Math_Sol		alx_factorial(int16_t n);
+long double	alx_ldbl_factorial		(int16_t n);
+double		alx_factorial			(int16_t n);
+float		alx_flt_factorial		(int16_t n);
+int		alx_factorial_factorized	(int16_t n,
+				int8_t (*restrict pf)[PRIME_NUMBERS_QTY_S16]);
 }
 
 

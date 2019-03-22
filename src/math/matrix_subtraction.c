@@ -9,6 +9,7 @@
  ******************************************************************************/
 #include "libalx/math/matrix_subtraction.h"
 
+#include <errno.h>
 #include <limits.h>
 #include <math.h>
 #include <stdint.h>
@@ -45,14 +46,16 @@
  ******* global functions *****************************************************
  ******************************************************************************/
 int	alx_matrix_subtraction_uint	(ssize_t n,
-					unsigned dest[restrict n],
-					const unsigned src1[restrict n],
-					const unsigned src2[restrict n])
+					unsigned dest[n],
+					const unsigned src1[n],
+					const unsigned src2[n])
 {
 
 	for (ssize_t i = 0; i < n; i++) {
-		if (src1[i] < src2[i])
+		if (src1[i] < src2[i]) {
+			errno	= ERANGE;
 			return	-1;
+		}
 		dest[i]	= src1[i] - src2[i];
 	}
 
@@ -60,18 +63,22 @@ int	alx_matrix_subtraction_uint	(ssize_t n,
 }
 
 int	alx_matrix_subtraction_int	(ssize_t n,
-					int dest[restrict n],
-					const int src1[restrict n],
-					const int src2[restrict n])
+					int dest[n],
+					const int src1[n],
+					const int src2[n])
 {
 	double_t	tmp;
 
 	for (ssize_t i = 0; i < n; i++) {
 		tmp	= (double_t)src1[i] - (double_t)src2[i];
-		if (nextafter(tmp, tmp + 1) > INT_MAX)
+		if (nextafter(tmp, tmp + 1) > INT_MAX) {
+			errno	= ERANGE;
 			return	1;
-		if (nextafter(tmp, tmp - 1) < INT_MIN)
+		}
+		if (nextafter(tmp, tmp - 1) < INT_MIN) {
+			errno	= ERANGE;
 			return	-1;
+		}
 		dest[i]	= src1[i] - src2[i];
 	}
 
@@ -79,14 +86,16 @@ int	alx_matrix_subtraction_int	(ssize_t n,
 }
 
 int	alx_matrix_subtraction_u8	(ssize_t n,
-					uint8_t dest[restrict n],
-					const uint8_t src1[restrict n],
-					const uint8_t src2[restrict n])
+					uint8_t dest[n],
+					const uint8_t src1[n],
+					const uint8_t src2[n])
 {
 
 	for (ssize_t i = 0; i < n; i++) {
-		if (src1[i] < src2[i])
+		if (src1[i] < src2[i]) {
+			errno	= ERANGE;
 			return	-1;
+		}
 		dest[i]	= src1[i] - src2[i];
 	}
 
@@ -94,18 +103,22 @@ int	alx_matrix_subtraction_u8	(ssize_t n,
 }
 
 int	alx_matrix_subtraction_s8	(ssize_t n,
-					int8_t dest[restrict n],
-					const int8_t src1[restrict n],
-					const int8_t src2[restrict n])
+					int8_t dest[n],
+					const int8_t src1[n],
+					const int8_t src2[n])
 {
 	int_fast16_t	tmp;
 
 	for (ssize_t i = 0; i < n; i++) {
 		tmp	= (int_fast16_t)src1[i] - (int_fast16_t)src2[i];
-		if (nextafter(tmp, tmp + 1) > INT8_MAX)
+		if (nextafter(tmp, tmp + 1) > INT8_MAX) {
+			errno	= ERANGE;
 			return	1;
-		if (nextafter(tmp, tmp - 1) < INT8_MIN)
+		}
+		if (nextafter(tmp, tmp - 1) < INT8_MIN) {
+			errno	= ERANGE;
 			return	-1;
+		}
 		dest[i]	= src1[i] - src2[i];
 	}
 
@@ -113,14 +126,16 @@ int	alx_matrix_subtraction_s8	(ssize_t n,
 }
 
 int	alx_matrix_subtraction_u16	(ssize_t n,
-					uint16_t dest[restrict n],
-					const uint16_t src1[restrict n],
-					const uint16_t src2[restrict n])
+					uint16_t dest[n],
+					const uint16_t src1[n],
+					const uint16_t src2[n])
 {
 
 	for (ssize_t i = 0; i < n; i++) {
-		if (src1[i] < src2[i])
+		if (src1[i] < src2[i]) {
+			errno	= ERANGE;
 			return	-1;
+		}
 		dest[i]	= src1[i] - src2[i];
 	}
 
@@ -128,18 +143,22 @@ int	alx_matrix_subtraction_u16	(ssize_t n,
 }
 
 int	alx_matrix_subtraction_s16	(ssize_t n,
-					int16_t dest[restrict n],
-					const int16_t src1[restrict n],
-					const int16_t src2[restrict n])
+					int16_t dest[n],
+					const int16_t src1[n],
+					const int16_t src2[n])
 {
 	int_fast32_t	tmp;
 
 	for (ssize_t i = 0; i < n; i++) {
 		tmp	= (int_fast32_t)src1[i] - (int_fast32_t)src2[i];
-		if (nextafter(tmp, tmp + 1) > INT16_MAX)
+		if (nextafter(tmp, tmp + 1) > INT16_MAX) {
+			errno	= ERANGE;
 			return	1;
-		if (nextafter(tmp, tmp - 1) < INT16_MIN)
+		}
+		if (nextafter(tmp, tmp - 1) < INT16_MIN) {
+			errno	= ERANGE;
 			return	-1;
+		}
 		dest[i]	= src1[i] - src2[i];
 	}
 
@@ -147,14 +166,16 @@ int	alx_matrix_subtraction_s16	(ssize_t n,
 }
 
 int	alx_matrix_subtraction_u32	(ssize_t n,
-					uint32_t dest[restrict n],
-					const uint32_t src1[restrict n],
-					const uint32_t src2[restrict n])
+					uint32_t dest[n],
+					const uint32_t src1[n],
+					const uint32_t src2[n])
 {
 
 	for (ssize_t i = 0; i < n; i++) {
-		if (src1[i] < src2[i])
+		if (src1[i] < src2[i]) {
+			errno	= ERANGE;
 			return	-1;
+		}
 		dest[i]	= src1[i] - src2[i];
 	}
 
@@ -162,18 +183,22 @@ int	alx_matrix_subtraction_u32	(ssize_t n,
 }
 
 int	alx_matrix_subtraction_s32	(ssize_t n,
-					int32_t dest[restrict n],
-					const int32_t src1[restrict n],
-					const int32_t src2[restrict n])
+					int32_t dest[n],
+					const int32_t src1[n],
+					const int32_t src2[n])
 {
 	int_fast64_t	tmp;
 
 	for (ssize_t i = 0; i < n; i++) {
 		tmp	= (int_fast64_t)src1[i] - (int_fast64_t)src2[i];
-		if (nextafter(tmp, tmp + 1) > INT32_MAX)
+		if (nextafter(tmp, tmp + 1) > INT32_MAX) {
+			errno	= ERANGE;
 			return	1;
-		if (nextafter(tmp, tmp - 1) < INT32_MIN)
+		}
+		if (nextafter(tmp, tmp - 1) < INT32_MIN) {
+			errno	= ERANGE;
 			return	-1;
+		}
 		dest[i]	= src1[i] - src2[i];
 	}
 
@@ -181,14 +206,16 @@ int	alx_matrix_subtraction_s32	(ssize_t n,
 }
 
 int	alx_matrix_subtraction_u64	(ssize_t n,
-					uint64_t dest[restrict n],
-					const uint64_t src1[restrict n],
-					const uint64_t src2[restrict n])
+					uint64_t dest[n],
+					const uint64_t src1[n],
+					const uint64_t src2[n])
 {
 
 	for (ssize_t i = 0; i < n; i++) {
-		if (src1[i] < src2[i])
+		if (src1[i] < src2[i]) {
+			errno	= ERANGE;
 			return	-1;
+		}
 		dest[i]	= src1[i] - src2[i];
 	}
 
@@ -196,18 +223,22 @@ int	alx_matrix_subtraction_u64	(ssize_t n,
 }
 
 int	alx_matrix_subtraction_s64	(ssize_t n,
-					int64_t dest[restrict n],
-					const int64_t src1[restrict n],
-					const int64_t src2[restrict n])
+					int64_t dest[n],
+					const int64_t src1[n],
+					const int64_t src2[n])
 {
 	double_t	tmp;
 
 	for (ssize_t i = 0; i < n; i++) {
 		tmp	= (double_t)src1[i] - (double_t)src2[i];
-		if (nextafter(tmp, tmp + 1) > INT64_MAX)
+		if (nextafter(tmp, tmp + 1) > INT64_MAX) {
+			errno	= ERANGE;
 			return	1;
-		if (nextafter(tmp, tmp - 1) < INT64_MIN)
+		}
+		if (nextafter(tmp, tmp - 1) < INT64_MIN) {
+			errno	= ERANGE;
 			return	-1;
+		}
 		dest[i]	= src1[i] - src2[i];
 	}
 

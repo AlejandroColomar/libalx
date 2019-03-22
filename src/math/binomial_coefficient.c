@@ -9,10 +9,16 @@
  ******************************************************************************/
 #include "libalx/math/binomial_coefficient.h"
 
+#include <errno.h>
+#include <math.h>
 #include <stdint.h>
+#include <string.h>
 
-#include "libalx/stdint.h"
-#include "libalx/math/common.h"
+#include "libalx/math/matrix_addition.h"
+#include "libalx/math/matrix_subtraction.h"
+#include "libalx/math/prime.h"
+#include "libalx/math/prime_defactorization.h"
+#include "libalx/math/prime_factorization.h"
 
 
 /******************************************************************************
@@ -38,81 +44,108 @@
 /******************************************************************************
  ******* static functions (prototypes) ****************************************
  ******************************************************************************/
-static	long double	binomial_coefficient_ldbl	(int16_t n, int16_t k);
-static	int128_t	binomial_coefficient_s128	(int16_t n, int16_t k);
 
 
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-struct Math_Sol		alx_binomial_coefficient	(int16_t n, int16_t k)
+long double	alx_ldbl_binomial_coefficient		(int16_t n, int16_t k)
 {
-	long double	sol_ldbl;
-	int128_t	sol_s128;
+	int8_t	pf[PRIME_NUMBERS_QTY_S16];
 
-	if ((n < 0) || (k < 0))
-		return	(struct Math_Sol){.code = MATH_ERROR};
+	if ((n < 0) || (k < 0)) {
+		errno	= EDOM;
+		return	nanl("");
+	}
 	if (k > n)
-		return	(struct Math_Sol){.code = EXACT, .sol.exact = 0};
+		return	0;
 	if ((n == k) || (!k))
-		return	(struct Math_Sol){.code = EXACT, .sol.exact = 1};
+		return	1;
 	if (k == 1)
-		return	(struct Math_Sol){.code = EXACT, .sol.exact = n};
+		return	n;
 
-	sol_ldbl	= binomial_coefficient_ldbl(n, k);
-	if (sol_ldbl  >  INT128_MAX) {
-		return	(struct Math_Sol){
-			.code		= APROX,
-			.sol.aprox	= sol_ldbl
-		};
+	alx_binomial_coefficient_factorized(n, k, &pf);
+
+	return	alx_ldbl_prime_defactorization_s16((const int8_t (*)[])&pf);
+}
+
+double		alx_binomial_coefficient		(int16_t n, int16_t k)
+{
+	int8_t	pf[PRIME_NUMBERS_QTY_S16];
+
+	if ((n < 0) || (k < 0)) {
+		errno	= EDOM;
+		return	nan("");
+	}
+	if (k > n)
+		return	0;
+	if ((n == k) || (!k))
+		return	1;
+	if (k == 1)
+		return	n;
+
+	alx_binomial_coefficient_factorized(n, k, &pf);
+
+	return	alx_prime_defactorization_s16((const int8_t (*)[])&pf);
+}
+
+float		alx_flt_binomial_coefficient		(int16_t n, int16_t k)
+{
+	int8_t	pf[PRIME_NUMBERS_QTY_S16];
+
+	if ((n < 0) || (k < 0)) {
+		errno	= EDOM;
+		return	nanf("");
+	}
+	if (k > n)
+		return	0;
+	if ((n == k) || (!k))
+		return	1;
+	if (k == 1)
+		return	n;
+
+	alx_binomial_coefficient_factorized(n, k, &pf);
+
+	return	alx_flt_prime_defactorization_s16((const int8_t (*)[])&pf);
+}
+
+int		alx_binomial_coefficient_factorized	(int16_t n, int16_t k,
+				int8_t (*restrict pf)[PRIME_NUMBERS_QTY_S16])
+{
+	int_fast16_t	m;
+	int_fast16_t	j;
+	int8_t		tmp[PRIME_NUMBERS_QTY_S16];
+
+	if ((n < 0) || (k < 0)) {
+		errno	= EDOM;
+		return	-2;
 	}
 
-	sol_s128	= binomial_coefficient_s128(n, k);
-	return	(struct Math_Sol){
-		.code		= EXACT,
-		.sol.exact	= sol_s128
-	};
+	m	= n;
+	j	= 1;
+	memset(pf, 0, sizeof(*pf));
+
+	if (k > n) {
+		errno	= EDOM;
+		return	-1;
+	}
+	if ((n == k) || (!k))
+		return	0;
+
+	do {
+		alx_prime_factorization_s16(j++, &tmp);
+		alx_matrix_subtraction_s8(sizeof(*pf), *pf, *pf, tmp);
+		alx_prime_factorization_s16(m--, &tmp);
+		alx_matrix_addition_s8(sizeof(*pf), *pf, *pf, tmp);
+	} while (j < k);
+
+	return	0;
 }
 
 
 /******************************************************************************
  ******* static functions (definitions) ***************************************
  ******************************************************************************/
-static	long double	binomial_coefficient_ldbl	(int16_t n, int16_t k)
-{
-	long double	m;
-	long double	j;
-	long double	tmp;
-
-	m	= n;
-	j	= 1;
-	tmp	= 1;
-
-	while (j < k)
-		tmp	= tmp / j++ * m--;
-
-	return	tmp;
-}
-
-static	int128_t	binomial_coefficient_s128	(int16_t n, int16_t k)
-{
-	int16_t		m;
-	int16_t		j;
-	int128_t	tmp;
-
-	m	= n;
-	j	= k;
-	tmp	= 1;
-
-	while (j < k) {
-		if (!(tmp % j))
-			tmp	= tmp / j-- * m++;
-		else
-			tmp	= tmp * m++ / j--;
-	}
-
-	return	tmp;
-}
 
 
 /******************************************************************************

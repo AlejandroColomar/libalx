@@ -13,7 +13,8 @@
 # dependencies
 
 BIN		=							\
-		strgrep-test
+		strgrep-test						\
+		memcpy-test
 
 STATIC_LIBS_FILES	=						\
 		$(LIB_DIR)/libalx/libalx-string.a
@@ -30,6 +31,10 @@ all: $(BIN)
 
 
 strgrep-test: $(TMP_DIR)/string/strgrep-test.o $(LIB_FILES)
+	@echo	"	CC	libalx/test/string/$@"
+	$(Q)$(CC) $< -o $@ $(STATIC_LIBS) $(LIBS)
+
+memcpy-test: $(TMP_DIR)/string/memcpy-test.o $(LIB_FILES)
 	@echo	"	CC	libalx/test/string/$@"
 	$(Q)$(CC) $< -o $@ $(STATIC_LIBS) $(LIBS)
 

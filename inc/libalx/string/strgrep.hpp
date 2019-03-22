@@ -42,19 +42,35 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
-ssize_t	alx_strngrepF		(ssize_t size,
+ssize_t	alx_strnfgrep		(ssize_t size,
 					char dest[restrict],
 					const char src[restrict],
 					const char pattern[restrict]);
-ssize_t	alx_strlgrepF		(ssize_t size,
+ssize_t	alx_strlfgrep		(ssize_t size,
 					char dest[restrict],
 					const char src[restrict],
 					const char pattern[restrict]);
-ssize_t	alx_strncasegrepF	(ssize_t size,
+ssize_t	alx_strncasefgrep	(ssize_t size,
 					char dest[restrict],
 					const char src[restrict],
 					const char pattern[restrict]);
-ssize_t	alx_strlcasegrepF	(ssize_t size,
+ssize_t	alx_strlcasefgrep	(ssize_t size,
+					char dest[restrict],
+					const char src[restrict],
+					const char pattern[restrict]);
+ssize_t	alx_strnfgrepv		(ssize_t size,
+					char dest[restrict],
+					const char src[restrict],
+					const char pattern[restrict]);
+ssize_t	alx_strlfgrepv		(ssize_t size,
+					char dest[restrict],
+					const char src[restrict],
+					const char pattern[restrict]);
+ssize_t	alx_strncasefgrepv	(ssize_t size,
+					char dest[restrict],
+					const char src[restrict],
+					const char pattern[restrict]);
+ssize_t	alx_strlcasefgrepv	(ssize_t size,
 					char dest[restrict],
 					const char src[restrict],
 					const char pattern[restrict]);
