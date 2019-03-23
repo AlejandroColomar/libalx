@@ -13,12 +13,12 @@
 # dependencies
 
 OBJ		=							\
-		ssizeof.o
+		size.o
 
-SSIZEOF_INC	=							\
-		$(INC_DIR)/libalx/stddef/ssizeof.h
-SSIZEOF_SRC	=							\
-		$(SRC_DIR)/stddef/ssizeof.c
+SIZE_INC	=							\
+		$(INC_DIR)/libalx/stddef/size.h
+SIZE_SRC	=							\
+		$(SRC_DIR)/stddef/size.c
 
 ################################################################################
 # target: dependencies
@@ -28,10 +28,10 @@ PHONY := all
 all: $(OBJ)
 
 
-ssizeof.s: $(SSIZEOF_SRC) $(SSIZEOF_INC)
+size.s: $(SIZE_SRC) $(SIZE_INC)
 	@echo	"	CC	libalx/tmp/stdint/$@"
 	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
-ssizeof.o: ssizeof.s
+size.o: size.s
 	@echo	"	AS	libalx/tmp/stdint/$@"
 	$(Q)$(AS) $< -o $@
 

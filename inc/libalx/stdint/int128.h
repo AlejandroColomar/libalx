@@ -30,15 +30,12 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-#if !defined(UINT128_MAX)
-	#define UINT128_MAX	(~((uint128_t)0))
-#endif
-#if !defined(INT128_MAX)
-	#define INT128_MAX	((int128_t)(UINT128_MAX >> 1))
-#endif
-#if !defined(INT128_MIN)
-	#define INT128_MIN	((int128_t)(-INT128_MAX - 1))
-#endif
+#define U128_MAX	(~((uint128_t)0))
+#define S128_MAX	((int128_t)(U128_MAX >> 1))
+#define S128_MIN	((int128_t)(-S128_MAX - 1))
+
+#define SQRT_U128_MAX	((uint128_t)(0xFFFFFFFFFFFFFFFF))
+#define SQRT_S128_MAX	( (int128_t)(0xB504F333F9DE6800))
 
 
 /******************************************************************************

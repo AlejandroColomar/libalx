@@ -11,9 +11,8 @@
 
 #include <math.h>
 #include <stdbool.h>
+#include <stddef.h>
 #include <stdint.h>
-
-#include <sys/types.h>
 
 #include "libalx/stdlib/search.h"
 
@@ -68,7 +67,7 @@ static bool	is_prime_u16	(unsigned n);
  ******************************************************************************/
 void	alx_prime_s16_init	(void)
 {
-	ssize_t	i;
+	ptrdiff_t	i;
 
 	i	= 0;
 	alx_prime_s16[i++]	= 2;
@@ -81,7 +80,7 @@ void	alx_prime_s16_init	(void)
 
 void	alx_prime_u16_init	(void)
 {
-	ssize_t	i;
+	ptrdiff_t	i;
 
 	i	= 0;
 	alx_prime_u16[i++]	= 2;
@@ -103,7 +102,7 @@ static bool	is_prime_s16	(int n)
 
 	sqrt_n	= sqrt(n) + 1;
 
-	for (ssize_t i = 0; (alx_prime_s16[i] <= sqrt_n) &&
+	for (ptrdiff_t i = 0; (alx_prime_s16[i] <= sqrt_n) &&
 					(i < PRIME_NUMBERS_QTY_S16); i++) {
 		if (!(n % alx_prime_s16[i]))
 			return	false;
@@ -118,7 +117,7 @@ static bool	is_prime_u16	(unsigned n)
 
 	sqrt_n	= sqrt(n) + 1;
 
-	for (ssize_t i = 0; (alx_prime_s16[i] <= sqrt_n) &&
+	for (ptrdiff_t i = 0; (alx_prime_s16[i] <= sqrt_n) &&
 					(i < PRIME_NUMBERS_QTY_U16); i++) {
 		if (!(n % alx_prime_s16[i]))
 			return	false;

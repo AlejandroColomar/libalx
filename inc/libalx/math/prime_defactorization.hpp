@@ -15,13 +15,11 @@
  ******* headers **************************************************************
  ******************************************************************************/
 #include <cmath>
-#include <cstdbool>
+#include <cstddef>
 #include <cstdint>
 
-#include <sys/types.h>
-
 #include "libalx/math/prime.hpp"
-#include "libalx/stddef/ssizeof.hpp"
+#include "libalx/stddef/size.hpp"
 
 
 /******************************************************************************
@@ -93,7 +91,7 @@ long double	alx_ldbl_prime_defactorization_s8(
 	long double	n;
 
 	n	= 1;
-	for (ssize_t i = 0; i < ssizeof(*pf); i++)
+	for (ptrdiff_t i = 0; i < ARRAY_SIZE(*pf); i++)
 		n	+= (*pf)[i] * alx_prime_s8[i];
 
 	return	n;
@@ -106,7 +104,7 @@ long double	alx_ldbl_prime_defactorization_u8(
 	long double	n;
 
 	n	= 1;
-	for (ssize_t i = 0; i < ssizeof(*pf); i++)
+	for (ptrdiff_t i = 0; i < ARRAY_SIZE(*pf); i++)
 		n	+= (*pf)[i] * alx_prime_u8[i];
 
 	return	n;
@@ -119,7 +117,7 @@ long double	alx_ldbl_prime_defactorization_s16(
 	long double	n;
 
 	n	= 1;
-	for (ssize_t i = 0; i < ssizeof(*pf); i++)
+	for (ptrdiff_t i = 0; i < ARRAY_SIZE(*pf); i++)
 		n	+= (*pf)[i] * alx_prime_s16[i];
 
 	return	n;
@@ -132,7 +130,7 @@ long double	alx_ldbl_prime_defactorization_u16(
 	long double	n;
 
 	n	= 1;
-	for (ssize_t i = 0; i < ssizeof(*pf); i++)
+	for (ptrdiff_t i = 0; i < ARRAY_SIZE(*pf); i++)
 		n	+= (*pf)[i] * alx_prime_u16[i];
 
 	return	n;
@@ -146,7 +144,7 @@ double		alx_prime_defactorization_s8(
 	double_t	n;
 
 	n	= 1;
-	for (ssize_t i = 0; i < ssizeof(*pf); i++)
+	for (ptrdiff_t i = 0; i < ARRAY_SIZE(*pf); i++)
 		n	+= (*pf)[i] * alx_prime_s8[i];
 
 	return	n;
@@ -159,7 +157,7 @@ double		alx_prime_defactorization_u8(
 	double_t	n;
 
 	n	= 1;
-	for (ssize_t i = 0; i < ssizeof(*pf); i++)
+	for (ptrdiff_t i = 0; i < ARRAY_SIZE(*pf); i++)
 		n	+= (*pf)[i] * alx_prime_u8[i];
 
 	return	n;
@@ -172,7 +170,7 @@ double		alx_prime_defactorization_s16(
 	double_t	n;
 
 	n	= 1;
-	for (ssize_t i = 0; i < ssizeof(*pf); i++)
+	for (ptrdiff_t i = 0; i < ARRAY_SIZE(*pf); i++)
 		n	+= (*pf)[i] * alx_prime_s16[i];
 
 	return	n;
@@ -185,7 +183,7 @@ double		alx_prime_defactorization_u16(
 	double_t	n;
 
 	n	= 1;
-	for (ssize_t i = 0; i < ssizeof(*pf); i++)
+	for (ptrdiff_t i = 0; i < ARRAY_SIZE(*pf); i++)
 		n	+= (*pf)[i] * alx_prime_u16[i];
 
 	return	n;
@@ -199,7 +197,7 @@ float		alx_flt_prime_defactorization_s8(
 	float_t	n;
 
 	n	= 1;
-	for (ssize_t i = 0; i < ssizeof(*pf); i++)
+	for (ptrdiff_t i = 0; i < ARRAY_SIZE(*pf); i++)
 		n	+= (*pf)[i] * alx_prime_s8[i];
 
 	return	n;
@@ -212,7 +210,7 @@ float		alx_flt_prime_defactorization_u8(
 	float_t	n;
 
 	n	= 1;
-	for (ssize_t i = 0; i < ssizeof(*pf); i++)
+	for (ptrdiff_t i = 0; i < ARRAY_SIZE(*pf); i++)
 		n	+= (*pf)[i] * alx_prime_u8[i];
 
 	return	n;
@@ -225,7 +223,7 @@ float		alx_flt_prime_defactorization_s16(
 	float_t	n;
 
 	n	= 1;
-	for (ssize_t i = 0; i < ssizeof(*pf); i++)
+	for (ptrdiff_t i = 0; i < ARRAY_SIZE(*pf); i++)
 		n	+= (*pf)[i] * alx_prime_s16[i];
 
 	return	n;
@@ -238,7 +236,7 @@ float		alx_flt_prime_defactorization_u16(
 	float_t	n;
 
 	n	= 1;
-	for (ssize_t i = 0; i < ssizeof(*pf); i++)
+	for (ptrdiff_t i = 0; i < ARRAY_SIZE(*pf); i++)
 		n	+= (*pf)[i] * alx_prime_u16[i];
 
 	return	n;

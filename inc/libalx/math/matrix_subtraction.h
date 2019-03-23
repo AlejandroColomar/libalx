@@ -14,9 +14,8 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include <stddef.h>
 #include <stdint.h>
-
-#include <sys/types.h>
 
 
 /******************************************************************************
@@ -42,43 +41,43 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
-int	alx_matrix_subtraction_uint	(ssize_t n,
+int	alx_matrix_subtraction_uint	(ptrdiff_t n,
 					unsigned dest[n],
 					const unsigned src1[n],
 					const unsigned src2[n]);
-int	alx_matrix_subtraction_int	(ssize_t n,
+int	alx_matrix_subtraction_int	(ptrdiff_t n,
 					int dest[n],
 					const int src1[n],
 					const int src2[n]);
-int	alx_matrix_subtraction_u8	(ssize_t n,
+int	alx_matrix_subtraction_u8	(ptrdiff_t n,
 					uint8_t dest[n],
 					const uint8_t src1[n],
 					const uint8_t src2[n]);
-int	alx_matrix_subtraction_s8	(ssize_t n,
+int	alx_matrix_subtraction_s8	(ptrdiff_t n,
 					int8_t dest[n],
 					const int8_t src1[n],
 					const int8_t src2[n]);
-int	alx_matrix_subtraction_u16	(ssize_t n,
+int	alx_matrix_subtraction_u16	(ptrdiff_t n,
 					uint16_t dest[n],
 					const uint16_t src1[n],
 					const uint16_t src2[n]);
-int	alx_matrix_subtraction_s16	(ssize_t n,
+int	alx_matrix_subtraction_s16	(ptrdiff_t n,
 					int16_t dest[n],
 					const int16_t src1[n],
 					const int16_t src2[n]);
-int	alx_matrix_subtraction_u32	(ssize_t n,
+int	alx_matrix_subtraction_u32	(ptrdiff_t n,
 					uint32_t dest[n],
 					const uint32_t src1[n],
 					const uint32_t src2[n]);
-int	alx_matrix_subtraction_s32	(ssize_t n,
+int	alx_matrix_subtraction_s32	(ptrdiff_t n,
 					int32_t dest[n],
 					const int32_t src1[n],
 					const int32_t src2[n]);
-int	alx_matrix_subtraction_u64	(ssize_t n,
+int	alx_matrix_subtraction_u64	(ptrdiff_t n,
 					uint64_t dest[n],
 					const uint64_t src1[n],
 					const uint64_t src2[n]);
-int	alx_matrix_subtraction_s64	(ssize_t n,
+int	alx_matrix_subtraction_s64	(ptrdiff_t n,
 					int64_t dest[n],
 					const int64_t src1[n],
 					const int64_t src2[n]);
@@ -87,15 +86,15 @@ int	alx_matrix_subtraction_s64	(ssize_t n,
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
-static inline	void	alx_matrix_subtraction_ldbl	(ssize_t n,
+static inline	void	alx_matrix_subtraction_ldbl	(ptrdiff_t n,
 					long double dest[n],
 					const long double src1[n],
 					const long double src2[n]);
-static inline	void	alx_matrix_subtraction		(ssize_t n,
+static inline	void	alx_matrix_subtraction		(ptrdiff_t n,
 					double dest[n],
 					const double src1[n],
 					const double src2[n]);
-static inline	void	alx_matrix_subtraction_flt	(ssize_t n,
+static inline	void	alx_matrix_subtraction_flt	(ptrdiff_t n,
 					float dest[n],
 					const float src1[n],
 					const float src2[n]);
@@ -105,35 +104,35 @@ static inline	void	alx_matrix_subtraction_flt	(ssize_t n,
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
 static inline
-void	alx_matrix_subtraction_ldbl	(ssize_t n,
+void	alx_matrix_subtraction_ldbl	(ptrdiff_t n,
 					long double dest[n],
 					const long double src1[n],
 					const long double src2[n])
 {
 
-	for (ssize_t i = 0; i < n; i++)
+	for (ptrdiff_t i = 0; i < n; i++)
 		dest[i]	= src1[i] - src2[i];
 }
 
 static inline
-void	alx_matrix_subtraction		(ssize_t n,
+void	alx_matrix_subtraction		(ptrdiff_t n,
 					double dest[n],
 					const double src1[n],
 					const double src2[n])
 {
 
-	for (ssize_t i = 0; i < n; i++)
+	for (ptrdiff_t i = 0; i < n; i++)
 		dest[i]	= src1[i] - src2[i];
 }
 
 static inline
-void	alx_matrix_subtraction_flt	(ssize_t n,
+void	alx_matrix_subtraction_flt	(ptrdiff_t n,
 					float dest[n],
 					const float src1[n],
 					const float src2[n])
 {
 
-	for (ssize_t i = 0; i < n; i++)
+	for (ptrdiff_t i = 0; i < n; i++)
 		dest[i]	= src1[i] - src2[i];
 }
 

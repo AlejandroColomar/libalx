@@ -10,7 +10,6 @@
 #include "libalx/math/prime_defactorization.h"
 
 #include "libalx/math/prime.h"
-#include "libalx/stddef/ssizeof.h"
 
 
 /******************************************************************************

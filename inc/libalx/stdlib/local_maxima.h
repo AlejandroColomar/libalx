@@ -17,6 +17,8 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#include <sys/types.h>
+
 
 /******************************************************************************
  ******* macros ***************************************************************
@@ -41,43 +43,43 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
-void	alx_local_maxima_ldbl	(int rows, int cols,
+void	alx_local_maxima_ldbl	(ssize_t rows, ssize_t cols,
 				const long double arr_in[restrict rows][cols],
 				bool arr_out[restrict rows][cols]);
-void	alx_local_maxima	(int rows, int cols,
+void	alx_local_maxima	(ssize_t rows, ssize_t cols,
 				const double arr_in[restrict rows][cols],
 				bool arr_out[restrict rows][cols]);
-void	alx_local_maxima_f	(int rows, int cols,
+void	alx_local_maxima_f	(ssize_t rows, ssize_t cols,
 				const float arr_in[restrict rows][cols],
 				bool arr_out[restrict rows][cols]);
-void	alx_local_maxima_uint	(int rows, int cols,
+void	alx_local_maxima_uint	(ssize_t rows, ssize_t cols,
 				const unsigned arr_in[restrict rows][cols],
 				bool arr_out[restrict rows][cols]);
-void	alx_local_maxima_int	(int rows, int cols,
+void	alx_local_maxima_int	(ssize_t rows, ssize_t cols,
 				const int arr_in[restrict rows][cols],
 				bool arr_out[restrict rows][cols]);
-void	alx_local_maxima_u8	(int rows, int cols,
+void	alx_local_maxima_u8	(ssize_t rows, ssize_t cols,
 				const uint8_t arr_in[restrict rows][cols],
 				bool arr_out[restrict rows][cols]);
-void	alx_local_maxima_s8	(int rows, int cols,
+void	alx_local_maxima_s8	(ssize_t rows, ssize_t cols,
 				const int8_t arr_in[restrict rows][cols],
 				bool arr_out[restrict rows][cols]);
-void	alx_local_maxima_u16	(int rows, int cols,
+void	alx_local_maxima_u16	(ssize_t rows, ssize_t cols,
 				const uint16_t arr_in[restrict rows][cols],
 				bool arr_out[restrict rows][cols]);
-void	alx_local_maxima_s16	(int rows, int cols,
+void	alx_local_maxima_s16	(ssize_t rows, ssize_t cols,
 				const int16_t arr_in[restrict rows][cols],
 				bool arr_out[restrict rows][cols]);
-void	alx_local_maxima_u32	(int rows, int cols,
+void	alx_local_maxima_u32	(ssize_t rows, ssize_t cols,
 				const uint32_t arr_in[restrict rows][cols],
 				bool arr_out[restrict rows][cols]);
-void	alx_local_maxima_s32	(int rows, int cols,
+void	alx_local_maxima_s32	(ssize_t rows, ssize_t cols,
 				const int32_t arr_in[restrict rows][cols],
 				bool arr_out[restrict rows][cols]);
-void	alx_local_maxima_u64	(int rows, int cols,
+void	alx_local_maxima_u64	(ssize_t rows, ssize_t cols,
 				const uint64_t arr_in[restrict rows][cols],
 				bool arr_out[restrict rows][cols]);
-void	alx_local_maxima_s64	(int rows, int cols,
+void	alx_local_maxima_s64	(ssize_t rows, ssize_t cols,
 				const int64_t arr_in[restrict rows][cols],
 				bool arr_out[restrict rows][cols]);
 

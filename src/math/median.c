@@ -9,11 +9,10 @@
  ******************************************************************************/
 #include "libalx/math/median.h"
 
+#include <stddef.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
-
-#include <sys/types.h>
 
 #include "libalx/stdlib/compare.h"
 
@@ -46,7 +45,7 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-long double	alx_median_ldbl	(ssize_t n, const long double x[restrict n])
+long double	alx_median_ldbl	(ptrdiff_t n, const long double x[restrict n])
 {
 	long double	sorted[n];
 	long double	median;
@@ -62,7 +61,7 @@ long double	alx_median_ldbl	(ssize_t n, const long double x[restrict n])
 	return	median;
 }
 
-double		alx_median	(ssize_t n, const double x[restrict n])
+double		alx_median	(ptrdiff_t n, const double x[restrict n])
 {
 	double	sorted[n];
 	double	median;
@@ -78,7 +77,7 @@ double		alx_median	(ssize_t n, const double x[restrict n])
 	return	median;
 }
 
-float		alx_median_flt	(ssize_t n, const float x[restrict n])
+float		alx_median_flt	(ptrdiff_t n, const float x[restrict n])
 {
 	float	sorted[n];
 	float	median;
@@ -94,7 +93,7 @@ float		alx_median_flt	(ssize_t n, const float x[restrict n])
 	return	median;
 }
 
-double		alx_median_uint	(ssize_t n, const unsigned x[restrict n])
+double		alx_median_uint	(ptrdiff_t n, const unsigned x[restrict n])
 {
 	unsigned	sorted[n];
 	double		median;
@@ -110,7 +109,7 @@ double		alx_median_uint	(ssize_t n, const unsigned x[restrict n])
 	return	median;
 }
 
-double		alx_median_int	(ssize_t n, const int x[restrict n])
+double		alx_median_int	(ptrdiff_t n, const int x[restrict n])
 {
 	int	sorted[n];
 	double	median;
@@ -126,7 +125,7 @@ double		alx_median_int	(ssize_t n, const int x[restrict n])
 	return	median;
 }
 
-double		alx_median_u8	(ssize_t n, const uint8_t x[restrict n])
+double		alx_median_u8	(ptrdiff_t n, const uint8_t x[restrict n])
 {
 	uint8_t	sorted[n];
 	double	median;
@@ -142,7 +141,7 @@ double		alx_median_u8	(ssize_t n, const uint8_t x[restrict n])
 	return	median;
 }
 
-double		alx_median_s8	(ssize_t n, const int8_t x[restrict n])
+double		alx_median_s8	(ptrdiff_t n, const int8_t x[restrict n])
 {
 	int8_t	sorted[n];
 	double	median;
@@ -158,7 +157,7 @@ double		alx_median_s8	(ssize_t n, const int8_t x[restrict n])
 	return	median;
 }
 
-double		alx_median_u16	(ssize_t n, const uint16_t x[restrict n])
+double		alx_median_u16	(ptrdiff_t n, const uint16_t x[restrict n])
 {
 	uint16_t	sorted[n];
 	double		median;
@@ -174,7 +173,7 @@ double		alx_median_u16	(ssize_t n, const uint16_t x[restrict n])
 	return	median;
 }
 
-double		alx_median_s16	(ssize_t n, const int16_t x[restrict n])
+double		alx_median_s16	(ptrdiff_t n, const int16_t x[restrict n])
 {
 	int16_t	sorted[n];
 	double	median;
@@ -190,7 +189,7 @@ double		alx_median_s16	(ssize_t n, const int16_t x[restrict n])
 	return	median;
 }
 
-double		alx_median_u32	(ssize_t n, const uint32_t x[restrict n])
+double		alx_median_u32	(ptrdiff_t n, const uint32_t x[restrict n])
 {
 	uint32_t	sorted[n];
 	double		median;
@@ -206,7 +205,7 @@ double		alx_median_u32	(ssize_t n, const uint32_t x[restrict n])
 	return	median;
 }
 
-double		alx_median_s32	(ssize_t n, const int32_t x[restrict n])
+double		alx_median_s32	(ptrdiff_t n, const int32_t x[restrict n])
 {
 	int32_t	sorted[n];
 	double	median;
@@ -222,7 +221,7 @@ double		alx_median_s32	(ssize_t n, const int32_t x[restrict n])
 	return	median;
 }
 
-double		alx_median_u64	(ssize_t n, const uint64_t x[restrict n])
+double		alx_median_u64	(ptrdiff_t n, const uint64_t x[restrict n])
 {
 	uint64_t	sorted[n];
 	double		median;
@@ -238,7 +237,7 @@ double		alx_median_u64	(ssize_t n, const uint64_t x[restrict n])
 	return	median;
 }
 
-double		alx_median_s64	(ssize_t n, const int64_t x[restrict n])
+double		alx_median_s64	(ptrdiff_t n, const int64_t x[restrict n])
 {
 	int64_t	sorted[n];
 	double	median;

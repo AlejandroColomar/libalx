@@ -20,7 +20,7 @@ MATH_OBJ	=							\
 		$(TMP_DIR)/math/prime_factorization.o			\
 		$(TMP_DIR)/math/scale_linear.o
 STDDEF_OBJ	=							\
-		$(TMP_DIR)/stddef/ssizeof.o
+		$(TMP_DIR)/stddef/size.o
 STDINT_OBJ	=							\
 		$(TMP_DIR)/stdint/constants.o				\
 		$(TMP_DIR)/stdint/int128.o

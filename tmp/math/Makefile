@@ -102,15 +102,14 @@ PRIME_SRC	=							\
 
 PRIME_DEFACTORIZATION_INC	=					\
 		$(INC_DIR)/libalx/math/prime_defactorization.h		\
-		$(INC_DIR)/libalx/math/prime.h				\
-		$(INC_DIR)/libalx/stddef/ssizeof.h
-PRIME_DEFACTORZATION_SRC	=					\
+		$(INC_DIR)/libalx/math/prime.h
+PRIME_DEFACTORIZATION_SRC	=					\
 		$(SRC_DIR)/math/prime_defactorization.c
 
 PRIME_FACTORIZATION_INC	=						\
 		$(INC_DIR)/libalx/math/prime_factorization.h		\
 		$(INC_DIR)/libalx/math/prime.h
-PRIME_FACTORZATION_SRC	=						\
+PRIME_FACTORIZATION_SRC	=						\
 		$(SRC_DIR)/math/prime_factorization.c
 
 SCALE_LINEAR_INC	=						\
@@ -203,14 +202,14 @@ prime.o: prime.s
 	@echo	"	AS	libalx/tmp/math/$@"
 	$(Q)$(AS) $< -o $@
 
-prime_defactorization.s: $(PRIME_DEFACTORZATION_SRC) $(PRIME_DEFACTORZATION_INC)
+prime_defactorization.s: $(PRIME_DEFACTORIZATION_SRC) $(PRIME_DEFACTORIZATION_INC)
 	@echo	"	CC	libalx/tmp/math/$@"
 	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
 prime_defactorization.o: prime_defactorization.s
 	@echo	"	AS	libalx/tmp/math/$@"
 	$(Q)$(AS) $< -o $@
 
-prime_factorization.s: $(PRIME_FACTORZATION_SRC) $(PRIME_FACTORZATION_INC)
+prime_factorization.s: $(PRIME_FACTORIZATION_SRC) $(PRIME_FACTORIZATION_INC)
 	@echo	"	CC	libalx/tmp/math/$@"
 	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
 prime_factorization.o: prime_factorization.s

@@ -19,6 +19,7 @@
 #include "libalx/math/prime.h"
 #include "libalx/math/prime_defactorization.h"
 #include "libalx/math/prime_factorization.h"
+#include "libalx/stddef/size.h"
 
 
 /******************************************************************************
@@ -123,9 +124,9 @@ int		alx_pascal_triangle_factorized	(int16_t n, int16_t k,
 
 	for (int_fast16_t i = 0; i < k; i++) {
 		alx_prime_factorization_s16(i + 1, &tmp);
-		alx_matrix_subtraction_s8(sizeof(*pf), *pf, *pf, tmp);
+		alx_matrix_subtraction_s8(ARRAY_SIZE(*pf), *pf, *pf, tmp);
 		alx_prime_factorization_s16(n - i, &tmp);
-		alx_matrix_addition_s8(sizeof(*pf), *pf, *pf, tmp);
+		alx_matrix_addition_s8(ARRAY_SIZE(*pf), *pf, *pf, tmp);
 	}
 
 	return	0;

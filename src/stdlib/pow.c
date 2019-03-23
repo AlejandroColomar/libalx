@@ -61,7 +61,7 @@ uint8_t		alx_pow_u8	(uint8_t base, uint8_t exp)
 		result *= base_;
 	exp >>= 1;
 	while (exp) {
-		if (base_ > SQRT_UINT8_MAX)
+		if (base_ > SQRT_U8_MAX)
 			return	0;
 		base_ *= base_;
 		if (exp & 1)
@@ -91,7 +91,7 @@ int8_t		alx_pow_s8	(int8_t base, uint8_t exp)
 		result *= base_;
 	exp >>= 1;
 	while (exp) {
-		if (base_ > SQRT_INT8_MAX)
+		if (base_ > SQRT_S8_MAX)
 			return	0;
 		base_ *= base_;
 		if (exp & 1)
@@ -121,7 +121,7 @@ uint16_t	alx_pow_u16	(uint16_t base, uint8_t exp)
 		result *= base_;
 	exp >>= 1;
 	while (exp) {
-		if (base_ > SQRT_UINT16_MAX)
+		if (base_ > SQRT_U16_MAX)
 			return	0;
 		base_ *= base_;
 		if (exp & 1)
@@ -151,7 +151,7 @@ int16_t		alx_pow_s16	(int16_t base, uint8_t exp)
 		result *= base_;
 	exp >>= 1;
 	while (exp) {
-		if (base_ > SQRT_INT16_MAX)
+		if (base_ > SQRT_S16_MAX)
 			return	0;
 		base_ *= base_;
 		if (exp & 1)
@@ -181,7 +181,7 @@ uint32_t	alx_pow_u32	(uint32_t base, uint8_t exp)
 		result *= base_;
 	exp >>= 1;
 	while (exp) {
-		if (base_ > SQRT_UINT32_MAX)
+		if (base_ > SQRT_U32_MAX)
 			return	0;
 		base_ *= base_;
 		if (exp & 1)
@@ -211,7 +211,7 @@ int32_t		alx_pow_s32	(int32_t base, uint8_t exp)
 		result *= base_;
 	exp >>= 1;
 	while (exp) {
-		if (base_ > SQRT_INT32_MAX)
+		if (base_ > SQRT_S32_MAX)
 			return	0;
 		base_ *= base_;
 		if (exp & 1)
@@ -241,7 +241,7 @@ uint64_t	alx_pow_u64	(uint64_t base, uint8_t exp)
 		result *= base_;
 	exp >>= 1;
 	while (exp) {
-		if (base_ > SQRT_UINT64_MAX)
+		if (base_ > SQRT_U64_MAX)
 			return	0;
 		base_ *= base_;
 		if (exp & 1)
@@ -271,7 +271,7 @@ int64_t		alx_pow_s64	(int64_t base, uint8_t exp)
 		result *= base_;
 	exp >>= 1;
 	while (exp) {
-		if (base_ > SQRT_INT64_MAX)
+		if (base_ > SQRT_S64_MAX)
 			return	0;
 		base_ *= base_;
 		if (exp & 1)

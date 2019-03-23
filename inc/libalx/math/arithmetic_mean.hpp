@@ -14,9 +14,8 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include <cstddef>
 #include <cstdint>
-
-#include <sys/types.h>
 
 
 /******************************************************************************
@@ -44,31 +43,31 @@
  ******************************************************************************/
 extern	"C"
 {
-long double	alx_arithmetic_mean_ldbl(ssize_t n,
+long double	alx_arithmetic_mean_ldbl(ptrdiff_t n,
 					const long double arr[restrict]);
-double		alx_arithmetic_mean	(ssize_t n,
+double		alx_arithmetic_mean	(ptrdiff_t n,
 					const double arr[restrict]);
-float		alx_arithmetic_mean_flt	(ssize_t n,
+float		alx_arithmetic_mean_flt	(ptrdiff_t n,
 					const float arr[restrict]);
-double		alx_arithmetic_mean_uint(ssize_t n,
+double		alx_arithmetic_mean_uint(ptrdiff_t n,
 					const unsigned arr[restrict]);
-double		alx_arithmetic_mean_int	(ssize_t n,
+double		alx_arithmetic_mean_int	(ptrdiff_t n,
 					const int arr[restrict]);
-double		alx_arithmetic_mean_u8	(ssize_t n,
+double		alx_arithmetic_mean_u8	(ptrdiff_t n,
 					const uint8_t arr[restrict]);
-double		alx_arithmetic_mean_s8	(ssize_t n,
+double		alx_arithmetic_mean_s8	(ptrdiff_t n,
 					const int8_t arr[restrict]);
-double		alx_arithmetic_mean_u16	(ssize_t n,
+double		alx_arithmetic_mean_u16	(ptrdiff_t n,
 					const uint16_t arr[restrict]);
-double		alx_arithmetic_mean_s16	(ssize_t n,
+double		alx_arithmetic_mean_s16	(ptrdiff_t n,
 					const int16_t arr[restrict]);
-double		alx_arithmetic_mean_u32	(ssize_t n,
+double		alx_arithmetic_mean_u32	(ptrdiff_t n,
 					const uint32_t arr[restrict]);
-double		alx_arithmetic_mean_s32	(ssize_t n,
+double		alx_arithmetic_mean_s32	(ptrdiff_t n,
 					const int32_t arr[restrict]);
-double		alx_arithmetic_mean_u64	(ssize_t n,
+double		alx_arithmetic_mean_u64	(ptrdiff_t n,
 					const uint64_t arr[restrict]);
-double		alx_arithmetic_mean_s64	(ssize_t n,
+double		alx_arithmetic_mean_s64	(ptrdiff_t n,
 					const int64_t arr[restrict]);
 }
 

@@ -9,11 +9,14 @@
  ******************************************************************************/
 #include "libalx/stdlib/local_maxima.h"
 
+#include <errno.h>
+#include <limits.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <string.h>
 
 #include <sys/types.h>
+#include <unistd.h>
 
 
 /******************************************************************************
@@ -49,11 +52,16 @@ enum	Cell {
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-void	alx_local_maxima_ldbl	(int rows, int cols,
+void	alx_local_maxima_ldbl	(ssize_t rows, ssize_t cols,
 				const long double arr_in[restrict rows][cols],
 				bool arr_out[restrict rows][cols])
 {
 
+	if ((rows >= (SSIZE_MAX - 1))  ||  (cols >= (SSIZE_MAX - 1))) {
+		errno	= EOVERFLOW;
+		return;
+	}
+
 	memset(arr_out, 0, rows * cols * sizeof(arr_out[0][0]));
 
 	for (ssize_t i = 0; i < rows; i++) {
@@ -80,11 +88,16 @@ not_maxima:
 	}
 }
 
-void	alx_local_maxima	(int rows, int cols,
+void	alx_local_maxima	(ssize_t rows, ssize_t cols,
 				const double arr_in[restrict rows][cols],
 				bool arr_out[restrict rows][cols])
 {
 
+	if ((rows >= (SSIZE_MAX - 1))  ||  (cols >= (SSIZE_MAX - 1))) {
+		errno	= EOVERFLOW;
+		return;
+	}
+
 	memset(arr_out, 0, rows * cols * sizeof(arr_out[0][0]));
 
 	for (ssize_t i = 0; i < rows; i++) {
@@ -111,11 +124,16 @@ not_maxima:
 	}
 }
 
-void	alx_local_maxima_f	(int rows, int cols,
+void	alx_local_maxima_f	(ssize_t rows, ssize_t cols,
 				const float arr_in[restrict rows][cols],
 				bool arr_out[restrict rows][cols])
 {
 
+	if ((rows >= (SSIZE_MAX - 1))  ||  (cols >= (SSIZE_MAX - 1))) {
+		errno	= EOVERFLOW;
+		return;
+	}
+
 	memset(arr_out, 0, rows * cols * sizeof(arr_out[0][0]));
 
 	for (ssize_t i = 0; i < rows; i++) {
@@ -142,13 +160,18 @@ not_maxima:
 	}
 }
 
-void	alx_local_maxima_uint	(int rows, int cols,
+void	alx_local_maxima_uint	(ssize_t rows, ssize_t cols,
 				const unsigned arr_in[restrict rows][cols],
 				bool arr_out[restrict rows][cols])
 {
 	int	arr_tmp[rows][cols];
 	bool	wh;
 
+	if ((rows >= (SSIZE_MAX - 1))  ||  (cols >= (SSIZE_MAX - 1))) {
+		errno	= EOVERFLOW;
+		return;
+	}
+
 	memset(arr_tmp, 0, sizeof(arr_tmp));
 
 	for (ssize_t i = 0; i < rows; i++) {
@@ -214,13 +237,18 @@ not_maxima_2:
 	}
 }
 
-void	alx_local_maxima_int	(int rows, int cols,
+void	alx_local_maxima_int	(ssize_t rows, ssize_t cols,
 				const int arr_in[restrict rows][cols],
 				bool arr_out[restrict rows][cols])
 {
 	int	arr_tmp[rows][cols];
 	bool	wh;
 
+	if ((rows >= (SSIZE_MAX - 1))  ||  (cols >= (SSIZE_MAX - 1))) {
+		errno	= EOVERFLOW;
+		return;
+	}
+
 	memset(arr_tmp, 0, sizeof(arr_tmp));
 
 	for (ssize_t i = 0; i < rows; i++) {
@@ -286,13 +314,18 @@ not_maxima_2:
 	}
 }
 
-void	alx_local_maxima_u8	(int rows, int cols,
+void	alx_local_maxima_u8	(ssize_t rows, ssize_t cols,
 				const uint8_t arr_in[restrict rows][cols],
 				bool arr_out[restrict rows][cols])
 {
 	int	arr_tmp[rows][cols];
 	bool	wh;
 
+	if ((rows >= (SSIZE_MAX - 1))  ||  (cols >= (SSIZE_MAX - 1))) {
+		errno	= EOVERFLOW;
+		return;
+	}
+
 	memset(arr_tmp, 0, sizeof(arr_tmp));
 
 	for (ssize_t i = 0; i < rows; i++) {
@@ -358,13 +391,18 @@ not_maxima_2:
 	}
 }
 
-void	alx_local_maxima_s8	(int rows, int cols,
+void	alx_local_maxima_s8	(ssize_t rows, ssize_t cols,
 				const int8_t arr_in[restrict rows][cols],
 				bool arr_out[restrict rows][cols])
 {
 	int	arr_tmp[rows][cols];
 	bool	wh;
 
+	if ((rows >= (SSIZE_MAX - 1))  ||  (cols >= (SSIZE_MAX - 1))) {
+		errno	= EOVERFLOW;
+		return;
+	}
+
 	memset(arr_tmp, 0, sizeof(arr_tmp));
 
 	for (ssize_t i = 0; i < rows; i++) {
@@ -430,13 +468,18 @@ not_maxima_2:
 	}
 }
 
-void	alx_local_maxima_u16	(int rows, int cols,
+void	alx_local_maxima_u16	(ssize_t rows, ssize_t cols,
 				const uint16_t arr_in[restrict rows][cols],
 				bool arr_out[restrict rows][cols])
 {
 	int	arr_tmp[rows][cols];
 	bool	wh;
 
+	if ((rows >= (SSIZE_MAX - 1))  ||  (cols >= (SSIZE_MAX - 1))) {
+		errno	= EOVERFLOW;
+		return;
+	}
+
 	memset(arr_tmp, 0, sizeof(arr_tmp));
 
 	for (ssize_t i = 0; i < rows; i++) {
@@ -502,13 +545,18 @@ not_maxima_2:
 	}
 }
 
-void	alx_local_maxima_s16	(int rows, int cols,
+void	alx_local_maxima_s16	(ssize_t rows, ssize_t cols,
 				const int16_t arr_in[restrict rows][cols],
 				bool arr_out[restrict rows][cols])
 {
 	int	arr_tmp[rows][cols];
 	bool	wh;
 
+	if ((rows >= (SSIZE_MAX - 1))  ||  (cols >= (SSIZE_MAX - 1))) {
+		errno	= EOVERFLOW;
+		return;
+	}
+
 	memset(arr_tmp, 0, sizeof(arr_tmp));
 
 	for (ssize_t i = 0; i < rows; i++) {
@@ -574,13 +622,18 @@ not_maxima_2:
 	}
 }
 
-void	alx_local_maxima_u32	(int rows, int cols,
+void	alx_local_maxima_u32	(ssize_t rows, ssize_t cols,
 				const uint32_t arr_in[restrict rows][cols],
 				bool arr_out[restrict rows][cols])
 {
 	int	arr_tmp[rows][cols];
 	bool	wh;
 
+	if ((rows >= (SSIZE_MAX - 1))  ||  (cols >= (SSIZE_MAX - 1))) {
+		errno	= EOVERFLOW;
+		return;
+	}
+
 	memset(arr_tmp, 0, sizeof(arr_tmp));
 
 	for (ssize_t i = 0; i < rows; i++) {
@@ -646,13 +699,18 @@ not_maxima_2:
 	}
 }
 
-void	alx_local_maxima_s32	(int rows, int cols,
+void	alx_local_maxima_s32	(ssize_t rows, ssize_t cols,
 				const int32_t arr_in[restrict rows][cols],
 				bool arr_out[restrict rows][cols])
 {
 	int	arr_tmp[rows][cols];
 	bool	wh;
 
+	if ((rows >= (SSIZE_MAX - 1))  ||  (cols >= (SSIZE_MAX - 1))) {
+		errno	= EOVERFLOW;
+		return;
+	}
+
 	memset(arr_tmp, 0, sizeof(arr_tmp));
 
 	for (ssize_t i = 0; i < rows; i++) {
@@ -718,13 +776,18 @@ not_maxima_2:
 	}
 }
 
-void	alx_local_maxima_u64	(int rows, int cols,
+void	alx_local_maxima_u64	(ssize_t rows, ssize_t cols,
 				const uint64_t arr_in[restrict rows][cols],
 				bool arr_out[restrict rows][cols])
 {
 	int	arr_tmp[rows][cols];
 	bool	wh;
 
+	if ((rows >= (SSIZE_MAX - 1))  ||  (cols >= (SSIZE_MAX - 1))) {
+		errno	= EOVERFLOW;
+		return;
+	}
+
 	memset(arr_tmp, 0, sizeof(arr_tmp));
 
 	for (ssize_t i = 0; i < rows; i++) {
@@ -790,12 +853,17 @@ not_maxima_2:
 	}
 }
 
-void	alx_local_maxima_s64	(int rows, int cols,
+void	alx_local_maxima_s64	(ssize_t rows, ssize_t cols,
 				const int64_t arr_in[restrict rows][cols],
 				bool arr_out[restrict rows][cols])
 {
 	int	arr_tmp[rows][cols];
 	bool	wh;
+
+	if ((rows >= (SSIZE_MAX - 1))  ||  (cols >= (SSIZE_MAX - 1))) {
+		errno	= EOVERFLOW;
+		return;
+	}
 
 	memset(arr_tmp, 0, sizeof(arr_tmp));
 

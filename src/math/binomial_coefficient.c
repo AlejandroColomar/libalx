@@ -19,6 +19,7 @@
 #include "libalx/math/prime.h"
 #include "libalx/math/prime_defactorization.h"
 #include "libalx/math/prime_factorization.h"
+#include "libalx/stddef/size.h"
 
 
 /******************************************************************************
@@ -134,9 +135,9 @@ int		alx_binomial_coefficient_factorized	(int16_t n, int16_t k,
 
 	do {
 		alx_prime_factorization_s16(j++, &tmp);
-		alx_matrix_subtraction_s8(sizeof(*pf), *pf, *pf, tmp);
+		alx_matrix_subtraction_s8(ARRAY_SIZE(*pf), *pf, *pf, tmp);
 		alx_prime_factorization_s16(m--, &tmp);
-		alx_matrix_addition_s8(sizeof(*pf), *pf, *pf, tmp);
+		alx_matrix_addition_s8(ARRAY_SIZE(*pf), *pf, *pf, tmp);
 	} while (j < k);
 
 	return	0;

@@ -14,9 +14,8 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include <cstddef>
 #include <cstdint>
-
-#include <sys/types.h>
 
 
 /******************************************************************************
@@ -44,19 +43,19 @@
  ******************************************************************************/
 extern	"C"
 {
-long double	alx_median_ldbl	(ssize_t n, const long double x[restrict]);
-double		alx_median	(ssize_t n, const double x[restrict]);
-float		alx_median_flt	(ssize_t n, const float x[restrict]);
-double		alx_median_uint	(ssize_t n, const unsigned x[restrict]);
-double		alx_median_int	(ssize_t n, const int x[restrict]);
-double		alx_median_u8	(ssize_t n, const uint8_t x[restrict]);
-double		alx_median_s8	(ssize_t n, const int8_t x[restrict]);
-double		alx_median_u16	(ssize_t n, const uint16_t x[restrict]);
-double		alx_median_s16	(ssize_t n, const int16_t x[restrict]);
-double		alx_median_u32	(ssize_t n, const uint32_t x[restrict]);
-double		alx_median_s32	(ssize_t n, const int32_t x[restrict]);
-double		alx_median_u64	(ssize_t n, const uint64_t x[restrict]);
-double		alx_median_s64	(ssize_t n, const int64_t x[restrict]);
+long double	alx_median_ldbl	(ptrdiff_t n, const long double x[restrict]);
+double		alx_median	(ptrdiff_t n, const double x[restrict]);
+float		alx_median_flt	(ptrdiff_t n, const float x[restrict]);
+double		alx_median_uint	(ptrdiff_t n, const unsigned x[restrict]);
+double		alx_median_int	(ptrdiff_t n, const int x[restrict]);
+double		alx_median_u8	(ptrdiff_t n, const uint8_t x[restrict]);
+double		alx_median_s8	(ptrdiff_t n, const int8_t x[restrict]);
+double		alx_median_u16	(ptrdiff_t n, const uint16_t x[restrict]);
+double		alx_median_s16	(ptrdiff_t n, const int16_t x[restrict]);
+double		alx_median_u32	(ptrdiff_t n, const uint32_t x[restrict]);
+double		alx_median_s32	(ptrdiff_t n, const int32_t x[restrict]);
+double		alx_median_u64	(ptrdiff_t n, const uint64_t x[restrict]);
+double		alx_median_s64	(ptrdiff_t n, const int64_t x[restrict]);
 }
 
 
