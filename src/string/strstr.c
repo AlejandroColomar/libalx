@@ -10,9 +10,8 @@
 #include "libalx/string/strstr.h"
 
 #include <ctype.h>
+#include <stddef.h>
 #include <string.h>
-
-#include <sys/types.h>
 
 
 /******************************************************************************
@@ -43,7 +42,7 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-ssize_t	alx_strncasestr		(ssize_t buff_size,
+ptrdiff_t	alx_strncasestr		(ptrdiff_t buff_size,
 					const char str[restrict buff_size],
 					const char pattern[restrict])
 {
@@ -56,12 +55,12 @@ ssize_t	alx_strncasestr		(ssize_t buff_size,
 	if (!pattern[0])
 		return	0;
 
-	for (ssize_t i = 0; i < buff_size; i++) {
+	for (ptrdiff_t i = 0; i < buff_size; i++) {
 		str_lower[i]	= tolower(str[i]);
 		if (!str_lower[i])
 			break;
 	}
-	for (ssize_t i = 0; i < buff_size; i++) {
+	for (ptrdiff_t i = 0; i < buff_size; i++) {
 		pat_lower[i]	= tolower(pattern[i]);
 		if (!pat_lower[i])
 			break;

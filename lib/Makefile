@@ -40,7 +40,7 @@ STRING_OBJ	=							\
 		$(TMP_DIR)/string/strstr.o
 IO_OBJ		=							\
 		$(TMP_DIR)/io/alx_input.o				\
-		$(TMP_DIR)/io/alx_file.o
+		$(TMP_DIR)/io/sprint_file.o
 CURSES_OBJ	=							\
 		$(TMP_DIR)/curses/alx_ncur.o
 

@@ -12,13 +12,13 @@
 ################################################################################
 # dependencies
 OBJ		=							\
-		alx_file.o						\
+		sprint_file.o						\
 		alx_input.o
 
-FILE_INC	=							\
-		$(INC_DIR)/libalx/io/alx_file.h
-FILE_SRC	=							\
-		$(SRC_DIR)/io/alx_file.c
+SPRINT_FILE_INC	=							\
+		$(INC_DIR)/libalx/io/sprint_file.h
+SPRINT_FILE_SRC	=							\
+		$(SRC_DIR)/io/sprint_file.c
 
 INPUT_INC	=							\
 		$(INC_DIR)/libalx/io/alx_input.h
@@ -33,10 +33,10 @@ PHONY := all
 all: $(OBJ)
 
 
-alx_file.s: $(FILE_SRC) $(FILE_INC)
+sprint_file.s: $(SPRINT_FILE_SRC) $(SPRINT_FILE_INC)
 	@echo	"	CC	libalx/tmp/io/$@"
 	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
-alx_file.o: alx_file.s
+sprint_file.o: sprint_file.s
 	@echo	"	AS	libalx/tmp/io/$@"
 	$(Q)$(AS) $< -o $@
 

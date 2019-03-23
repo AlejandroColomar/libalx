@@ -44,11 +44,6 @@
 #define S32_MAX		((int32_t)(U32_MAX >> 1))
 #define S32_MIN		((int32_t)(-S32_MAX - 1))
 
-#define SZ_MAX		((size_t)SIZE_MAX)
-#define RSZ_MAX		((rsize_t)RSIZE_MAX)
-#define SSZ_MAX		((ssize_t)SSIZE_MAX)
-#define SSZ_MIN		((ssize_t)-1)
-
 #define SQRT_U8_MAX	((uint8_t)0xF)
 #define SQRT_S8_MAX	((int8_t)0xB)
 

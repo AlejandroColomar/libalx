@@ -55,7 +55,8 @@ BINOMIAL_COEFFICIENT_INC	=					\
 		$(INC_DIR)/libalx/math/matrix_subtraction.h		\
 		$(INC_DIR)/libalx/math/prime.h				\
 		$(INC_DIR)/libalx/math/prime_defactorization.h		\
-		$(INC_DIR)/libalx/math/prime_factorization.h
+		$(INC_DIR)/libalx/math/prime_factorization.h		\
+		$(INC_DIR)/libalx/stddef/size.h
 BINOMIAL_COEFFICIENT_SRC	=					\
 		$(SRC_DIR)/math/binomial_coefficient.c
 
@@ -64,7 +65,8 @@ FACTORIAL_INC	=							\
 		$(INC_DIR)/libalx/math/matrix_addition.h		\
 		$(INC_DIR)/libalx/math/prime.h				\
 		$(INC_DIR)/libalx/math/prime_defactorization.h		\
-		$(INC_DIR)/libalx/math/prime_factorization.h
+		$(INC_DIR)/libalx/math/prime_factorization.h		\
+		$(INC_DIR)/libalx/stddef/size.h
 FACTORIAL_SRC	=							\
 		$(SRC_DIR)/math/factorial.c
 
@@ -90,7 +92,8 @@ PASCAL_TRIANGLE_INC	=						\
 		$(INC_DIR)/libalx/math/matrix_subtraction.h		\
 		$(INC_DIR)/libalx/math/prime.h				\
 		$(INC_DIR)/libalx/math/prime_defactorization.h		\
-		$(INC_DIR)/libalx/math/prime_factorization.h
+		$(INC_DIR)/libalx/math/prime_factorization.h		\
+		$(INC_DIR)/libalx/stddef/size.h
 PASCAL_TRIANGLE_SRC	=						\
 		$(SRC_DIR)/math/pascal_triangle.c
 
@@ -102,7 +105,8 @@ PRIME_SRC	=							\
 
 PRIME_DEFACTORIZATION_INC	=					\
 		$(INC_DIR)/libalx/math/prime_defactorization.h		\
-		$(INC_DIR)/libalx/math/prime.h
+		$(INC_DIR)/libalx/math/prime.h				\
+		$(INC_DIR)/libalx/stddef/size.h
 PRIME_DEFACTORIZATION_SRC	=					\
 		$(SRC_DIR)/math/prime_defactorization.c
 

@@ -14,9 +14,8 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include <stddef.h>
 #include <string.h>
-
-#include <sys/types.h>
 
 
 /******************************************************************************
@@ -42,35 +41,35 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
-ssize_t	alx_strnfgrep		(ssize_t size,
+ptrdiff_t	alx_strnfgrep		(ptrdiff_t size,
 					char dest[restrict size],
 					const char src[restrict size],
 					const char pattern[restrict]);
-ssize_t	alx_strlfgrep		(ssize_t size,
+ptrdiff_t	alx_strlfgrep		(ptrdiff_t size,
 					char dest[restrict size],
 					const char src[restrict size],
 					const char pattern[restrict]);
-ssize_t	alx_strncasefgrep	(ssize_t size,
+ptrdiff_t	alx_strncasefgrep	(ptrdiff_t size,
 					char dest[restrict size],
 					const char src[restrict size],
 					const char pattern[restrict]);
-ssize_t	alx_strlcasefgrep	(ssize_t size,
+ptrdiff_t	alx_strlcasefgrep	(ptrdiff_t size,
 					char dest[restrict size],
 					const char src[restrict size],
 					const char pattern[restrict]);
-ssize_t	alx_strnfgrepv		(ssize_t size,
+ptrdiff_t	alx_strnfgrepv		(ptrdiff_t size,
 					char dest[restrict size],
 					const char src[restrict size],
 					const char pattern[restrict]);
-ssize_t	alx_strlfgrepv		(ssize_t size,
+ptrdiff_t	alx_strlfgrepv		(ptrdiff_t size,
 					char dest[restrict size],
 					const char src[restrict size],
 					const char pattern[restrict]);
-ssize_t	alx_strncasefgrepv	(ssize_t size,
+ptrdiff_t	alx_strncasefgrepv	(ptrdiff_t size,
 					char dest[restrict size],
 					const char src[restrict size],
 					const char pattern[restrict]);
-ssize_t	alx_strlcasefgrepv	(ssize_t size,
+ptrdiff_t	alx_strlcasefgrepv	(ptrdiff_t size,
 					char dest[restrict size],
 					const char src[restrict size],
 					const char pattern[restrict]);

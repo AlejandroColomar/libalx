@@ -14,9 +14,8 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include <stddef.h>
 #include <string.h>
-
-#include <sys/types.h>
 
 
 /******************************************************************************
@@ -47,14 +46,14 @@
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
-static inline	ssize_t	alx_strnchr	(ssize_t size,
+static inline	ptrdiff_t	alx_strnchr	(ptrdiff_t size,
 					const char str[restrict size], char c);
 /* Missing memrchr() */
 #if 0
-static inline	ssize_t	alx_strnrchr	(const char *restrict str,
-					char c, ssize_t size);
+static inline	ptrdiff_t	alx_strnrchr	(ptrdiff_t size,
+					const char str[restrict size], char c);
 #endif
-static inline	ssize_t	alx_strnchrnul	(ssize_t size,
+static inline	ptrdiff_t	alx_strnchrnul	(ptrdiff_t size,
 					const char str[restrict size], char c);
 
 
@@ -62,7 +61,8 @@ static inline	ssize_t	alx_strnchrnul	(ssize_t size,
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
 static inline
-ssize_t	alx_strnchr	(ssize_t size, const char str[restrict size], char c)
+ptrdiff_t	alx_strnchr	(ptrdiff_t size,
+					const char str[restrict size], char c)
 {
 	const char	*p = memchr(str, c, strnlen(str, size));
 
@@ -74,7 +74,8 @@ ssize_t	alx_strnchr	(ssize_t size, const char str[restrict size], char c)
 /* Missing memrchr() */
 #if 0
 static inline
-ssize_t	alx_strnrchr	(const char *restrict str, char c, ssize_t size)
+ptrdiff_t	alx_strnrchr	(ptrdiff_t size,
+					const char str[restrict size], char c)
 {
 	const char	*p = memrchr(str, c, strnlen(str, size));
 
@@ -85,7 +86,8 @@ ssize_t	alx_strnrchr	(const char *restrict str, char c, ssize_t size)
 #endif
 
 static inline
-ssize_t	alx_strnchrnul	(ssize_t size, const char str[restrict size], char c)
+ptrdiff_t	alx_strnchrnul	(ptrdiff_t size,
+					const char str[restrict size], char c)
 {
 	const char	*p = memchr(str, c, strnlen(str, size));
 

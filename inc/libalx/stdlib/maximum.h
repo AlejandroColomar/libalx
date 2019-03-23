@@ -14,9 +14,8 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include <stddef.h>
 #include <stdint.h>
-
-#include <sys/types.h>
 
 
 /******************************************************************************
@@ -42,19 +41,19 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
-ssize_t	alx_maximum_ldbl	(ssize_t n, const long double arr[restrict n]);
-ssize_t	alx_maximum		(ssize_t n, const double arr[restrict n]);
-ssize_t	alx_maximum_f		(ssize_t n, const float arr[restrict n]);
-ssize_t	alx_maximum_uint	(ssize_t n, const unsigned arr[restrict n]);
-ssize_t	alx_maximum_int		(ssize_t n, const int arr[restrict n]);
-ssize_t	alx_maximum_u8		(ssize_t n, const uint8_t arr[restrict n]);
-ssize_t	alx_maximum_s8		(ssize_t n, const int8_t arr[restrict n]);
-ssize_t	alx_maximum_u16		(ssize_t n, const uint16_t arr[restrict n]);
-ssize_t	alx_maximum_s16		(ssize_t n, const int16_t arr[restrict n]);
-ssize_t	alx_maximum_u32		(ssize_t n, const uint32_t arr[restrict n]);
-ssize_t	alx_maximum_s32		(ssize_t n, const int32_t arr[restrict n]);
-ssize_t	alx_maximum_u64		(ssize_t n, const uint64_t arr[restrict n]);
-ssize_t	alx_maximum_s64		(ssize_t n, const int64_t arr[restrict n]);
+ptrdiff_t	alx_maximum_ldbl(ptrdiff_t n, const long double arr[restrict n]);
+ptrdiff_t	alx_maximum	(ptrdiff_t n, const double arr[restrict n]);
+ptrdiff_t	alx_maximum_f	(ptrdiff_t n, const float arr[restrict n]);
+ptrdiff_t	alx_maximum_uint(ptrdiff_t n, const unsigned arr[restrict n]);
+ptrdiff_t	alx_maximum_int	(ptrdiff_t n, const int arr[restrict n]);
+ptrdiff_t	alx_maximum_u8	(ptrdiff_t n, const uint8_t arr[restrict n]);
+ptrdiff_t	alx_maximum_s8	(ptrdiff_t n, const int8_t arr[restrict n]);
+ptrdiff_t	alx_maximum_u16	(ptrdiff_t n, const uint16_t arr[restrict n]);
+ptrdiff_t	alx_maximum_s16	(ptrdiff_t n, const int16_t arr[restrict n]);
+ptrdiff_t	alx_maximum_u32	(ptrdiff_t n, const uint32_t arr[restrict n]);
+ptrdiff_t	alx_maximum_s32	(ptrdiff_t n, const int32_t arr[restrict n]);
+ptrdiff_t	alx_maximum_u64	(ptrdiff_t n, const uint64_t arr[restrict n]);
+ptrdiff_t	alx_maximum_s64	(ptrdiff_t n, const int64_t arr[restrict n]);
 
 
 /******************************************************************************

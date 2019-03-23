@@ -1,21 +1,17 @@
 /******************************************************************************
- *	Copyright (C) 2019	Alejandro Colomar Andrés		      *
+ *	Copyright (C) 2017	Alejandro Colomar Andrés		      *
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* include guard ********************************************************
- ******************************************************************************/
-#ifndef ALX_STRING_STRSTR_H
-#define ALX_STRING_STRSTR_H
-
-
-/******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include "libalx/stdio/sprint_file.h"
+
+#include <errno.h>
 #include <stddef.h>
-#include <string.h>
+#include <stdio.h>
 
 
 /******************************************************************************
@@ -39,27 +35,74 @@
 
 
 /******************************************************************************
- ******* extern functions *****************************************************
+ ******* static functions (prototypes) ****************************************
  ******************************************************************************/
-ptrdiff_t	alx_strncasestr		(ptrdiff_t buff_size,
-					const char str[restrict buff_size],
-					const char pattern[restrict]);
+ptrdiff_t	_snprint_file_getc	(ptrdiff_t size,
+					char dest[restrict size],
+					FILE *fp);
+ptrdiff_t	_snprint_file_fread	(ptrdiff_t size,
+					char dest[restrict size],
+					FILE *fp);
 
 
 /******************************************************************************
- ******* static inline functions (prototypes) *********************************
+ ******* global functions *****************************************************
  ******************************************************************************/
+ptrdiff_t	alx_snprint_file(ptrdiff_t size,
+				char dest[restrict size],
+				const char fpath[restrict FILENAME_MAX])
+{
+	FILE		*fp;
+	ptrdiff_t	len;
+
+	fp	= fopen(fpath, "r");
+	if (!fp)
+		return	-1;
+#if 1
+	_snprint_file_getc(size, dest, fp);
+#else
+	_snprint_file_fread(size, dest, fp);
+#endif
+	fclose(fp);
+
+	return	len;
+}
 
 
 /******************************************************************************
- ******* static inline functions (definitions) ********************************
+ ******* static functions (definitions) ***************************************
  ******************************************************************************/
+ptrdiff_t	_snprint_file_getc	(ptrdiff_t size,
+					char dest[restrict size],
+					FILE *fp)
+{
+	ptrdiff_t	len;
+	int		c;
 
+	for (len = 0; len < size; len++) {
+		c = getc(fp);
+		if (c == EOF) {
+			dest[len] = '\0';
+			break;
+		}
+		dest[len] = c;
+	}
+}
 
-/******************************************************************************
- ******* include guard ********************************************************
- ******************************************************************************/
-#endif		/* libalx/string/strstr.h */
+ptrdiff_t	_snprint_file_fread	(ptrdiff_t size,
+					char dest[restrict size],
+					FILE *fp)
+{
+	ptrdiff_t	len;
+
+	fseek(fp, 0, SEEK_END);
+	len	= ftell(fp);
+	fseek(fp, 0, SEEK_SET);
+
+	fread(buff, sizeof(char), min(len, size), fp);
+	if (len < size)
+		buff[len + 1]	= '\0';
+}
 
 
 /******************************************************************************

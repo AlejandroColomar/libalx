@@ -13,8 +13,6 @@
 #include <stddef.h>
 #include <string.h>
 
-#include <sys/types.h>
-
 #include "libalx/string/strchr.h"
 #include "libalx/string/strstr.h"
 
@@ -42,35 +40,35 @@
 /******************************************************************************
  ******* static functions (prototypes) ****************************************
  ******************************************************************************/
-static	ssize_t	_strnfgrep_line		(ssize_t len,
-					char dest[restrict len],
-					const char src[restrict len],
-					const char pattern[restrict]);
-static	ssize_t	_strncasefgrep_line	(ssize_t len,
-					char dest[restrict len],
-					const char src[restrict len],
-					const char pattern[restrict]);
-static	ssize_t	_strnfgrepv_line	(ssize_t len,
-					char dest[restrict len],
-					const char src[restrict len],
-					const char pattern[restrict]);
-static	ssize_t	_strncasefgrepv_line	(ssize_t len,
-					char dest[restrict len],
-					const char src[restrict len],
-					const char pattern[restrict]);
+static	ptrdiff_t	_strnfgrep_line		(ptrdiff_t len,
+						char dest[restrict len],
+						const char src[restrict len],
+						const char pattern[restrict]);
+static	ptrdiff_t	_strncasefgrep_line	(ptrdiff_t len,
+						char dest[restrict len],
+						const char src[restrict len],
+						const char pattern[restrict]);
+static	ptrdiff_t	_strnfgrepv_line	(ptrdiff_t len,
+						char dest[restrict len],
+						const char src[restrict len],
+						const char pattern[restrict]);
+static	ptrdiff_t	_strncasefgrepv_line	(ptrdiff_t len,
+						char dest[restrict len],
+						const char src[restrict len],
+						const char pattern[restrict]);
 
 
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-ssize_t	alx_strnfgrep		(ssize_t size,
+ptrdiff_t	alx_strnfgrep		(ptrdiff_t size,
 					char dest[restrict size],
 					const char src[restrict size],
 					const char pattern[restrict])
 {
-	ssize_t	pos_dest;
-	ssize_t	pos_src;
-	ssize_t	line_len;
+	ptrdiff_t	pos_dest;
+	ptrdiff_t	pos_src;
+	ptrdiff_t	line_len;
 
 	pos_dest	= 0;
 	pos_src		= 0;
@@ -89,12 +87,12 @@ ssize_t	alx_strnfgrep		(ssize_t size,
 	return	pos_dest;
 }
 
-ssize_t	alx_strlfgrep		(ssize_t size,
+ptrdiff_t	alx_strlfgrep		(ptrdiff_t size,
 					char dest[restrict size],
 					const char src[restrict size],
 					const char pattern[restrict])
 {
-	ssize_t	dest_len;
+	ptrdiff_t	dest_len;
 
 	if (!size)
 		return	0;
@@ -109,14 +107,14 @@ ssize_t	alx_strlfgrep		(ssize_t size,
 	return	dest_len;
 }
 
-ssize_t	alx_strncasefgrep	(ssize_t size,
+ptrdiff_t	alx_strncasefgrep	(ptrdiff_t size,
 					char dest[restrict size],
 					const char src[restrict size],
 					const char pattern[restrict])
 {
-	ssize_t	pos_dest;
-	ssize_t	pos_src;
-	ssize_t	line_len;
+	ptrdiff_t	pos_dest;
+	ptrdiff_t	pos_src;
+	ptrdiff_t	line_len;
 
 	pos_dest	= 0;
 	pos_src		= 0;
@@ -135,12 +133,12 @@ ssize_t	alx_strncasefgrep	(ssize_t size,
 	return	pos_dest;
 }
 
-ssize_t	alx_strlcasefgrep	(ssize_t size,
+ptrdiff_t	alx_strlcasefgrep	(ptrdiff_t size,
 					char dest[restrict size],
 					const char src[restrict size],
 					const char pattern[restrict])
 {
-	ssize_t	dest_len;
+	ptrdiff_t	dest_len;
 
 	if (!size)
 		return	0;
@@ -155,14 +153,14 @@ ssize_t	alx_strlcasefgrep	(ssize_t size,
 	return	dest_len;
 }
 
-ssize_t	alx_strnfgrepv		(ssize_t size,
+ptrdiff_t	alx_strnfgrepv		(ptrdiff_t size,
 					char dest[restrict size],
 					const char src[restrict size],
 					const char pattern[restrict])
 {
-	ssize_t	pos_dest;
-	ssize_t	pos_src;
-	ssize_t	line_len;
+	ptrdiff_t	pos_dest;
+	ptrdiff_t	pos_src;
+	ptrdiff_t	line_len;
 
 	pos_dest	= 0;
 	pos_src		= 0;
@@ -181,12 +179,12 @@ ssize_t	alx_strnfgrepv		(ssize_t size,
 	return	pos_dest;
 }
 
-ssize_t	alx_strlfgrepv		(ssize_t size,
+ptrdiff_t	alx_strlfgrepv		(ptrdiff_t size,
 					char dest[restrict size],
 					const char src[restrict size],
 					const char pattern[restrict])
 {
-	ssize_t	dest_len;
+	ptrdiff_t	dest_len;
 
 	if (!size)
 		return	0;
@@ -201,14 +199,14 @@ ssize_t	alx_strlfgrepv		(ssize_t size,
 	return	dest_len;
 }
 
-ssize_t	alx_strncasefgrepv	(ssize_t size,
+ptrdiff_t	alx_strncasefgrepv	(ptrdiff_t size,
 					char dest[restrict size],
 					const char src[restrict size],
 					const char pattern[restrict])
 {
-	ssize_t	pos_dest;
-	ssize_t	pos_src;
-	ssize_t	line_len;
+	ptrdiff_t	pos_dest;
+	ptrdiff_t	pos_src;
+	ptrdiff_t	line_len;
 
 	pos_dest	= 0;
 	pos_src		= 0;
@@ -227,12 +225,12 @@ ssize_t	alx_strncasefgrepv	(ssize_t size,
 	return	pos_dest;
 }
 
-ssize_t	alx_strlcasefgrepv	(ssize_t size,
+ptrdiff_t	alx_strlcasefgrepv	(ptrdiff_t size,
 					char dest[restrict size],
 					const char src[restrict size],
 					const char pattern[restrict])
 {
-	ssize_t	dest_len;
+	ptrdiff_t	dest_len;
 
 	if (!size)
 		return	0;
@@ -251,10 +249,10 @@ ssize_t	alx_strlcasefgrepv	(ssize_t size,
 /******************************************************************************
  ******* static functions (definitions) ***************************************
  ******************************************************************************/
-static	ssize_t	_strnfgrep_line		(ssize_t len,
-					char dest[restrict len],
-					const char src[restrict len],
-					const char pattern[restrict])
+static	ptrdiff_t	_strnfgrep_line		(ptrdiff_t len,
+						char dest[restrict len],
+						const char src[restrict len],
+						const char pattern[restrict])
 {
 
 	if (!strnstr(src, pattern, len))
@@ -264,10 +262,10 @@ static	ssize_t	_strnfgrep_line		(ssize_t len,
 	return	len;
 }
 
-static	ssize_t	_strncasefgrep_line	(ssize_t len,
-					char dest[restrict len],
-					const char src[restrict len],
-					const char pattern[restrict])
+static	ptrdiff_t	_strncasefgrep_line	(ptrdiff_t len,
+						char dest[restrict len],
+						const char src[restrict len],
+						const char pattern[restrict])
 {
 
 	if (alx_strncasestr(len, src, pattern) < 0)
@@ -277,10 +275,10 @@ static	ssize_t	_strncasefgrep_line	(ssize_t len,
 	return	len;
 }
 
-static	ssize_t	_strnfgrepv_line	(ssize_t len,
-					char dest[restrict len],
-					const char src[restrict len],
-					const char pattern[restrict])
+static	ptrdiff_t	_strnfgrepv_line	(ptrdiff_t len,
+						char dest[restrict len],
+						const char src[restrict len],
+						const char pattern[restrict])
 {
 
 	if (strnstr(src, pattern, len))
@@ -290,10 +288,10 @@ static	ssize_t	_strnfgrepv_line	(ssize_t len,
 	return	len;
 }
 
-static	ssize_t	_strncasefgrepv_line	(ssize_t len,
-					char dest[restrict len],
-					const char src[restrict len],
-					const char pattern[restrict])
+static	ptrdiff_t	_strncasefgrepv_line	(ptrdiff_t len,
+						char dest[restrict len],
+						const char src[restrict len],
+						const char pattern[restrict])
 {
 
 	if (alx_strncasestr(len, src, pattern) >= 0)
