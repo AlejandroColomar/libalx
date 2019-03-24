@@ -56,6 +56,7 @@ ptrdiff_t	alx_maximum_u32	(ptrdiff_t n, const uint32_t arr[restrict]);
 ptrdiff_t	alx_maximum_s32	(ptrdiff_t n, const int32_t arr[restrict]);
 ptrdiff_t	alx_maximum_u64	(ptrdiff_t n, const uint64_t arr[restrict]);
 ptrdiff_t	alx_maximum_s64	(ptrdiff_t n, const int64_t arr[restrict]);
+ptrdiff_t	alx_maximum_pdif(ptrdiff_t n, const ptrdiff_t arr[restrict]);
 }
 
 

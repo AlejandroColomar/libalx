@@ -21,6 +21,32 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+#define	AVG(a, b) (							\
+{									\
+	__auto_type	_a	= (a);					\
+	__auto_type	_b	= (b);					\
+									\
+	(_a / 2) + (_b / 2) + (((_a % 2) + (_b % 2)) / 2);		\
+}									\
+)
+
+#define	fAVG(a, b) (							\
+{									\
+	__auto_type	_a	= (a);					\
+	__auto_type	_b	= (b);					\
+									\
+	(_a / 2.0) + (_b / 2.0);					\
+}									\
+)
+
+#define	fAVGf(a, b) (							\
+{									\
+	__auto_type	_a	= (a);					\
+	__auto_type	_b	= (b);					\
+									\
+	(_a + _b) / 2.0;						\
+}									\
+)
 
 
 /******************************************************************************
@@ -41,32 +67,32 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
-long double	alx_arithmetic_mean_ldbl(ptrdiff_t n,
-					const long double arr[restrict n]);
-double		alx_arithmetic_mean	(ptrdiff_t n,
-					const double arr[restrict n]);
-float		alx_arithmetic_mean_flt	(ptrdiff_t n,
-					const float arr[restrict n]);
-double		alx_arithmetic_mean_uint(ptrdiff_t n,
-					const unsigned arr[restrict n]);
-double		alx_arithmetic_mean_int	(ptrdiff_t n,
-					const int arr[restrict n]);
-double		alx_arithmetic_mean_u8	(ptrdiff_t n,
-					const uint8_t arr[restrict n]);
-double		alx_arithmetic_mean_s8	(ptrdiff_t n,
-					const int8_t arr[restrict n]);
-double		alx_arithmetic_mean_u16	(ptrdiff_t n,
-					const uint16_t arr[restrict n]);
-double		alx_arithmetic_mean_s16	(ptrdiff_t n,
-					const int16_t arr[restrict n]);
-double		alx_arithmetic_mean_u32	(ptrdiff_t n,
-					const uint32_t arr[restrict n]);
-double		alx_arithmetic_mean_s32	(ptrdiff_t n,
-					const int32_t arr[restrict n]);
-double		alx_arithmetic_mean_u64	(ptrdiff_t n,
-					const uint64_t arr[restrict n]);
-double		alx_arithmetic_mean_s64	(ptrdiff_t n,
-					const int64_t arr[restrict n]);
+long double	alx_arithmetic_mean_ldbl(ptrdiff_t nmemb,
+					const long double arr[restrict nmemb]);
+double		alx_arithmetic_mean	(ptrdiff_t nmemb,
+					const double arr[restrict nmemb]);
+float		alx_arithmetic_mean_flt	(ptrdiff_t nmemb,
+					const float arr[restrict nmemb]);
+double		alx_arithmetic_mean_uint(ptrdiff_t nmemb,
+					const unsigned arr[restrict nmemb]);
+double		alx_arithmetic_mean_int	(ptrdiff_t nmemb,
+					const int arr[restrict nmemb]);
+double		alx_arithmetic_mean_u8	(ptrdiff_t nmemb,
+					const uint8_t arr[restrict nmemb]);
+double		alx_arithmetic_mean_s8	(ptrdiff_t nmemb,
+					const int8_t arr[restrict nmemb]);
+double		alx_arithmetic_mean_u16	(ptrdiff_t nmemb,
+					const uint16_t arr[restrict nmemb]);
+double		alx_arithmetic_mean_s16	(ptrdiff_t nmemb,
+					const int16_t arr[restrict nmemb]);
+double		alx_arithmetic_mean_u32	(ptrdiff_t nmemb,
+					const uint32_t arr[restrict nmemb]);
+double		alx_arithmetic_mean_s32	(ptrdiff_t nmemb,
+					const int32_t arr[restrict nmemb]);
+double		alx_arithmetic_mean_u64	(ptrdiff_t nmemb,
+					const uint64_t arr[restrict nmemb]);
+double		alx_arithmetic_mean_s64	(ptrdiff_t nmemb,
+					const int64_t arr[restrict nmemb]);
 
 
 /******************************************************************************

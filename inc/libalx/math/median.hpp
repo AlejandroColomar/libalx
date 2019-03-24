@@ -43,19 +43,19 @@
  ******************************************************************************/
 extern	"C"
 {
-long double	alx_median_ldbl	(ptrdiff_t n, const long double x[restrict]);
-double		alx_median	(ptrdiff_t n, const double x[restrict]);
-float		alx_median_flt	(ptrdiff_t n, const float x[restrict]);
-double		alx_median_uint	(ptrdiff_t n, const unsigned x[restrict]);
-double		alx_median_int	(ptrdiff_t n, const int x[restrict]);
-double		alx_median_u8	(ptrdiff_t n, const uint8_t x[restrict]);
-double		alx_median_s8	(ptrdiff_t n, const int8_t x[restrict]);
-double		alx_median_u16	(ptrdiff_t n, const uint16_t x[restrict]);
-double		alx_median_s16	(ptrdiff_t n, const int16_t x[restrict]);
-double		alx_median_u32	(ptrdiff_t n, const uint32_t x[restrict]);
-double		alx_median_s32	(ptrdiff_t n, const int32_t x[restrict]);
-double		alx_median_u64	(ptrdiff_t n, const uint64_t x[restrict]);
-double		alx_median_s64	(ptrdiff_t n, const int64_t x[restrict]);
+long double	alx_median_ldbl	(ptrdiff_t nmemb, const long double x[restrict]);
+double		alx_median	(ptrdiff_t nmemb, const double x[restrict]);
+float		alx_median_flt	(ptrdiff_t nmemb, const float x[restrict]);
+double		alx_median_uint	(ptrdiff_t nmemb, const unsigned x[restrict]);
+double		alx_median_int	(ptrdiff_t nmemb, const int x[restrict]);
+double		alx_median_u8	(ptrdiff_t nmemb, const uint8_t x[restrict]);
+double		alx_median_s8	(ptrdiff_t nmemb, const int8_t x[restrict]);
+double		alx_median_u16	(ptrdiff_t nmemb, const uint16_t x[restrict]);
+double		alx_median_s16	(ptrdiff_t nmemb, const int16_t x[restrict]);
+double		alx_median_u32	(ptrdiff_t nmemb, const uint32_t x[restrict]);
+double		alx_median_s32	(ptrdiff_t nmemb, const int32_t x[restrict]);
+double		alx_median_u64	(ptrdiff_t nmemb, const uint64_t x[restrict]);
+double		alx_median_s64	(ptrdiff_t nmemb, const int64_t x[restrict]);
 }
 
 

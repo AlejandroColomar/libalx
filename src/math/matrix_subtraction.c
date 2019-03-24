@@ -51,14 +51,16 @@ int	alx_matrix_subtraction_uint	(ptrdiff_t n,
 {
 
 	for (ptrdiff_t i = 0; i < n; i++) {
-		if (src1[i] < src2[i]) {
-			errno	= ERANGE;
-			return	-1;
-		}
+		if (src1[i] < src2[i])
+			goto err_wrap;
 		dest[i]	= src1[i] - src2[i];
 	}
 
 	return	0;
+
+err_wrap:
+	errno	= ERANGE;
+	return	1;
 }
 
 int	alx_matrix_subtraction_int	(ptrdiff_t n,
@@ -70,18 +72,21 @@ int	alx_matrix_subtraction_int	(ptrdiff_t n,
 
 	for (ptrdiff_t i = 0; i < n; i++) {
 		tmp	= (double_t)src1[i] - (double_t)src2[i];
-		if (nextafter(tmp, tmp + 1) > INT_MAX) {
-			errno	= ERANGE;
-			return	1;
-		}
-		if (nextafter(tmp, tmp - 1) < INT_MIN) {
-			errno	= ERANGE;
-			return	-1;
-		}
+		if (nextafter(tmp, tmp + 1) > INT_MAX)
+			goto err_ovf_hi;
+		if (nextafter(tmp, tmp - 1) < INT_MIN)
+			goto err_ovf_lo;
 		dest[i]	= src1[i] - src2[i];
 	}
 
 	return	0;
+
+err_ovf_hi:
+	errno	= ERANGE;
+	return	1;
+err_ovf_lo:
+	errno	= ERANGE;
+	return	-1;
 }
 
 int	alx_matrix_subtraction_u8	(ptrdiff_t n,
@@ -91,14 +96,16 @@ int	alx_matrix_subtraction_u8	(ptrdiff_t n,
 {
 
 	for (ptrdiff_t i = 0; i < n; i++) {
-		if (src1[i] < src2[i]) {
-			errno	= ERANGE;
-			return	-1;
-		}
+		if (src1[i] < src2[i])
+			goto err_wrap;
 		dest[i]	= src1[i] - src2[i];
 	}
 
 	return	0;
+
+err_wrap:
+	errno	= ERANGE;
+	return	1;
 }
 
 int	alx_matrix_subtraction_s8	(ptrdiff_t n,
@@ -110,18 +117,21 @@ int	alx_matrix_subtraction_s8	(ptrdiff_t n,
 
 	for (ptrdiff_t i = 0; i < n; i++) {
 		tmp	= (int_fast16_t)src1[i] - (int_fast16_t)src2[i];
-		if (nextafter(tmp, tmp + 1) > INT8_MAX) {
-			errno	= ERANGE;
-			return	1;
-		}
-		if (nextafter(tmp, tmp - 1) < INT8_MIN) {
-			errno	= ERANGE;
-			return	-1;
-		}
+		if (tmp > INT8_MAX)
+			goto err_ovf_hi;
+		if (tmp < INT8_MIN)
+			goto err_ovf_lo;
 		dest[i]	= src1[i] - src2[i];
 	}
 
 	return	0;
+
+err_ovf_hi:
+	errno	= ERANGE;
+	return	1;
+err_ovf_lo:
+	errno	= ERANGE;
+	return	-1;
 }
 
 int	alx_matrix_subtraction_u16	(ptrdiff_t n,
@@ -131,14 +141,16 @@ int	alx_matrix_subtraction_u16	(ptrdiff_t n,
 {
 
 	for (ptrdiff_t i = 0; i < n; i++) {
-		if (src1[i] < src2[i]) {
-			errno	= ERANGE;
-			return	-1;
-		}
+		if (src1[i] < src2[i])
+			goto err_wrap;
 		dest[i]	= src1[i] - src2[i];
 	}
 
 	return	0;
+
+err_wrap:
+	errno	= ERANGE;
+	return	1;
 }
 
 int	alx_matrix_subtraction_s16	(ptrdiff_t n,
@@ -150,18 +162,21 @@ int	alx_matrix_subtraction_s16	(ptrdiff_t n,
 
 	for (ptrdiff_t i = 0; i < n; i++) {
 		tmp	= (int_fast32_t)src1[i] - (int_fast32_t)src2[i];
-		if (nextafter(tmp, tmp + 1) > INT16_MAX) {
-			errno	= ERANGE;
-			return	1;
-		}
-		if (nextafter(tmp, tmp - 1) < INT16_MIN) {
-			errno	= ERANGE;
-			return	-1;
-		}
+		if (tmp > INT16_MAX)
+			goto err_ovf_hi;
+		if (tmp < INT16_MIN)
+			goto err_ovf_lo;
 		dest[i]	= src1[i] - src2[i];
 	}
 
 	return	0;
+
+err_ovf_hi:
+	errno	= ERANGE;
+	return	1;
+err_ovf_lo:
+	errno	= ERANGE;
+	return	-1;
 }
 
 int	alx_matrix_subtraction_u32	(ptrdiff_t n,
@@ -171,14 +186,16 @@ int	alx_matrix_subtraction_u32	(ptrdiff_t n,
 {
 
 	for (ptrdiff_t i = 0; i < n; i++) {
-		if (src1[i] < src2[i]) {
-			errno	= ERANGE;
-			return	-1;
-		}
+		if (src1[i] < src2[i])
+			goto err_wrap;
 		dest[i]	= src1[i] - src2[i];
 	}
 
 	return	0;
+
+err_wrap:
+	errno	= ERANGE;
+	return	1;
 }
 
 int	alx_matrix_subtraction_s32	(ptrdiff_t n,
@@ -190,18 +207,21 @@ int	alx_matrix_subtraction_s32	(ptrdiff_t n,
 
 	for (ptrdiff_t i = 0; i < n; i++) {
 		tmp	= (int_fast64_t)src1[i] - (int_fast64_t)src2[i];
-		if (nextafter(tmp, tmp + 1) > INT32_MAX) {
-			errno	= ERANGE;
-			return	1;
-		}
-		if (nextafter(tmp, tmp - 1) < INT32_MIN) {
-			errno	= ERANGE;
-			return	-1;
-		}
+		if (tmp > INT32_MAX)
+			goto err_ovf_hi;
+		if (tmp < INT32_MIN)
+			goto err_ovf_lo;
 		dest[i]	= src1[i] - src2[i];
 	}
 
 	return	0;
+
+err_ovf_hi:
+	errno	= ERANGE;
+	return	1;
+err_ovf_lo:
+	errno	= ERANGE;
+	return	-1;
 }
 
 int	alx_matrix_subtraction_u64	(ptrdiff_t n,
@@ -211,14 +231,16 @@ int	alx_matrix_subtraction_u64	(ptrdiff_t n,
 {
 
 	for (ptrdiff_t i = 0; i < n; i++) {
-		if (src1[i] < src2[i]) {
-			errno	= ERANGE;
-			return	-1;
-		}
+		if (src1[i] < src2[i])
+			goto err_wrap;
 		dest[i]	= src1[i] - src2[i];
 	}
 
 	return	0;
+
+err_wrap:
+	errno	= ERANGE;
+	return	1;
 }
 
 int	alx_matrix_subtraction_s64	(ptrdiff_t n,
@@ -230,18 +252,21 @@ int	alx_matrix_subtraction_s64	(ptrdiff_t n,
 
 	for (ptrdiff_t i = 0; i < n; i++) {
 		tmp	= (double_t)src1[i] - (double_t)src2[i];
-		if (nextafter(tmp, tmp + 1) > INT64_MAX) {
-			errno	= ERANGE;
-			return	1;
-		}
-		if (nextafter(tmp, tmp - 1) < INT64_MIN) {
-			errno	= ERANGE;
-			return	-1;
-		}
+		if (nextafter(tmp, tmp + 1) > INT64_MAX)
+			goto err_ovf_hi;
+		if (nextafter(tmp, tmp - 1) < INT64_MIN)
+			goto err_ovf_lo;
 		dest[i]	= src1[i] - src2[i];
 	}
 
 	return	0;
+
+err_ovf_hi:
+	errno	= ERANGE;
+	return	1;
+err_ovf_lo:
+	errno	= ERANGE;
+	return	-1;
 }
 
 

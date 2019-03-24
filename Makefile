@@ -70,7 +70,7 @@ export	SZ
 ################################################################################
 # cflags
 CFLAGS_STD	= -std=c17
-CFLAGS_STD	= -Wpedantic
+#CFLAGS_STD	= -Wpedantic
 
 CFLAGS_BSD	= `pkg-config --cflags libbsd-overlay`
 
@@ -133,7 +133,7 @@ export	TST_DIR
 #	action
 
 PHONY := all
-all: math stddef stdint stdlib string io curses
+all: math stddef stdint stdio stdlib string curses
 
 
 PHONY += math
@@ -154,6 +154,12 @@ stdint:
 	$(Q)$(MAKE) stdint	-C $(TMP_DIR)
 	$(Q)$(MAKE) stdint	-C $(LIB_DIR)
 
+PHONY += stdio
+stdio: stdlib
+	@echo	"	MAKE	stdio"
+	$(Q)$(MAKE) stdio	-C $(TMP_DIR)
+	$(Q)$(MAKE) stdio	-C $(LIB_DIR)
+
 PHONY += stdlib
 stdlib: stdint
 	@echo	"	MAKE	stdlib"
@@ -165,12 +171,6 @@ string:
 	@echo	"	MAKE	string"
 	$(Q)$(MAKE) string	-C $(TMP_DIR)
 	$(Q)$(MAKE) string	-C $(LIB_DIR)
-
-PHONY += io
-io: stdlib
-	@echo	"	MAKE	io"
-	$(Q)$(MAKE) io		-C $(TMP_DIR)
-	$(Q)$(MAKE) io		-C $(LIB_DIR)
 
 PHONY += curses
 curses: stdlib io

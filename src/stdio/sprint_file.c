@@ -1,26 +1,25 @@
 /******************************************************************************
- *	Copyright (C) 2019	Alejandro Colomar Andrés		      *
+ *	Copyright (C) 2017	Alejandro Colomar Andrés		      *
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* include guard ********************************************************
- ******************************************************************************/
-#ifndef ALX_STDLIB_MAXIMUM_H
-#define ALX_STDLIB_MAXIMUM_H
-
-
-/******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include "libalx/stdio/sprint_file.h"
+
+#include <errno.h>
 #include <stddef.h>
-#include <stdint.h>
+#include <stdio.h>
+
+#include "libalx/stdlib/minimum.h"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+#define _snprint_file	_snprint_file_fread
 
 
 /******************************************************************************
@@ -39,38 +38,75 @@
 
 
 /******************************************************************************
- ******* extern functions *****************************************************
+ ******* static functions (prototypes) ****************************************
  ******************************************************************************/
-ptrdiff_t	alx_maximum_ldbl(ptrdiff_t n, const long double arr[restrict n]);
-ptrdiff_t	alx_maximum	(ptrdiff_t n, const double arr[restrict n]);
-ptrdiff_t	alx_maximum_f	(ptrdiff_t n, const float arr[restrict n]);
-ptrdiff_t	alx_maximum_uint(ptrdiff_t n, const unsigned arr[restrict n]);
-ptrdiff_t	alx_maximum_int	(ptrdiff_t n, const int arr[restrict n]);
-ptrdiff_t	alx_maximum_u8	(ptrdiff_t n, const uint8_t arr[restrict n]);
-ptrdiff_t	alx_maximum_s8	(ptrdiff_t n, const int8_t arr[restrict n]);
-ptrdiff_t	alx_maximum_u16	(ptrdiff_t n, const uint16_t arr[restrict n]);
-ptrdiff_t	alx_maximum_s16	(ptrdiff_t n, const int16_t arr[restrict n]);
-ptrdiff_t	alx_maximum_u32	(ptrdiff_t n, const uint32_t arr[restrict n]);
-ptrdiff_t	alx_maximum_s32	(ptrdiff_t n, const int32_t arr[restrict n]);
-ptrdiff_t	alx_maximum_u64	(ptrdiff_t n, const uint64_t arr[restrict n]);
-ptrdiff_t	alx_maximum_s64	(ptrdiff_t n, const int64_t arr[restrict n]);
-ptrdiff_t	alx_maximum_pdif(ptrdiff_t n, const ptrdiff_t arr[restrict n]);
+static	ptrdiff_t	_snprint_file_getc	(ptrdiff_t size,
+						char dest[restrict size],
+						FILE *fp);
+static	ptrdiff_t	_snprint_file_fread	(ptrdiff_t size,
+						char dest[restrict size],
+						FILE *fp);
 
 
 /******************************************************************************
- ******* static inline functions (prototypes) *********************************
+ ******* global functions *****************************************************
  ******************************************************************************/
+ptrdiff_t	alx_snprint_file(ptrdiff_t size,
+				char dest[restrict size],
+				const char fpath[restrict FILENAME_MAX])
+{
+	FILE		*fp;
+	ptrdiff_t	len;
+
+	fp	= fopen(fpath, "r");
+	if (!fp)
+		return	-1;
+
+	len	= _snprint_file(size, dest, fp);
+	fclose(fp);
+
+	return	len;
+}
 
 
 /******************************************************************************
- ******* static inline functions (definitions) ********************************
+ ******* static functions (definitions) ***************************************
  ******************************************************************************/
+static	ptrdiff_t	_snprint_file_getc	(ptrdiff_t size,
+						char dest[restrict size],
+						FILE *fp)
+{
+	ptrdiff_t	len;
+	int		c;
 
+	for (len = 0; len < size; len++) {
+		c = getc(fp);
+		if (c == EOF) {
+			dest[len--] = '\0';
+			break;
+		}
+		dest[len] = c;
+	}
 
-/******************************************************************************
- ******* include guard ********************************************************
- ******************************************************************************/
-#endif		/* libalx/stdlib/maximum.h */
+	return	len;
+}
+
+static	ptrdiff_t	_snprint_file_fread	(ptrdiff_t size,
+						char dest[restrict size],
+						FILE *fp)
+{
+	ptrdiff_t	len;
+
+	fseek(fp, 0, SEEK_END);
+	len	= ftell(fp);
+	fseek(fp, 0, SEEK_SET);
+
+	fread(dest, sizeof(char), MIN(len, size), fp);
+	if (len < size)
+		dest[len + 1]	= '\0';
+
+	return	len;
+}
 
 
 /******************************************************************************

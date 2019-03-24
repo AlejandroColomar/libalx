@@ -264,6 +264,23 @@ ptrdiff_t	alx_maximum_s64	(ptrdiff_t n, const int64_t arr[restrict n])
 	return	pos;
 }
 
+ptrdiff_t	alx_maximum_pdif(ptrdiff_t n, const ptrdiff_t arr[restrict n])
+{
+	ptrdiff_t	pos;
+	ptrdiff_t	val;
+
+	pos	= 0;
+	val	= INT64_MIN;
+	for (ptrdiff_t i = 0; i < n; i++) {
+		if (arr[i] >= val) {
+			val	= arr[i];
+			pos	= i;
+		}
+	}
+
+	return	pos;
+}
+
 
 /******************************************************************************
  ******* static functions (definitions) ***************************************

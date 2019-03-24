@@ -44,214 +44,239 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_array_multiplication_uint	(ptrdiff_t n,
-					unsigned dest[restrict n],
-					const unsigned src1[restrict n],
-					const unsigned src2[restrict n])
-{
-	long double	tmp;
-
-	for (ptrdiff_t i = 0; i < n; i++) {
-		tmp	= (double_t)src1[i] * (double_t)src2[i];
-		if (nextafter(tmp, tmp + 1) > UINT_MAX) {
-			errno	= ERANGE;
-			return	1;
-		}
-		dest[i]	= src1[i] * src2[i];
-	}
-
-	return	0;
-}
-
-int	alx_array_multiplication_int	(ptrdiff_t n,
-					int dest[restrict n],
-					const int src1[restrict n],
-					const int src2[restrict n])
+int	alx_array_multiplication_uint	(ptrdiff_t nmemb,
+					unsigned dest[restrict nmemb],
+					const unsigned src1[restrict nmemb],
+					const unsigned src2[restrict nmemb])
 {
 	double_t	tmp;
 
-	for (ptrdiff_t i = 0; i < n; i++) {
+	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		tmp	= (double_t)src1[i] * (double_t)src2[i];
-		if (nextafter(tmp, tmp + 1) > INT_MAX) {
-			errno	= ERANGE;
-			return	1;
-		}
-		if (nextafter(tmp, tmp - 1) < INT_MIN) {
-			errno	= ERANGE;
-			return	-1;
-		}
+		if (nextafter(tmp, tmp + 1) > UINT_MAX)
+			goto err_wrap;
 		dest[i]	= src1[i] * src2[i];
 	}
 
 	return	0;
+
+err_wrap:
+	errno	= ERANGE;
+	return	1;
 }
 
-int	alx_array_multiplication_u8	(ptrdiff_t n,
-					uint8_t dest[restrict n],
-					const uint8_t src1[restrict n],
-					const uint8_t src2[restrict n])
+int	alx_array_multiplication_int	(ptrdiff_t nmemb,
+					int dest[restrict nmemb],
+					const int src1[restrict nmemb],
+					const int src2[restrict nmemb])
+{
+	double_t	tmp;
+
+	for (ptrdiff_t i = 0; i < nmemb; i++) {
+		tmp	= (double_t)src1[i] * (double_t)src2[i];
+		if (nextafter(tmp, tmp + 1) > INT_MAX)
+			goto err_ovf_hi;
+		if (nextafter(tmp, tmp - 1) < INT_MIN)
+			goto err_ovf_lo;
+		dest[i]	= src1[i] * src2[i];
+	}
+
+	return	0;
+
+err_ovf_hi:
+	errno	= ERANGE;
+	return	1;
+err_ovf_lo:
+	errno	= ERANGE;
+	return	-1;
+}
+
+int	alx_array_multiplication_u8	(ptrdiff_t nmemb,
+					uint8_t dest[restrict nmemb],
+					const uint8_t src1[restrict nmemb],
+					const uint8_t src2[restrict nmemb])
 {
 	uint_fast16_t	tmp;
 
-	for (ptrdiff_t i = 0; i < n; i++) {
+	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		tmp	= (uint_fast16_t)src1[i] * (uint_fast16_t)src2[i];
-		if (tmp > UINT8_MAX) {
-			errno	= ERANGE;
-			return	1;
-		}
+		if (tmp > UINT8_MAX)
+			goto err_wrap;
 		dest[i]	= tmp;
 	}
 
 	return	0;
+
+err_wrap:
+	errno	= ERANGE;
+	return	1;
 }
 
-int	alx_array_multiplication_s8	(ptrdiff_t n,
-					int8_t dest[restrict n],
-					const int8_t src1[restrict n],
-					const int8_t src2[restrict n])
+int	alx_array_multiplication_s8	(ptrdiff_t nmemb,
+					int8_t dest[restrict nmemb],
+					const int8_t src1[restrict nmemb],
+					const int8_t src2[restrict nmemb])
 {
 	int_fast16_t	tmp;
 
-	for (ptrdiff_t i = 0; i < n; i++) {
+	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		tmp	= (int_fast16_t)src1[i] * (int_fast16_t)src2[i];
-		if (tmp > INT8_MAX) {
-			errno	= ERANGE;
-			return	1;
-		}
-		if (tmp < INT8_MIN) {
-			errno	= ERANGE;
-			return	-1;
-		}
+		if (tmp > INT8_MAX)
+			goto err_ovf_hi;
+		if (tmp < INT8_MIN)
+			goto err_ovf_lo;
 		dest[i]	= tmp;
 	}
 
 	return	0;
+
+err_ovf_hi:
+	errno	= ERANGE;
+	return	1;
+err_ovf_lo:
+	errno	= ERANGE;
+	return	-1;
 }
 
-int	alx_array_multiplication_u16	(ptrdiff_t n,
-					uint16_t dest[restrict n],
-					const uint16_t src1[restrict n],
-					const uint16_t src2[restrict n])
+int	alx_array_multiplication_u16	(ptrdiff_t nmemb,
+					uint16_t dest[restrict nmemb],
+					const uint16_t src1[restrict nmemb],
+					const uint16_t src2[restrict nmemb])
 {
 	uint_fast32_t	tmp;
 
-	for (ptrdiff_t i = 0; i < n; i++) {
+	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		tmp	= (uint_fast32_t)src1[i] * (uint_fast32_t)src2[i];
-		if (tmp > UINT16_MAX) {
-			errno	= ERANGE;
-			return	1;
-		}
+		if (tmp > UINT16_MAX)
+			goto err_wrap;
 		dest[i]	= tmp;
 	}
 
 	return	0;
+
+err_wrap:
+	errno	= ERANGE;
+	return	1;
 }
 
-int	alx_array_multiplication_s16	(ptrdiff_t n,
-					int16_t dest[restrict n],
-					const int16_t src1[restrict n],
-					const int16_t src2[restrict n])
+int	alx_array_multiplication_s16	(ptrdiff_t nmemb,
+					int16_t dest[restrict nmemb],
+					const int16_t src1[restrict nmemb],
+					const int16_t src2[restrict nmemb])
 {
 	int_fast32_t	tmp;
 
-	for (ptrdiff_t i = 0; i < n; i++) {
+	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		tmp	= (int_fast32_t)src1[i] * (int_fast32_t)src2[i];
-		if (tmp > INT16_MAX) {
-			errno	= ERANGE;
-			return	1;
-		}
-		if (tmp < INT16_MIN) {
-			errno	= ERANGE;
-			return	-1;
-		}
+		if (tmp > INT16_MAX)
+			goto err_ovf_hi;
+		if (tmp < INT16_MIN)
+			goto err_ovf_lo;
 		dest[i]	= tmp;
 	}
 
 	return	0;
+
+err_ovf_hi:
+	errno	= ERANGE;
+	return	1;
+err_ovf_lo:
+	errno	= ERANGE;
+	return	-1;
 }
 
-int	alx_array_multiplication_u32	(ptrdiff_t n,
-					uint32_t dest[restrict n],
-					const uint32_t src1[restrict n],
-					const uint32_t src2[restrict n])
+int	alx_array_multiplication_u32	(ptrdiff_t nmemb,
+					uint32_t dest[restrict nmemb],
+					const uint32_t src1[restrict nmemb],
+					const uint32_t src2[restrict nmemb])
 {
 	uint_fast64_t	tmp;
 
-	for (ptrdiff_t i = 0; i < n; i++) {
+	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		tmp	= (uint_fast64_t)src1[i] * (uint_fast64_t)src2[i];
-		if (tmp > UINT32_MAX) {
-			errno	= ERANGE;
-			return	1;
-		}
+		if (tmp > UINT32_MAX)
+			goto err_wrap;
 		dest[i]	= tmp;
 	}
 
 	return	0;
+
+err_wrap:
+	errno	= ERANGE;
+	return	1;
 }
 
-int	alx_array_multiplication_s32	(ptrdiff_t n,
-					int32_t dest[restrict n],
-					const int32_t src1[restrict n],
-					const int32_t src2[restrict n])
+int	alx_array_multiplication_s32	(ptrdiff_t nmemb,
+					int32_t dest[restrict nmemb],
+					const int32_t src1[restrict nmemb],
+					const int32_t src2[restrict nmemb])
 {
 	int_fast64_t	tmp;
 
-	for (ptrdiff_t i = 0; i < n; i++) {
+	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		tmp	= (int_fast64_t)src1[i] * (int_fast64_t)src2[i];
-		if (tmp > INT32_MAX) {
-			errno	= ERANGE;
-			return	1;
-		}
-		if (tmp < INT32_MIN) {
-			errno	= ERANGE;
-			return	-1;
-		}
+		if (tmp > INT32_MAX)
+			goto err_ovf_hi;
+		if (tmp < INT32_MIN)
+			goto err_ovf_lo;
 		dest[i]	= tmp;
 	}
 
 	return	0;
+
+err_ovf_hi:
+	errno	= ERANGE;
+	return	1;
+err_ovf_lo:
+	errno	= ERANGE;
+	return	-1;
 }
 
-int	alx_array_multiplication_u64	(ptrdiff_t n,
-					uint64_t dest[restrict n],
-					const uint64_t src1[restrict n],
-					const uint64_t src2[restrict n])
+int	alx_array_multiplication_u64	(ptrdiff_t nmemb,
+					uint64_t dest[restrict nmemb],
+					const uint64_t src1[restrict nmemb],
+					const uint64_t src2[restrict nmemb])
 {
 	double_t	tmp;
 
-	for (ptrdiff_t i = 0; i < n; i++) {
+	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		tmp	= (double_t)src1[i] * (double_t)src2[i];
-		if (nextafter(tmp, tmp + 1) > UINT64_MAX) {
-			errno	= ERANGE;
-			return	1;
-		}
+		if (nextafter(tmp, tmp + 1) > UINT64_MAX) 
+			goto err_wrap;
 		dest[i]	= src1[i] * src2[i];
 	}
 
 	return	0;
+
+err_wrap:
+	errno	= ERANGE;
+	return	1;
 }
 
-int	alx_array_multiplication_s64	(ptrdiff_t n,
-					int64_t dest[restrict n],
-					const int64_t src1[restrict n],
-					const int64_t src2[restrict n])
+int	alx_array_multiplication_s64	(ptrdiff_t nmemb,
+					int64_t dest[restrict nmemb],
+					const int64_t src1[restrict nmemb],
+					const int64_t src2[restrict nmemb])
 {
 	double_t	tmp;
 
-	for (ptrdiff_t i = 0; i < n; i++) {
+	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		tmp	= (double_t)src1[i] * (double_t)src2[i];
-		if (nextafter(tmp, tmp + 1) > INT64_MAX) {
-			errno	= ERANGE;
-			return	1;
-		}
-		if (nextafter(tmp, tmp - 1) < INT64_MIN) {
-			errno	= ERANGE;
-			return	-1;
-		}
+		if (nextafter(tmp, tmp + 1) > INT64_MAX)
+			goto err_ovf_hi;
+		if (nextafter(tmp, tmp - 1) < INT64_MIN)
+			goto err_ovf_lo;
 		dest[i]	= src1[i] * src2[i];
 	}
 
 	return	0;
+
+err_ovf_hi:
+	errno	= ERANGE;
+	return	1;
+err_ovf_lo:
+	errno	= ERANGE;
+	return	-1;
 }
 
 

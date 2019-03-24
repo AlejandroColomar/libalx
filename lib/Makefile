@@ -24,6 +24,9 @@ STDDEF_OBJ	=							\
 STDINT_OBJ	=							\
 		$(TMP_DIR)/stdint/constants.o				\
 		$(TMP_DIR)/stdint/int128.o
+STDIO_OBJ	=							\
+		$(TMP_DIR)/stdio/alx_input.o				\
+		$(TMP_DIR)/stdio/sprint_file.o
 STDLIB_OBJ	=							\
 		$(TMP_DIR)/stdlib/array_split_pos_neg.o			\
 		$(TMP_DIR)/stdlib/compare.o				\
@@ -38,9 +41,6 @@ STRING_OBJ	=							\
 		$(TMP_DIR)/string/strchr.o				\
 		$(TMP_DIR)/string/strgrep.o				\
 		$(TMP_DIR)/string/strstr.o
-IO_OBJ		=							\
-		$(TMP_DIR)/io/alx_input.o				\
-		$(TMP_DIR)/io/sprint_file.o
 CURSES_OBJ	=							\
 		$(TMP_DIR)/curses/alx_ncur.o
 
@@ -48,7 +48,7 @@ CURSES_OBJ	=							\
 #	action
 
 PHONY := all
-all: libalx math stddef stdint stdlib string io curses
+all: libalx math stddef stdint stdio stdlib string curses
 
 PHONY += math
 math: libalx libalx/libalx-math.a
@@ -59,14 +59,14 @@ stddef: libalx libalx/libalx-stddef.a
 PHONY += stdint
 stdint: libalx libalx/libalx-stdint.a
 
+PHONY += stdio
+stdio: libalx libalx/libalx-stdio.a
+
 PHONY += stdlib
 stdlib: libalx libalx/libalx-stdlib.a
 
 PHONY += string
 string: libalx libalx/libalx-string.a
-
-PHONY += io
-io: libalx libalx/libalx-io.a
 
 PHONY += curses
 curses: libalx libalx/libalx-curses.a
@@ -96,7 +96,7 @@ libalx/libalx-string.a: $(STRING_OBJ)
 	@echo	"	AR	libalx/lib/$@"
 	$(Q)$(AR) -r -c -s -o $@ $^
 
-libalx/libalx-io.a: $(IO_OBJ)
+libalx/libalx-stdio.a: $(IO_OBJ)
 	@echo	"	AR	libalx/lib/$@"
 	$(Q)$(AR) -r -c -s -o $@ $^
 

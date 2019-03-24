@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "libalx/math/arithmetic_mean.h"
 #include "libalx/stdlib/compare.h"
 
 
@@ -45,210 +46,228 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-long double	alx_median_ldbl	(ptrdiff_t n, const long double x[restrict n])
+long double	alx_median_ldbl	(ptrdiff_t nmemb,
+				const long double arr[restrict nmemb])
 {
-	long double	sorted[n];
+	long double	sorted[nmemb];
 	long double	median;
 
-	memcpy(sorted, x, sizeof(sorted));
-	qsort(sorted, n, sizeof(sorted[0]), alx_compare_ldbl);
+	memcpy(sorted, arr, sizeof(sorted));
+	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_ldbl);
 
-	if (n % 2)
-		median	= sorted[n/2];
+	if (nmemb % 2)
+		median	= sorted[nmemb/2];
 	else
-		median	= (sorted[n/2] + sorted[n/2 - 1]) / 2.0;
+		median	= fAVGf(sorted[nmemb/2], sorted[nmemb/2 - 1]);
 
 	return	median;
 }
 
-double		alx_median	(ptrdiff_t n, const double x[restrict n])
+double		alx_median	(ptrdiff_t nmemb,
+				const double arr[restrict nmemb])
 {
-	double	sorted[n];
+	double	sorted[nmemb];
 	double	median;
 
-	memcpy(sorted, x, sizeof(sorted));
-	qsort(sorted, n, sizeof(sorted[0]), alx_compare);
+	memcpy(sorted, arr, sizeof(sorted));
+	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare);
 
-	if (n % 2)
-		median	= sorted[n/2];
+	if (nmemb % 2)
+		median	= sorted[nmemb/2];
 	else
-		median	= (sorted[n/2] + sorted[n/2 - 1]) / 2.0;
+		median	= fAVGf(sorted[nmemb/2], sorted[nmemb/2 - 1]);
 
 	return	median;
 }
 
-float		alx_median_flt	(ptrdiff_t n, const float x[restrict n])
+float		alx_median_flt	(ptrdiff_t nmemb,
+				const float arr[restrict nmemb])
 {
-	float	sorted[n];
+	float	sorted[nmemb];
 	float	median;
 
-	memcpy(sorted, x, sizeof(sorted));
-	qsort(sorted, n, sizeof(sorted[0]), alx_compare_f);
+	memcpy(sorted, arr, sizeof(sorted));
+	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_f);
 
-	if (n % 2)
-		median	= sorted[n/2];
+	if (nmemb % 2)
+		median	= sorted[nmemb/2];
 	else
-		median	= (sorted[n/2] + sorted[n/2 - 1]) / 2.0;
+		median	= fAVGf(sorted[nmemb/2], sorted[nmemb/2 - 1]);
 
 	return	median;
 }
 
-double		alx_median_uint	(ptrdiff_t n, const unsigned x[restrict n])
+double		alx_median_uint	(ptrdiff_t nmemb,
+				const unsigned arr[restrict nmemb])
 {
-	unsigned	sorted[n];
+	unsigned	sorted[nmemb];
 	double		median;
 
-	memcpy(sorted, x, sizeof(sorted));
-	qsort(sorted, n, sizeof(sorted[0]), alx_compare_uint);
+	memcpy(sorted, arr, sizeof(sorted));
+	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_uint);
 
-	if (n % 2)
-		median	= sorted[n/2];
+	if (nmemb % 2)
+		median	= sorted[nmemb/2];
 	else
-		median	= (sorted[n/2] + sorted[n/2 - 1]) / 2.0;
+		median	= fAVG(sorted[nmemb/2], sorted[nmemb/2 - 1]);
 
 	return	median;
 }
 
-double		alx_median_int	(ptrdiff_t n, const int x[restrict n])
+double		alx_median_int	(ptrdiff_t nmemb,
+				const int arr[restrict nmemb])
 {
-	int	sorted[n];
+	int	sorted[nmemb];
 	double	median;
 
-	memcpy(sorted, x, sizeof(sorted));
-	qsort(sorted, n, sizeof(sorted[0]), alx_compare_int);
+	memcpy(sorted, arr, sizeof(sorted));
+	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_int);
 
-	if (n % 2)
-		median	= sorted[n/2];
+	if (nmemb % 2)
+		median	= sorted[nmemb/2];
 	else
-		median	= (sorted[n/2] + sorted[n/2 - 1]) / 2.0;
+		median	= ((unsigned)sorted[nmemb/2] +
+				(unsigned)sorted[nmemb/2 - 1]) / 2.0;
 
 	return	median;
 }
 
-double		alx_median_u8	(ptrdiff_t n, const uint8_t x[restrict n])
+double		alx_median_u8	(ptrdiff_t nmemb,
+				const uint8_t arr[restrict nmemb])
 {
-	uint8_t	sorted[n];
+	uint8_t	sorted[nmemb];
 	double	median;
 
-	memcpy(sorted, x, sizeof(sorted));
-	qsort(sorted, n, sizeof(sorted[0]), alx_compare_u8);
+	memcpy(sorted, arr, sizeof(sorted));
+	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_u8);
 
-	if (n % 2)
-		median	= sorted[n/2];
+	if (nmemb % 2)
+		median	= sorted[nmemb/2];
 	else
-		median	= (sorted[n/2] + sorted[n/2 - 1]) / 2.0;
+		median	= fAVG(sorted[nmemb/2], sorted[nmemb/2 - 1]);
 
 	return	median;
 }
 
-double		alx_median_s8	(ptrdiff_t n, const int8_t x[restrict n])
+double		alx_median_s8	(ptrdiff_t nmemb,
+				const int8_t arr[restrict nmemb])
 {
-	int8_t	sorted[n];
+	int8_t	sorted[nmemb];
 	double	median;
 
-	memcpy(sorted, x, sizeof(sorted));
-	qsort(sorted, n, sizeof(sorted[0]), alx_compare_s8);
+	memcpy(sorted, arr, sizeof(sorted));
+	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_s8);
 
-	if (n % 2)
-		median	= sorted[n/2];
+	if (nmemb % 2)
+		median	= sorted[nmemb/2];
 	else
-		median	= (sorted[n/2] + sorted[n/2 - 1]) / 2.0;
+		median	= ((uint_fast8_t)sorted[nmemb/2] +
+				(uint_fast8_t)sorted[nmemb/2 - 1]) / 2.0;
 
 	return	median;
 }
 
-double		alx_median_u16	(ptrdiff_t n, const uint16_t x[restrict n])
+double		alx_median_u16	(ptrdiff_t nmemb,
+				const uint16_t arr[restrict nmemb])
 {
-	uint16_t	sorted[n];
+	uint16_t	sorted[nmemb];
 	double		median;
 
-	memcpy(sorted, x, sizeof(sorted));
-	qsort(sorted, n, sizeof(sorted[0]), alx_compare_u16);
+	memcpy(sorted, arr, sizeof(sorted));
+	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_u16);
 
-	if (n % 2)
-		median	= sorted[n/2];
+	if (nmemb % 2)
+		median	= sorted[nmemb/2];
 	else
-		median	= (sorted[n/2] + sorted[n/2 - 1]) / 2.0;
+		median	= fAVG(sorted[nmemb/2], sorted[nmemb/2 - 1]);
 
 	return	median;
 }
 
-double		alx_median_s16	(ptrdiff_t n, const int16_t x[restrict n])
+double		alx_median_s16	(ptrdiff_t nmemb,
+				const int16_t arr[restrict nmemb])
 {
-	int16_t	sorted[n];
+	int16_t	sorted[nmemb];
 	double	median;
 
-	memcpy(sorted, x, sizeof(sorted));
-	qsort(sorted, n, sizeof(sorted[0]), alx_compare_s16);
+	memcpy(sorted, arr, sizeof(sorted));
+	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_s16);
 
-	if (n % 2)
-		median	= sorted[n/2];
+	if (nmemb % 2)
+		median	= sorted[nmemb/2];
 	else
-		median	= (sorted[n/2] + sorted[n/2 - 1]) / 2.0;
+		median	= ((uint_fast16_t)sorted[nmemb/2] +
+				(uint_fast16_t)sorted[nmemb/2 - 1]) / 2.0;
 
 	return	median;
 }
 
-double		alx_median_u32	(ptrdiff_t n, const uint32_t x[restrict n])
+double		alx_median_u32	(ptrdiff_t nmemb,
+				const uint32_t arr[restrict nmemb])
 {
-	uint32_t	sorted[n];
+	uint32_t	sorted[nmemb];
 	double		median;
 
-	memcpy(sorted, x, sizeof(sorted));
-	qsort(sorted, n, sizeof(sorted[0]), alx_compare_u32);
+	memcpy(sorted, arr, sizeof(sorted));
+	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_u32);
 
-	if (n % 2)
-		median	= sorted[n/2];
+	if (nmemb % 2)
+		median	= sorted[nmemb/2];
 	else
-		median	= (sorted[n/2] + sorted[n/2 - 1]) / 2.0;
+		median	= fAVG(sorted[nmemb/2], sorted[nmemb/2 - 1]);
 
 	return	median;
 }
 
-double		alx_median_s32	(ptrdiff_t n, const int32_t x[restrict n])
+double		alx_median_s32	(ptrdiff_t nmemb,
+				const int32_t arr[restrict nmemb])
 {
-	int32_t	sorted[n];
+	int32_t	sorted[nmemb];
 	double	median;
 
-	memcpy(sorted, x, sizeof(sorted));
-	qsort(sorted, n, sizeof(sorted[0]), alx_compare_s32);
+	memcpy(sorted, arr, sizeof(sorted));
+	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_s32);
 
-	if (n % 2)
-		median	= sorted[n/2];
+	if (nmemb % 2)
+		median	= sorted[nmemb/2];
 	else
-		median	= (sorted[n/2] + sorted[n/2 - 1]) / 2.0;
+		median	= ((uint_fast32_t)sorted[nmemb/2] +
+				(uint_fast32_t)sorted[nmemb/2 - 1]) / 2.0;
 
 	return	median;
 }
 
-double		alx_median_u64	(ptrdiff_t n, const uint64_t x[restrict n])
+double		alx_median_u64	(ptrdiff_t nmemb,
+				const uint64_t arr[restrict nmemb])
 {
-	uint64_t	sorted[n];
+	uint64_t	sorted[nmemb];
 	double		median;
 
-	memcpy(sorted, x, sizeof(sorted));
-	qsort(sorted, n, sizeof(sorted[0]), alx_compare_u64);
+	memcpy(sorted, arr, sizeof(sorted));
+	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_u64);
 
-	if (n % 2)
-		median	= sorted[n/2];
+	if (nmemb % 2)
+		median	= sorted[nmemb/2];
 	else
-		median	= (sorted[n/2] + sorted[n/2 - 1]) / 2.0;
+		median	= fAVG(sorted[nmemb/2], sorted[nmemb/2 - 1]);
 
 	return	median;
 }
 
-double		alx_median_s64	(ptrdiff_t n, const int64_t x[restrict n])
+double		alx_median_s64	(ptrdiff_t nmemb,
+				const int64_t arr[restrict nmemb])
 {
-	int64_t	sorted[n];
+	int64_t	sorted[nmemb];
 	double	median;
 
-	memcpy(sorted, x, sizeof(sorted));
-	qsort(sorted, n, sizeof(sorted[0]), alx_compare_s64);
+	memcpy(sorted, arr, sizeof(sorted));
+	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_s64);
 
-	if (n % 2)
-		median	= sorted[n/2];
+	if (nmemb % 2)
+		median	= sorted[nmemb/2];
 	else
-		median	= (sorted[n/2] + sorted[n/2 - 1]) / 2.0;
+		median	= ((uint_fast64_t)sorted[nmemb/2] +
+				(uint_fast64_t)sorted[nmemb/2 - 1]) / 2.0;
 
 	return	median;
 }

@@ -16,14 +16,14 @@ OBJ		=							\
 		alx_input.o
 
 SPRINT_FILE_INC	=							\
-		$(INC_DIR)/libalx/io/sprint_file.h
+		$(INC_DIR)/libalx/stdio/sprint_file.h
 SPRINT_FILE_SRC	=							\
-		$(SRC_DIR)/io/sprint_file.c
+		$(SRC_DIR)/stdio/sprint_file.c
 
 INPUT_INC	=							\
-		$(INC_DIR)/libalx/io/alx_input.h
+		$(INC_DIR)/libalx/stdio/alx_input.h
 INPUT_SRC	=							\
-		$(SRC_DIR)/io/alx_input.c
+		$(SRC_DIR)/stdio/alx_input.c
 
 ################################################################################
 # target: dependencies
@@ -34,17 +34,17 @@ all: $(OBJ)
 
 
 sprint_file.s: $(SPRINT_FILE_SRC) $(SPRINT_FILE_INC)
-	@echo	"	CC	libalx/tmp/io/$@"
+	@echo	"	CC	libalx/tmp/stdio/$@"
 	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
 sprint_file.o: sprint_file.s
-	@echo	"	AS	libalx/tmp/io/$@"
+	@echo	"	AS	libalx/tmp/stdio/$@"
 	$(Q)$(AS) $< -o $@
 
 alx_input.s: $(INPUT_SRC) $(INPUT_INC)
-	@echo	"	CC	libalx/tmp/io/$@"
+	@echo	"	CC	libalx/tmp/stdio/$@"
 	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
 alx_input.o: alx_input.s
-	@echo	"	AS	libalx/tmp/io/$@"
+	@echo	"	AS	libalx/tmp/stdio/$@"
 	$(Q)$(AS) $< -o $@
 
 

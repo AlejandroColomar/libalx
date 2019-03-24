@@ -59,7 +59,8 @@ long double	alx_ldbl_factorial		(int16_t n)
 	if (!n)
 		return	1;
 
-	alx_factorial_factorized(n, &pf);
+	if (alx_factorial_factorized(n, &pf))
+		return	nanl("");
 
 	return	alx_ldbl_prime_defactorization_s16((const int8_t (*)[])&pf);
 }
@@ -75,7 +76,8 @@ double		alx_factorial			(int16_t n)
 	if (!n)
 		return	1;
 
-	alx_factorial_factorized(n, &pf);
+	if (alx_factorial_factorized(n, &pf))
+		return	nan("");
 
 	return	alx_prime_defactorization_s16((const int8_t (*)[])&pf);
 }
@@ -91,7 +93,8 @@ float		alx_flt_factorial		(int16_t n)
 	if (!n)
 		return	1;
 
-	alx_factorial_factorized(n, &pf);
+	if (alx_factorial_factorized(n, &pf))
+		return	nanf("");
 
 	return	alx_flt_prime_defactorization_s16((const int8_t (*)[])&pf);
 }
@@ -116,6 +119,8 @@ int		alx_factorial_factorized	(int16_t n,
 		alx_matrix_addition_s8(ARRAY_SIZE(*pf), *pf, *pf, tmp);
 	}
 
+	if (errno)
+		return	-2;
 	return	0;
 }
 

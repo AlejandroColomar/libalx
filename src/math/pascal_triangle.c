@@ -63,7 +63,8 @@ long double	alx_ldbl_pascal_triangle	(int16_t n, int16_t k)
 	if (k > (n / 2))
 		return	alx_ldbl_pascal_triangle(n, n - k);
 
-	alx_pascal_triangle_factorized(n, k, &pf);
+	if (alx_pascal_triangle_factorized(n, k, &pf))
+		return	nanl("");
 
 	return	alx_ldbl_prime_defactorization_s16((const int8_t (*)[])&pf);
 }
@@ -81,7 +82,8 @@ double		alx_pascal_triangle		(int16_t n, int16_t k)
 	if (k > (n / 2))
 		return	alx_pascal_triangle(n, n - k);
 
-	alx_pascal_triangle_factorized(n, k, &pf);
+	if (alx_pascal_triangle_factorized(n, k, &pf))
+		return	nan("");
 
 	return	alx_prime_defactorization_s16((const int8_t (*)[])&pf);
 }
@@ -99,7 +101,8 @@ float		alx_flt_pascal_triangle		(int16_t n, int16_t k)
 	if (k > (n / 2))
 		return	alx_flt_pascal_triangle(n, n - k);
 
-	alx_pascal_triangle_factorized(n, k, &pf);
+	if (alx_pascal_triangle_factorized(n, k, &pf))
+		return	nanf("");
 
 	return	alx_flt_prime_defactorization_s16((const int8_t (*)[])&pf);
 }
@@ -129,6 +132,8 @@ int		alx_pascal_triangle_factorized	(int16_t n, int16_t k,
 		alx_matrix_addition_s8(ARRAY_SIZE(*pf), *pf, *pf, tmp);
 	}
 
+	if (errno)
+		return	-2;
 	return	0;
 }
 

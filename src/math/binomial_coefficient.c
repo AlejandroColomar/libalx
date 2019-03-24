@@ -65,7 +65,8 @@ long double	alx_ldbl_binomial_coefficient		(int16_t n, int16_t k)
 	if (k == 1)
 		return	n;
 
-	alx_binomial_coefficient_factorized(n, k, &pf);
+	if (alx_binomial_coefficient_factorized(n, k, &pf))
+		return	nanl("");
 
 	return	alx_ldbl_prime_defactorization_s16((const int8_t (*)[])&pf);
 }
@@ -85,7 +86,8 @@ double		alx_binomial_coefficient		(int16_t n, int16_t k)
 	if (k == 1)
 		return	n;
 
-	alx_binomial_coefficient_factorized(n, k, &pf);
+	if (alx_binomial_coefficient_factorized(n, k, &pf))
+		return	nan("");
 
 	return	alx_prime_defactorization_s16((const int8_t (*)[])&pf);
 }
@@ -105,7 +107,8 @@ float		alx_flt_binomial_coefficient		(int16_t n, int16_t k)
 	if (k == 1)
 		return	n;
 
-	alx_binomial_coefficient_factorized(n, k, &pf);
+	if (alx_binomial_coefficient_factorized(n, k, &pf))
+		return	nanf("");
 
 	return	alx_flt_prime_defactorization_s16((const int8_t (*)[])&pf);
 }
@@ -140,6 +143,8 @@ int		alx_binomial_coefficient_factorized	(int16_t n, int16_t k,
 		alx_matrix_addition_s8(ARRAY_SIZE(*pf), *pf, *pf, tmp);
 	} while (j < k);
 
+	if (errno)
+		return	-3;
 	return	0;
 }
 

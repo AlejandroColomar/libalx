@@ -1,5 +1,5 @@
 /******************************************************************************
- *	Copyright (C) 2019	Alejandro Colomar Andrés		      *
+ *	Copyright (C) 2017	Alejandro Colomar Andrés		      *
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
@@ -7,15 +7,15 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_STDLIB_MAXIMUM_H
-#define ALX_STDLIB_MAXIMUM_H
+#ifndef ALX_STDIO_SPRINT_FILE_HPP
+#define ALX_STDIO_SPRINT_FILE_HPP
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <stddef.h>
-#include <stdint.h>
+#include <cstddef>
+#include <cstdio>
 
 
 /******************************************************************************
@@ -41,20 +41,12 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
-ptrdiff_t	alx_maximum_ldbl(ptrdiff_t n, const long double arr[restrict n]);
-ptrdiff_t	alx_maximum	(ptrdiff_t n, const double arr[restrict n]);
-ptrdiff_t	alx_maximum_f	(ptrdiff_t n, const float arr[restrict n]);
-ptrdiff_t	alx_maximum_uint(ptrdiff_t n, const unsigned arr[restrict n]);
-ptrdiff_t	alx_maximum_int	(ptrdiff_t n, const int arr[restrict n]);
-ptrdiff_t	alx_maximum_u8	(ptrdiff_t n, const uint8_t arr[restrict n]);
-ptrdiff_t	alx_maximum_s8	(ptrdiff_t n, const int8_t arr[restrict n]);
-ptrdiff_t	alx_maximum_u16	(ptrdiff_t n, const uint16_t arr[restrict n]);
-ptrdiff_t	alx_maximum_s16	(ptrdiff_t n, const int16_t arr[restrict n]);
-ptrdiff_t	alx_maximum_u32	(ptrdiff_t n, const uint32_t arr[restrict n]);
-ptrdiff_t	alx_maximum_s32	(ptrdiff_t n, const int32_t arr[restrict n]);
-ptrdiff_t	alx_maximum_u64	(ptrdiff_t n, const uint64_t arr[restrict n]);
-ptrdiff_t	alx_maximum_s64	(ptrdiff_t n, const int64_t arr[restrict n]);
-ptrdiff_t	alx_maximum_pdif(ptrdiff_t n, const ptrdiff_t arr[restrict n]);
+extern	"C"
+{
+ptrdiff_t	alx_snprint_file(ptrdiff_t size,
+				char dest[restrict size],
+				const char fpath[restrict FILENAME_MAX]);
+}
 
 
 /******************************************************************************
@@ -70,7 +62,7 @@ ptrdiff_t	alx_maximum_pdif(ptrdiff_t n, const ptrdiff_t arr[restrict n]);
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/stdlib/maximum.h */
+# endif			/* libalx/stdio/sprint_file.hpp */
 
 
 /******************************************************************************

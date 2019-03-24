@@ -16,6 +16,18 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+/*
+ * Using AVG(x, y) would be slow.  Here we know that the first element will be
+ * always smaller than the second element.
+ */
+#define	mid_index(lo, hi) (						\
+{									\
+	__auto_type	_lo	= (lo);					\
+	__auto_type	_hi	= (hi);					\
+									\
+	_hi - (_hi - _lo) / 2;						\
+}									\
+)
 
 
 /******************************************************************************
@@ -41,10 +53,12 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-ptrdiff_t alx_search_uint(ptrdiff_t n, const unsigned arr[restrict n], unsigned x)
+ptrdiff_t	alx_search_uint	(ptrdiff_t nmemb,
+				const unsigned arr[restrict nmemb],
+				unsigned x)
 {
 
-	for (ptrdiff_t i = 0; i < n; i++) {
+	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		if (arr[i] == x)
 			return	i;
 	}
@@ -52,10 +66,12 @@ ptrdiff_t alx_search_uint(ptrdiff_t n, const unsigned arr[restrict n], unsigned 
 	return	-1;
 }
 
-ptrdiff_t alx_search_int(ptrdiff_t n, const int arr[restrict n], int x)
+ptrdiff_t	alx_search_int	(ptrdiff_t nmemb,
+				const int arr[restrict nmemb],
+				int x)
 {
 
-	for (ptrdiff_t i = 0; i < n; i++) {
+	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		if (arr[i] == x)
 			return	i;
 	}
@@ -63,10 +79,12 @@ ptrdiff_t alx_search_int(ptrdiff_t n, const int arr[restrict n], int x)
 	return	-1;
 }
 
-ptrdiff_t alx_search_u8	(ptrdiff_t n, const uint8_t arr[restrict n], uint8_t x)
+ptrdiff_t	alx_search_u8	(ptrdiff_t nmemb,
+				const uint8_t arr[restrict nmemb],
+				uint8_t x)
 {
 
-	for (ptrdiff_t i = 0; i < n; i++) {
+	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		if (arr[i] == x)
 			return	i;
 	}
@@ -74,10 +92,12 @@ ptrdiff_t alx_search_u8	(ptrdiff_t n, const uint8_t arr[restrict n], uint8_t x)
 	return	-1;
 }
 
-ptrdiff_t alx_search_s8	(ptrdiff_t n, const int8_t arr[restrict n], int8_t x)
+ptrdiff_t	alx_search_s8	(ptrdiff_t nmemb,
+				const int8_t arr[restrict nmemb],
+				int8_t x)
 {
 
-	for (ptrdiff_t i = 0; i < n; i++) {
+	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		if (arr[i] == x)
 			return	i;
 	}
@@ -85,10 +105,12 @@ ptrdiff_t alx_search_s8	(ptrdiff_t n, const int8_t arr[restrict n], int8_t x)
 	return	-1;
 }
 
-ptrdiff_t alx_search_u16(ptrdiff_t n, const uint16_t arr[restrict n], uint16_t x)
+ptrdiff_t	alx_search_u16	(ptrdiff_t nmemb,
+				const uint16_t arr[restrict nmemb],
+				uint16_t x)
 {
 
-	for (ptrdiff_t i = 0; i < n; i++) {
+	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		if (arr[i] == x)
 			return	i;
 	}
@@ -96,10 +118,12 @@ ptrdiff_t alx_search_u16(ptrdiff_t n, const uint16_t arr[restrict n], uint16_t x
 	return	-1;
 }
 
-ptrdiff_t alx_search_s16(ptrdiff_t n, const int16_t arr[restrict n], int16_t x)
+ptrdiff_t	alx_search_s16	(ptrdiff_t nmemb,
+				const int16_t arr[restrict nmemb],
+				int16_t x)
 {
 
-	for (ptrdiff_t i = 0; i < n; i++) {
+	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		if (arr[i] == x)
 			return	i;
 	}
@@ -107,10 +131,12 @@ ptrdiff_t alx_search_s16(ptrdiff_t n, const int16_t arr[restrict n], int16_t x)
 	return	-1;
 }
 
-ptrdiff_t alx_search_u32(ptrdiff_t n, const uint32_t arr[restrict n], uint32_t x)
+ptrdiff_t	alx_search_u32	(ptrdiff_t nmemb,
+				const uint32_t arr[restrict nmemb],
+				uint32_t x)
 {
 
-	for (ptrdiff_t i = 0; i < n; i++) {
+	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		if (arr[i] == x)
 			return	i;
 	}
@@ -118,9 +144,11 @@ ptrdiff_t alx_search_u32(ptrdiff_t n, const uint32_t arr[restrict n], uint32_t x
 	return	-1;
 }
 
-ptrdiff_t alx_search_s32(ptrdiff_t n, const int32_t arr[restrict n], int32_t x)
+ptrdiff_t	alx_search_s32	(ptrdiff_t nmemb,
+				const int32_t arr[restrict nmemb],
+				int32_t x)
 {
-	for (ptrdiff_t i = 0; i < n; i++) {
+	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		if (arr[i] == x)
 			return	i;
 	}
@@ -128,10 +156,12 @@ ptrdiff_t alx_search_s32(ptrdiff_t n, const int32_t arr[restrict n], int32_t x)
 	return	-1;
 }
 
-ptrdiff_t alx_search_u64(ptrdiff_t n, const uint64_t arr[restrict n], uint64_t x)
+ptrdiff_t	alx_search_u64	(ptrdiff_t nmemb,
+				const uint64_t arr[restrict nmemb],
+				uint64_t x)
 {
 
-	for (ptrdiff_t i = 0; i < n; i++) {
+	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		if (arr[i] == x)
 			return	i;
 	}
@@ -139,10 +169,12 @@ ptrdiff_t alx_search_u64(ptrdiff_t n, const uint64_t arr[restrict n], uint64_t x
 	return	-1;
 }
 
-ptrdiff_t alx_search_s64(ptrdiff_t n, const int64_t arr[restrict n], int64_t x)
+ptrdiff_t	alx_search_s64	(ptrdiff_t nmemb,
+				const int64_t arr[restrict nmemb],
+				int64_t x)
 {
 
-	for (ptrdiff_t i = 0; i < n; i++) {
+	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		if (arr[i] == x)
 			return	i;
 	}
@@ -150,17 +182,19 @@ ptrdiff_t alx_search_s64(ptrdiff_t n, const int64_t arr[restrict n], int64_t x)
 	return	-1;
 }
 
-ptrdiff_t alx_bsearch_uint(ptrdiff_t n, const unsigned arr[restrict n], unsigned x)
+ptrdiff_t	alx_bsearch_uint(ptrdiff_t nmemb,
+				const unsigned arr[restrict nmemb],
+				unsigned x)
 {
 	ptrdiff_t	lim_hi;
 	ptrdiff_t	lim_lo;
 	ptrdiff_t	i;
 
-	lim_hi	= n;
+	lim_hi	= nmemb;
 	lim_lo	= 0;
 
 	while (lim_hi > lim_lo) {
-		i	= (lim_hi + lim_lo) / 2;
+		i	= mid_index(lim_lo, lim_hi);
 		if (arr[i] > x)
 			lim_hi	= i;
 		else if (arr[i] < x)
@@ -172,17 +206,19 @@ ptrdiff_t alx_bsearch_uint(ptrdiff_t n, const unsigned arr[restrict n], unsigned
 	return	-1;
 }
 
-ptrdiff_t alx_bsearch_int(ptrdiff_t n, const int arr[restrict n], int x)
+ptrdiff_t	alx_bsearch_int	(ptrdiff_t nmemb,
+				const int arr[restrict nmemb],
+				int x)
 {
 	ptrdiff_t	lim_hi;
 	ptrdiff_t	lim_lo;
 	ptrdiff_t	i;
 
-	lim_hi	= n;
+	lim_hi	= nmemb;
 	lim_lo	= 0;
 
 	while (lim_hi > lim_lo) {
-		i	= (lim_hi + lim_lo) / 2;
+		i	= mid_index(lim_lo, lim_hi);
 		if (arr[i] > x)
 			lim_hi	= i;
 		else if (arr[i] < x)
@@ -194,17 +230,19 @@ ptrdiff_t alx_bsearch_int(ptrdiff_t n, const int arr[restrict n], int x)
 	return	-1;
 }
 
-ptrdiff_t alx_bsearch_u8(ptrdiff_t n, const uint8_t arr[restrict n], uint8_t x)
+ptrdiff_t	alx_bsearch_u8	(ptrdiff_t nmemb,
+				const uint8_t arr[restrict nmemb],
+				uint8_t x)
 {
 	ptrdiff_t	lim_hi;
 	ptrdiff_t	lim_lo;
 	ptrdiff_t	i;
 
-	lim_hi	= n;
+	lim_hi	= nmemb;
 	lim_lo	= 0;
 
 	while (lim_hi > lim_lo) {
-		i	= (lim_hi + lim_lo) / 2;
+		i	= mid_index(lim_lo, lim_hi);
 		if (arr[i] > x)
 			lim_hi	= i;
 		else if (arr[i] < x)
@@ -216,17 +254,19 @@ ptrdiff_t alx_bsearch_u8(ptrdiff_t n, const uint8_t arr[restrict n], uint8_t x)
 	return	-1;
 }
 
-ptrdiff_t alx_bsearch_s8(ptrdiff_t n, const int8_t arr[restrict n], int8_t x)
+ptrdiff_t	alx_bsearch_s8	(ptrdiff_t nmemb,
+				const int8_t arr[restrict nmemb],
+				int8_t x)
 {
 	ptrdiff_t	lim_hi;
 	ptrdiff_t	lim_lo;
 	ptrdiff_t	i;
 
-	lim_hi	= n;
+	lim_hi	= nmemb;
 	lim_lo	= 0;
 
 	while (lim_hi > lim_lo) {
-		i	= (lim_hi + lim_lo) / 2;
+		i	= mid_index(lim_lo, lim_hi);
 		if (arr[i] > x)
 			lim_hi	= i;
 		else if (arr[i] < x)
@@ -238,17 +278,19 @@ ptrdiff_t alx_bsearch_s8(ptrdiff_t n, const int8_t arr[restrict n], int8_t x)
 	return	-1;
 }
 
-ptrdiff_t alx_bsearch_u16(ptrdiff_t n, const uint16_t arr[restrict n], uint16_t x)
+ptrdiff_t	alx_bsearch_u16	(ptrdiff_t nmemb,
+				const uint16_t arr[restrict nmemb],
+				uint16_t x)
 {
 	ptrdiff_t	lim_hi;
 	ptrdiff_t	lim_lo;
 	ptrdiff_t	i;
 
-	lim_hi	= n;
+	lim_hi	= nmemb;
 	lim_lo	= 0;
 
 	while (lim_hi > lim_lo) {
-		i	= (lim_hi + lim_lo) / 2;
+		i	= mid_index(lim_lo, lim_hi);
 		if (arr[i] > x)
 			lim_hi	= i;
 		else if (arr[i] < x)
@@ -260,17 +302,19 @@ ptrdiff_t alx_bsearch_u16(ptrdiff_t n, const uint16_t arr[restrict n], uint16_t 
 	return	-1;
 }
 
-ptrdiff_t alx_bsearch_s16(ptrdiff_t n, const int16_t arr[restrict n], int16_t x)
+ptrdiff_t	alx_bsearch_s16	(ptrdiff_t nmemb,
+				const int16_t arr[restrict nmemb],
+				int16_t x)
 {
 	ptrdiff_t	lim_hi;
 	ptrdiff_t	lim_lo;
 	ptrdiff_t	i;
 
-	lim_hi	= n;
+	lim_hi	= nmemb;
 	lim_lo	= 0;
 
 	while (lim_hi > lim_lo) {
-		i	= (lim_hi + lim_lo) / 2;
+		i	= mid_index(lim_lo, lim_hi);
 		if (arr[i] > x)
 			lim_hi	= i;
 		else if (arr[i] < x)
@@ -282,17 +326,19 @@ ptrdiff_t alx_bsearch_s16(ptrdiff_t n, const int16_t arr[restrict n], int16_t x)
 	return	-1;
 }
 
-ptrdiff_t alx_bsearch_u32(ptrdiff_t n, const uint32_t arr[restrict n], uint32_t x)
+ptrdiff_t	alx_bsearch_u32	(ptrdiff_t nmemb,
+				const uint32_t arr[restrict nmemb],
+				uint32_t x)
 {
 	ptrdiff_t	lim_hi;
 	ptrdiff_t	lim_lo;
 	ptrdiff_t	i;
 
-	lim_hi	= n;
+	lim_hi	= nmemb;
 	lim_lo	= 0;
 
 	while (lim_hi > lim_lo) {
-		i	= (lim_hi + lim_lo) / 2;
+		i	= mid_index(lim_lo, lim_hi);
 		if (arr[i] > x)
 			lim_hi	= i;
 		else if (arr[i] < x)
@@ -304,17 +350,19 @@ ptrdiff_t alx_bsearch_u32(ptrdiff_t n, const uint32_t arr[restrict n], uint32_t 
 	return	-1;
 }
 
-ptrdiff_t alx_bsearch_s32(ptrdiff_t n, const int32_t arr[restrict n], int32_t x)
+ptrdiff_t	alx_bsearch_s32	(ptrdiff_t nmemb,
+				const int32_t arr[restrict nmemb],
+				int32_t x)
 {
 	ptrdiff_t	lim_hi;
 	ptrdiff_t	lim_lo;
 	ptrdiff_t	i;
 
-	lim_hi	= n;
+	lim_hi	= nmemb;
 	lim_lo	= 0;
 
 	while (lim_hi > lim_lo) {
-		i	= (lim_hi + lim_lo) / 2;
+		i	= mid_index(lim_lo, lim_hi);
 		if (arr[i] > x)
 			lim_hi	= i;
 		else if (arr[i] < x)
@@ -326,17 +374,19 @@ ptrdiff_t alx_bsearch_s32(ptrdiff_t n, const int32_t arr[restrict n], int32_t x)
 	return	-1;
 }
 
-ptrdiff_t alx_bsearch_u64(ptrdiff_t n, const uint64_t arr[restrict n], uint64_t x)
+ptrdiff_t	alx_bsearch_u64	(ptrdiff_t nmemb,
+				const uint64_t arr[restrict nmemb],
+				uint64_t x)
 {
 	ptrdiff_t	lim_hi;
 	ptrdiff_t	lim_lo;
 	ptrdiff_t	i;
 
-	lim_hi	= n;
+	lim_hi	= nmemb;
 	lim_lo	= 0;
 
 	while (lim_hi > lim_lo) {
-		i	= (lim_hi + lim_lo) / 2;
+		i	= mid_index(lim_lo, lim_hi);
 		if (arr[i] > x)
 			lim_hi	= i;
 		else if (arr[i] < x)
@@ -348,17 +398,19 @@ ptrdiff_t alx_bsearch_u64(ptrdiff_t n, const uint64_t arr[restrict n], uint64_t 
 	return	-1;
 }
 
-ptrdiff_t alx_bsearch_s64(ptrdiff_t n, const int64_t arr[restrict n], int64_t x)
+ptrdiff_t	alx_bsearch_s64	(ptrdiff_t nmemb,
+				const int64_t arr[restrict nmemb],
+				int64_t x)
 {
 	ptrdiff_t	lim_hi;
 	ptrdiff_t	lim_lo;
 	ptrdiff_t	i;
 
-	lim_hi	= n;
+	lim_hi	= nmemb;
 	lim_lo	= 0;
 
 	while (lim_hi > lim_lo) {
-		i	= (lim_hi + lim_lo) / 2;
+		i	= mid_index(lim_lo, lim_hi);
 		if (arr[i] > x)
 			lim_hi	= i;
 		else if (arr[i] < x)
