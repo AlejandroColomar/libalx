@@ -60,7 +60,7 @@ void	alx_local_maxima_ldbl	(ptrdiff_t rows, ptrdiff_t cols,
 		return;
 	}
 
-	memset(arr_out, 0, rows * cols * sizeof(arr_out[0][0]));
+	memset(arr_out, 0, sizeof(arr_out[0][0]) * rows * cols);
 
 	for (ptrdiff_t i = 0; i < rows; i++) {
 	for (ptrdiff_t j = 0; j < cols; j++) {
@@ -96,7 +96,7 @@ void	alx_local_maxima	(ptrdiff_t rows, ptrdiff_t cols,
 		return;
 	}
 
-	memset(arr_out, 0, rows * cols * sizeof(arr_out[0][0]));
+	memset(arr_out, 0, sizeof(arr_out[0][0]) * rows * cols);
 
 	for (ptrdiff_t i = 0; i < rows; i++) {
 	for (ptrdiff_t j = 0; j < cols; j++) {
@@ -132,7 +132,7 @@ void	alx_local_maxima_f	(ptrdiff_t rows, ptrdiff_t cols,
 		return;
 	}
 
-	memset(arr_out, 0, rows * cols * sizeof(arr_out[0][0]));
+	memset(arr_out, 0, sizeof(arr_out[0][0]) * rows * cols);
 
 	for (ptrdiff_t i = 0; i < rows; i++) {
 	for (ptrdiff_t j = 0; j < cols; j++) {

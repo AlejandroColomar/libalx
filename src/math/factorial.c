@@ -116,7 +116,7 @@ int		alx_factorial_factorized	(int16_t n,
 
 	for (int_fast16_t i = n; i > 1; i--) {
 		alx_prime_factorization_s16(i, &tmp);
-		alx_matrix_addition_s8(ARRAY_SIZE(*pf), *pf, *pf, tmp);
+		alx_matrix_addition_s8(ARRAY_SSIZE(*pf), *pf, *pf, tmp);
 	}
 
 	if (errno)

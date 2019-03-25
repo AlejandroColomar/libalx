@@ -41,9 +41,9 @@ PHONY += string
 string:
 	$(Q)$(MAKE)	-C $(TST_DIR)/string/
 
-PHONY += io
-io:
-	$(Q)$(MAKE)	-C $(TST_DIR)/io/
+PHONY += stdio
+stdio:
+	$(Q)$(MAKE)	-C $(TST_DIR)/stdio/
 
 PHONY += curses
 curses:

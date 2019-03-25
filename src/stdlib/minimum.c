@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/stdlib/maximum.h"
+#include "libalx/stdlib/minimum.h"
 
 #include <limits.h>
 #include <math.h>
@@ -43,16 +43,16 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-ptrdiff_t	alx_maximum_ldbl(ptrdiff_t nmemb,
+ptrdiff_t	alx_minimum_ldbl(ptrdiff_t nmemb,
 				const long double arr[restrict nmemb])
 {
 	ptrdiff_t	pos;
 	long double	val;
 
 	pos	= 0;
-	val	= -INFINITY;
+	val	= INFINITY;
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
-		if (arr[i] >= val) {
+		if (arr[i] <= val) {
 			val	= arr[i];
 			pos	= i;
 		}
@@ -61,16 +61,16 @@ ptrdiff_t	alx_maximum_ldbl(ptrdiff_t nmemb,
 	return	pos;
 }
 
-ptrdiff_t	alx_maximum	(ptrdiff_t nmemb,
+ptrdiff_t	alx_minimum	(ptrdiff_t nmemb,
 				const double arr[restrict nmemb])
 {
 	ptrdiff_t	pos;
 	double		val;
 
 	pos	= 0;
-	val	= -INFINITY;
+	val	= INFINITY;
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
-		if (arr[i] >= val) {
+		if (arr[i] <= val) {
 			val	= arr[i];
 			pos	= i;
 		}
@@ -79,16 +79,16 @@ ptrdiff_t	alx_maximum	(ptrdiff_t nmemb,
 	return	pos;
 }
 
-ptrdiff_t	alx_maximum_f	(ptrdiff_t nmemb,
+ptrdiff_t	alx_minimum_f	(ptrdiff_t nmemb,
 				const float arr[restrict nmemb])
 {
 	ptrdiff_t	pos;
 	float		val;
 
 	pos	= 0;
-	val	= -INFINITY;
+	val	= INFINITY;
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
-		if (arr[i] >= val) {
+		if (arr[i] <= val) {
 			val	= arr[i];
 			pos	= i;
 		}
@@ -97,16 +97,16 @@ ptrdiff_t	alx_maximum_f	(ptrdiff_t nmemb,
 	return	pos;
 }
 
-ptrdiff_t	alx_maximum_uint(ptrdiff_t nmemb,
+ptrdiff_t	alx_minimum_uint(ptrdiff_t nmemb,
 				const unsigned arr[restrict nmemb])
 {
 	ptrdiff_t	pos;
 	unsigned	val;
 
 	pos	= 0;
-	val	= 0;
+	val	= UINT_MAX;
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
-		if (arr[i] >= val) {
+		if (arr[i] <= val) {
 			val	= arr[i];
 			pos	= i;
 		}
@@ -115,16 +115,16 @@ ptrdiff_t	alx_maximum_uint(ptrdiff_t nmemb,
 	return	pos;
 }
 
-ptrdiff_t	alx_maximum_int	(ptrdiff_t nmemb,
+ptrdiff_t	alx_minimum_int	(ptrdiff_t nmemb,
 				const int arr[restrict nmemb])
 {
 	ptrdiff_t	pos;
 	int		val;
 
 	pos	= 0;
-	val	= INT_MIN;
+	val	= INT_MAX;
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
-		if (arr[i] >= val) {
+		if (arr[i] <= val) {
 			val	= arr[i];
 			pos	= i;
 		}
@@ -133,16 +133,16 @@ ptrdiff_t	alx_maximum_int	(ptrdiff_t nmemb,
 	return	pos;
 }
 
-ptrdiff_t	alx_maximum_u8	(ptrdiff_t nmemb,
+ptrdiff_t	alx_minimum_u8	(ptrdiff_t nmemb,
 				const uint8_t arr[restrict nmemb])
 {
 	ptrdiff_t	pos;
 	uint8_t		val;
 
 	pos	= 0;
-	val	= 0;
+	val	= UINT8_MAX;
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
-		if (arr[i] >= val) {
+		if (arr[i] <= val) {
 			val	= arr[i];
 			pos	= i;
 		}
@@ -151,16 +151,16 @@ ptrdiff_t	alx_maximum_u8	(ptrdiff_t nmemb,
 	return	pos;
 }
 
-ptrdiff_t	alx_maximum_s8	(ptrdiff_t nmemb,
+ptrdiff_t	alx_minimum_s8	(ptrdiff_t nmemb,
 				const int8_t arr[restrict nmemb])
 {
 	ptrdiff_t	pos;
 	int8_t		val;
 
 	pos	= 0;
-	val	= INT8_MIN;
+	val	= INT8_MAX;
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
-		if (arr[i] >= val) {
+		if (arr[i] <= val) {
 			val	= arr[i];
 			pos	= i;
 		}
@@ -169,16 +169,16 @@ ptrdiff_t	alx_maximum_s8	(ptrdiff_t nmemb,
 	return	pos;
 }
 
-ptrdiff_t	alx_maximum_u16	(ptrdiff_t nmemb,
+ptrdiff_t	alx_minimum_u16	(ptrdiff_t nmemb,
 				const uint16_t arr[restrict nmemb])
 {
 	ptrdiff_t	pos;
 	uint16_t	val;
 
 	pos	= 0;
-	val	= 0;
+	val	= UINT16_MAX;
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
-		if (arr[i] >= val) {
+		if (arr[i] <= val) {
 			val	= arr[i];
 			pos	= i;
 		}
@@ -187,16 +187,16 @@ ptrdiff_t	alx_maximum_u16	(ptrdiff_t nmemb,
 	return	pos;
 }
 
-ptrdiff_t	alx_maximum_s16	(ptrdiff_t nmemb,
+ptrdiff_t	alx_minimum_s16	(ptrdiff_t nmemb,
 				const int16_t arr[restrict nmemb])
 {
 	ptrdiff_t	pos;
 	int16_t		val;
 
 	pos	= 0;
-	val	= INT16_MIN;
+	val	= INT16_MAX;
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
-		if (arr[i] >= val) {
+		if (arr[i] <= val) {
 			val	= arr[i];
 			pos	= i;
 		}
@@ -205,16 +205,16 @@ ptrdiff_t	alx_maximum_s16	(ptrdiff_t nmemb,
 	return	pos;
 }
 
-ptrdiff_t	alx_maximum_u32	(ptrdiff_t nmemb,
+ptrdiff_t	alx_minimum_u32	(ptrdiff_t nmemb,
 				const uint32_t arr[restrict nmemb])
 {
 	ptrdiff_t	pos;
 	uint32_t	val;
 
 	pos	= 0;
-	val	= 0;
+	val	= UINT32_MAX;
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
-		if (arr[i] >= val) {
+		if (arr[i] <= val) {
 			val	= arr[i];
 			pos	= i;
 		}
@@ -223,16 +223,16 @@ ptrdiff_t	alx_maximum_u32	(ptrdiff_t nmemb,
 	return	pos;
 }
 
-ptrdiff_t	alx_maximum_s32	(ptrdiff_t nmemb,
+ptrdiff_t	alx_minimum_s32	(ptrdiff_t nmemb,
 				const int32_t arr[restrict nmemb])
 {
 	ptrdiff_t	pos;
 	int32_t		val;
 
 	pos	= 0;
-	val	= INT32_MIN;
+	val	= INT32_MAX;
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
-		if (arr[i] >= val) {
+		if (arr[i] <= val) {
 			val	= arr[i];
 			pos	= i;
 		}
@@ -241,16 +241,16 @@ ptrdiff_t	alx_maximum_s32	(ptrdiff_t nmemb,
 	return	pos;
 }
 
-ptrdiff_t	alx_maximum_u64	(ptrdiff_t nmemb,
+ptrdiff_t	alx_minimum_u64	(ptrdiff_t nmemb,
 				const uint64_t arr[restrict nmemb])
 {
 	ptrdiff_t	pos;
 	uint64_t	val;
 
 	pos	= 0;
-	val	= 0;
+	val	= UINT64_MAX;
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
-		if (arr[i] >= val) {
+		if (arr[i] <= val) {
 			val	= arr[i];
 			pos	= i;
 		}
@@ -259,16 +259,16 @@ ptrdiff_t	alx_maximum_u64	(ptrdiff_t nmemb,
 	return	pos;
 }
 
-ptrdiff_t	alx_maximum_s64	(ptrdiff_t nmemb,
+ptrdiff_t	alx_minimum_s64	(ptrdiff_t nmemb,
 				const int64_t arr[restrict nmemb])
 {
 	ptrdiff_t	pos;
 	int64_t		val;
 
 	pos	= 0;
-	val	= INT64_MIN;
+	val	= INT64_MAX;
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
-		if (arr[i] >= val) {
+		if (arr[i] <= val) {
 			val	= arr[i];
 			pos	= i;
 		}
@@ -277,16 +277,16 @@ ptrdiff_t	alx_maximum_s64	(ptrdiff_t nmemb,
 	return	pos;
 }
 
-ptrdiff_t	alx_maximum_pdif(ptrdiff_t nmemb,
+ptrdiff_t	alx_minimum_pdif(ptrdiff_t nmemb,
 				const ptrdiff_t arr[restrict nmemb])
 {
 	ptrdiff_t	pos;
 	ptrdiff_t	val;
 
 	pos	= 0;
-	val	= PTRDIFF_MIN;
+	val	= PTRDIFF_MAX;
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
-		if (arr[i] >= val) {
+		if (arr[i] <= val) {
 			val	= arr[i];
 			pos	= i;
 		}

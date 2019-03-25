@@ -30,19 +30,10 @@
 }									\
 )
 
-#define	fAVG(a, b) (							\
+#define	AVGfast(a, b, type) (						\
 {									\
-	__auto_type	_a	= (a);					\
-	__auto_type	_b	= (b);					\
-									\
-	(_a / 2.0) + (_b / 2.0);					\
-}									\
-)
-
-#define	fAVGf(a, b) (							\
-{									\
-	__auto_type	_a	= (a);					\
-	__auto_type	_b	= (b);					\
+	type	_a	= (a);						\
+	type	_b	= (b);						\
 									\
 	(_a + _b) / 2.0;						\
 }									\

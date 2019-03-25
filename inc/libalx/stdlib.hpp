@@ -20,6 +20,7 @@
 #include "libalx/stdlib/compare.hpp"
 #include "libalx/stdlib/local_maxima.hpp"
 #include "libalx/stdlib/maximum.hpp"
+#include "libalx/stdlib/minimum.hpp"
 #include "libalx/stdlib/popcnt.hpp"
 #include "libalx/stdlib/pow.hpp"
 #include "libalx/stdlib/search.hpp"

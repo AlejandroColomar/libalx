@@ -26,12 +26,14 @@ STDINT_OBJ	=							\
 		$(TMP_DIR)/stdint/int128.o
 STDIO_OBJ	=							\
 		$(TMP_DIR)/stdio/alx_input.o				\
-		$(TMP_DIR)/stdio/sprint_file.o
+		$(TMP_DIR)/stdio/sprint_file.o				\
+		$(TMP_DIR)/stdio/sscan.o
 STDLIB_OBJ	=							\
 		$(TMP_DIR)/stdlib/array_split_pos_neg.o			\
 		$(TMP_DIR)/stdlib/compare.o				\
 		$(TMP_DIR)/stdlib/local_maxima.o			\
 		$(TMP_DIR)/stdlib/maximum.o				\
+		$(TMP_DIR)/stdlib/minimum.o				\
 		$(TMP_DIR)/stdlib/popcnt.o				\
 		$(TMP_DIR)/stdlib/pow.o					\
 		$(TMP_DIR)/stdlib/search.o				\

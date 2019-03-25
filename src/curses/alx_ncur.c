@@ -17,7 +17,8 @@
 
 	#include <ncurses.h>
 
-	#include "libalx/io/alx_input.h"
+	#include "libalx/stdio/alx_input.h"
+	#include "libalx/stdio/sscan.h"
 
 
 /******************************************************************************
@@ -563,7 +564,7 @@ static	int64_t	loop_w_getint		(WINDOW *win,
 			err_val	= ERR_GETSTR;
 			goto err;
 		}
-		err_val	= alx_sscan_i64(&Z, m, def, M, buff);
+		err_val	= alx_sscan_s64(&Z, m, def, M, buff);
 		if (err_val)
 			goto err;
 
@@ -585,7 +586,7 @@ static	int	loop_w_getstr		(char *dest, int destsize, WINDOW *win)
 	int	err_val;
 
 	for (i = 0; i < MAX_TRIES; i++) {
-		err_val	= ERR_OK;
+		err_val	= 0;
 
 		echo();
 		x	= mvwgetnstr(win, 0, 0, buff, BUFF_SIZE);
@@ -620,7 +621,7 @@ static	int	loop_w_getfname		(const char *fpath, char *fname,
 	int	err_val;
 
 	for (i = 0; i < MAX_TRIES; i++) {
-		err_val	= ERR_OK;
+		err_val	= 0;
 
 		echo();
 		x	= mvwgetnstr(win, 0, 0, buff, FILENAME_MAX);
@@ -655,8 +656,11 @@ static	void	manage_w_error		(WINDOW *win, int err)
 	case ERR_SSCANF:
 		mvwaddstr(win, 0, 0, ERR_SSCANF_MSG);
 		break;
-	case ERR_FPTR:
-		mvwaddstr(win, 0, 0, ERR_FPTR_MSG);
+	case ERR_FOPEN:
+		mvwaddstr(win, 0, 0, ERR_FOPEN_MSG);
+		break;
+	case ERR_FEXIST:
+		mvwaddstr(win, 0, 0, ERR_FEXIST_MSG);
 		break;
 	case ERR_FGETS:
 		mvwaddstr(win, 0, 0, ERR_FGETS_MSG);

@@ -7,12 +7,14 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-	#include "libalx/stdio/alx_input.h"
+#include "libalx/stdio/alx_input.h"
 
-	#include <inttypes.h>
-	#include <stdbool.h>
-	#include <stddef.h>
-	#include <stdio.h>
+#include <inttypes.h>
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdio.h>
+
+#include "libalx/stdio/sscan.h"
 
 
 /******************************************************************************
@@ -35,108 +37,6 @@ static	void	manage_error	(int err);
 /******************************************************************************
  ******* main *****************************************************************
  ******************************************************************************/
-	/*
-	 * Scan a number in the range [m, M].
-	 * return:	0	if correct
-	 *		non 0	if there is an error
-	 */
-int	alx_sscan_dbl	(double *dest, double m, double def, double M,
-			const char *str)
-{
-	int	ret;
-
-	if (sscanf(str, " %lf", dest) != 1) {
-		ret	= ERR_SSCANF;
-		goto err;
-	}
-	if ((*dest < m) || (*dest > M)) {
-		ret	= ERR_RANGE;
-		goto err;
-	}
-
-	return	ERR_OK;
-
-err:
-	*dest	= def;
-	return	ret;
-}
-
-int	alx_sscan_int	(int *dest, double m, int def, double M,
-			const char *str)
-{
-	int	ret;
-
-	if (sscanf(str, " %i", dest) != 1) {
-		ret	= ERR_SSCANF;
-		goto err;
-	}
-	if ((*dest < m) || (*dest > M)) {
-		ret	= ERR_RANGE;
-		goto err;
-	}
-
-	return	ERR_OK;
-
-err:
-	*dest	= def;
-	return	ret;
-}
-
-int	alx_sscan_i64	(int64_t *dest, double m, int64_t def, double M,
-			const char *str)
-{
-	int	ret;
-
-	if (sscanf(str, " %"SCNi64"", dest) != 1) {
-		ret	= ERR_SSCANF;
-		goto err;
-	}
-	if ((*dest < m) || (*dest > M)) {
-		ret	= ERR_RANGE;
-		goto err;
-	}
-
-	return	ERR_OK;
-
-err:
-	*dest	= def;
-	return	ret;
-}
-
-	/*
-	 * Scan a file name in fpath.
-	 * return:	0	if correct
-	 *		non 0	if there is an error
-	 */
-int	alx_sscan_fname	(const char *fpath, char *fname, bool exist,
-			const char *str)
-{
-	char	buff [FILENAME_MAX];
-	char	file_path [FILENAME_MAX];
-	FILE	*fp;
-
-	if (sscanf(str, " %s", buff) != 1)
-		return	ERR_SSCANF;
-
-	if (snprintf(file_path, FILENAME_MAX, "%s%s", fpath, buff) < 0)
-		return	ERR_SNPRINTF;
-
-	fp	= fopen(file_path, "r");
-	if (fp) {
-		fclose(fp);
-		if (!exist)
-			return	ERR_FPTR;
-	} else {
-		if (exist)
-			return	ERR_FPTR;
-	}
-
-	if (snprintf(fname, FILENAME_MAX, "%s", buff) < 0)
-		return	ERR_SNPRINTF;
-
-	return	ERR_OK;
-}
-
 	/*
 	 * Ask for a double in the range [m, M].
 	 *
@@ -282,7 +182,7 @@ static	int64_t	loop_getint_i64	(double m, int64_t def, double M)
 			goto err;
 		}
 
-		err_val	= alx_sscan_i64(&Z, m, def, M, buff);
+		err_val	= alx_sscan_s64(&Z, m, def, M, buff);
 		if (err_val)
 			goto err;
 
@@ -306,8 +206,11 @@ static	void	manage_error	(int err)
 	case ERR_SSCANF:
 		printf("%s\n", ERR_SSCANF_MSG);
 		break;
-	case ERR_FPTR:
-		printf("%s\n", ERR_FPTR_MSG);
+	case ERR_FOPEN:
+		printf("%s\n", ERR_FOPEN_MSG);
+		break;
+	case ERR_FEXIST:
+		printf("%s\n", ERR_FEXIST_MSG);
 		break;
 	case ERR_FGETS:
 		printf("%s\n", ERR_FGETS_MSG);

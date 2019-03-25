@@ -7,28 +7,28 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_STDDEF_SIZE_HPP
-#define ALX_STDDEF_SIZE_HPP
+#ifndef ALX_STDLIB_MINIMUM_H
+#define ALX_STDLIB_MINIMUM_H
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <cstddef>
-
-#include <sys/types.h>
-
-
-/******************************************************************************
- ******* typedefs *************************************************************
- ******************************************************************************/
+#include <stddef.h>
+#include <stdint.h>
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-#define ssizeof			(ssize_t)sizeof
-#define ARRAY_SSIZE(arr)	((ptrdiff_t)(sizeof(arr) / sizeof((arr)[0])))
+#define	MIN(a, b) (							\
+{									\
+	__auto_type	_a	= (a);					\
+	__auto_type	_b	= (b);					\
+									\
+	(_a < _b) ? _a : _b;						\
+}									\
+)
 
 
 /******************************************************************************
@@ -49,6 +49,34 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
+ptrdiff_t	alx_minimum_ldbl	(ptrdiff_t nmemb,
+					const long double arr[restrict nmemb]);
+ptrdiff_t	alx_minimum		(ptrdiff_t nmemb,
+					const double arr[restrict nmemb]);
+ptrdiff_t	alx_minimum_f		(ptrdiff_t nmemb,
+					const float arr[restrict nmemb]);
+ptrdiff_t	alx_minimum_uint	(ptrdiff_t nmemb,
+					const unsigned arr[restrict nmemb]);
+ptrdiff_t	alx_minimum_int		(ptrdiff_t nmemb,
+					const int arr[restrict nmemb]);
+ptrdiff_t	alx_minimum_u8		(ptrdiff_t nmemb,
+					const uint8_t arr[restrict nmemb]);
+ptrdiff_t	alx_minimum_s8		(ptrdiff_t nmemb,
+					const int8_t arr[restrict nmemb]);
+ptrdiff_t	alx_minimum_u16		(ptrdiff_t nmemb,
+					const uint16_t arr[restrict nmemb]);
+ptrdiff_t	alx_minimum_s16		(ptrdiff_t nmemb,
+					const int16_t arr[restrict nmemb]);
+ptrdiff_t	alx_minimum_u32		(ptrdiff_t nmemb,
+					const uint32_t arr[restrict nmemb]);
+ptrdiff_t	alx_minimum_s32		(ptrdiff_t nmemb,
+					const int32_t arr[restrict nmemb]);
+ptrdiff_t	alx_minimum_u64		(ptrdiff_t nmemb,
+					const uint64_t arr[restrict nmemb]);
+ptrdiff_t	alx_minimum_s64		(ptrdiff_t nmemb,
+					const int64_t arr[restrict nmemb]);
+ptrdiff_t	alx_minimum_pdif	(ptrdiff_t nmemb,
+					const ptrdiff_t arr[restrict nmemb]);
 
 
 /******************************************************************************
@@ -64,7 +92,7 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/stddef/size.hpp */
+#endif		/* libalx/stdlib/minimum.h */
 
 
 /******************************************************************************

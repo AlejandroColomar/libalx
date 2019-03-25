@@ -12,22 +12,12 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#include "libalx/math/arithmetic_mean.h"
+
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-/*
- * Using AVG(x, y) would be slow.  Here we know that the first element will be
- * always smaller than the second element.
- */
-#define	mid_index(lo, hi) (						\
-{									\
-	__auto_type	_lo	= (lo);					\
-	__auto_type	_hi	= (hi);					\
-									\
-	_hi - (_hi - _lo) / 2;						\
-}									\
-)
 
 
 /******************************************************************************
@@ -194,7 +184,7 @@ ptrdiff_t	alx_bsearch_uint(ptrdiff_t nmemb,
 	lim_lo	= 0;
 
 	while (lim_hi > lim_lo) {
-		i	= mid_index(lim_lo, lim_hi);
+		i	= AVGfast(lim_lo, lim_hi, size_t);
 		if (arr[i] > x)
 			lim_hi	= i;
 		else if (arr[i] < x)
@@ -218,7 +208,7 @@ ptrdiff_t	alx_bsearch_int	(ptrdiff_t nmemb,
 	lim_lo	= 0;
 
 	while (lim_hi > lim_lo) {
-		i	= mid_index(lim_lo, lim_hi);
+		i	= AVGfast(lim_lo, lim_hi, size_t);
 		if (arr[i] > x)
 			lim_hi	= i;
 		else if (arr[i] < x)
@@ -242,7 +232,7 @@ ptrdiff_t	alx_bsearch_u8	(ptrdiff_t nmemb,
 	lim_lo	= 0;
 
 	while (lim_hi > lim_lo) {
-		i	= mid_index(lim_lo, lim_hi);
+		i	= AVGfast(lim_lo, lim_hi, size_t);
 		if (arr[i] > x)
 			lim_hi	= i;
 		else if (arr[i] < x)
@@ -266,7 +256,7 @@ ptrdiff_t	alx_bsearch_s8	(ptrdiff_t nmemb,
 	lim_lo	= 0;
 
 	while (lim_hi > lim_lo) {
-		i	= mid_index(lim_lo, lim_hi);
+		i	= AVGfast(lim_lo, lim_hi, size_t);
 		if (arr[i] > x)
 			lim_hi	= i;
 		else if (arr[i] < x)
@@ -290,7 +280,7 @@ ptrdiff_t	alx_bsearch_u16	(ptrdiff_t nmemb,
 	lim_lo	= 0;
 
 	while (lim_hi > lim_lo) {
-		i	= mid_index(lim_lo, lim_hi);
+		i	= AVGfast(lim_lo, lim_hi, size_t);
 		if (arr[i] > x)
 			lim_hi	= i;
 		else if (arr[i] < x)
@@ -314,7 +304,7 @@ ptrdiff_t	alx_bsearch_s16	(ptrdiff_t nmemb,
 	lim_lo	= 0;
 
 	while (lim_hi > lim_lo) {
-		i	= mid_index(lim_lo, lim_hi);
+		i	= AVGfast(lim_lo, lim_hi, size_t);
 		if (arr[i] > x)
 			lim_hi	= i;
 		else if (arr[i] < x)
@@ -338,7 +328,7 @@ ptrdiff_t	alx_bsearch_u32	(ptrdiff_t nmemb,
 	lim_lo	= 0;
 
 	while (lim_hi > lim_lo) {
-		i	= mid_index(lim_lo, lim_hi);
+		i	= AVGfast(lim_lo, lim_hi, size_t);
 		if (arr[i] > x)
 			lim_hi	= i;
 		else if (arr[i] < x)
@@ -362,7 +352,7 @@ ptrdiff_t	alx_bsearch_s32	(ptrdiff_t nmemb,
 	lim_lo	= 0;
 
 	while (lim_hi > lim_lo) {
-		i	= mid_index(lim_lo, lim_hi);
+		i	= AVGfast(lim_lo, lim_hi, size_t);
 		if (arr[i] > x)
 			lim_hi	= i;
 		else if (arr[i] < x)
@@ -386,7 +376,7 @@ ptrdiff_t	alx_bsearch_u64	(ptrdiff_t nmemb,
 	lim_lo	= 0;
 
 	while (lim_hi > lim_lo) {
-		i	= mid_index(lim_lo, lim_hi);
+		i	= AVGfast(lim_lo, lim_hi, size_t);
 		if (arr[i] > x)
 			lim_hi	= i;
 		else if (arr[i] < x)
@@ -410,7 +400,7 @@ ptrdiff_t	alx_bsearch_s64	(ptrdiff_t nmemb,
 	lim_lo	= 0;
 
 	while (lim_hi > lim_lo) {
-		i	= mid_index(lim_lo, lim_hi);
+		i	= AVGfast(lim_lo, lim_hi, size_t);
 		if (arr[i] > x)
 			lim_hi	= i;
 		else if (arr[i] < x)

@@ -13,6 +13,7 @@
 # dependencies
 OBJ		=							\
 		sprint_file.o						\
+		sscan.o							\
 		alx_input.o
 
 SPRINT_FILE_INC	=							\
@@ -21,9 +22,15 @@ SPRINT_FILE_SRC	=							\
 		$(SRC_DIR)/stdio/sprint_file.c
 
 INPUT_INC	=							\
-		$(INC_DIR)/libalx/stdio/alx_input.h
+		$(INC_DIR)/libalx/stdio/alx_input.h			\
+		$(INC_DIR)/libalx/stdio/sscan.h
 INPUT_SRC	=							\
 		$(SRC_DIR)/stdio/alx_input.c
+
+SSCAN_INC	=							\
+		$(INC_DIR)/libalx/stdio/sscan.h
+SSCAN_SRC	=							\
+		$(SRC_DIR)/stdio/sscan.c
 
 ################################################################################
 # target: dependencies
@@ -44,6 +51,13 @@ alx_input.s: $(INPUT_SRC) $(INPUT_INC)
 	@echo	"	CC	libalx/tmp/stdio/$@"
 	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
 alx_input.o: alx_input.s
+	@echo	"	AS	libalx/tmp/stdio/$@"
+	$(Q)$(AS) $< -o $@
+
+sscan.s: $(SSCAN_SRC) $(SSCAN_INC)
+	@echo	"	CC	libalx/tmp/stdio/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+sscan.o: sscan.s
 	@echo	"	AS	libalx/tmp/stdio/$@"
 	$(Q)$(AS) $< -o $@
 

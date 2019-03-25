@@ -41,35 +41,35 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
-void	alx_array_split_pos_neg_ldbl	(ptrdiff_t n,
+void	alx_array_split_pos_neg_ldbl	(ptrdiff_t nmemb,
 				const long double mix[restrict],
 				long double pos[restrict],
 				long double neg[restrict]);
-void	alx_array_split_pos_neg		(ptrdiff_t n,
+void	alx_array_split_pos_neg		(ptrdiff_t nmemb,
 				const double mix[restrict],
 				double pos[restrict],
 				double neg[restrict]);
-void	alx_array_split_pos_neg_flt	(ptrdiff_t n,
+void	alx_array_split_pos_neg_flt	(ptrdiff_t nmemb,
 				const float mix[restrict],
 				float pos[restrict],
 				float neg[restrict]);
-void	alx_array_split_pos_neg_int	(ptrdiff_t n,
+void	alx_array_split_pos_neg_int	(ptrdiff_t nmemb,
 				const int mix[restrict],
 				int pos[restrict],
 				int neg[restrict]);
-void	alx_array_split_pos_neg_s8	(ptrdiff_t n,
+void	alx_array_split_pos_neg_s8	(ptrdiff_t nmemb,
 				const int8_t mix[restrict],
 				int8_t pos[restrict],
 				int8_t neg[restrict]);
-void	alx_array_split_pos_neg_s16	(ptrdiff_t n,
+void	alx_array_split_pos_neg_s16	(ptrdiff_t nmemb,
 				const int16_t mix[restrict],
 				int16_t pos[restrict],
 				int16_t neg[restrict]);
-void	alx_array_split_pos_neg_s32	(ptrdiff_t n,
+void	alx_array_split_pos_neg_s32	(ptrdiff_t nmemb,
 				const int32_t mix[restrict],
 				int32_t pos[restrict],
 				int32_t neg[restrict]);
-void	alx_array_split_pos_neg_s64	(ptrdiff_t n,
+void	alx_array_split_pos_neg_s64	(ptrdiff_t nmemb,
 				const int64_t mix[restrict],
 				int64_t pos[restrict],
 				int64_t neg[restrict]);

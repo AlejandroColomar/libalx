@@ -138,9 +138,9 @@ int		alx_binomial_coefficient_factorized	(int16_t n, int16_t k,
 
 	do {
 		alx_prime_factorization_s16(j++, &tmp);
-		alx_matrix_subtraction_s8(ARRAY_SIZE(*pf), *pf, *pf, tmp);
+		alx_matrix_subtraction_s8(ARRAY_SSIZE(*pf), *pf, *pf, tmp);
 		alx_prime_factorization_s16(m--, &tmp);
-		alx_matrix_addition_s8(ARRAY_SIZE(*pf), *pf, *pf, tmp);
+		alx_matrix_addition_s8(ARRAY_SSIZE(*pf), *pf, *pf, tmp);
 	} while (j < k);
 
 	if (errno)

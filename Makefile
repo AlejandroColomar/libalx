@@ -69,8 +69,8 @@ export	SZ
 
 ################################################################################
 # cflags
-CFLAGS_STD	= -std=c17
-#CFLAGS_STD	= -Wpedantic
+CFLAGS_STD	= -std=gnu17
+#CFLAGS_STD    += -Wpedantic
 
 CFLAGS_BSD	= `pkg-config --cflags libbsd-overlay`
 
@@ -82,6 +82,7 @@ CFLAGS_W       += -Wextra
 CFLAGS_W       += -Wstrict-prototypes
 CFLAGS_W       += -Werror
 CFLAGS_W       += -Wno-error=pedantic
+CFLAGS_W       += -Wno-error=unused-function
 
 CFLAGS		= $(CFLAGS_STD)
 CFLAGS         += $(CFLAGS_BSD)
@@ -92,7 +93,8 @@ export	CFLAGS
 
 ################################################################################
 # c++flags
-CXXFLAGS_STD	= -std=c++17
+CXXFLAGS_STD	= -std=gnu++17
+#CXXFLAGS_STD  += -Wpedantic
 
 CXXFLAGS_BSD	= `pkg-config --cflags libbsd-overlay`
 
@@ -173,7 +175,7 @@ string:
 	$(Q)$(MAKE) string	-C $(LIB_DIR)
 
 PHONY += curses
-curses: stdlib io
+curses: stdlib stdio
 	@echo	"	MAKE	curses"
 	$(Q)$(MAKE) curses	-C $(TMP_DIR)
 	$(Q)$(MAKE) curses	-C $(LIB_DIR)

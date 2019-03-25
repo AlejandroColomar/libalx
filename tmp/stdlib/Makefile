@@ -17,6 +17,7 @@ OBJ		=							\
 		compare.o						\
 		local_maxima.o						\
 		maximum.o						\
+		minimum.o						\
 		popcnt.o						\
 		pow.o							\
 		search.o						\
@@ -42,6 +43,11 @@ MAXIMUM_INC	=							\
 MAXIMUM_SRC	=							\
 		$(SRC_DIR)/stdlib/maximum.c
 
+MINIMUM_INC	=							\
+		$(INC_DIR)/libalx/stdlib/minimum.h
+MINIMUM_SRC	=							\
+		$(SRC_DIR)/stdlib/minimum.c
+
 POPCNT_INC	=							\
 		$(INC_DIR)/libalx/stdlib/popcnt.h
 POPCNT_SRC	=							\
@@ -54,7 +60,8 @@ POW_SRC		=							\
 		$(SRC_DIR)/stdlib/pow.c
 
 SEARCH_INC	=							\
-		$(INC_DIR)/libalx/stdlib/search.h
+		$(INC_DIR)/libalx/stdlib/search.h			\
+		$(INC_DIR)/libalx/math/arithmetic_mean.h
 SEARCH_SRC	=							\
 		$(SRC_DIR)/stdlib/search.c
 
@@ -96,6 +103,13 @@ maximum.s: $(MAXIMUM_SRC) $(MAXIMUM_INC)
 	@echo	"	CC	libalx/tmp/stdlib/$@"
 	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
 maximum.o: maximum.s
+	@echo	"	AS	libalx/tmp/stdlib/$@"
+	$(Q)$(AS) $< -o $@
+
+minimum.s: $(MINIMUM_SRC) $(MINIMUM_INC)
+	@echo	"	CC	libalx/tmp/stdlib/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+minimum.o: minimum.s
 	@echo	"	AS	libalx/tmp/stdlib/$@"
 	$(Q)$(AS) $< -o $@
 

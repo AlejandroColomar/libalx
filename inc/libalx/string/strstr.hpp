@@ -41,7 +41,7 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
-ptrdiff_t	alx_strncasestr		(ptrdiff_t buff_size,
+ptrdiff_t	alx_strncasestr		(ptrdiff_t size,
 					const char str[restrict],
 					const char pattern[restrict]);
 

@@ -20,6 +20,7 @@
 #include "libalx/stdlib/compare.h"
 #include "libalx/stdlib/local_maxima.h"
 #include "libalx/stdlib/maximum.h"
+#include "libalx/stdlib/minimum.h"
 #include "libalx/stdlib/popcnt.h"
 #include "libalx/stdlib/pow.h"
 #include "libalx/stdlib/search.h"
