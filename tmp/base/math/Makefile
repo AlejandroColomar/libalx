@@ -19,6 +19,9 @@ OBJ		=							\
 		array_sum.o						\
 		binomial_coefficient.o					\
 		distribution_binomial.o					\
+		distribution_geometric.o				\
+		distribution_poisson.o					\
+		distribution_uniform.o					\
 		factorial.o						\
 		matrix_addition.o					\
 		matrix_subtraction.o					\
@@ -68,6 +71,22 @@ DISTRIBUTION_BINOMIAL_INC	=					\
 		$(INC_DIR)/libalx/base/math/binomial_coefficient.h
 DISTRIBUTION_BINOMIAL_SRC	=					\
 		$(SRC_DIR)/base/math/distribution_binomial.c
+
+DISTRIBUTION_GEOMETRIC_INC	=					\
+		$(INC_DIR)/libalx/base/math/distribution_geometric.h
+DISTRIBUTION_GEOMETRIC_SRC	=					\
+		$(SRC_DIR)/base/math/distribution_geometric.c
+
+DISTRIBUTION_POISSON_INC	=					\
+		$(INC_DIR)/libalx/base/math/distribution_poisson.h	\
+		$(INC_DIR)/libalx/base/math/factorial.h
+DISTRIBUTION_POISSON_SRC	=					\
+		$(SRC_DIR)/base/math/distribution_poisson.c
+
+DISTRIBUTION_UNIFORM_INC	=					\
+		$(INC_DIR)/libalx/base/math/distribution_uniform.h
+DISTRIBUTION_UNIFORM_SRC	=					\
+		$(SRC_DIR)/base/math/distribution_uniform.c
 
 FACTORIAL_INC	=							\
 		$(INC_DIR)/libalx/base/math/factorial.h			\
@@ -179,6 +198,27 @@ distribution_binomial.s: $(DISTRIBUTION_BINOMIAL_SRC) $(DISTRIBUTION_BINOMIAL_IN
 	@echo	"	CC	libalx/tmp/base/math/$@"
 	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
 distribution_binomial.o: distribution_binomial.s
+	@echo	"	AS	libalx/tmp/base/math/$@"
+	$(Q)$(AS) $< -o $@
+
+distribution_geometric.s: $(DISTRIBUTION_GEOMETRIC_SRC) $(DISTRIBUTION_GEOMETRIC_INC)
+	@echo	"	CC	libalx/tmp/base/math/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+distribution_geometric.o: distribution_geometric.s
+	@echo	"	AS	libalx/tmp/base/math/$@"
+	$(Q)$(AS) $< -o $@
+
+distribution_poisson.s: $(DISTRIBUTION_POISSON_SRC) $(DISTRIBUTION_POISSON_INC)
+	@echo	"	CC	libalx/tmp/base/math/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+distribution_poisson.o: distribution_poisson.s
+	@echo	"	AS	libalx/tmp/base/math/$@"
+	$(Q)$(AS) $< -o $@
+
+distribution_uniform.s: $(DISTRIBUTION_UNIFORM_SRC) $(DISTRIBUTION_UNIFORM_INC)
+	@echo	"	CC	libalx/tmp/base/math/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+distribution_uniform.o: distribution_uniform.s
 	@echo	"	AS	libalx/tmp/base/math/$@"
 	$(Q)$(AS) $< -o $@
 

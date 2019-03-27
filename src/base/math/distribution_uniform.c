@@ -7,13 +7,10 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/base/math/distribution_binomial.h"
+#include "libalx/base/math/distribution_uniform.h"
 
 #include <errno.h>
 #include <math.h>
-#include <stdint.h>
-
-#include "libalx/base/math/binomial_coefficient.h"
 
 
 /******************************************************************************
@@ -44,127 +41,106 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-long double	alx_ldbl_distribution_binomial_P(int16_t n, long double p,
-						int16_t x)
+long double	alx_ldbl_distribution_uniform_P	(long double a, long double b,
+						long double x1, long double x2)
 {
-	long double	tmp;
 
-	if ((n < 0) || (p < 0) || (p > 1) || (x < 0) || (x > n)) {
+	if ((b < a) || (x1 < a) || (x2 > b) || (x2 < x1) || (b == a)) {
 		errno	= EDOM;
 		return	nanl("");
 	}
 
-	tmp	= alx_ldbl_binomial_coefficient(n, x);
-	tmp	*= powl(p, x);
-	tmp	*= powl(1 - p, n - x);
-
-	return	tmp;
+	return	(x2 - x1) / (b - a);
 }
 
-double		alx_distribution_binomial_P	(int16_t n, double p,
-						int16_t x)
+double		alx_distribution_uniform_P	(double a, double b,
+						double x1, double x2)
 {
-	double_t	tmp;
 
-	if ((n < 0) || (p < 0) || (p > 1) || (x < 0) || (x > n)) {
+	if ((b < a) || (x1 < a) || (x2 > b) || (x2 < x1) || (b == a)) {
 		errno	= EDOM;
 		return	nan("");
 	}
 
-	tmp	= alx_binomial_coefficient(n, x);
-	tmp	*= pow(p, x);
-	tmp	*= pow(1 - p, n - x);
-
-	return	tmp;
+	return	(x2 - x1) / (b - a);
 }
 
-float		alx_flt_distribution_binomial_P	(int16_t n, float p,
-						int16_t x)
+float		alx_flt_distribution_uniform_P	(float a, float b,
+						float x1, float x2)
 {
-	float_t	tmp;
 
-	if ((n < 0) || (p < 0) || (p > 1) || (x < 0) || (x > n)) {
+	if ((b < a) || (x1 < a) || (x2 > b) || (x2 < x1) || (b == a)) {
 		errno	= EDOM;
 		return	nanf("");
 	}
 
-	tmp	= alx_flt_binomial_coefficient(n, x);
-	tmp	*= powf(p, x);
-	tmp	*= powf(1 - p, n - x);
-
-	return	tmp;
+	return	(x2 - x1) / (b - a);
 }
 
-long double	alx_ldbl_distribution_binomial_E(int16_t n, long double p)
+long double	alx_ldbl_distribution_uniform_E	(long double a, long double b)
 {
 
-	if ((n < 0) || (p < 0) || (p > 1)) {
+	if (b < a) {
 		errno	= EDOM;
 		return	nanl("");
 	}
 
-
-	return	n * p;
+	return	(a + b) / 2;
 }
 
-double		alx_distribution_binomial_E	(int16_t n, double p)
+double		alx_distribution_uniform_E	(double a, double b)
 {
 
-	if ((n < 0) || (p < 0) || (p > 1)) {
+	if (b < a) {
 		errno	= EDOM;
 		return	nan("");
 	}
 
-
-	return	n * p;
+	return	(a + b) / 2;
 }
 
-float		alx_flt_distribution_binomial_E	(int16_t n, float p)
+float		alx_flt_distribution_uniform_E	(float a, float b)
 {
 
-	if ((n < 0) || (p < 0) || (p > 1)) {
+	if (b < a) {
 		errno	= EDOM;
 		return	nanf("");
 	}
 
-
-	return	n * p;
+	return	(a + b) / 2;
 }
 
-long double	alx_ldbl_distribution_binomial_Var(int16_t n, long double p)
+long double	alx_ldbl_distribution_uniform_Var(long double a, long double b)
 {
 
-	if ((n < 0) || (p < 0) || (p > 1)) {
+	if (b < a) {
 		errno	= EDOM;
 		return	nanl("");
 	}
 
-
-	return	n * p * (1 - p);
+	return	(b - a) * (b - a) / 12;
 }
 
-double		alx_distribution_binomial_Var	(int16_t n, double p)
+double		alx_distribution_uniform_Var	(double a, double b)
 {
 
-	if ((n < 0) || (p < 0) || (p > 1)) {
+	if (b < a) {
 		errno	= EDOM;
 		return	nan("");
 	}
 
-
-	return	n * p * (1 - p);
+	return	(b - a) * (b - a) / 12;
 }
 
-float		alx_flt_distribution_binomial_Var(int16_t n, float p)
+float		alx_flt_distribution_uniform_Var(float a, float b)
 {
 
-	if ((n < 0) || (p < 0) || (p > 1)) {
+	if (b < a) {
 		errno	= EDOM;
 		return	nanf("");
 	}
 
-
-	return	n * p * (1 - p);
+	return	(b - a) * (b - a) / 12;
 }
 
 

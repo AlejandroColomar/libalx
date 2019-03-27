@@ -7,13 +7,12 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/base/math/distribution_binomial.h"
+#include "libalx/base/math/distribution_poisson.h"
 
 #include <errno.h>
 #include <math.h>
-#include <stdint.h>
 
-#include "libalx/base/math/binomial_coefficient.h"
+#include "libalx/base/math/factorial.h"
 
 
 /******************************************************************************
@@ -44,127 +43,121 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-long double	alx_ldbl_distribution_binomial_P(int16_t n, long double p,
-						int16_t x)
+long double	alx_ldbl_distribution_poisson_P(long double l, long double x)
 {
 	long double	tmp;
 
-	if ((n < 0) || (p < 0) || (p > 1) || (x < 0) || (x > n)) {
+	if ((l < 0) || (x < 0)) {
 		errno	= EDOM;
 		return	nanl("");
 	}
 
-	tmp	= alx_ldbl_binomial_coefficient(n, x);
-	tmp	*= powl(p, x);
-	tmp	*= powl(1 - p, n - x);
+	tmp	= expl(-l);
+	tmp	*= powl(l, x);
+	tmp	/= alx_ldbl_factorial(x);
 
 	return	tmp;
 }
 
-double		alx_distribution_binomial_P	(int16_t n, double p,
-						int16_t x)
+double		alx_distribution_poisson_P	(double l, double x)
 {
 	double_t	tmp;
 
-	if ((n < 0) || (p < 0) || (p > 1) || (x < 0) || (x > n)) {
+	if ((l < 0) || (x < 0)) {
 		errno	= EDOM;
 		return	nan("");
 	}
 
-	tmp	= alx_binomial_coefficient(n, x);
-	tmp	*= pow(p, x);
-	tmp	*= pow(1 - p, n - x);
+	tmp	= exp(-l);
+	tmp	*= pow(l, x);
+	tmp	/= alx_factorial(x);
 
 	return	tmp;
 }
 
-float		alx_flt_distribution_binomial_P	(int16_t n, float p,
-						int16_t x)
+float		alx_flt_distribution_poisson_P	(float l, float x)
 {
 	float_t	tmp;
 
-	if ((n < 0) || (p < 0) || (p > 1) || (x < 0) || (x > n)) {
+	if ((l < 0) || (x < 0)) {
 		errno	= EDOM;
 		return	nanf("");
 	}
 
-	tmp	= alx_flt_binomial_coefficient(n, x);
-	tmp	*= powf(p, x);
-	tmp	*= powf(1 - p, n - x);
+	tmp	= expf(-l);
+	tmp	*= powf(l, x);
+	tmp	/= alx_flt_factorial(x);
 
 	return	tmp;
 }
 
-long double	alx_ldbl_distribution_binomial_E(int16_t n, long double p)
+long double	alx_ldbl_distribution_poisson_E(long double l)
 {
 
-	if ((n < 0) || (p < 0) || (p > 1)) {
+	if (l < 0) {
+		errno	= EDOM;
+		return	nanl("");
+	}
+
+	return	l;
+}
+
+double		alx_distribution_poisson_E	(double l)
+{
+
+	if (l < 0) {
+		errno	= EDOM;
+		return	nan("");
+	}
+
+	return	l;
+}
+
+float		alx_flt_distribution_poisson_E	(float l)
+{
+
+	if (l < 0) {
+		errno	= EDOM;
+		return	nanf("");
+	}
+
+	return	l;
+}
+
+long double	alx_ldbl_distribution_poisson_Var(long double l)
+{
+
+	if (l < 0) {
 		errno	= EDOM;
 		return	nanl("");
 	}
 
 
-	return	n * p;
+	return	l;
 }
 
-double		alx_distribution_binomial_E	(int16_t n, double p)
+double		alx_distribution_poisson_Var	(double l)
 {
 
-	if ((n < 0) || (p < 0) || (p > 1)) {
+	if (l < 0) {
 		errno	= EDOM;
 		return	nan("");
 	}
 
 
-	return	n * p;
+	return	l;
 }
 
-float		alx_flt_distribution_binomial_E	(int16_t n, float p)
+float		alx_flt_distribution_poisson_Var(float l)
 {
 
-	if ((n < 0) || (p < 0) || (p > 1)) {
+	if (l < 0) {
 		errno	= EDOM;
 		return	nanf("");
 	}
 
 
-	return	n * p;
-}
-
-long double	alx_ldbl_distribution_binomial_Var(int16_t n, long double p)
-{
-
-	if ((n < 0) || (p < 0) || (p > 1)) {
-		errno	= EDOM;
-		return	nanl("");
-	}
-
-
-	return	n * p * (1 - p);
-}
-
-double		alx_distribution_binomial_Var	(int16_t n, double p)
-{
-
-	if ((n < 0) || (p < 0) || (p > 1)) {
-		errno	= EDOM;
-		return	nan("");
-	}
-
-
-	return	n * p * (1 - p);
-}
-
-float		alx_flt_distribution_binomial_Var(int16_t n, float p)
-{
-
-	if ((n < 0) || (p < 0) || (p > 1)) {
-		errno	= EDOM;
-		return	nanf("");
-	}
-
-
-	return	n * p * (1 - p);
+	return	l;
 }
 
 
