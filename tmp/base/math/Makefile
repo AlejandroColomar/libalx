@@ -18,6 +18,7 @@ OBJ		=							\
 		array_multiplication.o					\
 		array_sum.o						\
 		binomial_coefficient.o					\
+		distribution_binomial.o					\
 		factorial.o						\
 		matrix_addition.o					\
 		matrix_subtraction.o					\
@@ -61,6 +62,12 @@ BINOMIAL_COEFFICIENT_INC	=					\
 		$(INC_DIR)/libalx/base/stddef/size.h
 BINOMIAL_COEFFICIENT_SRC	=					\
 		$(SRC_DIR)/base/math/binomial_coefficient.c
+
+DISTRIBUTION_BINOMIAL_INC	=					\
+		$(INC_DIR)/libalx/base/math/distribution_binomial.h	\
+		$(INC_DIR)/libalx/base/math/binomial_coefficient.h
+DISTRIBUTION_BINOMIAL_SRC	=					\
+		$(SRC_DIR)/base/math/distribution_binomial.c
 
 FACTORIAL_INC	=							\
 		$(INC_DIR)/libalx/base/math/factorial.h			\
@@ -165,6 +172,13 @@ binomial_coefficient.s: $(BINOMIAL_COEFFICIENT_SRC) $(BINOMIAL_COEFFICIENT_INC)
 	@echo	"	CC	libalx/tmp/base/math/$@"
 	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
 binomial_coefficient.o: binomial_coefficient.s
+	@echo	"	AS	libalx/tmp/base/math/$@"
+	$(Q)$(AS) $< -o $@
+
+distribution_binomial.s: $(DISTRIBUTION_BINOMIAL_SRC) $(DISTRIBUTION_BINOMIAL_INC)
+	@echo	"	CC	libalx/tmp/base/math/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+distribution_binomial.o: distribution_binomial.s
 	@echo	"	AS	libalx/tmp/base/math/$@"
 	$(Q)$(AS) $< -o $@
 

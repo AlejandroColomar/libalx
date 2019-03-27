@@ -1,5 +1,5 @@
 /******************************************************************************
- *	Copyright (C) 2019	Alejandro Colomar Andrés		      *
+ *	Copyright (C) 2015	Alejandro Colomar Andrés		      *
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
@@ -7,31 +7,14 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_MATH_H
-#define ALX_MATH_H
+#ifndef ALX_MATH_DISTRIBUTION_BINOMIAL_H
+#define ALX_MATH_DISTRIBUTION_BINOMIAL_H
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <math.h>
-
-#include "libalx/base/math/arithmetic_mean.h"
-#include "libalx/base/math/array_division.h"
-#include "libalx/base/math/array_multiplication.h"
-#include "libalx/base/math/array_sum.h"
-#include "libalx/base/math/binomial_coefficient.h"
-#include "libalx/base/math/distribution_binomial.h"
-#include "libalx/base/math/common.h"
-#include "libalx/base/math/factorial.h"
-#include "libalx/base/math/matrix_addition.h"
-#include "libalx/base/math/matrix_subtraction.h"
-#include "libalx/base/math/median.h"
-#include "libalx/base/math/pascal_triangle.h"
-#include "libalx/base/math/prime.h"
-#include "libalx/base/math/prime_factorization.h"
-#include "libalx/base/math/prime_defactorization.h"
-#include "libalx/base/math/scale_linear.h"
+#include <stdint.h>
 
 
 /******************************************************************************
@@ -57,6 +40,20 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
+long double	alx_ldbl_distribution_binomial_P(int16_t n, long double p,
+						int16_t x);
+double		alx_distribution_binomial_P	(int16_t n, double p,
+						int16_t x);
+float		alx_flt_distribution_binomial_P	(int16_t n, float p,
+						int16_t x);
+
+long double	alx_ldbl_distribution_binomial_E(int16_t n, long double p);
+double		alx_distribution_binomial_E	(int16_t n, double p);
+float		alx_flt_distribution_binomial_E	(int16_t n, float p);
+
+long double	alx_ldbl_distribution_binomial_Var(int16_t n, long double p);
+double		alx_distribution_binomial_Var	(int16_t n, double p);
+float		alx_flt_distribution_binomial_Var(int16_t n, float p);
 
 
 /******************************************************************************
@@ -72,7 +69,7 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/base/math.h */
+#endif		/* libalx/base/math/distribution_binomial.h */
 
 
 /******************************************************************************

@@ -21,6 +21,7 @@
 #include "libalx/base/math/array_multiplication.hpp"
 #include "libalx/base/math/array_sum.hpp"
 #include "libalx/base/math/binomial_coefficient.hpp"
+#include "libalx/base/math/distribution_binomial.hpp"
 #include "libalx/base/math/common.hpp"
 #include "libalx/base/math/factorial.hpp"
 #include "libalx/base/math/matrix_addition.hpp"
