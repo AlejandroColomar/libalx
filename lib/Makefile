@@ -25,7 +25,7 @@ STDINT_OBJ	=							\
 		$(TMP_DIR)/stdint/constants.o				\
 		$(TMP_DIR)/stdint/int128.o
 STDIO_OBJ	=							\
-		$(TMP_DIR)/stdio/alx_input.o				\
+		$(TMP_DIR)/stdio/get.o					\
 		$(TMP_DIR)/stdio/sprint_file.o				\
 		$(TMP_DIR)/stdio/sscan.o
 STDLIB_OBJ	=							\

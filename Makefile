@@ -139,7 +139,7 @@ all: math stddef stdint stdio stdlib string curses
 
 
 PHONY += math
-math: stdint stdlib
+math: stdlib
 	@echo	"	MAKE	math"
 	$(Q)$(MAKE) math	-C $(TMP_DIR)
 	$(Q)$(MAKE) math	-C $(LIB_DIR)
@@ -157,13 +157,13 @@ stdint:
 	$(Q)$(MAKE) stdint	-C $(LIB_DIR)
 
 PHONY += stdio
-stdio: stdlib
+stdio:
 	@echo	"	MAKE	stdio"
 	$(Q)$(MAKE) stdio	-C $(TMP_DIR)
 	$(Q)$(MAKE) stdio	-C $(LIB_DIR)
 
 PHONY += stdlib
-stdlib: stdint
+stdlib:
 	@echo	"	MAKE	stdlib"
 	$(Q)$(MAKE) stdlib	-C $(TMP_DIR)
 	$(Q)$(MAKE) stdlib	-C $(LIB_DIR)

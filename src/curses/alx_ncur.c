@@ -17,7 +17,7 @@
 
 	#include <ncurses.h>
 
-	#include "libalx/stdio/alx_input.h"
+	#include "libalx/stdio/common.h"
 	#include "libalx/stdio/sscan.h"
 
 

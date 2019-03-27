@@ -12,23 +12,26 @@
 ################################################################################
 # dependencies
 OBJ		=							\
+		get.o							\
 		sprint_file.o						\
-		sscan.o							\
-		alx_input.o
+		sscan.o
+
+GET_INC		=							\
+		$(INC_DIR)/libalx/stdio/get.h				\
+		$(INC_DIR)/libalx/stdio/common.h			\
+		$(INC_DIR)/libalx/stdio/sscan.h
+GET_SRC		=							\
+		$(SRC_DIR)/stdio/get.c
 
 SPRINT_FILE_INC	=							\
-		$(INC_DIR)/libalx/stdio/sprint_file.h
+		$(INC_DIR)/libalx/stdio/sprint_file.h			\
+		$(INC_DIR)/libalx/stdlib/minimum.h
 SPRINT_FILE_SRC	=							\
 		$(SRC_DIR)/stdio/sprint_file.c
 
-INPUT_INC	=							\
-		$(INC_DIR)/libalx/stdio/alx_input.h			\
-		$(INC_DIR)/libalx/stdio/sscan.h
-INPUT_SRC	=							\
-		$(SRC_DIR)/stdio/alx_input.c
-
 SSCAN_INC	=							\
-		$(INC_DIR)/libalx/stdio/sscan.h
+		$(INC_DIR)/libalx/stdio/sscan.h				\
+		$(INC_DIR)/libalx/stdio/common.h
 SSCAN_SRC	=							\
 		$(SRC_DIR)/stdio/sscan.c
 
@@ -40,17 +43,17 @@ PHONY := all
 all: $(OBJ)
 
 
+get.s: $(GET_SRC) $(GET_INC)
+	@echo	"	CC	libalx/tmp/stdio/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+get.o: get.s
+	@echo	"	AS	libalx/tmp/stdio/$@"
+	$(Q)$(AS) $< -o $@
+
 sprint_file.s: $(SPRINT_FILE_SRC) $(SPRINT_FILE_INC)
 	@echo	"	CC	libalx/tmp/stdio/$@"
 	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
 sprint_file.o: sprint_file.s
-	@echo	"	AS	libalx/tmp/stdio/$@"
-	$(Q)$(AS) $< -o $@
-
-alx_input.s: $(INPUT_SRC) $(INPUT_INC)
-	@echo	"	CC	libalx/tmp/stdio/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
-alx_input.o: alx_input.s
 	@echo	"	AS	libalx/tmp/stdio/$@"
 	$(Q)$(AS) $< -o $@
 

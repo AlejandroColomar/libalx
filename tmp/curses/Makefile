@@ -16,7 +16,7 @@ OBJ		=							\
 
 NCUR_INC	=							\
 		$(INC_DIR)/libalx/curses/alx_ncur.h			\
-		$(INC_DIR)/libalx/stdio/alx_input.h			\
+		$(INC_DIR)/libalx/stdio/common.h			\
 		$(INC_DIR)/libalx/stdio/sscan.h
 NCUR_SRC	=							\
 		$(SRC_DIR)/curses/alx_ncur.c
