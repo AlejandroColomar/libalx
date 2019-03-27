@@ -29,7 +29,8 @@ OBJ		=							\
 		scale_linear.o
 
 ARITHMETIC_MEAN_INC	=						\
-		$(INC_DIR)/libalx/base/math/arithmetic_mean.h
+		$(INC_DIR)/libalx/base/math/arithmetic_mean.h		\
+		$(INC_DIR)/libalx/base/stdint/redefinitions.h
 ARITHMETIC_MEAN_SRC	=						\
 		$(SRC_DIR)/base/math/arithmetic_mean.c
 
@@ -45,6 +46,7 @@ ARRAY_MULTIPLICATION_SRC	=					\
 
 ARRAY_SUM_INC	=							\
 		$(INC_DIR)/libalx/base/math/array_sum.h			\
+		$(INC_DIR)/libalx/base/stdint/redefinitions.h		\
 		$(INC_DIR)/libalx/base/stdlib/compare.h
 ARRAY_SUM_SRC	=							\
 		$(SRC_DIR)/base/math/array_sum.c
@@ -112,12 +114,14 @@ PRIME_DEFACTORIZATION_SRC	=					\
 
 PRIME_FACTORIZATION_INC	=						\
 		$(INC_DIR)/libalx/base/math/prime_factorization.h	\
-		$(INC_DIR)/libalx/base/math/prime.h
+		$(INC_DIR)/libalx/base/math/prime.h			\
+		$(INC_DIR)/libalx/base/stdint/redefinitions.h
 PRIME_FACTORIZATION_SRC	=						\
 		$(SRC_DIR)/base/math/prime_factorization.c
 
 SCALE_LINEAR_INC	=						\
-		$(INC_DIR)/libalx/base/math/scale_linear.h
+		$(INC_DIR)/libalx/base/math/scale_linear.h		\
+		$(INC_DIR)/libalx/base/stdint/redefinitions.h
 SCALE_LINEAR_SRC	=						\
 		$(SRC_DIR)/base/math/scale_linear.c
 

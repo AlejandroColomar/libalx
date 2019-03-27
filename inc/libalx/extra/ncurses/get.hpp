@@ -43,6 +43,8 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
+extern	"C"
+{
 long double	alx_w_get_ldbl	(long double m, long double def, long double M,
 				int8_t width, int8_t row,
 				const char *restrict title,
@@ -119,6 +121,7 @@ int		alx_w_get_fname	(const char *restrict fpath,
 				const char *restrict title,
 				const char *restrict help,
 				uint8_t attempts);
+}
 
 
 /******************************************************************************

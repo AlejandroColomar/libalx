@@ -49,8 +49,9 @@ BASE_OBJ	=							\
 		$(STRING_OBJ)
 
 NCURSES_OBJ	=							\
-		$(TMP_DIR)/extra/ncurses/alx_ncur.o			\
-		$(TMP_DIR)/extra/ncurses/get.o
+		$(TMP_DIR)/extra/ncurses/common.o			\
+		$(TMP_DIR)/extra/ncurses/get.o				\
+		$(TMP_DIR)/extra/ncurses/menu.o
 EXTRA_OBJ	=							\
 		$(NCURSES_OBJ)
 

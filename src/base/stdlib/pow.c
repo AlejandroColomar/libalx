@@ -12,6 +12,7 @@
 #include <stdint.h>
 
 #include "libalx/base/stdint/constants.h"
+#include "libalx/base/stdint/redefinitions.h"
 
 
 /******************************************************************************

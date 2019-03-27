@@ -12,23 +12,29 @@
 ################################################################################
 # dependencies
 OBJ		=							\
-		alx_ncur.o						\
-		get.o
+		common.o						\
+		get.o							\
+		menu.o
 
-NCUR_INC	=							\
-		$(INC_DIR)/libalx/extra/ncurses/alx_ncur.h		\
-		$(INC_DIR)/libalx/base/stdio/common.h			\
-		$(INC_DIR)/libalx/base/stdio/sscan.h
-NCUR_SRC	=							\
-		$(SRC_DIR)/extra/ncurses/alx_ncur.c
+COMMON_INC	=							\
+		$(INC_DIR)/libalx/extra/ncurses/common.h
+COMMON_SRC	=							\
+		$(SRC_DIR)/extra/ncurses/common.c
 
-GET_INC	=								\
+GET_INC		=							\
 		$(INC_DIR)/libalx/extra/ncurses/get.h			\
 		$(INC_DIR)/libalx/base/stdio/common.h			\
 		$(INC_DIR)/libalx/base/stdio/sscan.h			\
-		$(INC_DIR)/libalx/extra/ncurses/alx_ncur.h
-GET_SRC	=								\
+		$(INC_DIR)/libalx/extra/ncurses/common.h
+GET_SRC		=							\
 		$(SRC_DIR)/extra/ncurses/get.c
+
+MENU_INC	=							\
+		$(INC_DIR)/libalx/extra/ncurses/menu.h			\
+		$(INC_DIR)/libalx/base/stdint/redefinitions.h		\
+		$(INC_DIR)/libalx/extra/ncurses/common.h
+MENU_SRC	=							\
+		$(SRC_DIR)/extra/ncurses/menu.c
 
 ################################################################################
 # CFLAGS
@@ -42,10 +48,10 @@ PHONY := all
 all: $(OBJ)
 
 
-alx_ncur.s: $(NCUR_SRC) $(NCUR_INC)
+common.s: $(COMMON_SRC) $(COMMON_INC)
 	@echo	"	CC	libalx/tmp/extra/ncurses/$@"
 	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
-alx_ncur.o: alx_ncur.s
+common.o: common.s
 	@echo	"	AS	libalx/tmp/extra/ncurses/$@"
 	$(Q)$(AS) $< -o $@
 
@@ -53,6 +59,13 @@ get.s: $(GET_SRC) $(GET_INC)
 	@echo	"	CC	libalx/tmp/extra/ncurses/$@"
 	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
 get.o: get.s
+	@echo	"	AS	libalx/tmp/extra/ncurses/$@"
+	$(Q)$(AS) $< -o $@
+
+menu.s: $(MENU_SRC) $(MENU_INC)
+	@echo	"	CC	libalx/tmp/extra/ncurses/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+menu.o: menu.s
 	@echo	"	AS	libalx/tmp/extra/ncurses/$@"
 	$(Q)$(AS) $< -o $@
 

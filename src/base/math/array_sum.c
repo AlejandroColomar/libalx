@@ -17,6 +17,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "libalx/base/stdint/redefinitions.h"
 #include "libalx/base/stdlib/compare.h"
 
 
@@ -60,7 +61,7 @@ unsigned	alx_array_sum_uint	(ptrdiff_t nmemb,
 			goto err_wrap;
 	}
 
-	return	0;
+	return	sum;
 
 err_wrap:
 	errno	= ERANGE;
@@ -121,16 +122,16 @@ err_ovf_lo:
 uint8_t		alx_array_sum_u8	(ptrdiff_t nmemb,
 					const uint8_t arr[restrict nmemb])
 {
-	uint8_t		sum;
+	uint_fast16_t		sum;
 
 	sum	= 0;
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		sum += arr[i];
-		if (sum < arr[i])
+		if (sum > UINT8_MAX)
 			goto err_wrap;
 	}
 
-	return	0;
+	return	sum;
 
 err_wrap:
 	errno	= ERANGE;
@@ -143,7 +144,7 @@ int8_t		alx_array_sum_s8	(ptrdiff_t nmemb,
 	int8_t		sorted[nmemb];
 	ptrdiff_t	i, j;
 	double_t	tmp;
-	int8_t		sum;
+	int_fast8_t	sum;
 
 	memcpy(sorted, arr, sizeof(sorted));
 	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_s8);
@@ -178,7 +179,7 @@ int8_t		alx_array_sum_s8	(ptrdiff_t nmemb,
 	}
 	sum += arr[i];
 
-	return	0;
+	return	sum;
 
 err_ovf_hi:
 	errno	= ERANGE;
@@ -191,16 +192,16 @@ err_ovf_lo:
 uint16_t	alx_array_sum_u16	(ptrdiff_t nmemb,
 					const uint16_t arr[restrict nmemb])
 {
-	uint16_t	sum;
+	uint_fast32_t	sum;
 
 	sum	= 0;
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		sum += arr[i];
-		if (sum < arr[i])
+		if (sum > UINT16_MAX)
 			goto err_wrap;
 	}
 
-	return	0;
+	return	sum;
 
 err_wrap:
 	errno	= ERANGE;
@@ -213,7 +214,7 @@ int16_t		alx_array_sum_s16	(ptrdiff_t nmemb,
 	int16_t		sorted[nmemb];
 	ptrdiff_t	i, j;
 	double_t	tmp;
-	int16_t		sum;
+	int_fast16_t	sum;
 
 	memcpy(sorted, arr, sizeof(sorted));
 	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_s16);
@@ -248,7 +249,7 @@ int16_t		alx_array_sum_s16	(ptrdiff_t nmemb,
 	}
 	sum += arr[i];
 
-	return	0;
+	return	sum;
 
 err_ovf_hi:
 	errno	= ERANGE;
@@ -261,12 +262,12 @@ err_ovf_lo:
 uint32_t	alx_array_sum_u32	(ptrdiff_t nmemb,
 					const uint32_t arr[restrict nmemb])
 {
-	uint32_t	sum;
+	uint_fast64_t	sum;
 
 	sum	= 0;
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		sum += arr[i];
-		if (sum < arr[i])
+		if (sum > UINT32_MAX)
 			goto err_wrap;
 	}
 
@@ -283,7 +284,7 @@ int32_t		alx_array_sum_s32	(ptrdiff_t nmemb,
 	int32_t		sorted[nmemb];
 	ptrdiff_t	i, j;
 	double_t	tmp;
-	int32_t		sum;
+	int_fast32_t	sum;
 
 	memcpy(sorted, arr, sizeof(sorted));
 	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_s32);
@@ -318,7 +319,7 @@ int32_t		alx_array_sum_s32	(ptrdiff_t nmemb,
 	}
 	sum += arr[i];
 
-	return	0;
+	return	sum;
 
 err_ovf_hi:
 	errno	= ERANGE;
@@ -331,7 +332,7 @@ err_ovf_lo:
 uint64_t	alx_array_sum_u64	(ptrdiff_t nmemb,
 					const uint64_t arr[restrict nmemb])
 {
-	uint64_t	sum;
+	uint_fast64_t	sum;
 
 	sum	= 0;
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
@@ -340,7 +341,7 @@ uint64_t	alx_array_sum_u64	(ptrdiff_t nmemb,
 			goto err_wrap;
 	}
 
-	return	0;
+	return	sum;
 
 err_wrap:
 	errno	= ERANGE;
@@ -353,7 +354,7 @@ int64_t		alx_array_sum_s64	(ptrdiff_t nmemb,
 	int64_t		sorted[nmemb];
 	ptrdiff_t	i, j;
 	double_t	tmp;
-	int64_t		sum;
+	int_fast64_t	sum;
 
 	memcpy(sorted, arr, sizeof(sorted));
 	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_s64);
@@ -388,7 +389,7 @@ int64_t		alx_array_sum_s64	(ptrdiff_t nmemb,
 	}
 	sum += arr[i];
 
-	return	0;
+	return	sum;
 
 err_ovf_hi:
 	errno	= ERANGE;

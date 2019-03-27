@@ -19,7 +19,7 @@
 
 #include "libalx/base/stdio/common.h"
 #include "libalx/base/stdio/sscan.h"
-#include "libalx/extra/ncurses/alx_ncur.h"
+#include "libalx/extra/ncurses/common.h"
 
 
 /******************************************************************************
@@ -29,7 +29,22 @@
 
 
 /******************************************************************************
- ******* static functions *****************************************************
+ ******* enums ****************************************************************
+ ******************************************************************************/
+
+
+/******************************************************************************
+ ******* structs / unions *****************************************************
+ ******************************************************************************/
+
+
+/******************************************************************************
+ ******* variables ************************************************************
+ ******************************************************************************/
+
+
+/******************************************************************************
+ ******* static functions (prototypes) ****************************************
  ******************************************************************************/
 static	long double	loop_w_get_ldbl	(WINDOW *win,
 					long double m, long double def,
@@ -80,7 +95,7 @@ static	void		manage_w_error	(WINDOW *win, int err);
 
 
 /******************************************************************************
- ******* main *****************************************************************
+ ******* global functions *****************************************************
  ******************************************************************************/
 long double	alx_w_get_ldbl	(long double m, long double def, long double M,
 				int8_t width, int8_t row,
@@ -114,7 +129,7 @@ long double	alx_w_get_ldbl	(long double m, long double def, long double M,
 	win1	= newwin(h1, w1, r1, c1);
 	wbkgd(win1, A_REVERSE);
 	box(win1, 0, 0);
-	alx_ncur_prn_title(win1, title);
+	alx_ncurses_title(win1, title);
 	wrefresh(win1);
 
 	/* Help */
@@ -133,9 +148,9 @@ long double	alx_w_get_ldbl	(long double m, long double def, long double M,
 	R	= loop_w_get_ldbl(win3, m, def, M, attempts);
 
 	/* Delete window */
-	alx_win_del(win3);
-	alx_win_del(win2);
-	alx_win_del(win1);
+	alx_ncurses_delwin(win3);
+	alx_ncurses_delwin(win2);
+	alx_ncurses_delwin(win1);
 
 	return	R;
 }
@@ -172,7 +187,7 @@ double		alx_w_get_dbl	(double m, double def, double M,
 	win1	= newwin(h1, w1, r1, c1);
 	wbkgd(win1, A_REVERSE);
 	box(win1, 0, 0);
-	alx_ncur_prn_title(win1, title);
+	alx_ncurses_title(win1, title);
 	wrefresh(win1);
 
 	/* Help */
@@ -191,9 +206,9 @@ double		alx_w_get_dbl	(double m, double def, double M,
 	R	= loop_w_get_dbl(win3, m, def, M, attempts);
 
 	/* Delete window */
-	alx_win_del(win3);
-	alx_win_del(win2);
-	alx_win_del(win1);
+	alx_ncurses_delwin(win3);
+	alx_ncurses_delwin(win2);
+	alx_ncurses_delwin(win1);
 
 	return	R;
 }
@@ -230,7 +245,7 @@ float		alx_w_get_flt	(float m, float def, float M,
 	win1	= newwin(h1, w1, r1, c1);
 	wbkgd(win1, A_REVERSE);
 	box(win1, 0, 0);
-	alx_ncur_prn_title(win1, title);
+	alx_ncurses_title(win1, title);
 	wrefresh(win1);
 
 	/* Help */
@@ -249,9 +264,9 @@ float		alx_w_get_flt	(float m, float def, float M,
 	R	= loop_w_get_flt(win3, m, def, M, attempts);
 
 	/* Delete window */
-	alx_win_del(win3);
-	alx_win_del(win2);
-	alx_win_del(win1);
+	alx_ncurses_delwin(win3);
+	alx_ncurses_delwin(win2);
+	alx_ncurses_delwin(win1);
 
 	return	R;
 }
@@ -288,7 +303,7 @@ unsigned	alx_w_get_uint	(unsigned m, unsigned def, unsigned M,
 	win1	= newwin(h1, w1, r1, c1);
 	wbkgd(win1, A_REVERSE);
 	box(win1, 0, 0);
-	alx_ncur_prn_title(win1, title);
+	alx_ncurses_title(win1, title);
 	wrefresh(win1);
 
 	/* Help */
@@ -307,9 +322,9 @@ unsigned	alx_w_get_uint	(unsigned m, unsigned def, unsigned M,
 	R	= loop_w_get_uint(win3, m, def, M, attempts);
 
 	/* Delete window */
-	alx_win_del(win3);
-	alx_win_del(win2);
-	alx_win_del(win1);
+	alx_ncurses_delwin(win3);
+	alx_ncurses_delwin(win2);
+	alx_ncurses_delwin(win1);
 
 	return	R;
 }
@@ -346,7 +361,7 @@ int		alx_w_get_int	(int m, int def, int M,
 	win1	= newwin(h1, w1, r1, c1);
 	wbkgd(win1, A_REVERSE);
 	box(win1, 0, 0);
-	alx_ncur_prn_title(win1, title);
+	alx_ncurses_title(win1, title);
 	wrefresh(win1);
 
 	/* Help */
@@ -365,9 +380,9 @@ int		alx_w_get_int	(int m, int def, int M,
 	R	= loop_w_get_int(win3, m, def, M, attempts);
 
 	/* Delete window */
-	alx_win_del(win3);
-	alx_win_del(win2);
-	alx_win_del(win1);
+	alx_ncurses_delwin(win3);
+	alx_ncurses_delwin(win2);
+	alx_ncurses_delwin(win1);
 
 	return	R;
 }
@@ -404,7 +419,7 @@ uint8_t		alx_w_get_u8	(uint8_t m, uint8_t def, uint8_t M,
 	win1	= newwin(h1, w1, r1, c1);
 	wbkgd(win1, A_REVERSE);
 	box(win1, 0, 0);
-	alx_ncur_prn_title(win1, title);
+	alx_ncurses_title(win1, title);
 	wrefresh(win1);
 
 	/* Help */
@@ -423,9 +438,9 @@ uint8_t		alx_w_get_u8	(uint8_t m, uint8_t def, uint8_t M,
 	R	= loop_w_get_u8(win3, m, def, M, attempts);
 
 	/* Delete window */
-	alx_win_del(win3);
-	alx_win_del(win2);
-	alx_win_del(win1);
+	alx_ncurses_delwin(win3);
+	alx_ncurses_delwin(win2);
+	alx_ncurses_delwin(win1);
 
 	return	R;
 }
@@ -462,7 +477,7 @@ int8_t		alx_w_get_s8	(int8_t m, int8_t def, int8_t M,
 	win1	= newwin(h1, w1, r1, c1);
 	wbkgd(win1, A_REVERSE);
 	box(win1, 0, 0);
-	alx_ncur_prn_title(win1, title);
+	alx_ncurses_title(win1, title);
 	wrefresh(win1);
 
 	/* Help */
@@ -481,9 +496,9 @@ int8_t		alx_w_get_s8	(int8_t m, int8_t def, int8_t M,
 	R	= loop_w_get_s8(win3, m, def, M, attempts);
 
 	/* Delete window */
-	alx_win_del(win3);
-	alx_win_del(win2);
-	alx_win_del(win1);
+	alx_ncurses_delwin(win3);
+	alx_ncurses_delwin(win2);
+	alx_ncurses_delwin(win1);
 
 	return	R;
 }
@@ -520,7 +535,7 @@ uint16_t	alx_w_get_u16	(uint16_t m, uint16_t def, uint16_t M,
 	win1	= newwin(h1, w1, r1, c1);
 	wbkgd(win1, A_REVERSE);
 	box(win1, 0, 0);
-	alx_ncur_prn_title(win1, title);
+	alx_ncurses_title(win1, title);
 	wrefresh(win1);
 
 	/* Help */
@@ -539,9 +554,9 @@ uint16_t	alx_w_get_u16	(uint16_t m, uint16_t def, uint16_t M,
 	R	= loop_w_get_u16(win3, m, def, M, attempts);
 
 	/* Delete window */
-	alx_win_del(win3);
-	alx_win_del(win2);
-	alx_win_del(win1);
+	alx_ncurses_delwin(win3);
+	alx_ncurses_delwin(win2);
+	alx_ncurses_delwin(win1);
 
 	return	R;
 }
@@ -578,7 +593,7 @@ int16_t		alx_w_get_s16	(int16_t m, int16_t def, int16_t M,
 	win1	= newwin(h1, w1, r1, c1);
 	wbkgd(win1, A_REVERSE);
 	box(win1, 0, 0);
-	alx_ncur_prn_title(win1, title);
+	alx_ncurses_title(win1, title);
 	wrefresh(win1);
 
 	/* Help */
@@ -597,9 +612,9 @@ int16_t		alx_w_get_s16	(int16_t m, int16_t def, int16_t M,
 	R	= loop_w_get_s16(win3, m, def, M, attempts);
 
 	/* Delete window */
-	alx_win_del(win3);
-	alx_win_del(win2);
-	alx_win_del(win1);
+	alx_ncurses_delwin(win3);
+	alx_ncurses_delwin(win2);
+	alx_ncurses_delwin(win1);
 
 	return	R;
 }
@@ -636,7 +651,7 @@ uint32_t	alx_w_get_u32	(uint32_t m, uint32_t def, uint32_t M,
 	win1	= newwin(h1, w1, r1, c1);
 	wbkgd(win1, A_REVERSE);
 	box(win1, 0, 0);
-	alx_ncur_prn_title(win1, title);
+	alx_ncurses_title(win1, title);
 	wrefresh(win1);
 
 	/* Help */
@@ -655,9 +670,9 @@ uint32_t	alx_w_get_u32	(uint32_t m, uint32_t def, uint32_t M,
 	R	= loop_w_get_u32(win3, m, def, M, attempts);
 
 	/* Delete window */
-	alx_win_del(win3);
-	alx_win_del(win2);
-	alx_win_del(win1);
+	alx_ncurses_delwin(win3);
+	alx_ncurses_delwin(win2);
+	alx_ncurses_delwin(win1);
 
 	return	R;
 }
@@ -694,7 +709,7 @@ int32_t		alx_w_get_s32	(int32_t m, int32_t def, int32_t M,
 	win1	= newwin(h1, w1, r1, c1);
 	wbkgd(win1, A_REVERSE);
 	box(win1, 0, 0);
-	alx_ncur_prn_title(win1, title);
+	alx_ncurses_title(win1, title);
 	wrefresh(win1);
 
 	/* Help */
@@ -713,9 +728,9 @@ int32_t		alx_w_get_s32	(int32_t m, int32_t def, int32_t M,
 	R	= loop_w_get_s32(win3, m, def, M, attempts);
 
 	/* Delete window */
-	alx_win_del(win3);
-	alx_win_del(win2);
-	alx_win_del(win1);
+	alx_ncurses_delwin(win3);
+	alx_ncurses_delwin(win2);
+	alx_ncurses_delwin(win1);
 
 	return	R;
 }
@@ -752,7 +767,7 @@ uint64_t	alx_w_get_u64	(uint64_t m, uint64_t def, uint64_t M,
 	win1	= newwin(h1, w1, r1, c1);
 	wbkgd(win1, A_REVERSE);
 	box(win1, 0, 0);
-	alx_ncur_prn_title(win1, title);
+	alx_ncurses_title(win1, title);
 	wrefresh(win1);
 
 	/* Help */
@@ -771,9 +786,9 @@ uint64_t	alx_w_get_u64	(uint64_t m, uint64_t def, uint64_t M,
 	R	= loop_w_get_u64(win3, m, def, M, attempts);
 
 	/* Delete window */
-	alx_win_del(win3);
-	alx_win_del(win2);
-	alx_win_del(win1);
+	alx_ncurses_delwin(win3);
+	alx_ncurses_delwin(win2);
+	alx_ncurses_delwin(win1);
 
 	return	R;
 }
@@ -810,7 +825,7 @@ int64_t		alx_w_get_s64	(int64_t m, int64_t def, int64_t M,
 	win1	= newwin(h1, w1, r1, c1);
 	wbkgd(win1, A_REVERSE);
 	box(win1, 0, 0);
-	alx_ncur_prn_title(win1, title);
+	alx_ncurses_title(win1, title);
 	wrefresh(win1);
 
 	/* Help */
@@ -829,9 +844,9 @@ int64_t		alx_w_get_s64	(int64_t m, int64_t def, int64_t M,
 	R	= loop_w_get_s64(win3, m, def, M, attempts);
 
 	/* Delete window */
-	alx_win_del(win3);
-	alx_win_del(win2);
-	alx_win_del(win1);
+	alx_ncurses_delwin(win3);
+	alx_ncurses_delwin(win2);
+	alx_ncurses_delwin(win1);
 
 	return	R;
 }
@@ -867,7 +882,7 @@ int		alx_w_get_nstr	(ptrdiff_t size, char dest[restrict size],
 	win1	= newwin(h1, w1, r1, c1);
 	wbkgd(win1, A_REVERSE);
 	box(win1, 0, 0);
-	alx_ncur_prn_title(win1, title);
+	alx_ncurses_title(win1, title);
 	wrefresh(win1);
 
 	/* Help */
@@ -890,9 +905,9 @@ int		alx_w_get_nstr	(ptrdiff_t size, char dest[restrict size],
 	noecho();
 
 	/* Delete window */
-	alx_win_del(win3);
-	alx_win_del(win2);
-	alx_win_del(win1);
+	alx_ncurses_delwin(win3);
+	alx_ncurses_delwin(win2);
+	alx_ncurses_delwin(win1);
 
 	return	err;
 }
@@ -931,7 +946,7 @@ int		alx_w_get_fname	(const char *restrict fpath,
 	win1	= newwin(h1, w1, r1, c1);
 	wbkgd(win1, A_REVERSE);
 	box(win1, 0, 0);
-	alx_ncur_prn_title(win1, title);
+	alx_ncurses_title(win1, title);
 	wrefresh(win1);
 
 	/* Help */
@@ -949,16 +964,16 @@ int		alx_w_get_fname	(const char *restrict fpath,
 	err	= loop_w_get_fname(win3, fpath, fname, exist, attempts);
 
 	/* Delete window */
-	alx_win_del(win3);
-	alx_win_del(win2);
-	alx_win_del(win1);
+	alx_ncurses_delwin(win3);
+	alx_ncurses_delwin(win2);
+	alx_ncurses_delwin(win1);
 
 	return	err;
 }
 
 
 /******************************************************************************
- ******* static functions *****************************************************
+ ******* static functions (definitions) ***************************************
  ******************************************************************************/
 static	long double	loop_w_get_ldbl	(WINDOW *win,
 					long double m, long double def,

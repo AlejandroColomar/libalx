@@ -16,6 +16,7 @@
 #include <string.h>
 
 #include "libalx/base/math/prime.h"
+#include "libalx/base/stdint/redefinitions.h"
 
 
 /******************************************************************************
@@ -50,7 +51,7 @@ int	alx_prime_factorization_s8	(int8_t n,
 				int8_t (*restrict pf)[PRIME_NUMBERS_QTY_S8])
 {
 	ptrdiff_t	prime_index;
-	int		tmp;
+	int_fast8_t	tmp;
 
 	if (!n) {
 		errno	= EDOM;
@@ -92,7 +93,7 @@ int	alx_prime_factorization_u8	(uint8_t n,
 				int8_t (*restrict pf)[PRIME_NUMBERS_QTY_U8])
 {
 	ptrdiff_t	prime_index;
-	unsigned	tmp;
+	uint_fast8_t	tmp;
 
 	if (!n) {
 		errno	= EDOM;
@@ -130,7 +131,7 @@ int	alx_prime_factorization_s16	(int16_t n,
 				int8_t (*restrict pf)[PRIME_NUMBERS_QTY_S16])
 {
 	ptrdiff_t	prime_index;
-	int		tmp;
+	int_fast16_t	tmp;
 
 	if (!n) {
 		errno	= EDOM;
@@ -175,7 +176,7 @@ int	alx_prime_factorization_u16	(uint16_t n,
 				int8_t (*restrict pf)[PRIME_NUMBERS_QTY_U16])
 {
 	ptrdiff_t	prime_index;
-	unsigned	tmp;
+	uint_fast16_t	tmp;
 
 	if (!n) {
 		errno	= EDOM;

@@ -39,12 +39,14 @@ LOCAL_MAXIMA_SRC	=						\
 		$(SRC_DIR)/base/stdlib/local_maxima.c
 
 MAXIMUM_INC	=							\
-		$(INC_DIR)/libalx/base/stdlib/maximum.h
+		$(INC_DIR)/libalx/base/stdlib/maximum.h			\
+		$(INC_DIR)/libalx/base/stdint/redefinitions.h
 MAXIMUM_SRC	=							\
 		$(SRC_DIR)/base/stdlib/maximum.c
 
 MINIMUM_INC	=							\
-		$(INC_DIR)/libalx/base/stdlib/minimum.h
+		$(INC_DIR)/libalx/base/stdlib/minimum.h			\
+		$(INC_DIR)/libalx/base/stdint/redefinitions.h
 MINIMUM_SRC	=							\
 		$(SRC_DIR)/base/stdlib/minimum.c
 
@@ -55,7 +57,8 @@ POPCNT_SRC	=							\
 
 POW_INC		=							\
 		$(INC_DIR)/libalx/base/stdlib/pow.h			\
-		$(INC_DIR)/libalx/base/stdint/constants.h
+		$(INC_DIR)/libalx/base/stdint/constants.h		\
+		$(INC_DIR)/libalx/base/stdint/redefinitions.h
 POW_SRC		=							\
 		$(SRC_DIR)/base/stdlib/pow.c
 

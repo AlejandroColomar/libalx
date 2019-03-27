@@ -1,5 +1,5 @@
 /******************************************************************************
- *	Copyright (C) 2019	Alejandro Colomar Andrés		      *
+ *	Copyright (C) 2017	Alejandro Colomar Andrés		      *
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
@@ -7,8 +7,8 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_STDLIB_POPCNT_H
-#define ALX_STDLIB_POPCNT_H
+#ifndef ALX_NCURSES_MENU_H
+#define ALX_NCURSES_MENU_H
 
 
 /******************************************************************************
@@ -16,9 +16,7 @@
  ******************************************************************************/
 #include <stdint.h>
 
-#include <nmmintrin.h>
-
-#include "libalx/base/stdint/int128.h"
+#include <ncurses.h>
 
 
 /******************************************************************************
@@ -34,9 +32,10 @@
 /******************************************************************************
  ******* structs / unions *****************************************************
  ******************************************************************************/
-union	Uint128 {
-	uint128_t	uu128;
-	uint64_t	uu64[2];
+struct	Alx_Ncurses_Menu {
+	int8_t		r;
+	int8_t		c;
+	const char	*t;
 };
 
 
@@ -48,60 +47,30 @@ union	Uint128 {
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
+int8_t	alx_ncurses_menu	(int8_t height, int8_t width,
+				int8_t N,
+				const struct Alx_Ncurses_Menu mnu[restrict N],
+				const char *restrict title);
+int8_t	alx_ncurses_w_menu	(WINDOW *win,
+				int8_t N,
+				const struct Alx_Ncurses_Menu mnu[restrict N],
+				const char *restrict title);
 
 
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
-static inline	uint8_t		popcnt_u8	(uint8_t n);
-static inline	uint16_t	popcnt_u16	(uint16_t n);
-static inline	uint32_t	popcnt_u32	(uint32_t n);
-static inline	uint64_t	popcnt_u64	(uint32_t n);
-static inline	uint64_t	popcnt_u128	(uint128_t n);
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
-static inline	uint8_t		popcnt_u8	(uint8_t n)
-{
-
-	return	_mm_popcnt_u64(n);
-}
-
-static inline	uint16_t	popcnt_u16	(uint16_t n)
-{
-
-	return	_mm_popcnt_u64(n);
-}
-
-static inline	uint32_t	popcnt_u32	(uint32_t n)
-{
-
-	return	_mm_popcnt_u64(n);
-}
-
-static inline	uint64_t	popcnt_u64	(uint32_t n)
-{
-
-	return	_mm_popcnt_u64(n);
-}
-
-static inline	uint64_t	popcnt_u128	(uint128_t n)
-{
-	const	union Uint128	n_u	= {.uu128 = n};
-	const	uint_fast64_t	cnt_a	= _mm_popcnt_u64(n_u.uu64[0]);
-	const	uint_fast64_t	cnt_b	= _mm_popcnt_u64(n_u.uu64[1]);
-	const	uint_fast64_t	cnt	= cnt_a + cnt_b;
-
-	return	cnt;
-}
 
 
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/base/stdlib/popcnt.h */
+#endif		/* libalx/extra/ncurses/menu.h */
 
 
 /******************************************************************************

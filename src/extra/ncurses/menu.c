@@ -1,5 +1,5 @@
 /******************************************************************************
- *	Copyright (C) 2019	Alejandro Colomar Andrés		      *
+ *	Copyright (C) 2017	Alejandro Colomar Andrés		      *
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
@@ -7,14 +7,15 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/base/math/prime.h"
+#include "libalx/extra/ncurses/menu.h"
 
-#include <math.h>
 #include <stdbool.h>
-#include <stddef.h>
 #include <stdint.h>
 
-#include "libalx/base/stdlib/search.h"
+#include <ncurses.h>
+
+#include "libalx/base/stdint/redefinitions.h"
+#include "libalx/extra/ncurses/common.h"
 
 
 /******************************************************************************
@@ -35,95 +36,140 @@
 /******************************************************************************
  ******* variables ************************************************************
  ******************************************************************************/
-/* global --------------------------------------------------------------------*/
-const	int8_t		alx_prime_s8 [PRIME_NUMBERS_QTY_S8] = {
-		2, 3, 5, 7, 11,			13, 17, 19, 23, 29,
-		31, 37, 41, 43, 47,		53, 59, 61, 67, 71,
-		73, 79, 83, 89, 97,		101, 103, 107, 109, 113,
-		127
-	};
-const	uint8_t		alx_prime_u8 [PRIME_NUMBERS_QTY_U8] = {
-		2, 3, 5, 7, 11,			13, 17, 19, 23, 29,
-		31, 37, 41, 43, 47,		53, 59, 61, 67, 71,
-		73, 79, 83, 89, 97,		101, 103, 107, 109, 113,
-		127, 131, 137, 139, 149,	151, 157, 163, 167, 173,
-		179, 181, 191, 193, 197,	199, 211, 223, 227, 229,
-		233, 239, 241, 251
-	};
-	int16_t		alx_prime_s16 [PRIME_NUMBERS_QTY_S16];
-	uint16_t	alx_prime_u16 [PRIME_NUMBERS_QTY_U16];
-/* static --------------------------------------------------------------------*/
 
 
 /******************************************************************************
  ******* static functions (prototypes) ****************************************
  ******************************************************************************/
-static bool	is_prime_s16	(int n);
-static bool	is_prime_u16	(unsigned n);
+static	void	_print_menu	(WINDOW *win,
+				int8_t N,
+				const struct Alx_Ncurses_Menu mnu[N]);
+static	int8_t	_usr_input_sel	(WINDOW *win,
+				int8_t N,
+				const struct Alx_Ncurses_Menu mnu[N]);
 
 
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-void	alx_prime_s16_init	(void)
+int8_t	alx_ncurses_menu	(int8_t height, int8_t width,
+				int8_t N,
+				const struct Alx_Ncurses_Menu mnu[restrict N],
+				const char *restrict title)
 {
-	ptrdiff_t	i;
+	WINDOW		*win;
+	int_fast8_t	r, c;
+	int_fast8_t	sel;
 
-	i	= 0;
-	alx_prime_s16[i++]	= 2;
+	r	= 1;
+	c	= (80 - width) / 2;
+	win	= newwin(height, width, r, c);
 
-	for (int n = 3; n < INT16_MAX; n++) {
-		if (is_prime_s16(n))
-			alx_prime_s16[i++]	= n;
-	}
+	sel	= alx_ncurses_w_menu(win, N, mnu, title);
+
+	alx_ncurses_delwin(win);
+
+	return	sel;
 }
 
-void	alx_prime_u16_init	(void)
+int8_t	alx_ncurses_w_menu	(WINDOW *win,
+				int8_t N,
+				const struct Alx_Ncurses_Menu mnu[restrict N],
+				const char *restrict title)
 {
-	ptrdiff_t	i;
+	int_fast8_t	sel;
 
-	i	= 0;
-	alx_prime_u16[i++]	= 2;
+	keypad(win, true);
+	noecho();
 
-	for (unsigned n = 3; n < UINT16_MAX; n++) {
-		if (is_prime_u16(n))
-			alx_prime_u16[i++]	= n;
-	}
+	box(win, 0, 0);
+	alx_ncurses_title(win, title);
+	_print_menu(win, N, mnu);
+
+	sel	= _usr_input_sel(win, N, mnu);
+
+	return	sel;
 }
-
 
 
 /******************************************************************************
  ******* static functions (definitions) ***************************************
  ******************************************************************************/
-static bool	is_prime_s16	(int n)
+static	void	_print_menu	(WINDOW *win,
+				int8_t N,
+				const struct Alx_Ncurses_Menu mnu[N])
 {
-	int_fast16_t	sqrt_n;
 
-	sqrt_n	= sqrt(n) + 1;
-
-	for (ptrdiff_t i = 0; (alx_prime_s16[i] <= sqrt_n) &&
-					(i < PRIME_NUMBERS_QTY_S16); i++) {
-		if (!(n % alx_prime_s16[i]))
-			return	false;
-	}
-
-	return	true;
+	/* Print menu items */
+	for (int_fast8_t i = 0; i < N; i++)
+		mvwaddstr(win, mnu[i].r, mnu[i].c, mnu[i].t);
+	wrefresh(win);
 }
 
-static bool	is_prime_u16	(unsigned n)
+static	int8_t	_usr_input_sel	(WINDOW *win,
+				int8_t N,
+				const struct Alx_Ncurses_Menu mnu[N])
 {
-	uint_fast16_t	sqrt_n;
+	int_fast8_t	sel;
+	bool		wh;
+	int		c;
 
-	sqrt_n	= sqrt(n) + 1;
+	/* default item */
+	sel	= 1;
+	wmove(win, mnu[sel].r, mnu[sel].c + 1);
 
-	for (ptrdiff_t i = 0; (alx_prime_u16[i] <= sqrt_n) &&
-					(i < PRIME_NUMBERS_QTY_U16); i++) {
-		if (!(n % alx_prime_u16[i]))
-			return	false;
+	/* Receive input until ENTER key */
+	wh	= true;
+	while (wh) {
+		/* Input */
+		c = wgetch(win);
+
+		switch (c) {
+		case KEY_UP:
+		case 'w':
+		case 'k':
+			/* KEY_UP, move one item up */
+			if (sel)
+				sel--;
+			else
+				sel = N - 1;
+			wmove(win, mnu[sel].r, mnu[sel].c + 1);
+			break;
+
+		case KEY_DOWN:
+		case 's':
+		case 'j':
+			/* KEY_DOWN, move one item down */
+			if (sel != N - 1)
+				sel++;
+			else
+				sel = 0;
+			wmove(win, mnu[sel].r, mnu[sel].c + 1);
+			break;
+
+		/* '\r' is Enter key in Windows */
+		case KEY_ENTER:
+		case '\r':
+		case '\n':
+		case ' ':
+			/* ENTER / SPACE, end menu */
+			wh = false;
+			break;
+
+		default:
+			if ((c >= '0') && (c < N + '0')) {
+				/* Input is a number, move to item & end menu */
+				sel = c - '0';
+				wmove(win, mnu[sel].r, mnu[sel].c + 1);
+				wh = false;
+			}
+			break;
+
+		}
+
 	}
 
-	return	true;
+	return	sel;
 }
 
 

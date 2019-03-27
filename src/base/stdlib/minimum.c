@@ -137,7 +137,7 @@ ptrdiff_t	alx_minimum_u8	(ptrdiff_t nmemb,
 				const uint8_t arr[restrict nmemb])
 {
 	ptrdiff_t	pos;
-	uint8_t		val;
+	uint_fast8_t	val;
 
 	pos	= 0;
 	val	= UINT8_MAX;
@@ -155,7 +155,7 @@ ptrdiff_t	alx_minimum_s8	(ptrdiff_t nmemb,
 				const int8_t arr[restrict nmemb])
 {
 	ptrdiff_t	pos;
-	int8_t		val;
+	int_fast8_t	val;
 
 	pos	= 0;
 	val	= INT8_MAX;
@@ -173,7 +173,7 @@ ptrdiff_t	alx_minimum_u16	(ptrdiff_t nmemb,
 				const uint16_t arr[restrict nmemb])
 {
 	ptrdiff_t	pos;
-	uint16_t	val;
+	uint_fast16_t	val;
 
 	pos	= 0;
 	val	= UINT16_MAX;
@@ -191,7 +191,7 @@ ptrdiff_t	alx_minimum_s16	(ptrdiff_t nmemb,
 				const int16_t arr[restrict nmemb])
 {
 	ptrdiff_t	pos;
-	int16_t		val;
+	int_fast16_t	val;
 
 	pos	= 0;
 	val	= INT16_MAX;
@@ -209,7 +209,7 @@ ptrdiff_t	alx_minimum_u32	(ptrdiff_t nmemb,
 				const uint32_t arr[restrict nmemb])
 {
 	ptrdiff_t	pos;
-	uint32_t	val;
+	uint_fast32_t	val;
 
 	pos	= 0;
 	val	= UINT32_MAX;
@@ -227,7 +227,7 @@ ptrdiff_t	alx_minimum_s32	(ptrdiff_t nmemb,
 				const int32_t arr[restrict nmemb])
 {
 	ptrdiff_t	pos;
-	int32_t		val;
+	int_fast32_t	val;
 
 	pos	= 0;
 	val	= INT32_MAX;
@@ -245,7 +245,7 @@ ptrdiff_t	alx_minimum_u64	(ptrdiff_t nmemb,
 				const uint64_t arr[restrict nmemb])
 {
 	ptrdiff_t	pos;
-	uint64_t	val;
+	uint_fast64_t	val;
 
 	pos	= 0;
 	val	= UINT64_MAX;
@@ -263,7 +263,7 @@ ptrdiff_t	alx_minimum_s64	(ptrdiff_t nmemb,
 				const int64_t arr[restrict nmemb])
 {
 	ptrdiff_t	pos;
-	int64_t		val;
+	int_fast64_t	val;
 
 	pos	= 0;
 	val	= INT64_MAX;

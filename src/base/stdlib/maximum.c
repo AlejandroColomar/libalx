@@ -14,6 +14,8 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#include "libalx/base/stdint/redefinitions.h"
+
 
 /******************************************************************************
  ******* macros ***************************************************************
@@ -137,7 +139,7 @@ ptrdiff_t	alx_maximum_u8	(ptrdiff_t nmemb,
 				const uint8_t arr[restrict nmemb])
 {
 	ptrdiff_t	pos;
-	uint8_t		val;
+	uint_fast8_t	val;
 
 	pos	= 0;
 	val	= 0;
@@ -155,7 +157,7 @@ ptrdiff_t	alx_maximum_s8	(ptrdiff_t nmemb,
 				const int8_t arr[restrict nmemb])
 {
 	ptrdiff_t	pos;
-	int8_t		val;
+	int_fast8_t	val;
 
 	pos	= 0;
 	val	= INT8_MIN;
@@ -173,7 +175,7 @@ ptrdiff_t	alx_maximum_u16	(ptrdiff_t nmemb,
 				const uint16_t arr[restrict nmemb])
 {
 	ptrdiff_t	pos;
-	uint16_t	val;
+	uint_fast16_t	val;
 
 	pos	= 0;
 	val	= 0;
@@ -191,7 +193,7 @@ ptrdiff_t	alx_maximum_s16	(ptrdiff_t nmemb,
 				const int16_t arr[restrict nmemb])
 {
 	ptrdiff_t	pos;
-	int16_t		val;
+	int_fast16_t	val;
 
 	pos	= 0;
 	val	= INT16_MIN;
@@ -209,7 +211,7 @@ ptrdiff_t	alx_maximum_u32	(ptrdiff_t nmemb,
 				const uint32_t arr[restrict nmemb])
 {
 	ptrdiff_t	pos;
-	uint32_t	val;
+	uint_fast32_t	val;
 
 	pos	= 0;
 	val	= 0;
@@ -227,7 +229,7 @@ ptrdiff_t	alx_maximum_s32	(ptrdiff_t nmemb,
 				const int32_t arr[restrict nmemb])
 {
 	ptrdiff_t	pos;
-	int32_t		val;
+	int_fast32_t	val;
 
 	pos	= 0;
 	val	= INT32_MIN;
@@ -245,7 +247,7 @@ ptrdiff_t	alx_maximum_u64	(ptrdiff_t nmemb,
 				const uint64_t arr[restrict nmemb])
 {
 	ptrdiff_t	pos;
-	uint64_t	val;
+	uint_fast64_t	val;
 
 	pos	= 0;
 	val	= 0;
@@ -263,7 +265,7 @@ ptrdiff_t	alx_maximum_s64	(ptrdiff_t nmemb,
 				const int64_t arr[restrict nmemb])
 {
 	ptrdiff_t	pos;
-	int64_t		val;
+	int_fast64_t	val;
 
 	pos	= 0;
 	val	= INT64_MIN;
