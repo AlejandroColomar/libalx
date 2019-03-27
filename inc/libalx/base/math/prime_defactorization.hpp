@@ -58,27 +58,27 @@ static inline	long double	alx_ldbl_prime_defactorization_s8(
 static inline	long double	alx_ldbl_prime_defactorization_u8(
 			const int8_t (*restrict pf)[PRIME_NUMBERS_QTY_U8]);
 static inline	long double	alx_ldbl_prime_defactorization_s16(
-			const int8_t (*restrict pf)[PRIME_NUMBERS_QTY_S16]);
+			const int16_t (*restrict pf)[PRIME_NUMBERS_QTY_S16]);
 static inline	long double	alx_ldbl_prime_defactorization_s16(
-			const int8_t (*restrict pf)[PRIME_NUMBERS_QTY_S16]);
+			const int16_t (*restrict pf)[PRIME_NUMBERS_QTY_S16]);
 
 static inline	double		alx_prime_defactorization_s8(
 			const int8_t (*restrict pf)[PRIME_NUMBERS_QTY_S8]);
 static inline	double		alx_prime_defactorization_u8(
 			const int8_t (*restrict pf)[PRIME_NUMBERS_QTY_U8]);
 static inline	double		alx_prime_defactorization_s16(
-			const int8_t (*restrict pf)[PRIME_NUMBERS_QTY_S16]);
+			const int16_t (*restrict pf)[PRIME_NUMBERS_QTY_S16]);
 static inline	double		alx_prime_defactorization_s16(
-			const int8_t (*restrict pf)[PRIME_NUMBERS_QTY_S16]);
+			const int16_t (*restrict pf)[PRIME_NUMBERS_QTY_S16]);
 
 static inline	float		alx_flt_prime_defactorization_s8(
 			const int8_t (*restrict pf)[PRIME_NUMBERS_QTY_S8]);
 static inline	float		alx_flt_prime_defactorization_u8(
 			const int8_t (*restrict pf)[PRIME_NUMBERS_QTY_U8]);
 static inline	float		alx_flt_prime_defactorization_s16(
-			const int8_t (*restrict pf)[PRIME_NUMBERS_QTY_S16]);
+			const int16_t (*restrict pf)[PRIME_NUMBERS_QTY_S16]);
 static inline	float		alx_flt_prime_defactorization_s16(
-			const int8_t (*restrict pf)[PRIME_NUMBERS_QTY_S16]);
+			const int16_t (*restrict pf)[PRIME_NUMBERS_QTY_S16]);
 
 
 /******************************************************************************
@@ -112,7 +112,7 @@ long double	alx_ldbl_prime_defactorization_u8(
 
 static inline
 long double	alx_ldbl_prime_defactorization_s16(
-			const int8_t (*restrict pf)[PRIME_NUMBERS_QTY_S16])
+			const int16_t (*restrict pf)[PRIME_NUMBERS_QTY_S16])
 {
 	long double	n;
 
@@ -125,7 +125,7 @@ long double	alx_ldbl_prime_defactorization_s16(
 
 static inline
 long double	alx_ldbl_prime_defactorization_u16(
-			const int8_t (*restrict pf)[PRIME_NUMBERS_QTY_U16])
+			const int16_t (*restrict pf)[PRIME_NUMBERS_QTY_U16])
 {
 	long double	n;
 
@@ -165,7 +165,7 @@ double		alx_prime_defactorization_u8(
 
 static inline
 double		alx_prime_defactorization_s16(
-			const int8_t (*restrict pf)[PRIME_NUMBERS_QTY_S16])
+			const int16_t (*restrict pf)[PRIME_NUMBERS_QTY_S16])
 {
 	double_t	n;
 
@@ -178,7 +178,7 @@ double		alx_prime_defactorization_s16(
 
 static inline
 double		alx_prime_defactorization_u16(
-			const int8_t (*restrict pf)[PRIME_NUMBERS_QTY_U16])
+			const int16_t (*restrict pf)[PRIME_NUMBERS_QTY_U16])
 {
 	double_t	n;
 
@@ -218,7 +218,7 @@ float		alx_flt_prime_defactorization_u8(
 
 static inline
 float		alx_flt_prime_defactorization_s16(
-			const int8_t (*restrict pf)[PRIME_NUMBERS_QTY_S16])
+			const int16_t (*restrict pf)[PRIME_NUMBERS_QTY_S16])
 {
 	float_t	n;
 
@@ -231,7 +231,7 @@ float		alx_flt_prime_defactorization_s16(
 
 static inline
 float		alx_flt_prime_defactorization_u16(
-			const int8_t (*restrict pf)[PRIME_NUMBERS_QTY_U16])
+			const int16_t (*restrict pf)[PRIME_NUMBERS_QTY_U16])
 {
 	float_t	n;
 

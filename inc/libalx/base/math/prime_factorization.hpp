@@ -49,9 +49,9 @@ int	alx_prime_factorization_s8	(int8_t n,
 int	alx_prime_factorization_u8	(uint8_t n,
 				int8_t (*restrict pf)[PRIME_NUMBERS_QTY_U8]);
 int	alx_prime_factorization_s16	(int16_t n,
-				int8_t (*restrict pf)[PRIME_NUMBERS_QTY_S16]);
+				int16_t (*restrict pf)[PRIME_NUMBERS_QTY_S16]);
 int	alx_prime_factorization_u16	(uint16_t n,
-				int8_t (*restrict pf)[PRIME_NUMBERS_QTY_U16]);
+				int16_t (*restrict pf)[PRIME_NUMBERS_QTY_U16]);
 }
 
 

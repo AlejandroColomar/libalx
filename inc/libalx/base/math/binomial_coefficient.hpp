@@ -48,7 +48,7 @@ long double	alx_ldbl_binomial_coefficient		(int16_t n, int16_t k);
 double		alx_binomial_coefficient		(int16_t n, int16_t k);
 float		alx_flt_binomial_coefficient		(int16_t n, int16_t k);
 int		alx_binomial_coefficient_factorized	(int16_t n, int16_t k,
-				int8_t (*restrict pf)[PRIME_NUMBERS_QTY_S16]);
+				int16_t (*restrict pf)[PRIME_NUMBERS_QTY_S16]);
 }
 
 

@@ -52,7 +52,7 @@
  ******************************************************************************/
 long double	alx_ldbl_pascal_triangle	(int16_t n, int16_t k)
 {
-	int8_t	pf[PRIME_NUMBERS_QTY_S16];
+	int16_t	pf[PRIME_NUMBERS_QTY_S16];
 
 	if ((n < 0) || (k < 0) || (k > n)) {
 		errno	= EDOM;
@@ -66,12 +66,12 @@ long double	alx_ldbl_pascal_triangle	(int16_t n, int16_t k)
 	if (alx_pascal_triangle_factorized(n, k, &pf))
 		return	nanl("");
 
-	return	alx_ldbl_prime_defactorization_s16((const int8_t (*)[])&pf);
+	return	alx_ldbl_prime_defactorization_s16((const int16_t (*)[])&pf);
 }
 
 double		alx_pascal_triangle		(int16_t n, int16_t k)
 {
-	int8_t	pf[PRIME_NUMBERS_QTY_S16];
+	int16_t	pf[PRIME_NUMBERS_QTY_S16];
 
 	if ((n < 0) || (k < 0) || (k > n)) {
 		errno	= EDOM;
@@ -85,12 +85,12 @@ double		alx_pascal_triangle		(int16_t n, int16_t k)
 	if (alx_pascal_triangle_factorized(n, k, &pf))
 		return	nan("");
 
-	return	alx_prime_defactorization_s16((const int8_t (*)[])&pf);
+	return	alx_prime_defactorization_s16((const int16_t (*)[])&pf);
 }
 
 float		alx_flt_pascal_triangle		(int16_t n, int16_t k)
 {
-	int8_t	pf[PRIME_NUMBERS_QTY_S16];
+	int16_t	pf[PRIME_NUMBERS_QTY_S16];
 
 	if ((n < 0) || (k < 0) || (k > n)) {
 		errno	= EDOM;
@@ -104,13 +104,13 @@ float		alx_flt_pascal_triangle		(int16_t n, int16_t k)
 	if (alx_pascal_triangle_factorized(n, k, &pf))
 		return	nanf("");
 
-	return	alx_flt_prime_defactorization_s16((const int8_t (*)[])&pf);
+	return	alx_flt_prime_defactorization_s16((const int16_t (*)[])&pf);
 }
 
 int		alx_pascal_triangle_factorized	(int16_t n, int16_t k,
-				int8_t (*restrict pf)[PRIME_NUMBERS_QTY_S16])
+				int16_t (*restrict pf)[PRIME_NUMBERS_QTY_S16])
 {
-	int8_t	tmp[PRIME_NUMBERS_QTY_S16];
+	int16_t	tmp[PRIME_NUMBERS_QTY_S16];
 
 	if ((n < 0) || (k < 0) || (k > n)) {
 		errno	= EDOM;
@@ -127,9 +127,9 @@ int		alx_pascal_triangle_factorized	(int16_t n, int16_t k,
 
 	for (int_fast16_t i = 0; i < k; i++) {
 		alx_prime_factorization_s16(i + 1, &tmp);
-		alx_matrix_subtraction_s8(ARRAY_SSIZE(*pf), *pf, *pf, tmp);
+		alx_matrix_subtraction_s16(ARRAY_SSIZE(*pf), *pf, *pf, tmp);
 		alx_prime_factorization_s16(n - i, &tmp);
-		alx_matrix_addition_s8(ARRAY_SSIZE(*pf), *pf, *pf, tmp);
+		alx_matrix_addition_s16(ARRAY_SSIZE(*pf), *pf, *pf, tmp);
 	}
 
 	if (errno)
