@@ -14,12 +14,16 @@
 #	action
 
 PHONY := all
-all: math stddef stdint stdio stdlib string curses
+all: math ncurses stddef stdint stdio stdlib string
 
 
 PHONY += math
 math:
 	$(Q)$(MAKE)	-C $(TMP_DIR)/math/
+
+PHONY += ncurses
+ncurses:
+	$(Q)$(MAKE)	-C $(TMP_DIR)/ncurses/
 
 PHONY += stddef
 stddef:
@@ -40,10 +44,6 @@ stdlib:
 PHONY += string
 string:
 	$(Q)$(MAKE)	-C $(TMP_DIR)/string/
-
-PHONY += curses
-curses:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/curses/
 
 
 PHONY += clean

@@ -58,8 +58,7 @@ static	int		loop_get_fname	(const char *restrict path,
 					char fname[restrict FILENAME_MAX],
 					bool exist,
 					uint8_t attempts);
-
-static	void	manage_error	(int err);
+static	void		manage_error	(int err);
 
 
 /******************************************************************************
@@ -317,7 +316,7 @@ long double	loop_get_ldbl	(long double m, long double def, long double M,
 	int		err;
 
 	R	= def;
-	for (uint8_t i = 0; i <= attempts - 1; i++) {
+	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
 		if (!fgets(buff, BUFF_SIZE, stdin))
 			goto err_fgets;
 		err	= alx_sscan_ldbl(&R, m, def, M, buff);
@@ -342,7 +341,7 @@ static	double		loop_get_dbl	(double m, double def, double M,
 	int	err;
 
 	R	= def;
-	for (uint8_t i = 0; i <= attempts - 1; i++) {
+	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
 		if (!fgets(buff, BUFF_SIZE, stdin))
 			goto err_fgets;
 		err	= alx_sscan_dbl(&R, m, def, M, buff);
@@ -367,7 +366,7 @@ static	float		loop_get_flt	(float m, float def, float M,
 	int	err;
 
 	R	= def;
-	for (uint8_t i = 0; i <= attempts - 1; i++) {
+	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
 		if (!fgets(buff, BUFF_SIZE, stdin))
 			goto err_fgets;
 		err	= alx_sscan_flt(&R, m, def, M, buff);
@@ -392,7 +391,7 @@ static	unsigned	loop_get_uint	(unsigned m, unsigned def, unsigned M,
 	int		err;
 
 	N	= def;
-	for (uint8_t i = 0; i <= attempts - 1; i++) {
+	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
 		if (!fgets(buff, BUFF_SIZE, stdin))
 			goto err_fgets;
 		err	= alx_sscan_uint(&N, m, def, M, buff);
@@ -417,7 +416,7 @@ static	int		loop_get_int	(int m, int def, int M,
 	int	err;
 
 	Z	= def;
-	for (uint8_t i = 0; i <= attempts - 1; i++) {
+	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
 		if (!fgets(buff, BUFF_SIZE, stdin))
 			goto err_fgets;
 		err	= alx_sscan_int(&Z, m, def, M, buff);
@@ -442,7 +441,7 @@ static	uint8_t		loop_get_u8	(uint8_t m, uint8_t def, uint8_t M,
 	int	err;
 
 	N	= def;
-	for (uint8_t i = 0; i <= attempts - 1; i++) {
+	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
 		if (!fgets(buff, BUFF_SIZE, stdin))
 			goto err_fgets;
 		err	= alx_sscan_u8(&N, m, def, M, buff);
@@ -467,7 +466,7 @@ static	int8_t		loop_get_s8	(int8_t m, int8_t def, int8_t M,
 	int	err;
 
 	Z	= def;
-	for (uint8_t i = 0; i <= attempts - 1; i++) {
+	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
 		if (!fgets(buff, BUFF_SIZE, stdin))
 			goto err_fgets;
 		err	= alx_sscan_s8(&Z, m, def, M, buff);
@@ -492,7 +491,7 @@ static	uint16_t	loop_get_u16	(uint16_t m, uint16_t def, uint16_t M,
 	int		err;
 
 	N	= def;
-	for (uint8_t i = 0; i <= attempts - 1; i++) {
+	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
 		if (!fgets(buff, BUFF_SIZE, stdin))
 			goto err_fgets;
 		err	= alx_sscan_u16(&N, m, def, M, buff);
@@ -517,7 +516,7 @@ static	int16_t		loop_get_s16	(int16_t m, int16_t def, int16_t M,
 	int	err;
 
 	Z	= def;
-	for (uint8_t i = 0; i <= attempts - 1; i++) {
+	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
 		if (!fgets(buff, BUFF_SIZE, stdin))
 			goto err_fgets;
 		err	= alx_sscan_s16(&Z, m, def, M, buff);
@@ -542,7 +541,7 @@ static	uint32_t	loop_get_u32	(uint32_t m, uint32_t def, uint32_t M,
 	int		err;
 
 	N	= def;
-	for (uint8_t i = 0; i <= attempts - 1; i++) {
+	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
 		if (!fgets(buff, BUFF_SIZE, stdin))
 			goto err_fgets;
 		err	= alx_sscan_u32(&N, m, def, M, buff);
@@ -567,7 +566,7 @@ static	int32_t		loop_get_s32	(int32_t m, int32_t def, int32_t M,
 	int	err;
 
 	Z	= def;
-	for (uint8_t i = 0; i <= attempts - 1; i++) {
+	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
 		if (!fgets(buff, BUFF_SIZE, stdin))
 			goto err_fgets;
 		err	= alx_sscan_s32(&Z, m, def, M, buff);
@@ -592,7 +591,7 @@ static	uint64_t	loop_get_u64	(uint64_t m, uint64_t def, uint64_t M,
 	int		err;
 
 	N	= def;
-	for (uint8_t i = 0; i <= attempts - 1; i++) {
+	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
 		if (!fgets(buff, BUFF_SIZE, stdin))
 			goto err_fgets;
 		err	= alx_sscan_u64(&N, m, def, M, buff);
@@ -617,7 +616,7 @@ static	int64_t		loop_get_s64	(int64_t m, int64_t def, int64_t M,
 	int	err;
 
 	Z	= def;
-	for (uint8_t i = 0; i <= attempts - 1; i++) {
+	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
 		if (!fgets(buff, BUFF_SIZE, stdin))
 			goto err_fgets;
 		err	= alx_sscan_s64(&Z, m, def, M, buff);
@@ -659,7 +658,7 @@ err_sscan:
 	return	err;
 }
 
-static	void	manage_error	(int err)
+static	void		manage_error	(int err)
 {
 
 	switch (err) {

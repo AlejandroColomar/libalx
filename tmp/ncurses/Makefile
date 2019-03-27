@@ -12,14 +12,23 @@
 ################################################################################
 # dependencies
 OBJ		=							\
-		alx_ncur.o
+		alx_ncur.o						\
+		get.o
 
 NCUR_INC	=							\
-		$(INC_DIR)/libalx/curses/alx_ncur.h			\
+		$(INC_DIR)/libalx/ncurses/alx_ncur.h			\
 		$(INC_DIR)/libalx/stdio/common.h			\
 		$(INC_DIR)/libalx/stdio/sscan.h
 NCUR_SRC	=							\
-		$(SRC_DIR)/curses/alx_ncur.c
+		$(SRC_DIR)/ncurses/alx_ncur.c
+
+GET_INC	=								\
+		$(INC_DIR)/libalx/ncurses/get.h				\
+		$(INC_DIR)/libalx/stdio/common.h			\
+		$(INC_DIR)/libalx/stdio/sscan.h				\
+		$(INC_DIR)/libalx/ncurses/alx_ncur.h
+GET_SRC	=								\
+		$(SRC_DIR)/ncurses/get.c
 
 ################################################################################
 # CFLAGS
@@ -34,10 +43,17 @@ all: $(OBJ)
 
 
 alx_ncur.s: $(NCUR_SRC) $(NCUR_INC)
-	@echo	"	CC	libalx/tmp/curses/$@"
+	@echo	"	CC	libalx/tmp/ncurses/$@"
 	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
 alx_ncur.o: alx_ncur.s
-	@echo	"	AS	libalx/tmp/curses/$@"
+	@echo	"	AS	libalx/tmp/ncurses/$@"
+	$(Q)$(AS) $< -o $@
+
+get.s: $(GET_SRC) $(GET_INC)
+	@echo	"	CC	libalx/tmp/ncurses/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+get.o: get.s
+	@echo	"	AS	libalx/tmp/ncurses/$@"
 	$(Q)$(AS) $< -o $@
 
 

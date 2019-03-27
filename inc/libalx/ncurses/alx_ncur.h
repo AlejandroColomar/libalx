@@ -51,37 +51,6 @@ int	alx_menu_2		(WINDOW		*win,
 				const struct Alx_Menu	mnu[N],
 				const char	*str);
 
-double	alx_w_getdbl		(int		w,
-				int		r,
-				const char	*title,
-				double		m,
-				double		def,
-				double		M,
-				const char	*help);
-
-int64_t	alx_w_getint		(int		w,
-				int		r,
-				const char	*title,
-				double		m,
-				int64_t		def,
-				double		M,
-				const char	*help);
-
-void	alx_w_getstr		(char		*dest,
-				int		destsize,
-				int		w,
-				int		r,
-				const char	*title,
-				const char	*help);
-
-void	alx_w_getfname		(const char	*fpath,
-				char		*fname,
-				bool		exist,
-				int		w,
-				int		r,
-				const char	*title,
-				const char	*help);
-
 void	alx_ncur_prn_title	(WINDOW		*win,
 				const char	*title);
 

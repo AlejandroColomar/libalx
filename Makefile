@@ -131,15 +131,17 @@ export	LIB_DIR
 export	TST_DIR
 
 ################################################################################
+
+################################################################################
 # target: dependencies
 #	action
 
 PHONY := all
-all: math stddef stdint stdio stdlib string curses
+all: base extra
 
 
 PHONY += math
-math: stdlib
+math:
 	@echo	"	MAKE	math"
 	$(Q)$(MAKE) math	-C $(TMP_DIR)
 	$(Q)$(MAKE) math	-C $(LIB_DIR)
@@ -174,11 +176,21 @@ string:
 	$(Q)$(MAKE) string	-C $(TMP_DIR)
 	$(Q)$(MAKE) string	-C $(LIB_DIR)
 
-PHONY += curses
-curses: stdlib stdio
-	@echo	"	MAKE	curses"
-	$(Q)$(MAKE) curses	-C $(TMP_DIR)
-	$(Q)$(MAKE) curses	-C $(LIB_DIR)
+PHONY += base
+base: math stddef stdint stdio stdlib string
+	@echo	"	MAKE	base"
+	$(Q)$(MAKE) base	-C $(LIB_DIR)
+
+PHONY += ncurses
+ncurses:
+	@echo	"	MAKE	ncurses"
+	$(Q)$(MAKE) ncurses	-C $(TMP_DIR)
+	$(Q)$(MAKE) ncurses	-C $(LIB_DIR)
+
+PHONY += extra
+extra: ncurses
+	@echo	"	MAKE	extra"
+	$(Q)$(MAKE) extra	-C $(LIB_DIR)
 
 
 PHONY += tst

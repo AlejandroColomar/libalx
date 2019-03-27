@@ -43,14 +43,32 @@ STRING_OBJ	=							\
 		$(TMP_DIR)/string/strchr.o				\
 		$(TMP_DIR)/string/strgrep.o				\
 		$(TMP_DIR)/string/strstr.o
-CURSES_OBJ	=							\
-		$(TMP_DIR)/curses/alx_ncur.o
+BASE_OBJ	=							\
+		$(MATH_OBJ)						\
+		$(STDDEF_OBJ)						\
+		$(STDINT_OBJ)						\
+		$(STDIO_OBJ)						\
+		$(STDLIB_OBJ)						\
+		$(STRING_OBJ)
+
+NCURSES_OBJ	=							\
+		$(TMP_DIR)/ncurses/alx_ncur.o				\
+		$(TMP_DIR)/ncurses/get.o
+EXTRA_OBJ	=							\
+		$(NCURSES_OBJ)
+
+
+ALL	= libalx							\
+	math stddef stdint stdio stdlib string				\
+	base								\
+	ncurses								\
+	extra
 
 # target: dependencies
 #	action
 
 PHONY := all
-all: libalx math stddef stdint stdio stdlib string curses
+all: $(ALL)
 
 PHONY += math
 math: libalx libalx/libalx-math.a
@@ -70,8 +88,15 @@ stdlib: libalx libalx/libalx-stdlib.a
 PHONY += string
 string: libalx libalx/libalx-string.a
 
-PHONY += curses
-curses: libalx libalx/libalx-curses.a
+PHONY += base
+base: libalx libalx/libalx-base.a
+
+
+PHONY += ncurses
+ncurses: libalx libalx/libalx-ncurses.a
+
+PHONY += extra
+extra: libalx libalx/libalx-extra.a
 
 
 libalx:
@@ -102,7 +127,16 @@ libalx/libalx-stdio.a: $(IO_OBJ)
 	@echo	"	AR	libalx/lib/$@"
 	$(Q)$(AR) -r -c -s -o $@ $^
 
-libalx/libalx-curses.a: $(CURSES_OBJ)
+libalx/libalx-base.a: $(BASE_OBJ)
+	@echo	"	AR	libalx/lib/$@"
+	$(Q)$(AR) -r -c -s -o $@ $^
+
+
+libalx/libalx-ncurses.a: $(CURSES_OBJ)
+	@echo	"	AR	libalx/lib/$@"
+	$(Q)$(AR) -r -c -s -o $@ $^
+
+libalx/libalx-extra.a: $(EXTRA_OBJ)
 	@echo	"	AR	libalx/lib/$@"
 	$(Q)$(AR) -r -c -s -o $@ $^
 
