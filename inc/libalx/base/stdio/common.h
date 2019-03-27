@@ -1,5 +1,5 @@
 /******************************************************************************
- *	Copyright (C) 2019	Alejandro Colomar Andrés		      *
+ *	Copyright (C) 2017	Alejandro Colomar Andrés		      *
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
@@ -7,26 +7,39 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_TEST_TEST_H
-#define ALX_TEST_TEST_H
+#ifndef ALX_STDIO_COMMON_H
+#define ALX_STDIO_COMMON_H
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <stdio.h>
-
-#include "libalx/base/stdio/escape_sequences.h"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+#define ERR_RANGE_MSG		"¡ Number is out of range !"
+#define ERR_SSCANF_MSG		"¡ sscanf() error !"
+#define ERR_FOPEN_MSG		"¡ FILE error !"
+#define ERR_FEXIST_MSG		"¡ FILE exists !"
+#define ERR_FGETS_MSG		"¡ fgets() error !"
+#define ERR_GETSTR_MSG		"¡ wgetstr() error !"
+#define ERR_SNPRINTF_MSG	"¡ snprintf() error !"
 
 
 /******************************************************************************
  ******* enums ****************************************************************
  ******************************************************************************/
+enum	Errors_Input {
+	ERR_RANGE	= 1,
+	ERR_SSCANF,
+	ERR_FOPEN,
+	ERR_FEXIST,
+	ERR_FGETS,
+	ERR_GETSTR,
+	ERR_SNPRINTF
+};
 
 
 /******************************************************************************
@@ -47,40 +60,17 @@
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
-static inline	void	print_fail	(const char *msg);
-static inline	void	print_ok	(const char *msg);
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
-static inline
-void	print_fail	(const char *msg)
-{
-
-	printf(""SGR_FGND_RED""SGR_BOLD"");
-	printf(" [FAIL]	");
-	printf(""SGR_FGND_YELLOW"");
-	printf("%s", msg);
-	printf(""SGR_RESET"");
-}
-
-static inline
-void	print_ok	(const char *msg)
-{
-
-	printf(""SGR_FGND_GREEN""SGR_BOLD"");
-	printf("  [OK]	");
-	printf(""SGR_RESET""SGR_FGND_BLUE"");
-	printf("%s", msg);
-	printf(""SGR_RESET"");
-}
 
 
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/../../test/test.h */
+#endif		/* libalx/base/stdio/common.h */
 
 
 /******************************************************************************

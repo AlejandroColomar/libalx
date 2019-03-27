@@ -7,16 +7,14 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_TEST_TEST_H
-#define ALX_TEST_TEST_H
+#ifndef ALX_STDLIB_POW_HPP
+#define ALX_STDLIB_POW_HPP
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <stdio.h>
-
-#include "libalx/base/stdio/escape_sequences.h"
+#include <cstdint>
 
 
 /******************************************************************************
@@ -42,45 +40,33 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
+extern	"C"
+{
+uint8_t		alx_pow_u8	(uint8_t base, uint8_t exp);
+int8_t		alx_pow_s8	(int8_t base, uint8_t exp);
+uint16_t	alx_pow_u16	(uint16_t base, uint8_t exp);
+int16_t		alx_pow_s16	(int16_t base, uint8_t exp);
+uint32_t	alx_pow_u32	(uint32_t base, uint8_t exp);
+int32_t		alx_pow_s32	(int32_t base, uint8_t exp);
+uint64_t	alx_pow_u64	(uint64_t base, uint8_t exp);
+int64_t		alx_pow_s64	(int64_t base, uint8_t exp);
+}
 
 
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
-static inline	void	print_fail	(const char *msg);
-static inline	void	print_ok	(const char *msg);
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
-static inline
-void	print_fail	(const char *msg)
-{
-
-	printf(""SGR_FGND_RED""SGR_BOLD"");
-	printf(" [FAIL]	");
-	printf(""SGR_FGND_YELLOW"");
-	printf("%s", msg);
-	printf(""SGR_RESET"");
-}
-
-static inline
-void	print_ok	(const char *msg)
-{
-
-	printf(""SGR_FGND_GREEN""SGR_BOLD"");
-	printf("  [OK]	");
-	printf(""SGR_RESET""SGR_FGND_BLUE"");
-	printf("%s", msg);
-	printf(""SGR_RESET"");
-}
 
 
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/../../test/test.h */
+#endif		/* libalx/base/stdlib/pow.hpp */
 
 
 /******************************************************************************

@@ -7,16 +7,30 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_TEST_TEST_H
-#define ALX_TEST_TEST_H
+#ifndef ALX_MATH_H
+#define ALX_MATH_H
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <stdio.h>
+#include <math.h>
 
-#include "libalx/base/stdio/escape_sequences.h"
+#include "libalx/base/math/arithmetic_mean.h"
+#include "libalx/base/math/array_division.h"
+#include "libalx/base/math/array_multiplication.h"
+#include "libalx/base/math/array_sum.h"
+#include "libalx/base/math/binomial_coefficient.h"
+#include "libalx/base/math/common.h"
+#include "libalx/base/math/factorial.h"
+#include "libalx/base/math/matrix_addition.h"
+#include "libalx/base/math/matrix_subtraction.h"
+#include "libalx/base/math/median.h"
+#include "libalx/base/math/pascal_triangle.h"
+#include "libalx/base/math/prime.h"
+#include "libalx/base/math/prime_factorization.h"
+#include "libalx/base/math/prime_defactorization.h"
+#include "libalx/base/math/scale_linear.h"
 
 
 /******************************************************************************
@@ -47,40 +61,17 @@
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
-static inline	void	print_fail	(const char *msg);
-static inline	void	print_ok	(const char *msg);
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
-static inline
-void	print_fail	(const char *msg)
-{
-
-	printf(""SGR_FGND_RED""SGR_BOLD"");
-	printf(" [FAIL]	");
-	printf(""SGR_FGND_YELLOW"");
-	printf("%s", msg);
-	printf(""SGR_RESET"");
-}
-
-static inline
-void	print_ok	(const char *msg)
-{
-
-	printf(""SGR_FGND_GREEN""SGR_BOLD"");
-	printf("  [OK]	");
-	printf(""SGR_RESET""SGR_FGND_BLUE"");
-	printf("%s", msg);
-	printf(""SGR_RESET"");
-}
 
 
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/../../test/test.h */
+#endif		/* libalx/base/math.h */
 
 
 /******************************************************************************

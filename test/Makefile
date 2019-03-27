@@ -27,37 +27,37 @@ all: string run
 
 PHONY += math
 math:
-	$(Q)$(MAKE)	-C $(TST_DIR)/math/
+	$(Q)$(MAKE)	-C $(TST_DIR)/base/math/
 
 PHONY += stdint
 stdint:
-	$(Q)$(MAKE)	-C $(TST_DIR)/stdint/
-
-PHONY += stdlib
-stdlib:
-	$(Q)$(MAKE)	-C $(TST_DIR)/stdlib/
-
-PHONY += string
-string:
-	$(Q)$(MAKE)	-C $(TST_DIR)/string/
+	$(Q)$(MAKE)	-C $(TST_DIR)/base/stdint/
 
 PHONY += stdio
 stdio:
-	$(Q)$(MAKE)	-C $(TST_DIR)/stdio/
+	$(Q)$(MAKE)	-C $(TST_DIR)/base/stdio/
 
-PHONY += curses
-curses:
-	$(Q)$(MAKE)	-C $(TST_DIR)/curses/
+PHONY += stdlib
+stdlib:
+	$(Q)$(MAKE)	-C $(TST_DIR)/base/stdlib/
+
+PHONY += string
+string:
+	$(Q)$(MAKE)	-C $(TST_DIR)/base/string/
+
+PHONY += ncurses
+ncurses:
+	$(Q)$(MAKE)	-C $(TST_DIR)/extra/ncurses/
 
 PHONY += run
-run:
+run: string
 	@echo	"	TEST"
 	$(Q)./run_tests
 
 
 PHONY += clean
 clean:
-	$(Q)$(MAKE) clean	-C $(TST_DIR)/string/
+	$(Q)$(MAKE) clean	-C $(TST_DIR)/base/string/
 
 ################################################################################
 # Declare the contents of the .PHONY variable as phony.

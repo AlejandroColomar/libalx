@@ -5,18 +5,13 @@
 
 
 /******************************************************************************
- ******* include guard ********************************************************
- ******************************************************************************/
-#ifndef ALX_TEST_TEST_H
-#define ALX_TEST_TEST_H
-
-
-/******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <stdio.h>
+#include "libalx/base/string/strstr.h"
 
-#include "libalx/base/stdio/escape_sequences.h"
+#include <ctype.h>
+#include <stddef.h>
+#include <string.h>
 
 
 /******************************************************************************
@@ -40,47 +35,48 @@
 
 
 /******************************************************************************
- ******* extern functions *****************************************************
+ ******* static functions (prototypes) ****************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* static inline functions (prototypes) *********************************
+ ******* global functions *****************************************************
  ******************************************************************************/
-static inline	void	print_fail	(const char *msg);
-static inline	void	print_ok	(const char *msg);
-
-
-/******************************************************************************
- ******* static inline functions (definitions) ********************************
- ******************************************************************************/
-static inline
-void	print_fail	(const char *msg)
+ptrdiff_t	alx_strncasestr		(ptrdiff_t size,
+					const char str[restrict size],
+					const char pattern[restrict])
 {
+	char	str_lower[size];
+	char	pat_lower[size];
+	char	*p;
 
-	printf(""SGR_FGND_RED""SGR_BOLD"");
-	printf(" [FAIL]	");
-	printf(""SGR_FGND_YELLOW"");
-	printf("%s", msg);
-	printf(""SGR_RESET"");
+	if (!size)
+		return	-1;
+	if (!pattern[0])
+		return	0;
+
+	for (ptrdiff_t i = 0; i < size; i++) {
+		str_lower[i]	= tolower(str[i]);
+		if (!str_lower[i])
+			break;
+	}
+	for (ptrdiff_t i = 0; i < size; i++) {
+		pat_lower[i]	= tolower(pattern[i]);
+		if (!pat_lower[i])
+			break;
+	}
+
+	p	= strnstr(str_lower, pat_lower, size);
+
+	if (!p)
+		return	-1;
+	return	p - str_lower;
 }
 
-static inline
-void	print_ok	(const char *msg)
-{
-
-	printf(""SGR_FGND_GREEN""SGR_BOLD"");
-	printf("  [OK]	");
-	printf(""SGR_RESET""SGR_FGND_BLUE"");
-	printf("%s", msg);
-	printf(""SGR_RESET"");
-}
-
 
 /******************************************************************************
- ******* include guard ********************************************************
+ ******* static functions (definitions) ***************************************
  ******************************************************************************/
-#endif		/* libalx/../../test/test.h */
 
 
 /******************************************************************************

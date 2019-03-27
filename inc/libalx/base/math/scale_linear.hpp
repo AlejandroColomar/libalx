@@ -7,16 +7,14 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_TEST_TEST_H
-#define ALX_TEST_TEST_H
+#ifndef ALX_MATH_SCALE_LINEAR_HPP
+#define ALX_MATH_SCALE_LINEAR_HPP
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <stdio.h>
-
-#include "libalx/base/stdio/escape_sequences.h"
+#include <cstdint>
 
 
 /******************************************************************************
@@ -42,45 +40,64 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
+extern	"C"
+{
+long double	alx_scale_linear_ldbl	(long double input,
+					long double in_lo, long double in_hi,
+					long double out_lo, long double out_hi);
+double		alx_scale_linear	(double input,
+					double in_lo, double in_hi,
+					double out_lo, double out_hi);
+float		alx_scale_linear_flt	(float input,
+					float in_lo, float in_hi,
+					float out_lo, float out_hi);
+unsigned	alx_scale_linear_uint	(unsigned input,
+					unsigned in_lo, unsigned in_hi,
+					unsigned out_lo, unsigned out_hi);
+int		alx_scale_linear_int	(int input,
+					int in_lo, int in_hi,
+					int out_lo, int out_hi);
+uint8_t		alx_scale_linear_u8	(uint8_t input,
+					uint8_t in_lo, uint8_t in_hi,
+					uint8_t out_lo, uint8_t out_hi);
+int8_t		alx_scale_linear_s8	(int8_t input,
+					int8_t in_lo, int8_t in_hi,
+					int8_t out_lo, int8_t out_hi);
+uint16_t	alx_scale_linear_u16	(uint16_t input,
+					uint16_t in_lo, uint16_t in_hi,
+					uint16_t out_lo, uint16_t out_hi);
+int16_t		alx_scale_linear_s16	(int16_t input,
+					int16_t in_lo, int16_t in_hi,
+					int16_t out_lo, int16_t out_hi);
+uint32_t	alx_scale_linear_u32	(uint32_t input,
+					uint32_t in_lo, uint32_t in_hi,
+					uint32_t out_lo, uint32_t out_hi);
+int32_t		alx_scale_linear_s32	(int32_t input,
+					int32_t in_lo, int32_t in_hi,
+					int32_t out_lo, int32_t out_hi);
+uint64_t	alx_scale_linear_u64	(uint64_t input,
+					uint64_t in_lo, uint64_t in_hi,
+					uint64_t out_lo, uint64_t out_hi);
+int64_t		alx_scale_linear_s64	(int64_t input,
+					int64_t in_lo, int64_t in_hi,
+					int64_t out_lo, int64_t out_hi);
+}
 
 
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
-static inline	void	print_fail	(const char *msg);
-static inline	void	print_ok	(const char *msg);
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
-static inline
-void	print_fail	(const char *msg)
-{
-
-	printf(""SGR_FGND_RED""SGR_BOLD"");
-	printf(" [FAIL]	");
-	printf(""SGR_FGND_YELLOW"");
-	printf("%s", msg);
-	printf(""SGR_RESET"");
-}
-
-static inline
-void	print_ok	(const char *msg)
-{
-
-	printf(""SGR_FGND_GREEN""SGR_BOLD"");
-	printf("  [OK]	");
-	printf(""SGR_RESET""SGR_FGND_BLUE"");
-	printf("%s", msg);
-	printf(""SGR_RESET"");
-}
 
 
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/../../test/test.h */
+#endif		/* libalx/base/math/scale_linear.hpp */
 
 
 /******************************************************************************

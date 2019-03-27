@@ -10,40 +10,17 @@
 ################################################################################
 
 ################################################################################
+# dependencies
+
+OBJ		=
+
+################################################################################
 # target: dependencies
 #	action
 
 PHONY := all
-all: math stddef stdint stdio stdlib string ncurses
+all: $(OBJ)
 
-
-PHONY += math
-math:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/math/
-
-PHONY += stddef
-stddef:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stddef/
-
-PHONY += stdint
-stdint:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stdint/
-
-PHONY += stdio
-stdio:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stdio/
-
-PHONY += stdlib
-stdlib:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stdlib/
-
-PHONY += string
-string:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/string/
-
-PHONY += ncurses
-ncurses:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/ncurses/
 
 
 PHONY += clean

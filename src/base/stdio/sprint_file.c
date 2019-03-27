@@ -1,27 +1,25 @@
 /******************************************************************************
- *	Copyright (C) 2019	Alejandro Colomar Andrés		      *
+ *	Copyright (C) 2017	Alejandro Colomar Andrés		      *
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* include guard ********************************************************
- ******************************************************************************/
-#ifndef ALX_TEST_TEST_H
-#define ALX_TEST_TEST_H
-
-
-/******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include "libalx/base/stdio/sprint_file.h"
+
+#include <errno.h>
+#include <stddef.h>
 #include <stdio.h>
 
-#include "libalx/base/stdio/escape_sequences.h"
+#include "libalx/base/stdlib/minimum.h"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+#define _snprint_file	_snprint_file_fread
 
 
 /******************************************************************************
@@ -40,47 +38,75 @@
 
 
 /******************************************************************************
- ******* extern functions *****************************************************
+ ******* static functions (prototypes) ****************************************
  ******************************************************************************/
+static	ptrdiff_t	_snprint_file_getc	(ptrdiff_t size,
+						char dest[restrict size],
+						FILE *fp);
+static	ptrdiff_t	_snprint_file_fread	(ptrdiff_t size,
+						char dest[restrict size],
+						FILE *fp);
 
 
 /******************************************************************************
- ******* static inline functions (prototypes) *********************************
+ ******* global functions *****************************************************
  ******************************************************************************/
-static inline	void	print_fail	(const char *msg);
-static inline	void	print_ok	(const char *msg);
-
-
-/******************************************************************************
- ******* static inline functions (definitions) ********************************
- ******************************************************************************/
-static inline
-void	print_fail	(const char *msg)
+ptrdiff_t	alx_snprint_file(ptrdiff_t size,
+				char dest[restrict size],
+				const char fpath[restrict FILENAME_MAX])
 {
+	FILE		*fp;
+	ptrdiff_t	len;
 
-	printf(""SGR_FGND_RED""SGR_BOLD"");
-	printf(" [FAIL]	");
-	printf(""SGR_FGND_YELLOW"");
-	printf("%s", msg);
-	printf(""SGR_RESET"");
-}
+	fp	= fopen(fpath, "r");
+	if (!fp)
+		return	-1;
 
-static inline
-void	print_ok	(const char *msg)
-{
+	len	= _snprint_file(size, dest, fp);
+	fclose(fp);
 
-	printf(""SGR_FGND_GREEN""SGR_BOLD"");
-	printf("  [OK]	");
-	printf(""SGR_RESET""SGR_FGND_BLUE"");
-	printf("%s", msg);
-	printf(""SGR_RESET"");
+	return	len;
 }
 
 
 /******************************************************************************
- ******* include guard ********************************************************
+ ******* static functions (definitions) ***************************************
  ******************************************************************************/
-#endif		/* libalx/../../test/test.h */
+static	ptrdiff_t	_snprint_file_getc	(ptrdiff_t size,
+						char dest[restrict size],
+						FILE *fp)
+{
+	ptrdiff_t	len;
+	int		c;
+
+	for (len = 0; len < size; len++) {
+		c = getc(fp);
+		if (c == EOF) {
+			dest[len--] = '\0';
+			break;
+		}
+		dest[len] = c;
+	}
+
+	return	len;
+}
+
+static	ptrdiff_t	_snprint_file_fread	(ptrdiff_t size,
+						char dest[restrict size],
+						FILE *fp)
+{
+	ptrdiff_t	len;
+
+	fseek(fp, 0, SEEK_END);
+	len	= ftell(fp);
+	fseek(fp, 0, SEEK_SET);
+
+	fread(dest, sizeof(char), MIN(len, size), fp);
+	if (len < size)
+		dest[len + 1]	= '\0';
+
+	return	len;
+}
 
 
 /******************************************************************************

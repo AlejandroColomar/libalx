@@ -7,16 +7,24 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_TEST_TEST_H
-#define ALX_TEST_TEST_H
+#ifndef ALX_STDLIB_H
+#define ALX_STDLIB_H
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <stdio.h>
+#include <stdlib.h>
 
-#include "libalx/base/stdio/escape_sequences.h"
+#include "libalx/base/stdlib/array_split_pos_neg.h"
+#include "libalx/base/stdlib/compare.h"
+#include "libalx/base/stdlib/local_maxima.h"
+#include "libalx/base/stdlib/maximum.h"
+#include "libalx/base/stdlib/minimum.h"
+#include "libalx/base/stdlib/popcnt.h"
+#include "libalx/base/stdlib/pow.h"
+#include "libalx/base/stdlib/search.h"
+#include "libalx/base/stdlib/seed_mix.h"
 
 
 /******************************************************************************
@@ -47,40 +55,17 @@
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
-static inline	void	print_fail	(const char *msg);
-static inline	void	print_ok	(const char *msg);
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
-static inline
-void	print_fail	(const char *msg)
-{
-
-	printf(""SGR_FGND_RED""SGR_BOLD"");
-	printf(" [FAIL]	");
-	printf(""SGR_FGND_YELLOW"");
-	printf("%s", msg);
-	printf(""SGR_RESET"");
-}
-
-static inline
-void	print_ok	(const char *msg)
-{
-
-	printf(""SGR_FGND_GREEN""SGR_BOLD"");
-	printf("  [OK]	");
-	printf(""SGR_RESET""SGR_FGND_BLUE"");
-	printf("%s", msg);
-	printf(""SGR_RESET"");
-}
 
 
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/../../test/test.h */
+#endif		/* libalx/base/stdlib.h */
 
 
 /******************************************************************************

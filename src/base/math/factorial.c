@@ -5,18 +5,19 @@
 
 
 /******************************************************************************
- ******* include guard ********************************************************
- ******************************************************************************/
-#ifndef ALX_TEST_TEST_H
-#define ALX_TEST_TEST_H
-
-
-/******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <stdio.h>
+#include "libalx/base/math/factorial.h"
 
-#include "libalx/base/stdio/escape_sequences.h"
+#include <errno.h>
+#include <math.h>
+#include <stdint.h>
+#include <string.h>
+
+#include "libalx/base/math/matrix_addition.h"
+#include "libalx/base/math/prime.h"
+#include "libalx/base/math/prime_defactorization.h"
+#include "libalx/base/math/prime_factorization.h"
 
 
 /******************************************************************************
@@ -40,47 +41,93 @@
 
 
 /******************************************************************************
- ******* extern functions *****************************************************
+ ******* static functions (prototypes) ****************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* static inline functions (prototypes) *********************************
+ ******* global functions *****************************************************
  ******************************************************************************/
-static inline	void	print_fail	(const char *msg);
-static inline	void	print_ok	(const char *msg);
-
-
-/******************************************************************************
- ******* static inline functions (definitions) ********************************
- ******************************************************************************/
-static inline
-void	print_fail	(const char *msg)
+long double	alx_ldbl_factorial		(int16_t n)
 {
+	int8_t	pf[PRIME_NUMBERS_QTY_S16];
 
-	printf(""SGR_FGND_RED""SGR_BOLD"");
-	printf(" [FAIL]	");
-	printf(""SGR_FGND_YELLOW"");
-	printf("%s", msg);
-	printf(""SGR_RESET"");
+	if (n < 0) {
+		errno	= EDOM;
+		return	nanl("");
+	}
+	if (!n)
+		return	1;
+
+	if (alx_factorial_factorized(n, &pf))
+		return	nanl("");
+
+	return	alx_ldbl_prime_defactorization_s16((const int8_t (*)[])&pf);
 }
 
-static inline
-void	print_ok	(const char *msg)
+double		alx_factorial			(int16_t n)
 {
+	int8_t	pf[PRIME_NUMBERS_QTY_S16];
 
-	printf(""SGR_FGND_GREEN""SGR_BOLD"");
-	printf("  [OK]	");
-	printf(""SGR_RESET""SGR_FGND_BLUE"");
-	printf("%s", msg);
-	printf(""SGR_RESET"");
+	if (n < 0) {
+		errno	= EDOM;
+		return	nan("");
+	}
+	if (!n)
+		return	1;
+
+	if (alx_factorial_factorized(n, &pf))
+		return	nan("");
+
+	return	alx_prime_defactorization_s16((const int8_t (*)[])&pf);
+}
+
+float		alx_flt_factorial		(int16_t n)
+{
+	int8_t	pf[PRIME_NUMBERS_QTY_S16];
+
+	if (n < 0) {
+		errno	= EDOM;
+		return	nanf("");
+	}
+	if (!n)
+		return	1;
+
+	if (alx_factorial_factorized(n, &pf))
+		return	nanf("");
+
+	return	alx_flt_prime_defactorization_s16((const int8_t (*)[])&pf);
+}
+
+int		alx_factorial_factorized	(int16_t n,
+				int8_t (*restrict pf)[PRIME_NUMBERS_QTY_S16])
+{
+	int8_t	tmp[PRIME_NUMBERS_QTY_S16];
+
+	if (n < 0) {
+		errno	= EDOM;
+		return	-1;
+	}
+
+	memset(pf, 0, sizeof(*pf));
+
+	if (!n)
+		return	0;
+
+	for (int_fast16_t i = n; i > 1; i--) {
+		alx_prime_factorization_s16(i, &tmp);
+		alx_matrix_addition_s8(ARRAY_SSIZE(*pf), *pf, *pf, tmp);
+	}
+
+	if (errno)
+		return	-2;
+	return	0;
 }
 
 
 /******************************************************************************
- ******* include guard ********************************************************
+ ******* static functions (definitions) ***************************************
  ******************************************************************************/
-#endif		/* libalx/../../test/test.h */
 
 
 /******************************************************************************

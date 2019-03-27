@@ -10,45 +10,49 @@
 ################################################################################
 
 ################################################################################
+# dependencies
+
+BIN		=							\
+		strgrep-test						\
+		memcpy-test
+
+MEMCPY_DEPS	=							\
+		$(TMP_DIR)/base/string/memcpy-test.o			\
+		$(TMP_DIR)/base/string/memcpy.o				\
+		$(LIB_DIR)/libalx/libalx-string.a
+MEMCPY_LIBS	=							\
+		-L $(LIB_DIR)/libalx/					\
+		-l alx-string
+
+STRGREP_DEPS	=							\
+		$(TMP_DIR)/base/string/strgrep-test.o			\
+		$(TMP_DIR)/base/string/strgrep.o			\
+		$(LIB_DIR)/libalx/libalx-string.a
+STRGREP_LIBS	=							\
+		-L $(LIB_DIR)/libalx/					\
+		-l alx-string
+
+################################################################################
 # target: dependencies
 #	action
 
 PHONY := all
-all: math stddef stdint stdio stdlib string ncurses
+all: $(BIN)
 
 
-PHONY += math
-math:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/math/
+memcpy-test: $(MEMCPY_DEPS)
+	@echo	"	CC	libalx/test/base/string/$@"
+	$(Q)$(CC) $< -o $@ $(MEMCPY_LIBS) $(LIBS)
 
-PHONY += stddef
-stddef:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stddef/
-
-PHONY += stdint
-stdint:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stdint/
-
-PHONY += stdio
-stdio:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stdio/
-
-PHONY += stdlib
-stdlib:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stdlib/
-
-PHONY += string
-string:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/string/
-
-PHONY += ncurses
-ncurses:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/ncurses/
+strgrep-test: $(STRGREP_DEPS)
+	@echo	"	CC	libalx/test/base/string/$@"
+	$(Q)$(CC) $< -o $@ $(STRGREP_LIBS) $(LIBS)
 
 
 PHONY += clean
 clean:
-	$(Q)rm -f *.o *.s
+	@echo	"	RM	$(ALL)"
+	$(Q)rm -f $(BIN)
 
 ################################################################################
 # Declare the contents of the .PHONY variable as phony.

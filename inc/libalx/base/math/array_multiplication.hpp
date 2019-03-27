@@ -7,16 +7,15 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_TEST_TEST_H
-#define ALX_TEST_TEST_H
+#ifndef ALX_MATH_ARRAY_MULTIPLICATION_HPP
+#define ALX_MATH_ARRAY_MULTIPLICATION_HPP
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <stdio.h>
-
-#include "libalx/base/stdio/escape_sequences.h"
+#include <cstddef>
+#include <cstdint>
 
 
 /******************************************************************************
@@ -42,45 +41,109 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
+extern	"C"
+{
+int	alx_array_multiplication_uint	(ptrdiff_t nmemb,
+					unsigned dest[restrict],
+					const unsigned src1[restrict],
+					const unsigned src2[restrict]);
+int	alx_array_multiplication_int	(ptrdiff_t nmemb,
+					int dest[restrict],
+					const int src1[restrict],
+					const int src2[restrict]);
+int	alx_array_multiplication_u8	(ptrdiff_t nmemb,
+					uint8_t dest[restrict],
+					const uint8_t src1[restrict],
+					const uint8_t src2[restrict]);
+int	alx_array_multiplication_s8	(ptrdiff_t nmemb,
+					int8_t dest[restrict],
+					const int8_t src1[restrict],
+					const int8_t src2[restrict]);
+int	alx_array_multiplication_u16	(ptrdiff_t nmemb,
+					uint16_t dest[restrict],
+					const uint16_t src1[restrict],
+					const uint16_t src2[restrict]);
+int	alx_array_multiplication_s16	(ptrdiff_t nmemb,
+					int16_t dest[restrict],
+					const int16_t src1[restrict],
+					const int16_t src2[restrict]);
+int	alx_array_multiplication_u32	(ptrdiff_t nmemb,
+					uint32_t dest[restrict],
+					const uint32_t src1[restrict],
+					const uint32_t src2[restrict]);
+int	alx_array_multiplication_s32	(ptrdiff_t nmemb,
+					int32_t dest[restrict],
+					const int32_t src1[restrict],
+					const int32_t src2[restrict]);
+int	alx_array_multiplication_u64	(ptrdiff_t nmemb,
+					uint64_t dest[restrict],
+					const uint64_t src1[restrict],
+					const uint64_t src2[restrict]);
+int	alx_array_multiplication_s64	(ptrdiff_t nmemb,
+					int64_t dest[restrict],
+					const int64_t src1[restrict],
+					const int64_t src2[restrict]);
+}
 
 
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
-static inline	void	print_fail	(const char *msg);
-static inline	void	print_ok	(const char *msg);
+static inline	void	alx_array_multiplication_ldbl	(ptrdiff_t nmemb,
+					long double dest[restrict],
+					const long double src1[restrict],
+					const long double src2[restrict]);
+static inline	void	alx_array_multiplication	(ptrdiff_t nmemb,
+					double dest[restrict],
+					const double src1[restrict],
+					const double src2[restrict]);
+static inline	void	alx_array_multiplication_flt	(ptrdiff_t nmemb,
+					float dest[restrict],
+					const float src1[restrict],
+					const float src2[restrict]);
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
 static inline
-void	print_fail	(const char *msg)
+void	alx_array_multiplication_ldbl	(ptrdiff_t nmemb,
+					long double dest[restrict],
+					const long double src1[restrict],
+					const long double src2[restrict])
 {
 
-	printf(""SGR_FGND_RED""SGR_BOLD"");
-	printf(" [FAIL]	");
-	printf(""SGR_FGND_YELLOW"");
-	printf("%s", msg);
-	printf(""SGR_RESET"");
+	for (ptrdiff_t i = 0; i < nmemb; i++)
+		dest[i]	= src1[i] * src2[i];
 }
 
 static inline
-void	print_ok	(const char *msg)
+void	alx_array_multiplication	(ptrdiff_t nmemb,
+					double dest[restrict],
+					const double src1[restrict],
+					const double src2[restrict])
 {
 
-	printf(""SGR_FGND_GREEN""SGR_BOLD"");
-	printf("  [OK]	");
-	printf(""SGR_RESET""SGR_FGND_BLUE"");
-	printf("%s", msg);
-	printf(""SGR_RESET"");
+	for (ptrdiff_t i = 0; i < nmemb; i++)
+		dest[i]	= src1[i] * src2[i];
+}
+
+static inline
+void	alx_array_multiplication_flt	(ptrdiff_t nmemb,
+					float dest[restrict],
+					const float src1[restrict],
+					const float src2[restrict])
+{
+
+	for (ptrdiff_t i = 0; i < nmemb; i++)
+		dest[i]	= src1[i] * src2[i];
 }
 
 
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/../../test/test.h */
+#endif		/* libalx/base/math/array_multiplication.hpp */
 
 
 /******************************************************************************

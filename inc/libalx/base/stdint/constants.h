@@ -7,21 +7,56 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_TEST_TEST_H
-#define ALX_TEST_TEST_H
+#ifndef ALX_STDINT_LIMITS_H
+#define ALX_STDINT_LIMITS_H
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <stdio.h>
+#include <stddef.h>
+#include <stdint.h>
 
-#include "libalx/base/stdio/escape_sequences.h"
+#include <sys/types.h>
+
+
+/******************************************************************************
+ ******* typedefs *************************************************************
+ ******************************************************************************/
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+#define U8_MAX		(~(uint8_t)0)
+#define S8_MAX		((int8_t)(U8_MAX >> 1))
+#define S8_MIN		((int8_t)(-S8_MAX - 1))
+
+#define U16_MAX		(~(uint16_t)0)
+#define S16_MAX		((int16_t)(U16_MAX >> 1))
+#define S16_MIN		((int16_t)(-S16_MAX - 1))
+
+#define U32_MAX		(~(uint32_t)0)
+#define S32_MAX		((int32_t)(U32_MAX >> 1))
+#define S32_MIN		((int32_t)(-S32_MAX - 1))
+
+#define U64_MAX		(~(uint64_t)0)
+#define S32_MAX		((int32_t)(U32_MAX >> 1))
+#define S32_MIN		((int32_t)(-S32_MAX - 1))
+
+#define SQRT_U8_MAX	((uint8_t)0xF)
+#define SQRT_S8_MAX	((int8_t)0xB)
+
+#define SQRT_U16_MAX	((uint16_t)0xFF)
+#define SQRT_S16_MAX	((int16_t)0xB5)
+
+#define SQRT_U32_MAX	((uint32_t)0xFFFF)
+#define SQRT_S32_MAX	((int32_t)0xB504)
+
+#define SQRT_U64_MAX	((uint64_t)0xFFFFFFFF)
+#define SQRT_S64_MAX	((int64_t)0xB504F333)
+
+
 
 
 /******************************************************************************
@@ -47,40 +82,17 @@
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
-static inline	void	print_fail	(const char *msg);
-static inline	void	print_ok	(const char *msg);
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
-static inline
-void	print_fail	(const char *msg)
-{
-
-	printf(""SGR_FGND_RED""SGR_BOLD"");
-	printf(" [FAIL]	");
-	printf(""SGR_FGND_YELLOW"");
-	printf("%s", msg);
-	printf(""SGR_RESET"");
-}
-
-static inline
-void	print_ok	(const char *msg)
-{
-
-	printf(""SGR_FGND_GREEN""SGR_BOLD"");
-	printf("  [OK]	");
-	printf(""SGR_RESET""SGR_FGND_BLUE"");
-	printf("%s", msg);
-	printf(""SGR_RESET"");
-}
 
 
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/../../test/test.h */
+#endif		/* libalx/base/stdint/constants.h */
 
 
 /******************************************************************************

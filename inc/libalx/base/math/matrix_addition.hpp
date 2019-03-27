@@ -7,16 +7,15 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_TEST_TEST_H
-#define ALX_TEST_TEST_H
+#ifndef ALX_MATH_MATRIX_ADDITION_HPP
+#define ALX_MATH_MATRIX_ADDITION_HPP
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <stdio.h>
-
-#include "libalx/base/stdio/escape_sequences.h"
+#include <cstddef>
+#include <cstdint>
 
 
 /******************************************************************************
@@ -42,45 +41,110 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
+extern	"C"
+{
+int	alx_matrix_addition_uint(ptrdiff_t nmemb,
+					unsigned dest[],
+					const unsigned src1[],
+					const unsigned src2[]);
+int	alx_matrix_addition_int	(ptrdiff_t nmemb,
+					int dest[],
+					const int src1[],
+					const int src2[]);
+int	alx_matrix_addition_u8	(ptrdiff_t nmemb,
+					uint8_t dest[],
+					const uint8_t src1[],
+					const uint8_t src2[]);
+int	alx_matrix_addition_s8	(ptrdiff_t nmemb,
+					int8_t dest[],
+					const int8_t src1[],
+					const int8_t src2[]);
+int	alx_matrix_addition_u16	(ptrdiff_t nmemb,
+					uint16_t dest[],
+					const uint16_t src1[],
+					const uint16_t src2[]);
+int	alx_matrix_addition_s16	(ptrdiff_t nmemb,
+					int16_t dest[],
+					const int16_t src1[],
+					const int16_t src2[]);
+int	alx_matrix_addition_u32	(ptrdiff_t nmemb,
+					uint32_t dest[],
+					const uint32_t src1[],
+					const uint32_t src2[]);
+int	alx_matrix_addition_s32	(ptrdiff_t nmemb,
+					int32_t dest[],
+					const int32_t src1[],
+					const int32_t src2[]);
+int	alx_matrix_addition_u64	(ptrdiff_t nmemb,
+					uint64_t dest[],
+					const uint64_t src1[],
+					const uint64_t src2[]);
+int	alx_matrix_addition_s64	(ptrdiff_t nmemb,
+					int64_t dest[],
+					const int64_t src1[],
+					const int64_t src2[]);
+}
 
 
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
-static inline	void	print_fail	(const char *msg);
-static inline	void	print_ok	(const char *msg);
+static inline	void	alx_matrix_addition_ldbl(ptrdiff_t nmemb,
+					long double dest[],
+					const long double src1[],
+					const long double src2[]);
+static inline	void	alx_matrix_addition	(ptrdiff_t nmemb,
+					double dest[],
+					const double src1[],
+					const double src2[]);
+static inline	void	alx_matrix_addition_flt	(ptrdiff_t nmemb,
+					float dest[],
+					const float src1[],
+					const float src2[]);
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
 static inline
-void	print_fail	(const char *msg)
+void	alx_matrix_addition_ldbl	(ptrdiff_t nmemb,
+					long double dest[],
+					const long double src1[],
+					const long double src2[])
 {
 
-	printf(""SGR_FGND_RED""SGR_BOLD"");
-	printf(" [FAIL]	");
-	printf(""SGR_FGND_YELLOW"");
-	printf("%s", msg);
-	printf(""SGR_RESET"");
+	for (ptrdiff_t i = 0; i < nmemb; i++)
+		dest[i]	= src1[i] + src2[i];
 }
 
 static inline
-void	print_ok	(const char *msg)
+void	alx_matrix_addition		(ptrdiff_t nmemb,
+					double dest[],
+					const double src1[],
+					const double src2[])
 {
 
-	printf(""SGR_FGND_GREEN""SGR_BOLD"");
-	printf("  [OK]	");
-	printf(""SGR_RESET""SGR_FGND_BLUE"");
-	printf("%s", msg);
-	printf(""SGR_RESET"");
+	for (ptrdiff_t i = 0; i < nmemb; i++)
+		dest[i]	= src1[i] + src2[i];
 }
+
+static inline
+void	alx_matrix_addition_flt		(ptrdiff_t nmemb,
+					float dest[],
+					const float src1[],
+					const float src2[])
+{
+
+	for (ptrdiff_t i = 0; i < nmemb; i++)
+		dest[i]	= src1[i] + src2[i];
+}
+
 
 
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/../../test/test.h */
+#endif		/* libalx/base/math/matrix_addition.hpp */
 
 
 /******************************************************************************

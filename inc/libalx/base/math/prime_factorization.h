@@ -7,16 +7,16 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_TEST_TEST_H
-#define ALX_TEST_TEST_H
+#ifndef ALX_MATH_PRIME_FACTORIZATION_H
+#define ALX_MATH_PRIME_FACTORIZATION_H
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <stdio.h>
+#include <stdint.h>
 
-#include "libalx/base/stdio/escape_sequences.h"
+#include "libalx/base/math/prime.h"
 
 
 /******************************************************************************
@@ -42,45 +42,30 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
+int	alx_prime_factorization_s8	(int8_t n,
+				int8_t (*restrict pf)[PRIME_NUMBERS_QTY_S8]);
+int	alx_prime_factorization_u8	(uint8_t n,
+				int8_t (*restrict pf)[PRIME_NUMBERS_QTY_U8]);
+int	alx_prime_factorization_s16	(int16_t n,
+				int8_t (*restrict pf)[PRIME_NUMBERS_QTY_S16]);
+int	alx_prime_factorization_u16	(uint16_t n,
+				int8_t (*restrict pf)[PRIME_NUMBERS_QTY_U16]);
 
 
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
-static inline	void	print_fail	(const char *msg);
-static inline	void	print_ok	(const char *msg);
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
-static inline
-void	print_fail	(const char *msg)
-{
-
-	printf(""SGR_FGND_RED""SGR_BOLD"");
-	printf(" [FAIL]	");
-	printf(""SGR_FGND_YELLOW"");
-	printf("%s", msg);
-	printf(""SGR_RESET"");
-}
-
-static inline
-void	print_ok	(const char *msg)
-{
-
-	printf(""SGR_FGND_GREEN""SGR_BOLD"");
-	printf("  [OK]	");
-	printf(""SGR_RESET""SGR_FGND_BLUE"");
-	printf("%s", msg);
-	printf(""SGR_RESET"");
-}
 
 
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/../../test/test.h */
+#endif		/* libalx/base/math/prime_factorization.h */
 
 
 /******************************************************************************

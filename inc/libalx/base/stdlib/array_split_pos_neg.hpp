@@ -7,16 +7,15 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_TEST_TEST_H
-#define ALX_TEST_TEST_H
+#ifndef ALX_STDLIB_ARRAY_SPLIT_POS_NEG_HPP
+#define ALX_STDLIB_ARRAY_SPLIT_POS_NEG_HPP
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <stdio.h>
-
-#include "libalx/base/stdio/escape_sequences.h"
+#include <cstddef>
+#include <cstdint>
 
 
 /******************************************************************************
@@ -42,45 +41,54 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
+void	alx_array_split_pos_neg_ldbl	(ptrdiff_t nmemb,
+				const long double mix[restrict],
+				long double pos[restrict],
+				long double neg[restrict]);
+void	alx_array_split_pos_neg		(ptrdiff_t nmemb,
+				const double mix[restrict],
+				double pos[restrict],
+				double neg[restrict]);
+void	alx_array_split_pos_neg_flt	(ptrdiff_t nmemb,
+				const float mix[restrict],
+				float pos[restrict],
+				float neg[restrict]);
+void	alx_array_split_pos_neg_int	(ptrdiff_t nmemb,
+				const int mix[restrict],
+				int pos[restrict],
+				int neg[restrict]);
+void	alx_array_split_pos_neg_s8	(ptrdiff_t nmemb,
+				const int8_t mix[restrict],
+				int8_t pos[restrict],
+				int8_t neg[restrict]);
+void	alx_array_split_pos_neg_s16	(ptrdiff_t nmemb,
+				const int16_t mix[restrict],
+				int16_t pos[restrict],
+				int16_t neg[restrict]);
+void	alx_array_split_pos_neg_s32	(ptrdiff_t nmemb,
+				const int32_t mix[restrict],
+				int32_t pos[restrict],
+				int32_t neg[restrict]);
+void	alx_array_split_pos_neg_s64	(ptrdiff_t nmemb,
+				const int64_t mix[restrict],
+				int64_t pos[restrict],
+				int64_t neg[restrict]);
 
 
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
-static inline	void	print_fail	(const char *msg);
-static inline	void	print_ok	(const char *msg);
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
-static inline
-void	print_fail	(const char *msg)
-{
-
-	printf(""SGR_FGND_RED""SGR_BOLD"");
-	printf(" [FAIL]	");
-	printf(""SGR_FGND_YELLOW"");
-	printf("%s", msg);
-	printf(""SGR_RESET"");
-}
-
-static inline
-void	print_ok	(const char *msg)
-{
-
-	printf(""SGR_FGND_GREEN""SGR_BOLD"");
-	printf("  [OK]	");
-	printf(""SGR_RESET""SGR_FGND_BLUE"");
-	printf("%s", msg);
-	printf(""SGR_RESET"");
-}
 
 
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/../../test/test.h */
+#endif		/* libalx/base/stdlib/array_split_pos_neg.hpp */
 
 
 /******************************************************************************

@@ -7,21 +7,28 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_TEST_TEST_H
-#define ALX_TEST_TEST_H
+#ifndef ALX_MATH_PRIME_HPP
+#define ALX_MATH_PRIME_HPP
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <stdio.h>
+#include <cstddef>
+#include <cstdint>
 
-#include "libalx/base/stdio/escape_sequences.h"
+#include "libalx/base/stdlib/search.hpp"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+#define	PRIME_NUMBERS_QTY_S8	(31)
+#define	PRIME_NUMBERS_QTY_U8	(54)
+#define	PRIME_NUMBERS_QTY_S16	(3512)
+#define	PRIME_NUMBERS_QTY_U16	(6542)
+#define	PRIME_NUMBERS_QTY_S32	(105097565)
+#define	PRIME_NUMBERS_QTY_U32	(203280221)
 
 
 /******************************************************************************
@@ -37,50 +44,65 @@
 /******************************************************************************
  ******* variables ************************************************************
  ******************************************************************************/
+/* extern --------------------------------------------------------------------*/
+extern const	int8_t		alx_prime_s8 [PRIME_NUMBERS_QTY_S8];
+extern const	uint8_t		alx_prime_u8 [PRIME_NUMBERS_QTY_U8];
+extern		int16_t		alx_prime_s16 [PRIME_NUMBERS_QTY_S16];
+extern		uint16_t	alx_prime_u16 [PRIME_NUMBERS_QTY_U16];
+/* static const --------------------------------------------------------------*/
 
 
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
+extern	"C"
+{
+void	alx_prime_s16_init	(void);
+void	alx_prime_u16_init	(void);
+}
 
 
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
-static inline	void	print_fail	(const char *msg);
-static inline	void	print_ok	(const char *msg);
+static inline	ptrdiff_t	alx_prime_index_s8	(int8_t n);
+static inline	ptrdiff_t	alx_prime_index_u8	(int8_t n);
+static inline	ptrdiff_t	alx_prime_index_s16	(int8_t n);
+static inline	ptrdiff_t	alx_prime_index_u16	(int8_t n);
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
 static inline
-void	print_fail	(const char *msg)
+ptrdiff_t	alx_prime_index_s8	(int8_t n)
 {
-
-	printf(""SGR_FGND_RED""SGR_BOLD"");
-	printf(" [FAIL]	");
-	printf(""SGR_FGND_YELLOW"");
-	printf("%s", msg);
-	printf(""SGR_RESET"");
+	return	alx_bsearch_s8(PRIME_NUMBERS_QTY_S8, alx_prime_s8, n);
 }
 
 static inline
-void	print_ok	(const char *msg)
+ptrdiff_t	alx_prime_index_u8	(int8_t n)
 {
+	return	alx_bsearch_u8(PRIME_NUMBERS_QTY_U8, alx_prime_u8, n);
+}
 
-	printf(""SGR_FGND_GREEN""SGR_BOLD"");
-	printf("  [OK]	");
-	printf(""SGR_RESET""SGR_FGND_BLUE"");
-	printf("%s", msg);
-	printf(""SGR_RESET"");
+static inline
+ptrdiff_t	alx_prime_index_s16	(int8_t n)
+{
+	return	alx_bsearch_s16(PRIME_NUMBERS_QTY_S16, alx_prime_s16, n);
+}
+
+static inline
+ptrdiff_t	alx_prime_index_u16	(int8_t n)
+{
+	return	alx_bsearch_u16(PRIME_NUMBERS_QTY_U16, alx_prime_u16, n);
 }
 
 
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/../../test/test.h */
+#endif		/* libalx/base/math/prime.hpp */
 
 
 /******************************************************************************

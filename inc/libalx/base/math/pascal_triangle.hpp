@@ -7,16 +7,16 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_TEST_TEST_H
-#define ALX_TEST_TEST_H
+#ifndef ALX_MATH_PASCAL_TRIANGLE_HPP
+#define ALX_MATH_PASCAL_TRIANGLE_HPP
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <stdio.h>
+#include <stdint.h>
 
-#include "libalx/base/stdio/escape_sequences.h"
+#include "libalx/base/math/prime.hpp"
 
 
 /******************************************************************************
@@ -42,45 +42,30 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
+extern	"C"
+{
+long double	alx_ldbl_pascal_triangle	(int16_t n, int16_t k);
+double		alx_pascal_triangle		(int16_t n, int16_t k);
+float		alx_flt_pascal_triangle		(int16_t n, int16_t k);
+int		alx_pascal_triangle_factorized	(int16_t n, int16_t k,
+				int8_t (*restrict pf)[PRIME_NUMBERS_QTY_S16]);
+}
 
 
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
-static inline	void	print_fail	(const char *msg);
-static inline	void	print_ok	(const char *msg);
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
-static inline
-void	print_fail	(const char *msg)
-{
-
-	printf(""SGR_FGND_RED""SGR_BOLD"");
-	printf(" [FAIL]	");
-	printf(""SGR_FGND_YELLOW"");
-	printf("%s", msg);
-	printf(""SGR_RESET"");
-}
-
-static inline
-void	print_ok	(const char *msg)
-{
-
-	printf(""SGR_FGND_GREEN""SGR_BOLD"");
-	printf("  [OK]	");
-	printf(""SGR_RESET""SGR_FGND_BLUE"");
-	printf("%s", msg);
-	printf(""SGR_RESET"");
-}
 
 
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/../../test/test.h */
+#endif		/* libalx/base/math/pascal_triangle.hpp */
 
 
 /******************************************************************************

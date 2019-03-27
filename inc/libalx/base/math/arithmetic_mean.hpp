@@ -7,21 +7,37 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_TEST_TEST_H
-#define ALX_TEST_TEST_H
+#ifndef ALX_MATH_ARITHMETIC_MEAN_HPP
+#define ALX_MATH_ARITHMETIC_MEAN_HPP
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <stdio.h>
-
-#include "libalx/base/stdio/escape_sequences.h"
+#include <cstddef>
+#include <cstdint>
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+#define	AVG(a, b) (							\
+{									\
+	auto	_a	= (a);						\
+	auto	_b	= (b);						\
+									\
+	(_a / 2) + (_b / 2) + (((_a % 2) + (_b % 2)) / 2);		\
+}									\
+)
+
+#define	AVGfast(a, b, type) (						\
+{									\
+	type	_a	= (a);						\
+	type	_b	= (b);						\
+									\
+	(_a + _b) / 2.0;						\
+}									\
+)
 
 
 /******************************************************************************
@@ -42,45 +58,51 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
+extern	"C"
+{
+long double	alx_arithmetic_mean_ldbl(ptrdiff_t nmemb,
+					const long double arr[restrict]);
+double		alx_arithmetic_mean	(ptrdiff_t nmemb,
+					const double arr[restrict]);
+float		alx_arithmetic_mean_flt	(ptrdiff_t nmemb,
+					const float arr[restrict]);
+double		alx_arithmetic_mean_uint(ptrdiff_t nmemb,
+					const unsigned arr[restrict]);
+double		alx_arithmetic_mean_int	(ptrdiff_t nmemb,
+					const int arr[restrict]);
+double		alx_arithmetic_mean_u8	(ptrdiff_t nmemb,
+					const uint8_t arr[restrict]);
+double		alx_arithmetic_mean_s8	(ptrdiff_t nmemb,
+					const int8_t arr[restrict]);
+double		alx_arithmetic_mean_u16	(ptrdiff_t nmemb,
+					const uint16_t arr[restrict]);
+double		alx_arithmetic_mean_s16	(ptrdiff_t nmemb,
+					const int16_t arr[restrict]);
+double		alx_arithmetic_mean_u32	(ptrdiff_t nmemb,
+					const uint32_t arr[restrict]);
+double		alx_arithmetic_mean_s32	(ptrdiff_t nmemb,
+					const int32_t arr[restrict]);
+double		alx_arithmetic_mean_u64	(ptrdiff_t nmemb,
+					const uint64_t arr[restrict]);
+double		alx_arithmetic_mean_s64	(ptrdiff_t nmemb,
+					const int64_t arr[restrict]);
+}
 
 
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
-static inline	void	print_fail	(const char *msg);
-static inline	void	print_ok	(const char *msg);
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
-static inline
-void	print_fail	(const char *msg)
-{
-
-	printf(""SGR_FGND_RED""SGR_BOLD"");
-	printf(" [FAIL]	");
-	printf(""SGR_FGND_YELLOW"");
-	printf("%s", msg);
-	printf(""SGR_RESET"");
-}
-
-static inline
-void	print_ok	(const char *msg)
-{
-
-	printf(""SGR_FGND_GREEN""SGR_BOLD"");
-	printf("  [OK]	");
-	printf(""SGR_RESET""SGR_FGND_BLUE"");
-	printf("%s", msg);
-	printf(""SGR_RESET"");
-}
 
 
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/../../test/test.h */
+#endif		/* libalx/base/math/arithmetic_mean.hpp */
 
 
 /******************************************************************************

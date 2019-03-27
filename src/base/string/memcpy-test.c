@@ -5,23 +5,20 @@
 
 
 /******************************************************************************
- ******* include guard ********************************************************
- ******************************************************************************/
-#ifndef ALX_TEST_TEST_H
-#define ALX_TEST_TEST_H
-
-
-/******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include "libalx/base/string/memcpy.h"
+
+#include <stdbool.h>
 #include <stdio.h>
 
-#include "libalx/base/stdio/escape_sequences.h"
+#include "libalx/../../test/test.h"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+#define BUFF_SIZE	(8)
 
 
 /******************************************************************************
@@ -37,50 +34,82 @@
 /******************************************************************************
  ******* variables ************************************************************
  ******************************************************************************/
+static	volatile	double	src_v = 6.7;
+static			double	src_nv = 6.8;
+static	volatile	double	dest_v = 6.9;
+static			double	dest_nv = 7.0;
 
 
 /******************************************************************************
- ******* extern functions *****************************************************
+ ******* static functions (prototypes) ****************************************
  ******************************************************************************/
+int	test_alx_memcpy_vds(void);
+int	test_alx_memcpy_vd(void);
+int	test_alx_memcpy_vs(void);
 
 
 /******************************************************************************
- ******* static inline functions (prototypes) *********************************
+ ******* main *****************************************************************
  ******************************************************************************/
-static inline	void	print_fail	(const char *msg);
-static inline	void	print_ok	(const char *msg);
-
-
-/******************************************************************************
- ******* static inline functions (definitions) ********************************
- ******************************************************************************/
-static inline
-void	print_fail	(const char *msg)
+int main(void)
 {
+	int	fail = false;
 
-	printf(""SGR_FGND_RED""SGR_BOLD"");
-	printf(" [FAIL]	");
-	printf(""SGR_FGND_YELLOW"");
-	printf("%s", msg);
-	printf(""SGR_RESET"");
-}
+	if (test_alx_memcpy_vds())
+		fail = true;
+	if (test_alx_memcpy_vd())
+		fail = true;
+	if (test_alx_memcpy_vs())
+		fail = true;
 
-static inline
-void	print_ok	(const char *msg)
-{
+	if (!fail)
+		print_ok("	libalx/string/memcpy\n");
 
-	printf(""SGR_FGND_GREEN""SGR_BOLD"");
-	printf("  [OK]	");
-	printf(""SGR_RESET""SGR_FGND_BLUE"");
-	printf("%s", msg);
-	printf(""SGR_RESET"");
+	return	0;
 }
 
 
 /******************************************************************************
- ******* include guard ********************************************************
+ ******* static functions (definitions) ***************************************
  ******************************************************************************/
-#endif		/* libalx/../../test/test.h */
+int	test_alx_memcpy_vds(void)
+{
+
+	src_v	= 1.5;
+	alx_memcpy_vds(&dest_v, &src_v, sizeof(dest_v));
+	if (dest_v != src_v) {
+		print_fail("	libalx/string/memcpy:	alx_memcpy_vds()\n");
+		return	1;
+	}
+
+	return	0;
+}
+
+int	test_alx_memcpy_vd(void)
+{
+
+	src_nv	= 2.2;
+	alx_memcpy_vd(&dest_v, &src_nv, sizeof(dest_v));
+	if (dest_v != src_nv) {
+		print_fail("	libalx/string/memcpy:	alx_memcpy_vd()\n");
+		return	1;
+	}
+
+	return	0;
+}
+
+int	test_alx_memcpy_vs(void)
+{
+
+	src_v	= 3.7;
+	alx_memcpy_vs(&dest_nv, &src_v, sizeof(dest_nv));
+	if (dest_nv != src_v) {
+		print_fail("	libalx/string/memcpy:	alx_memcpy_vs()\n");
+		return	1;
+	}
+
+	return	0;
+}
 
 
 /******************************************************************************

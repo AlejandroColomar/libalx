@@ -7,16 +7,15 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_TEST_TEST_H
-#define ALX_TEST_TEST_H
+#ifndef ALX_STRING_STRCHR_HPP
+#define ALX_STRING_STRCHR_HPP
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <stdio.h>
-
-#include "libalx/base/stdio/escape_sequences.h"
+#include <cstddef>
+#include <cstring>
 
 
 /******************************************************************************
@@ -47,40 +46,61 @@
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
-static inline	void	print_fail	(const char *msg);
-static inline	void	print_ok	(const char *msg);
+static inline	ptrdiff_t	alx_strnchr	(ptrdiff_t size,
+					const char str[restrict], char c);
+/* Missing memrchr() */
+#if 0
+static inline	ptrdiff_t	alx_strnrchr	(ptrdiff_t size,
+					const char str[restrict], char c);
+#endif
+static inline	ptrdiff_t	alx_strnchrnul	(ptrdiff_t size,
+					const char str[restrict], char c);
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
 static inline
-void	print_fail	(const char *msg)
+ptrdiff_t	alx_strnchr	(ptrdiff_t size,
+					const char str[restrict], char c)
 {
+	const char	*p = memchr(str, c, strnlen(str, size));
 
-	printf(""SGR_FGND_RED""SGR_BOLD"");
-	printf(" [FAIL]	");
-	printf(""SGR_FGND_YELLOW"");
-	printf("%s", msg);
-	printf(""SGR_RESET"");
+	if (!p)
+		return	-1;
+	return	p - str;
 }
 
+/* Missing memrchr() */
+#if 0
 static inline
-void	print_ok	(const char *msg)
+ptrdiff_t	alx_strnrchr	(ptrdiff_t size,
+					const char str[restrict], char c)
 {
+	const char	*p = memrchr(str, c, strnlen(str, size));
 
-	printf(""SGR_FGND_GREEN""SGR_BOLD"");
-	printf("  [OK]	");
-	printf(""SGR_RESET""SGR_FGND_BLUE"");
-	printf("%s", msg);
-	printf(""SGR_RESET"");
+	if (!p)
+		return	-1;
+	return	p - str;
+}
+#endif
+
+static inline
+ptrdiff_t	alx_strnchrnul	(ptrdiff_t size,
+					const char str[restrict], char c)
+{
+	const char	*p = memchr(str, c, strnlen(str, size));
+
+	if (!p)
+		return	size;
+	return	p - str;
 }
 
 
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/../../test/test.h */
+#endif		/* libalx/base/string/strchr.hpp */
 
 
 /******************************************************************************

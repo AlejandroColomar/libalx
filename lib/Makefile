@@ -5,44 +5,41 @@
 # dependencies
 
 MATH_OBJ	=							\
-		$(TMP_DIR)/math/arithmetic_mean.o			\
-		$(TMP_DIR)/math/array_division.o			\
-		$(TMP_DIR)/math/array_multiplication.o			\
-		$(TMP_DIR)/math/array_sum.o				\
-		$(TMP_DIR)/math/binomial_coefficient.o			\
-		$(TMP_DIR)/math/factorial.o				\
-		$(TMP_DIR)/math/matrix_addition.o			\
-		$(TMP_DIR)/math/matrix_subtraction.o			\
-		$(TMP_DIR)/math/median.o				\
-		$(TMP_DIR)/math/pascal_triangle.o			\
-		$(TMP_DIR)/math/prime.o					\
-		$(TMP_DIR)/math/prime_defactorization.o			\
-		$(TMP_DIR)/math/prime_factorization.o			\
-		$(TMP_DIR)/math/scale_linear.o
-STDDEF_OBJ	=							\
-		$(TMP_DIR)/stddef/size.o
-STDINT_OBJ	=							\
-		$(TMP_DIR)/stdint/constants.o				\
-		$(TMP_DIR)/stdint/int128.o
+		$(TMP_DIR)/base/math/arithmetic_mean.o			\
+		$(TMP_DIR)/base/math/array_division.o			\
+		$(TMP_DIR)/base/math/array_multiplication.o		\
+		$(TMP_DIR)/base/math/array_sum.o			\
+		$(TMP_DIR)/base/math/binomial_coefficient.o		\
+		$(TMP_DIR)/base/math/factorial.o			\
+		$(TMP_DIR)/base/math/matrix_addition.o			\
+		$(TMP_DIR)/base/math/matrix_subtraction.o		\
+		$(TMP_DIR)/base/math/median.o				\
+		$(TMP_DIR)/base/math/pascal_triangle.o			\
+		$(TMP_DIR)/base/math/prime.o				\
+		$(TMP_DIR)/base/math/prime_defactorization.o		\
+		$(TMP_DIR)/base/math/prime_factorization.o		\
+		$(TMP_DIR)/base/math/scale_linear.o
+STDDEF_OBJ	=
+STDINT_OBJ	=
 STDIO_OBJ	=							\
-		$(TMP_DIR)/stdio/get.o					\
-		$(TMP_DIR)/stdio/sprint_file.o				\
-		$(TMP_DIR)/stdio/sscan.o
+		$(TMP_DIR)/base/stdio/get.o				\
+		$(TMP_DIR)/base/stdio/sprint_file.o			\
+		$(TMP_DIR)/base/stdio/sscan.o
 STDLIB_OBJ	=							\
-		$(TMP_DIR)/stdlib/array_split_pos_neg.o			\
-		$(TMP_DIR)/stdlib/compare.o				\
-		$(TMP_DIR)/stdlib/local_maxima.o			\
-		$(TMP_DIR)/stdlib/maximum.o				\
-		$(TMP_DIR)/stdlib/minimum.o				\
-		$(TMP_DIR)/stdlib/popcnt.o				\
-		$(TMP_DIR)/stdlib/pow.o					\
-		$(TMP_DIR)/stdlib/search.o				\
-		$(TMP_DIR)/stdlib/seed_mix.o
+		$(TMP_DIR)/base/stdlib/array_split_pos_neg.o		\
+		$(TMP_DIR)/base/stdlib/compare.o			\
+		$(TMP_DIR)/base/stdlib/local_maxima.o			\
+		$(TMP_DIR)/base/stdlib/maximum.o			\
+		$(TMP_DIR)/base/stdlib/minimum.o			\
+		$(TMP_DIR)/base/stdlib/popcnt.o				\
+		$(TMP_DIR)/base/stdlib/pow.o				\
+		$(TMP_DIR)/base/stdlib/search.o				\
+		$(TMP_DIR)/base/stdlib/seed_mix.o
 STRING_OBJ	=							\
-		$(TMP_DIR)/string/memcpy.o				\
-		$(TMP_DIR)/string/strchr.o				\
-		$(TMP_DIR)/string/strgrep.o				\
-		$(TMP_DIR)/string/strstr.o
+		$(TMP_DIR)/base/string/memcpy.o				\
+		$(TMP_DIR)/base/string/strchr.o				\
+		$(TMP_DIR)/base/string/strgrep.o			\
+		$(TMP_DIR)/base/string/strstr.o
 BASE_OBJ	=							\
 		$(MATH_OBJ)						\
 		$(STDDEF_OBJ)						\
@@ -52,8 +49,8 @@ BASE_OBJ	=							\
 		$(STRING_OBJ)
 
 NCURSES_OBJ	=							\
-		$(TMP_DIR)/ncurses/alx_ncur.o				\
-		$(TMP_DIR)/ncurses/get.o
+		$(TMP_DIR)/extra/ncurses/alx_ncur.o			\
+		$(TMP_DIR)/extra/ncurses/get.o
 EXTRA_OBJ	=							\
 		$(NCURSES_OBJ)
 
