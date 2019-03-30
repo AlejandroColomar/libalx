@@ -18,8 +18,12 @@ OBJ		=							\
 		array_multiplication.o					\
 		array_sum.o						\
 		binomial_coefficient.o					\
+		descriptive_statistics_1var.o				\
+		descriptive_statistics_2var.o				\
 		distribution_binomial.o					\
+		distribution_exponential.o				\
 		distribution_geometric.o				\
+		distribution_normal.o					\
 		distribution_poisson.o					\
 		distribution_uniform.o					\
 		factorial.o						\
@@ -33,8 +37,7 @@ OBJ		=							\
 		scale_linear.o
 
 ARITHMETIC_MEAN_INC	=						\
-		$(INC_DIR)/libalx/base/math/arithmetic_mean.h		\
-		$(INC_DIR)/libalx/base/stdint/redefinitions.h
+		$(INC_DIR)/libalx/base/math/arithmetic_mean.h
 ARITHMETIC_MEAN_SRC	=						\
 		$(SRC_DIR)/base/math/arithmetic_mean.c
 
@@ -50,7 +53,6 @@ ARRAY_MULTIPLICATION_SRC	=					\
 
 ARRAY_SUM_INC	=							\
 		$(INC_DIR)/libalx/base/math/array_sum.h			\
-		$(INC_DIR)/libalx/base/stdint/redefinitions.h		\
 		$(INC_DIR)/libalx/base/stdlib/compare.h
 ARRAY_SUM_SRC	=							\
 		$(SRC_DIR)/base/math/array_sum.c
@@ -66,16 +68,40 @@ BINOMIAL_COEFFICIENT_INC	=					\
 BINOMIAL_COEFFICIENT_SRC	=					\
 		$(SRC_DIR)/base/math/binomial_coefficient.c
 
+DESCRIPTIVE_STATISTICS_1VAR_INC	=					\
+		$(INC_DIR)/libalx/base/math/descriptive_statistics_1var.h \
+		$(INC_DIR)/libalx/base/math/array_multiplication.h	\
+		$(INC_DIR)/libalx/base/math/array_sum.h
+DESCRIPTIVE_STATISTICS_1VAR_SRC	=					\
+		$(SRC_DIR)/base/math/descriptive_statistics_1var.c
+
+DESCRIPTIVE_STATISTICS_2VAR_INC	=					\
+		$(INC_DIR)/libalx/base/math/descriptive_statistics_2var.h \
+		$(INC_DIR)/libalx/base/math/array_multiplication.h	\
+		$(INC_DIR)/libalx/base/math/array_sum.h
+DESCRIPTIVE_STATISTICS_2VAR_SRC	=					\
+		$(SRC_DIR)/base/math/descriptive_statistics_2var.c
+
 DISTRIBUTION_BINOMIAL_INC	=					\
 		$(INC_DIR)/libalx/base/math/distribution_binomial.h	\
 		$(INC_DIR)/libalx/base/math/binomial_coefficient.h
 DISTRIBUTION_BINOMIAL_SRC	=					\
 		$(SRC_DIR)/base/math/distribution_binomial.c
 
+DISTRIBUTION_EXPONENTIAL_INC	=					\
+		$(INC_DIR)/libalx/base/math/distribution_exponential.h
+DISTRIBUTION_EXPONENTIAL_SRC	=					\
+		$(SRC_DIR)/base/math/distribution_exponential.c
+
 DISTRIBUTION_GEOMETRIC_INC	=					\
 		$(INC_DIR)/libalx/base/math/distribution_geometric.h
 DISTRIBUTION_GEOMETRIC_SRC	=					\
 		$(SRC_DIR)/base/math/distribution_geometric.c
+
+DISTRIBUTION_NORMAL_INC	=						\
+		$(INC_DIR)/libalx/base/math/distribution_normal.h
+DISTRIBUTION_NORMAL_SRC	=						\
+		$(SRC_DIR)/base/math/distribution_normal.c
 
 DISTRIBUTION_POISSON_INC	=					\
 		$(INC_DIR)/libalx/base/math/distribution_poisson.h	\
@@ -140,14 +166,12 @@ PRIME_DEFACTORIZATION_SRC	=					\
 
 PRIME_FACTORIZATION_INC	=						\
 		$(INC_DIR)/libalx/base/math/prime_factorization.h	\
-		$(INC_DIR)/libalx/base/math/prime.h			\
-		$(INC_DIR)/libalx/base/stdint/redefinitions.h
+		$(INC_DIR)/libalx/base/math/prime.h
 PRIME_FACTORIZATION_SRC	=						\
 		$(SRC_DIR)/base/math/prime_factorization.c
 
 SCALE_LINEAR_INC	=						\
-		$(INC_DIR)/libalx/base/math/scale_linear.h		\
-		$(INC_DIR)/libalx/base/stdint/redefinitions.h
+		$(INC_DIR)/libalx/base/math/scale_linear.h
 SCALE_LINEAR_SRC	=						\
 		$(SRC_DIR)/base/math/scale_linear.c
 
@@ -194,6 +218,20 @@ binomial_coefficient.o: binomial_coefficient.s
 	@echo	"	AS	libalx/tmp/base/math/$@"
 	$(Q)$(AS) $< -o $@
 
+descriptive_statistics_1var.s: $(DESCRIPTIVE_STATISTICS_1VAR_SRC) $(DESCRIPTIVE_STATISTICS_1VAR_INC)
+	@echo	"	CC	libalx/tmp/base/math/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+descriptive_statistics_1var.o: descriptive_statistics_1var.s
+	@echo	"	AS	libalx/tmp/base/math/$@"
+	$(Q)$(AS) $< -o $@
+
+descriptive_statistics_2var.s: $(DESCRIPTIVE_STATISTICS_2VAR_SRC) $(DESCRIPTIVE_STATISTICS_2VAR_INC)
+	@echo	"	CC	libalx/tmp/base/math/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+descriptive_statistics_2var.o: descriptive_statistics_2var.s
+	@echo	"	AS	libalx/tmp/base/math/$@"
+	$(Q)$(AS) $< -o $@
+
 distribution_binomial.s: $(DISTRIBUTION_BINOMIAL_SRC) $(DISTRIBUTION_BINOMIAL_INC)
 	@echo	"	CC	libalx/tmp/base/math/$@"
 	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
@@ -201,10 +239,24 @@ distribution_binomial.o: distribution_binomial.s
 	@echo	"	AS	libalx/tmp/base/math/$@"
 	$(Q)$(AS) $< -o $@
 
+distribution_exponential.s: $(DISTRIBUTION_EXPONENTIAL_SRC) $(DISTRIBUTION_EXPONENTIAL_INC)
+	@echo	"	CC	libalx/tmp/base/math/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+distribution_exponential.o: distribution_exponential.s
+	@echo	"	AS	libalx/tmp/base/math/$@"
+	$(Q)$(AS) $< -o $@
+
 distribution_geometric.s: $(DISTRIBUTION_GEOMETRIC_SRC) $(DISTRIBUTION_GEOMETRIC_INC)
 	@echo	"	CC	libalx/tmp/base/math/$@"
 	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
 distribution_geometric.o: distribution_geometric.s
+	@echo	"	AS	libalx/tmp/base/math/$@"
+	$(Q)$(AS) $< -o $@
+
+distribution_normal.s: $(DISTRIBUTION_NORMAL_SRC) $(DISTRIBUTION_NORMAL_INC)
+	@echo	"	CC	libalx/tmp/base/math/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+distribution_normal.o: distribution_normal.s
 	@echo	"	AS	libalx/tmp/base/math/$@"
 	$(Q)$(AS) $< -o $@
 

@@ -14,7 +14,6 @@
 
 #include <ncurses.h>
 
-#include "libalx/base/stdint/redefinitions.h"
 #include "libalx/extra/ncurses/common.h"
 
 

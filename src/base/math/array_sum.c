@@ -17,7 +17,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "libalx/base/stdint/redefinitions.h"
 #include "libalx/base/stdlib/compare.h"
 
 

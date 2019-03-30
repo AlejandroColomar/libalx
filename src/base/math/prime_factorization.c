@@ -16,7 +16,6 @@
 #include <string.h>
 
 #include "libalx/base/math/prime.h"
-#include "libalx/base/stdint/redefinitions.h"
 
 
 /******************************************************************************

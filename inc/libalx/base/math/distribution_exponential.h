@@ -1,5 +1,5 @@
 /******************************************************************************
- *	Copyright (C) 2019	Alejandro Colomar Andrés		      *
+ *	Copyright (C) 2015	Alejandro Colomar Andrés		      *
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
@@ -7,35 +7,13 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_MATH_H
-#define ALX_MATH_H
+#ifndef ALX_MATH_DISTRIBUTION_EXPONENTIAL_H
+#define ALX_MATH_DISTRIBUTION_EXPONENTIAL_H
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <math.h>
-
-#include "libalx/base/math/arithmetic_mean.h"
-#include "libalx/base/math/array_division.h"
-#include "libalx/base/math/array_multiplication.h"
-#include "libalx/base/math/array_sum.h"
-#include "libalx/base/math/binomial_coefficient.h"
-#include "libalx/base/math/distribution_binomial.h"
-#include "libalx/base/math/distribution_exponential.h"
-#include "libalx/base/math/distribution_geometric.h"
-#include "libalx/base/math/distribution_poisson.h"
-#include "libalx/base/math/distribution_uniform.h"
-#include "libalx/base/math/common.h"
-#include "libalx/base/math/factorial.h"
-#include "libalx/base/math/matrix_addition.h"
-#include "libalx/base/math/matrix_subtraction.h"
-#include "libalx/base/math/median.h"
-#include "libalx/base/math/pascal_triangle.h"
-#include "libalx/base/math/prime.h"
-#include "libalx/base/math/prime_factorization.h"
-#include "libalx/base/math/prime_defactorization.h"
-#include "libalx/base/math/scale_linear.h"
 
 
 /******************************************************************************
@@ -61,6 +39,18 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
+long double	alx_ldbl_distribution_exponential_P(long double b,
+						long double x1, long double x2);
+double		alx_distribution_exponential_P	(double b, double x1, double x2);
+float		alx_flt_distribution_exponential_P(float b, float x1, float x2);
+
+long double	alx_ldbl_distribution_exponential_E(long double b);
+double		alx_distribution_exponential_E	(double b);
+float		alx_flt_distribution_exponential_E(float b);
+
+long double	alx_ldbl_distribution_exponential_Var(long double b);
+double		alx_distribution_exponential_Var(double b);
+float		alx_flt_distribution_exponential_Var(float b);
 
 
 /******************************************************************************
@@ -76,7 +66,7 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/base/math.h */
+#endif		/* libalx/base/math/distribution_exponential.h */
 
 
 /******************************************************************************

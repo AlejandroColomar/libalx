@@ -1,5 +1,5 @@
 /******************************************************************************
- *	Copyright (C) 2019	Alejandro Colomar Andrés		      *
+ *	Copyright (C) 2015	Alejandro Colomar Andrés		      *
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
@@ -7,15 +7,14 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_MATH_ARRAY_MULTIPLICATION_H
-#define ALX_MATH_ARRAY_MULTIPLICATION_H
+#ifndef ALX_MATH_DESCRIPTIVE_STATISTICS_2VAR_H
+#define ALX_MATH_DESCRIPTIVE_STATISTICS_2VAR_H
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
 #include <stddef.h>
-#include <stdint.h>
 
 
 /******************************************************************************
@@ -31,6 +30,74 @@
 /******************************************************************************
  ******* structs / unions *****************************************************
  ******************************************************************************/
+struct	Alx_Descriptive_Statistics_2var_Ldbl {
+	long double	ux;
+	long double	ox2;
+	long double	ox;
+	long double	a;
+	long double	Aa;
+	long double	b;
+	long double	Ab;
+
+	long double	uy;
+	long double	oy2;
+	long double	oy;
+	long double	c;
+	long double	Ac;
+	long double	d;
+	long double	Ad;
+
+	long double	oxy;
+	long double	r;
+	long double	Vr;
+	long double	R2;
+};
+
+struct	Alx_Descriptive_Statistics_2var {
+	double	ux;
+	double	ox2;
+	double	ox;
+	double	a;
+	double	Aa;
+	double	b;
+	double	Ab;
+
+	double	uy;
+	double	oy2;
+	double	oy;
+	double	c;
+	double	Ac;
+	double	d;
+	double	Ad;
+
+	double	oxy;
+	double	r;
+	double	Vr;
+	double	R2;
+};
+
+struct	Alx_Descriptive_Statistics_2var_Flt {
+	float	ux;
+	float	ox2;
+	float	ox;
+	float	a;
+	float	Aa;
+	float	b;
+	float	Ab;
+
+	float	uy;
+	float	oy2;
+	float	oy;
+	float	c;
+	float	Ac;
+	float	d;
+	float	Ad;
+
+	float	oxy;
+	float	r;
+	float	Vr;
+	float	R2;
+};
 
 
 /******************************************************************************
@@ -41,106 +108,34 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
-int	alx_array_multiplication_uint	(ptrdiff_t nmemb,
-					unsigned dest[restrict nmemb],
-					const unsigned src1[nmemb],
-					const unsigned src2[nmemb]);
-int	alx_array_multiplication_int	(ptrdiff_t nmemb,
-					int dest[restrict nmemb],
-					const int src1[nmemb],
-					const int src2[nmemb]);
-int	alx_array_multiplication_u8	(ptrdiff_t nmemb,
-					uint8_t dest[restrict nmemb],
-					const uint8_t src1[nmemb],
-					const uint8_t src2[nmemb]);
-int	alx_array_multiplication_s8	(ptrdiff_t nmemb,
-					int8_t dest[restrict nmemb],
-					const int8_t src1[nmemb],
-					const int8_t src2[nmemb]);
-int	alx_array_multiplication_u16	(ptrdiff_t nmemb,
-					uint16_t dest[restrict nmemb],
-					const uint16_t src1[nmemb],
-					const uint16_t src2[nmemb]);
-int	alx_array_multiplication_s16	(ptrdiff_t nmemb,
-					int16_t dest[restrict nmemb],
-					const int16_t src1[nmemb],
-					const int16_t src2[nmemb]);
-int	alx_array_multiplication_u32	(ptrdiff_t nmemb,
-					uint32_t dest[restrict nmemb],
-					const uint32_t src1[nmemb],
-					const uint32_t src2[nmemb]);
-int	alx_array_multiplication_s32	(ptrdiff_t nmemb,
-					int32_t dest[restrict nmemb],
-					const int32_t src1[nmemb],
-					const int32_t src2[nmemb]);
-int	alx_array_multiplication_u64	(ptrdiff_t nmemb,
-					uint64_t dest[restrict nmemb],
-					const uint64_t src1[nmemb],
-					const uint64_t src2[nmemb]);
-int	alx_array_multiplication_s64	(ptrdiff_t nmemb,
-					int64_t dest[restrict nmemb],
-					const int64_t src1[nmemb],
-					const int64_t src2[nmemb]);
+struct Alx_Descriptive_Statistics_2var_Ldbl
+alx_descriptive_statistics_2var_ldbl	(ptrdiff_t N,
+					const long double x[restrict N],
+					const long double y[restrict N]);
+struct Alx_Descriptive_Statistics_2var
+alx_descriptive_statistics_2var		(ptrdiff_t N,
+					const double x[restrict N],
+					const double y[restrict N]);
+struct Alx_Descriptive_Statistics_2var_Flt
+alx_descriptive_statistics_2var_flt	(ptrdiff_t N,
+					const float x[restrict N],
+					const float y[restrict N]);
 
 
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
-static inline	void	alx_array_multiplication_ldbl	(ptrdiff_t nmemb,
-					long double dest[nmemb],
-					const long double src1[nmemb],
-					const long double src2[nmemb]);
-static inline	void	alx_array_multiplication	(ptrdiff_t nmemb,
-					double dest[nmemb],
-					const double src1[nmemb],
-					const double src2[nmemb]);
-static inline	void	alx_array_multiplication_flt	(ptrdiff_t nmemb,
-					float dest[nmemb],
-					const float src1[nmemb],
-					const float src2[nmemb]);
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
-static inline
-void	alx_array_multiplication_ldbl	(ptrdiff_t nmemb,
-					long double dest[nmemb],
-					const long double src1[nmemb],
-					const long double src2[nmemb])
-{
-
-	for (ptrdiff_t i = 0; i < nmemb; i++)
-		dest[i]	= src1[i] * src2[i];
-}
-
-static inline
-void	alx_array_multiplication	(ptrdiff_t nmemb,
-					double dest[nmemb],
-					const double src1[nmemb],
-					const double src2[nmemb])
-{
-
-	for (ptrdiff_t i = 0; i < nmemb; i++)
-		dest[i]	= src1[i] * src2[i];
-}
-
-static inline
-void	alx_array_multiplication_flt	(ptrdiff_t nmemb,
-					float dest[nmemb],
-					const float src1[nmemb],
-					const float src2[nmemb])
-{
-
-	for (ptrdiff_t i = 0; i < nmemb; i++)
-		dest[i]	= src1[i] * src2[i];
-}
 
 
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/base/math/array_multiplication.h */
+#endif		/* libalx/base/math/descriptive_statistics_2var.h */
 
 
 /******************************************************************************

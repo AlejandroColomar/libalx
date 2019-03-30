@@ -31,7 +31,6 @@ GET_SRC		=							\
 
 MENU_INC	=							\
 		$(INC_DIR)/libalx/extra/ncurses/menu.h			\
-		$(INC_DIR)/libalx/base/stdint/redefinitions.h		\
 		$(INC_DIR)/libalx/extra/ncurses/common.h
 MENU_SRC	=							\
 		$(SRC_DIR)/extra/ncurses/menu.c
