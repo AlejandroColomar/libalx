@@ -54,6 +54,8 @@ static	uint64_t	loop_get_u64	(uint64_t m, uint64_t def, uint64_t M,
 					uint8_t attempts);
 static	int64_t		loop_get_s64	(int64_t m, int64_t def, int64_t M,
 					uint8_t attempts);
+static	ptrdiff_t	loop_get_ptrdiff(ptrdiff_t m, ptrdiff_t def, ptrdiff_t M,
+					uint8_t attempts);
 static	int		loop_get_fname	(const char *restrict path,
 					char fname[restrict FILENAME_MAX],
 					bool exist,
@@ -283,6 +285,23 @@ int64_t		alx_get_s64	(int64_t m, int64_t def, int64_t M,
 								m, M, def);
 
 	return	loop_get_s64(m, def, M, attempts);
+}
+
+ptrdiff_t	alx_get_ptrdiff	(ptrdiff_t m, ptrdiff_t def, ptrdiff_t M,
+				const char *restrict title,
+				const char *restrict help,
+				uint8_t attempts)
+{
+
+	if (title)
+		printf("%s\n", title);
+	if (help)
+		printf("%s\n", help);
+	else
+		printf("Introduce an integer [%ti U %ti] (default %ti):...\t",
+								m, M, def);
+
+	return	loop_get_ptrdiff(m, def, M, attempts);
 }
 
 int		alx_get_fname	(const char *restrict path,
@@ -620,6 +639,31 @@ static	int64_t		loop_get_s64	(int64_t m, int64_t def, int64_t M,
 		if (!fgets(buff, BUFF_SIZE, stdin))
 			goto err_fgets;
 		err	= alx_sscan_s64(&Z, m, def, M, buff);
+		if (err)
+			goto err_sscan;
+		break;
+
+err_fgets:
+		err	= ERR_FGETS;
+err_sscan:
+		manage_error(err);
+	}
+
+	return	Z;
+}
+
+static	ptrdiff_t	loop_get_ptrdiff(ptrdiff_t m, ptrdiff_t def, ptrdiff_t M,
+					uint8_t attempts)
+{
+	char		buff [BUFF_SIZE];
+	ptrdiff_t	Z;
+	int		err;
+
+	Z	= def;
+	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
+		if (!fgets(buff, BUFF_SIZE, stdin))
+			goto err_fgets;
+		err	= alx_sscan_ptrdiff(&Z, m, def, M, buff);
 		if (err)
 			goto err_sscan;
 		break;

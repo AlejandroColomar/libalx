@@ -15,6 +15,7 @@
  ******* headers **************************************************************
  ******************************************************************************/
 #include <cstdbool>
+#include <cstddef>
 #include <cstdint>
 #include <cstdio>
 
@@ -82,6 +83,9 @@ int	alx_sscan_u64	(uint64_t *restrict dest,
 			const char *restrict str);
 int	alx_sscan_s64	(int64_t *restrict dest,
 			int64_t m, int64_t def, int64_t M,
+			const char *restrict str);
+int	alx_sscan_ptrdiff(ptrdiff_t *restrict dest,
+			ptrdiff_t m, ptrdiff_t def, ptrdiff_t M,
 			const char *restrict str);
 int	alx_sscan_fname	(const char *path,
 			char fname[restrict FILENAME_MAX],

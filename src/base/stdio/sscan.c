@@ -305,6 +305,26 @@ err_range:
 	return	ERR_RANGE;
 }
 
+int	alx_sscan_ptrdiff(ptrdiff_t *restrict dest,
+			ptrdiff_t m, ptrdiff_t def, ptrdiff_t M,
+			const char *restrict str)
+{
+
+	if (sscanf(str, " %ti", dest) != 1)
+		goto err_sscanf;
+	if ((*dest < m) || (*dest > M))
+		goto err_range;
+
+	return	0;
+
+err_sscanf:
+	*dest	= def;
+	return	ERR_SSCANF;
+err_range:
+	*dest	= def;
+	return	ERR_RANGE;
+}
+
 int	alx_sscan_fname	(const char *restrict path,
 			char fname[restrict FILENAME_MAX],
 			bool exist,

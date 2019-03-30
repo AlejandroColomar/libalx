@@ -15,6 +15,7 @@
  ******* headers **************************************************************
  ******************************************************************************/
 #include <cstdbool>
+#include <cstddef>
 #include <cstdint>
 #include <cstdio>
 
@@ -96,6 +97,10 @@ int64_t		alx_get_s64	(int64_t m, int64_t def, int64_t M,
 				const char *restrict title,
 				const char *restrict help,
 				uint8_t attempts);
+ptrdiff_t	alx_get_ptrdiff	(ptrdiff_t m, ptrdiff_t def, ptrdiff_t M,
+				const char *restrict title,
+				const char *restrict help,
+				uint8_t attempts)
 int		alx_get_fname	(const char *restrict path,
 				char fname[restrict FILENAME_MAX],
 				bool exist,
