@@ -2,3 +2,4 @@ tmp/**/*.o
 tmp/**/*.s
 lib/**/*.a
 test/**/*-test
+Checkstyle/*
