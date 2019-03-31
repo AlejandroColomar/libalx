@@ -41,39 +41,6 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-long double	alx_ldbl_distribution_normal_o	(long double o2)
-{
-
-	if (o2 < 0) {
-		errno	= EDOM;
-		return	nanl("");
-	}
-
-	return	sqrtl(o2);
-}
-
-double		alx_distribution_normal_o	(double o2)
-{
-
-	if (o2 < 0) {
-		errno	= EDOM;
-		return	nan("");
-	}
-
-	return	sqrt(o2);
-}
-
-float		alx_flt_distribution_normal_o	(float o2)
-{
-
-	if (o2 < 0) {
-		errno	= EDOM;
-		return	nanf("");
-	}
-
-	return	sqrtf(o2);
-}
-
 long double	alx_ldbl_distribution_normal_A	(long double o)
 {
 

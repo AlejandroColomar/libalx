@@ -19,6 +19,12 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+#define DIST_NORMAL_u_MIN	(-INFINITY)
+#define DIST_NORMAL_u_MAX	(INFINITY)
+#define DIST_NORMAL_o2_MIN	(0)
+#define DIST_NORMAL_o2_MAX	(INFINITY)
+#define DIST_NORMAL_o_MIN	(0)
+#define DIST_NORMAL_o_MAX	(INFINITY)
 
 
 /******************************************************************************
@@ -39,10 +45,6 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
-long double	alx_ldbl_distribution_normal_o	(long double o2);
-double		alx_distribution_normal_o	(double o2);
-float		alx_flt_distribution_normal_o	(float o2);
-
 long double	alx_ldbl_distribution_normal_A	(long double o);
 double		alx_distribution_normal_A	(double o);
 float		alx_flt_distribution_normal_A	(float o);

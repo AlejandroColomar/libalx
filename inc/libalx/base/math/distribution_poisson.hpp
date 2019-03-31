@@ -14,11 +14,16 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include <cmath>
+#include <cstdint>
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+#define DIST_POISSON_l_MIN	(0.0)
+#define DIST_POISSON_l_MAX	(INFINITY)
+#define DIST_POISSON_x_MIN	(0)
 
 
 /******************************************************************************
@@ -41,9 +46,9 @@
  ******************************************************************************/
 extern	"C"
 {
-long double	alx_ldbl_distribution_poisson_P(long double l, long double x);
-double		alx_distribution_poisson_P	(double l, double x);
-float		alx_flt_distribution_poisson_P	(float l, float x);
+long double	alx_ldbl_distribution_poisson_P(long double l, int64_t x);
+double		alx_distribution_poisson_P	(double l, int32_t x);
+float		alx_flt_distribution_poisson_P	(float l, int16_t x);
 
 long double	alx_ldbl_distribution_poisson_E(long double l);
 double		alx_distribution_poisson_E	(double l);

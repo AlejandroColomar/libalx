@@ -49,7 +49,7 @@ long double	alx_ldbl_distribution_binomial_P(int16_t n, long double p,
 {
 	long double	tmp;
 
-	if ((n < 0) || (p < 0) || (p > 1) || (x < 0) || (x > n)) {
+	if ((n < 0) || (p < 0) || (p > 1) || (x < 0)) {
 		errno	= EDOM;
 		return	nanl("");
 	}
@@ -66,7 +66,7 @@ double		alx_distribution_binomial_P	(int16_t n, double p,
 {
 	double_t	tmp;
 
-	if ((n < 0) || (p < 0) || (p > 1) || (x < 0) || (x > n)) {
+	if ((n < 0) || (p < 0) || (p > 1) || (x < 0)) {
 		errno	= EDOM;
 		return	nan("");
 	}
@@ -83,7 +83,7 @@ float		alx_flt_distribution_binomial_P	(int16_t n, float p,
 {
 	float_t	tmp;
 
-	if ((n < 0) || (p < 0) || (p > 1) || (x < 0) || (x > n)) {
+	if ((n < 0) || (p < 0) || (p > 1) || (x < 0)) {
 		errno	= EDOM;
 		return	nanf("");
 	}

@@ -11,6 +11,7 @@
 
 #include <errno.h>
 #include <math.h>
+#include <stdint.h>
 
 #include "libalx/base/math/factorial.h"
 
@@ -43,7 +44,7 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-long double	alx_ldbl_distribution_poisson_P(long double l, long double x)
+long double	alx_ldbl_distribution_poisson_P(long double l, int64_t x)
 {
 	long double	tmp;
 
@@ -59,7 +60,7 @@ long double	alx_ldbl_distribution_poisson_P(long double l, long double x)
 	return	tmp;
 }
 
-double		alx_distribution_poisson_P	(double l, double x)
+double		alx_distribution_poisson_P	(double l, int32_t x)
 {
 	double_t	tmp;
 
@@ -75,7 +76,7 @@ double		alx_distribution_poisson_P	(double l, double x)
 	return	tmp;
 }
 
-float		alx_flt_distribution_poisson_P	(float l, float x)
+float		alx_flt_distribution_poisson_P	(float l, int16_t x)
 {
 	float_t	tmp;
 
