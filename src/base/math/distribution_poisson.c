@@ -44,11 +44,11 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-long double	alx_ldbl_distribution_poisson_P(long double l, int64_t x)
+long double	alx_ldbl_distribution_poisson_P	(long double l, int16_t x)
 {
 	long double	tmp;
 
-	if ((l < 0) || (x < 0)) {
+	if ((l < DIST_POISSON_l_MIN) || (x < DIST_POISSON_x_MIN)) {
 		errno	= EDOM;
 		return	nanl("");
 	}
@@ -60,11 +60,11 @@ long double	alx_ldbl_distribution_poisson_P(long double l, int64_t x)
 	return	tmp;
 }
 
-double		alx_distribution_poisson_P	(double l, int32_t x)
+double		alx_distribution_poisson_P	(double l, int16_t x)
 {
 	double_t	tmp;
 
-	if ((l < 0) || (x < 0)) {
+	if ((l < DIST_POISSON_l_MIN) || (x < DIST_POISSON_x_MIN)) {
 		errno	= EDOM;
 		return	nan("");
 	}
@@ -80,7 +80,7 @@ float		alx_flt_distribution_poisson_P	(float l, int16_t x)
 {
 	float_t	tmp;
 
-	if ((l < 0) || (x < 0)) {
+	if ((l < DIST_POISSON_l_MIN) || (x < DIST_POISSON_x_MIN)) {
 		errno	= EDOM;
 		return	nanf("");
 	}
@@ -95,7 +95,7 @@ float		alx_flt_distribution_poisson_P	(float l, int16_t x)
 long double	alx_ldbl_distribution_poisson_E(long double l)
 {
 
-	if (l < 0) {
+	if (l < DIST_POISSON_l_MIN) {
 		errno	= EDOM;
 		return	nanl("");
 	}
@@ -106,7 +106,7 @@ long double	alx_ldbl_distribution_poisson_E(long double l)
 double		alx_distribution_poisson_E	(double l)
 {
 
-	if (l < 0) {
+	if (l < DIST_POISSON_l_MIN) {
 		errno	= EDOM;
 		return	nan("");
 	}
@@ -117,7 +117,7 @@ double		alx_distribution_poisson_E	(double l)
 float		alx_flt_distribution_poisson_E	(float l)
 {
 
-	if (l < 0) {
+	if (l < DIST_POISSON_l_MIN) {
 		errno	= EDOM;
 		return	nanf("");
 	}
@@ -128,7 +128,7 @@ float		alx_flt_distribution_poisson_E	(float l)
 long double	alx_ldbl_distribution_poisson_Var(long double l)
 {
 
-	if (l < 0) {
+	if (l < DIST_POISSON_l_MIN) {
 		errno	= EDOM;
 		return	nanl("");
 	}
@@ -140,7 +140,7 @@ long double	alx_ldbl_distribution_poisson_Var(long double l)
 double		alx_distribution_poisson_Var	(double l)
 {
 
-	if (l < 0) {
+	if (l < DIST_POISSON_l_MIN) {
 		errno	= EDOM;
 		return	nan("");
 	}
@@ -152,7 +152,7 @@ double		alx_distribution_poisson_Var	(double l)
 float		alx_flt_distribution_poisson_Var(float l)
 {
 
-	if (l < 0) {
+	if (l < DIST_POISSON_l_MIN) {
 		errno	= EDOM;
 		return	nanf("");
 	}

@@ -19,12 +19,8 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-#define DIST_NORMAL_u_MIN	(-INFINITY)
-#define DIST_NORMAL_u_MAX	(INFINITY)
 #define DIST_NORMAL_o2_MIN	(0)
-#define DIST_NORMAL_o2_MAX	(INFINITY)
 #define DIST_NORMAL_o_MIN	(0)
-#define DIST_NORMAL_o_MAX	(INFINITY)
 
 
 /******************************************************************************
@@ -55,15 +51,15 @@ long double	alx_ldbl_distribution_normal_B	(long double u, long double o);
 double		alx_distribution_normal_B	(double u, double o);
 float		alx_flt_distribution_normal_B	(float u, float o);
 
-long double	alx_ldbl_distribution_normal_Z	(long double a, long double b,
+long double	alx_ldbl_distribution_normal_X2Z(long double a, long double b,
 						long double x);
-double		alx_distribution_normal_Z	(double a, double b, double x);
-float		alx_flt_distribution_normal_Z	(float a, float b, float x);
+double		alx_distribution_normal_X2Z	(double a, double b, double x);
+float		alx_flt_distribution_normal_X2Z	(float a, float b, float x);
 
-long double	alx_ldbl_distribution_normal_X	(long double a, long double b,
+long double	alx_ldbl_distribution_normal_Z2X(long double a, long double b,
 						long double z);
-double		alx_distribution_normal_X	(double a, double b, double z);
-float		alx_flt_distribution_normal_X	(float a, float b, float z);
+double		alx_distribution_normal_Z2X	(double a, double b, double z);
+float		alx_flt_distribution_normal_Z2X	(float a, float b, float z);
 }
 
 

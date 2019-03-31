@@ -132,7 +132,7 @@ alx_descriptive_statistics_2var_ldbl	(ptrdiff_t N,
 	long double	uy, oy2, oy, c, Ac, d, Ad;
 	long double	oxy, r, Vr, R2;
 
-	if (N <= 0)
+	if (N < ALX_DS2V_N_MIN)
 		goto err;
 
 	Exi	= alx_ldbl_array_sum_ldbl(N, x);
@@ -195,7 +195,7 @@ alx_descriptive_statistics_2var		(ptrdiff_t N,
 	double_t	uy, oy2, oy, c, Ac, d, Ad;
 	double_t	oxy, r, Vr, R2;
 
-	if (N <= 0)
+	if (N < ALX_DS2V_N_MIN)
 		goto err;
 
 	Exi	= alx_dbl_array_sum(N, x);
@@ -258,7 +258,7 @@ alx_descriptive_statistics_2var_flt	(ptrdiff_t N,
 	float_t	uy, oy2, oy, c, Ac, d, Ad;
 	float_t	oxy, r, Vr, R2;
 
-	if (N <= 0)
+	if (N < ALX_DS2V_N_MIN)
 		goto err;
 
 	Exi	= alx_flt_array_sum_flt(N, x);

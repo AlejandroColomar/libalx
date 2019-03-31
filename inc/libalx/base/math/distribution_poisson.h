@@ -14,7 +14,6 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <math.h>
 #include <stdint.h>
 
 
@@ -22,7 +21,6 @@
  ******* macros ***************************************************************
  ******************************************************************************/
 #define DIST_POISSON_l_MIN	(0.0)
-#define DIST_POISSON_l_MAX	(INFINITY)
 #define DIST_POISSON_x_MIN	(0)
 
 
@@ -44,8 +42,8 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
-long double	alx_ldbl_distribution_poisson_P(long double l, int64_t x);
-double		alx_distribution_poisson_P	(double l, int32_t x);
+long double	alx_ldbl_distribution_poisson_P	(long double l, int16_t x);
+double		alx_distribution_poisson_P	(double l, int16_t x);
 float		alx_flt_distribution_poisson_P	(float l, int16_t x);
 
 long double	alx_ldbl_distribution_poisson_E(long double l);

@@ -101,7 +101,7 @@ alx_descriptive_statistics_1var_ldbl	(ptrdiff_t N,
 	long double	Eni, Exi, Exi2;
 	long double	u, o2, o, s2, s, CV;
 
-	if (N <= 0)
+	if (N < ALX_DS1V_N_MIN)
 		goto err;
 
 	Eni	= alx_ldbl_array_sum_ldbl(N, n);
@@ -133,7 +133,7 @@ alx_descriptive_statistics_1var		(ptrdiff_t N,
 	double_t	Eni, Exi, Exi2;
 	double_t	u, o2, o, s2, s, CV;
 
-	if (N <= 0)
+	if (N < ALX_DS1V_N_MIN)
 		goto err;
 
 	Eni	= alx_dbl_array_sum(N, n);
@@ -165,7 +165,7 @@ alx_descriptive_statistics_1var_flt	(ptrdiff_t N,
 	float_t	Eni, Exi, Exi2;
 	float_t	u, o2, o, s2, s, CV;
 
-	if (N <= 0)
+	if (N < ALX_DS1V_N_MIN)
 		goto err;
 
 	Eni	= alx_flt_array_sum_flt(N, n);

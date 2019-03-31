@@ -198,7 +198,7 @@ not_maxima:
 	}
 	}
 
-	do { 
+	do {
 		wh	= false;
 		for (ptrdiff_t i = 0; i < rows; i++) {
 		for (ptrdiff_t j = 0; j < cols; j++) {
@@ -229,9 +229,8 @@ not_maxima_2:
 	} while (wh);
 
 	for (ptrdiff_t i = 0; i < rows; i++) {
-		for (ptrdiff_t j = 0; j < cols; j++) {
+		for (ptrdiff_t j = 0; j < cols; j++)
 			arr_out[i][j]	= arr_tmp[i][j];
-		}
 	}
 }
 
@@ -275,7 +274,7 @@ not_maxima:
 	}
 	}
 
-	do { 
+	do {
 		wh	= false;
 		for (ptrdiff_t i = 0; i < rows; i++) {
 		for (ptrdiff_t j = 0; j < cols; j++) {
@@ -306,9 +305,8 @@ not_maxima_2:
 	} while (wh);
 
 	for (ptrdiff_t i = 0; i < rows; i++) {
-		for (ptrdiff_t j = 0; j < cols; j++) {
+		for (ptrdiff_t j = 0; j < cols; j++)
 			arr_out[i][j]	= arr_tmp[i][j];
-		}
 	}
 }
 
@@ -352,7 +350,7 @@ not_maxima:
 	}
 	}
 
-	do { 
+	do {
 		wh	= false;
 		for (ptrdiff_t i = 0; i < rows; i++) {
 		for (ptrdiff_t j = 0; j < cols; j++) {
@@ -383,9 +381,8 @@ not_maxima_2:
 	} while (wh);
 
 	for (ptrdiff_t i = 0; i < rows; i++) {
-		for (ptrdiff_t j = 0; j < cols; j++) {
+		for (ptrdiff_t j = 0; j < cols; j++)
 			arr_out[i][j]	= arr_tmp[i][j];
-		}
 	}
 }
 
@@ -429,7 +426,7 @@ not_maxima:
 	}
 	}
 
-	do { 
+	do {
 		wh	= false;
 		for (ptrdiff_t i = 0; i < rows; i++) {
 		for (ptrdiff_t j = 0; j < cols; j++) {
@@ -460,9 +457,8 @@ not_maxima_2:
 	} while (wh);
 
 	for (ptrdiff_t i = 0; i < rows; i++) {
-		for (ptrdiff_t j = 0; j < cols; j++) {
+		for (ptrdiff_t j = 0; j < cols; j++)
 			arr_out[i][j]	= arr_tmp[i][j];
-		}
 	}
 }
 
@@ -506,7 +502,7 @@ not_maxima:
 	}
 	}
 
-	do { 
+	do {
 		wh	= false;
 		for (ptrdiff_t i = 0; i < rows; i++) {
 		for (ptrdiff_t j = 0; j < cols; j++) {
@@ -537,9 +533,8 @@ not_maxima_2:
 	} while (wh);
 
 	for (ptrdiff_t i = 0; i < rows; i++) {
-		for (ptrdiff_t j = 0; j < cols; j++) {
+		for (ptrdiff_t j = 0; j < cols; j++)
 			arr_out[i][j]	= arr_tmp[i][j];
-		}
 	}
 }
 
@@ -583,7 +578,7 @@ not_maxima:
 	}
 	}
 
-	do { 
+	do {
 		wh	= false;
 		for (ptrdiff_t i = 0; i < rows; i++) {
 		for (ptrdiff_t j = 0; j < cols; j++) {
@@ -614,9 +609,8 @@ not_maxima_2:
 	} while (wh);
 
 	for (ptrdiff_t i = 0; i < rows; i++) {
-		for (ptrdiff_t j = 0; j < cols; j++) {
+		for (ptrdiff_t j = 0; j < cols; j++)
 			arr_out[i][j]	= arr_tmp[i][j];
-		}
 	}
 }
 
@@ -660,7 +654,7 @@ not_maxima:
 	}
 	}
 
-	do { 
+	do {
 		wh	= false;
 		for (ptrdiff_t i = 0; i < rows; i++) {
 		for (ptrdiff_t j = 0; j < cols; j++) {
@@ -691,9 +685,8 @@ not_maxima_2:
 	} while (wh);
 
 	for (ptrdiff_t i = 0; i < rows; i++) {
-		for (ptrdiff_t j = 0; j < cols; j++) {
+		for (ptrdiff_t j = 0; j < cols; j++)
 			arr_out[i][j]	= arr_tmp[i][j];
-		}
 	}
 }
 
@@ -737,7 +730,7 @@ not_maxima:
 	}
 	}
 
-	do { 
+	do {
 		wh	= false;
 		for (ptrdiff_t i = 0; i < rows; i++) {
 		for (ptrdiff_t j = 0; j < cols; j++) {
@@ -768,9 +761,8 @@ not_maxima_2:
 	} while (wh);
 
 	for (ptrdiff_t i = 0; i < rows; i++) {
-		for (ptrdiff_t j = 0; j < cols; j++) {
+		for (ptrdiff_t j = 0; j < cols; j++)
 			arr_out[i][j]	= arr_tmp[i][j];
-		}
 	}
 }
 
@@ -814,7 +806,7 @@ not_maxima:
 	}
 	}
 
-	do { 
+	do {
 		wh	= false;
 		for (ptrdiff_t i = 0; i < rows; i++) {
 		for (ptrdiff_t j = 0; j < cols; j++) {
@@ -845,9 +837,8 @@ not_maxima_2:
 	} while (wh);
 
 	for (ptrdiff_t i = 0; i < rows; i++) {
-		for (ptrdiff_t j = 0; j < cols; j++) {
+		for (ptrdiff_t j = 0; j < cols; j++)
 			arr_out[i][j]	= arr_tmp[i][j];
-		}
 	}
 }
 
@@ -891,7 +882,7 @@ not_maxima:
 	}
 	}
 
-	do { 
+	do {
 		wh	= false;
 		for (ptrdiff_t i = 0; i < rows; i++) {
 		for (ptrdiff_t j = 0; j < cols; j++) {
@@ -922,9 +913,8 @@ not_maxima_2:
 	} while (wh);
 
 	for (ptrdiff_t i = 0; i < rows; i++) {
-		for (ptrdiff_t j = 0; j < cols; j++) {
+		for (ptrdiff_t j = 0; j < cols; j++)
 			arr_out[i][j]	= arr_tmp[i][j];
-		}
 	}
 }
 

@@ -21,12 +21,11 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-#define ALX_DS1V_N_MIN	(1)
-#define ALX_DS1V_N_MAX	(PTRDIFF_MAX)
-#define ALX_DS1V_x_MIN	(-INFINITY)
-#define ALX_DS1V_x_MAX	(INFINITY)
-#define ALX_DS1V_y_MIN	(-INFINITY)
-#define ALX_DS1V_y_MAX	(INFINITY)
+#define ALX_DS2V_N_MIN	(1)
+#define ALX_DS2V_x_MIN	(-INFINITY)
+#define ALX_DS2V_x_MAX	(INFINITY)
+#define ALX_DS2V_y_MIN	(-INFINITY)
+#define ALX_DS2V_y_MAX	(INFINITY)
 
 
 /******************************************************************************

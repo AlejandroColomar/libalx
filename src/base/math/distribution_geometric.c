@@ -46,7 +46,8 @@ long double	alx_ldbl_distribution_geometric_P(long double p, int64_t x)
 {
 	long double	tmp;
 
-	if ((p < 0) || (p > 1) || (x < 0)) {
+	if ((p < DIST_GEOMETRIC_p_MIN) || (p > DIST_GEOMETRIC_p_MAX) ||
+						(x < DIST_GEOMETRIC_x_MIN)) {
 		errno	= EDOM;
 		return	nanl("");
 	}
@@ -61,7 +62,8 @@ double		alx_distribution_geometric_P	(double p, int32_t x)
 {
 	double_t	tmp;
 
-	if ((p < 0) || (p > 1) || (x < 0)) {
+	if ((p < DIST_GEOMETRIC_p_MIN) || (p > DIST_GEOMETRIC_p_MAX) ||
+						(x < DIST_GEOMETRIC_x_MIN)) {
 		errno	= EDOM;
 		return	nan("");
 	}
@@ -76,7 +78,8 @@ float		alx_flt_distribution_geometric_P(float p, int16_t x)
 {
 	float_t	tmp;
 
-	if ((p < 0) || (p > 1) || (x < 0)) {
+	if ((p < DIST_GEOMETRIC_p_MIN) || (p > DIST_GEOMETRIC_p_MAX) ||
+						(x < DIST_GEOMETRIC_x_MIN)) {
 		errno	= EDOM;
 		return	nanf("");
 	}
@@ -90,7 +93,7 @@ float		alx_flt_distribution_geometric_P(float p, int16_t x)
 long double	alx_ldbl_distribution_geometric_E(long double p)
 {
 
-	if ((p < 0) || (p > 1)) {
+	if ((p < DIST_GEOMETRIC_p_MIN) || (p > DIST_GEOMETRIC_p_MAX)) {
 		errno	= EDOM;
 		return	nanl("");
 	}
@@ -101,7 +104,7 @@ long double	alx_ldbl_distribution_geometric_E(long double p)
 double		alx_distribution_geometric_E	(double p)
 {
 
-	if ((p < 0) || (p > 1)) {
+	if ((p < DIST_GEOMETRIC_p_MIN) || (p > DIST_GEOMETRIC_p_MAX)) {
 		errno	= EDOM;
 		return	nan("");
 	}
@@ -112,7 +115,7 @@ double		alx_distribution_geometric_E	(double p)
 float		alx_flt_distribution_geometric_E(float p)
 {
 
-	if ((p < 0) || (p > 1)) {
+	if ((p < DIST_GEOMETRIC_p_MIN) || (p > DIST_GEOMETRIC_p_MAX)) {
 		errno	= EDOM;
 		return	nanf("");
 	}
@@ -123,7 +126,7 @@ float		alx_flt_distribution_geometric_E(float p)
 long double	alx_ldbl_distribution_geometric_Var(long double p)
 {
 
-	if ((p < 0) || (p > 1)) {
+	if ((p < DIST_GEOMETRIC_p_MIN) || (p > DIST_GEOMETRIC_p_MAX)) {
 		errno	= EDOM;
 		return	nanl("");
 	}
@@ -134,7 +137,7 @@ long double	alx_ldbl_distribution_geometric_Var(long double p)
 double		alx_distribution_geometric_Var	(double p)
 {
 
-	if ((p < 0) || (p > 1)) {
+	if ((p < DIST_GEOMETRIC_p_MIN) || (p > DIST_GEOMETRIC_p_MAX)) {
 		errno	= EDOM;
 		return	nan("");
 	}
@@ -145,7 +148,7 @@ double		alx_distribution_geometric_Var	(double p)
 float		alx_flt_distribution_geometric_Var(float p)
 {
 
-	if ((p < 0) || (p > 1)) {
+	if ((p < DIST_GEOMETRIC_p_MIN) || (p > DIST_GEOMETRIC_p_MAX)) {
 		errno	= EDOM;
 		return	nanf("");
 	}

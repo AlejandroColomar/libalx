@@ -22,7 +22,6 @@
  ******* macros ***************************************************************
  ******************************************************************************/
 #define ALX_DS1V_N_MIN	(1)
-#define ALX_DS1V_N_MAX	(PTRDIFF_MAX)
 #define ALX_DS1V_x_MIN	(-INFINITY)
 #define ALX_DS1V_x_MAX	(INFINITY)
 #define ALX_DS1V_n_MIN	(-INFINITY)

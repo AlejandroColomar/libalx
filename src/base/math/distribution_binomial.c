@@ -49,7 +49,9 @@ long double	alx_ldbl_distribution_binomial_P(int16_t n, long double p,
 {
 	long double	tmp;
 
-	if ((n < 0) || (p < 0) || (p > 1) || (x < 0)) {
+	if ((n < DIST_BINOMIAL_n_MIN) || (p < DIST_BINOMIAL_p_MIN) ||
+						(p > DIST_BINOMIAL_p_MAX) ||
+						(x < DIST_BINOMIAL_x_MIN)) {
 		errno	= EDOM;
 		return	nanl("");
 	}
@@ -66,7 +68,9 @@ double		alx_distribution_binomial_P	(int16_t n, double p,
 {
 	double_t	tmp;
 
-	if ((n < 0) || (p < 0) || (p > 1) || (x < 0)) {
+	if ((n < DIST_BINOMIAL_n_MIN) || (p < DIST_BINOMIAL_p_MIN) ||
+						(p > DIST_BINOMIAL_p_MAX) ||
+						(x < DIST_BINOMIAL_x_MIN)) {
 		errno	= EDOM;
 		return	nan("");
 	}
@@ -83,7 +87,9 @@ float		alx_flt_distribution_binomial_P	(int16_t n, float p,
 {
 	float_t	tmp;
 
-	if ((n < 0) || (p < 0) || (p > 1) || (x < 0)) {
+	if ((n < DIST_BINOMIAL_n_MIN) || (p < DIST_BINOMIAL_p_MIN) ||
+						(p > DIST_BINOMIAL_p_MAX) ||
+						(x < DIST_BINOMIAL_x_MIN)) {
 		errno	= EDOM;
 		return	nanf("");
 	}
@@ -98,7 +104,8 @@ float		alx_flt_distribution_binomial_P	(int16_t n, float p,
 long double	alx_ldbl_distribution_binomial_E(int16_t n, long double p)
 {
 
-	if ((n < 0) || (p < 0) || (p > 1)) {
+	if ((n < DIST_BINOMIAL_n_MIN) || (p < DIST_BINOMIAL_p_MIN) ||
+						(p > DIST_BINOMIAL_p_MAX)) {
 		errno	= EDOM;
 		return	nanl("");
 	}
@@ -110,7 +117,8 @@ long double	alx_ldbl_distribution_binomial_E(int16_t n, long double p)
 double		alx_distribution_binomial_E	(int16_t n, double p)
 {
 
-	if ((n < 0) || (p < 0) || (p > 1)) {
+	if ((n < DIST_BINOMIAL_n_MIN) || (p < DIST_BINOMIAL_p_MIN) ||
+						(p > DIST_BINOMIAL_p_MAX)) {
 		errno	= EDOM;
 		return	nan("");
 	}
@@ -122,7 +130,8 @@ double		alx_distribution_binomial_E	(int16_t n, double p)
 float		alx_flt_distribution_binomial_E	(int16_t n, float p)
 {
 
-	if ((n < 0) || (p < 0) || (p > 1)) {
+	if ((n < DIST_BINOMIAL_n_MIN) || (p < DIST_BINOMIAL_p_MIN) ||
+						(p > DIST_BINOMIAL_p_MAX)) {
 		errno	= EDOM;
 		return	nanf("");
 	}
@@ -134,7 +143,8 @@ float		alx_flt_distribution_binomial_E	(int16_t n, float p)
 long double	alx_ldbl_distribution_binomial_Var(int16_t n, long double p)
 {
 
-	if ((n < 0) || (p < 0) || (p > 1)) {
+	if ((n < DIST_BINOMIAL_n_MIN) || (p < DIST_BINOMIAL_p_MIN) ||
+						(p > DIST_BINOMIAL_p_MAX)) {
 		errno	= EDOM;
 		return	nanl("");
 	}
@@ -146,7 +156,8 @@ long double	alx_ldbl_distribution_binomial_Var(int16_t n, long double p)
 double		alx_distribution_binomial_Var	(int16_t n, double p)
 {
 
-	if ((n < 0) || (p < 0) || (p > 1)) {
+	if ((n < DIST_BINOMIAL_n_MIN) || (p < DIST_BINOMIAL_p_MIN) ||
+						(p > DIST_BINOMIAL_p_MAX)) {
 		errno	= EDOM;
 		return	nan("");
 	}
@@ -158,7 +169,8 @@ double		alx_distribution_binomial_Var	(int16_t n, double p)
 float		alx_flt_distribution_binomial_Var(int16_t n, float p)
 {
 
-	if ((n < 0) || (p < 0) || (p > 1)) {
+	if ((n < DIST_BINOMIAL_n_MIN) || (p < DIST_BINOMIAL_p_MIN) ||
+						(p > DIST_BINOMIAL_p_MAX)) {
 		errno	= EDOM;
 		return	nanf("");
 	}

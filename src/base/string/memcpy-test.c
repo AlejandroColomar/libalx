@@ -43,9 +43,9 @@ static			double	dest_nv = 7.0;
 /******************************************************************************
  ******* static functions (prototypes) ****************************************
  ******************************************************************************/
-int	test_alx_memcpy_vds(void);
-int	test_alx_memcpy_vd(void);
-int	test_alx_memcpy_vs(void);
+static	int	test_alx_memcpy_vds(void);
+static	int	test_alx_memcpy_vd(void);
+static	int	test_alx_memcpy_vs(void);
 
 
 /******************************************************************************
@@ -72,7 +72,7 @@ int main(void)
 /******************************************************************************
  ******* static functions (definitions) ***************************************
  ******************************************************************************/
-int	test_alx_memcpy_vds(void)
+static	int	test_alx_memcpy_vds(void)
 {
 
 	src_v	= 1.5;
@@ -85,7 +85,7 @@ int	test_alx_memcpy_vds(void)
 	return	0;
 }
 
-int	test_alx_memcpy_vd(void)
+static	int	test_alx_memcpy_vd(void)
 {
 
 	src_nv	= 2.2;
@@ -98,7 +98,7 @@ int	test_alx_memcpy_vd(void)
 	return	0;
 }
 
-int	test_alx_memcpy_vs(void)
+static	int	test_alx_memcpy_vs(void)
 {
 
 	src_v	= 3.7;

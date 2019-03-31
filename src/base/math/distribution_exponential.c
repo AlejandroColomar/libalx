@@ -46,7 +46,8 @@ long double	alx_ldbl_distribution_exponential_P(long double b,
 {
 	long double	tmp;
 
-	if ((b < 0) || (x1 < 0) || (x2 < x1)) {
+	if ((b < DIST_BINOMIAL_b_MIN) || (x1 < DIST_BINOMIAL_x_MIN) ||
+								(x2 < x1)) {
 		errno	= EDOM;
 		return	nanl("");
 	}
@@ -61,7 +62,8 @@ double		alx_distribution_exponential_P	(double b, double x1, double x2)
 {
 	double_t	tmp;
 
-	if ((b < 0) || (x1 < 0) || (x2 < x1)) {
+	if ((b < DIST_BINOMIAL_b_MIN) || (x1 < DIST_BINOMIAL_x_MIN) ||
+								(x2 < x1)) {
 		errno	= EDOM;
 		return	nan("");
 	}
@@ -76,7 +78,8 @@ float		alx_flt_distribution_exponential_P(float b, float x1, float x2)
 {
 	float_t	tmp;
 
-	if ((b < 0) || (x1 < 0) || (x2 < x1)) {
+	if ((b < DIST_BINOMIAL_b_MIN) || (x1 < DIST_BINOMIAL_x_MIN) ||
+								(x2 < x1)) {
 		errno	= EDOM;
 		return	nanf("");
 	}
@@ -90,7 +93,7 @@ float		alx_flt_distribution_exponential_P(float b, float x1, float x2)
 long double	alx_ldbl_distribution_exponential_E(long double b)
 {
 
-	if (b < 0) {
+	if (b < DIST_BINOMIAL_b_MIN) {
 		errno	= EDOM;
 		return	nanl("");
 	}
@@ -101,7 +104,7 @@ long double	alx_ldbl_distribution_exponential_E(long double b)
 double		alx_distribution_exponential_E	(double b)
 {
 
-	if (b < 0) {
+	if (b < DIST_BINOMIAL_b_MIN) {
 		errno	= EDOM;
 		return	nan("");
 	}
@@ -112,7 +115,7 @@ double		alx_distribution_exponential_E	(double b)
 float		alx_flt_distribution_exponential_E(float b)
 {
 
-	if (b < 0) {
+	if (b < DIST_BINOMIAL_b_MIN) {
 		errno	= EDOM;
 		return	nanf("");
 	}
@@ -123,7 +126,7 @@ float		alx_flt_distribution_exponential_E(float b)
 long double	alx_ldbl_distribution_exponential_Var(long double b)
 {
 
-	if (b < 0) {
+	if (b < DIST_BINOMIAL_b_MIN) {
 		errno	= EDOM;
 		return	nanl("");
 	}
@@ -134,7 +137,7 @@ long double	alx_ldbl_distribution_exponential_Var(long double b)
 double		alx_distribution_exponential_Var(double b)
 {
 
-	if (b < 0) {
+	if (b < DIST_BINOMIAL_b_MIN) {
 		errno	= EDOM;
 		return	nan("");
 	}
@@ -145,7 +148,7 @@ double		alx_distribution_exponential_Var(double b)
 float		alx_flt_distribution_exponential_Var(float b)
 {
 
-	if (b < 0) {
+	if (b < DIST_BINOMIAL_b_MIN) {
 		errno	= EDOM;
 		return	nanf("");
 	}

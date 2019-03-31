@@ -23,7 +23,6 @@
 #define DIST_GEOMETRIC_p_MIN	(0.0)
 #define DIST_GEOMETRIC_p_MAX	(1.0)
 #define DIST_GEOMETRIC_x_MIN	(0)
-#define DIST_GEOMETRIC_x_MAX	(INT64_MAX)
 
 
 /******************************************************************************

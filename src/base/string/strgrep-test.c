@@ -64,14 +64,14 @@ static	const char	*const expected[TESTS] = {
 /******************************************************************************
  ******* static functions (prototypes) ****************************************
  ******************************************************************************/
-int	test_alx_strnfgrep(void);
-int	test_alx_strlfgrep(void);
-int	test_alx_strncasefgrep(void);
-int	test_alx_strlcasefgrep(void);
-int	test_alx_strnfgrepv(void);
-int	test_alx_strlfgrepv(void);
-int	test_alx_strncasefgrepv(void);
-int	test_alx_strlcasefgrepv(void);
+static	int	test_alx_strnfgrep(void);
+static	int	test_alx_strlfgrep(void);
+static	int	test_alx_strncasefgrep(void);
+static	int	test_alx_strlcasefgrep(void);
+static	int	test_alx_strnfgrepv(void);
+static	int	test_alx_strlfgrepv(void);
+static	int	test_alx_strncasefgrepv(void);
+static	int	test_alx_strlcasefgrepv(void);
 
 
 /******************************************************************************
@@ -108,7 +108,7 @@ int main(void)
 /******************************************************************************
  ******* static functions (definitions) ***************************************
  ******************************************************************************/
-int	test_alx_strnfgrep(void)
+static	int	test_alx_strnfgrep(void)
 {
 	char	buff[BUFF_SIZE];
 	int	cmp;
@@ -123,7 +123,7 @@ int	test_alx_strnfgrep(void)
 	return	0;
 }
 
-int	test_alx_strlfgrep(void)
+static	int	test_alx_strlfgrep(void)
 {
 	char	buff[BUFF_SIZE];
 	int	cmp;
@@ -138,7 +138,7 @@ int	test_alx_strlfgrep(void)
 	return	0;
 }
 
-int	test_alx_strncasefgrep(void)
+static	int	test_alx_strncasefgrep(void)
 {
 	char	buff[BUFF_SIZE];
 	int	cmp;
@@ -153,7 +153,7 @@ int	test_alx_strncasefgrep(void)
 	return	0;
 }
 
-int	test_alx_strlcasefgrep(void)
+static	int	test_alx_strlcasefgrep(void)
 {
 	char	buff[BUFF_SIZE];
 	int	cmp;
@@ -168,7 +168,7 @@ int	test_alx_strlcasefgrep(void)
 	return	0;
 }
 
-int	test_alx_strnfgrepv(void)
+static	int	test_alx_strnfgrepv(void)
 {
 	char	buff[BUFF_SIZE];
 	int	cmp;
@@ -183,7 +183,7 @@ int	test_alx_strnfgrepv(void)
 	return	0;
 }
 
-int	test_alx_strlfgrepv(void)
+static	int	test_alx_strlfgrepv(void)
 {
 	char	buff[BUFF_SIZE];
 	int	cmp;
@@ -198,7 +198,7 @@ int	test_alx_strlfgrepv(void)
 	return	0;
 }
 
-int	test_alx_strncasefgrepv(void)
+static	int	test_alx_strncasefgrepv(void)
 {
 	char	buff[BUFF_SIZE];
 	int	cmp;
@@ -213,7 +213,7 @@ int	test_alx_strncasefgrepv(void)
 	return	0;
 }
 
-int	test_alx_strlcasefgrepv(void)
+static	int	test_alx_strlcasefgrepv(void)
 {
 	char	buff[BUFF_SIZE];
 	int	cmp;

@@ -241,7 +241,7 @@ int	alx_array_multiplication_u64	(ptrdiff_t nmemb,
 
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		tmp	= (double_t)src1[i] * (double_t)src2[i];
-		if (nextafter(tmp, tmp + 1) > UINT64_MAX) 
+		if (nextafter(tmp, tmp + 1) > UINT64_MAX)
 			goto err_wrap;
 		dest[i]	= src1[i] * src2[i];
 	}

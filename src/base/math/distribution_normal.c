@@ -107,39 +107,39 @@ float		alx_flt_distribution_normal_B	(float u, float o)
 	return	-u / o;
 }
 
-long double	alx_ldbl_distribution_normal_Z	(long double a, long double b,
+long double	alx_ldbl_distribution_normal_X2Z(long double a, long double b,
 						long double x)
 {
 
 	return	a * x + b;
 }
 
-double		alx_distribution_normal_Z	(double a, double b, double x)
+double		alx_distribution_normal_X2Z	(double a, double b, double x)
 {
 
 	return	a * x + b;
 }
 
-float		alx_flt_distribution_normal_Z	(float a, float b, float x)
+float		alx_flt_distribution_normal_X2Z	(float a, float b, float x)
 {
 
 	return	a * x + b;
 }
 
-long double	alx_ldbl_distribution_normal_X	(long double a, long double b,
+long double	alx_ldbl_distribution_normal_Z2X(long double a, long double b,
 						long double z)
 {
 
 	return	(z - b) / a;
 }
 
-double		alx_distribution_normal_X	(double a, double b, double z)
+double		alx_distribution_normal_Z2X	(double a, double b, double z)
 {
 
 	return	(z - b) / a;
 }
 
-float		alx_flt_distribution_normal_X	(float a, float b, float z)
+float		alx_flt_distribution_normal_Z2X	(float a, float b, float z)
 {
 
 	return	(z - b) / a;
