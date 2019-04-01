@@ -103,7 +103,7 @@ static	ptrdiff_t	_snprint_file_fread	(ptrdiff_t size,
 
 	fread(dest, sizeof(char), MIN(len, size), fp);
 	if (len < size)
-		dest[len + 1]	= '\0';
+		dest[len]	= '\0';
 
 	return	len;
 }

@@ -125,11 +125,11 @@ libalx/libalx-stdlib.a: $(STDLIB_OBJ)
 	@echo	"	AR	libalx/lib/$@"
 	$(Q)$(AR) -r -c -s -o $@ $^
 
-libalx/libalx-string.a: $(STRING_OBJ)
+libalx/libalx-stdio.a: $(STDIO_OBJ)
 	@echo	"	AR	libalx/lib/$@"
 	$(Q)$(AR) -r -c -s -o $@ $^
 
-libalx/libalx-stdio.a: $(IO_OBJ)
+libalx/libalx-string.a: $(STRING_OBJ)
 	@echo	"	AR	libalx/lib/$@"
 	$(Q)$(AR) -r -c -s -o $@ $^
 
@@ -138,7 +138,7 @@ libalx/libalx-base.a: $(BASE_OBJ)
 	$(Q)$(AR) -r -c -s -o $@ $^
 
 
-libalx/libalx-ncurses.a: $(CURSES_OBJ)
+libalx/libalx-ncurses.a: $(NCURSES_OBJ)
 	@echo	"	AR	libalx/lib/$@"
 	$(Q)$(AR) -r -c -s -o $@ $^
 
