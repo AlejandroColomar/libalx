@@ -60,7 +60,7 @@ ptrdiff_t	alx_snprint_file(ptrdiff_t size,
 
 	fp	= fopen(fpath, "r");
 	if (!fp)
-		return	-1;
+		return	-errno;
 
 	len	= _snprint_file(size, dest, fp);
 	fclose(fp);
@@ -82,11 +82,13 @@ static	ptrdiff_t	_snprint_file_getc	(ptrdiff_t size,
 	for (len = 0; len < size; len++) {
 		c = getc(fp);
 		if (c == EOF) {
-			dest[len--] = '\0';
-			break;
+			dest[len] = '\0';
+			return	len;
 		}
 		dest[len] = c;
 	}
+	while (getc(fp) != EOF)
+		len++;
 
 	return	len;
 }
