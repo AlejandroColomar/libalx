@@ -10,44 +10,30 @@
 ################################################################################
 
 ################################################################################
+# dependencies
+
+OBJ		=							\
+		errno_str.o
+
+ERRNO_STR_INC	=							\
+		$(INC_DIR)/libalx/base/errno/errno_str.h
+ERRNO_STR_SRC	=							\
+		$(SRC_DIR)/base/errno/errno_str.c
+
+################################################################################
 # target: dependencies
 #	action
 
 PHONY := all
-all: errno math stddef stdint stdio stdlib string ncurses
+all: $(OBJ)
 
 
-PHONY += errno
-errno:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/errno/
-
-PHONY += math
-math:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/math/
-
-PHONY += stddef
-stddef:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stddef/
-
-PHONY += stdint
-stdint:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stdint/
-
-PHONY += stdio
-stdio:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stdio/
-
-PHONY += stdlib
-stdlib:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stdlib/
-
-PHONY += string
-string:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/string/
-
-PHONY += ncurses
-ncurses:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/ncurses/
+errno_str.s: $(ERRNO_STR_SRC) $(ERRNO_STR_INC)
+	@echo	"	CC	libalx/tmp/base/errno/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+errno_str.o: errno_str.s
+	@echo	"	AS	libalx/tmp/base/errno/$@"
+	$(Q)$(AS) $< -o $@
 
 
 PHONY += clean
@@ -57,8 +43,6 @@ clean:
 ################################################################################
 # Declare the contents of the .PHONY variable as phony.
 .PHONY: $(PHONY)
-
-
 
 
 ################################################################################

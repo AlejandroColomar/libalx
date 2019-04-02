@@ -140,6 +140,12 @@ PHONY := all
 all: base extra
 
 
+PHONY += errno
+errno:
+	@echo	"	MAKE	errno"
+	$(Q)$(MAKE) errno	-C $(TMP_DIR)
+	$(Q)$(MAKE) errno	-C $(LIB_DIR)
+
 PHONY += math
 math:
 	@echo	"	MAKE	math"
@@ -177,7 +183,7 @@ string:
 	$(Q)$(MAKE) string	-C $(LIB_DIR)
 
 PHONY += base
-base: math stddef stdint stdio stdlib string
+base: errno math stddef stdint stdio stdlib string
 	@echo	"	MAKE	base"
 	$(Q)$(MAKE) base	-C $(LIB_DIR)
 
