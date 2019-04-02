@@ -7,20 +7,21 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_STDIO_H
-#define ALX_STDIO_H
+#ifndef ALX_STDIO_HPP
+#define ALX_STDIO_HPP
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <stdio.h>
+#include <cstdio>
 
-#include "libalx/base/stdio/common.h"
-#include "libalx/base/stdio/escape_sequences.h"
-#include "libalx/base/stdio/get.h"
-#include "libalx/base/stdio/sprint_file.h"
-#include "libalx/base/stdio/sscan.h"
+#include "libalx/base/stdio/common.hpp"
+#include "libalx/base/stdio/escape_sequences.hpp"
+#include "libalx/base/stdio/get.hpp"
+#include "libalx/base/stdio/sprint_file.hpp"
+#include "libalx/base/stdio/sscan.hpp"
+#include "libalx/base/stdio/wait.hpp"
 
 
 /******************************************************************************
@@ -61,7 +62,7 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/base/stdio.h */
+#endif		/* libalx/base/stdio.hpp */
 
 
 /******************************************************************************

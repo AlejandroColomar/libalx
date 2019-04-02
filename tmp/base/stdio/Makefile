@@ -14,7 +14,8 @@
 OBJ		=							\
 		get.o							\
 		sprint_file.o						\
-		sscan.o
+		sscan.o							\
+		wait.o
 
 GET_INC		=							\
 		$(INC_DIR)/libalx/base/stdio/get.h			\
@@ -34,6 +35,11 @@ SSCAN_INC	=							\
 		$(INC_DIR)/libalx/base/stdio/common.h
 SSCAN_SRC	=							\
 		$(SRC_DIR)/base/stdio/sscan.c
+
+WAIT_INC	=							\
+		$(INC_DIR)/libalx/base/stdio/wait.h
+WAIT_SRC	=							\
+		$(SRC_DIR)/base/stdio/wait.c
 
 ################################################################################
 # target: dependencies
@@ -61,6 +67,13 @@ sscan.s: $(SSCAN_SRC) $(SSCAN_INC)
 	@echo	"	CC	libalx/tmp/base/stdio/$@"
 	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
 sscan.o: sscan.s
+	@echo	"	AS	libalx/tmp/base/stdio/$@"
+	$(Q)$(AS) $< -o $@
+
+wait.s: $(WAIT_SRC) $(WAIT_INC)
+	@echo	"	CC	libalx/tmp/base/stdio/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+wait.o: wait.s
 	@echo	"	AS	libalx/tmp/base/stdio/$@"
 	$(Q)$(AS) $< -o $@
 
