@@ -164,7 +164,7 @@ int	alx_prime_factorization_s16	(int16_t n,
 				return	0;
 			prime_index = alx_prime_index_s16(tmp);
 			if (prime_index != -1) {
-				(*pf)[prime_index]	= 1;
+				(*pf)[prime_index]++;
 				return	0;
 			}
 		}

@@ -46,7 +46,8 @@
  ******* static functions (prototypes) ****************************************
  ******************************************************************************/
 
-
+#include <inttypes.h>
+#include <stdio.h>
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
@@ -68,7 +69,16 @@ long double	alx_ldbl_binomial_coefficient		(int16_t n, int16_t k)
 	if (alx_binomial_coefficient_factorized(n, k, &pf))
 		return	nanl("");
 
-	return	alx_ldbl_prime_defactorization_s16((const int16_t (*)[])&pf);
+
+for (int i = 0; i < 20; i++)
+printf("pf_%i = %"PRIi16"\n", i, (pf)[i]);
+
+//	return	alx_ldbl_prime_defactorization_s16((const int16_t (*)[])&pf);
+	long double tmp =	alx_ldbl_prime_defactorization_s16((const int16_t (*)[])&pf);
+printf("n = %"PRIi16"\n", n);
+printf("k = %"PRIi16"\n", k);
+printf("tmp = %Lf", tmp);
+	return	tmp;
 }
 
 double		alx_binomial_coefficient		(int16_t n, int16_t k)
@@ -122,7 +132,7 @@ int		alx_binomial_coefficient_factorized	(int16_t n, int16_t k,
 
 	if ((n < 0) || (k < 0)) {
 		errno	= EDOM;
-		return	-2;
+		return	-EDOM;
 	}
 
 	m	= n;
@@ -131,7 +141,7 @@ int		alx_binomial_coefficient_factorized	(int16_t n, int16_t k,
 
 	if (k > n) {
 		errno	= EDOM;
-		return	-1;
+		return	-EDOM;
 	}
 	if ((n == k) || (!k))
 		return	0;
@@ -143,9 +153,7 @@ int		alx_binomial_coefficient_factorized	(int16_t n, int16_t k,
 		alx_matrix_addition_s16(ARRAY_SSIZE(*pf), *pf, *pf, tmp);
 	} while (j < k);
 
-	if (errno)
-		return	-3;
-	return	0;
+	return	-errno;
 }
 
 
