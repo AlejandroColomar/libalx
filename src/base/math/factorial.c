@@ -18,6 +18,7 @@
 #include "libalx/base/math/prime.h"
 #include "libalx/base/math/prime_defactorization.h"
 #include "libalx/base/math/prime_factorization.h"
+#include "libalx/base/stddef/size.h"
 
 
 /******************************************************************************

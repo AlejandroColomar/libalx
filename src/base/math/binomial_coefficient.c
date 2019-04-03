@@ -46,8 +46,7 @@
  ******* static functions (prototypes) ****************************************
  ******************************************************************************/
 
-#include <inttypes.h>
-#include <stdio.h>
+
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
@@ -69,16 +68,7 @@ long double	alx_ldbl_binomial_coefficient		(int16_t n, int16_t k)
 	if (alx_binomial_coefficient_factorized(n, k, &pf))
 		return	nanl("");
 
-
-for (int i = 0; i < 20; i++)
-printf("pf_%i = %"PRIi16"\n", i, (pf)[i]);
-
-//	return	alx_ldbl_prime_defactorization_s16((const int16_t (*)[])&pf);
-	long double tmp =	alx_ldbl_prime_defactorization_s16((const int16_t (*)[])&pf);
-printf("n = %"PRIi16"\n", n);
-printf("k = %"PRIi16"\n", k);
-printf("tmp = %Lf", tmp);
-	return	tmp;
+	return	alx_ldbl_prime_defactorization_s16((const int16_t (*)[])&pf);
 }
 
 double		alx_binomial_coefficient		(int16_t n, int16_t k)
