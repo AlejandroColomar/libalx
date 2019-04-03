@@ -54,33 +54,33 @@
 extern	"C"
 {
 ptrdiff_t	alx_minimum_ldbl	(ptrdiff_t nmemb,
-					const long double arr[restrict]);
+					const long double *restrict arr);
 ptrdiff_t	alx_minimum		(ptrdiff_t nmemb,
-					const double arr[restrict]);
+					const double *restrict arr);
 ptrdiff_t	alx_minimum_f		(ptrdiff_t nmemb,
-					const float arr[restrict]);
+					const float *restrict arr);
 ptrdiff_t	alx_minimum_uint	(ptrdiff_t nmemb,
-					const unsigned arr[restrict]);
+					const unsigned *restrict arr);
 ptrdiff_t	alx_minimum_int		(ptrdiff_t nmemb,
-					const int arr[restrict]);
+					const int *restrict arr);
 ptrdiff_t	alx_minimum_u8		(ptrdiff_t nmemb,
-					const uint8_t arr[restrict]);
+					const uint8_t *restrict arr);
 ptrdiff_t	alx_minimum_s8		(ptrdiff_t nmemb,
-					const int8_t arr[restrict]);
+					const int8_t *restrict arr);
 ptrdiff_t	alx_minimum_u16		(ptrdiff_t nmemb,
-					const uint16_t arr[restrict]);
+					const uint16_t *restrict arr);
 ptrdiff_t	alx_minimum_s16		(ptrdiff_t nmemb,
-					const int16_t arr[restrict]);
+					const int16_t *restrict arr);
 ptrdiff_t	alx_minimum_u32		(ptrdiff_t nmemb,
-					const uint32_t arr[restrict]);
+					const uint32_t *restrict arr);
 ptrdiff_t	alx_minimum_s32		(ptrdiff_t nmemb,
-					const int32_t arr[restrict]);
+					const int32_t *restrict arr);
 ptrdiff_t	alx_minimum_u64		(ptrdiff_t nmemb,
-					const uint64_t arr[restrict]);
+					const uint64_t *restrict arr);
 ptrdiff_t	alx_minimum_s64		(ptrdiff_t nmemb,
-					const int64_t arr[restrict]);
+					const int64_t *restrict arr);
 ptrdiff_t	alx_minimum_pdif	(ptrdiff_t nmemb,
-					const ptrdiff_t arr[restrict]);
+					const ptrdiff_t *restrict arr);
 }
 
 

@@ -46,45 +46,45 @@
 extern	"C"
 {
 int	alx_array_division_uint	(ptrdiff_t nmemb,
-					unsigned dest[restrict],
-					const unsigned src1[restrict],
-					const unsigned src2[restrict]);
+					unsigned *restrict dest,
+					const unsigned *restrict src1,
+					const unsigned *restrict src2);
 int	alx_array_division_int	(ptrdiff_t nmemb,
-					int dest[restrict],
-					const int src1[restrict],
-					const int src2[restrict]);
+					int *restrict dest,
+					const int *restrict src1,
+					const int *restrict src2);
 int	alx_array_division_u8	(ptrdiff_t nmemb,
-					uint8_t dest[restrict],
-					const uint8_t src1[restrict],
-					const uint8_t src2[restrict]);
+					uint8_t *restrict dest,
+					const uint8_t *restrict src1,
+					const uint8_t *restrict src2);
 int	alx_array_division_s8	(ptrdiff_t nmemb,
-					int8_t dest[restrict],
-					const int8_t src1[restrict],
-					const int8_t src2[restrict]);
+					int8_t *restrict dest,
+					const int8_t *restrict src1,
+					const int8_t *restrict src2);
 int	alx_array_division_u16	(ptrdiff_t nmemb,
-					uint16_t dest[restrict],
-					const uint16_t src1[restrict],
-					const uint16_t src2[restrict]);
+					uint16_t *restrict dest,
+					const uint16_t *restrict src1,
+					const uint16_t *restrict src2);
 int	alx_array_division_s16	(ptrdiff_t nmemb,
-					int16_t dest[restrict],
-					const int16_t src1[restrict],
-					const int16_t src2[restrict]);
+					int16_t *restrict dest,
+					const int16_t *restrict src1,
+					const int16_t *restrict src2);
 int	alx_array_division_u32	(ptrdiff_t nmemb,
-					uint32_t dest[restrict],
-					const uint32_t src1[restrict],
-					const uint32_t src2[restrict]);
+					uint32_t *restrict dest,
+					const uint32_t *restrict src1,
+					const uint32_t *restrict src2);
 int	alx_array_division_s32	(ptrdiff_t nmemb,
-					int32_t dest[restrict],
-					const int32_t src1[restrict],
-					const int32_t src2[restrict]);
+					int32_t *restrict dest,
+					const int32_t *restrict src1,
+					const int32_t *restrict src2);
 int	alx_array_division_u64	(ptrdiff_t nmemb,
-					uint64_t dest[restrict],
-					const uint64_t src1[restrict],
-					const uint64_t src2[restrict]);
+					uint64_t *restrict dest,
+					const uint64_t *restrict src1,
+					const uint64_t *restrict src2);
 int	alx_array_division_s64	(ptrdiff_t nmemb,
-					int64_t dest[restrict],
-					const int64_t src1[restrict],
-					const int64_t src2[restrict]);
+					int64_t *restrict dest,
+					const int64_t *restrict src1,
+					const int64_t *restrict src2);
 }
 
 
@@ -92,17 +92,17 @@ int	alx_array_division_s64	(ptrdiff_t nmemb,
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
 static inline	void	alx_array_division_ldbl	(ptrdiff_t nmemb,
-					long double dest[restrict],
-					const long double src1[restrict],
-					const long double src2[restrict]);
+					long double *restrict dest,
+					const long double *restrict src1,
+					const long double *restrict src2);
 static inline	void	alx_array_division	(ptrdiff_t nmemb,
-					double dest[restrict],
-					const double src1[restrict],
-					const double src2[restrict]);
+					double *restrict dest,
+					const double *restrict src1,
+					const double *restrict src2);
 static inline	void	alx_array_division_flt	(ptrdiff_t nmemb,
-					float dest[restrict],
-					const float src1[restrict],
-					const float src2[restrict]);
+					float *restrict dest,
+					const float *restrict src1,
+					const float *restrict src2);
 
 
 /******************************************************************************
@@ -110,9 +110,9 @@ static inline	void	alx_array_division_flt	(ptrdiff_t nmemb,
  ******************************************************************************/
 static inline
 void	alx_array_division_ldbl	(ptrdiff_t nmemb,
-					long double dest[restrict],
-					const long double src1[restrict],
-					const long double src2[restrict])
+					long double *restrict dest,
+					const long double *restrict src1,
+					const long double *restrict src2)
 {
 
 	for (ptrdiff_t i = 0; i < nmemb; i++)
@@ -121,9 +121,9 @@ void	alx_array_division_ldbl	(ptrdiff_t nmemb,
 
 static inline
 void	alx_array_division	(ptrdiff_t nmemb,
-					double dest[restrict],
-					const double src1[restrict],
-					const double src2[restrict])
+					double *restrict dest,
+					const double *restrict src1,
+					const double *restrict src2)
 {
 
 	for (ptrdiff_t i = 0; i < nmemb; i++)
@@ -132,9 +132,9 @@ void	alx_array_division	(ptrdiff_t nmemb,
 
 static inline
 void	alx_array_division_flt	(ptrdiff_t nmemb,
-					float dest[restrict],
-					const float src1[restrict],
-					const float src2[restrict])
+					float *restrict dest,
+					const float *restrict src1,
+					const float *restrict src2)
 {
 
 	for (ptrdiff_t i = 0; i < nmemb; i++)

@@ -46,37 +46,37 @@
 extern	"C"
 {
 ptrdiff_t	alx_strnfgrep		(ptrdiff_t size,
-					char dest[restrict],
-					const char src[restrict],
-					const char pattern[restrict]);
+					char *restrict dest,
+					const char *restrict src,
+					const char *restrict pattern);
 ptrdiff_t	alx_strlfgrep		(ptrdiff_t size,
-					char dest[restrict],
-					const char src[restrict],
-					const char pattern[restrict]);
+					char *restrict dest,
+					const char *restrict src,
+					const char *restrict pattern);
 ptrdiff_t	alx_strncasefgrep	(ptrdiff_t size,
-					char dest[restrict],
-					const char src[restrict],
-					const char pattern[restrict]);
+					char *restrict dest,
+					const char *restrict src,
+					const char *restrict pattern);
 ptrdiff_t	alx_strlcasefgrep	(ptrdiff_t size,
-					char dest[restrict],
-					const char src[restrict],
-					const char pattern[restrict]);
+					char *restrict dest,
+					const char *restrict src,
+					const char *restrict pattern);
 ptrdiff_t	alx_strnfgrepv		(ptrdiff_t size,
-					char dest[restrict],
-					const char src[restrict],
-					const char pattern[restrict]);
+					char *restrict dest,
+					const char *restrict src,
+					const char *restrict pattern);
 ptrdiff_t	alx_strlfgrepv		(ptrdiff_t size,
-					char dest[restrict],
-					const char src[restrict],
-					const char pattern[restrict]);
+					char *restrict dest,
+					const char *restrict src,
+					const char *restrict pattern);
 ptrdiff_t	alx_strncasefgrepv	(ptrdiff_t size,
-					char dest[restrict],
-					const char src[restrict],
-					const char pattern[restrict]);
+					char *restrict dest,
+					const char *restrict src,
+					const char *restrict pattern);
 ptrdiff_t	alx_strlcasefgrepv	(ptrdiff_t size,
-					char dest[restrict],
-					const char src[restrict],
-					const char pattern[restrict]);
+					char *restrict dest,
+					const char *restrict src,
+					const char *restrict pattern);
 }
 
 

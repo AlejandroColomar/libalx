@@ -115,16 +115,16 @@ extern	"C"
 {
 struct Alx_Descriptive_Statistics_2var_Ldbl
 alx_descriptive_statistics_2var_ldbl	(ptrdiff_t N,
-					const long double x[restrict],
-					const long double y[restrict]);
+					const long double *restrict x,
+					const long double *restrict y);
 struct Alx_Descriptive_Statistics_2var
 alx_descriptive_statistics_2var		(ptrdiff_t N,
-					const double x[restrict],
-					const double y[restrict]);
+					const double *restrict x,
+					const double *restrict y);
 struct Alx_Descriptive_Statistics_2var_Flt
 alx_descriptive_statistics_2var_flt	(ptrdiff_t N,
-					const float x[restrict],
-					const float y[restrict]);
+					const float *restrict x,
+					const float *restrict y);
 }
 
 

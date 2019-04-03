@@ -63,31 +63,31 @@
 extern	"C"
 {
 long double	alx_arithmetic_mean_ldbl(ptrdiff_t nmemb,
-					const long double arr[restrict]);
+					const long double *restrict arr);
 double		alx_arithmetic_mean	(ptrdiff_t nmemb,
-					const double arr[restrict]);
+					const double *restrict arr);
 float		alx_arithmetic_mean_flt	(ptrdiff_t nmemb,
-					const float arr[restrict]);
+					const float *restrict arr);
 double		alx_arithmetic_mean_uint(ptrdiff_t nmemb,
-					const unsigned arr[restrict]);
+					const unsigned *restrict arr);
 double		alx_arithmetic_mean_int	(ptrdiff_t nmemb,
-					const int arr[restrict]);
+					const int *restrict arr);
 double		alx_arithmetic_mean_u8	(ptrdiff_t nmemb,
-					const uint8_t arr[restrict]);
+					const uint8_t *restrict arr);
 double		alx_arithmetic_mean_s8	(ptrdiff_t nmemb,
-					const int8_t arr[restrict]);
+					const int8_t *restrict arr);
 double		alx_arithmetic_mean_u16	(ptrdiff_t nmemb,
-					const uint16_t arr[restrict]);
+					const uint16_t *restrict arr);
 double		alx_arithmetic_mean_s16	(ptrdiff_t nmemb,
-					const int16_t arr[restrict]);
+					const int16_t *restrict arr);
 double		alx_arithmetic_mean_u32	(ptrdiff_t nmemb,
-					const uint32_t arr[restrict]);
+					const uint32_t *restrict arr);
 double		alx_arithmetic_mean_s32	(ptrdiff_t nmemb,
-					const int32_t arr[restrict]);
+					const int32_t *restrict arr);
 double		alx_arithmetic_mean_u64	(ptrdiff_t nmemb,
-					const uint64_t arr[restrict]);
+					const uint64_t *restrict arr);
 double		alx_arithmetic_mean_s64	(ptrdiff_t nmemb,
-					const int64_t arr[restrict]);
+					const int64_t *restrict arr);
 }
 
 

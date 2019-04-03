@@ -46,43 +46,43 @@
 extern	"C"
 {
 int	alx_array_multiplication_uint	(ptrdiff_t nmemb,
-					unsigned dest[restrict],
+					unsigned *restrict dest,
 					const unsigned src1[],
 					const unsigned src2[]);
 int	alx_array_multiplication_int	(ptrdiff_t nmemb,
-					int dest[restrict],
+					int *restrict dest,
 					const int src1[],
 					const int src2[]);
 int	alx_array_multiplication_u8	(ptrdiff_t nmemb,
-					uint8_t dest[restrict],
+					uint8_t *restrict dest,
 					const uint8_t src1[],
 					const uint8_t src2[]);
 int	alx_array_multiplication_s8	(ptrdiff_t nmemb,
-					int8_t dest[restrict],
+					int8_t *restrict dest,
 					const int8_t src1[],
 					const int8_t src2[]);
 int	alx_array_multiplication_u16	(ptrdiff_t nmemb,
-					uint16_t dest[restrict],
+					uint16_t *restrict dest,
 					const uint16_t src1[],
 					const uint16_t src2[]);
 int	alx_array_multiplication_s16	(ptrdiff_t nmemb,
-					int16_t dest[restrict],
+					int16_t *restrict dest,
 					const int16_t src1[],
 					const int16_t src2[]);
 int	alx_array_multiplication_u32	(ptrdiff_t nmemb,
-					uint32_t dest[restrict],
+					uint32_t *restrict dest,
 					const uint32_t src1[],
 					const uint32_t src2[]);
 int	alx_array_multiplication_s32	(ptrdiff_t nmemb,
-					int32_t dest[restrict],
+					int32_t *restrict dest,
 					const int32_t src1[],
 					const int32_t src2[]);
 int	alx_array_multiplication_u64	(ptrdiff_t nmemb,
-					uint64_t dest[restrict],
+					uint64_t *restrict dest,
 					const uint64_t src1[],
 					const uint64_t src2[]);
 int	alx_array_multiplication_s64	(ptrdiff_t nmemb,
-					int64_t dest[restrict],
+					int64_t *restrict dest,
 					const int64_t src1[],
 					const int64_t src2[]);
 }

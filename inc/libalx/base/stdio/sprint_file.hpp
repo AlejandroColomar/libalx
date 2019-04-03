@@ -46,7 +46,7 @@
 extern	"C"
 {
 ptrdiff_t	alx_snprint_file(ptrdiff_t size,
-				char dest[restrict size],
+				char *restrict dest,
 				const char fpath[restrict FILENAME_MAX]);
 }
 

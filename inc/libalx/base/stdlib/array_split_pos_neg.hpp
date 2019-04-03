@@ -46,37 +46,37 @@
 extern	"C"
 {
 void	alx_array_split_pos_neg_ldbl	(ptrdiff_t nmemb,
-				const long double mix[restrict],
-				long double pos[restrict],
-				long double neg[restrict]);
+				const long double *restrict mix,
+				long double *restrict pos,
+				long double *restrict neg);
 void	alx_array_split_pos_neg		(ptrdiff_t nmemb,
-				const double mix[restrict],
-				double pos[restrict],
-				double neg[restrict]);
+				const double *restrict mix,
+				double *restrict pos,
+				double *restrict neg);
 void	alx_array_split_pos_neg_flt	(ptrdiff_t nmemb,
-				const float mix[restrict],
-				float pos[restrict],
-				float neg[restrict]);
+				const float *restrict mix,
+				float *restrict pos,
+				float *restrict neg);
 void	alx_array_split_pos_neg_int	(ptrdiff_t nmemb,
-				const int mix[restrict],
-				int pos[restrict],
-				int neg[restrict]);
+				const int *restrict mix,
+				int *restrict pos,
+				int *restrict neg);
 void	alx_array_split_pos_neg_s8	(ptrdiff_t nmemb,
-				const int8_t mix[restrict],
-				int8_t pos[restrict],
-				int8_t neg[restrict]);
+				const int8_t *restrict mix,
+				int8_t *restrict pos,
+				int8_t *restrict neg);
 void	alx_array_split_pos_neg_s16	(ptrdiff_t nmemb,
-				const int16_t mix[restrict],
-				int16_t pos[restrict],
-				int16_t neg[restrict]);
+				const int16_t *restrict mix,
+				int16_t *restrict pos,
+				int16_t *restrict neg);
 void	alx_array_split_pos_neg_s32	(ptrdiff_t nmemb,
-				const int32_t mix[restrict],
-				int32_t pos[restrict],
-				int32_t neg[restrict]);
+				const int32_t *restrict mix,
+				int32_t *restrict pos,
+				int32_t *restrict neg);
 void	alx_array_split_pos_neg_s64	(ptrdiff_t nmemb,
-				const int64_t mix[restrict],
-				int64_t pos[restrict],
-				int64_t neg[restrict]);
+				const int64_t *restrict mix,
+				int64_t *restrict pos,
+				int64_t *restrict neg);
 }
 
 
