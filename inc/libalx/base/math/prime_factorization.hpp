@@ -17,6 +17,7 @@
 #include <cstdint>
 
 #include "libalx/base/math/prime.hpp"
+#include "libalx/base/stddef/restrict.hpp"
 
 
 /******************************************************************************

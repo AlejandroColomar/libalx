@@ -17,6 +17,8 @@
 #include <cstddef>
 #include <cstdint>
 
+#include "libalx/base/stddef/restrict.hpp"
+
 
 /******************************************************************************
  ******* macros ***************************************************************
@@ -90,17 +92,17 @@ int	alx_array_division_s64	(ptrdiff_t nmemb,
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
 static inline	void	alx_array_division_ldbl	(ptrdiff_t nmemb,
-					long double dest[],
-					const long double src1[],
-					const long double src2[]);
+					long double dest[restrict],
+					const long double src1[restrict],
+					const long double src2[restrict]);
 static inline	void	alx_array_division	(ptrdiff_t nmemb,
-					double dest[],
-					const double src1[],
-					const double src2[]);
+					double dest[restrict],
+					const double src1[restrict],
+					const double src2[restrict]);
 static inline	void	alx_array_division_flt	(ptrdiff_t nmemb,
-					float dest[],
-					const float src1[],
-					const float src2[]);
+					float dest[restrict],
+					const float src1[restrict],
+					const float src2[restrict]);
 
 
 /******************************************************************************
@@ -108,9 +110,9 @@ static inline	void	alx_array_division_flt	(ptrdiff_t nmemb,
  ******************************************************************************/
 static inline
 void	alx_array_division_ldbl	(ptrdiff_t nmemb,
-					long double dest[],
-					const long double src1[],
-					const long double src2[])
+					long double dest[restrict],
+					const long double src1[restrict],
+					const long double src2[restrict])
 {
 
 	for (ptrdiff_t i = 0; i < nmemb; i++)
@@ -119,9 +121,9 @@ void	alx_array_division_ldbl	(ptrdiff_t nmemb,
 
 static inline
 void	alx_array_division	(ptrdiff_t nmemb,
-					double dest[],
-					const double src1[],
-					const double src2[])
+					double dest[restrict],
+					const double src1[restrict],
+					const double src2[restrict])
 {
 
 	for (ptrdiff_t i = 0; i < nmemb; i++)
@@ -130,9 +132,9 @@ void	alx_array_division	(ptrdiff_t nmemb,
 
 static inline
 void	alx_array_division_flt	(ptrdiff_t nmemb,
-					float dest[],
-					const float src1[],
-					const float src2[])
+					float dest[restrict],
+					const float src1[restrict],
+					const float src2[restrict])
 {
 
 	for (ptrdiff_t i = 0; i < nmemb; i++)

@@ -17,6 +17,7 @@
 #include <stdint.h>
 
 #include "libalx/base/math/prime.hpp"
+#include "libalx/base/stddef/restrict.hpp"
 
 
 /******************************************************************************

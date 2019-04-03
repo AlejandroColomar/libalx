@@ -18,6 +18,8 @@
 #include <cstddef>
 #include <cstdint>
 
+#include "libalx/base/stddef/restrict.hpp"
+
 
 /******************************************************************************
  ******* macros ***************************************************************
@@ -71,69 +73,69 @@ int64_t		alx_array_sum_s64	(ptrdiff_t nmemb,
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
 static inline	long double	alx_ldbl_array_sum_ldbl	(ptrdiff_t nmemb,
-					const long double arr[]);
+					const long double arr[restrict]);
 static inline	long double	alx_ldbl_array_sum_uint	(ptrdiff_t nmemb,
-					const unsigned arr[]);
+					const unsigned arr[restrict]);
 static inline	long double	alx_ldbl_array_sum_int	(ptrdiff_t nmemb,
-					const int arr[]);
+					const int arr[restrict]);
 static inline	long double	alx_ldbl_array_sum_u8	(ptrdiff_t nmemb,
-					const uint8_t arr[]);
+					const uint8_t arr[restrict]);
 static inline	long double	alx_ldbl_array_sum_s8	(ptrdiff_t nmemb,
-					const int8_t arr[]);
+					const int8_t arr[restrict]);
 static inline	long double	alx_ldbl_array_sum_u16	(ptrdiff_t nmemb,
-					const uint16_t arr[]);
+					const uint16_t arr[restrict]);
 static inline	long double	alx_ldbl_array_sum_s16	(ptrdiff_t nmemb,
-					const int16_t arr[]);
+					const int16_t arr[restrict]);
 static inline	long double	alx_ldbl_array_sum_u32	(ptrdiff_t nmemb,
-					const uint32_t arr[]);
+					const uint32_t arr[restrict]);
 static inline	long double	alx_ldbl_array_sum_s32	(ptrdiff_t nmemb,
-					const int32_t arr[]);
+					const int32_t arr[restrict]);
 static inline	long double	alx_ldbl_array_sum_u64	(ptrdiff_t nmemb,
-					const uint64_t arr[]);
+					const uint64_t arr[restrict]);
 static inline	long double	alx_ldbl_array_sum_s64	(ptrdiff_t nmemb,
-					const int64_t arr[]);
+					const int64_t arr[restrict]);
 
 static inline	double	alx_dbl_array_sum	(ptrdiff_t nmemb,
-					const double arr[]);
+					const double arr[restrict]);
 static inline	double	alx_dbl_array_sum_uint	(ptrdiff_t nmemb,
-					const unsigned arr[]);
+					const unsigned arr[restrict]);
 static inline	double	alx_dbl_array_sum_int	(ptrdiff_t nmemb,
-					const int arr[]);
+					const int arr[restrict]);
 static inline	double	alx_dbl_array_sum_u8	(ptrdiff_t nmemb,
-					const uint8_t arr[]);
+					const uint8_t arr[restrict]);
 static inline	double	alx_dbl_array_sum_s8	(ptrdiff_t nmemb,
-					const int8_t arr[]);
+					const int8_t arr[restrict]);
 static inline	double	alx_dbl_array_sum_u16	(ptrdiff_t nmemb,
-					const uint16_t arr[]);
+					const uint16_t arr[restrict]);
 static inline	double	alx_dbl_array_sum_s16	(ptrdiff_t nmemb,
-					const int16_t arr[]);
+					const int16_t arr[restrict]);
 static inline	double	alx_dbl_array_sum_u32	(ptrdiff_t nmemb,
-					const uint32_t arr[]);
+					const uint32_t arr[restrict]);
 static inline	double	alx_dbl_array_sum_s32	(ptrdiff_t nmemb,
-					const int32_t arr[]);
+					const int32_t arr[restrict]);
 static inline	double	alx_dbl_array_sum_u64	(ptrdiff_t nmemb,
-					const uint64_t arr[]);
+					const uint64_t arr[restrict]);
 static inline	double	alx_dbl_array_sum_s64	(ptrdiff_t nmemb,
-					const int64_t arr[]);
+					const int64_t arr[restrict]);
 
 static inline	float	alx_flt_array_sum_flt	(ptrdiff_t nmemb,
-					const float arr[]);
+					const float arr[restrict]);
 static inline	float	alx_flt_array_sum_uint	(ptrdiff_t nmemb,
-					const unsigned arr[]);
+					const unsigned arr[restrict]);
 static inline	float	alx_flt_array_sum_int	(ptrdiff_t nmemb,
-					const int arr[]);
+					const int arr[restrict]);
 static inline	float	alx_flt_array_sum_u8	(ptrdiff_t nmemb,
-					const uint8_t arr[]);
+					const uint8_t arr[restrict]);
 static inline	float	alx_flt_array_sum_s8	(ptrdiff_t nmemb,
-					const int8_t arr[]);
+					const int8_t arr[restrict]);
 static inline	float	alx_flt_array_sum_u16	(ptrdiff_t nmemb,
-					const uint16_t arr[]);
+					const uint16_t arr[restrict]);
 static inline	float	alx_flt_array_sum_s16	(ptrdiff_t nmemb,
-					const int16_t arr[]);
+					const int16_t arr[restrict]);
 static inline	float	alx_flt_array_sum_u32	(ptrdiff_t nmemb,
-					const uint32_t arr[]);
+					const uint32_t arr[restrict]);
 static inline	float	alx_flt_array_sum_s32	(ptrdiff_t nmemb,
-					const int32_t arr[]);
+					const int32_t arr[restrict]);
 
 
 /******************************************************************************
@@ -141,7 +143,7 @@ static inline	float	alx_flt_array_sum_s32	(ptrdiff_t nmemb,
  ******************************************************************************/
 static inline
 long double	alx_ldbl_array_sum_ldbl	(ptrdiff_t nmemb,
-					const long double arr[])
+					const long double arr[restrict])
 {
 	long double	sum;
 
@@ -154,7 +156,7 @@ long double	alx_ldbl_array_sum_ldbl	(ptrdiff_t nmemb,
 
 static inline
 long double	alx_ldbl_array_sum_uint	(ptrdiff_t nmemb,
-					const unsigned arr[])
+					const unsigned arr[restrict])
 {
 	long double	sum;
 
@@ -167,7 +169,7 @@ long double	alx_ldbl_array_sum_uint	(ptrdiff_t nmemb,
 
 static inline
 long double	alx_ldbl_array_sum_int	(ptrdiff_t nmemb,
-					const int arr[])
+					const int arr[restrict])
 {
 	long double	sum;
 
@@ -180,7 +182,7 @@ long double	alx_ldbl_array_sum_int	(ptrdiff_t nmemb,
 
 static inline
 long double	alx_ldbl_array_sum_u8	(ptrdiff_t nmemb,
-					const uint8_t arr[])
+					const uint8_t arr[restrict])
 {
 	long double	sum;
 
@@ -193,7 +195,7 @@ long double	alx_ldbl_array_sum_u8	(ptrdiff_t nmemb,
 
 static inline
 long double	alx_ldbl_array_sum_s8	(ptrdiff_t nmemb,
-					const int8_t arr[])
+					const int8_t arr[restrict])
 {
 	long double	sum;
 
@@ -206,7 +208,7 @@ long double	alx_ldbl_array_sum_s8	(ptrdiff_t nmemb,
 
 static inline
 long double	alx_ldbl_array_sum_u16	(ptrdiff_t nmemb,
-					const uint16_t arr[])
+					const uint16_t arr[restrict])
 {
 	long double	sum;
 
@@ -219,7 +221,7 @@ long double	alx_ldbl_array_sum_u16	(ptrdiff_t nmemb,
 
 static inline
 long double	alx_ldbl_array_sum_s16	(ptrdiff_t nmemb,
-					const int16_t arr[])
+					const int16_t arr[restrict])
 {
 	long double	sum;
 
@@ -232,7 +234,7 @@ long double	alx_ldbl_array_sum_s16	(ptrdiff_t nmemb,
 
 static inline
 long double	alx_ldbl_array_sum_u32	(ptrdiff_t nmemb,
-					const uint32_t arr[])
+					const uint32_t arr[restrict])
 {
 	long double	sum;
 
@@ -245,7 +247,7 @@ long double	alx_ldbl_array_sum_u32	(ptrdiff_t nmemb,
 
 static inline
 long double	alx_ldbl_array_sum_s32	(ptrdiff_t nmemb,
-					const int32_t arr[])
+					const int32_t arr[restrict])
 {
 	long double	sum;
 
@@ -258,7 +260,7 @@ long double	alx_ldbl_array_sum_s32	(ptrdiff_t nmemb,
 
 static inline
 long double	alx_ldbl_array_sum_u64	(ptrdiff_t nmemb,
-					const uint64_t arr[])
+					const uint64_t arr[restrict])
 {
 	long double	sum;
 
@@ -271,7 +273,7 @@ long double	alx_ldbl_array_sum_u64	(ptrdiff_t nmemb,
 
 static inline
 long double	alx_ldbl_array_sum_s64	(ptrdiff_t nmemb,
-					const int64_t arr[])
+					const int64_t arr[restrict])
 {
 	long double	sum;
 
@@ -285,7 +287,7 @@ long double	alx_ldbl_array_sum_s64	(ptrdiff_t nmemb,
 
 static inline
 double	alx_dbl_array_sum	(ptrdiff_t nmemb,
-				const double arr[])
+				const double arr[restrict])
 {
 	double_t	sum;
 
@@ -298,7 +300,7 @@ double	alx_dbl_array_sum	(ptrdiff_t nmemb,
 
 static inline
 double	alx_dbl_array_sum_uint	(ptrdiff_t nmemb,
-				const unsigned arr[])
+				const unsigned arr[restrict])
 {
 	double_t	sum;
 
@@ -311,7 +313,7 @@ double	alx_dbl_array_sum_uint	(ptrdiff_t nmemb,
 
 static inline
 double	alx_dbl_array_sum_int	(ptrdiff_t nmemb,
-				const int arr[])
+				const int arr[restrict])
 {
 	double_t	sum;
 
@@ -324,7 +326,7 @@ double	alx_dbl_array_sum_int	(ptrdiff_t nmemb,
 
 static inline
 double	alx_dbl_array_sum_u8	(ptrdiff_t nmemb,
-				const uint8_t arr[])
+				const uint8_t arr[restrict])
 {
 	double_t	sum;
 
@@ -337,7 +339,7 @@ double	alx_dbl_array_sum_u8	(ptrdiff_t nmemb,
 
 static inline
 double	alx_dbl_array_sum_s8	(ptrdiff_t nmemb,
-				const int8_t arr[])
+				const int8_t arr[restrict])
 {
 	double_t	sum;
 
@@ -350,7 +352,7 @@ double	alx_dbl_array_sum_s8	(ptrdiff_t nmemb,
 
 static inline
 double	alx_dbl_array_sum_u16	(ptrdiff_t nmemb,
-				const uint16_t arr[])
+				const uint16_t arr[restrict])
 {
 	double_t	sum;
 
@@ -363,7 +365,7 @@ double	alx_dbl_array_sum_u16	(ptrdiff_t nmemb,
 
 static inline
 double	alx_dbl_array_sum_s16	(ptrdiff_t nmemb,
-				const int16_t arr[])
+				const int16_t arr[restrict])
 {
 	double_t	sum;
 
@@ -376,7 +378,7 @@ double	alx_dbl_array_sum_s16	(ptrdiff_t nmemb,
 
 static inline
 double	alx_dbl_array_sum_u32	(ptrdiff_t nmemb,
-				const uint32_t arr[])
+				const uint32_t arr[restrict])
 {
 	double_t	sum;
 
@@ -389,7 +391,7 @@ double	alx_dbl_array_sum_u32	(ptrdiff_t nmemb,
 
 static inline
 double	alx_dbl_array_sum_s32	(ptrdiff_t nmemb,
-				const int32_t arr[])
+				const int32_t arr[restrict])
 {
 	double_t	sum;
 
@@ -402,7 +404,7 @@ double	alx_dbl_array_sum_s32	(ptrdiff_t nmemb,
 
 static inline
 double	alx_dbl_array_sum_u64	(ptrdiff_t nmemb,
-				const uint64_t arr[])
+				const uint64_t arr[restrict])
 {
 	double_t	sum;
 
@@ -415,7 +417,7 @@ double	alx_dbl_array_sum_u64	(ptrdiff_t nmemb,
 
 static inline
 double	alx_dbl_array_sum_s64	(ptrdiff_t nmemb,
-				const int64_t arr[])
+				const int64_t arr[restrict])
 {
 	double_t	sum;
 
@@ -429,7 +431,7 @@ double	alx_dbl_array_sum_s64	(ptrdiff_t nmemb,
 
 static inline
 float	alx_flt_array_sum_flt	(ptrdiff_t nmemb,
-				const float arr[])
+				const float arr[restrict])
 {
 	float_t	sum;
 
@@ -442,7 +444,7 @@ float	alx_flt_array_sum_flt	(ptrdiff_t nmemb,
 
 static inline
 float	alx_flt_array_sum_uint	(ptrdiff_t nmemb,
-				const unsigned arr[])
+				const unsigned arr[restrict])
 {
 	float_t	sum;
 
@@ -455,7 +457,7 @@ float	alx_flt_array_sum_uint	(ptrdiff_t nmemb,
 
 static inline
 float	alx_flt_array_sum_int	(ptrdiff_t nmemb,
-				const int arr[])
+				const int arr[restrict])
 {
 	float_t	sum;
 
@@ -468,7 +470,7 @@ float	alx_flt_array_sum_int	(ptrdiff_t nmemb,
 
 static inline
 float	alx_flt_array_sum_u8	(ptrdiff_t nmemb,
-				const uint8_t arr[])
+				const uint8_t arr[restrict])
 {
 	float_t	sum;
 
@@ -481,7 +483,7 @@ float	alx_flt_array_sum_u8	(ptrdiff_t nmemb,
 
 static inline
 float	alx_flt_array_sum_s8	(ptrdiff_t nmemb,
-				const int8_t arr[])
+				const int8_t arr[restrict])
 {
 	float_t	sum;
 
@@ -494,7 +496,7 @@ float	alx_flt_array_sum_s8	(ptrdiff_t nmemb,
 
 static inline
 float	alx_flt_array_sum_u16	(ptrdiff_t nmemb,
-				const uint16_t arr[])
+				const uint16_t arr[restrict])
 {
 	float_t	sum;
 
@@ -507,7 +509,7 @@ float	alx_flt_array_sum_u16	(ptrdiff_t nmemb,
 
 static inline
 float	alx_flt_array_sum_s16	(ptrdiff_t nmemb,
-				const int16_t arr[])
+				const int16_t arr[restrict])
 {
 	float_t	sum;
 
@@ -520,7 +522,7 @@ float	alx_flt_array_sum_s16	(ptrdiff_t nmemb,
 
 static inline
 float	alx_flt_array_sum_u32	(ptrdiff_t nmemb,
-				const uint32_t arr[])
+				const uint32_t arr[restrict])
 {
 	float_t	sum;
 
@@ -533,7 +535,7 @@ float	alx_flt_array_sum_u32	(ptrdiff_t nmemb,
 
 static inline
 float	alx_flt_array_sum_s32	(ptrdiff_t nmemb,
-				const int32_t arr[])
+				const int32_t arr[restrict])
 {
 	float_t	sum;
 
