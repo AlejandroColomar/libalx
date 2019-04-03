@@ -58,8 +58,8 @@ const	uint8_t		alx_prime_u8 [PRIME_NUMBERS_QTY_U8] = {
 /******************************************************************************
  ******* static functions (prototypes) ****************************************
  ******************************************************************************/
-static bool	is_prime_s16	(int n);
-static bool	is_prime_u16	(unsigned n);
+static bool	is_prime_s16	(int_fast16_t n);
+static bool	is_prime_u16	(uint_fast16_t n);
 
 
 /******************************************************************************
@@ -71,8 +71,10 @@ void	alx_prime_s16_init	(void)
 
 	i	= 0;
 	alx_prime_s16[i++]	= 2;
+	alx_prime_s16[i++]	= 3;
+	alx_prime_s16[i++]	= 5;
 
-	for (int n = 3; n < INT16_MAX; n++) {
+	for (int n = 7; n < INT16_MAX; n++) {
 		if (is_prime_s16(n))
 			alx_prime_s16[i++]	= n;
 	}
@@ -84,8 +86,10 @@ void	alx_prime_u16_init	(void)
 
 	i	= 0;
 	alx_prime_u16[i++]	= 2;
+	alx_prime_u16[i++]	= 3;
+	alx_prime_u16[i++]	= 5;
 
-	for (unsigned n = 3; n < UINT16_MAX; n++) {
+	for (unsigned n = 7; n < UINT16_MAX; n++) {
 		if (is_prime_u16(n))
 			alx_prime_u16[i++]	= n;
 	}
@@ -96,7 +100,7 @@ void	alx_prime_u16_init	(void)
 /******************************************************************************
  ******* static functions (definitions) ***************************************
  ******************************************************************************/
-static bool	is_prime_s16	(int n)
+static bool	is_prime_s16	(int_fast16_t n)
 {
 	int_fast16_t	sqrt_n;
 
@@ -111,7 +115,7 @@ static bool	is_prime_s16	(int n)
 	return	true;
 }
 
-static bool	is_prime_u16	(unsigned n)
+static bool	is_prime_u16	(uint_fast16_t n)
 {
 	uint_fast16_t	sqrt_n;
 
