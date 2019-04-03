@@ -41,20 +41,23 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
+extern	"C"
+{
+}
 
 
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
 static inline	ptrdiff_t	alx_strnchr	(ptrdiff_t size,
-					const char str[restrict], char c);
+					const char str[], char c);
 /* Missing memrchr() */
 #if 0
 static inline	ptrdiff_t	alx_strnrchr	(ptrdiff_t size,
-					const char str[restrict], char c);
+					const char str[], char c);
 #endif
 static inline	ptrdiff_t	alx_strnchrnul	(ptrdiff_t size,
-					const char str[restrict], char c);
+					const char str[], char c);
 
 
 /******************************************************************************
@@ -62,7 +65,7 @@ static inline	ptrdiff_t	alx_strnchrnul	(ptrdiff_t size,
  ******************************************************************************/
 static inline
 ptrdiff_t	alx_strnchr	(ptrdiff_t size,
-					const char str[restrict], char c)
+					const char str[], char c)
 {
 	const char	*p = memchr(str, c, strnlen(str, size));
 
@@ -75,7 +78,7 @@ ptrdiff_t	alx_strnchr	(ptrdiff_t size,
 #if 0
 static inline
 ptrdiff_t	alx_strnrchr	(ptrdiff_t size,
-					const char str[restrict], char c)
+					const char str[], char c)
 {
 	const char	*p = memrchr(str, c, strnlen(str, size));
 
@@ -87,7 +90,7 @@ ptrdiff_t	alx_strnrchr	(ptrdiff_t size,
 
 static inline
 ptrdiff_t	alx_strnchrnul	(ptrdiff_t size,
-					const char str[restrict], char c)
+					const char str[], char c)
 {
 	const char	*p = memchr(str, c, strnlen(str, size));
 

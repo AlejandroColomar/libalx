@@ -41,6 +41,8 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
+extern	"C"
+{
 ptrdiff_t	alx_strnfgrep		(ptrdiff_t size,
 					char dest[restrict],
 					const char src[restrict],
@@ -73,6 +75,7 @@ ptrdiff_t	alx_strlcasefgrepv	(ptrdiff_t size,
 					char dest[restrict],
 					const char src[restrict],
 					const char pattern[restrict]);
+}
 
 
 /******************************************************************************

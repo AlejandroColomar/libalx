@@ -40,19 +40,22 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
+extern	"C"
+{
+}
 
 
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
-static inline	void	alx_memcpy_vds	(volatile void *restrict dest,
-					const volatile void *restrict src,
+static inline	void	alx_memcpy_vds	(volatile void *dest,
+					const volatile void *src,
 					ssize_t n);
-static inline	void	alx_memcpy_vd	(volatile void *restrict dest,
-					const void *restrict src,
+static inline	void	alx_memcpy_vd	(volatile void *dest,
+					const void *src,
 					ssize_t n);
-static inline	void	alx_memcpy_vs	(void *restrict dest,
-					const volatile void *restrict src,
+static inline	void	alx_memcpy_vs	(void *dest,
+					const volatile void *src,
 					ssize_t n);
 
 
@@ -60,8 +63,8 @@ static inline	void	alx_memcpy_vs	(void *restrict dest,
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
 static inline
-void	alx_memcpy_vds	(volatile void *restrict dest,
-			const volatile void *restrict src,
+void	alx_memcpy_vds	(volatile void *dest,
+			const volatile void *src,
 			ssize_t n)
 {
 	volatile unsigned char		*dest_c	= dest;
@@ -74,8 +77,8 @@ void	alx_memcpy_vds	(volatile void *restrict dest,
 }
 
 static inline
-void	alx_memcpy_vd	(volatile void *restrict dest,
-			const void *restrict src,
+void	alx_memcpy_vd	(volatile void *dest,
+			const void *src,
 			ssize_t n)
 {
 	volatile unsigned char	*dest_c	= dest;
@@ -88,8 +91,8 @@ void	alx_memcpy_vd	(volatile void *restrict dest,
 }
 
 static inline
-void	alx_memcpy_vs	(void *restrict dest,
-			const volatile void *restrict src,
+void	alx_memcpy_vs	(void *dest,
+			const volatile void *src,
 			ssize_t n)
 {
 	unsigned char			*dest_c	= dest;

@@ -41,6 +41,8 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
+extern	"C"
+{
 void	alx_array_split_pos_neg_ldbl	(ptrdiff_t nmemb,
 				const long double mix[restrict],
 				long double pos[restrict],
@@ -73,6 +75,7 @@ void	alx_array_split_pos_neg_s64	(ptrdiff_t nmemb,
 				const int64_t mix[restrict],
 				int64_t pos[restrict],
 				int64_t neg[restrict]);
+}
 
 
 /******************************************************************************
