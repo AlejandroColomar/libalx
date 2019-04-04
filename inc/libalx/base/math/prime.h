@@ -63,9 +63,9 @@ void	alx_prime_u16_init	(void);
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
 static inline	ptrdiff_t	alx_prime_index_s8	(int8_t n);
-static inline	ptrdiff_t	alx_prime_index_u8	(int8_t n);
-static inline	ptrdiff_t	alx_prime_index_s16	(int8_t n);
-static inline	ptrdiff_t	alx_prime_index_u16	(int8_t n);
+static inline	ptrdiff_t	alx_prime_index_u8	(uint8_t n);
+static inline	ptrdiff_t	alx_prime_index_s16	(int16_t n);
+static inline	ptrdiff_t	alx_prime_index_u16	(uint16_t n);
 
 
 /******************************************************************************
@@ -78,19 +78,19 @@ ptrdiff_t	alx_prime_index_s8	(int8_t n)
 }
 
 static inline
-ptrdiff_t	alx_prime_index_u8	(int8_t n)
+ptrdiff_t	alx_prime_index_u8	(uint8_t n)
 {
 	return	alx_bsearch_u8(PRIME_NUMBERS_QTY_U8, alx_prime_u8, n);
 }
 
 static inline
-ptrdiff_t	alx_prime_index_s16	(int8_t n)
+ptrdiff_t	alx_prime_index_s16	(int16_t n)
 {
 	return	alx_bsearch_s16(PRIME_NUMBERS_QTY_S16, alx_prime_s16, n);
 }
 
 static inline
-ptrdiff_t	alx_prime_index_u16	(int8_t n)
+ptrdiff_t	alx_prime_index_u16	(uint16_t n)
 {
 	return	alx_bsearch_u16(PRIME_NUMBERS_QTY_U16, alx_prime_u16, n);
 }

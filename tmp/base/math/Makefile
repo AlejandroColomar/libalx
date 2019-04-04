@@ -59,11 +59,9 @@ ARRAY_SUM_SRC	=							\
 
 BINOMIAL_COEFFICIENT_INC	=					\
 		$(INC_DIR)/libalx/base/math/binomial_coefficient.h	\
-		$(INC_DIR)/libalx/base/math/matrix_addition.h		\
-		$(INC_DIR)/libalx/base/math/matrix_subtraction.h	\
+		$(INC_DIR)/libalx/base/math/pascal_triangle.h		\
 		$(INC_DIR)/libalx/base/math/prime.h			\
 		$(INC_DIR)/libalx/base/math/prime_defactorization.h	\
-		$(INC_DIR)/libalx/base/math/prime_factorization.h	\
 		$(INC_DIR)/libalx/base/stddef/size.h
 BINOMIAL_COEFFICIENT_SRC	=					\
 		$(SRC_DIR)/base/math/binomial_coefficient.c

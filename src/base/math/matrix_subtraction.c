@@ -60,7 +60,7 @@ int	alx_matrix_subtraction_uint	(ptrdiff_t n,
 
 err_wrap:
 	errno	= ERANGE;
-	return	1;
+	return	ERANGE;
 }
 
 int	alx_matrix_subtraction_int	(ptrdiff_t n,
@@ -83,10 +83,10 @@ int	alx_matrix_subtraction_int	(ptrdiff_t n,
 
 err_ovf_hi:
 	errno	= ERANGE;
-	return	1;
+	return	ERANGE;
 err_ovf_lo:
 	errno	= ERANGE;
-	return	-1;
+	return	-ERANGE;
 }
 
 int	alx_matrix_subtraction_u8	(ptrdiff_t n,
@@ -105,7 +105,7 @@ int	alx_matrix_subtraction_u8	(ptrdiff_t n,
 
 err_wrap:
 	errno	= ERANGE;
-	return	1;
+	return	ERANGE;
 }
 
 int	alx_matrix_subtraction_s8	(ptrdiff_t n,
@@ -128,10 +128,10 @@ int	alx_matrix_subtraction_s8	(ptrdiff_t n,
 
 err_ovf_hi:
 	errno	= ERANGE;
-	return	1;
+	return	ERANGE;
 err_ovf_lo:
 	errno	= ERANGE;
-	return	-1;
+	return	-ERANGE;
 }
 
 int	alx_matrix_subtraction_u16	(ptrdiff_t n,
@@ -150,7 +150,7 @@ int	alx_matrix_subtraction_u16	(ptrdiff_t n,
 
 err_wrap:
 	errno	= ERANGE;
-	return	1;
+	return	ERANGE;
 }
 
 int	alx_matrix_subtraction_s16	(ptrdiff_t n,
@@ -173,10 +173,10 @@ int	alx_matrix_subtraction_s16	(ptrdiff_t n,
 
 err_ovf_hi:
 	errno	= ERANGE;
-	return	1;
+	return	ERANGE;
 err_ovf_lo:
 	errno	= ERANGE;
-	return	-1;
+	return	-ERANGE;
 }
 
 int	alx_matrix_subtraction_u32	(ptrdiff_t n,
@@ -195,7 +195,7 @@ int	alx_matrix_subtraction_u32	(ptrdiff_t n,
 
 err_wrap:
 	errno	= ERANGE;
-	return	1;
+	return	ERANGE;
 }
 
 int	alx_matrix_subtraction_s32	(ptrdiff_t n,
@@ -218,10 +218,10 @@ int	alx_matrix_subtraction_s32	(ptrdiff_t n,
 
 err_ovf_hi:
 	errno	= ERANGE;
-	return	1;
+	return	ERANGE;
 err_ovf_lo:
 	errno	= ERANGE;
-	return	-1;
+	return	-ERANGE;
 }
 
 int	alx_matrix_subtraction_u64	(ptrdiff_t n,
@@ -240,7 +240,7 @@ int	alx_matrix_subtraction_u64	(ptrdiff_t n,
 
 err_wrap:
 	errno	= ERANGE;
-	return	1;
+	return	ERANGE;
 }
 
 int	alx_matrix_subtraction_s64	(ptrdiff_t n,
@@ -263,10 +263,10 @@ int	alx_matrix_subtraction_s64	(ptrdiff_t n,
 
 err_ovf_hi:
 	errno	= ERANGE;
-	return	1;
+	return	ERANGE;
 err_ovf_lo:
 	errno	= ERANGE;
-	return	-1;
+	return	-ERANGE;
 }
 
 

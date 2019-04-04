@@ -114,7 +114,7 @@ int		alx_pascal_triangle_factorized	(int16_t n, int16_t k,
 
 	if ((n < 0) || (k < 0) || (k > n)) {
 		errno	= EDOM;
-		return	-1;
+		return	-EDOM;
 	}
 
 	if (k > (n / 2))
@@ -132,9 +132,7 @@ int		alx_pascal_triangle_factorized	(int16_t n, int16_t k,
 		alx_matrix_addition_s16(ARRAY_SSIZE(*pf), *pf, *pf, tmp);
 	}
 
-	if (errno)
-		return	-2;
-	return	0;
+	return	-errno;
 }
 
 

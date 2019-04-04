@@ -60,7 +60,7 @@ int	alx_matrix_addition_uint	(ptrdiff_t n,
 
 err_wrap:
 	errno	= ERANGE;
-	return	1;
+	return	ERANGE;
 }
 
 int	alx_matrix_addition_int		(ptrdiff_t n,
@@ -83,10 +83,10 @@ int	alx_matrix_addition_int		(ptrdiff_t n,
 
 err_ovf_hi:
 	errno	= ERANGE;
-	return	1;
+	return	ERANGE;
 err_ovf_lo:
 	errno	= ERANGE;
-	return	-1;
+	return	-ERANGE;
 }
 
 int	alx_matrix_addition_u8		(ptrdiff_t n,
@@ -105,7 +105,7 @@ int	alx_matrix_addition_u8		(ptrdiff_t n,
 
 err_wrap:
 	errno	= ERANGE;
-	return	1;
+	return	ERANGE;
 }
 
 int	alx_matrix_addition_s8		(ptrdiff_t n,
@@ -128,10 +128,10 @@ int	alx_matrix_addition_s8		(ptrdiff_t n,
 
 err_ovf_hi:
 	errno	= ERANGE;
-	return	1;
+	return	ERANGE;
 err_ovf_lo:
 	errno	= ERANGE;
-	return	-1;
+	return	-ERANGE;
 }
 
 int	alx_matrix_addition_u16		(ptrdiff_t n,
@@ -150,7 +150,7 @@ int	alx_matrix_addition_u16		(ptrdiff_t n,
 
 err_wrap:
 	errno	= ERANGE;
-	return	1;
+	return	ERANGE;
 }
 
 int	alx_matrix_addition_s16		(ptrdiff_t n,
@@ -162,9 +162,9 @@ int	alx_matrix_addition_s16		(ptrdiff_t n,
 
 	for (ptrdiff_t i = 0; i < n; i++) {
 		tmp	= (int_fast32_t)src1[i] + (int_fast32_t)src2[i];
-		if (tmp > INT8_MAX)
+		if (tmp > INT16_MAX)
 			goto err_ovf_hi;
-		if (tmp < INT8_MIN)
+		if (tmp < INT16_MIN)
 			goto err_ovf_lo;
 		dest[i]	= tmp;
 	}
@@ -173,10 +173,10 @@ int	alx_matrix_addition_s16		(ptrdiff_t n,
 
 err_ovf_hi:
 	errno	= ERANGE;
-	return	1;
+	return	ERANGE;
 err_ovf_lo:
 	errno	= ERANGE;
-	return	-1;
+	return	-ERANGE;
 }
 
 int	alx_matrix_addition_u32		(ptrdiff_t n,
@@ -195,7 +195,7 @@ int	alx_matrix_addition_u32		(ptrdiff_t n,
 
 err_wrap:
 	errno	= ERANGE;
-	return	1;
+	return	ERANGE;
 }
 
 int	alx_matrix_addition_s32		(ptrdiff_t n,
@@ -207,9 +207,9 @@ int	alx_matrix_addition_s32		(ptrdiff_t n,
 
 	for (ptrdiff_t i = 0; i < n; i++) {
 		tmp	= (int_fast64_t)src1[i] + (int_fast64_t)src2[i];
-		if (tmp > INT8_MAX)
+		if (tmp > INT32_MAX)
 			goto err_ovf_hi;
-		if (tmp < INT8_MIN)
+		if (tmp < INT32_MIN)
 			goto err_ovf_lo;
 		dest[i]	= tmp;
 	}
@@ -218,10 +218,10 @@ int	alx_matrix_addition_s32		(ptrdiff_t n,
 
 err_ovf_hi:
 	errno	= ERANGE;
-	return	1;
+	return	ERANGE;
 err_ovf_lo:
 	errno	= ERANGE;
-	return	-1;
+	return	-ERANGE;
 }
 
 int	alx_matrix_addition_u64		(ptrdiff_t n,
@@ -240,7 +240,7 @@ int	alx_matrix_addition_u64		(ptrdiff_t n,
 
 err_wrap:
 	errno	= ERANGE;
-	return	1;
+	return	ERANGE;
 }
 
 int	alx_matrix_addition_s64		(ptrdiff_t n,
@@ -263,10 +263,10 @@ int	alx_matrix_addition_s64		(ptrdiff_t n,
 
 err_ovf_hi:
 	errno	= ERANGE;
-	return	1;
+	return	ERANGE;
 err_ovf_lo:
 	errno	= ERANGE;
-	return	-1;
+	return	-ERANGE;
 }
 
 
