@@ -64,17 +64,17 @@ void	alx_local_maxima_ldbl	(ptrdiff_t rows, ptrdiff_t cols,
 
 	for (ptrdiff_t i = 0; i < rows; i++) {
 	for (ptrdiff_t j = 0; j < cols; j++) {
-		for (ptrdiff_t k = i - 1; k <= (i + 1); k++) {
+		for (ptrdiff_t k = i + 1; k >= (i - 1); k--) {
 			if (k < 0)
-				continue;
-			if (k >= rows)
 				break;
-			for (ptrdiff_t l = j - 1; l <= (j + 1); l++) {
+			if (k >= rows)
+				continue;
+			for (ptrdiff_t l = j + 1; l >= (j - 1); l--) {
 				if (l < 0)
-					continue;
-				if (l >= cols)
 					break;
-				if (arr_in[i][j] < arr_in[k][l])
+				if (l >= cols)
+					continue;
+				if (arr_in[k][l] > arr_in[i][j])
 					goto not_maxima;
 			}
 		}
@@ -100,17 +100,17 @@ void	alx_local_maxima	(ptrdiff_t rows, ptrdiff_t cols,
 
 	for (ptrdiff_t i = 0; i < rows; i++) {
 	for (ptrdiff_t j = 0; j < cols; j++) {
-		for (ptrdiff_t k = i - 1; k <= (i + 1); k++) {
+		for (ptrdiff_t k = i + 1; k >= (i - 1); k--) {
 			if (k < 0)
-				continue;
-			if (k >= rows)
 				break;
-			for (ptrdiff_t l = j - 1; l <= (j + 1); l++) {
+			if (k >= rows)
+				continue;
+			for (ptrdiff_t l = j + 1; l >= (j - 1); l--) {
 				if (l < 0)
-					continue;
-				if (l >= cols)
 					break;
-				if (arr_in[i][j] < arr_in[k][l])
+				if (l >= cols)
+					continue;
+				if (arr_in[k][l] > arr_in[i][j])
 					goto not_maxima;
 			}
 		}
@@ -136,17 +136,17 @@ void	alx_local_maxima_f	(ptrdiff_t rows, ptrdiff_t cols,
 
 	for (ptrdiff_t i = 0; i < rows; i++) {
 	for (ptrdiff_t j = 0; j < cols; j++) {
-		for (ptrdiff_t k = i - 1; k <= (i + 1); k++) {
+		for (ptrdiff_t k = i + 1; k >= (i - 1); k--) {
 			if (k < 0)
-				continue;
-			if (k >= rows)
 				break;
-			for (ptrdiff_t l = j - 1; l <= (j + 1); l++) {
+			if (k >= rows)
+				continue;
+			for (ptrdiff_t l = j + 1; l >= (j - 1); l--) {
 				if (l < 0)
-					continue;
-				if (l >= cols)
 					break;
-				if (arr_in[i][j] < arr_in[k][l])
+				if (l >= cols)
+					continue;
+				if (arr_in[k][l] > arr_in[i][j])
 					goto not_maxima;
 			}
 		}
@@ -174,17 +174,17 @@ void	alx_local_maxima_uint	(ptrdiff_t rows, ptrdiff_t cols,
 
 	for (ptrdiff_t i = 0; i < rows; i++) {
 	for (ptrdiff_t j = 0; j < cols; j++) {
-		for (ptrdiff_t k = i - 1; k <= (i + 1); k++) {
+		for (ptrdiff_t k = i + 1; k >= (i - 1); k--) {
 			if (k < 0)
-				continue;
-			if (k >= rows)
 				break;
-			for (ptrdiff_t l = j - 1; l <= (j + 1); l++) {
+			if (k >= rows)
+				continue;
+			for (ptrdiff_t l = j + 1; l >= (j - 1); l--) {
 				if (l < 0)
-					continue;
-				if (l >= cols)
 					break;
-				if (arr_in[i][j] < arr_in[k][l])
+				if (l >= cols)
+					continue;
+				if (arr_in[k][l] > arr_in[i][j])
 					goto not_maxima;
 				if (arr_in[i][j] == arr_in[k][l])
 					arr_tmp[i][j]	= MAYBE_LOCAL_MAX;
@@ -204,12 +204,12 @@ not_maxima:
 		for (ptrdiff_t j = 0; j < cols; j++) {
 			if (arr_tmp[i][j] != MAYBE_LOCAL_MAX)
 				continue;
-			for (ptrdiff_t k = i - 1; k <= (i + 1); k++) {
+			for (ptrdiff_t k = i + 1; k >= (i - 1); k--) {
 				if (k < 0)
 					continue;
 				if (k >= rows)
 					break;
-				for (ptrdiff_t l = j - 1; l <= (j + 1); l++) {
+				for (ptrdiff_t l = j + 1; l >= (j - 1); l--) {
 					if (l < 0)
 						continue;
 					if (l >= cols)
@@ -223,7 +223,7 @@ not_maxima:
 			continue;
 not_maxima_2:
 			wh		= true;
-			arr_tmp[i][j]	= false;
+			arr_tmp[i][j]	= NOT_LOCAL_MAX;
 		}
 		}
 	} while (wh);
@@ -250,17 +250,17 @@ void	alx_local_maxima_int	(ptrdiff_t rows, ptrdiff_t cols,
 
 	for (ptrdiff_t i = 0; i < rows; i++) {
 	for (ptrdiff_t j = 0; j < cols; j++) {
-		for (ptrdiff_t k = i - 1; k <= (i + 1); k++) {
+		for (ptrdiff_t k = i + 1; k >= (i - 1); k--) {
 			if (k < 0)
-				continue;
-			if (k >= rows)
 				break;
-			for (ptrdiff_t l = j - 1; l <= (j + 1); l++) {
+			if (k >= rows)
+				continue;
+			for (ptrdiff_t l = j + 1; l >= (j - 1); l--) {
 				if (l < 0)
-					continue;
-				if (l >= cols)
 					break;
-				if (arr_in[i][j] < arr_in[k][l])
+				if (l >= cols)
+					continue;
+				if (arr_in[k][l] > arr_in[i][j])
 					goto not_maxima;
 				if (arr_in[i][j] == arr_in[k][l])
 					arr_tmp[i][j]	= MAYBE_LOCAL_MAX;
@@ -280,12 +280,12 @@ not_maxima:
 		for (ptrdiff_t j = 0; j < cols; j++) {
 			if (arr_tmp[i][j] != MAYBE_LOCAL_MAX)
 				continue;
-			for (ptrdiff_t k = i - 1; k <= (i + 1); k++) {
+			for (ptrdiff_t k = i + 1; k >= (i - 1); k--) {
 				if (k < 0)
 					continue;
 				if (k >= rows)
 					break;
-				for (ptrdiff_t l = j - 1; l <= (j + 1); l++) {
+				for (ptrdiff_t l = j + 1; l >= (j - 1); l--) {
 					if (l < 0)
 						continue;
 					if (l >= cols)
@@ -299,7 +299,7 @@ not_maxima:
 			continue;
 not_maxima_2:
 			wh		= true;
-			arr_tmp[i][j]	= false;
+			arr_tmp[i][j]	= NOT_LOCAL_MAX;
 		}
 		}
 	} while (wh);
@@ -326,17 +326,17 @@ void	alx_local_maxima_u8	(ptrdiff_t rows, ptrdiff_t cols,
 
 	for (ptrdiff_t i = 0; i < rows; i++) {
 	for (ptrdiff_t j = 0; j < cols; j++) {
-		for (ptrdiff_t k = i - 1; k <= (i + 1); k++) {
+		for (ptrdiff_t k = i + 1; k >= (i - 1); k--) {
 			if (k < 0)
-				continue;
-			if (k >= rows)
 				break;
-			for (ptrdiff_t l = j - 1; l <= (j + 1); l++) {
+			if (k >= rows)
+				continue;
+			for (ptrdiff_t l = j + 1; l >= (j - 1); l--) {
 				if (l < 0)
-					continue;
-				if (l >= cols)
 					break;
-				if (arr_in[i][j] < arr_in[k][l])
+				if (l >= cols)
+					continue;
+				if (arr_in[k][l] > arr_in[i][j])
 					goto not_maxima;
 				if (arr_in[i][j] == arr_in[k][l])
 					arr_tmp[i][j]	= MAYBE_LOCAL_MAX;
@@ -356,12 +356,12 @@ not_maxima:
 		for (ptrdiff_t j = 0; j < cols; j++) {
 			if (arr_tmp[i][j] != MAYBE_LOCAL_MAX)
 				continue;
-			for (ptrdiff_t k = i - 1; k <= (i + 1); k++) {
+			for (ptrdiff_t k = i + 1; k >= (i - 1); k--) {
 				if (k < 0)
 					continue;
 				if (k >= rows)
 					break;
-				for (ptrdiff_t l = j - 1; l <= (j + 1); l++) {
+				for (ptrdiff_t l = j + 1; l >= (j - 1); l--) {
 					if (l < 0)
 						continue;
 					if (l >= cols)
@@ -375,7 +375,7 @@ not_maxima:
 			continue;
 not_maxima_2:
 			wh		= true;
-			arr_tmp[i][j]	= false;
+			arr_tmp[i][j]	= NOT_LOCAL_MAX;
 		}
 		}
 	} while (wh);
@@ -402,17 +402,17 @@ void	alx_local_maxima_s8	(ptrdiff_t rows, ptrdiff_t cols,
 
 	for (ptrdiff_t i = 0; i < rows; i++) {
 	for (ptrdiff_t j = 0; j < cols; j++) {
-		for (ptrdiff_t k = i - 1; k <= (i + 1); k++) {
+		for (ptrdiff_t k = i + 1; k >= (i - 1); k--) {
 			if (k < 0)
-				continue;
-			if (k >= rows)
 				break;
-			for (ptrdiff_t l = j - 1; l <= (j + 1); l++) {
+			if (k >= rows)
+				continue;
+			for (ptrdiff_t l = j + 1; l >= (j - 1); l--) {
 				if (l < 0)
-					continue;
-				if (l >= cols)
 					break;
-				if (arr_in[i][j] < arr_in[k][l])
+				if (l >= cols)
+					continue;
+				if (arr_in[k][l] > arr_in[i][j])
 					goto not_maxima;
 				if (arr_in[i][j] == arr_in[k][l])
 					arr_tmp[i][j]	= MAYBE_LOCAL_MAX;
@@ -432,12 +432,12 @@ not_maxima:
 		for (ptrdiff_t j = 0; j < cols; j++) {
 			if (arr_tmp[i][j] != MAYBE_LOCAL_MAX)
 				continue;
-			for (ptrdiff_t k = i - 1; k <= (i + 1); k++) {
+			for (ptrdiff_t k = i + 1; k >= (i - 1); k--) {
 				if (k < 0)
 					continue;
 				if (k >= rows)
 					break;
-				for (ptrdiff_t l = j - 1; l <= (j + 1); l++) {
+				for (ptrdiff_t l = j + 1; l >= (j - 1); l--) {
 					if (l < 0)
 						continue;
 					if (l >= cols)
@@ -451,7 +451,7 @@ not_maxima:
 			continue;
 not_maxima_2:
 			wh		= true;
-			arr_tmp[i][j]	= false;
+			arr_tmp[i][j]	= NOT_LOCAL_MAX;
 		}
 		}
 	} while (wh);
@@ -478,17 +478,17 @@ void	alx_local_maxima_u16	(ptrdiff_t rows, ptrdiff_t cols,
 
 	for (ptrdiff_t i = 0; i < rows; i++) {
 	for (ptrdiff_t j = 0; j < cols; j++) {
-		for (ptrdiff_t k = i - 1; k <= (i + 1); k++) {
+		for (ptrdiff_t k = i + 1; k >= (i - 1); k--) {
 			if (k < 0)
-				continue;
-			if (k >= rows)
 				break;
-			for (ptrdiff_t l = j - 1; l <= (j + 1); l++) {
+			if (k >= rows)
+				continue;
+			for (ptrdiff_t l = j + 1; l >= (j - 1); l--) {
 				if (l < 0)
-					continue;
-				if (l >= cols)
 					break;
-				if (arr_in[i][j] < arr_in[k][l])
+				if (l >= cols)
+					continue;
+				if (arr_in[k][l] > arr_in[i][j])
 					goto not_maxima;
 				if (arr_in[i][j] == arr_in[k][l])
 					arr_tmp[i][j]	= MAYBE_LOCAL_MAX;
@@ -508,12 +508,12 @@ not_maxima:
 		for (ptrdiff_t j = 0; j < cols; j++) {
 			if (arr_tmp[i][j] != MAYBE_LOCAL_MAX)
 				continue;
-			for (ptrdiff_t k = i - 1; k <= (i + 1); k++) {
+			for (ptrdiff_t k = i + 1; k >= (i - 1); k--) {
 				if (k < 0)
 					continue;
 				if (k >= rows)
 					break;
-				for (ptrdiff_t l = j - 1; l <= (j + 1); l++) {
+				for (ptrdiff_t l = j + 1; l >= (j - 1); l--) {
 					if (l < 0)
 						continue;
 					if (l >= cols)
@@ -527,7 +527,7 @@ not_maxima:
 			continue;
 not_maxima_2:
 			wh		= true;
-			arr_tmp[i][j]	= false;
+			arr_tmp[i][j]	= NOT_LOCAL_MAX;
 		}
 		}
 	} while (wh);
@@ -554,17 +554,17 @@ void	alx_local_maxima_s16	(ptrdiff_t rows, ptrdiff_t cols,
 
 	for (ptrdiff_t i = 0; i < rows; i++) {
 	for (ptrdiff_t j = 0; j < cols; j++) {
-		for (ptrdiff_t k = i - 1; k <= (i + 1); k++) {
+		for (ptrdiff_t k = i + 1; k >= (i - 1); k--) {
 			if (k < 0)
-				continue;
-			if (k >= rows)
 				break;
-			for (ptrdiff_t l = j - 1; l <= (j + 1); l++) {
+			if (k >= rows)
+				continue;
+			for (ptrdiff_t l = j + 1; l >= (j - 1); l--) {
 				if (l < 0)
-					continue;
-				if (l >= cols)
 					break;
-				if (arr_in[i][j] < arr_in[k][l])
+				if (l >= cols)
+					continue;
+				if (arr_in[k][l] > arr_in[i][j])
 					goto not_maxima;
 				if (arr_in[i][j] == arr_in[k][l])
 					arr_tmp[i][j]	= MAYBE_LOCAL_MAX;
@@ -584,12 +584,12 @@ not_maxima:
 		for (ptrdiff_t j = 0; j < cols; j++) {
 			if (arr_tmp[i][j] != MAYBE_LOCAL_MAX)
 				continue;
-			for (ptrdiff_t k = i - 1; k <= (i + 1); k++) {
+			for (ptrdiff_t k = i + 1; k >= (i - 1); k--) {
 				if (k < 0)
 					continue;
 				if (k >= rows)
 					break;
-				for (ptrdiff_t l = j - 1; l <= (j + 1); l++) {
+				for (ptrdiff_t l = j + 1; l >= (j - 1); l--) {
 					if (l < 0)
 						continue;
 					if (l >= cols)
@@ -603,7 +603,7 @@ not_maxima:
 			continue;
 not_maxima_2:
 			wh		= true;
-			arr_tmp[i][j]	= false;
+			arr_tmp[i][j]	= NOT_LOCAL_MAX;
 		}
 		}
 	} while (wh);
@@ -630,17 +630,17 @@ void	alx_local_maxima_u32	(ptrdiff_t rows, ptrdiff_t cols,
 
 	for (ptrdiff_t i = 0; i < rows; i++) {
 	for (ptrdiff_t j = 0; j < cols; j++) {
-		for (ptrdiff_t k = i - 1; k <= (i + 1); k++) {
+		for (ptrdiff_t k = i + 1; k >= (i - 1); k--) {
 			if (k < 0)
-				continue;
-			if (k >= rows)
 				break;
-			for (ptrdiff_t l = j - 1; l <= (j + 1); l++) {
+			if (k >= rows)
+				continue;
+			for (ptrdiff_t l = j + 1; l >= (j - 1); l--) {
 				if (l < 0)
-					continue;
-				if (l >= cols)
 					break;
-				if (arr_in[i][j] < arr_in[k][l])
+				if (l >= cols)
+					continue;
+				if (arr_in[k][l] > arr_in[i][j])
 					goto not_maxima;
 				if (arr_in[i][j] == arr_in[k][l])
 					arr_tmp[i][j]	= MAYBE_LOCAL_MAX;
@@ -660,12 +660,12 @@ not_maxima:
 		for (ptrdiff_t j = 0; j < cols; j++) {
 			if (arr_tmp[i][j] != MAYBE_LOCAL_MAX)
 				continue;
-			for (ptrdiff_t k = i - 1; k <= (i + 1); k++) {
+			for (ptrdiff_t k = i + 1; k >= (i - 1); k--) {
 				if (k < 0)
 					continue;
 				if (k >= rows)
 					break;
-				for (ptrdiff_t l = j - 1; l <= (j + 1); l++) {
+				for (ptrdiff_t l = j + 1; l >= (j - 1); l--) {
 					if (l < 0)
 						continue;
 					if (l >= cols)
@@ -679,7 +679,7 @@ not_maxima:
 			continue;
 not_maxima_2:
 			wh		= true;
-			arr_tmp[i][j]	= false;
+			arr_tmp[i][j]	= NOT_LOCAL_MAX;
 		}
 		}
 	} while (wh);
@@ -706,17 +706,17 @@ void	alx_local_maxima_s32	(ptrdiff_t rows, ptrdiff_t cols,
 
 	for (ptrdiff_t i = 0; i < rows; i++) {
 	for (ptrdiff_t j = 0; j < cols; j++) {
-		for (ptrdiff_t k = i - 1; k <= (i + 1); k++) {
+		for (ptrdiff_t k = i + 1; k >= (i - 1); k--) {
 			if (k < 0)
-				continue;
-			if (k >= rows)
 				break;
-			for (ptrdiff_t l = j - 1; l <= (j + 1); l++) {
+			if (k >= rows)
+				continue;
+			for (ptrdiff_t l = j + 1; l >= (j - 1); l--) {
 				if (l < 0)
-					continue;
-				if (l >= cols)
 					break;
-				if (arr_in[i][j] < arr_in[k][l])
+				if (l >= cols)
+					continue;
+				if (arr_in[k][l] > arr_in[i][j])
 					goto not_maxima;
 				if (arr_in[i][j] == arr_in[k][l])
 					arr_tmp[i][j]	= MAYBE_LOCAL_MAX;
@@ -736,12 +736,12 @@ not_maxima:
 		for (ptrdiff_t j = 0; j < cols; j++) {
 			if (arr_tmp[i][j] != MAYBE_LOCAL_MAX)
 				continue;
-			for (ptrdiff_t k = i - 1; k <= (i + 1); k++) {
+			for (ptrdiff_t k = i + 1; k >= (i - 1); k--) {
 				if (k < 0)
 					continue;
 				if (k >= rows)
 					break;
-				for (ptrdiff_t l = j - 1; l <= (j + 1); l++) {
+				for (ptrdiff_t l = j + 1; l >= (j - 1); l--) {
 					if (l < 0)
 						continue;
 					if (l >= cols)
@@ -755,7 +755,7 @@ not_maxima:
 			continue;
 not_maxima_2:
 			wh		= true;
-			arr_tmp[i][j]	= false;
+			arr_tmp[i][j]	= NOT_LOCAL_MAX;
 		}
 		}
 	} while (wh);
@@ -782,17 +782,17 @@ void	alx_local_maxima_u64	(ptrdiff_t rows, ptrdiff_t cols,
 
 	for (ptrdiff_t i = 0; i < rows; i++) {
 	for (ptrdiff_t j = 0; j < cols; j++) {
-		for (ptrdiff_t k = i - 1; k <= (i + 1); k++) {
+		for (ptrdiff_t k = i + 1; k >= (i - 1); k--) {
 			if (k < 0)
-				continue;
-			if (k >= rows)
 				break;
-			for (ptrdiff_t l = j - 1; l <= (j + 1); l++) {
+			if (k >= rows)
+				continue;
+			for (ptrdiff_t l = j + 1; l >= (j - 1); l--) {
 				if (l < 0)
-					continue;
-				if (l >= cols)
 					break;
-				if (arr_in[i][j] < arr_in[k][l])
+				if (l >= cols)
+					continue;
+				if (arr_in[k][l] > arr_in[i][j])
 					goto not_maxima;
 				if (arr_in[i][j] == arr_in[k][l])
 					arr_tmp[i][j]	= MAYBE_LOCAL_MAX;
@@ -812,12 +812,12 @@ not_maxima:
 		for (ptrdiff_t j = 0; j < cols; j++) {
 			if (arr_tmp[i][j] != MAYBE_LOCAL_MAX)
 				continue;
-			for (ptrdiff_t k = i - 1; k <= (i + 1); k++) {
+			for (ptrdiff_t k = i + 1; k >= (i - 1); k--) {
 				if (k < 0)
 					continue;
 				if (k >= rows)
 					break;
-				for (ptrdiff_t l = j - 1; l <= (j + 1); l++) {
+				for (ptrdiff_t l = j + 1; l >= (j - 1); l--) {
 					if (l < 0)
 						continue;
 					if (l >= cols)
@@ -831,7 +831,7 @@ not_maxima:
 			continue;
 not_maxima_2:
 			wh		= true;
-			arr_tmp[i][j]	= false;
+			arr_tmp[i][j]	= NOT_LOCAL_MAX;
 		}
 		}
 	} while (wh);
@@ -858,17 +858,17 @@ void	alx_local_maxima_s64	(ptrdiff_t rows, ptrdiff_t cols,
 
 	for (ptrdiff_t i = 0; i < rows; i++) {
 	for (ptrdiff_t j = 0; j < cols; j++) {
-		for (ptrdiff_t k = i - 1; k <= (i + 1); k++) {
+		for (ptrdiff_t k = i + 1; k >= (i - 1); k--) {
 			if (k < 0)
-				continue;
-			if (k >= rows)
 				break;
-			for (ptrdiff_t l = j - 1; l <= (j + 1); l++) {
+			if (k >= rows)
+				continue;
+			for (ptrdiff_t l = j + 1; l >= (j - 1); l--) {
 				if (l < 0)
-					continue;
-				if (l >= cols)
 					break;
-				if (arr_in[i][j] < arr_in[k][l])
+				if (l >= cols)
+					continue;
+				if (arr_in[k][l] > arr_in[i][j])
 					goto not_maxima;
 				if (arr_in[i][j] == arr_in[k][l])
 					arr_tmp[i][j]	= MAYBE_LOCAL_MAX;
@@ -888,12 +888,12 @@ not_maxima:
 		for (ptrdiff_t j = 0; j < cols; j++) {
 			if (arr_tmp[i][j] != MAYBE_LOCAL_MAX)
 				continue;
-			for (ptrdiff_t k = i - 1; k <= (i + 1); k++) {
+			for (ptrdiff_t k = i + 1; k >= (i - 1); k--) {
 				if (k < 0)
 					continue;
 				if (k >= rows)
 					break;
-				for (ptrdiff_t l = j - 1; l <= (j + 1); l++) {
+				for (ptrdiff_t l = j + 1; l >= (j - 1); l--) {
 					if (l < 0)
 						continue;
 					if (l >= cols)
@@ -907,7 +907,7 @@ not_maxima:
 			continue;
 not_maxima_2:
 			wh		= true;
-			arr_tmp[i][j]	= false;
+			arr_tmp[i][j]	= NOT_LOCAL_MAX;
 		}
 		}
 	} while (wh);
