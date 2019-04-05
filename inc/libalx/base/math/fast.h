@@ -21,22 +21,93 @@
  ******* macros ***************************************************************
  ******************************************************************************/
 #if	(FLT_EVAL_METHOD == 0)
-#define PRIflt		"f"
-#define SCNflt		"f"
-#define PRIdbl		"lf"
-#define SCNdbl		"lf"
+#define PRIaFLT		"a"
+#define PRIAFLT		"A"
+#define PRIeFLT		"e"
+#define PRIEFLT		"E"
+#define PRIfFLT		"f"
+#define PRIFFLT		"F"
+#define PRIgFLT		"g"
+#define PRIGFLT		"G"
+
+#define SCNaFLT		"a"
+#define SCNeFLT		"e"
+#define SCNfFLT		"f"
+#define SCNgFLT		"g"
+
+#define PRIaDBL		"la"
+#define PRIADBL		"lA"
+#define PRIeDBL		"le"
+#define PRIEDBL		"lE"
+#define PRIfDBL		"lf"
+#define PRIFDBL		"lF"
+#define PRIgDBL		"lg"
+#define PRIGDBL		"lG"
+
+#define SCNaDBL		"la"
+#define SCNeDBL		"le"
+#define SCNfDBL		"lf"
+#define SCNgDBL		"lg"
+
 
 #elif	(FLT_EVAL_METHOD == 1)
-#define PRIflt		"lf"
-#define SCNflt		"lf"
-#define PRIdbl		"lf"
-#define SCNdbl		"lf"
+#define PRIaFLT		"la"
+#define PRIAFLT		"lA"
+#define PRIeFLT		"le"
+#define PRIEFLT		"lE"
+#define PRIfFLT		"lf"
+#define PRIFFLT		"lF"
+#define PRIgFLT		"lg"
+#define PRIGFLT		"lG"
+
+#define SCNaFLT		"la"
+#define SCNeFLT		"le"
+#define SCNfFLT		"lf"
+#define SCNgFLT		"lg"
+
+#define PRIaDBL		"la"
+#define PRIADBL		"lA"
+#define PRIeDBL		"le"
+#define PRIEDBL		"lE"
+#define PRIfDBL		"lf"
+#define PRIFDBL		"lF"
+#define PRIgDBL		"lg"
+#define PRIGDBL		"lG"
+
+#define SCNaDBL		"la"
+#define SCNeDBL		"le"
+#define SCNfDBL		"lf"
+#define SCNgDBL		"lg"
+
 
 #elif	(FLT_EVAL_METHOD == 2)
-#define PRIflt		"Lf"
-#define SCNflt		"Lf"
-#define PRIdbl		"Lf"
-#define SCNdbl		"Lf"
+#define PRIaFLT		"La"
+#define PRIAFLT		"LA"
+#define PRIeFLT		"Le"
+#define PRIEFLT		"LE"
+#define PRIfFLT		"Lf"
+#define PRIFFLT		"LF"
+#define PRIgFLT		"Lg"
+#define PRIGFLT		"LG"
+
+#define SCNaFLT		"La"
+#define SCNeFLT		"Le"
+#define SCNfFLT		"Lf"
+#define SCNgFLT		"Lg"
+
+#define PRIaDBL		"La"
+#define PRIADBL		"LA"
+#define PRIeDBL		"Le"
+#define PRIEDBL		"LE"
+#define PRIfDBL		"Lf"
+#define PRIFDBL		"LF"
+#define PRIgDBL		"Lg"
+#define PRIGDBL		"LG"
+
+#define SCNaDBL		"La"
+#define SCNeDBL		"Le"
+#define SCNfDBL		"Lf"
+#define SCNgDBL		"Lg"
 #endif
 
 
