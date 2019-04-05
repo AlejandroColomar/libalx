@@ -19,6 +19,7 @@ OBJ		=							\
 
 GET_INC		=							\
 		$(INC_DIR)/libalx/base/stdio/get.h			\
+		$(INC_DIR)/libalx/base/stddef/size.h			\
 		$(INC_DIR)/libalx/base/stdio/common.h			\
 		$(INC_DIR)/libalx/base/stdio/sscan.h
 GET_SRC		=							\
@@ -32,7 +33,8 @@ SPRINT_FILE_SRC	=							\
 
 SSCAN_INC	=							\
 		$(INC_DIR)/libalx/base/stdio/sscan.h			\
-		$(INC_DIR)/libalx/base/stdio/common.h
+		$(INC_DIR)/libalx/base/stdio/common.h			\
+		$(INC_DIR)/libalx/base/string/strchr.h
 SSCAN_SRC	=							\
 		$(SRC_DIR)/base/stdio/sscan.c
 

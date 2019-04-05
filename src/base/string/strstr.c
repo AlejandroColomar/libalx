@@ -56,12 +56,12 @@ ptrdiff_t	alx_strncasestr		(ptrdiff_t size,
 		return	0;
 
 	for (ptrdiff_t i = 0; i < size; i++) {
-		str_lower[i]	= tolower(str[i]);
+		str_lower[i]	= tolower((unsigned char)str[i]);
 		if (!str_lower[i])
 			break;
 	}
 	for (ptrdiff_t i = 0; i < size; i++) {
-		pat_lower[i]	= tolower(pattern[i]);
+		pat_lower[i]	= tolower((unsigned char)pattern[i]);
 		if (!pat_lower[i])
 			break;
 	}

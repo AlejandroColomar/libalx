@@ -84,10 +84,13 @@ CFLAGS_W       += -Werror
 CFLAGS_W       += -Wno-error=pedantic
 CFLAGS_W       += -Wno-error=unused-function
 
+CFLAGS_D	= -D _GNU_SOURCE
+
 CFLAGS		= $(CFLAGS_STD)
 CFLAGS         += $(CFLAGS_BSD)
 CFLAGS         += $(CFLAGS_OPT)
 CFLAGS         += $(CFLAGS_W)
+CFLAGS         += $(CFLAGS_D)
 
 export	CFLAGS
 
@@ -105,10 +108,13 @@ CXXFLAGS_W	= -Wall
 CXXFLAGS_W     += -Wextra
 CXXFLAGS_W     += -Werror
 
+CXXFLAGS_D	= -D _GNU_SOURCE
+
 CXXFLAGS	= $(CXXFLAGS_STD)
 CXXFLAGS       += $(CXXFLAGS_BSD)
 CXXFLAGS       += $(CXXFLAGS_OPT)
 CXXFLAGS       += $(CXXFLAGS_W)
+CXXFLAGS       += $(CXXFLAGS_D)
 
 export	CXXFLAGS
 

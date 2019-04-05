@@ -14,6 +14,7 @@
 #include <stddef.h>
 #include <stdio.h>
 
+#include "libalx/base/stddef/size.h"
 #include "libalx/base/stdio/common.h"
 #include "libalx/base/stdio/sscan.h"
 
@@ -70,6 +71,9 @@ static	uint64_t	loop_get_u64	(uint64_t m, uint64_t def, uint64_t M,
 static	int64_t		loop_get_s64	(int64_t m, int64_t def, int64_t M,
 					uint8_t attempts);
 static	ptrdiff_t	loop_get_ptrdiff(ptrdiff_t m, ptrdiff_t def, ptrdiff_t M,
+					uint8_t attempts);
+static	char		loop_get_ch	(const char *restrict valid,
+					bool skip_space, bool ignore_case,
 					uint8_t attempts);
 static	int		loop_get_fname	(const char *restrict path,
 					char fname[restrict FILENAME_MAX],
@@ -319,6 +323,24 @@ ptrdiff_t	alx_get_ptrdiff	(ptrdiff_t m, ptrdiff_t def, ptrdiff_t M,
 	return	loop_get_ptrdiff(m, def, M, attempts);
 }
 
+char		alx_get_ch	(const char *restrict valid,
+				bool skip_space, bool ignore_case,
+				const char *restrict title,
+				const char *restrict help,
+				uint8_t attempts)
+{
+
+	if (title)
+		printf("%s\n", title);
+	if (help)
+		printf("%s\n", help);
+	else
+		printf("Introduce a character [%s] (default %c):...\t",
+							valid, valid[0]);
+
+	return	loop_get_ch(valid, skip_space, ignore_case, attempts);
+}
+
 int		alx_get_fname	(const char *restrict path,
 				char fname[restrict FILENAME_MAX],
 				bool exist,
@@ -345,13 +367,13 @@ static
 long double	loop_get_ldbl	(long double m, long double def, long double M,
 					uint8_t attempts)
 {
-	char		buff [BUFF_SIZE];
+	char		buff[BUFF_SIZE];
 	long double	R;
 	int		err;
 
 	R	= def;
 	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
-		if (!fgets(buff, BUFF_SIZE, stdin))
+		if (!fgets(buff, ARRAY_SIZE(buff), stdin))
 			goto err_fgets;
 		err	= alx_sscan_ldbl(&R, m, def, M, buff);
 		if (err)
@@ -370,13 +392,13 @@ err_sscan:
 static	double		loop_get_dbl	(double m, double def, double M,
 					uint8_t attempts)
 {
-	char	buff [BUFF_SIZE];
+	char	buff[BUFF_SIZE];
 	double	R;
 	int	err;
 
 	R	= def;
 	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
-		if (!fgets(buff, BUFF_SIZE, stdin))
+		if (!fgets(buff, ARRAY_SIZE(buff), stdin))
 			goto err_fgets;
 		err	= alx_sscan_dbl(&R, m, def, M, buff);
 		if (err)
@@ -395,13 +417,13 @@ err_sscan:
 static	float		loop_get_flt	(float m, float def, float M,
 					uint8_t attempts)
 {
-	char	buff [BUFF_SIZE];
+	char	buff[BUFF_SIZE];
 	float	R;
 	int	err;
 
 	R	= def;
 	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
-		if (!fgets(buff, BUFF_SIZE, stdin))
+		if (!fgets(buff, ARRAY_SIZE(buff), stdin))
 			goto err_fgets;
 		err	= alx_sscan_flt(&R, m, def, M, buff);
 		if (err)
@@ -420,13 +442,13 @@ err_sscan:
 static	unsigned	loop_get_uint	(unsigned m, unsigned def, unsigned M,
 					uint8_t attempts)
 {
-	char		buff [BUFF_SIZE];
+	char		buff[BUFF_SIZE];
 	unsigned	N;
 	int		err;
 
 	N	= def;
 	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
-		if (!fgets(buff, BUFF_SIZE, stdin))
+		if (!fgets(buff, ARRAY_SIZE(buff), stdin))
 			goto err_fgets;
 		err	= alx_sscan_uint(&N, m, def, M, buff);
 		if (err)
@@ -445,13 +467,13 @@ err_sscan:
 static	int		loop_get_int	(int m, int def, int M,
 					uint8_t attempts)
 {
-	char	buff [BUFF_SIZE];
+	char	buff[BUFF_SIZE];
 	int	Z;
 	int	err;
 
 	Z	= def;
 	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
-		if (!fgets(buff, BUFF_SIZE, stdin))
+		if (!fgets(buff, ARRAY_SIZE(buff), stdin))
 			goto err_fgets;
 		err	= alx_sscan_int(&Z, m, def, M, buff);
 		if (err)
@@ -470,13 +492,13 @@ err_sscan:
 static	uint8_t		loop_get_u8	(uint8_t m, uint8_t def, uint8_t M,
 					uint8_t attempts)
 {
-	char	buff [BUFF_SIZE];
+	char	buff[BUFF_SIZE];
 	uint8_t	N;
 	int	err;
 
 	N	= def;
 	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
-		if (!fgets(buff, BUFF_SIZE, stdin))
+		if (!fgets(buff, ARRAY_SIZE(buff), stdin))
 			goto err_fgets;
 		err	= alx_sscan_u8(&N, m, def, M, buff);
 		if (err)
@@ -495,13 +517,13 @@ err_sscan:
 static	int8_t		loop_get_s8	(int8_t m, int8_t def, int8_t M,
 					uint8_t attempts)
 {
-	char	buff [BUFF_SIZE];
+	char	buff[BUFF_SIZE];
 	int8_t	Z;
 	int	err;
 
 	Z	= def;
 	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
-		if (!fgets(buff, BUFF_SIZE, stdin))
+		if (!fgets(buff, ARRAY_SIZE(buff), stdin))
 			goto err_fgets;
 		err	= alx_sscan_s8(&Z, m, def, M, buff);
 		if (err)
@@ -520,13 +542,13 @@ err_sscan:
 static	uint16_t	loop_get_u16	(uint16_t m, uint16_t def, uint16_t M,
 					uint8_t attempts)
 {
-	char		buff [BUFF_SIZE];
+	char		buff[BUFF_SIZE];
 	uint16_t	N;
 	int		err;
 
 	N	= def;
 	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
-		if (!fgets(buff, BUFF_SIZE, stdin))
+		if (!fgets(buff, ARRAY_SIZE(buff), stdin))
 			goto err_fgets;
 		err	= alx_sscan_u16(&N, m, def, M, buff);
 		if (err)
@@ -545,13 +567,13 @@ err_sscan:
 static	int16_t		loop_get_s16	(int16_t m, int16_t def, int16_t M,
 					uint8_t attempts)
 {
-	char	buff [BUFF_SIZE];
+	char	buff[BUFF_SIZE];
 	int16_t	Z;
 	int	err;
 
 	Z	= def;
 	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
-		if (!fgets(buff, BUFF_SIZE, stdin))
+		if (!fgets(buff, ARRAY_SIZE(buff), stdin))
 			goto err_fgets;
 		err	= alx_sscan_s16(&Z, m, def, M, buff);
 		if (err)
@@ -570,13 +592,13 @@ err_sscan:
 static	uint32_t	loop_get_u32	(uint32_t m, uint32_t def, uint32_t M,
 					uint8_t attempts)
 {
-	char		buff [BUFF_SIZE];
+	char		buff[BUFF_SIZE];
 	uint32_t	N;
 	int		err;
 
 	N	= def;
 	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
-		if (!fgets(buff, BUFF_SIZE, stdin))
+		if (!fgets(buff, ARRAY_SIZE(buff), stdin))
 			goto err_fgets;
 		err	= alx_sscan_u32(&N, m, def, M, buff);
 		if (err)
@@ -595,13 +617,13 @@ err_sscan:
 static	int32_t		loop_get_s32	(int32_t m, int32_t def, int32_t M,
 					uint8_t attempts)
 {
-	char	buff [BUFF_SIZE];
+	char	buff[BUFF_SIZE];
 	int32_t	Z;
 	int	err;
 
 	Z	= def;
 	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
-		if (!fgets(buff, BUFF_SIZE, stdin))
+		if (!fgets(buff, ARRAY_SIZE(buff), stdin))
 			goto err_fgets;
 		err	= alx_sscan_s32(&Z, m, def, M, buff);
 		if (err)
@@ -620,13 +642,13 @@ err_sscan:
 static	uint64_t	loop_get_u64	(uint64_t m, uint64_t def, uint64_t M,
 					uint8_t attempts)
 {
-	char		buff [BUFF_SIZE];
+	char		buff[BUFF_SIZE];
 	uint64_t	N;
 	int		err;
 
 	N	= def;
 	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
-		if (!fgets(buff, BUFF_SIZE, stdin))
+		if (!fgets(buff, ARRAY_SIZE(buff), stdin))
 			goto err_fgets;
 		err	= alx_sscan_u64(&N, m, def, M, buff);
 		if (err)
@@ -645,13 +667,13 @@ err_sscan:
 static	int64_t		loop_get_s64	(int64_t m, int64_t def, int64_t M,
 					uint8_t attempts)
 {
-	char	buff [BUFF_SIZE];
+	char	buff[BUFF_SIZE];
 	int64_t	Z;
 	int	err;
 
 	Z	= def;
 	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
-		if (!fgets(buff, BUFF_SIZE, stdin))
+		if (!fgets(buff, ARRAY_SIZE(buff), stdin))
 			goto err_fgets;
 		err	= alx_sscan_s64(&Z, m, def, M, buff);
 		if (err)
@@ -670,13 +692,13 @@ err_sscan:
 static	ptrdiff_t	loop_get_ptrdiff(ptrdiff_t m, ptrdiff_t def, ptrdiff_t M,
 					uint8_t attempts)
 {
-	char		buff [BUFF_SIZE];
+	char		buff[BUFF_SIZE];
 	ptrdiff_t	Z;
 	int		err;
 
 	Z	= def;
 	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
-		if (!fgets(buff, BUFF_SIZE, stdin))
+		if (!fgets(buff, ARRAY_SIZE(buff), stdin))
 			goto err_fgets;
 		err	= alx_sscan_ptrdiff(&Z, m, def, M, buff);
 		if (err)
@@ -692,16 +714,42 @@ err_sscan:
 	return	Z;
 }
 
+static	char		loop_get_ch	(const char *restrict valid,
+					bool skip_space, bool ignore_case,
+					uint8_t attempts)
+{
+	char	buff[BUFF_SIZE];
+	char	c;
+	int	err;
+
+	c	= valid[0];
+	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
+		if (!fgets(buff, ARRAY_SIZE(buff), stdin))
+			goto err_fgets;
+		err = alx_sscan_ch(&c, valid, skip_space, ignore_case, buff);
+		if (err)
+			goto err_sscan;
+		break;
+
+err_fgets:
+		err	= ERR_FGETS;
+err_sscan:
+		manage_error(err);
+	}
+
+	return	c;
+}
+
 static	int		loop_get_fname	(const char *restrict path,
 					char fname[restrict FILENAME_MAX],
 					bool exist,
 					uint8_t attempts)
 {
-	char	buff [FILENAME_MAX];
+	char	buff[FILENAME_MAX];
 	int	err;
 
 	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
-		if (!fgets(buff, FILENAME_MAX, stdin))
+		if (!fgets(buff, ARRAY_SIZE(buff), stdin))
 			goto err_fgets;
 		err	= alx_sscan_fname(path, fname, exist, buff);
 		if (err)

@@ -85,6 +85,10 @@ int	alx_sscan_s64	(int64_t *restrict dest,
 int	alx_sscan_ptrdiff(ptrdiff_t *restrict dest,
 			ptrdiff_t m, ptrdiff_t def, ptrdiff_t M,
 			const char *restrict str);
+int	alx_sscan_ch	(char *restrict dest,
+			const char *restrict valid,
+			bool skip_space, bool ignore_case,
+			const char *restrict str);
 int	alx_sscan_fname	(const char *restrict path,
 			char fname[restrict FILENAME_MAX],
 			bool exist,

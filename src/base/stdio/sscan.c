@@ -15,6 +15,7 @@
 #include <stdio.h>
 
 #include "libalx/base/stdio/common.h"
+#include "libalx/base/string/strchr.h"
 
 
 /******************************************************************************
@@ -322,6 +323,39 @@ err_sscanf:
 	return	ERR_SSCANF;
 err_range:
 	*dest	= def;
+	return	ERR_RANGE;
+}
+
+int	alx_sscan_ch	(char *restrict dest,
+			const char *restrict valid,
+			bool skip_space, bool ignore_case,
+			const char *restrict str)
+{
+	char	*format;
+
+	if (skip_space)
+		format	= " %c";
+	else
+		format	= "%c";
+
+	if (sscanf(str, format, dest) != 1)
+		goto err_sscanf;
+
+	if (ignore_case) {
+		if (!alx_strcasechr(valid, *dest))
+			goto err_nfound;
+	} else {
+		if (!strchr(valid, *dest))
+			goto err_nfound;
+	}
+
+	return	0;
+
+err_sscanf:
+	*dest	= valid[0];
+	return	ERR_SSCANF;
+err_nfound:
+	*dest	= valid[0];
 	return	ERR_RANGE;
 }
 
