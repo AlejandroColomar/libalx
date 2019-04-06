@@ -7,30 +7,28 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_STDLIB_H
-#define ALX_STDLIB_H
+#ifndef ALX_STDLIB_SWAP_HPP
+#define ALX_STDLIB_SWAP_HPP
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <stdlib.h>
-
-#include "libalx/base/stdlib/array_split_pos_neg.h"
-#include "libalx/base/stdlib/compare.h"
-#include "libalx/base/stdlib/local_maxima.h"
-#include "libalx/base/stdlib/maximum.h"
-#include "libalx/base/stdlib/minimum.h"
-#include "libalx/base/stdlib/popcnt.h"
-#include "libalx/base/stdlib/pow.h"
-#include "libalx/base/stdlib/search.h"
-#include "libalx/base/stdlib/seed_mix.h"
-#include "libalx/base/stdlib/swap.h"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+#define SWAP(a_ptr, b_ptr)	do					\
+{									\
+	auto		_a_ptr = (a_ptr);				\
+	auto		_b_ptr = (b_ptr);				\
+	typeof(*_a_ptr)	_tmp;						\
+									\
+	_tmp	= *_a_ptr;						\
+	*_a_ptr	= *_b_ptr;						\
+	*_b_ptr	= _tmp;							\
+} while (0);
 
 
 /******************************************************************************
@@ -66,7 +64,7 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/base/stdlib.h */
+#endif		/* libalx/base/stdlib/swap.hpp */
 
 
 /******************************************************************************

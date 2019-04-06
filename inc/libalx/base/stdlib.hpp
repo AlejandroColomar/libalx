@@ -25,6 +25,7 @@
 #include "libalx/base/stdlib/pow.hpp"
 #include "libalx/base/stdlib/search.hpp"
 #include "libalx/base/stdlib/seed_mix.hpp"
+#include "libalx/base/stdlib/swap.hpp"
 
 
 /******************************************************************************
