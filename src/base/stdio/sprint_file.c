@@ -103,7 +103,7 @@ static	ptrdiff_t	_snprint_file_fread	(ptrdiff_t size,
 	len	= ftell(fp);
 	fseek(fp, 0, SEEK_SET);
 
-	fread(dest, sizeof(char), MIN(len, size), fp);
+	fread(dest, sizeof(char), ALX_MIN(len, size), fp);
 	if (len < size)
 		dest[len]	= '\0';
 
