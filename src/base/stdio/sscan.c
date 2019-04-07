@@ -9,6 +9,7 @@
  ******************************************************************************/
 #include "libalx/base/stdio/sscan.h"
 
+#include <errno.h>
 #include <inttypes.h>
 #include <stdbool.h>
 #include <stdint.h>
@@ -370,8 +371,8 @@ int	alx_sscan_fname	(const char *restrict path,
 
 	if (sscanf(str, " %s", buff) != 1)
 		return	ERR_SSCANF;
-	if (snprintf(fpath, FILENAME_MAX, "%s%s", path, buff) < 0)
-		return	ERR_SNPRINTF;
+	if (snprintf(fpath, FILENAME_MAX, "%s/%s", path, buff) >= FILENAME_MAX)
+		goto err_nametoolong;
 
 	fp	= fopen(fpath, "r");
 	if (fp) {
@@ -387,6 +388,10 @@ int	alx_sscan_fname	(const char *restrict path,
 		return	ERR_SNPRINTF;
 
 	return	0;
+
+err_nametoolong:
+	errno	= ENAMETOOLONG;
+	return	-ENAMETOOLONG;
 }
 
 
