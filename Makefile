@@ -76,6 +76,7 @@ CFLAGS_BSD	= `pkg-config --cflags libbsd-overlay`
 
 CFLAGS_OPT	= -O3
 CFLAGS_OPT     += -march=native
+CFLAGS_OPT     += -flto
 
 CFLAGS_W	= -Wall
 CFLAGS_W       += -Wextra
@@ -103,6 +104,7 @@ CXXFLAGS_BSD	= `pkg-config --cflags libbsd-overlay`
 
 CXXFLAGS_OPT	= -O3
 CXXFLAGS_OPT   += -march=native
+CXXFLAGS_OPT   += -flto
 
 CXXFLAGS_W	= -Wall
 CXXFLAGS_W     += -Wextra
