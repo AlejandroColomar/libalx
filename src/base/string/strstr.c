@@ -42,31 +42,81 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-ptrdiff_t	alx_strncasestr		(ptrdiff_t size,
-					const char str[restrict size],
-					const char pattern[restrict])
+ptrdiff_t alx_strsstr		(ptrdiff_t size,
+				const char str[restrict size],
+				const char pattern[restrict size])
 {
-	char	str_lower[size];
-	char	pat_lower[size];
-	char	*p;
+	const ptrdiff_t	plen = strnlen(pattern, size);
+	ptrdiff_t	slen = strnlen(str, size);
+	const char	*p;
 
-	if (!size)
-		return	-1;
-	if (!pattern[0])
+	if (!plen)
 		return	0;
+	if (!slen)
+		return	-1;
 
-	for (ptrdiff_t i = 0; i < size; i++) {
+	p	= str;
+	while (slen >= plen) {
+		slen--;
+		if (!memcmp(p, pattern, plen))
+			return	p - str;
+		p++;
+	}
+	return	-1;
+}
+
+ptrdiff_t alx_strncasestr	(ptrdiff_t size,
+				const char str[restrict size],
+				const char *restrict pattern)
+{
+	const ptrdiff_t	slen = strnlen(str, size);
+	const ptrdiff_t	plen = strlen(pattern);
+	char		str_lower[slen + 1];
+	char		pat_lower[plen + 1];
+	const char	*p;
+
+	if (!plen)
+		return	0;
+	if (!slen)
+		return	-1;
+
+	for (ptrdiff_t i = 0; i < slen; i++)
 		str_lower[i]	= tolower((unsigned char)str[i]);
-		if (!str_lower[i])
-			break;
-	}
-	for (ptrdiff_t i = 0; i < size; i++) {
+	str_lower[slen]	= '\0';
+	for (ptrdiff_t i = 0; i < plen; i++)
 		pat_lower[i]	= tolower((unsigned char)pattern[i]);
-		if (!pat_lower[i])
-			break;
-	}
+	pat_lower[plen]	= '\0';
 
-	p	= strnstr(str_lower, pat_lower, size);
+	p	= strstr(str_lower, pat_lower);
+
+	if (!p)
+		return	-1;
+	return	p - str_lower;
+}
+
+ptrdiff_t alx_strscasestr	(ptrdiff_t size,
+				const char str[restrict size],
+				const char pattern[restrict size])
+{
+	const ptrdiff_t	slen = strnlen(str, size);
+	const ptrdiff_t	plen = strnlen(pattern, size);
+	char		str_lower[slen + 1];
+	char		pat_lower[plen + 1];
+	const char	*p;
+
+	if (!plen)
+		return	0;
+	if (!slen)
+		return	-1;
+
+	for (ptrdiff_t i = 0; i < slen; i++)
+		str_lower[i]	= tolower((unsigned char)str[i]);
+	str_lower[slen]	= '\0';
+	for (ptrdiff_t i = 0; i < plen; i++)
+		pat_lower[i]	= tolower((unsigned char)pattern[i]);
+	pat_lower[plen]	= '\0';
+
+	p	= strstr(str_lower, pat_lower);
 
 	if (!p)
 		return	-1;

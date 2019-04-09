@@ -45,9 +45,12 @@
  ******************************************************************************/
 extern	"C"
 {
-ptrdiff_t	alx_strncasestr		(ptrdiff_t size,
-					const char *restrict str,
-					const char *restrict pattern);
+ptrdiff_t alx_strncasestr	(ptrdiff_t size,
+				const char *restrict str,
+				const char *restrict pattern);
+ptrdiff_t alx_strscasestr	(ptrdiff_t size,
+				const char *restrict str,
+				const char *restrict pattern);
 }
 
 
