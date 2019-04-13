@@ -9,6 +9,7 @@
  ******************************************************************************/
 #include "libalx/base/string/strgrep.h"
 
+#include <errno.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <string.h>
@@ -44,18 +45,34 @@ static	ptrdiff_t	_strnfgrep_line		(ptrdiff_t len,
 						char dest[restrict len],
 						const char src[restrict len],
 						const char pattern[restrict]);
+static	ptrdiff_t	_strsfgrep_line		(ptrdiff_t len,
+						char dest[restrict len],
+						const char src[restrict len],
+						const char pattern[restrict len]);
 static	ptrdiff_t	_strncasefgrep_line	(ptrdiff_t len,
 						char dest[restrict len],
 						const char src[restrict len],
 						const char pattern[restrict]);
+static	ptrdiff_t	_strscasefgrep_line	(ptrdiff_t len,
+						char dest[restrict len],
+						const char src[restrict len],
+						const char pattern[restrict len]);
 static	ptrdiff_t	_strnfgrepv_line	(ptrdiff_t len,
 						char dest[restrict len],
 						const char src[restrict len],
 						const char pattern[restrict]);
+static	ptrdiff_t	_strsfgrepv_line	(ptrdiff_t len,
+						char dest[restrict len],
+						const char src[restrict len],
+						const char pattern[restrict len]);
 static	ptrdiff_t	_strncasefgrepv_line	(ptrdiff_t len,
 						char dest[restrict len],
 						const char src[restrict len],
 						const char pattern[restrict]);
+static	ptrdiff_t	_strscasefgrepv_line	(ptrdiff_t len,
+						char dest[restrict len],
+						const char src[restrict len],
+						const char pattern[restrict len]);
 
 
 /******************************************************************************
@@ -66,25 +83,32 @@ ptrdiff_t	alx_strnfgrep		(ptrdiff_t size,
 					const char src[restrict size],
 					const char pattern[restrict])
 {
-	ptrdiff_t	pos_dest;
-	ptrdiff_t	pos_src;
-	ptrdiff_t	line_len;
+	ptrdiff_t	dpos;
+	ptrdiff_t	spos;
+	ptrdiff_t	llen;
+	ptrdiff_t	plen;
 
-	pos_dest	= 0;
-	pos_src		= 0;
+	dpos	= 0;
+	spos	= 0;
+	plen	= strnlen(pattern, size);
 
-	while (pos_src < size) {
-		line_len = alx_strnchrnul(size - pos_src, &src[pos_src], '\n');
-		if (line_len < size - pos_src)
-			line_len++;
-		pos_dest += _strnfgrep_line(line_len, &dest[pos_dest],
-						&src[pos_src], pattern);
-		pos_src += line_len;
-		if (src[pos_src - 1] == '\0')
+	while (spos < size) {
+		llen = alx_strnchrnul(size - spos, &src[spos], '\n');
+		if (llen < (size - spos))
+			llen++;
+		if (llen < plen)
+			goto short_line;
+		dpos += _strnfgrep_line(llen, &dest[dpos], &src[spos], pattern);
+		spos += llen;
+short_line:
+		if (!src[spos - 1])
 			break;
 	}
+	memset(&dest[dpos], 0, size - dpos);
 
-	return	pos_dest;
+	if (!dest[dpos - 1])
+		return	dpos - 1;
+	return	dpos;
 }
 
 ptrdiff_t	alx_strlfgrep		(ptrdiff_t size,
@@ -92,19 +116,83 @@ ptrdiff_t	alx_strlfgrep		(ptrdiff_t size,
 					const char src[restrict size],
 					const char pattern[restrict])
 {
-	ptrdiff_t	dest_len;
+	ptrdiff_t	dpos;
+	ptrdiff_t	spos;
+	ptrdiff_t	llen;
+	ptrdiff_t	plen;
 
 	if (!size)
 		return	0;
 
-	dest_len	= alx_strnfgrep(size, dest, src, pattern) + 1;
+	dpos	= 0;
+	spos	= 0;
+	plen	= strnlen(pattern, size);
 
-	if (dest_len <= size)
-		dest[dest_len - 1]	= '\0';
-	else
-		dest[size - 1]		= '\0';
+	while (spos < size) {
+		llen = alx_strnchrnul(size - spos, &src[spos], '\n');
+		if (llen < (size - spos))
+			llen++;
+		if (llen < plen)
+			goto short_line;
+		dpos += _strnfgrep_line(llen, &dest[dpos], &src[spos], pattern);
+		spos += llen;
+short_line:
+		if (!src[spos - 1]) {
+			if (!dest[dpos - 1])
+				return	dpos - 1;
+			if (dpos == size)
+				dpos--;
+			dest[dpos]	= '\0';
+			return	dpos;
+		}
+	}
+	if (dpos == size)
+		dpos--;
+	dest[dpos]	= '\0';
 
-	return	dest_len;
+	return	-E2BIG;
+}
+
+ptrdiff_t	alx_strsfgrep		(ptrdiff_t size,
+					char dest[restrict size],
+					const char src[restrict size],
+					const char pattern[restrict size])
+{
+	ptrdiff_t	dpos;
+	ptrdiff_t	spos;
+	ptrdiff_t	llen;
+	ptrdiff_t	plen;
+
+	if (!size)
+		return	0;
+
+	dpos	= 0;
+	spos	= 0;
+	plen	= strnlen(pattern, size);
+
+	while (spos < size) {
+		llen = alx_strnchrnul(size - spos, &src[spos], '\n');
+		if (llen < (size - spos))
+			llen++;
+		if (llen < plen)
+			goto short_line;
+		dpos += _strsfgrep_line(llen, &dest[dpos], &src[spos], pattern);
+		spos += llen;
+short_line:
+		if (!src[spos - 1]) {
+			if (!dest[dpos - 1])
+				return	dpos - 1;
+			if (dpos == size)
+				dpos--;
+			dest[dpos]	= '\0';
+			return	dpos;
+		}
+	}
+	if (dpos == size)
+		dpos--;
+	dest[dpos]	= '\0';
+
+	return	-E2BIG;
 }
 
 ptrdiff_t	alx_strncasefgrep	(ptrdiff_t size,
@@ -112,25 +200,33 @@ ptrdiff_t	alx_strncasefgrep	(ptrdiff_t size,
 					const char src[restrict size],
 					const char pattern[restrict])
 {
-	ptrdiff_t	pos_dest;
-	ptrdiff_t	pos_src;
-	ptrdiff_t	line_len;
+	ptrdiff_t	dpos;
+	ptrdiff_t	spos;
+	ptrdiff_t	llen;
+	ptrdiff_t	plen;
 
-	pos_dest	= 0;
-	pos_src		= 0;
+	dpos	= 0;
+	spos	= 0;
+	plen	= strnlen(pattern, size);
 
-	while (pos_src < size) {
-		line_len = alx_strnchrnul(size - pos_src, &src[pos_src], '\n');
-		if (line_len < size - pos_src)
-			line_len++;
-		pos_dest += _strncasefgrep_line(line_len, &dest[pos_dest],
-						&src[pos_src], pattern);
-		pos_src += line_len;
-		if (src[pos_src - 1] == '\0')
+	while (spos < size) {
+		llen = alx_strnchrnul(size - spos, &src[spos], '\n');
+		if (llen < (size - spos))
+			llen++;
+		if (llen < plen)
+			goto short_line;
+		dpos += _strncasefgrep_line(llen, &dest[dpos], &src[spos],
+								pattern);
+		spos += llen;
+short_line:
+		if (!src[spos - 1])
 			break;
 	}
+	memset(&dest[dpos], 0, size - dpos);
 
-	return	pos_dest;
+	if (!dest[dpos - 1])
+		return	dpos - 1;
+	return	dpos;
 }
 
 ptrdiff_t	alx_strlcasefgrep	(ptrdiff_t size,
@@ -138,19 +234,85 @@ ptrdiff_t	alx_strlcasefgrep	(ptrdiff_t size,
 					const char src[restrict size],
 					const char pattern[restrict])
 {
-	ptrdiff_t	dest_len;
+	ptrdiff_t	dpos;
+	ptrdiff_t	spos;
+	ptrdiff_t	llen;
+	ptrdiff_t	plen;
 
 	if (!size)
 		return	0;
 
-	dest_len	= alx_strncasefgrep(size, dest, src, pattern) + 1;
+	dpos	= 0;
+	spos	= 0;
+	plen	= strnlen(pattern, size);
 
-	if (dest_len <= size)
-		dest[dest_len - 1]	= '\0';
-	else
-		dest[size - 1]		= '\0';
+	while (spos < size) {
+		llen = alx_strnchrnul(size - spos, &src[spos], '\n');
+		if (llen < (size - spos))
+			llen++;
+		if (llen < plen)
+			goto short_line;
+		dpos += _strncasefgrep_line(llen, &dest[dpos], &src[spos],
+								pattern);
+		spos += llen;
+short_line:
+		if (!src[spos - 1]) {
+			if (!dest[dpos - 1])
+				return	dpos - 1;
+			if (dpos == size)
+				dpos--;
+			dest[dpos]	= '\0';
+			return	dpos;
+		}
+	}
+	if (dpos == size)
+		dpos--;
+	dest[dpos]	= '\0';
 
-	return	dest_len;
+	return	-E2BIG;
+}
+
+ptrdiff_t	alx_strscasefgrep	(ptrdiff_t size,
+					char dest[restrict size],
+					const char src[restrict size],
+					const char pattern[restrict size])
+{
+	ptrdiff_t	dpos;
+	ptrdiff_t	spos;
+	ptrdiff_t	llen;
+	ptrdiff_t	plen;
+
+	if (!size)
+		return	0;
+
+	dpos	= 0;
+	spos	= 0;
+	plen	= strnlen(pattern, size);
+
+	while (spos < size) {
+		llen = alx_strnchrnul(size - spos, &src[spos], '\n');
+		if (llen < (size - spos))
+			llen++;
+		if (llen < plen)
+			goto short_line;
+		dpos += _strscasefgrep_line(llen, &dest[dpos], &src[spos],
+								pattern);
+		spos += llen;
+short_line:
+		if (!src[spos - 1]) {
+			if (!dest[dpos - 1])
+				return	dpos - 1;
+			if (dpos == size)
+				dpos--;
+			dest[dpos]	= '\0';
+			return	dpos;
+		}
+	}
+	if (dpos == size)
+		dpos--;
+	dest[dpos]	= '\0';
+
+	return	-E2BIG;
 }
 
 ptrdiff_t	alx_strnfgrepv		(ptrdiff_t size,
@@ -158,25 +320,32 @@ ptrdiff_t	alx_strnfgrepv		(ptrdiff_t size,
 					const char src[restrict size],
 					const char pattern[restrict])
 {
-	ptrdiff_t	pos_dest;
-	ptrdiff_t	pos_src;
-	ptrdiff_t	line_len;
+	ptrdiff_t	dpos;
+	ptrdiff_t	spos;
+	ptrdiff_t	llen;
+	ptrdiff_t	plen;
 
-	pos_dest	= 0;
-	pos_src		= 0;
+	dpos	= 0;
+	spos	= 0;
+	plen	= strnlen(pattern, size);
 
-	while (pos_src < size) {
-		line_len = alx_strnchrnul(size - pos_src, &src[pos_src], '\n');
-		if (line_len < size - pos_src)
-			line_len++;
-		pos_dest += _strnfgrepv_line(line_len, &dest[pos_dest],
-						&src[pos_src], pattern);
-		pos_src += line_len;
-		if (src[pos_src - 1] == '\0')
+	while (spos < size) {
+		llen = alx_strnchrnul(size - spos, &src[spos], '\n');
+		if (llen < (size - spos))
+			llen++;
+		if (llen < plen)
+			goto short_line;
+		dpos += _strnfgrepv_line(llen, &dest[dpos], &src[spos], pattern);
+		spos += llen;
+short_line:
+		if (!src[spos - 1])
 			break;
 	}
+	memset(&dest[dpos], 0, size - dpos);
 
-	return	pos_dest;
+	if (!dest[dpos - 1])
+		return	dpos - 1;
+	return	dpos;
 }
 
 ptrdiff_t	alx_strlfgrepv		(ptrdiff_t size,
@@ -184,19 +353,83 @@ ptrdiff_t	alx_strlfgrepv		(ptrdiff_t size,
 					const char src[restrict size],
 					const char pattern[restrict])
 {
-	ptrdiff_t	dest_len;
+	ptrdiff_t	dpos;
+	ptrdiff_t	spos;
+	ptrdiff_t	llen;
+	ptrdiff_t	plen;
 
 	if (!size)
 		return	0;
 
-	dest_len	= alx_strnfgrepv(size, dest, src, pattern) + 1;
+	dpos	= 0;
+	spos	= 0;
+	plen	= strnlen(pattern, size);
 
-	if (dest_len <= size)
-		dest[dest_len - 1]	= '\0';
-	else
-		dest[size - 1]		= '\0';
+	while (spos < size) {
+		llen = alx_strnchrnul(size - spos, &src[spos], '\n');
+		if (llen < (size - spos))
+			llen++;
+		if (llen < plen)
+			goto short_line;
+		dpos += _strnfgrepv_line(llen, &dest[dpos], &src[spos], pattern);
+		spos += llen;
+short_line:
+		if (!src[spos - 1]) {
+			if (!dest[dpos - 1])
+				return	dpos - 1;
+			if (dpos == size)
+				dpos--;
+			dest[dpos]	= '\0';
+			return	dpos;
+		}
+	}
+	if (dpos == size)
+		dpos--;
+	dest[dpos]	= '\0';
 
-	return	dest_len;
+	return	-E2BIG;
+}
+
+ptrdiff_t	alx_strsfgrepv		(ptrdiff_t size,
+					char dest[restrict size],
+					const char src[restrict size],
+					const char pattern[restrict size])
+{
+	ptrdiff_t	dpos;
+	ptrdiff_t	spos;
+	ptrdiff_t	llen;
+	ptrdiff_t	plen;
+
+	if (!size)
+		return	0;
+
+	dpos	= 0;
+	spos	= 0;
+	plen	= strnlen(pattern, size);
+
+	while (spos < size) {
+		llen = alx_strnchrnul(size - spos, &src[spos], '\n');
+		if (llen < (size - spos))
+			llen++;
+		if (llen < plen)
+			goto short_line;
+		dpos += _strsfgrepv_line(llen, &dest[dpos], &src[spos], pattern);
+		spos += llen;
+short_line:
+		if (!src[spos - 1]) {
+			if (!dest[dpos - 1])
+				return	dpos - 1;
+			if (dpos == size)
+				dpos--;
+			dest[dpos]	= '\0';
+			return	dpos;
+		}
+	}
+	if (dpos == size)
+		dpos--;
+	dest[dpos]	= '\0';
+
+	return	-E2BIG;
 }
 
 ptrdiff_t	alx_strncasefgrepv	(ptrdiff_t size,
@@ -204,25 +437,33 @@ ptrdiff_t	alx_strncasefgrepv	(ptrdiff_t size,
 					const char src[restrict size],
 					const char pattern[restrict])
 {
-	ptrdiff_t	pos_dest;
-	ptrdiff_t	pos_src;
-	ptrdiff_t	line_len;
+	ptrdiff_t	dpos;
+	ptrdiff_t	spos;
+	ptrdiff_t	llen;
+	ptrdiff_t	plen;
 
-	pos_dest	= 0;
-	pos_src		= 0;
+	dpos	= 0;
+	spos	= 0;
+	plen	= strnlen(pattern, size);
 
-	while (pos_src < size) {
-		line_len = alx_strnchrnul(size - pos_src, &src[pos_src], '\n');
-		if (line_len < size - pos_src)
-			line_len++;
-		pos_dest += _strncasefgrepv_line(line_len, &dest[pos_dest],
-						&src[pos_src], pattern);
-		pos_src += line_len;
-		if (src[pos_src - 1] == '\0')
+	while (spos < size) {
+		llen = alx_strnchrnul(size - spos, &src[spos], '\n');
+		if (llen < (size - spos))
+			llen++;
+		if (llen < plen)
+			goto short_line;
+		dpos += _strncasefgrepv_line(llen, &dest[dpos], &src[spos],
+								pattern);
+		spos += llen;
+short_line:
+		if (!src[spos - 1])
 			break;
 	}
+	memset(&dest[dpos], 0, size - dpos);
 
-	return	pos_dest;
+	if (!dest[dpos - 1])
+		return	dpos - 1;
+	return	dpos;
 }
 
 ptrdiff_t	alx_strlcasefgrepv	(ptrdiff_t size,
@@ -230,19 +471,85 @@ ptrdiff_t	alx_strlcasefgrepv	(ptrdiff_t size,
 					const char src[restrict size],
 					const char pattern[restrict])
 {
-	ptrdiff_t	dest_len;
+	ptrdiff_t	dpos;
+	ptrdiff_t	spos;
+	ptrdiff_t	llen;
+	ptrdiff_t	plen;
 
 	if (!size)
 		return	0;
 
-	dest_len	= alx_strncasefgrepv(size, dest, src, pattern) + 1;
+	dpos	= 0;
+	spos	= 0;
+	plen	= strnlen(pattern, size);
 
-	if (dest_len <= size)
-		dest[dest_len - 1]	= '\0';
-	else
-		dest[size - 1]		= '\0';
+	while (spos < size) {
+		llen = alx_strnchrnul(size - spos, &src[spos], '\n');
+		if (llen < (size - spos))
+			llen++;
+		if (llen < plen)
+			goto short_line;
+		dpos += _strncasefgrepv_line(llen, &dest[dpos], &src[spos],
+								pattern);
+		spos += llen;
+short_line:
+		if (!src[spos - 1]) {
+			if (!dest[dpos - 1])
+				return	dpos - 1;
+			if (dpos == size)
+				dpos--;
+			dest[dpos]	= '\0';
+			return	dpos;
+		}
+	}
+	if (dpos == size)
+		dpos--;
+	dest[dpos]	= '\0';
 
-	return	dest_len;
+	return	-E2BIG;
+}
+
+ptrdiff_t	alx_strscasefgrepv	(ptrdiff_t size,
+					char dest[restrict size],
+					const char src[restrict size],
+					const char pattern[restrict size])
+{
+	ptrdiff_t	dpos;
+	ptrdiff_t	spos;
+	ptrdiff_t	llen;
+	ptrdiff_t	plen;
+
+	if (!size)
+		return	0;
+
+	dpos	= 0;
+	spos	= 0;
+	plen	= strnlen(pattern, size);
+
+	while (spos < size) {
+		llen = alx_strnchrnul(size - spos, &src[spos], '\n');
+		if (llen < (size - spos))
+			llen++;
+		if (llen < plen)
+			goto short_line;
+		dpos += _strscasefgrepv_line(llen, &dest[dpos], &src[spos],
+								pattern);
+		spos += llen;
+short_line:
+		if (!src[spos - 1]) {
+			if (!dest[dpos - 1])
+				return	dpos - 1;
+			if (dpos == size)
+				dpos--;
+			dest[dpos]	= '\0';
+			return	dpos;
+		}
+	}
+	if (dpos == size)
+		dpos--;
+	dest[dpos]	= '\0';
+
+	return	-E2BIG;
 }
 
 
@@ -262,6 +569,19 @@ static	ptrdiff_t	_strnfgrep_line		(ptrdiff_t len,
 	return	len;
 }
 
+static	ptrdiff_t	_strsfgrep_line		(ptrdiff_t len,
+						char dest[restrict len],
+						const char src[restrict len],
+						const char pattern[restrict len])
+{
+
+	if (alx_strsstr(len, src, pattern) < 0)
+		return	0;
+
+	memcpy(dest, src, len);
+	return	len;
+}
+
 static	ptrdiff_t	_strncasefgrep_line	(ptrdiff_t len,
 						char dest[restrict len],
 						const char src[restrict len],
@@ -269,6 +589,19 @@ static	ptrdiff_t	_strncasefgrep_line	(ptrdiff_t len,
 {
 
 	if (alx_strncasestr(len, src, pattern) < 0)
+		return	0;
+
+	memcpy(dest, src, len);
+	return	len;
+}
+
+static	ptrdiff_t	_strscasefgrep_line	(ptrdiff_t len,
+						char dest[restrict len],
+						const char src[restrict len],
+						const char pattern[restrict len])
+{
+
+	if (alx_strscasestr(len, src, pattern) < 0)
 		return	0;
 
 	memcpy(dest, src, len);
@@ -288,6 +621,19 @@ static	ptrdiff_t	_strnfgrepv_line	(ptrdiff_t len,
 	return	len;
 }
 
+static	ptrdiff_t	_strsfgrepv_line	(ptrdiff_t len,
+						char dest[restrict len],
+						const char src[restrict len],
+						const char pattern[restrict len])
+{
+
+	if (alx_strsstr(len, src, pattern) >= 0)
+		return	0;
+
+	memcpy(dest, src, len);
+	return	len;
+}
+
 static	ptrdiff_t	_strncasefgrepv_line	(ptrdiff_t len,
 						char dest[restrict len],
 						const char src[restrict len],
@@ -295,6 +641,19 @@ static	ptrdiff_t	_strncasefgrepv_line	(ptrdiff_t len,
 {
 
 	if (alx_strncasestr(len, src, pattern) >= 0)
+		return	0;
+
+	memcpy(dest, src, len);
+	return	len;
+}
+
+static	ptrdiff_t	_strscasefgrepv_line	(ptrdiff_t len,
+						char dest[restrict len],
+						const char src[restrict len],
+						const char pattern[restrict len])
+{
+
+	if (alx_strscasestr(len, src, pattern) >= 0)
 		return	0;
 
 	memcpy(dest, src, len);

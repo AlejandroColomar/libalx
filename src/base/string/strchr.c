@@ -41,7 +41,7 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-ptrdiff_t alx_strcasechr	(const char *restrict str, char c)
+ptrdiff_t alx_strcasechr	(const char str[restrict], char c)
 {
 	const ptrdiff_t	len = strlen(str);
 	char		str_lower[len + 1];
@@ -58,7 +58,7 @@ ptrdiff_t alx_strcasechr	(const char *restrict str, char c)
 	return	p - str_lower;
 }
 
-ptrdiff_t alx_strrcasechr	(const char *restrict str, char c)
+ptrdiff_t alx_strrcasechr	(const char str[restrict], char c)
 {
 	const ptrdiff_t	len = strlen(str);
 	char		str_lower[len + 1];
@@ -75,7 +75,7 @@ ptrdiff_t alx_strrcasechr	(const char *restrict str, char c)
 	return	p - str_lower;
 }
 
-ptrdiff_t alx_strcasechrnul	(const char *restrict str, char c)
+ptrdiff_t alx_strcasechrnul	(const char str[restrict], char c)
 {
 	const ptrdiff_t	len = strlen(str);
 	char		str_lower[len + 1];
@@ -97,7 +97,7 @@ ptrdiff_t alx_strcasechrnul	(const char *restrict str, char c)
 	return	p - str_lower;
 }
 
-ptrdiff_t alx_strrcasechrnul	(const char *restrict str, char c)
+ptrdiff_t alx_strrcasechrnul	(const char str[restrict], char c)
 {
 	const ptrdiff_t	len = strlen(str);
 	char		str_lower[len + 1];

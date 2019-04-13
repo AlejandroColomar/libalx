@@ -67,7 +67,7 @@ ptrdiff_t alx_strsstr		(ptrdiff_t size,
 
 ptrdiff_t alx_strncasestr	(ptrdiff_t size,
 				const char str[restrict size],
-				const char *restrict pattern)
+				const char pattern[restrict])
 {
 	const ptrdiff_t	slen = strnlen(str, size);
 	const ptrdiff_t	plen = strlen(pattern);
