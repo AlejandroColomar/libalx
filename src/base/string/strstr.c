@@ -13,6 +13,8 @@
 #include <stddef.h>
 #include <string.h>
 
+#include "libalx/base/stdint/types.h"
+
 
 /******************************************************************************
  ******* macros ***************************************************************
@@ -81,10 +83,10 @@ ptrdiff_t alx_strncasestr	(ptrdiff_t size,
 		return	-1;
 
 	for (ptrdiff_t i = 0; i < slen; i++)
-		str_lower[i]	= tolower((unsigned char)str[i]);
+		str_lower[i]	= tolower((uchar)str[i]);
 	str_lower[slen]	= '\0';
 	for (ptrdiff_t i = 0; i < plen; i++)
-		pat_lower[i]	= tolower((unsigned char)pattern[i]);
+		pat_lower[i]	= tolower((uchar)pattern[i]);
 	pat_lower[plen]	= '\0';
 
 	p	= strstr(str_lower, pat_lower);
@@ -110,10 +112,10 @@ ptrdiff_t alx_strscasestr	(ptrdiff_t size,
 		return	-1;
 
 	for (ptrdiff_t i = 0; i < slen; i++)
-		str_lower[i]	= tolower((unsigned char)str[i]);
+		str_lower[i]	= tolower((uchar)str[i]);
 	str_lower[slen]	= '\0';
 	for (ptrdiff_t i = 0; i < plen; i++)
-		pat_lower[i]	= tolower((unsigned char)pattern[i]);
+		pat_lower[i]	= tolower((uchar)pattern[i]);
 	pat_lower[plen]	= '\0';
 
 	p	= strstr(str_lower, pat_lower);

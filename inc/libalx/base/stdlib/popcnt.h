@@ -18,7 +18,7 @@
 
 #include <nmmintrin.h>
 
-#include "libalx/base/stdint/int128.h"
+#include "libalx/base/stdint/types.h"
 
 
 /******************************************************************************
