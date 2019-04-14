@@ -33,7 +33,6 @@ STDDEF_OBJ	=
 STDINT_OBJ	=
 STDIO_OBJ	=							\
 		$(TMP_DIR)/base/stdio/get.o				\
-		$(TMP_DIR)/base/stdio/sprint_file.o			\
 		$(TMP_DIR)/base/stdio/sscan.o				\
 		$(TMP_DIR)/base/stdio/wait.o
 STDLIB_OBJ	=							\

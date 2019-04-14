@@ -19,7 +19,6 @@
 #include "libalx/base/stdio/common.h"
 #include "libalx/base/stdio/escape_sequences.h"
 #include "libalx/base/stdio/get.h"
-#include "libalx/base/stdio/sprint_file.h"
 #include "libalx/base/stdio/sscan.h"
 #include "libalx/base/stdio/wait.h"
 

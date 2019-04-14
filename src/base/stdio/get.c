@@ -43,8 +43,8 @@
 /******************************************************************************
  ******* static functions (prototypes) ****************************************
  ******************************************************************************/
-static
-long double	loop_get_ldbl	(long double m, long double def, long double M,
+static	long double	loop_get_ldbl	(long double m, long double def,
+					long double M,
 					uint8_t attempts);
 static	double		loop_get_dbl	(double m, double def, double M,
 					uint8_t attempts);
