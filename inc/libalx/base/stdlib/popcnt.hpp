@@ -34,10 +34,12 @@
 /******************************************************************************
  ******* structs / unions *****************************************************
  ******************************************************************************/
+#if defined(uint128_t)
 union	Uint128 {
 	uint128_t	uu128;
 	uint64_t	uu64[2];
 };
+#endif
 
 
 /******************************************************************************
@@ -60,7 +62,9 @@ static inline	uint8_t		popcnt_u8	(uint8_t n);
 static inline	uint16_t	popcnt_u16	(uint16_t n);
 static inline	uint32_t	popcnt_u32	(uint32_t n);
 static inline	uint64_t	popcnt_u64	(uint32_t n);
+#if defined(uint128_t)
 static inline	uint64_t	popcnt_u128	(uint128_t n);
+#endif
 
 
 /******************************************************************************
@@ -90,6 +94,7 @@ static inline	uint64_t	popcnt_u64	(uint32_t n)
 	return	_mm_popcnt_u64(n);
 }
 
+#if defined(uint128_t)
 static inline	uint64_t	popcnt_u128	(uint128_t n)
 {
 	const	union Uint128	n_u	= {.uu128 = n};
@@ -99,6 +104,7 @@ static inline	uint64_t	popcnt_u128	(uint128_t n)
 
 	return	cnt;
 }
+#endif
 
 
 /******************************************************************************

@@ -26,6 +26,12 @@ typedef unsigned char		uchar;
 typedef	unsigned __int128	uint128_t;
 typedef	__int128		int128_t;
 # endif
+# ifndef uint128_t
+#define uint128_t	uint128_t
+# endif
+# ifndef int128_t
+#define int128_t	int128_t
+# endif
 #endif
 
 

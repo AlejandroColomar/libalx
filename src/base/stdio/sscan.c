@@ -307,7 +307,7 @@ err_range:
 	return	ERR_RANGE;
 }
 
-int	alx_sscan_ptrdiff(ptrdiff_t *restrict dest,
+int	alx_sscan_pdif	(ptrdiff_t *restrict dest,
 			ptrdiff_t m, ptrdiff_t def, ptrdiff_t M,
 			const char *restrict str)
 {

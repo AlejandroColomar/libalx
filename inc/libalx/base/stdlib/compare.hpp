@@ -60,7 +60,7 @@ static inline	int	alx_compare_s16	(const void *a_ptr, const void *b_ptr);
 static inline	int	alx_compare_u32	(const void *a_ptr, const void *b_ptr);
 static inline	int	alx_compare_s32	(const void *a_ptr, const void *b_ptr);
 static inline	int	alx_compare_u64	(const void *a_ptr, const void *b_ptr);
-static inline	int	alx_compare_s32	(const void *a_ptr, const void *b_ptr);
+static inline	int	alx_compare_s64	(const void *a_ptr, const void *b_ptr);
 
 
 /******************************************************************************

@@ -70,7 +70,7 @@ static	uint64_t	loop_get_u64	(uint64_t m, uint64_t def, uint64_t M,
 					uint8_t attempts);
 static	int64_t		loop_get_s64	(int64_t m, int64_t def, int64_t M,
 					uint8_t attempts);
-static	ptrdiff_t	loop_get_ptrdiff(ptrdiff_t m, ptrdiff_t def, ptrdiff_t M,
+static	ptrdiff_t	loop_get_pdif	(ptrdiff_t m, ptrdiff_t def, ptrdiff_t M,
 					uint8_t attempts);
 static	char		loop_get_ch	(const char *restrict valid,
 					bool skip_space, bool ignore_case,
@@ -306,7 +306,7 @@ int64_t		alx_get_s64	(int64_t m, int64_t def, int64_t M,
 	return	loop_get_s64(m, def, M, attempts);
 }
 
-ptrdiff_t	alx_get_ptrdiff	(ptrdiff_t m, ptrdiff_t def, ptrdiff_t M,
+ptrdiff_t	alx_get_pdif	(ptrdiff_t m, ptrdiff_t def, ptrdiff_t M,
 				const char *restrict title,
 				const char *restrict help,
 				uint8_t attempts)
@@ -320,7 +320,7 @@ ptrdiff_t	alx_get_ptrdiff	(ptrdiff_t m, ptrdiff_t def, ptrdiff_t M,
 		printf("Introduce an integer [%ti U %ti] (default %ti):...\t",
 								m, M, def);
 
-	return	loop_get_ptrdiff(m, def, M, attempts);
+	return	loop_get_pdif(m, def, M, attempts);
 }
 
 char		alx_get_ch	(const char *restrict valid,
@@ -689,7 +689,7 @@ err_sscan:
 	return	Z;
 }
 
-static	ptrdiff_t	loop_get_ptrdiff(ptrdiff_t m, ptrdiff_t def, ptrdiff_t M,
+static	ptrdiff_t	loop_get_pdif	(ptrdiff_t m, ptrdiff_t def, ptrdiff_t M,
 					uint8_t attempts)
 {
 	char		buff[BUFF_SIZE];
@@ -700,7 +700,7 @@ static	ptrdiff_t	loop_get_ptrdiff(ptrdiff_t m, ptrdiff_t def, ptrdiff_t M,
 	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
 		if (!fgets(buff, ARRAY_SIZE(buff), stdin))
 			goto err_fgets;
-		err	= alx_sscan_ptrdiff(&Z, m, def, M, buff);
+		err	= alx_sscan_pdif(&Z, m, def, M, buff);
 		if (err)
 			goto err_sscan;
 		break;
