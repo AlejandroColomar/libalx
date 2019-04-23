@@ -16,11 +16,12 @@
  ******************************************************************************/
 #include <stdint.h>
 
+#include <immintrin.h>
+
 
 /******************************************************************************
  ******* typedefs *************************************************************
  ******************************************************************************/
-typedef unsigned char		uchar;
 #if defined(__SIZEOF_INT128__)
 # if !defined(UINT128_MAX)	/* This is to test if uint128_t already exists */
 typedef	unsigned __int128	uint128_t;
@@ -34,17 +35,27 @@ typedef	__int128		int128_t;
 # endif
 #endif
 
+# ifndef uint256_t
+#define uint256_t	uint256_t
+# endif
+typedef	__m256i			uint256_t;
+
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-#if defined(__SIZEOF_INT128__)
+#if defined(uint128_t)
 #define U128_MAX	(~((uint128_t)0))
 #define S128_MAX	((int128_t)(U128_MAX >> 1))
 #define S128_MIN	((int128_t)(-S128_MAX - 1))
-
 #define SQRT_U128_MAX	((uint128_t)(0xFFFFFFFFFFFFFFFF))
 #define SQRT_S128_MAX	((int128_t)(0xB504F333F9DE6800))
+#endif
+
+#if defined(uint256_t)
+#define U256_MAX	(~((uint256_t)0))
+#define S256_MAX	((int256_t)(U256_MAX >> 1))
+#define S256_MIN	((int256_t)(-S256_MAX - 1))
 #endif
 
 
