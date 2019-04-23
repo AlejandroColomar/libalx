@@ -12,8 +12,6 @@
 #include "ctype.h"
 #include "string.h"
 
-#include "libalx/base/stdint/types.h"
-
 
 /******************************************************************************
  ******* macros ***************************************************************
@@ -51,9 +49,9 @@ ptrdiff_t alx_strcasechr	(const char str[restrict], char c)
 	char		*p;
 
 	for (ptrdiff_t i = 0; i < len; i++)
-		str_lower[i]	= tolower((uchar)str[i]);
+		str_lower[i]	= tolower((unsigned char)str[i]);
 	str_lower[len]	= '\0';
-	c_lower		= tolower((uchar)c);
+	c_lower		= tolower((unsigned char)c);
 
 	p	= strchr(str_lower, c_lower);
 
@@ -68,9 +66,9 @@ ptrdiff_t alx_strrcasechr	(const char str[restrict], char c)
 	char		*p;
 
 	for (ptrdiff_t i = 0; i < len; i++)
-		str_lower[i]	= tolower((uchar)str[i]);
+		str_lower[i]	= tolower((unsigned char)str[i]);
 	str_lower[len]	= '\0';
-	c_lower		= tolower((uchar)c);
+	c_lower		= tolower((unsigned char)c);
 
 	p	= strrchr(str_lower, c_lower);
 
@@ -85,9 +83,9 @@ ptrdiff_t alx_strcasechrnul	(const char str[restrict], char c)
 	char		*p;
 
 	for (ptrdiff_t i = 0; i < len; i++)
-		str_lower[i]	= tolower((uchar)str[i]);
+		str_lower[i]	= tolower((unsigned char)str[i]);
 	str_lower[len]	= '\0';
-	c_lower		= tolower((uchar)c);
+	c_lower		= tolower((unsigned char)c);
 
 #if defined(_GNU_SOURCE)
 	p	= strchrnul(str_lower, c_lower);
@@ -106,9 +104,9 @@ ptrdiff_t alx_strrcasechrnul	(const char str[restrict], char c)
 	char		c_lower;
 
 	for (ptrdiff_t i = 0; i < len; i++)
-		str_lower[i]	= tolower((uchar)str[i]);
+		str_lower[i]	= tolower((unsigned char)str[i]);
 	str_lower[len]	= '\0';
-	c_lower		= tolower((uchar)c);
+	c_lower		= tolower((unsigned char)c);
 
 	return	alx_strrchrnul(str_lower, c_lower);
 }
@@ -122,9 +120,9 @@ ptrdiff_t alx_strncasechr	(ptrdiff_t size, const char str[restrict size],
 	char		*p;
 
 	for (ptrdiff_t i = 0; i < len; i++)
-		str_lower[i]	= tolower((uchar)str[i]);
+		str_lower[i]	= tolower((unsigned char)str[i]);
 	str_lower[len]	= '\0';
-	c_lower		= tolower((uchar)c);
+	c_lower		= tolower((unsigned char)c);
 
 	p	= strchr(str_lower, c_lower);
 
@@ -140,9 +138,9 @@ ptrdiff_t alx_strnrcasechr	(ptrdiff_t size, const char str[restrict size],
 	char		*p;
 
 	for (ptrdiff_t i = 0; i < len; i++)
-		str_lower[i]	= tolower((uchar)str[i]);
+		str_lower[i]	= tolower((unsigned char)str[i]);
 	str_lower[len]	= '\0';
-	c_lower		= tolower((uchar)c);
+	c_lower		= tolower((unsigned char)c);
 
 	p	= strrchr(str_lower, c_lower);
 
@@ -158,9 +156,9 @@ ptrdiff_t alx_strncasechrnul	(ptrdiff_t size, const char str[restrict size],
 	char		*p;
 
 	for (ptrdiff_t i = 0; i < len; i++)
-		str_lower[i]	= tolower((uchar)str[i]);
+		str_lower[i]	= tolower((unsigned char)str[i]);
 	str_lower[len]	= '\0';
-	c_lower		= tolower((uchar)c);
+	c_lower		= tolower((unsigned char)c);
 
 #if defined(_GNU_SOURCE)
 	p	= strchrnul(str_lower, c_lower);
@@ -181,9 +179,9 @@ ptrdiff_t alx_strnrcasechrnul	(ptrdiff_t size, const char str[restrict size],
 	char		*p;
 
 	for (ptrdiff_t i = 0; i < len; i++)
-		str_lower[i]	= tolower((uchar)str[i]);
+		str_lower[i]	= tolower((unsigned char)str[i]);
 	str_lower[len]	= '\0';
-	c_lower		= tolower((uchar)c);
+	c_lower		= tolower((unsigned char)c);
 
 	p	= strrchr(str_lower, c_lower);
 	if (!p)
