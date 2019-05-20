@@ -14,12 +14,8 @@
 #	action
 
 PHONY := all
-all: errno math stddef stdint stdio stdlib string ncurses
+all: math stddef stdint stdio stdlib string ncurses
 
-
-PHONY += errno
-errno:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/errno/
 
 PHONY += math
 math:

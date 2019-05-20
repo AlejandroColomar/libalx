@@ -4,8 +4,6 @@
 
 # dependencies
 
-ERRNO_OBJ	=							\
-		$(TMP_DIR)/base/errno/errno_str.o
 MATH_OBJ	=							\
 		$(TMP_DIR)/base/math/arithmetic_mean.o			\
 		$(TMP_DIR)/base/math/array_division.o			\
@@ -67,7 +65,7 @@ EXTRA_OBJ	=							\
 
 
 ALL	= libalx							\
-	errno math stddef stdint stdio stdlib string			\
+	math stddef stdint stdio stdlib string				\
 	base								\
 	ncurses								\
 	extra
@@ -77,9 +75,6 @@ ALL	= libalx							\
 
 PHONY := all
 all: $(ALL)
-
-PHONY += errno
-errno: libalx libalx/libalx-errno.a
 
 PHONY += math
 math: libalx libalx/libalx-math.a
@@ -113,10 +108,6 @@ extra: libalx libalx/libalx-extra.a
 libalx:
 	@echo	"	MKDIR	libalx/lib/$@"
 	$(Q)mkdir -p		$(LIB_DIR)/$@/
-
-libalx/libalx-errno.a: $(ERRNO_OBJ)
-	@echo	"	AR	libalx/lib/$@"
-	$(Q)$(AR) -r -c -s -o $@ $^
 
 libalx/libalx-math.a: $(MATH_OBJ)
 	@echo	"	AR	libalx/lib/$@"
