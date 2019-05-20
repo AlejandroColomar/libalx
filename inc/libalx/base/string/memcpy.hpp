@@ -17,7 +17,6 @@
 #include <sys/types.h>
 
 #include "libalx/base/stddef/restrict.hpp"
-#include "libalx/base/stdint/types.hpp"
 
 
 /******************************************************************************
@@ -70,8 +69,8 @@ void	alx_memcpy_vds	(volatile void *restrict dest,
 			const volatile void *restrict src,
 			ssize_t n)
 {
-	volatile uchar		*dest_c	= dest;
-	const volatile uchar	*src_c	= src;
+	volatile unsigned char		*dest_c	= dest;
+	const volatile unsigned char	*src_c	= src;
 
 	while (n) {
 		n--;
@@ -84,8 +83,8 @@ void	alx_memcpy_vd	(volatile void *restrict dest,
 			const void *restrict src,
 			ssize_t n)
 {
-	volatile uchar	*dest_c	= dest;
-	const uchar	*src_c	= src;
+	volatile unsigned char	*dest_c	= dest;
+	const unsigned char	*src_c	= src;
 
 	while (n) {
 		n--;
@@ -98,8 +97,8 @@ void	alx_memcpy_vs	(void *restrict dest,
 			const volatile void *restrict src,
 			ssize_t n)
 {
-	uchar			*dest_c	= dest;
-	const volatile uchar	*src_c	= src;
+	unsigned char			*dest_c	= dest;
+	const volatile unsigned char	*src_c	= src;
 
 	while (n) {
 		n--;

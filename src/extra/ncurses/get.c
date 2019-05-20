@@ -86,6 +86,9 @@ static	uint64_t	loop_w_get_u64	(WINDOW *win,
 static	int64_t		loop_w_get_s64	(WINDOW *win,
 					int64_t m, int64_t def, int64_t M,
 					uint8_t attempts);
+static	ptrdiff_t	loop_w_get_pdif	(WINDOW *win,
+					ptrdiff_t m, ptrdiff_t def, ptrdiff_t M,
+					uint8_t attempts);
 static	int		loop_w_get_fname(WINDOW *win,
 					const char *restrict fpath,
 					char fname[restrict FILENAME_MAX],
@@ -399,7 +402,7 @@ uint8_t		alx_w_get_u8	(uint8_t m, uint8_t def, uint8_t M,
 	int8_t	h2, w2, r2, c2;
 	WINDOW	*win3;
 	int8_t	h3, w3, r3, c3;
-	double	R;
+	uint8_t	R;
 
 	/* Dimensions */
 	h1	= 3;
@@ -457,7 +460,7 @@ int8_t		alx_w_get_s8	(int8_t m, int8_t def, int8_t M,
 	int8_t	h2, w2, r2, c2;
 	WINDOW	*win3;
 	int8_t	h3, w3, r3, c3;
-	double	R;
+	int8_t	R;
 
 	/* Dimensions */
 	h1	= 3;
@@ -509,13 +512,13 @@ uint16_t	alx_w_get_u16	(uint16_t m, uint16_t def, uint16_t M,
 				const char *restrict help,
 				uint8_t attempts)
 {
-	WINDOW	*win1;
-	int8_t	h1, w1, r1, c1;
-	WINDOW	*win2;
-	int8_t	h2, w2, r2, c2;
-	WINDOW	*win3;
-	int8_t	h3, w3, r3, c3;
-	double	R;
+	WINDOW		*win1;
+	int8_t		h1, w1, r1, c1;
+	WINDOW		*win2;
+	int8_t		h2, w2, r2, c2;
+	WINDOW		*win3;
+	int8_t		h3, w3, r3, c3;
+	uint16_t	R;
 
 	/* Dimensions */
 	h1	= 3;
@@ -573,7 +576,7 @@ int16_t		alx_w_get_s16	(int16_t m, int16_t def, int16_t M,
 	int8_t	h2, w2, r2, c2;
 	WINDOW	*win3;
 	int8_t	h3, w3, r3, c3;
-	double	R;
+	int16_t	R;
 
 	/* Dimensions */
 	h1	= 3;
@@ -625,13 +628,13 @@ uint32_t	alx_w_get_u32	(uint32_t m, uint32_t def, uint32_t M,
 				const char *restrict help,
 				uint8_t attempts)
 {
-	WINDOW	*win1;
-	int8_t	h1, w1, r1, c1;
-	WINDOW	*win2;
-	int8_t	h2, w2, r2, c2;
-	WINDOW	*win3;
-	int8_t	h3, w3, r3, c3;
-	double	R;
+	WINDOW		*win1;
+	int8_t		h1, w1, r1, c1;
+	WINDOW		*win2;
+	int8_t		h2, w2, r2, c2;
+	WINDOW		*win3;
+	int8_t		h3, w3, r3, c3;
+	uint32_t	R;
 
 	/* Dimensions */
 	h1	= 3;
@@ -689,7 +692,7 @@ int32_t		alx_w_get_s32	(int32_t m, int32_t def, int32_t M,
 	int8_t	h2, w2, r2, c2;
 	WINDOW	*win3;
 	int8_t	h3, w3, r3, c3;
-	double	R;
+	int32_t	R;
 
 	/* Dimensions */
 	h1	= 3;
@@ -741,13 +744,13 @@ uint64_t	alx_w_get_u64	(uint64_t m, uint64_t def, uint64_t M,
 				const char *restrict help,
 				uint8_t attempts)
 {
-	WINDOW	*win1;
-	int8_t	h1, w1, r1, c1;
-	WINDOW	*win2;
-	int8_t	h2, w2, r2, c2;
-	WINDOW	*win3;
-	int8_t	h3, w3, r3, c3;
-	double	R;
+	WINDOW		*win1;
+	int8_t		h1, w1, r1, c1;
+	WINDOW		*win2;
+	int8_t		h2, w2, r2, c2;
+	WINDOW		*win3;
+	int8_t		h3, w3, r3, c3;
+	uint64_t	R;
 
 	/* Dimensions */
 	h1	= 3;
@@ -805,7 +808,7 @@ int64_t		alx_w_get_s64	(int64_t m, int64_t def, int64_t M,
 	int8_t	h2, w2, r2, c2;
 	WINDOW	*win3;
 	int8_t	h3, w3, r3, c3;
-	double	R;
+	int64_t	R;
 
 	/* Dimensions */
 	h1	= 3;
@@ -842,6 +845,64 @@ int64_t		alx_w_get_s64	(int64_t m, int64_t def, int64_t M,
 	wbkgd(win3, A_REVERSE);
 	wrefresh(win3);
 	R	= loop_w_get_s64(win3, m, def, M, attempts);
+
+	/* Delete window */
+	alx_ncurses_delwin(win3);
+	alx_ncurses_delwin(win2);
+	alx_ncurses_delwin(win1);
+
+	return	R;
+}
+
+ptrdiff_t	alx_w_get_pdif	(ptrdiff_t m, ptrdiff_t def, ptrdiff_t M,
+				int8_t width, int8_t row,
+				const char *restrict title,
+				const char *restrict help,
+				uint8_t attempts)
+{
+	WINDOW		*win1;
+	int8_t		h1, w1, r1, c1;
+	WINDOW		*win2;
+	int8_t		h2, w2, r2, c2;
+	WINDOW		*win3;
+	int8_t		h3, w3, r3, c3;
+	ptrdiff_t	R;
+
+	/* Dimensions */
+	h1	= 3;
+	w1	= width;
+	r1	= row;
+	c1	= (80 - width) / 2;
+	h2	= 1;
+	w2	= w1 - 4;
+	r2	= r1 + 3;
+	c2	= c1 + 2;
+	h3	= 1;
+	w3	= w1 - 2;
+	r3	= r1 + 1;
+	c3	= c1 + 1;
+
+	/* Box & title */
+	win1	= newwin(h1, w1, r1, c1);
+	wbkgd(win1, A_REVERSE);
+	box(win1, 0, 0);
+	alx_ncurses_title(win1, title);
+	wrefresh(win1);
+
+	/* Help */
+	win2	= newwin(h2, w2, r2, c2);
+	if (help)
+		wprintw(win2, "%s", help);
+	else
+		wprintw(win2, "Introduce an integer [%ti U %ti] (default %ti)",
+								m, M, def);
+	wrefresh(win2);
+
+	/* Input */
+	win3	= newwin(h3, w3, r3, c3);
+	wbkgd(win3, A_REVERSE);
+	wrefresh(win3);
+	R	= loop_w_get_pdif(win3, m, def, M, attempts);
 
 	/* Delete window */
 	alx_ncurses_delwin(win3);
@@ -1379,6 +1440,38 @@ static	int64_t		loop_w_get_s64	(WINDOW *win,
 		if (tmp == ERR)
 			goto err_getstr;
 		err	= alx_sscan_s64(&Z, m, def, M, buff);
+		if (err)
+			goto err_sscan;
+		break;
+
+err_getstr:
+		err	= ERR_GETSTR;
+err_sscan:
+		manage_w_error(win, err);
+	}
+
+	return	Z;
+}
+
+static	ptrdiff_t	loop_w_get_pdif	(WINDOW *win,
+					int64_t m, int64_t def, int64_t M,
+					uint8_t attempts)
+{
+	char		buff [BUFF_SIZE];
+	int		tmp;
+	ptrdiff_t	Z;
+	int		err;
+
+	Z	= def;
+	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
+		echo();
+		tmp	= mvwgetnstr(win, 0, 0, buff, BUFF_SIZE);
+		noecho();
+		wclear(win);
+		wrefresh(win);
+		if (tmp == ERR)
+			goto err_getstr;
+		err	= alx_sscan_pdif(&Z, m, def, M, buff);
 		if (err)
 			goto err_sscan;
 		break;

@@ -21,8 +21,7 @@ OBJ		=							\
 		strstr.o
 
 MEMCPY_INC	=							\
-		$(INC_DIR)/libalx/base/string/memcpy.h			\
-		$(INC_DIR)/libalx/base/stdint/types.h
+		$(INC_DIR)/libalx/base/string/memcpy.h
 MEMCPY_SRC	=							\
 		$(SRC_DIR)/base/string/memcpy.c
 TST_MEMCPY_INC	=							\
@@ -33,8 +32,7 @@ TST_MEMCPY_SRC	=							\
 		$(SRC_DIR)/base/string/memcpy.c
 
 STRCHR_INC	=							\
-		$(INC_DIR)/libalx/base/string/strchr.h			\
-		$(INC_DIR)/libalx/base/stdint/types.h
+		$(INC_DIR)/libalx/base/string/strchr.h
 STRCHR_SRC	=							\
 		$(SRC_DIR)/base/string/strchr.c
 
