@@ -35,19 +35,6 @@
 /******************************************************************************
  ******* structs / unions *****************************************************
  ******************************************************************************/
-#if defined(uint128_t)
-union	Uint128 {
-	uint128_t	uu128;
-	uint64_t	uu64[2];
-};
-#endif
-
-#if defined(uint256_t)
-union	Uint256 {
-	uint256_t	uu256;
-	uint64_t	uu64[4];
-};
-#endif
 
 
 /******************************************************************************
@@ -96,7 +83,7 @@ static inline	uint32_t	popcnt_u32	(uint32_t n)
 	return	_mm_popcnt_u64(n);
 }
 
-static inline	uint64_t	popcnt_u64	(uint32_t n)
+static inline	uint64_t	popcnt_u64	(uint64_t n)
 {
 
 	return	_mm_popcnt_u64(n);
@@ -105,9 +92,8 @@ static inline	uint64_t	popcnt_u64	(uint32_t n)
 #if defined(uint128_t)
 static inline	uint64_t	popcnt_u128	(uint128_t n)
 {
-	const	union Uint128	n_u	= {.uu128 = n};
-	const	uint_fast64_t	cnt_a	= _mm_popcnt_u64(n_u.uu64[0]);
-	const	uint_fast64_t	cnt_b	= _mm_popcnt_u64(n_u.uu64[1]);
+	const	uint_fast64_t	cnt_a	= popcnt_u64((uint64_t)n);
+	const	uint_fast64_t	cnt_b	= popcnt_u64((uint64_t)(n >> 64));
 	const	uint_fast64_t	cnt	= cnt_a + cnt_b;
 
 	return	cnt;
@@ -117,11 +103,10 @@ static inline	uint64_t	popcnt_u128	(uint128_t n)
 #if defined(uint256_t)
 static inline	uint64_t	popcnt_u256	(uint256_t n)
 {
-	const	union Uint256	n_u	= {.uu256 = n};
-	const	uint_fast64_t	cnt_a	= _mm_popcnt_u64(n_u.uu64[0]);
-	const	uint_fast64_t	cnt_b	= _mm_popcnt_u64(n_u.uu64[1]);
-	const	uint_fast64_t	cnt_c	= _mm_popcnt_u64(n_u.uu64[2]);
-	const	uint_fast64_t	cnt_d	= _mm_popcnt_u64(n_u.uu64[3]);
+	const	uint_fast64_t	cnt_a	= popcnt_u64((uint64_t)n);
+	const	uint_fast64_t	cnt_b	= popcnt_u64((uint64_t)(n >> 64));
+	const	uint_fast64_t	cnt_c	= popcnt_u64((uint64_t)(n >> (64 * 2)));
+	const	uint_fast64_t	cnt_d	= popcnt_u64((uint64_t)(n >> (64 * 3)));
 	const	uint_fast64_t	cnt	= cnt_a + cnt_b + cnt_c + cnt_d;
 
 	return	cnt;
