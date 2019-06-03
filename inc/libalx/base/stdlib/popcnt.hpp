@@ -56,7 +56,7 @@ extern	"C"
 static inline	uint8_t		popcnt_u8	(uint8_t n);
 static inline	uint16_t	popcnt_u16	(uint16_t n);
 static inline	uint32_t	popcnt_u32	(uint32_t n);
-static inline	uint64_t	popcnt_u64	(uint32_t n);
+static inline	uint64_t	popcnt_u64	(uint64_t n);
 #if defined(uint128_t)
 static inline	uint64_t	popcnt_u128	(uint128_t n);
 #endif
