@@ -49,7 +49,7 @@ long double	alx_ldbl_factorial		(int16_t n);
 double		alx_factorial			(int16_t n);
 float		alx_flt_factorial		(int16_t n);
 int		alx_factorial_factorized	(int16_t n,
-				int16_t (*restrict pf)[PRIME_NUMBERS_QTY_S16]);
+				int16_t pf[static restrict PRIME_NUMS_QTY_16b]);
 }
 
 

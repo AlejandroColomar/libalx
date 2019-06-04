@@ -50,7 +50,7 @@
  ******************************************************************************/
 long double	alx_ldbl_binomial_coefficient		(int16_t n, int16_t k)
 {
-	int16_t	pf[PRIME_NUMBERS_QTY_S16];
+	int16_t	pf[PRIME_NUMS_QTY_16b];
 
 	if ((n < 0) || (k < 0)) {
 		errno	= EDOM;
@@ -63,15 +63,15 @@ long double	alx_ldbl_binomial_coefficient		(int16_t n, int16_t k)
 	if (k == 1)
 		return	n;
 
-	if (alx_binomial_coefficient_factorized(n, k, &pf))
+	if (alx_binomial_coefficient_factorized(n, k, pf))
 		return	nanl("");
 
-	return	alx_ldbl_prime_defactorization_s16((const int16_t (*)[])&pf);
+	return	alx_ldbl_prime_defactorization_16b(pf);
 }
 
 double		alx_binomial_coefficient		(int16_t n, int16_t k)
 {
-	int16_t	pf[PRIME_NUMBERS_QTY_S16];
+	int16_t	pf[PRIME_NUMS_QTY_16b];
 
 	if ((n < 0) || (k < 0)) {
 		errno	= EDOM;
@@ -84,15 +84,15 @@ double		alx_binomial_coefficient		(int16_t n, int16_t k)
 	if (k == 1)
 		return	n;
 
-	if (alx_binomial_coefficient_factorized(n, k, &pf))
+	if (alx_binomial_coefficient_factorized(n, k, pf))
 		return	nan("");
 
-	return	alx_prime_defactorization_s16((const int16_t (*)[])&pf);
+	return	alx_prime_defactorization_16b(pf);
 }
 
 float		alx_flt_binomial_coefficient		(int16_t n, int16_t k)
 {
-	int16_t	pf[PRIME_NUMBERS_QTY_S16];
+	int16_t	pf[PRIME_NUMS_QTY_16b];
 
 	if ((n < 0) || (k < 0)) {
 		errno	= EDOM;
@@ -105,14 +105,14 @@ float		alx_flt_binomial_coefficient		(int16_t n, int16_t k)
 	if (k == 1)
 		return	n;
 
-	if (alx_binomial_coefficient_factorized(n, k, &pf))
+	if (alx_binomial_coefficient_factorized(n, k, pf))
 		return	nanf("");
 
-	return	alx_flt_prime_defactorization_s16((const int16_t (*)[])&pf);
+	return	alx_flt_prime_defactorization_16b(pf);
 }
 
 int		alx_binomial_coefficient_factorized	(int16_t n, int16_t k,
-				int16_t (*restrict pf)[PRIME_NUMBERS_QTY_S16])
+				int16_t pf[static restrict PRIME_NUMS_QTY_16b])
 {
 
 	if ((n < 0) || (k < 0)) {
@@ -120,7 +120,7 @@ int		alx_binomial_coefficient_factorized	(int16_t n, int16_t k,
 		return	-EDOM;
 	}
 
-	memset(pf, 0, sizeof(*pf));
+	memset(pf, 0, sizeof(pf[0]) * PRIME_NUMS_QTY_16b);
 
 	if (k > n) {
 		errno	= EDOM;

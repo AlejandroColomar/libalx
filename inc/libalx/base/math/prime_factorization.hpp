@@ -45,14 +45,12 @@
  ******************************************************************************/
 extern	"C"
 {
-int	alx_prime_factorization_s8	(int8_t n,
-				int8_t (*restrict pf)[PRIME_NUMBERS_QTY_S8]);
-int	alx_prime_factorization_u8	(uint8_t n,
-				int8_t (*restrict pf)[PRIME_NUMBERS_QTY_U8]);
-int	alx_prime_factorization_s16	(int16_t n,
-				int16_t (*restrict pf)[PRIME_NUMBERS_QTY_S16]);
-int	alx_prime_factorization_u16	(uint16_t n,
-				int16_t (*restrict pf)[PRIME_NUMBERS_QTY_U16]);
+void	alx_prime_factorization_8b_init		(void);
+void	alx_prime_factorization_16b_init	(void);
+int	alx_prime_factorization_8b		(uint8_t n,
+				int8_t pf[static restrict PRIME_NUMS_QTY_8b]);
+int	alx_prime_factorization_16b		(uint16_t n,
+				int16_t pf[static restrict PRIME_NUMS_QTY_16b]);
 }
 
 

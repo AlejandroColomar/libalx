@@ -51,7 +51,7 @@
  ******************************************************************************/
 long double	alx_ldbl_factorial		(int16_t n)
 {
-	int16_t	pf[PRIME_NUMBERS_QTY_S16];
+	int16_t	pf[PRIME_NUMS_QTY_16b];
 
 	if (n < 0) {
 		errno	= EDOM;
@@ -60,15 +60,15 @@ long double	alx_ldbl_factorial		(int16_t n)
 	if (!n)
 		return	1;
 
-	if (alx_factorial_factorized(n, &pf))
+	if (alx_factorial_factorized(n, pf))
 		return	nanl("");
 
-	return	alx_ldbl_prime_defactorization_s16((const int16_t (*)[])&pf);
+	return	alx_ldbl_prime_defactorization_16b(pf);
 }
 
 double		alx_factorial			(int16_t n)
 {
-	int16_t	pf[PRIME_NUMBERS_QTY_S16];
+	int16_t	pf[PRIME_NUMS_QTY_16b];
 
 	if (n < 0) {
 		errno	= EDOM;
@@ -77,15 +77,15 @@ double		alx_factorial			(int16_t n)
 	if (!n)
 		return	1;
 
-	if (alx_factorial_factorized(n, &pf))
+	if (alx_factorial_factorized(n, pf))
 		return	nan("");
 
-	return	alx_prime_defactorization_s16((const int16_t (*)[])&pf);
+	return	alx_prime_defactorization_16b(pf);
 }
 
 float		alx_flt_factorial		(int16_t n)
 {
-	int16_t	pf[PRIME_NUMBERS_QTY_S16];
+	int16_t	pf[PRIME_NUMS_QTY_16b];
 
 	if (n < 0) {
 		errno	= EDOM;
@@ -94,30 +94,30 @@ float		alx_flt_factorial		(int16_t n)
 	if (!n)
 		return	1;
 
-	if (alx_factorial_factorized(n, &pf))
+	if (alx_factorial_factorized(n, pf))
 		return	nanf("");
 
-	return	alx_flt_prime_defactorization_s16((const int16_t (*)[])&pf);
+	return	alx_flt_prime_defactorization_16b(pf);
 }
 
 int		alx_factorial_factorized	(int16_t n,
-				int16_t (*restrict pf)[PRIME_NUMBERS_QTY_S16])
+				int16_t pf[static restrict PRIME_NUMS_QTY_16b])
 {
-	int16_t	tmp[PRIME_NUMBERS_QTY_S16];
+	int16_t	tmp[PRIME_NUMS_QTY_16b];
 
 	if (n < 0) {
 		errno	= EDOM;
 		return	-1;
 	}
 
-	memset(pf, 0, sizeof(*pf));
+	memset(pf, 0, sizeof(pf[0]) * PRIME_NUMS_QTY_16b);
 
 	if (!n)
 		return	0;
 
 	for (int_fast16_t i = n; i > 1; i--) {
-		alx_prime_factorization_s16(i, &tmp);
-		alx_matrix_addition_s16(ARRAY_SSIZE(*pf), *pf, *pf, tmp);
+		alx_prime_factorization_16b(i, tmp);
+		alx_matrix_addition_s16(PRIME_NUMS_QTY_16b, pf, pf, tmp);
 	}
 
 	if (errno)

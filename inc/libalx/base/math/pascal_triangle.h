@@ -46,7 +46,7 @@ long double	alx_ldbl_pascal_triangle	(int16_t n, int16_t k);
 double		alx_pascal_triangle		(int16_t n, int16_t k);
 float		alx_flt_pascal_triangle		(int16_t n, int16_t k);
 int		alx_pascal_triangle_factorized	(int16_t n, int16_t k,
-				int16_t (*restrict pf)[PRIME_NUMBERS_QTY_S16]);
+				int16_t pf[static restrict PRIME_NUMS_QTY_16b]);
 
 
 /******************************************************************************

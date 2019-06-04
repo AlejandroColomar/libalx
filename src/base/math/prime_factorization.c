@@ -26,6 +26,12 @@
 /******************************************************************************
  ******* enums ****************************************************************
  ******************************************************************************/
+enum	Prime_Factorization {
+	PF_FACTOR,
+	PF_NEXT,
+
+	PF_LUT
+};
 
 
 /******************************************************************************
@@ -36,6 +42,10 @@
 /******************************************************************************
  ******* variables ************************************************************
  ******************************************************************************/
+/* global --------------------------------------------------------------------*/
+	int8_t	alx_factors_8b [UINT8_MAX][PF_LUT];
+	int16_t	alx_factors_16b [UINT16_MAX][PF_LUT];
+/* static --------------------------------------------------------------------*/
 
 
 /******************************************************************************
@@ -46,170 +56,94 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_prime_factorization_s8	(int8_t n,
-				int8_t (*restrict pf)[PRIME_NUMBERS_QTY_S8])
+void	alx_prime_factorization_8b_init		(void)
 {
-	ptrdiff_t	prime_index;
-	int_fast8_t	tmp;
+	ptrdiff_t	tmp;
 
-	if (!n) {
-		errno	= EDOM;
-		return	-1;
-	}
+	alx_factors_8b[0][PF_FACTOR]	= -1;
+	alx_factors_8b[0][PF_NEXT]	= 0;
+	alx_factors_8b[1][PF_FACTOR]	= -1;
+	alx_factors_8b[1][PF_NEXT]	= 0;
 
-	memset(*pf, 0, sizeof(*pf));
-	if (n < 0) {
-		errno	= EDOM;
-		n	= -n;
-	}
-	if (n == 1)
-		return	0;
-
-	prime_index	= alx_prime_index_s8(n);
-	if (prime_index != -1) {
-		(*pf)[prime_index]	= 1;
-		return	0;
-	}
-
-	tmp	= n;
-	for (ptrdiff_t i = 0; true; i++) {
-		while (!(tmp % alx_prime_s8[i])) {
-			(*pf)[i]++;
-			tmp	/= alx_prime_s8[i];
-
-			if (tmp == 1)
-				return	0;
-			prime_index = alx_prime_index_s8(tmp);
-			if (prime_index != -1) {
-				(*pf)[prime_index]	= 1;
-				return	0;
+	for (ptrdiff_t i = 0; i < PRIME_NUMS_QTY_8b; i++) {
+		tmp	= alx_prime_8b[i];
+		for (ptrdiff_t j = tmp; j < UINT8_MAX; j += tmp) {
+			if (!alx_factors_8b[j][PF_NEXT]  &&  !(j % tmp)) {
+				alx_factors_8b[j][PF_FACTOR]	= i;
+				alx_factors_8b[j][PF_NEXT]	= j / tmp;
 			}
 		}
 	}
 }
 
-int	alx_prime_factorization_u8	(uint8_t n,
-				int8_t (*restrict pf)[PRIME_NUMBERS_QTY_U8])
+void	alx_prime_factorization_16b_init	(void)
 {
-	ptrdiff_t	prime_index;
-	uint_fast8_t	tmp;
+	ptrdiff_t	tmp;
 
-	if (!n) {
-		errno	= EDOM;
-		return	-1;
-	}
+	alx_factors_16b[0][PF_FACTOR]	= -1;
+	alx_factors_16b[0][PF_NEXT]	= 0;
+	alx_factors_16b[1][PF_FACTOR]	= -1;
+	alx_factors_16b[1][PF_NEXT]	= 0;
 
-	memset(*pf, 0, sizeof(*pf));
-	if (n == 1)
-		return	0;
-
-	prime_index	= alx_prime_index_u8(n);
-	if (prime_index != -1) {
-		(*pf)[prime_index]	= 1;
-		return	0;
-	}
-
-	tmp	= n;
-	for (ptrdiff_t i = 0; true; i++) {
-		while (!(tmp % alx_prime_u8[i])) {
-			(*pf)[i]++;
-			tmp	/= alx_prime_u8[i];
-
-			if (tmp == 1)
-				return	0;
-			prime_index = alx_prime_index_u8(tmp);
-			if (prime_index != -1) {
-				(*pf)[prime_index]	= 1;
-				return	0;
+	for (ptrdiff_t i = 0; i < PRIME_NUMS_QTY_16b; i++) {
+		tmp	= alx_prime_16b[i];
+		for (ptrdiff_t j = tmp; j < UINT16_MAX; j += tmp) {
+			if (!alx_factors_16b[j][PF_NEXT]  &&  !(j % tmp)) {
+				alx_factors_16b[j][PF_FACTOR]	= i;
+				alx_factors_16b[j][PF_NEXT]	= j / tmp;
 			}
 		}
 	}
 }
 
-int	alx_prime_factorization_s16	(int16_t n,
-				int16_t (*restrict pf)[PRIME_NUMBERS_QTY_S16])
+int	alx_prime_factorization_8b		(uint8_t n,
+				int8_t pf[static restrict PRIME_NUMS_QTY_8b])
 {
-	ptrdiff_t	prime_index;
-	int_fast16_t	tmp;
 
 	if (!n) {
 		errno	= EDOM;
-		return	-1;
+		return	-EDOM;
 	}
 
-	memset(*pf, 0, sizeof(*pf));
-	if (n < 0) {
-		errno	= EDOM;
-		n	= -n;
-	}
+	memset(pf, 0, sizeof(pf[0]) * PRIME_NUMS_QTY_8b);
 	if (n == 1)
 		return	0;
 
-	if (!alx_prime_s16[0])
-		alx_prime_s16_init();
+	if (!alx_factors_8b[(3)][PF_FACTOR])
+		alx_prime_factorization_8b_init();
 
-	prime_index	= alx_prime_index_s16(n);
-	if (prime_index != -1) {
-		(*pf)[prime_index]	= 1;
-		return	0;
-	}
+	do {
+		pf[alx_factors_8b[n][PF_FACTOR]]++;
+		n	= alx_factors_8b[n][PF_NEXT];
+	} while (n > 1);
 
-	tmp	= n;
-	for (ptrdiff_t i = 0; true; i++) {
-		while (!(tmp % alx_prime_s16[i])) {
-			(*pf)[i]++;
-			tmp	/= alx_prime_s16[i];
-
-			if (tmp == 1)
-				return	0;
-			prime_index = alx_prime_index_s16(tmp);
-			if (prime_index != -1) {
-				(*pf)[prime_index]++;
-				return	0;
-			}
-		}
-	}
+	return	0;
 }
 
-int	alx_prime_factorization_u16	(uint16_t n,
-				int16_t (*restrict pf)[PRIME_NUMBERS_QTY_U16])
+int	alx_prime_factorization_16b		(uint16_t n,
+				int16_t pf[static restrict PRIME_NUMS_QTY_16b])
 {
-	ptrdiff_t	prime_index;
-	uint_fast16_t	tmp;
 
 	if (!n) {
 		errno	= EDOM;
-		return	-1;
+		return	-EDOM;
 	}
 
-	memset(*pf, 0, sizeof(*pf));
+	memset(pf, 0, sizeof(pf[0]) * PRIME_NUMS_QTY_16b);
 	if (n == 1)
 		return	0;
 
-	if (!alx_prime_u16[0])
-		alx_prime_u16_init();
+	if (!alx_prime_16b[0])
+		alx_prime_16b_init();
+	if (!alx_factors_16b[(3)][PF_FACTOR])
+		alx_prime_factorization_16b_init();
 
-	prime_index	= alx_prime_index_u16(n);
-	if (prime_index != -1) {
-		(*pf)[prime_index]	= 1;
-		return	0;
-	}
+	do {
+		pf[alx_factors_16b[n][PF_FACTOR]]++;
+		n	= alx_factors_16b[n][PF_NEXT];
+	} while (n > 1);
 
-	tmp	= n;
-	for (ptrdiff_t i = 0; true; i++) {
-		while (!(tmp % alx_prime_u16[i])) {
-			(*pf)[i]++;
-			tmp	/= alx_prime_u16[i];
-
-			if (tmp == 1)
-				return	0;
-			prime_index = alx_prime_index_u16(tmp);
-			if (prime_index != -1) {
-				(*pf)[prime_index]	= 1;
-				return	0;
-			}
-		}
-	}
+	return	0;
 }
 
 

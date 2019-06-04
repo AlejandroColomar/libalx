@@ -46,80 +46,40 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-long double	alx_ldbl_prime_defactorization_s8(
-			const int8_t (*restrict pf)[PRIME_NUMBERS_QTY_S8])
+long double	alx_ldbl_prime_defactorization_8b(
+			const int8_t pf[static restrict PRIME_NUMS_QTY_8b])
 {
 	long double	n;
 	long double	tmp;
 	int_fast8_t	exp;
 
 	n	= 1;
-	for (ptrdiff_t i = 0; i < ARRAY_SSIZE(*pf); i++) {
-		exp	= abs((*pf)[i]);
-		tmp	= powl(alx_prime_s8[i], exp);
-		if ((*pf)[i] > 0)
+	for (ptrdiff_t i = 0; i < PRIME_NUMS_QTY_8b; i++) {
+		exp	= abs(pf[i]);
+		tmp	= powl(alx_prime_8b[i], exp);
+		if (pf[i] > 0)
 			n *= tmp;
-		else if ((*pf)[i] < 0)
+		else if (pf[i] < 0)
 			n /= tmp;
 	}
 
 	return	n;
 }
 
-long double	alx_ldbl_prime_defactorization_u8(
-			const int8_t (*restrict pf)[PRIME_NUMBERS_QTY_U8])
-{
-	long double	n;
-	long double	tmp;
-	int_fast8_t	exp;
-
-	n	= 1;
-	for (ptrdiff_t i = 0; i < ARRAY_SSIZE(*pf); i++) {
-		exp	= abs((*pf)[i]);
-		tmp	= powl(alx_prime_u8[i], exp);
-		if ((*pf)[i] > 0)
-			n *= tmp;
-		else if ((*pf)[i] < 0)
-			n /= tmp;
-	}
-
-	return	n;
-}
-
-long double	alx_ldbl_prime_defactorization_s16(
-			const int16_t (*restrict pf)[PRIME_NUMBERS_QTY_S16])
+long double	alx_ldbl_prime_defactorization_16b(
+			const int16_t pf[static restrict PRIME_NUMS_QTY_16b])
 {
 	long double	n;
 	long double	tmp;
 	int_fast16_t	exp;
 
 	n	= 1;
-	for (ptrdiff_t i = 0; i < ARRAY_SSIZE(*pf); i++) {
-		exp	= abs((*pf)[i]);
-		tmp	= powl(alx_prime_s16[i], exp);
-		if ((*pf)[i] > 0)
+	for (ptrdiff_t i = 0; i < PRIME_NUMS_QTY_16b; i++) {
+		exp	= abs(pf[i]);
+		tmp	= powl(alx_prime_16b[i], exp);
+		if (pf[i] > 0)
 			n *= tmp;
-		else if ((*pf)[i] < 0)
-			n /= tmp;
-	}
-
-	return	n;
-}
-
-long double	alx_ldbl_prime_defactorization_u16(
-			const int16_t (*restrict pf)[PRIME_NUMBERS_QTY_U16])
-{
-	long double	n;
-	long double	tmp;
-	int_fast16_t	exp;
-
-	n	= 1;
-	for (ptrdiff_t i = 0; i < ARRAY_SSIZE(*pf); i++) {
-		exp	= abs((*pf)[i]);
-		tmp	= powl(alx_prime_u16[i], exp);
-		if ((*pf)[i] > 0)
-			n *= tmp;
-		else if ((*pf)[i] < 0)
+		else if (pf[i] < 0)
 			n /= tmp;
 	}
 
@@ -127,80 +87,40 @@ long double	alx_ldbl_prime_defactorization_u16(
 }
 
 
-double		alx_prime_defactorization_s8(
-			const int8_t (*restrict pf)[PRIME_NUMBERS_QTY_S8])
+double		alx_prime_defactorization_8b(
+			const int8_t pf[static restrict PRIME_NUMS_QTY_8b])
 {
 	double_t	n;
 	double_t	tmp;
 	int_fast8_t	exp;
 
 	n	= 1;
-	for (ptrdiff_t i = 0; i < ARRAY_SSIZE(*pf); i++) {
-		exp	= abs((*pf)[i]);
-		tmp	= pow(alx_prime_s8[i], exp);
-		if ((*pf)[i] > 0)
+	for (ptrdiff_t i = 0; i < PRIME_NUMS_QTY_8b; i++) {
+		exp	= abs(pf[i]);
+		tmp	= pow(alx_prime_8b[i], exp);
+		if (pf[i] > 0)
 			n *= tmp;
-		else if ((*pf)[i] < 0)
+		else if (pf[i] < 0)
 			n /= tmp;
 	}
 
 	return	n;
 }
 
-double		alx_prime_defactorization_u8(
-			const int8_t (*restrict pf)[PRIME_NUMBERS_QTY_U8])
-{
-	double_t	n;
-	double_t	tmp;
-	int_fast8_t	exp;
-
-	n	= 1;
-	for (ptrdiff_t i = 0; i < ARRAY_SSIZE(*pf); i++) {
-		exp	= abs((*pf)[i]);
-		tmp	= pow(alx_prime_u8[i], exp);
-		if ((*pf)[i] > 0)
-			n *= tmp;
-		else if ((*pf)[i] < 0)
-			n /= tmp;
-	}
-
-	return	n;
-}
-
-double		alx_prime_defactorization_s16(
-			const int16_t (*restrict pf)[PRIME_NUMBERS_QTY_S16])
+double		alx_prime_defactorization_16b(
+			const int16_t pf[static restrict PRIME_NUMS_QTY_16b])
 {
 	double_t	n;
 	double_t	tmp;
 	int_fast16_t	exp;
 
 	n	= 1;
-	for (ptrdiff_t i = 0; i < ARRAY_SSIZE(*pf); i++) {
-		exp	= abs((*pf)[i]);
-		tmp	= pow(alx_prime_s16[i], exp);
-		if ((*pf)[i] > 0)
+	for (ptrdiff_t i = 0; i < PRIME_NUMS_QTY_16b; i++) {
+		exp	= abs(pf[i]);
+		tmp	= pow(alx_prime_16b[i], exp);
+		if (pf[i] > 0)
 			n *= tmp;
-		else if ((*pf)[i] < 0)
-			n /= tmp;
-	}
-
-	return	n;
-}
-
-double		alx_prime_defactorization_u16(
-			const int16_t (*restrict pf)[PRIME_NUMBERS_QTY_U16])
-{
-	double_t	n;
-	double_t	tmp;
-	int_fast16_t	exp;
-
-	n	= 1;
-	for (ptrdiff_t i = 0; i < ARRAY_SSIZE(*pf); i++) {
-		exp	= abs((*pf)[i]);
-		tmp	= pow(alx_prime_u16[i], exp);
-		if ((*pf)[i] > 0)
-			n *= tmp;
-		else if ((*pf)[i] < 0)
+		else if (pf[i] < 0)
 			n /= tmp;
 	}
 
@@ -208,80 +128,40 @@ double		alx_prime_defactorization_u16(
 }
 
 
-float		alx_flt_prime_defactorization_s8(
-			const int8_t (*restrict pf)[PRIME_NUMBERS_QTY_S8])
+float		alx_flt_prime_defactorization_8b(
+			const int8_t pf[static restrict PRIME_NUMS_QTY_8b])
 {
 	float_t		n;
 	float_t		tmp;
 	int_fast8_t	exp;
 
 	n	= 1;
-	for (ptrdiff_t i = 0; i < ARRAY_SSIZE(*pf); i++) {
-		exp	= abs((*pf)[i]);
-		tmp	= powf(alx_prime_s8[i], exp);
-		if ((*pf)[i] > 0)
+	for (ptrdiff_t i = 0; i < PRIME_NUMS_QTY_8b; i++) {
+		exp	= abs(pf[i]);
+		tmp	= powf(alx_prime_8b[i], exp);
+		if (pf[i] > 0)
 			n *= tmp;
-		else if ((*pf)[i] < 0)
+		else if (pf[i] < 0)
 			n /= tmp;
 	}
 
 	return	n;
 }
 
-float		alx_flt_prime_defactorization_u8(
-			const int8_t (*restrict pf)[PRIME_NUMBERS_QTY_U8])
-{
-	float_t		n;
-	float_t		tmp;
-	int_fast8_t	exp;
-
-	n	= 1;
-	for (ptrdiff_t i = 0; i < ARRAY_SSIZE(*pf); i++) {
-		exp	= abs((*pf)[i]);
-		tmp	= powf(alx_prime_u8[i], exp);
-		if ((*pf)[i] > 0)
-			n *= tmp;
-		else if ((*pf)[i] < 0)
-			n /= tmp;
-	}
-
-	return	n;
-}
-
-float		alx_flt_prime_defactorization_s16(
-			const int16_t (*restrict pf)[PRIME_NUMBERS_QTY_S16])
+float		alx_flt_prime_defactorization_16b(
+			const int16_t pf[static restrict PRIME_NUMS_QTY_16b])
 {
 	float_t		n;
 	float_t		tmp;
 	int_fast16_t	exp;
 
 	n	= 1;
-	for (ptrdiff_t i = 0; i < ARRAY_SSIZE(*pf); i++) {
-		exp	= abs((*pf)[i]);
-		tmp	= powf(alx_prime_s16[i], exp);
-		if ((*pf)[i] > 0)
+	for (ptrdiff_t i = 0; i < PRIME_NUMS_QTY_16b; i++) {
+		exp	= abs(pf[i]);
+		tmp	= powf(alx_prime_16b[i], exp);
+		if (pf[i] > 0)
 			n *= tmp;
-		else if ((*pf)[i] < 0)
-			n /= tmp;
-	}
-
-	return	n;
-}
-
-float		alx_flt_prime_defactorization_u16(
-			const int16_t (*restrict pf)[PRIME_NUMBERS_QTY_U16])
-{
-	float_t		n;
-	float_t		tmp;
-	int_fast16_t	exp;
-
-	n	= 1;
-	for (ptrdiff_t i = 0; i < ARRAY_SSIZE(*pf); i++) {
-		exp	= abs((*pf)[i]);
-		tmp	= powf(alx_prime_u16[i], exp);
-		if ((*pf)[i] > 0)
-			n *= tmp;
-		else if ((*pf)[i] < 0)
+		else if (pf[i] < 0)
 			n /= tmp;
 	}
 
