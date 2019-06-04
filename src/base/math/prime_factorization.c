@@ -26,7 +26,7 @@
 /******************************************************************************
  ******* enums ****************************************************************
  ******************************************************************************/
-enum	Prime_Factorization {
+enum	{
 	PF_FACTOR,
 	PF_NEXT,
 
@@ -97,7 +97,8 @@ void	alx_prime_factorization_16b_init	(void)
 }
 
 int	alx_prime_factorization_8b		(uint8_t n,
-				int8_t pf[static restrict PRIME_NUMS_QTY_8b])
+				int8_t pf[static restrict PRIME_NUMS_QTY_8b],
+				bool denominator)
 {
 
 	if (!n) {
@@ -105,7 +106,6 @@ int	alx_prime_factorization_8b		(uint8_t n,
 		return	-EDOM;
 	}
 
-	memset(pf, 0, sizeof(pf[0]) * PRIME_NUMS_QTY_8b);
 	if (n == 1)
 		return	0;
 
@@ -113,7 +113,10 @@ int	alx_prime_factorization_8b		(uint8_t n,
 		alx_prime_factorization_8b_init();
 
 	do {
-		pf[alx_factors_8b[n][PF_FACTOR]]++;
+		if (denominator)
+			pf[alx_factors_8b[n][PF_FACTOR]]--;
+		else
+			pf[alx_factors_8b[n][PF_FACTOR]]++;
 		n	= alx_factors_8b[n][PF_NEXT];
 	} while (n > 1);
 
@@ -121,7 +124,8 @@ int	alx_prime_factorization_8b		(uint8_t n,
 }
 
 int	alx_prime_factorization_16b		(uint16_t n,
-				int16_t pf[static restrict PRIME_NUMS_QTY_16b])
+				int16_t pf[static restrict PRIME_NUMS_QTY_16b],
+				bool denominator)
 {
 
 	if (!n) {
@@ -129,7 +133,6 @@ int	alx_prime_factorization_16b		(uint16_t n,
 		return	-EDOM;
 	}
 
-	memset(pf, 0, sizeof(pf[0]) * PRIME_NUMS_QTY_16b);
 	if (n == 1)
 		return	0;
 
@@ -139,7 +142,10 @@ int	alx_prime_factorization_16b		(uint16_t n,
 		alx_prime_factorization_16b_init();
 
 	do {
-		pf[alx_factors_16b[n][PF_FACTOR]]++;
+		if (denominator)
+			pf[alx_factors_16b[n][PF_FACTOR]]--;
+		else
+			pf[alx_factors_16b[n][PF_FACTOR]]++;
 		n	= alx_factors_16b[n][PF_NEXT];
 	} while (n > 1);
 

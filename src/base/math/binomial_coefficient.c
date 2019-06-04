@@ -63,6 +63,7 @@ long double	alx_ldbl_binomial_coefficient		(int16_t n, int16_t k)
 	if (k == 1)
 		return	n;
 
+	memset(pf, 0, sizeof(pf));
 	if (alx_binomial_coefficient_factorized(n, k, pf))
 		return	nanl("");
 
@@ -84,6 +85,7 @@ double		alx_binomial_coefficient		(int16_t n, int16_t k)
 	if (k == 1)
 		return	n;
 
+	memset(pf, 0, sizeof(pf));
 	if (alx_binomial_coefficient_factorized(n, k, pf))
 		return	nan("");
 
@@ -105,6 +107,7 @@ float		alx_flt_binomial_coefficient		(int16_t n, int16_t k)
 	if (k == 1)
 		return	n;
 
+	memset(pf, 0, sizeof(pf));
 	if (alx_binomial_coefficient_factorized(n, k, pf))
 		return	nanf("");
 
@@ -119,8 +122,6 @@ int		alx_binomial_coefficient_factorized	(int16_t n, int16_t k,
 		errno	= EDOM;
 		return	-EDOM;
 	}
-
-	memset(pf, 0, sizeof(pf[0]) * PRIME_NUMS_QTY_16b);
 
 	if (k > n) {
 		errno	= EDOM;

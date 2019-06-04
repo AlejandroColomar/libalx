@@ -63,6 +63,7 @@ long double	alx_ldbl_pascal_triangle	(int16_t n, int16_t k)
 	if (k > (n / 2))
 		return	alx_ldbl_pascal_triangle(n, n - k);
 
+	memset(pf, 0, sizeof(pf));
 	if (alx_pascal_triangle_factorized(n, k, pf))
 		return	nanl("");
 
@@ -82,6 +83,7 @@ double		alx_pascal_triangle		(int16_t n, int16_t k)
 	if (k > (n / 2))
 		return	alx_pascal_triangle(n, n - k);
 
+	memset(pf, 0, sizeof(pf));
 	if (alx_pascal_triangle_factorized(n, k, pf))
 		return	nan("");
 
@@ -101,6 +103,7 @@ float		alx_flt_pascal_triangle		(int16_t n, int16_t k)
 	if (k > (n / 2))
 		return	alx_flt_pascal_triangle(n, n - k);
 
+	memset(pf, 0, sizeof(pf));
 	if (alx_pascal_triangle_factorized(n, k, pf))
 		return	nanf("");
 
@@ -110,7 +113,6 @@ float		alx_flt_pascal_triangle		(int16_t n, int16_t k)
 int		alx_pascal_triangle_factorized	(int16_t n, int16_t k,
 				int16_t pf[static restrict PRIME_NUMS_QTY_16b])
 {
-	int16_t	tmp[PRIME_NUMS_QTY_16b];
 
 	if ((n < 0) || (k < 0) || (k > n)) {
 		errno	= EDOM;
@@ -120,16 +122,12 @@ int		alx_pascal_triangle_factorized	(int16_t n, int16_t k,
 	if (k > (n / 2))
 		return	alx_pascal_triangle_factorized(n, n - k, pf);
 
-	memset(pf, 0, sizeof(pf[0]) * PRIME_NUMS_QTY_16b);
-
 	if (!k)
 		return	0;
 
 	for (int_fast16_t i = 0; i < k; i++) {
-		alx_prime_factorization_16b(i + 1, tmp);
-		alx_matrix_subtraction_s16(PRIME_NUMS_QTY_16b, pf, pf, tmp);
-		alx_prime_factorization_16b(n - i, tmp);
-		alx_matrix_addition_s16(PRIME_NUMS_QTY_16b, pf, pf, tmp);
+		alx_prime_factorization_16b(n - i, pf, PF_NUMERATOR);
+		alx_prime_factorization_16b(i + 1, pf, PF_DENOMINATOR);
 	}
 
 	return	-errno;

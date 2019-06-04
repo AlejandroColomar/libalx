@@ -14,6 +14,7 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include <cstdbool>
 #include <cstdint>
 
 #include "libalx/base/math/prime.hpp"
@@ -28,6 +29,10 @@
 /******************************************************************************
  ******* enums ****************************************************************
  ******************************************************************************/
+enum	{
+	PF_NUMERATOR,
+	PF_DENOMINATOR
+};
 
 
 /******************************************************************************
@@ -48,9 +53,11 @@ extern	"C"
 void	alx_prime_factorization_8b_init		(void);
 void	alx_prime_factorization_16b_init	(void);
 int	alx_prime_factorization_8b		(uint8_t n,
-				int8_t pf[static restrict PRIME_NUMS_QTY_8b]);
+				int8_t pf[static restrict PRIME_NUMS_QTY_8b],
+				bool denominator);
 int	alx_prime_factorization_16b		(uint16_t n,
-				int16_t pf[static restrict PRIME_NUMS_QTY_16b]);
+				int16_t pf[static restrict PRIME_NUMS_QTY_16b],
+				bool denominator);
 }
 
 

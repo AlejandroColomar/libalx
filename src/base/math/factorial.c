@@ -60,6 +60,7 @@ long double	alx_ldbl_factorial		(int16_t n)
 	if (!n)
 		return	1;
 
+	memset(pf, 0, sizeof(pf));
 	if (alx_factorial_factorized(n, pf))
 		return	nanl("");
 
@@ -77,6 +78,7 @@ double		alx_factorial			(int16_t n)
 	if (!n)
 		return	1;
 
+	memset(pf, 0, sizeof(pf));
 	if (alx_factorial_factorized(n, pf))
 		return	nan("");
 
@@ -94,6 +96,7 @@ float		alx_flt_factorial		(int16_t n)
 	if (!n)
 		return	1;
 
+	memset(pf, 0, sizeof(pf));
 	if (alx_factorial_factorized(n, pf))
 		return	nanf("");
 
@@ -103,22 +106,17 @@ float		alx_flt_factorial		(int16_t n)
 int		alx_factorial_factorized	(int16_t n,
 				int16_t pf[static restrict PRIME_NUMS_QTY_16b])
 {
-	int16_t	tmp[PRIME_NUMS_QTY_16b];
 
 	if (n < 0) {
 		errno	= EDOM;
 		return	-1;
 	}
 
-	memset(pf, 0, sizeof(pf[0]) * PRIME_NUMS_QTY_16b);
-
 	if (!n)
 		return	0;
 
-	for (int_fast16_t i = n; i > 1; i--) {
-		alx_prime_factorization_16b(i, tmp);
-		alx_matrix_addition_s16(PRIME_NUMS_QTY_16b, pf, pf, tmp);
-	}
+	for (int_fast16_t i = n; i > 1; i--)
+		alx_prime_factorization_16b(i, pf, PF_NUMERATOR);
 
 	if (errno)
 		return	-2;
