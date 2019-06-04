@@ -75,7 +75,7 @@ double		alx_pascal_triangle		(int16_t n, int16_t k)
 
 	if ((n < 0) || (k < 0) || (k > n)) {
 		errno	= EDOM;
-		return	nanl("");
+		return	nan("");
 	}
 	if (!k)
 		return	1;
@@ -94,7 +94,7 @@ float		alx_flt_pascal_triangle		(int16_t n, int16_t k)
 
 	if ((n < 0) || (k < 0) || (k > n)) {
 		errno	= EDOM;
-		return	nanl("");
+		return	nanf("");
 	}
 	if (!k)
 		return	1;
