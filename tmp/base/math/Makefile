@@ -81,8 +81,7 @@ DESCRIPTIVE_STATISTICS_2VAR_SRC	=					\
 		$(SRC_DIR)/base/math/descriptive_statistics_2var.c
 
 DISTRIBUTION_BINOMIAL_INC	=					\
-		$(INC_DIR)/libalx/base/math/distribution_binomial.h	\
-		$(INC_DIR)/libalx/base/math/binomial_coefficient.h
+		$(INC_DIR)/libalx/base/math/distribution_binomial.h
 DISTRIBUTION_BINOMIAL_SRC	=					\
 		$(SRC_DIR)/base/math/distribution_binomial.c
 

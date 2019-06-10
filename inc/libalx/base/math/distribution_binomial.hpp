@@ -14,16 +14,14 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include <cerrno>
+#include <cmath>
 #include <cstdint>
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-#define DIST_BINOMIAL_n_MIN	(0)
-#define DIST_BINOMIAL_p_MIN	(0.0)
-#define DIST_BINOMIAL_p_MAX	(1.0)
-#define DIST_BINOMIAL_x_MIN	(0)
 
 
 /******************************************************************************
@@ -44,33 +42,104 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
-extern	"C"
-{
-long double	alx_ldbl_distribution_binomial_P(int16_t n, long double p,
-						int16_t x);
-double		alx_distribution_binomial_P	(int16_t n, double p,
-						int16_t x);
-float		alx_flt_distribution_binomial_P	(int16_t n, float p,
-						int16_t x);
-
-long double	alx_ldbl_distribution_binomial_E(int16_t n, long double p);
-double		alx_distribution_binomial_E	(int16_t n, double p);
-float		alx_flt_distribution_binomial_E	(int16_t n, float p);
-
-long double	alx_ldbl_distribution_binomial_Var(int16_t n, long double p);
-double		alx_distribution_binomial_Var	(int16_t n, double p);
-float		alx_flt_distribution_binomial_Var(int16_t n, float p);
-}
 
 
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
+static inline
+long double	alx_ldbl_distribution_binomial_E(uint64_t n, long double p);
+static inline
+double		alx_distribution_binomial_E	(uint32_t n, double p);
+static inline
+float		alx_flt_distribution_binomial_E	(uint16_t n, float p);
+
+static inline
+long double	alx_ldbl_distribution_binomial_Var(uint64_t n, long double p);
+static inline
+double		alx_distribution_binomial_Var	(uint32_t n, double p);
+static inline
+float		alx_flt_distribution_binomial_Var(uint16_t n, float p);
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
+static inline
+long double	alx_ldbl_distribution_binomial_E(uint64_t n, long double p)
+{
+
+	if ((p < 0.0L) || (p > 1.0L)) {
+		errno	= EDOM;
+		return	nanl("");
+	}
+
+	return	n * p;
+}
+
+static inline
+double		alx_distribution_binomial_E	(uint32_t n, double p)
+{
+
+	if ((p < 0.0) || (p > 1.0)) {
+		errno	= EDOM;
+		return	nan("");
+	}
+
+	return	n * p;
+}
+
+static inline
+float		alx_flt_distribution_binomial_E	(uint16_t n, float p)
+{
+
+	if ((p < 0.0f) || (p > 1.0f)) {
+		errno	= EDOM;
+		return	nanf("");
+	}
+
+	return	n * p;
+}
+
+
+static inline
+long double	alx_ldbl_distribution_binomial_Var(uint64_t n, long double p)
+{
+
+	if ((p < 0.0L) || (p > 1.0L)) {
+		errno	= EDOM;
+		return	nanl("");
+	}
+
+
+	return	n * p * (1 - p);
+}
+
+static inline
+double		alx_distribution_binomial_Var	(uint32_t n, double p)
+{
+
+	if ((p < 0.0) || (p > 1.0)) {
+		errno	= EDOM;
+		return	nan("");
+	}
+
+
+	return	n * p * (1 - p);
+}
+
+static inline
+float		alx_flt_distribution_binomial_Var(uint16_t n, float p)
+{
+
+	if ((p < 0.0f) || (p > 1.0f)) {
+		errno	= EDOM;
+		return	nanf("");
+	}
+
+
+	return	n * p * (1 - p);
+}
 
 
 /******************************************************************************
