@@ -49,16 +49,22 @@ long double	alx_ldbl_prime_defactorization_8b(
 			const int8_t pf[static restrict PRIME_NUMS_QTY_8b]);
 long double	alx_ldbl_prime_defactorization_16b(
 			const int16_t pf[static restrict PRIME_NUMS_QTY_16b]);
+long double	alx_ldbl_prime_defactorization_32b(
+			const int32_t pf[static restrict PRIME_NUMS_QTY_32b]);
 
 double		alx_prime_defactorization_8b(
 			const int8_t pf[static restrict PRIME_NUMS_QTY_8b]);
 double		alx_prime_defactorization_16b(
 			const int16_t pf[static restrict PRIME_NUMS_QTY_16b]);
+double		alx_prime_defactorization_32b(
+			const int32_t pf[static restrict PRIME_NUMS_QTY_32b]);
 
 float		alx_flt_prime_defactorization_8b(
 			const int8_t pf[static restrict PRIME_NUMS_QTY_8b]);
 float		alx_flt_prime_defactorization_16b(
 			const int16_t pf[static restrict PRIME_NUMS_QTY_16b]);
+float		alx_flt_prime_defactorization_32b(
+			const int32_t pf[static restrict PRIME_NUMS_QTY_32b]);
 }
 
 

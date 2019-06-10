@@ -72,6 +72,8 @@ export	SZ
 CFLAGS_STD	= -std=gnu17
 #CFLAGS_STD    += -Wpedantic
 
+CFLAGS_MEM	= -mcmodel=large
+
 CFLAGS_BSD	= `pkg-config --cflags libbsd-overlay`
 
 CFLAGS_OPT	= -O3
@@ -88,6 +90,7 @@ CFLAGS_W       += -Wno-error=unused-function
 CFLAGS_D	= -D _GNU_SOURCE
 
 CFLAGS		= $(CFLAGS_STD)
+CFLAGS         += $(CFLAGS_MEM)
 CFLAGS         += $(CFLAGS_BSD)
 CFLAGS         += $(CFLAGS_OPT)
 CFLAGS         += $(CFLAGS_W)
@@ -99,6 +102,8 @@ export	CFLAGS
 # c++flags
 CXXFLAGS_STD	= -std=gnu++17
 #CXXFLAGS_STD  += -Wpedantic
+
+CXXFLAGS_MEM	= -mcmodel=large
 
 CXXFLAGS_BSD	= `pkg-config --cflags libbsd-overlay`
 
@@ -113,6 +118,7 @@ CXXFLAGS_W     += -Werror
 CXXFLAGS_D	= -D _GNU_SOURCE
 
 CXXFLAGS	= $(CXXFLAGS_STD)
+CXXFLAGS       += $(CXXFLAGS_MEM)
 CXXFLAGS       += $(CXXFLAGS_BSD)
 CXXFLAGS       += $(CXXFLAGS_OPT)
 CXXFLAGS       += $(CXXFLAGS_W)

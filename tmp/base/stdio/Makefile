@@ -13,7 +13,7 @@
 # dependencies
 OBJ		=							\
 		get.o							\
-		printf.o						\
+		printf_b.o						\
 		sscan.o							\
 		wait.o
 
@@ -25,10 +25,10 @@ GET_INC		=							\
 GET_SRC		=							\
 		$(SRC_DIR)/base/stdio/get.c
 
-PRINTF_INC	=							\
-		$(INC_DIR)/libalx/base/stdio/printf.h
-PRINTF_SRC	=							\
-		$(SRC_DIR)/base/stdio/printf.c
+PRINTFB_INC	=							\
+		$(INC_DIR)/libalx/base/stdio/printf_b.h
+PRINTFB_SRC	=							\
+		$(SRC_DIR)/base/stdio/printf_b.c
 
 SSCAN_INC	=							\
 		$(INC_DIR)/libalx/base/stdio/sscan.h			\
@@ -57,10 +57,10 @@ get.o: get.s
 	@echo	"	AS	libalx/tmp/base/stdio/$@"
 	$(Q)$(AS) $< -o $@
 
-printf.s: $(PRINTF_SRC) $(PRINTF_INC)
+printf_b.s: $(PRINTFB_SRC) $(PRINTFB_INC)
 	@echo	"	CC	libalx/tmp/base/stdio/$@"
 	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
-printf.o: printf.s
+printf_b.o: printf_b.s
 	@echo	"	AS	libalx/tmp/base/stdio/$@"
 	$(Q)$(AS) $< -o $@
 

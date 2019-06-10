@@ -151,6 +151,7 @@ PASCAL_TRIANGLE_SRC	=						\
 
 PRIME_INC	=							\
 		$(INC_DIR)/libalx/base/math/prime.h			\
+		$(INC_DIR)/libalx/base/stddef/size.h			\
 		$(INC_DIR)/libalx/base/stdlib/search.h
 PRIME_SRC	=							\
 		$(SRC_DIR)/base/math/prime.c

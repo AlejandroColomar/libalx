@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/base/stdio/printf.h"
+#include "libalx/base/stdio/printf_b.h"
 
 #include <limits.h>
 #include <stdbool.h>
@@ -80,7 +80,7 @@ static	int	printf_pad_spaces	(FILE *stream, int pad_len);
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_printf_init	(void)
+int	alx_printf_init_b	(void)
 {
 
 	if (register_printf_specifier('b', printf_b_output, printf_b_arginf_sz))
