@@ -18,7 +18,6 @@ OBJ		=							\
 		array_multiplication.o					\
 		array_sum.o						\
 		binomial_coefficient.o					\
-		descriptive_statistics_1var.o				\
 		distribution_binomial.o					\
 		distribution_exponential.o				\
 		distribution_geometric.o				\
@@ -64,13 +63,6 @@ BINOMIAL_COEFFICIENT_INC	=					\
 		$(INC_DIR)/libalx/base/stddef/size.h
 BINOMIAL_COEFFICIENT_SRC	=					\
 		$(SRC_DIR)/base/math/binomial_coefficient.c
-
-DESCRIPTIVE_STATISTICS_1VAR_INC	=					\
-		$(INC_DIR)/libalx/base/math/descriptive_statistics_1var.h \
-		$(INC_DIR)/libalx/base/math/array_multiplication.h	\
-		$(INC_DIR)/libalx/base/math/array_sum.h
-DESCRIPTIVE_STATISTICS_1VAR_SRC	=					\
-		$(SRC_DIR)/base/math/descriptive_statistics_1var.c
 
 DISTRIBUTION_BINOMIAL_INC	=					\
 		$(INC_DIR)/libalx/base/math/distribution_binomial.h
@@ -204,13 +196,6 @@ binomial_coefficient.s: $(BINOMIAL_COEFFICIENT_SRC) $(BINOMIAL_COEFFICIENT_INC)
 	@echo	"	CC	libalx/tmp/base/math/$@"
 	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
 binomial_coefficient.o: binomial_coefficient.s
-	@echo	"	AS	libalx/tmp/base/math/$@"
-	$(Q)$(AS) $< -o $@
-
-descriptive_statistics_1var.s: $(DESCRIPTIVE_STATISTICS_1VAR_SRC) $(DESCRIPTIVE_STATISTICS_1VAR_INC)
-	@echo	"	CC	libalx/tmp/base/math/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
-descriptive_statistics_1var.o: descriptive_statistics_1var.s
 	@echo	"	AS	libalx/tmp/base/math/$@"
 	$(Q)$(AS) $< -o $@
 
