@@ -14,15 +14,13 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <stdint.h>
+#include <errno.h>
+#include <math.h>
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-#define DIST_GEOMETRIC_p_MIN	(0.0)
-#define DIST_GEOMETRIC_p_MAX	(1.0)
-#define DIST_GEOMETRIC_x_MIN	(0)
 
 
 /******************************************************************************
@@ -43,27 +41,102 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
-long double	alx_ldbl_distribution_geometric_P(long double p, int64_t x);
-double		alx_distribution_geometric_P	(double p, int32_t x);
-float		alx_flt_distribution_geometric_P(float p, int16_t x);
-
-long double	alx_ldbl_distribution_geometric_E(long double p);
-double		alx_distribution_geometric_E	(double p);
-float		alx_flt_distribution_geometric_E(float p);
-
-long double	alx_ldbl_distribution_geometric_Var(long double p);
-double		alx_distribution_geometric_Var	(double p);
-float		alx_flt_distribution_geometric_Var(float p);
 
 
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
+static inline
+long double	alx_ldbl_distribution_geometric_E(long double p);
+static inline
+double		alx_distribution_geometric_E	(double p);
+static inline
+float		alx_flt_distribution_geometric_E(float p);
+static inline
+
+static inline
+long double	alx_ldbl_distribution_geometric_Var(long double p);
+static inline
+double		alx_distribution_geometric_Var	(double p);
+static inline
+float		alx_flt_distribution_geometric_Var(float p);
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
+static inline
+long double	alx_ldbl_distribution_geometric_E(long double p)
+{
+
+	if ((p < 0.0L) || (p > 1.0L)) {
+		errno	= EDOM;
+		return	nanl("");
+	}
+
+	return	1 / p;
+}
+
+static inline
+double		alx_distribution_geometric_E	(double p)
+{
+
+	if ((p < 0.0) || (p > 1.0)) {
+		errno	= EDOM;
+		return	nan("");
+	}
+
+	return	1 / p;
+}
+
+static inline
+float		alx_flt_distribution_geometric_E(float p)
+{
+
+	if ((p < 0.0f) || (p > 1.0f)) {
+		errno	= EDOM;
+		return	nanf("");
+	}
+
+	return	1 / p;
+}
+
+
+static inline
+long double	alx_ldbl_distribution_geometric_Var(long double p)
+{
+
+	if ((p < 0.0L) || (p > 1.0L)) {
+		errno	= EDOM;
+		return	nanl("");
+	}
+
+	return	(1 - p) / (p * p);
+}
+
+static inline
+double		alx_distribution_geometric_Var	(double p)
+{
+
+	if ((p < 0.0) || (p > 1.0)) {
+		errno	= EDOM;
+		return	nan("");
+	}
+
+	return	(1 - p) / (p * p);
+}
+
+static inline
+float		alx_flt_distribution_geometric_Var(float p)
+{
+
+	if ((p < 0.0f) || (p > 1.0f)) {
+		errno	= EDOM;
+		return	nanf("");
+	}
+
+	return	(1 - p) / (p * p);
+}
 
 
 /******************************************************************************

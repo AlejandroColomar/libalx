@@ -75,6 +75,7 @@ long double	alx_ldbl_distribution_poisson_E	(long double l)
 
 	return	l;
 }
+
 static inline
 double		alx_distribution_poisson_E	(double l)
 {
@@ -86,6 +87,7 @@ double		alx_distribution_poisson_E	(double l)
 
 	return	l;
 }
+
 static inline
 float		alx_flt_distribution_poisson_E	(float l)
 {
@@ -98,6 +100,7 @@ float		alx_flt_distribution_poisson_E	(float l)
 	return	l;
 }
 
+
 static inline
 long double	alx_ldbl_distribution_poisson_Var(long double l)
 {
@@ -109,6 +112,7 @@ long double	alx_ldbl_distribution_poisson_Var(long double l)
 
 	return	l;
 }
+
 static inline
 double		alx_distribution_poisson_Var	(double l)
 {
@@ -120,6 +124,7 @@ double		alx_distribution_poisson_Var	(double l)
 
 	return	l;
 }
+
 static inline
 float		alx_flt_distribution_poisson_Var(float l)
 {
