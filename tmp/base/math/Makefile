@@ -101,8 +101,7 @@ DISTRIBUTION_NORMAL_SRC	=						\
 		$(SRC_DIR)/base/math/distribution_normal.c
 
 DISTRIBUTION_POISSON_INC	=					\
-		$(INC_DIR)/libalx/base/math/distribution_poisson.h	\
-		$(INC_DIR)/libalx/base/math/factorial.h
+		$(INC_DIR)/libalx/base/math/distribution_poisson.h
 DISTRIBUTION_POISSON_SRC	=					\
 		$(SRC_DIR)/base/math/distribution_poisson.c
 

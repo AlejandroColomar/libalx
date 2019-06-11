@@ -14,14 +14,13 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <stdint.h>
+#include <errno.h>
+#include <math.h>
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-#define DIST_POISSON_l_MIN	(0.0)
-#define DIST_POISSON_x_MIN	(0)
 
 
 /******************************************************************************
@@ -42,27 +41,96 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
-long double	alx_ldbl_distribution_poisson_P	(long double l, int16_t x);
-double		alx_distribution_poisson_P	(double l, int16_t x);
-float		alx_flt_distribution_poisson_P	(float l, int16_t x);
-
-long double	alx_ldbl_distribution_poisson_E(long double l);
-double		alx_distribution_poisson_E	(double l);
-float		alx_flt_distribution_poisson_E	(float l);
-
-long double	alx_ldbl_distribution_poisson_Var(long double l);
-double		alx_distribution_poisson_Var	(double l);
-float		alx_flt_distribution_poisson_Var(float l);
 
 
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
+static inline
+long double	alx_ldbl_distribution_poisson_E	(long double l);
+static inline
+double		alx_distribution_poisson_E	(double l);
+static inline
+float		alx_flt_distribution_poisson_E	(float l);
+
+static inline
+long double	alx_ldbl_distribution_poisson_Var(long double l);
+static inline
+double		alx_distribution_poisson_Var	(double l);
+static inline
+float		alx_flt_distribution_poisson_Var(float l);
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
+static inline
+long double	alx_ldbl_distribution_poisson_E	(long double l)
+{
+
+	if (l < 0.0L) {
+		errno	= EDOM;
+		return	nanl("");
+	}
+
+	return	l;
+}
+static inline
+double		alx_distribution_poisson_E	(double l)
+{
+
+	if (l < 0.0) {
+		errno	= EDOM;
+		return	nan("");
+	}
+
+	return	l;
+}
+static inline
+float		alx_flt_distribution_poisson_E	(float l)
+{
+
+	if (l < 0.0f) {
+		errno	= EDOM;
+		return	nanf("");
+	}
+
+	return	l;
+}
+
+static inline
+long double	alx_ldbl_distribution_poisson_Var(long double l)
+{
+
+	if (l < 0.0L) {
+		errno	= EDOM;
+		return	nanl("");
+	}
+
+	return	l;
+}
+static inline
+double		alx_distribution_poisson_Var	(double l)
+{
+
+	if (l < 0.0) {
+		errno	= EDOM;
+		return	nan("");
+	}
+
+	return	l;
+}
+static inline
+float		alx_flt_distribution_poisson_Var(float l)
+{
+
+	if (l < 0.0f) {
+		errno	= EDOM;
+		return	nanf("");
+	}
+
+	return	l;
+}
 
 
 /******************************************************************************
