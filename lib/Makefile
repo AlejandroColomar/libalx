@@ -11,7 +11,6 @@ MATH_OBJ	=							\
 		$(TMP_DIR)/base/math/array_sum.o			\
 		$(TMP_DIR)/base/math/binomial_coefficient.o		\
 		$(TMP_DIR)/base/math/descriptive_statistics_1var.o	\
-		$(TMP_DIR)/base/math/descriptive_statistics_2var.o	\
 		$(TMP_DIR)/base/math/distribution_binomial.o		\
 		$(TMP_DIR)/base/math/distribution_exponential.o		\
 		$(TMP_DIR)/base/math/distribution_geometric.o		\

@@ -22,7 +22,6 @@
 #include "libalx/base/math/array_sum.h"
 #include "libalx/base/math/binomial_coefficient.h"
 #include "libalx/base/math/descriptive_statistics_1var.h"
-#include "libalx/base/math/descriptive_statistics_2var.h"
 #include "libalx/base/math/distribution_binomial.h"
 #include "libalx/base/math/distribution_exponential.h"
 #include "libalx/base/math/distribution_geometric.h"
