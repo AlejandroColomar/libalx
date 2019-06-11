@@ -52,7 +52,6 @@ static inline
 double		alx_distribution_geometric_E	(double p);
 static inline
 float		alx_flt_distribution_geometric_E(float p);
-static inline
 
 static inline
 long double	alx_ldbl_distribution_geometric_Var(long double p);
