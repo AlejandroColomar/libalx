@@ -9,9 +9,6 @@
  ******************************************************************************/
 #include "libalx/base/math/distribution_uniform.h"
 
-#include <errno.h>
-#include <math.h>
-
 
 /******************************************************************************
  ******* macros ***************************************************************
@@ -41,107 +38,6 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-long double	alx_ldbl_distribution_uniform_P	(long double a, long double b,
-						long double x1, long double x2)
-{
-
-	if ((b < a) || (x1 < a) || (x2 > b) || (x2 < x1) || (b == a)) {
-		errno	= EDOM;
-		return	nanl("");
-	}
-
-	return	(x2 - x1) / (b - a);
-}
-
-double		alx_distribution_uniform_P	(double a, double b,
-						double x1, double x2)
-{
-
-	if ((b < a) || (x1 < a) || (x2 > b) || (x2 < x1) || (b == a)) {
-		errno	= EDOM;
-		return	nan("");
-	}
-
-	return	(x2 - x1) / (b - a);
-}
-
-float		alx_flt_distribution_uniform_P	(float a, float b,
-						float x1, float x2)
-{
-
-	if ((b < a) || (x1 < a) || (x2 > b) || (x2 < x1) || (b == a)) {
-		errno	= EDOM;
-		return	nanf("");
-	}
-
-	return	(x2 - x1) / (b - a);
-}
-
-long double	alx_ldbl_distribution_uniform_E	(long double a, long double b)
-{
-
-	if (b < a) {
-		errno	= EDOM;
-		return	nanl("");
-	}
-
-	return	(a + b) / 2;
-}
-
-double		alx_distribution_uniform_E	(double a, double b)
-{
-
-	if (b < a) {
-		errno	= EDOM;
-		return	nan("");
-	}
-
-	return	(a + b) / 2;
-}
-
-float		alx_flt_distribution_uniform_E	(float a, float b)
-{
-
-	if (b < a) {
-		errno	= EDOM;
-		return	nanf("");
-	}
-
-	return	(a + b) / 2;
-}
-
-long double	alx_ldbl_distribution_uniform_Var(long double a, long double b)
-{
-
-	if (b < a) {
-		errno	= EDOM;
-		return	nanl("");
-	}
-
-	return	(b - a) * (b - a) / 12;
-}
-
-double		alx_distribution_uniform_Var	(double a, double b)
-{
-
-	if (b < a) {
-		errno	= EDOM;
-		return	nan("");
-	}
-
-	return	(b - a) * (b - a) / 12;
-}
-
-float		alx_flt_distribution_uniform_Var(float a, float b)
-{
-
-	if (b < a) {
-		errno	= EDOM;
-		return	nanf("");
-	}
-
-	return	(b - a) * (b - a) / 12;
-}
 
 
 /******************************************************************************
