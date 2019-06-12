@@ -59,8 +59,8 @@ long double	alx_median_ldbl	(ptrdiff_t nmemb,
 	if (nmemb % 2)
 		median	= sorted[nmemb/2];
 	else
-		median	= AVGfast(sorted[nmemb/2], sorted[nmemb/2 - 1],
-								long double);
+		median	= AVGfast((long double)sorted[nmemb/2],
+					(long double)sorted[nmemb/2 - 1]);
 
 	return	median;
 }
@@ -77,7 +77,8 @@ double		alx_median	(ptrdiff_t nmemb,
 	if (nmemb % 2)
 		median = sorted[nmemb/2];
 	else
-		median = AVGfast(sorted[nmemb/2], sorted[nmemb/2 -1], double_t);
+		median = AVGfast((double_t)sorted[nmemb/2],
+					(double_t)sorted[nmemb/2 -1]);
 
 	return	median;
 }
@@ -94,7 +95,8 @@ float		alx_median_flt	(ptrdiff_t nmemb,
 	if (nmemb % 2)
 		median = sorted[nmemb/2];
 	else
-		median = AVGfast(sorted[nmemb/2], sorted[nmemb/2 - 1], float_t);
+		median = AVGfast((float_t)sorted[nmemb/2],
+					(float_t)sorted[nmemb/2 - 1]);
 
 	return	median;
 }
@@ -111,7 +113,8 @@ double		alx_median_uint	(ptrdiff_t nmemb,
 	if (nmemb % 2)
 		median = sorted[nmemb/2];
 	else
-		median = AVGfast(sorted[nmemb/2], sorted[nmemb/2 -1], double_t);
+		median = AVGfast((double_t)sorted[nmemb/2],
+					(double_t)sorted[nmemb/2 -1]);
 
 	return	median;
 }
@@ -128,7 +131,8 @@ double		alx_median_int	(ptrdiff_t nmemb,
 	if (nmemb % 2)
 		median = sorted[nmemb/2];
 	else
-		median = AVGfast(sorted[nmemb/2], sorted[nmemb/2 -1], double_t);
+		median = AVGfast((double_t)sorted[nmemb/2],
+					(double_t)sorted[nmemb/2 -1]);
 
 	return	median;
 }
@@ -145,8 +149,8 @@ double		alx_median_u8	(ptrdiff_t nmemb,
 	if (nmemb % 2)
 		median	= sorted[nmemb/2];
 	else
-		median	= AVGfast(sorted[nmemb/2], sorted[nmemb/2 - 1],
-								uint_fast16_t);
+		median	= AVGfast((double_t)sorted[nmemb/2],
+					(double_t)sorted[nmemb/2 - 1]);
 
 	return	median;
 }
@@ -163,8 +167,8 @@ double		alx_median_s8	(ptrdiff_t nmemb,
 	if (nmemb % 2)
 		median	= sorted[nmemb/2];
 	else
-		median	= AVGfast(sorted[nmemb/2], sorted[nmemb/2 - 1],
-								int_fast16_t);
+		median	= AVGfast((double_t)sorted[nmemb/2],
+					(double_t)sorted[nmemb/2 - 1]);
 
 	return	median;
 }
@@ -181,8 +185,8 @@ double		alx_median_u16	(ptrdiff_t nmemb,
 	if (nmemb % 2)
 		median	= sorted[nmemb/2];
 	else
-		median	= AVGfast(sorted[nmemb/2], sorted[nmemb/2 - 1],
-								uint_fast32_t);
+		median	= AVGfast((double_t)sorted[nmemb/2],
+					(double_t)sorted[nmemb/2 - 1]);
 
 	return	median;
 }
@@ -199,8 +203,8 @@ double		alx_median_s16	(ptrdiff_t nmemb,
 	if (nmemb % 2)
 		median	= sorted[nmemb/2];
 	else
-		median	= AVGfast(sorted[nmemb/2], sorted[nmemb/2 - 1],
-								int_fast32_t);
+		median	= AVGfast((double_t)sorted[nmemb/2],
+					(double_t)sorted[nmemb/2 - 1]);
 
 	return	median;
 }
@@ -217,8 +221,8 @@ double		alx_median_u32	(ptrdiff_t nmemb,
 	if (nmemb % 2)
 		median	= sorted[nmemb/2];
 	else
-		median	= AVGfast(sorted[nmemb/2], sorted[nmemb/2 - 1],
-								uint_fast64_t);
+		median	= AVGfast((double_t)sorted[nmemb/2],
+					(double_t)sorted[nmemb/2 - 1]);
 
 	return	median;
 }
@@ -235,17 +239,17 @@ double		alx_median_s32	(ptrdiff_t nmemb,
 	if (nmemb % 2)
 		median	= sorted[nmemb/2];
 	else
-		median	= AVGfast(sorted[nmemb/2], sorted[nmemb/2 - 1],
-								uint_fast64_t);
+		median	= AVGfast((double_t)sorted[nmemb/2],
+					(double_t)sorted[nmemb/2 - 1]);
 
 	return	median;
 }
 
-double		alx_median_u64	(ptrdiff_t nmemb,
+long double	alx_median_u64	(ptrdiff_t nmemb,
 				const uint64_t arr[restrict nmemb])
 {
 	uint64_t	sorted[nmemb];
-	double		median;
+	long double	median;
 
 	memcpy(sorted, arr, sizeof(sorted));
 	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_u64);
@@ -253,17 +257,17 @@ double		alx_median_u64	(ptrdiff_t nmemb,
 	if (nmemb % 2)
 		median	= sorted[nmemb/2];
 	else
-		median	= AVGfast(sorted[nmemb/2], sorted[nmemb/2 - 1],
-								double_t);
+		median	= AVGfast((long double)sorted[nmemb/2],
+					(long double)sorted[nmemb/2 - 1]);
 
 	return	median;
 }
 
-double		alx_median_s64	(ptrdiff_t nmemb,
+long double	alx_median_s64	(ptrdiff_t nmemb,
 				const int64_t arr[restrict nmemb])
 {
-	int64_t	sorted[nmemb];
-	double	median;
+	int64_t		sorted[nmemb];
+	long double	median;
 
 	memcpy(sorted, arr, sizeof(sorted));
 	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_s64);
@@ -271,8 +275,8 @@ double		alx_median_s64	(ptrdiff_t nmemb,
 	if (nmemb % 2)
 		median	= sorted[nmemb/2];
 	else
-		median	= AVGfast(sorted[nmemb/2], sorted[nmemb/2 - 1],
-								double_t);
+		median	= AVGfast((long double)sorted[nmemb/2],
+					(long double)sorted[nmemb/2 - 1]);
 
 	return	median;
 }

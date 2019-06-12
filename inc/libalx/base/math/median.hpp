@@ -56,8 +56,8 @@ double		alx_median_u16	(ptrdiff_t nmemb, const uint16_t *restrict x);
 double		alx_median_s16	(ptrdiff_t nmemb, const int16_t *restrict x);
 double		alx_median_u32	(ptrdiff_t nmemb, const uint32_t *restrict x);
 double		alx_median_s32	(ptrdiff_t nmemb, const int32_t *restrict x);
-double		alx_median_u64	(ptrdiff_t nmemb, const uint64_t *restrict x);
-double		alx_median_s64	(ptrdiff_t nmemb, const int64_t *restrict x);
+long double	alx_median_u64	(ptrdiff_t nmemb, const uint64_t *restrict x);
+long double	alx_median_s64	(ptrdiff_t nmemb, const int64_t *restrict x);
 }
 
 

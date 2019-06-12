@@ -184,7 +184,7 @@ ptrdiff_t	alx_bsearch_uint(ptrdiff_t nmemb,
 	lim_lo	= 0;
 
 	while (lim_hi > lim_lo) {
-		i	= AVGfast(lim_lo, lim_hi, size_t);
+		i	= AVGfast((size_t)lim_lo, (size_t)lim_hi);
 		if (arr[i] > x)
 			lim_hi	= i;
 		else if (arr[i] < x)
@@ -208,7 +208,7 @@ ptrdiff_t	alx_bsearch_int	(ptrdiff_t nmemb,
 	lim_lo	= 0;
 
 	while (lim_hi > lim_lo) {
-		i	= AVGfast(lim_lo, lim_hi, size_t);
+		i	= AVGfast((size_t)lim_lo, (size_t)lim_hi);
 		if (arr[i] > x)
 			lim_hi	= i;
 		else if (arr[i] < x)
@@ -232,7 +232,7 @@ ptrdiff_t	alx_bsearch_u8	(ptrdiff_t nmemb,
 	lim_lo	= 0;
 
 	while (lim_hi > lim_lo) {
-		i	= AVGfast(lim_lo, lim_hi, size_t);
+		i	= AVGfast((size_t)lim_lo, (size_t)lim_hi);
 		if (arr[i] > x)
 			lim_hi	= i;
 		else if (arr[i] < x)
@@ -256,7 +256,7 @@ ptrdiff_t	alx_bsearch_s8	(ptrdiff_t nmemb,
 	lim_lo	= 0;
 
 	while (lim_hi > lim_lo) {
-		i	= AVGfast(lim_lo, lim_hi, size_t);
+		i	= AVGfast((size_t)lim_lo, (size_t)lim_hi);
 		if (arr[i] > x)
 			lim_hi	= i;
 		else if (arr[i] < x)
@@ -280,7 +280,7 @@ ptrdiff_t	alx_bsearch_u16	(ptrdiff_t nmemb,
 	lim_lo	= 0;
 
 	while (lim_hi > lim_lo) {
-		i	= AVGfast(lim_lo, lim_hi, size_t);
+		i	= AVGfast((size_t)lim_lo, (size_t)lim_hi);
 		if (arr[i] > x)
 			lim_hi	= i;
 		else if (arr[i] < x)
@@ -304,7 +304,7 @@ ptrdiff_t	alx_bsearch_s16	(ptrdiff_t nmemb,
 	lim_lo	= 0;
 
 	while (lim_hi > lim_lo) {
-		i	= AVGfast(lim_lo, lim_hi, size_t);
+		i	= AVGfast((size_t)lim_lo, (size_t)lim_hi);
 		if (arr[i] > x)
 			lim_hi	= i;
 		else if (arr[i] < x)
@@ -328,7 +328,7 @@ ptrdiff_t	alx_bsearch_u32	(ptrdiff_t nmemb,
 	lim_lo	= 0;
 
 	while (lim_hi > lim_lo) {
-		i	= AVGfast(lim_lo, lim_hi, size_t);
+		i	= AVGfast((size_t)lim_lo, (size_t)lim_hi);
 		if (arr[i] > x)
 			lim_hi	= i;
 		else if (arr[i] < x)
@@ -352,7 +352,7 @@ ptrdiff_t	alx_bsearch_s32	(ptrdiff_t nmemb,
 	lim_lo	= 0;
 
 	while (lim_hi > lim_lo) {
-		i	= AVGfast(lim_lo, lim_hi, size_t);
+		i	= AVGfast((size_t)lim_lo, (size_t)lim_hi);
 		if (arr[i] > x)
 			lim_hi	= i;
 		else if (arr[i] < x)
@@ -376,7 +376,7 @@ ptrdiff_t	alx_bsearch_u64	(ptrdiff_t nmemb,
 	lim_lo	= 0;
 
 	while (lim_hi > lim_lo) {
-		i	= AVGfast(lim_lo, lim_hi, size_t);
+		i	= AVGfast((size_t)lim_lo, (size_t)lim_hi);
 		if (arr[i] > x)
 			lim_hi	= i;
 		else if (arr[i] < x)
@@ -400,7 +400,7 @@ ptrdiff_t	alx_bsearch_s64	(ptrdiff_t nmemb,
 	lim_lo	= 0;
 
 	while (lim_hi > lim_lo) {
-		i	= AVGfast(lim_lo, lim_hi, size_t);
+		i	= AVGfast((size_t)lim_lo, (size_t)lim_hi);
 		if (arr[i] > x)
 			lim_hi	= i;
 		else if (arr[i] < x)

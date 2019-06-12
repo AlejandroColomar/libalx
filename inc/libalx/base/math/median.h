@@ -63,9 +63,9 @@ double		alx_median_u32	(ptrdiff_t nmemb,
 				const uint32_t x[restrict nmemb]);
 double		alx_median_s32	(ptrdiff_t nmemb,
 				const int32_t x[restrict nmemb]);
-double		alx_median_u64	(ptrdiff_t nmemb,
+long double	alx_median_u64	(ptrdiff_t nmemb,
 				const uint64_t x[restrict nmemb]);
-double		alx_median_s64	(ptrdiff_t nmemb,
+long double	alx_median_s64	(ptrdiff_t nmemb,
 				const int64_t x[restrict nmemb]);
 
 
