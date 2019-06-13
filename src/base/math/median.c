@@ -59,8 +59,7 @@ long double	alx_median_ldbl	(ptrdiff_t nmemb,
 	if (nmemb % 2)
 		median	= sorted[nmemb/2];
 	else
-		median	= AVGfast((long double)sorted[nmemb/2],
-					(long double)sorted[nmemb/2 - 1]);
+		median	= AVGfast(sorted[nmemb/2], sorted[nmemb/2 - 1]);
 
 	return	median;
 }
@@ -77,8 +76,7 @@ double		alx_median	(ptrdiff_t nmemb,
 	if (nmemb % 2)
 		median = sorted[nmemb/2];
 	else
-		median = AVGfast((double_t)sorted[nmemb/2],
-					(double_t)sorted[nmemb/2 -1]);
+		median = AVGfast(sorted[nmemb/2], sorted[nmemb/2 -1]);
 
 	return	median;
 }
@@ -95,8 +93,7 @@ float		alx_median_flt	(ptrdiff_t nmemb,
 	if (nmemb % 2)
 		median = sorted[nmemb/2];
 	else
-		median = AVGfast((float_t)sorted[nmemb/2],
-					(float_t)sorted[nmemb/2 - 1]);
+		median = AVGfast(sorted[nmemb/2], sorted[nmemb/2 - 1]);
 
 	return	median;
 }
