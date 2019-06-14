@@ -7,20 +7,21 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_MATH_DISTRIBUTION_EXPONENTIAL_HPP
-#define ALX_MATH_DISTRIBUTION_EXPONENTIAL_HPP
+#ifndef ALX_GSL_DISTRIBUTIONS_BINOMIAL_H
+#define ALX_GSL_DISTRIBUTIONS_BINOMIAL_H
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include <errno.h>
+#include <math.h>
+#include <stdint.h>
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-#define DIST_BINOMIAL_b_MIN	(0)
-#define DIST_BINOMIAL_x_MIN	(0)
 
 
 /******************************************************************************
@@ -41,37 +42,110 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
-extern	"C"
-{
-long double	alx_ldbl_distribution_exponential_P(long double b,
-						long double x1, long double x2);
-double		alx_distribution_exponential_P	(double b, double x1, double x2);
-float		alx_flt_distribution_exponential_P(float b, float x1, float x2);
-
-long double	alx_ldbl_distribution_exponential_E(long double b);
-double		alx_distribution_exponential_E	(double b);
-float		alx_flt_distribution_exponential_E(float b);
-
-long double	alx_ldbl_distribution_exponential_Var(long double b);
-double		alx_distribution_exponential_Var(double b);
-float		alx_flt_distribution_exponential_Var(float b);
-}
 
 
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
+static inline
+long double	alx_gsl_dist_binomial_E_ldbl	(uint64_t n, long double p);
+static inline
+double		alx_gsl_dist_binomial_E		(uint32_t n, double p);
+static inline
+float		alx_gsl_dist_binomial_E_flt	(uint16_t n, float p);
+
+static inline
+long double	alx_gsl_dist_binomial_Var_ldbl	(uint64_t n, long double p);
+static inline
+double		alx_gsl_dist_binomial_Var	(uint32_t n, double p);
+static inline
+float		alx_gsl_dist_binomial_Var_flt	(uint16_t n, float p);
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
+static inline
+long double	alx_gsl_dist_binomial_E_ldbl	(uint64_t n, long double p)
+{
+
+	if ((p < 0.0L) || (p > 1.0L)) {
+		errno	= EDOM;
+		return	nanl("");
+	}
+
+	return	n * p;
+}
+
+static inline
+double		alx_gsl_dist_binomial_E		(uint32_t n, double p)
+{
+
+	if ((p < 0.0) || (p > 1.0)) {
+		errno	= EDOM;
+		return	nan("");
+	}
+
+	return	n * p;
+}
+
+static inline
+float		alx_gsl_dist_binomial_E_flt	(uint16_t n, float p)
+{
+
+	if ((p < 0.0f) || (p > 1.0f)) {
+		errno	= EDOM;
+		return	nanf("");
+	}
+
+	return	n * p;
+}
+
+
+static inline
+long double	alx_gsl_dist_binomial_Var_ldbl	(uint64_t n, long double p)
+{
+
+	if ((p < 0.0L) || (p > 1.0L)) {
+		errno	= EDOM;
+		return	nanl("");
+	}
+
+
+	return	n * p * (1.0L - p);
+}
+
+static inline
+double		alx_gsl_dist_binomial_Var	(uint32_t n, double p)
+{
+
+	if ((p < 0.0) || (p > 1.0)) {
+		errno	= EDOM;
+		return	nan("");
+	}
+
+
+	return	n * p * (1.0 - p);
+}
+
+static inline
+float		alx_gsl_dist_binomial_Var_flt	(uint16_t n, float p)
+{
+
+	if ((p < 0.0f) || (p > 1.0f)) {
+		errno	= EDOM;
+		return	nanf("");
+	}
+
+
+	return	n * p * (1.0f - p);
+}
 
 
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/base/math/distribution_exponential.hpp */
+#endif		/* libalx/extra/gsl/distributions/binomial.h */
 
 
 /******************************************************************************

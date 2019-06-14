@@ -5,12 +5,19 @@
 
 
 /******************************************************************************
+ ******* include guard ********************************************************
+ ******************************************************************************/
+#ifndef ALX_GSL_DISTRIBUTIONS_UNIFORM_H
+#define ALX_GSL_DISTRIBUTIONS_UNIFORM_H
+
+
+/******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/base/math/distribution_exponential.h"
-
 #include <errno.h>
 #include <math.h>
+
+#include "libalx/base/stdlib/average.h"
 
 
 /******************************************************************************
@@ -34,132 +41,109 @@
 
 
 /******************************************************************************
- ******* static functions (prototypes) ****************************************
+ ******* extern functions *****************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* global functions *****************************************************
+ ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
-long double	alx_ldbl_distribution_exponential_P(long double b,
-						long double x1, long double x2)
-{
-	long double	tmp;
+static inline
+long double	alx_gsl_dist_uniform_E_ldbl	(long double a, long double b);
+static inline
+double		alx_gsl_dist_uniform_E		(double a, double b);
+static inline
+float		alx_gsl_dist_uniform_E_flt	(float a, float b);
 
-	if ((b < DIST_BINOMIAL_b_MIN) || (x1 < DIST_BINOMIAL_x_MIN) ||
-								(x2 < x1)) {
+static inline
+long double	alx_gsl_dist_uniform_Var_ldbl	(long double a, long double b);
+static inline
+double		alx_gsl_dist_uniform_Var	(double a, double b);
+static inline
+float		alx_gsl_dist_uniform_Var_flt	(float a, float b);
+
+
+/******************************************************************************
+ ******* static inline functions (definitions) ********************************
+ ******************************************************************************/
+static inline
+long double	alx_gsl_dist_uniform_E_ldbl	(long double a, long double b)
+{
+
+	if (b < a) {
 		errno	= EDOM;
 		return	nanl("");
 	}
 
-	tmp	= expl(-b * x1);
-	tmp	-= expl(-b * x2);
-
-	return	tmp;
+	return	AVGfast(a, b);
 }
 
-double		alx_distribution_exponential_P	(double b, double x1, double x2)
+static inline
+double		alx_gsl_dist_uniform_E		(double a, double b)
 {
-	double_t	tmp;
 
-	if ((b < DIST_BINOMIAL_b_MIN) || (x1 < DIST_BINOMIAL_x_MIN) ||
-								(x2 < x1)) {
+	if (b < a) {
 		errno	= EDOM;
 		return	nan("");
 	}
 
-	tmp	= exp(-b * x1);
-	tmp	-= exp(-b * x2);
-
-	return	tmp;
+	return	AVGfast(a, b);
 }
 
-float		alx_flt_distribution_exponential_P(float b, float x1, float x2)
+static inline
+float		alx_gsl_dist_uniform_E_flt	(float a, float b)
 {
-	float_t	tmp;
 
-	if ((b < DIST_BINOMIAL_b_MIN) || (x1 < DIST_BINOMIAL_x_MIN) ||
-								(x2 < x1)) {
+	if (b < a) {
 		errno	= EDOM;
 		return	nanf("");
 	}
 
-	tmp	= expf(-b * x1);
-	tmp	-= expf(-b * x2);
-
-	return	tmp;
+	return	AVGfast(a, b);
 }
 
-long double	alx_ldbl_distribution_exponential_E(long double b)
+
+static inline
+long double	alx_gsl_dist_uniform_Var_ldbl	(long double a, long double b)
 {
 
-	if (b < DIST_BINOMIAL_b_MIN) {
+	if (b < a) {
 		errno	= EDOM;
 		return	nanl("");
 	}
 
-	return	1 / b;
+	return	(b - a) * (b - a) / 12.0L;
 }
 
-double		alx_distribution_exponential_E	(double b)
+static inline
+double		alx_gsl_dist_uniform_Var	(double a, double b)
 {
 
-	if (b < DIST_BINOMIAL_b_MIN) {
+	if (b < a) {
 		errno	= EDOM;
 		return	nan("");
 	}
 
-	return	1 / b;
+	return	(b - a) * (b - a) / 12.0;
 }
 
-float		alx_flt_distribution_exponential_E(float b)
+static inline
+float		alx_gsl_dist_uniform_Var_flt	(float a, float b)
 {
 
-	if (b < DIST_BINOMIAL_b_MIN) {
+	if (b < a) {
 		errno	= EDOM;
 		return	nanf("");
 	}
 
-	return	1 / b;
-}
-
-long double	alx_ldbl_distribution_exponential_Var(long double b)
-{
-
-	if (b < DIST_BINOMIAL_b_MIN) {
-		errno	= EDOM;
-		return	nanl("");
-	}
-
-	return	1 / (b * b);
-}
-
-double		alx_distribution_exponential_Var(double b)
-{
-
-	if (b < DIST_BINOMIAL_b_MIN) {
-		errno	= EDOM;
-		return	nan("");
-	}
-
-	return	1 / (b * b);
-}
-
-float		alx_flt_distribution_exponential_Var(float b)
-{
-
-	if (b < DIST_BINOMIAL_b_MIN) {
-		errno	= EDOM;
-		return	nanf("");
-	}
-
-	return	1 / (b * b);
+	return	(b - a) * (b - a) / 12.0f;
 }
 
 
 /******************************************************************************
- ******* static functions (definitions) ***************************************
+ ******* include guard ********************************************************
  ******************************************************************************/
+#endif		/* libalx/extra/gsl/distributions/uniform.h */
 
 
 /******************************************************************************

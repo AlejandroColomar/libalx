@@ -7,8 +7,8 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_MATH_DISTRIBUTION_BINOMIAL_HPP
-#define ALX_MATH_DISTRIBUTION_BINOMIAL_HPP
+#ifndef ALX_GSL_DISTRIBUTIONS_EXPONENTIAL_HPP
+#define ALX_GSL_DISTRIBUTIONS_EXPONENTIAL_HPP
 
 
 /******************************************************************************
@@ -16,7 +16,6 @@
  ******************************************************************************/
 #include <cerrno>
 #include <cmath>
-#include <cstdint>
 
 
 /******************************************************************************
@@ -48,104 +47,101 @@
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
 static inline
-long double	alx_ldbl_distribution_binomial_E(uint64_t n, long double p);
+long double	alx_gsl_dist_exponential_E_ldbl		(long double b);
 static inline
-double		alx_distribution_binomial_E	(uint32_t n, double p);
+double		alx_gsl_dist_exponential_E		(double b);
 static inline
-float		alx_flt_distribution_binomial_E	(uint16_t n, float p);
+float		alx_gsl_dist_exponential_E_flt		(float b);
 
 static inline
-long double	alx_ldbl_distribution_binomial_Var(uint64_t n, long double p);
+long double	alx_gsl_dist_exponential_Var_ldbl	(long double b);
 static inline
-double		alx_distribution_binomial_Var	(uint32_t n, double p);
+double		alx_gsl_dist_exponential_Var		(double b);
 static inline
-float		alx_flt_distribution_binomial_Var(uint16_t n, float p);
+float		alx_gsl_dist_exponential_Var_flt	(float b);
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
 static inline
-long double	alx_ldbl_distribution_binomial_E(uint64_t n, long double p)
+long double	alx_gsl_dist_exponential_E_ldbl		(long double b)
 {
 
-	if ((p < 0.0L) || (p > 1.0L)) {
+	if (b <= 0.0L) {
 		errno	= EDOM;
 		return	nanl("");
 	}
 
-	return	n * p;
+	return	1.0L / b;
 }
 
 static inline
-double		alx_distribution_binomial_E	(uint32_t n, double p)
+double		alx_gsl_dist_exponential_E		(double b)
 {
 
-	if ((p < 0.0) || (p > 1.0)) {
+	if (b <= 0.0) {
 		errno	= EDOM;
 		return	nan("");
 	}
 
-	return	n * p;
+	return	1.0 / b;
 }
 
 static inline
-float		alx_flt_distribution_binomial_E	(uint16_t n, float p)
+float		alx_gsl_dist_exponential_E_flt		(float b)
 {
 
-	if ((p < 0.0f) || (p > 1.0f)) {
+	if (b <= 0.0f) {
 		errno	= EDOM;
 		return	nanf("");
 	}
 
-	return	n * p;
+	return	1.0f / b;
 }
 
 
 static inline
-long double	alx_ldbl_distribution_binomial_Var(uint64_t n, long double p)
+long double	alx_gsl_dist_exponential_Var_ldbl	(long double b)
 {
 
-	if ((p < 0.0L) || (p > 1.0L)) {
+	if (b <= 0.0L) {
 		errno	= EDOM;
 		return	nanl("");
 	}
 
-
-	return	n * p * (1 - p);
+	return	1.0L / (b * b);
 }
 
 static inline
-double		alx_distribution_binomial_Var	(uint32_t n, double p)
+double		alx_gsl_dist_exponential_Var		(double b)
 {
 
-	if ((p < 0.0) || (p > 1.0)) {
+	if (b <= 0.0) {
 		errno	= EDOM;
 		return	nan("");
 	}
 
-
-	return	n * p * (1 - p);
+	return	1.0 / (b * b);
 }
 
 static inline
-float		alx_flt_distribution_binomial_Var(uint16_t n, float p)
+float		alx_gsl_dist_exponential_Var_flt	(float b)
 {
 
-	if ((p < 0.0f) || (p > 1.0f)) {
+	if (b <= 0.0f) {
 		errno	= EDOM;
 		return	nanf("");
 	}
 
-
-	return	n * p * (1 - p);
+	return	1.0f / (b * b);
 }
 
 
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/base/math/distribution_binomial.hpp */
+#endif		/* libalx/extra/gsl/distributions/exponential.hpp */
 
 
 /******************************************************************************

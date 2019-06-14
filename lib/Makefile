@@ -9,12 +9,6 @@ MATH_OBJ	=							\
 		$(TMP_DIR)/base/math/array_multiplication.o		\
 		$(TMP_DIR)/base/math/array_sum.o			\
 		$(TMP_DIR)/base/math/binomial_coefficient.o		\
-		$(TMP_DIR)/base/math/distribution_binomial.o		\
-		$(TMP_DIR)/base/math/distribution_exponential.o		\
-		$(TMP_DIR)/base/math/distribution_geometric.o		\
-		$(TMP_DIR)/base/math/distribution_normal.o		\
-		$(TMP_DIR)/base/math/distribution_poisson.o		\
-		$(TMP_DIR)/base/math/distribution_uniform.o		\
 		$(TMP_DIR)/base/math/factorial.o			\
 		$(TMP_DIR)/base/math/matrix_addition.o			\
 		$(TMP_DIR)/base/math/matrix_subtraction.o		\
@@ -56,6 +50,12 @@ BASE_OBJ	=							\
 		$(STRING_OBJ)
 
 GSL_OBJ		=							\
+		$(TMP_DIR)/extra/gsl/distributions/binomial.o		\
+		$(TMP_DIR)/extra/gsl/distributions/exponential.o	\
+		$(TMP_DIR)/extra/gsl/distributions/geometric.o		\
+		$(TMP_DIR)/extra/gsl/distributions/normal.o		\
+		$(TMP_DIR)/extra/gsl/distributions/poisson.o		\
+		$(TMP_DIR)/extra/gsl/distributions/uniform.o		\
 		$(TMP_DIR)/extra/gsl/statistics/mean.o
 NCURSES_OBJ	=							\
 		$(TMP_DIR)/extra/ncurses/common.o			\

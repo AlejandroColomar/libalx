@@ -7,15 +7,17 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_MATH_DISTRIBUTION_GEOMETRIC_H
-#define ALX_MATH_DISTRIBUTION_GEOMETRIC_H
+#ifndef ALX_GSL_DISTRIBUTIONS_UNIFORM_HPP
+#define ALX_GSL_DISTRIBUTIONS_UNIFORM_HPP
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <errno.h>
-#include <math.h>
+#include <cerrno>
+#include <cmath>
+
+#include "libalx/base/stdlib/average.hpp"
 
 
 /******************************************************************************
@@ -47,101 +49,101 @@
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
 static inline
-long double	alx_ldbl_distribution_geometric_E(long double p);
+long double	alx_gsl_dist_uniform_E_ldbl	(long double a, long double b);
 static inline
-double		alx_distribution_geometric_E	(double p);
+double		alx_gsl_dist_uniform_E		(double a, double b);
 static inline
-float		alx_flt_distribution_geometric_E(float p);
+float		alx_gsl_dist_uniform_E_flt	(float a, float b);
 
 static inline
-long double	alx_ldbl_distribution_geometric_Var(long double p);
+long double	alx_gsl_dist_uniform_Var_ldbl	(long double a, long double b);
 static inline
-double		alx_distribution_geometric_Var	(double p);
+double		alx_gsl_dist_uniform_Var	(double a, double b);
 static inline
-float		alx_flt_distribution_geometric_Var(float p);
+float		alx_gsl_dist_uniform_Var_flt	(float a, float b);
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
 static inline
-long double	alx_ldbl_distribution_geometric_E(long double p)
+long double	alx_gsl_dist_uniform_E_ldbl	(long double a, long double b)
 {
 
-	if ((p < 0.0L) || (p > 1.0L)) {
+	if (b < a) {
 		errno	= EDOM;
 		return	nanl("");
 	}
 
-	return	1 / p;
+	return	AVGfast(a, b);
 }
 
 static inline
-double		alx_distribution_geometric_E	(double p)
+double		alx_gsl_dist_uniform_E		(double a, double b)
 {
 
-	if ((p < 0.0) || (p > 1.0)) {
+	if (b < a) {
 		errno	= EDOM;
 		return	nan("");
 	}
 
-	return	1 / p;
+	return	AVGfast(a, b);
 }
 
 static inline
-float		alx_flt_distribution_geometric_E(float p)
+float		alx_gsl_dist_uniform_E_flt	(float a, float b)
 {
 
-	if ((p < 0.0f) || (p > 1.0f)) {
+	if (b < a) {
 		errno	= EDOM;
 		return	nanf("");
 	}
 
-	return	1 / p;
+	return	AVGfast(a, b);
 }
 
 
 static inline
-long double	alx_ldbl_distribution_geometric_Var(long double p)
+long double	alx_gsl_dist_uniform_Var_ldbl	(long double a, long double b)
 {
 
-	if ((p < 0.0L) || (p > 1.0L)) {
+	if (b < a) {
 		errno	= EDOM;
 		return	nanl("");
 	}
 
-	return	(1 - p) / (p * p);
+	return	(b - a) * (b - a) / 12.0L;
 }
 
 static inline
-double		alx_distribution_geometric_Var	(double p)
+double		alx_gsl_dist_uniform_Var	(double a, double b)
 {
 
-	if ((p < 0.0) || (p > 1.0)) {
+	if (b < a) {
 		errno	= EDOM;
 		return	nan("");
 	}
 
-	return	(1 - p) / (p * p);
+	return	(b - a) * (b - a) / 12.0;
 }
 
 static inline
-float		alx_flt_distribution_geometric_Var(float p)
+float		alx_gsl_dist_uniform_Var_flt	(float a, float b)
 {
 
-	if ((p < 0.0f) || (p > 1.0f)) {
+	if (b < a) {
 		errno	= EDOM;
 		return	nanf("");
 	}
 
-	return	(1 - p) / (p * p);
+	return	(b - a) * (b - a) / 12.0f;
 }
 
 
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/base/math/distribution_geometric.h */
+#endif		/* libalx/extra/gsl/distributions/uniform.hpp */
 
 
 /******************************************************************************

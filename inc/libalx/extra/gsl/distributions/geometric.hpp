@@ -7,16 +7,15 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_MATH_DISTRIBUTION_BINOMIAL_H
-#define ALX_MATH_DISTRIBUTION_BINOMIAL_H
+#ifndef ALX_GSL_DISTRIBUTIONS_GEOMETRIC_HPP
+#define ALX_GSL_DISTRIBUTIONS_GEOMETRIC_HPP
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <errno.h>
-#include <math.h>
-#include <stdint.h>
+#include <cerrno>
+#include <cmath>
 
 
 /******************************************************************************
@@ -48,25 +47,25 @@
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
 static inline
-long double	alx_ldbl_distribution_binomial_E(uint64_t n, long double p);
+long double	alx_gsl_dist_geometric_E_ldbl	(long double p);
 static inline
-double		alx_distribution_binomial_E	(uint32_t n, double p);
+double		alx_gsl_dist_geometric_E	(double p);
 static inline
-float		alx_flt_distribution_binomial_E	(uint16_t n, float p);
+float		alx_gsl_dist_geometric_E_flt	(float p);
 
 static inline
-long double	alx_ldbl_distribution_binomial_Var(uint64_t n, long double p);
+long double	alx_gsl_dist_geometric_Var_ldbl	(long double p);
 static inline
-double		alx_distribution_binomial_Var	(uint32_t n, double p);
+double		alx_gsl_dist_geometric_Var	(double p);
 static inline
-float		alx_flt_distribution_binomial_Var(uint16_t n, float p);
+float		alx_gsl_dist_geometric_Var_flt	(float p);
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
 static inline
-long double	alx_ldbl_distribution_binomial_E(uint64_t n, long double p)
+long double	alx_gsl_dist_geometric_E_ldbl	(long double p)
 {
 
 	if ((p < 0.0L) || (p > 1.0L)) {
@@ -74,11 +73,11 @@ long double	alx_ldbl_distribution_binomial_E(uint64_t n, long double p)
 		return	nanl("");
 	}
 
-	return	n * p;
+	return	1.0L / p;
 }
 
 static inline
-double		alx_distribution_binomial_E	(uint32_t n, double p)
+double		alx_gsl_dist_geometric_E	(double p)
 {
 
 	if ((p < 0.0) || (p > 1.0)) {
@@ -86,11 +85,11 @@ double		alx_distribution_binomial_E	(uint32_t n, double p)
 		return	nan("");
 	}
 
-	return	n * p;
+	return	1.0 / p;
 }
 
 static inline
-float		alx_flt_distribution_binomial_E	(uint16_t n, float p)
+float		alx_gsl_dist_geometric_E_flt	(float p)
 {
 
 	if ((p < 0.0f) || (p > 1.0f)) {
@@ -98,12 +97,12 @@ float		alx_flt_distribution_binomial_E	(uint16_t n, float p)
 		return	nanf("");
 	}
 
-	return	n * p;
+	return	1.0f / p;
 }
 
 
 static inline
-long double	alx_ldbl_distribution_binomial_Var(uint64_t n, long double p)
+long double	alx_gsl_dist_geometric_Var_ldbl	(long double p)
 {
 
 	if ((p < 0.0L) || (p > 1.0L)) {
@@ -111,12 +110,11 @@ long double	alx_ldbl_distribution_binomial_Var(uint64_t n, long double p)
 		return	nanl("");
 	}
 
-
-	return	n * p * (1 - p);
+	return	(1.0L - p) / (p * p);
 }
 
 static inline
-double		alx_distribution_binomial_Var	(uint32_t n, double p)
+double		alx_gsl_dist_geometric_Var	(double p)
 {
 
 	if ((p < 0.0) || (p > 1.0)) {
@@ -124,12 +122,11 @@ double		alx_distribution_binomial_Var	(uint32_t n, double p)
 		return	nan("");
 	}
 
-
-	return	n * p * (1 - p);
+	return	(1.0 - p) / (p * p);
 }
 
 static inline
-float		alx_flt_distribution_binomial_Var(uint16_t n, float p)
+float		alx_gsl_dist_geometric_Var_flt	(float p)
 {
 
 	if ((p < 0.0f) || (p > 1.0f)) {
@@ -137,15 +134,14 @@ float		alx_flt_distribution_binomial_Var(uint16_t n, float p)
 		return	nanf("");
 	}
 
-
-	return	n * p * (1 - p);
+	return	(1.0f - p) / (p * p);
 }
 
 
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/base/math/distribution_binomial.h */
+#endif		/* libalx/extra/gsl/distributions/geometric.hpp */
 
 
 /******************************************************************************

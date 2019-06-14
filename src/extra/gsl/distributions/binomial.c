@@ -5,22 +5,14 @@
 
 
 /******************************************************************************
- ******* include guard ********************************************************
- ******************************************************************************/
-#ifndef ALX_MATH_DISTRIBUTION_NORMAL_HPP
-#define ALX_MATH_DISTRIBUTION_NORMAL_HPP
-
-
-/******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include "libalx/extra/gsl/distributions/binomial.h"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-#define DIST_NORMAL_o2_MIN	(0)
-#define DIST_NORMAL_o_MIN	(0)
 
 
 /******************************************************************************
@@ -39,44 +31,18 @@
 
 
 /******************************************************************************
- ******* extern functions *****************************************************
- ******************************************************************************/
-extern	"C"
-{
-long double	alx_ldbl_distribution_normal_A	(long double o);
-double		alx_distribution_normal_A	(double o);
-float		alx_flt_distribution_normal_A	(float o);
-
-long double	alx_ldbl_distribution_normal_B	(long double u, long double o);
-double		alx_distribution_normal_B	(double u, double o);
-float		alx_flt_distribution_normal_B	(float u, float o);
-
-long double	alx_ldbl_distribution_normal_X2Z(long double a, long double b,
-						long double x);
-double		alx_distribution_normal_X2Z	(double a, double b, double x);
-float		alx_flt_distribution_normal_X2Z	(float a, float b, float x);
-
-long double	alx_ldbl_distribution_normal_Z2X(long double a, long double b,
-						long double z);
-double		alx_distribution_normal_Z2X	(double a, double b, double z);
-float		alx_flt_distribution_normal_Z2X	(float a, float b, float z);
-}
-
-
-/******************************************************************************
- ******* static inline functions (prototypes) *********************************
+ ******* static functions (prototypes) ****************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* static inline functions (definitions) ********************************
+ ******* global functions *****************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* include guard ********************************************************
+ ******* static functions (definitions) ***************************************
  ******************************************************************************/
-#endif		/* libalx/base/math/distribution_normal.hpp */
 
 
 /******************************************************************************

@@ -5,9 +5,17 @@
 
 
 /******************************************************************************
+ ******* include guard ********************************************************
+ ******************************************************************************/
+#ifndef ALX_GSL_DISTRIBUTIONS_POISSON_HPP
+#define ALX_GSL_DISTRIBUTIONS_POISSON_HPP
+
+
+/******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/base/math/distribution_binomial.h"
+#include <cerrno>
+#include <cmath>
 
 
 /******************************************************************************
@@ -31,18 +39,109 @@
 
 
 /******************************************************************************
- ******* static functions (prototypes) ****************************************
+ ******* extern functions *****************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* global functions *****************************************************
+ ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
+static inline
+long double	alx_gsl_dist_poisson_E_ldbl	(long double l);
+static inline
+double		alx_gsl_dist_poisson_E		(double l);
+static inline
+float		alx_gsl_dist_poisson_E_flt	(float l);
+
+static inline
+long double	alx_gsl_dist_poisson_Var_ldbl	(long double l);
+static inline
+double		alx_gsl_dist_poisson_Var	(double l);
+static inline
+float		alx_gsl_dist_poisson_Var_flt	(float l);
 
 
 /******************************************************************************
- ******* static functions (definitions) ***************************************
+ ******* static inline functions (definitions) ********************************
  ******************************************************************************/
+static inline
+long double	alx_gsl_dist_poisson_E_ldbl	(long double l)
+{
+
+	if (l <= 0.0L) {
+		errno	= EDOM;
+		return	nanl("");
+	}
+
+	return	l;
+}
+
+static inline
+double		alx_gsl_dist_poisson_E		(double l)
+{
+
+	if (l <= 0.0) {
+		errno	= EDOM;
+		return	nan("");
+	}
+
+	return	l;
+}
+
+static inline
+float		alx_gsl_dist_poisson_E_flt	(float l)
+{
+
+	if (l <= 0.0f) {
+		errno	= EDOM;
+		return	nanf("");
+	}
+
+	return	l;
+}
+
+
+static inline
+long double	alx_gsl_dist_poisson_Var_ldbl	(long double l)
+{
+
+	if (l <= 0.0L) {
+		errno	= EDOM;
+		return	nanl("");
+	}
+
+	return	l;
+}
+
+static inline
+double		alx_gsl_dist_poisson_Var	(double l)
+{
+
+	if (l <= 0.0) {
+		errno	= EDOM;
+		return	nan("");
+	}
+
+	return	l;
+}
+
+static inline
+float		alx_gsl_dist_poisson_Var_flt	(float l)
+{
+
+	if (l <= 0.0f) {
+		errno	= EDOM;
+		return	nanf("");
+	}
+
+	return	l;
+}
+
+
+/******************************************************************************
+ ******* include guard ********************************************************
+ ******************************************************************************/
+#endif		/* libalx/extra/gsl/distributions/poisson.hpp */
 
 
 /******************************************************************************

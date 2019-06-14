@@ -7,8 +7,8 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_MATH_DISTRIBUTION_UNIFORM_H
-#define ALX_MATH_DISTRIBUTION_UNIFORM_H
+#ifndef ALX_GSL_DISTRIBUTIONS_EXPONENTIAL_H
+#define ALX_GSL_DISTRIBUTIONS_EXPONENTIAL_H
 
 
 /******************************************************************************
@@ -16,8 +16,6 @@
  ******************************************************************************/
 #include <errno.h>
 #include <math.h>
-
-#include "libalx/base/stdlib/average.h"
 
 
 /******************************************************************************
@@ -49,101 +47,102 @@
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
 static inline
-long double	alx_ldbl_distribution_uniform_E	(long double a, long double b);
+long double	alx_gsl_dist_exponential_E_ldbl		(long double b);
 static inline
-double		alx_distribution_uniform_E	(double a, double b);
+double		alx_gsl_dist_exponential_E		(double b);
 static inline
-float		alx_flt_distribution_uniform_E	(float a, float b);
+float		alx_gsl_dist_exponential_E_flt		(float b);
 
 static inline
-long double	alx_ldbl_distribution_uniform_Var(long double a, long double b);
+long double	alx_gsl_dist_exponential_Var_ldbl	(long double b);
 static inline
-double		alx_distribution_uniform_Var	(double a, double b);
+double		alx_gsl_dist_exponential_Var		(double b);
 static inline
-float		alx_flt_distribution_uniform_Var(float a, float b);
+float		alx_gsl_dist_exponential_Var_flt	(float b);
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
 static inline
-long double	alx_ldbl_distribution_uniform_E	(long double a, long double b)
+long double	alx_gsl_dist_exponential_E_ldbl		(long double b)
 {
 
-	if (b < a) {
+	if (b <= 0.0L) {
 		errno	= EDOM;
 		return	nanl("");
 	}
 
-	return	AVGfast(a, b);
+	return	1.0L / b;
 }
 
 static inline
-double		alx_distribution_uniform_E	(double a, double b)
+double		alx_gsl_dist_exponential_E		(double b)
 {
 
-	if (b < a) {
+	if (b <= 0.0) {
 		errno	= EDOM;
 		return	nan("");
 	}
 
-	return	AVGfast(a, b);
+	return	1.0 / b;
 }
 
 static inline
-float		alx_flt_distribution_uniform_E	(float a, float b)
+float		alx_gsl_dist_exponential_E_flt		(float b)
 {
 
-	if (b < a) {
+	if (b <= 0.0f) {
 		errno	= EDOM;
 		return	nanf("");
 	}
 
-	return	AVGfast(a, b);
+	return	1.0f / b;
 }
 
 
 static inline
-long double	alx_ldbl_distribution_uniform_Var(long double a, long double b)
+long double	alx_gsl_dist_exponential_Var_ldbl	(long double b)
 {
 
-	if (b < a) {
+	if (b <= 0.0L) {
 		errno	= EDOM;
 		return	nanl("");
 	}
 
-	return	(b - a) * (b - a) / 12.0L;
+	return	1.0L / (b * b);
 }
 
 static inline
-double		alx_distribution_uniform_Var	(double a, double b)
+double		alx_gsl_dist_exponential_Var		(double b)
 {
 
-	if (b < a) {
+	if (b <= 0.0) {
 		errno	= EDOM;
 		return	nan("");
 	}
 
-	return	(b - a) * (b - a) / 12.0;
+	return	1.0 / (b * b);
 }
 
 static inline
-float		alx_flt_distribution_uniform_Var(float a, float b)
+float		alx_gsl_dist_exponential_Var_flt	(float b)
 {
 
-	if (b < a) {
+	if (b <= 0.0f) {
 		errno	= EDOM;
 		return	nanf("");
 	}
 
-	return	(b - a) * (b - a) / 12.0f;
+	return	1.0f / (b * b);
 }
+
 
 
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/base/math/distribution_uniform.h */
+#endif		/* libalx/extra/gsl/distributions/exponential.h */
 
 
 /******************************************************************************

@@ -1,5 +1,5 @@
 /******************************************************************************
- *	Copyright (C) 2019	Alejandro Colomar Andrés		      *
+ *	Copyright (C) 2015	Alejandro Colomar Andrés		      *
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
@@ -7,15 +7,15 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_GSL_H
-#define ALX_GSL_H
+#ifndef ALX_GSL_DISTRIBUTIONS_POISSON_H
+#define ALX_GSL_DISTRIBUTIONS_POISSON_H
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/extra/gsl/distributions.h"
-#include "libalx/extra/gsl/statistics.h"
+#include <errno.h>
+#include <math.h>
 
 
 /******************************************************************************
@@ -46,17 +46,102 @@
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
+static inline
+long double	alx_gsl_dist_poisson_E_ldbl	(long double l);
+static inline
+double		alx_gsl_dist_poisson_E		(double l);
+static inline
+float		alx_gsl_dist_poisson_E_flt	(float l);
+
+static inline
+long double	alx_gsl_dist_poisson_Var_ldbl	(long double l);
+static inline
+double		alx_gsl_dist_poisson_Var	(double l);
+static inline
+float		alx_gsl_dist_poisson_Var_flt	(float l);
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
+static inline
+long double	alx_gsl_dist_poisson_E_ldbl	(long double l)
+{
+
+	if (l <= 0.0L) {
+		errno	= EDOM;
+		return	nanl("");
+	}
+
+	return	l;
+}
+
+static inline
+double		alx_gsl_dist_poisson_E		(double l)
+{
+
+	if (l <= 0.0) {
+		errno	= EDOM;
+		return	nan("");
+	}
+
+	return	l;
+}
+
+static inline
+float		alx_gsl_dist_poisson_E_flt	(float l)
+{
+
+	if (l <= 0.0f) {
+		errno	= EDOM;
+		return	nanf("");
+	}
+
+	return	l;
+}
+
+
+static inline
+long double	alx_gsl_dist_poisson_Var_ldbl	(long double l)
+{
+
+	if (l <= 0.0L) {
+		errno	= EDOM;
+		return	nanl("");
+	}
+
+	return	l;
+}
+
+static inline
+double		alx_gsl_dist_poisson_Var	(double l)
+{
+
+	if (l <= 0.0) {
+		errno	= EDOM;
+		return	nan("");
+	}
+
+	return	l;
+}
+
+static inline
+float		alx_gsl_dist_poisson_Var_flt	(float l)
+{
+
+	if (l <= 0.0f) {
+		errno	= EDOM;
+		return	nanf("");
+	}
+
+	return	l;
+}
 
 
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/extra/gsl.h */
+#endif		/* libalx/extra/gsl/distributions/poisson.h */
 
 
 /******************************************************************************

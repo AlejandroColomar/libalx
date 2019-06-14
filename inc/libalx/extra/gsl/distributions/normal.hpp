@@ -7,15 +7,13 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_MATH_DISTRIBUTION_GEOMETRIC_HPP
-#define ALX_MATH_DISTRIBUTION_GEOMETRIC_HPP
+#ifndef ALX_GSL_DISTRIBUTIONS_NORMAL_HPP
+#define ALX_GSL_DISTRIBUTIONS_NORMAL_HPP
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <cerrno>
-#include <cmath>
 
 
 /******************************************************************************
@@ -41,107 +39,42 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
+extern	"C"
+{
+long double	alx_gsl_dist_normal_A_ldbl	(long double o);
+double		alx_gsl_dist_normal_A		(double o);
+float		alx_gsl_dist_normal_A_flt	(float o);
+
+long double	alx_gsl_dist_normal_B_ldbl	(long double u, long double o);
+double		alx_gsl_dist_normal_B		(double u, double o);
+float		alx_gsl_dist_normal_B_flt	(float u, float o);
+
+long double	alx_gsl_dist_normal_X2Z_ldbl	(long double a, long double b,
+						long double x);
+double		alx_gsl_dist_normal_X2Z		(double a, double b, double x);
+float		alx_gsl_dist_normal_X2Z_flt	(float a, float b, float x);
+
+long double	alx_gsl_dist_normal_Z2X_ldbl	(long double a, long double b,
+						long double z);
+double		alx_gsl_dist_normal_Z2X		(double a, double b, double z);
+float		alx_gsl_dist_normal_Z2X_flt	(float a, float b, float z);
+}
 
 
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
-static inline
-long double	alx_ldbl_distribution_geometric_E(long double p);
-static inline
-double		alx_distribution_geometric_E	(double p);
-static inline
-float		alx_flt_distribution_geometric_E(float p);
-
-static inline
-long double	alx_ldbl_distribution_geometric_Var(long double p);
-static inline
-double		alx_distribution_geometric_Var	(double p);
-static inline
-float		alx_flt_distribution_geometric_Var(float p);
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
-static inline
-long double	alx_ldbl_distribution_geometric_E(long double p)
-{
-
-	if ((p < 0.0L) || (p > 1.0L)) {
-		errno	= EDOM;
-		return	nanl("");
-	}
-
-	return	1 / p;
-}
-
-static inline
-double		alx_distribution_geometric_E	(double p)
-{
-
-	if ((p < 0.0) || (p > 1.0)) {
-		errno	= EDOM;
-		return	nan("");
-	}
-
-	return	1 / p;
-}
-
-static inline
-float		alx_flt_distribution_geometric_E(float p)
-{
-
-	if ((p < 0.0f) || (p > 1.0f)) {
-		errno	= EDOM;
-		return	nanf("");
-	}
-
-	return	1 / p;
-}
-
-
-static inline
-long double	alx_ldbl_distribution_geometric_Var(long double p)
-{
-
-	if ((p < 0.0L) || (p > 1.0L)) {
-		errno	= EDOM;
-		return	nanl("");
-	}
-
-	return	(1 - p) / (p * p);
-}
-
-static inline
-double		alx_distribution_geometric_Var	(double p)
-{
-
-	if ((p < 0.0) || (p > 1.0)) {
-		errno	= EDOM;
-		return	nan("");
-	}
-
-	return	(1 - p) / (p * p);
-}
-
-static inline
-float		alx_flt_distribution_geometric_Var(float p)
-{
-
-	if ((p < 0.0f) || (p > 1.0f)) {
-		errno	= EDOM;
-		return	nanf("");
-	}
-
-	return	(1 - p) / (p * p);
-}
 
 
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/base/math/distribution_geometric.hpp */
+#endif		/* libalx/extra/gsl/distributions/normal.hpp */
 
 
 /******************************************************************************

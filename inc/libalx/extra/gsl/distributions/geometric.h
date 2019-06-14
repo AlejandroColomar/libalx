@@ -7,20 +7,20 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_MATH_DISTRIBUTION_EXPONENTIAL_H
-#define ALX_MATH_DISTRIBUTION_EXPONENTIAL_H
+#ifndef ALX_GSL_DISTRIBUTIONS_GEOMETRIC_H
+#define ALX_GSL_DISTRIBUTIONS_GEOMETRIC_H
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include <errno.h>
+#include <math.h>
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-#define DIST_BINOMIAL_b_MIN	(0)
-#define DIST_BINOMIAL_x_MIN	(0)
 
 
 /******************************************************************************
@@ -41,34 +41,107 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
-long double	alx_ldbl_distribution_exponential_P(long double b,
-						long double x1, long double x2);
-double		alx_distribution_exponential_P	(double b, double x1, double x2);
-float		alx_flt_distribution_exponential_P(float b, float x1, float x2);
-
-long double	alx_ldbl_distribution_exponential_E(long double b);
-double		alx_distribution_exponential_E	(double b);
-float		alx_flt_distribution_exponential_E(float b);
-
-long double	alx_ldbl_distribution_exponential_Var(long double b);
-double		alx_distribution_exponential_Var(double b);
-float		alx_flt_distribution_exponential_Var(float b);
 
 
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
+static inline
+long double	alx_gsl_dist_geometric_E_ldbl	(long double p);
+static inline
+double		alx_gsl_dist_geometric_E	(double p);
+static inline
+float		alx_gsl_dist_geometric_E_flt	(float p);
+
+static inline
+long double	alx_gsl_dist_geometric_Var_ldbl	(long double p);
+static inline
+double		alx_gsl_dist_geometric_Var	(double p);
+static inline
+float		alx_gsl_dist_geometric_Var_flt	(float p);
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
+static inline
+long double	alx_gsl_dist_geometric_E_ldbl	(long double p)
+{
+
+	if ((p < 0.0L) || (p > 1.0L)) {
+		errno	= EDOM;
+		return	nanl("");
+	}
+
+	return	1.0L / p;
+}
+
+static inline
+double		alx_gsl_dist_geometric_E	(double p)
+{
+
+	if ((p < 0.0) || (p > 1.0)) {
+		errno	= EDOM;
+		return	nan("");
+	}
+
+	return	1.0 / p;
+}
+
+static inline
+float		alx_gsl_dist_geometric_E_flt	(float p)
+{
+
+	if ((p < 0.0f) || (p > 1.0f)) {
+		errno	= EDOM;
+		return	nanf("");
+	}
+
+	return	1.0f / p;
+}
+
+
+static inline
+long double	alx_gsl_dist_geometric_Var_ldbl	(long double p)
+{
+
+	if ((p < 0.0L) || (p > 1.0L)) {
+		errno	= EDOM;
+		return	nanl("");
+	}
+
+	return	(1.0L - p) / (p * p);
+}
+
+static inline
+double		alx_gsl_dist_geometric_Var	(double p)
+{
+
+	if ((p < 0.0) || (p > 1.0)) {
+		errno	= EDOM;
+		return	nan("");
+	}
+
+	return	(1.0 - p) / (p * p);
+}
+
+static inline
+float		alx_gsl_dist_geometric_Var_flt	(float p)
+{
+
+	if ((p < 0.0f) || (p > 1.0f)) {
+		errno	= EDOM;
+		return	nanf("");
+	}
+
+	return	(1.0f - p) / (p * p);
+}
 
 
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/base/math/distribution_exponential.h */
+#endif		/* libalx/extra/gsl/distributions/geometric.h */
 
 
 /******************************************************************************

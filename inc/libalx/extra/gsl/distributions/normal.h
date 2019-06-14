@@ -7,17 +7,13 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_MATH_DISTRIBUTION_UNIFORM_HPP
-#define ALX_MATH_DISTRIBUTION_UNIFORM_HPP
+#ifndef ALX_GSL_DISTRIBUTIONS_NORMAL_H
+#define ALX_GSL_DISTRIBUTIONS_NORMAL_H
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <cerrno>
-#include <cmath>
-
-#include "libalx/base/stdlib/average.hpp"
 
 
 /******************************************************************************
@@ -43,107 +39,39 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
+long double	alx_gsl_dist_normal_A_ldbl	(long double o);
+double		alx_gsl_dist_normal_A		(double o);
+float		alx_gsl_dist_normal_A_flt	(float o);
+
+long double	alx_gsl_dist_normal_B_ldbl	(long double u, long double o);
+double		alx_gsl_dist_normal_B		(double u, double o);
+float		alx_gsl_dist_normal_B_flt	(float u, float o);
+
+long double	alx_gsl_dist_normal_X2Z_ldbl	(long double a, long double b,
+						long double x);
+double		alx_gsl_dist_normal_X2Z		(double a, double b, double x);
+float		alx_gsl_dist_normal_X2Z_flt	(float a, float b, float x);
+
+long double	alx_gsl_dist_normal_Z2X_ldbl	(long double a, long double b,
+						long double z);
+double		alx_gsl_dist_normal_Z2X		(double a, double b, double z);
+float		alx_gsl_dist_normal_Z2X_flt	(float a, float b, float z);
 
 
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
-static inline
-long double	alx_ldbl_distribution_uniform_E	(long double a, long double b);
-static inline
-double		alx_distribution_uniform_E	(double a, double b);
-static inline
-float		alx_flt_distribution_uniform_E	(float a, float b);
-
-static inline
-long double	alx_ldbl_distribution_uniform_Var(long double a, long double b);
-static inline
-double		alx_distribution_uniform_Var	(double a, double b);
-static inline
-float		alx_flt_distribution_uniform_Var(float a, float b);
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
-static inline
-long double	alx_ldbl_distribution_uniform_E	(long double a, long double b)
-{
-
-	if (b < a) {
-		errno	= EDOM;
-		return	nanl("");
-	}
-
-	return	AVGfast(a, b);
-}
-
-static inline
-double		alx_distribution_uniform_E	(double a, double b)
-{
-
-	if (b < a) {
-		errno	= EDOM;
-		return	nan("");
-	}
-
-	return	AVGfast(a, b);
-}
-
-static inline
-float		alx_flt_distribution_uniform_E	(float a, float b)
-{
-
-	if (b < a) {
-		errno	= EDOM;
-		return	nanf("");
-	}
-
-	return	AVGfast(a, b);
-}
-
-
-static inline
-long double	alx_ldbl_distribution_uniform_Var(long double a, long double b)
-{
-
-	if (b < a) {
-		errno	= EDOM;
-		return	nanl("");
-	}
-
-	return	(b - a) * (b - a) / 12.0L;
-}
-
-static inline
-double		alx_distribution_uniform_Var	(double a, double b)
-{
-
-	if (b < a) {
-		errno	= EDOM;
-		return	nan("");
-	}
-
-	return	(b - a) * (b - a) / 12.0;
-}
-
-static inline
-float		alx_flt_distribution_uniform_Var(float a, float b)
-{
-
-	if (b < a) {
-		errno	= EDOM;
-		return	nanf("");
-	}
-
-	return	(b - a) * (b - a) / 12.0f;
-}
 
 
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/base/math/distribution_uniform.hpp */
+#endif		/* libalx/extra/gsl/distributions/normal.h */
 
 
 /******************************************************************************

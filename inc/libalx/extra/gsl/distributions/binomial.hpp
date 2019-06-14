@@ -7,8 +7,8 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_MATH_DISTRIBUTION_POISSON_HPP
-#define ALX_MATH_DISTRIBUTION_POISSON_HPP
+#ifndef ALX_GSL_DISTRIBUTIONS_BINOMIAL_HPP
+#define ALX_GSL_DISTRIBUTIONS_BINOMIAL_HPP
 
 
 /******************************************************************************
@@ -16,6 +16,7 @@
  ******************************************************************************/
 #include <cerrno>
 #include <cmath>
+#include <cstdint>
 
 
 /******************************************************************************
@@ -47,101 +48,104 @@
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
 static inline
-long double	alx_ldbl_distribution_poisson_E	(long double l);
+long double	alx_gsl_dist_binomial_E_ldbl	(uint64_t n, long double p);
 static inline
-double		alx_distribution_poisson_E	(double l);
+double		alx_gsl_dist_binomial_E		(uint32_t n, double p);
 static inline
-float		alx_flt_distribution_poisson_E	(float l);
+float		alx_gsl_dist_binomial_E_flt	(uint16_t n, float p);
 
 static inline
-long double	alx_ldbl_distribution_poisson_Var(long double l);
+long double	alx_gsl_dist_binomial_Var_ldbl	(uint64_t n, long double p);
 static inline
-double		alx_distribution_poisson_Var	(double l);
+double		alx_gsl_dist_binomial_Var	(uint32_t n, double p);
 static inline
-float		alx_flt_distribution_poisson_Var(float l);
+float		alx_gsl_dist_binomial_Var_flt	(uint16_t n, float p);
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
 static inline
-long double	alx_ldbl_distribution_poisson_E	(long double l)
+long double	alx_gsl_dist_binomial_E_ldbl	(uint64_t n, long double p)
 {
 
-	if (l < 0.0L) {
+	if ((p < 0.0L) || (p > 1.0L)) {
 		errno	= EDOM;
 		return	nanl("");
 	}
 
-	return	l;
+	return	n * p;
 }
 
 static inline
-double		alx_distribution_poisson_E	(double l)
+double		alx_gsl_dist_binomial_E		(uint32_t n, double p)
 {
 
-	if (l < 0.0) {
+	if ((p < 0.0) || (p > 1.0)) {
 		errno	= EDOM;
 		return	nan("");
 	}
 
-	return	l;
+	return	n * p;
 }
 
 static inline
-float		alx_flt_distribution_poisson_E	(float l)
+float		alx_gsl_dist_binomial_E_flt	(uint16_t n, float p)
 {
 
-	if (l < 0.0f) {
+	if ((p < 0.0f) || (p > 1.0f)) {
 		errno	= EDOM;
 		return	nanf("");
 	}
 
-	return	l;
+	return	n * p;
 }
 
 
 static inline
-long double	alx_ldbl_distribution_poisson_Var(long double l)
+long double	alx_gsl_dist_binomial_Var_ldbl	(uint64_t n, long double p)
 {
 
-	if (l < 0.0L) {
+	if ((p < 0.0L) || (p > 1.0L)) {
 		errno	= EDOM;
 		return	nanl("");
 	}
 
-	return	l;
+
+	return	n * p * (1.0L - p);
 }
 
 static inline
-double		alx_distribution_poisson_Var	(double l)
+double		alx_gsl_dist_binomial_Var	(uint32_t n, double p)
 {
 
-	if (l < 0.0) {
+	if ((p < 0.0) || (p > 1.0)) {
 		errno	= EDOM;
 		return	nan("");
 	}
 
-	return	l;
+
+	return	n * p * (1.0 - p);
 }
 
 static inline
-float		alx_flt_distribution_poisson_Var(float l)
+float		alx_gsl_dist_binomial_Var_flt	(uint16_t n, float p)
 {
 
-	if (l < 0.0f) {
+	if ((p < 0.0f) || (p > 1.0f)) {
 		errno	= EDOM;
 		return	nanf("");
 	}
 
-	return	l;
+
+	return	n * p * (1.0f - p);
 }
 
 
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/base/math/distribution_poisson.hpp */
+#endif		/* libalx/extra/gsl/distributions/binomial.hpp */
 
 
 /******************************************************************************

@@ -17,12 +17,6 @@ OBJ		=							\
 		array_multiplication.o					\
 		array_sum.o						\
 		binomial_coefficient.o					\
-		distribution_binomial.o					\
-		distribution_exponential.o				\
-		distribution_geometric.o				\
-		distribution_normal.o					\
-		distribution_poisson.o					\
-		distribution_uniform.o					\
 		factorial.o						\
 		matrix_addition.o					\
 		matrix_subtraction.o					\
@@ -57,37 +51,6 @@ BINOMIAL_COEFFICIENT_INC	=					\
 		$(INC_DIR)/libalx/base/stddef/size.h
 BINOMIAL_COEFFICIENT_SRC	=					\
 		$(SRC_DIR)/base/math/binomial_coefficient.c
-
-DISTRIBUTION_BINOMIAL_INC	=					\
-		$(INC_DIR)/libalx/base/math/distribution_binomial.h
-DISTRIBUTION_BINOMIAL_SRC	=					\
-		$(SRC_DIR)/base/math/distribution_binomial.c
-
-DISTRIBUTION_EXPONENTIAL_INC	=					\
-		$(INC_DIR)/libalx/base/math/distribution_exponential.h
-DISTRIBUTION_EXPONENTIAL_SRC	=					\
-		$(SRC_DIR)/base/math/distribution_exponential.c
-
-DISTRIBUTION_GEOMETRIC_INC	=					\
-		$(INC_DIR)/libalx/base/math/distribution_geometric.h
-DISTRIBUTION_GEOMETRIC_SRC	=					\
-		$(SRC_DIR)/base/math/distribution_geometric.c
-
-DISTRIBUTION_NORMAL_INC	=						\
-		$(INC_DIR)/libalx/base/math/distribution_normal.h
-DISTRIBUTION_NORMAL_SRC	=						\
-		$(SRC_DIR)/base/math/distribution_normal.c
-
-DISTRIBUTION_POISSON_INC	=					\
-		$(INC_DIR)/libalx/base/math/distribution_poisson.h
-DISTRIBUTION_POISSON_SRC	=					\
-		$(SRC_DIR)/base/math/distribution_poisson.c
-
-DISTRIBUTION_UNIFORM_INC	=					\
-		$(INC_DIR)/libalx/base/math/distribution_uniform.h	\
-		$(INC_DIR)/libalx/base/stdlib/average.h
-DISTRIBUTION_UNIFORM_SRC	=					\
-		$(SRC_DIR)/base/math/distribution_uniform.c
 
 FACTORIAL_INC	=							\
 		$(INC_DIR)/libalx/base/math/factorial.h			\
@@ -185,48 +148,6 @@ binomial_coefficient.s: $(BINOMIAL_COEFFICIENT_SRC) $(BINOMIAL_COEFFICIENT_INC)
 	@echo	"	CC	libalx/tmp/base/math/$@"
 	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
 binomial_coefficient.o: binomial_coefficient.s
-	@echo	"	AS	libalx/tmp/base/math/$@"
-	$(Q)$(AS) $< -o $@
-
-distribution_binomial.s: $(DISTRIBUTION_BINOMIAL_SRC) $(DISTRIBUTION_BINOMIAL_INC)
-	@echo	"	CC	libalx/tmp/base/math/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
-distribution_binomial.o: distribution_binomial.s
-	@echo	"	AS	libalx/tmp/base/math/$@"
-	$(Q)$(AS) $< -o $@
-
-distribution_exponential.s: $(DISTRIBUTION_EXPONENTIAL_SRC) $(DISTRIBUTION_EXPONENTIAL_INC)
-	@echo	"	CC	libalx/tmp/base/math/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
-distribution_exponential.o: distribution_exponential.s
-	@echo	"	AS	libalx/tmp/base/math/$@"
-	$(Q)$(AS) $< -o $@
-
-distribution_geometric.s: $(DISTRIBUTION_GEOMETRIC_SRC) $(DISTRIBUTION_GEOMETRIC_INC)
-	@echo	"	CC	libalx/tmp/base/math/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
-distribution_geometric.o: distribution_geometric.s
-	@echo	"	AS	libalx/tmp/base/math/$@"
-	$(Q)$(AS) $< -o $@
-
-distribution_normal.s: $(DISTRIBUTION_NORMAL_SRC) $(DISTRIBUTION_NORMAL_INC)
-	@echo	"	CC	libalx/tmp/base/math/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
-distribution_normal.o: distribution_normal.s
-	@echo	"	AS	libalx/tmp/base/math/$@"
-	$(Q)$(AS) $< -o $@
-
-distribution_poisson.s: $(DISTRIBUTION_POISSON_SRC) $(DISTRIBUTION_POISSON_INC)
-	@echo	"	CC	libalx/tmp/base/math/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
-distribution_poisson.o: distribution_poisson.s
-	@echo	"	AS	libalx/tmp/base/math/$@"
-	$(Q)$(AS) $< -o $@
-
-distribution_uniform.s: $(DISTRIBUTION_UNIFORM_SRC) $(DISTRIBUTION_UNIFORM_INC)
-	@echo	"	CC	libalx/tmp/base/math/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
-distribution_uniform.o: distribution_uniform.s
 	@echo	"	AS	libalx/tmp/base/math/$@"
 	$(Q)$(AS) $< -o $@
 

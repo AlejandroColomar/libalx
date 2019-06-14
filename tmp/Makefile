@@ -50,7 +50,11 @@ extra: gsl ncurses
 
 
 PHONY := gsl
-gsl: gsl-statistics
+gsl: gsl-distributions gsl-statistics
+
+PHONY += gsl-distributions
+gsl-distributions:
+	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/gsl/distributions/
 
 PHONY += gsl-statistics
 gsl-statistics:
