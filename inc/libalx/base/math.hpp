@@ -16,7 +16,6 @@
  ******************************************************************************/
 #include <cmath>
 
-#include "libalx/base/math/arithmetic_mean.hpp"
 #include "libalx/base/math/array_division.hpp"
 #include "libalx/base/math/array_multiplication.hpp"
 #include "libalx/base/math/array_sum.hpp"

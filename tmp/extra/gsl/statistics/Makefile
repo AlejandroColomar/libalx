@@ -10,61 +10,33 @@
 ################################################################################
 
 ################################################################################
+# dependencies
+OBJ		=							\
+		mean.o
+
+MEAN_INC	=							\
+		$(INC_DIR)/libalx/extra/gsl/statistics/mean.h
+MEAN_SRC	=							\
+		$(SRC_DIR)/extra/gsl/statistics/mean.c
+
+################################################################################
 # target: dependencies
 #	action
 
 PHONY := all
-all: base extra
+all: $(OBJ)
 
 
-PHONY := base
-base: math stddef stdint stdio stdlib string
-
-PHONY += math
-math:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/math/
-
-PHONY += stddef
-stddef:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stddef/
-
-PHONY += stdint
-stdint:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stdint/
-
-PHONY += stdio
-stdio:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stdio/
-
-PHONY += stdlib
-stdlib:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stdlib/
-
-PHONY += string
-string:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/string/
-
-
-PHONY := extra
-extra: gsl ncurses
-
-
-PHONY := gsl
-gsl: gsl-statistics
-
-PHONY += gsl-statistics
-gsl-statistics:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/gsl/statistics/
-
-
-PHONY += ncurses
-ncurses:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/ncurses/
+mean.s: $(MEAN_SRC) $(MEAN_INC)
+	@echo	"	CC	libalx/tmp/extra/gsl/statistics/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+mean.o: mean.s
+	@echo	"	AS	libalx/tmp/extra/gsl/statistics/$@"
+	$(Q)$(AS) $< -o $@
 
 
 PHONY += clean
 clean:
-	@echo	"	RM	*.o *.s"
 	$(Q)rm -f *.o *.s
 
 ################################################################################

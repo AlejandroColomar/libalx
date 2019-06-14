@@ -13,7 +13,6 @@
 # dependencies
 
 OBJ		=							\
-		arithmetic_mean.o					\
 		array_division.o					\
 		array_multiplication.o					\
 		array_sum.o						\
@@ -33,11 +32,6 @@ OBJ		=							\
 		prime_defactorization.o					\
 		prime_factorization.o					\
 		scale_linear.o
-
-ARITHMETIC_MEAN_INC	=						\
-		$(INC_DIR)/libalx/base/math/arithmetic_mean.h
-ARITHMETIC_MEAN_SRC	=						\
-		$(SRC_DIR)/base/math/arithmetic_mean.c
 
 ARRAY_DIVISION_INC	=						\
 		$(INC_DIR)/libalx/base/math/array_division.h
@@ -90,7 +84,8 @@ DISTRIBUTION_POISSON_SRC	=					\
 		$(SRC_DIR)/base/math/distribution_poisson.c
 
 DISTRIBUTION_UNIFORM_INC	=					\
-		$(INC_DIR)/libalx/base/math/distribution_uniform.h
+		$(INC_DIR)/libalx/base/math/distribution_uniform.h	\
+		$(INC_DIR)/libalx/base/stdlib/average.h
 DISTRIBUTION_UNIFORM_SRC	=					\
 		$(SRC_DIR)/base/math/distribution_uniform.c
 
@@ -116,6 +111,7 @@ MATRIX_SUBTRACTION_SRC	=						\
 
 MEDIAN_INC	=							\
 		$(INC_DIR)/libalx/base/math/median.h			\
+		$(INC_DIR)/libalx/base/stdlib/average.h			\
 		$(INC_DIR)/libalx/base/stdlib/compare.h
 MEDIAN_SRC	=							\
 		$(SRC_DIR)/base/math/median.c
@@ -163,13 +159,6 @@ SCALE_LINEAR_SRC	=						\
 PHONY := all
 all: $(OBJ)
 
-
-arithmetic_mean.s: $(ARITHMETIC_MEAN_SRC) $(ARITHMETIC_MEAN_INC)
-	@echo	"	CC	libalx/tmp/base/math/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
-arithmetic_mean.o: arithmetic_mean.s
-	@echo	"	AS	libalx/tmp/base/math/$@"
-	$(Q)$(AS) $< -o $@
 
 array_division.s: $(ARRAY_DIVISION_SRC) $(ARRAY_DIVISION_INC)
 	@echo	"	CC	libalx/tmp/base/math/$@"

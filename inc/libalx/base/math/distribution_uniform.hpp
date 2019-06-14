@@ -17,7 +17,7 @@
 #include <cerrno>
 #include <cmath>
 
-#include "libalx/base/math/arithmetic_mean.hpp"
+#include "libalx/base/stdlib/average.hpp"
 
 
 /******************************************************************************

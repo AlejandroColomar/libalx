@@ -156,54 +156,60 @@ all: base extra
 
 PHONY += math
 math:
-	@echo	"	MAKE	math"
+	@echo	"	MAKE	$@"
 	$(Q)$(MAKE) math	-C $(TMP_DIR)
 	$(Q)$(MAKE) math	-C $(LIB_DIR)
 
 PHONY += stddef
 stddef:
-	@echo	"	MAKE	stddef"
+	@echo	"	MAKE	$@"
 	$(Q)$(MAKE) stddef	-C $(TMP_DIR)
 	$(Q)$(MAKE) stddef	-C $(LIB_DIR)
 
 PHONY += stdint
 stdint:
-	@echo	"	MAKE	stdint"
+	@echo	"	MAKE	$@"
 	$(Q)$(MAKE) stdint	-C $(TMP_DIR)
 	$(Q)$(MAKE) stdint	-C $(LIB_DIR)
 
 PHONY += stdio
 stdio:
-	@echo	"	MAKE	stdio"
+	@echo	"	MAKE	$@"
 	$(Q)$(MAKE) stdio	-C $(TMP_DIR)
 	$(Q)$(MAKE) stdio	-C $(LIB_DIR)
 
 PHONY += stdlib
 stdlib:
-	@echo	"	MAKE	stdlib"
+	@echo	"	MAKE	$@"
 	$(Q)$(MAKE) stdlib	-C $(TMP_DIR)
 	$(Q)$(MAKE) stdlib	-C $(LIB_DIR)
 
 PHONY += string
 string:
-	@echo	"	MAKE	string"
+	@echo	"	MAKE	$@"
 	$(Q)$(MAKE) string	-C $(TMP_DIR)
 	$(Q)$(MAKE) string	-C $(LIB_DIR)
 
 PHONY += base
 base: math stddef stdint stdio stdlib string
-	@echo	"	MAKE	base"
+	@echo	"	MAKE	$@"
 	$(Q)$(MAKE) base	-C $(LIB_DIR)
+
+PHONY += gsl
+gsl:
+	@echo	"	MAKE	$@"
+	$(Q)$(MAKE) gsl		-C $(TMP_DIR)
+	$(Q)$(MAKE) gsl		-C $(LIB_DIR)
 
 PHONY += ncurses
 ncurses:
-	@echo	"	MAKE	ncurses"
+	@echo	"	MAKE	$@"
 	$(Q)$(MAKE) ncurses	-C $(TMP_DIR)
 	$(Q)$(MAKE) ncurses	-C $(LIB_DIR)
 
 PHONY += extra
-extra: ncurses
-	@echo	"	MAKE	extra"
+extra: gsl ncurses
+	@echo	"	MAKE	$@"
 	$(Q)$(MAKE) extra	-C $(LIB_DIR)
 
 

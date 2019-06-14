@@ -5,7 +5,6 @@
 # dependencies
 
 MATH_OBJ	=							\
-		$(TMP_DIR)/base/math/arithmetic_mean.o			\
 		$(TMP_DIR)/base/math/array_division.o			\
 		$(TMP_DIR)/base/math/array_multiplication.o		\
 		$(TMP_DIR)/base/math/array_sum.o			\
@@ -34,6 +33,7 @@ STDIO_OBJ	=							\
 		$(TMP_DIR)/base/stdio/wait.o
 STDLIB_OBJ	=							\
 		$(TMP_DIR)/base/stdlib/array_split_pos_neg.o		\
+		$(TMP_DIR)/base/stdlib/average.o			\
 		$(TMP_DIR)/base/stdlib/compare.o			\
 		$(TMP_DIR)/base/stdlib/local_maxima.o			\
 		$(TMP_DIR)/base/stdlib/maximum.o			\
@@ -55,18 +55,21 @@ BASE_OBJ	=							\
 		$(STDLIB_OBJ)						\
 		$(STRING_OBJ)
 
+GSL_OBJ		=							\
+		$(TMP_DIR)/extra/gsl/statistics/mean.o
 NCURSES_OBJ	=							\
 		$(TMP_DIR)/extra/ncurses/common.o			\
 		$(TMP_DIR)/extra/ncurses/get.o				\
 		$(TMP_DIR)/extra/ncurses/menu.o
 EXTRA_OBJ	=							\
+		$(GSL_OBJ)						\
 		$(NCURSES_OBJ)
 
 
 ALL	= libalx							\
 	math stddef stdint stdio stdlib string				\
 	base								\
-	ncurses								\
+	gsl ncurses							\
 	extra
 
 # target: dependencies
@@ -96,6 +99,9 @@ string: libalx libalx/libalx-string.a
 PHONY += base
 base: libalx libalx/libalx-base.a
 
+
+PHONY += gsl
+gsl: libalx libalx/libalx-gsl.a
 
 PHONY += ncurses
 ncurses: libalx libalx/libalx-ncurses.a
@@ -138,6 +144,10 @@ libalx/libalx-base.a: $(BASE_OBJ)
 
 
 libalx/libalx-ncurses.a: $(NCURSES_OBJ)
+	@echo	"	AR	libalx/lib/$@"
+	$(Q)$(AR) -r -c -s -o $@ $^
+
+libalx/libalx-gsl.a: $(GSL_OBJ)
 	@echo	"	AR	libalx/lib/$@"
 	$(Q)$(AR) -r -c -s -o $@ $^
 

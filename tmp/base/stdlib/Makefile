@@ -14,6 +14,7 @@
 
 OBJ		=							\
 		array_split_pos_neg.o					\
+		average.o						\
 		compare.o						\
 		local_maxima.o						\
 		maximum.o						\
@@ -27,6 +28,11 @@ ARRAY_SPLIT_POS_NEG_INC	=						\
 		$(INC_DIR)/libalx/base/stdlib/array_split_pos_neg.h
 ARRAY_SPLIT_POS_NEG_SRC	=						\
 		$(SRC_DIR)/base/stdlib/array_split_pos_neg.c
+
+AVERAGE_INC	=							\
+		$(INC_DIR)/libalx/base/stdlib/average.h
+AVERAGE_SRC	=							\
+		$(SRC_DIR)/base/stdlib/average.c
 
 COMPARE_INC	=							\
 		$(INC_DIR)/libalx/base/stdlib/compare.h
@@ -61,7 +67,7 @@ POW_SRC		=							\
 
 SEARCH_INC	=							\
 		$(INC_DIR)/libalx/base/stdlib/search.h			\
-		$(INC_DIR)/libalx/base/math/arithmetic_mean.h
+		$(INC_DIR)/libalx/base/stdlib/average.h
 SEARCH_SRC	=							\
 		$(SRC_DIR)/base/stdlib/search.c
 
@@ -82,6 +88,13 @@ array_split_pos_neg.s: $(ARRAY_SPLIT_POS_NEG_SRC) $(ARRAY_SPLIT_POS_NEG_INC)
 	@echo	"	CC	libalx/tmp/base/stdlib/$@"
 	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
 array_split_pos_neg.o: array_split_pos_neg.s
+	@echo	"	AS	libalx/tmp/base/stdlib/$@"
+	$(Q)$(AS) $< -o $@
+
+average.s: $(AVERAGE_SRC) $(AVERAGE_INC)
+	@echo	"	CC	libalx/tmp/base/stdlib/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+average.o: average.s
 	@echo	"	AS	libalx/tmp/base/stdlib/$@"
 	$(Q)$(AS) $< -o $@
 

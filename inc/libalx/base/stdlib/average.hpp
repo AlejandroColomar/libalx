@@ -7,15 +7,17 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_MATH_ARITHMETIC_MEAN_H
-#define ALX_MATH_ARITHMETIC_MEAN_H
+#ifndef ALX_STDLIB_AVERAGE_HPP
+#define ALX_STDLIB_AVERAGE_HPP
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <stddef.h>
-#include <stdint.h>
+#include <cstddef>
+#include <cstdint>
+
+#include "libalx/base/stddef/restrict.hpp"
 
 
 /******************************************************************************
@@ -29,8 +31,8 @@
 
 #define	AVGsafe(a, b) (							\
 {									\
-	__auto_type	_a	= (a);					\
-	__auto_type	_b	= (b);					\
+	auto	_a	= (a);						\
+	auto	_b	= (b);						\
 									\
 	(_a / 2) + (_b / 2) + (((_a % 2) + (_b % 2)) / 2);		\
 }									\
@@ -55,32 +57,6 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
-long double	alx_arithmetic_mean_ldbl(ptrdiff_t nmemb,
-					const long double arr[restrict nmemb]);
-double		alx_arithmetic_mean	(ptrdiff_t nmemb,
-					const double arr[restrict nmemb]);
-float		alx_arithmetic_mean_flt	(ptrdiff_t nmemb,
-					const float arr[restrict nmemb]);
-double		alx_arithmetic_mean_uint(ptrdiff_t nmemb,
-					const unsigned arr[restrict nmemb]);
-double		alx_arithmetic_mean_int	(ptrdiff_t nmemb,
-					const int arr[restrict nmemb]);
-double		alx_arithmetic_mean_u8	(ptrdiff_t nmemb,
-					const uint8_t arr[restrict nmemb]);
-double		alx_arithmetic_mean_s8	(ptrdiff_t nmemb,
-					const int8_t arr[restrict nmemb]);
-double		alx_arithmetic_mean_u16	(ptrdiff_t nmemb,
-					const uint16_t arr[restrict nmemb]);
-double		alx_arithmetic_mean_s16	(ptrdiff_t nmemb,
-					const int16_t arr[restrict nmemb]);
-double		alx_arithmetic_mean_u32	(ptrdiff_t nmemb,
-					const uint32_t arr[restrict nmemb]);
-double		alx_arithmetic_mean_s32	(ptrdiff_t nmemb,
-					const int32_t arr[restrict nmemb]);
-double		alx_arithmetic_mean_u64	(ptrdiff_t nmemb,
-					const uint64_t arr[restrict nmemb]);
-double		alx_arithmetic_mean_s64	(ptrdiff_t nmemb,
-					const int64_t arr[restrict nmemb]);
 
 
 /******************************************************************************
@@ -96,7 +72,7 @@ double		alx_arithmetic_mean_s64	(ptrdiff_t nmemb,
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/base/math/arithmetic_mean.h */
+#endif		/* libalx/base/stdlib/average.hpp */
 
 
 /******************************************************************************

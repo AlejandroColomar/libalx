@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "libalx/base/math/arithmetic_mean.h"
+#include "libalx/base/stdlib/average.h"
 #include "libalx/base/stdlib/compare.h"
 
 

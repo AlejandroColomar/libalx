@@ -7,26 +7,16 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_STDLIB_HPP
-#define ALX_STDLIB_HPP
+#ifndef ALX_GSL_STATISTICS_HPP
+#define ALX_GSL_STATISTICS_HPP
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <cstdlib>
+#include <gsl/gsl_statistics.h>
 
-#include "libalx/base/stdlib/array_split_pos_neg.hpp"
-#include "libalx/base/stdlib/average.hpp"
-#include "libalx/base/stdlib/compare.hpp"
-#include "libalx/base/stdlib/local_maxima.hpp"
-#include "libalx/base/stdlib/maximum.hpp"
-#include "libalx/base/stdlib/minimum.hpp"
-#include "libalx/base/stdlib/popcnt.hpp"
-#include "libalx/base/stdlib/pow.hpp"
-#include "libalx/base/stdlib/search.hpp"
-#include "libalx/base/stdlib/seed_mix.hpp"
-#include "libalx/base/stdlib/swap.hpp"
+#include "libalx/extra/gsl/statistics/mean.hpp"
 
 
 /******************************************************************************
@@ -52,9 +42,6 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
-extern	"C"
-{
-}
 
 
 /******************************************************************************
@@ -70,7 +57,7 @@ extern	"C"
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/base/stdlib.hpp */
+#endif		/* libalx/extra/gsl/statistics.hpp */
 
 
 /******************************************************************************

@@ -7,36 +7,26 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_MATH_ARITHMETIC_MEAN_HPP
-#define ALX_MATH_ARITHMETIC_MEAN_HPP
+#ifndef ALX_GSL_STATS_MEAN_H
+#define ALX_GSL_STATS_MEAN_H
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <cstddef>
-#include <cstdint>
+#include <stddef.h>
+#include <stdint.h>
 
-#include "libalx/base/stddef/restrict.hpp"
+#include <gsl/gsl_statistics_uchar.h>
+#include <gsl/gsl_statistics_ushort.h>
+#include <gsl/gsl_statistics_short.h>
+#include <gsl/gsl_statistics_uint.h>
+#include <gsl/gsl_statistics_int.h>
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-#define	AVGfast(a, b) (							\
-{									\
-	(a + b) / 2.0;							\
-}									\
-)
-
-#define	AVGsafe(a, b) (							\
-{									\
-	auto	_a	= (a);						\
-	auto	_b	= (b);						\
-									\
-	(_a / 2) + (_b / 2) + (((_a % 2) + (_b % 2)) / 2);		\
-}									\
-)
 
 
 /******************************************************************************
@@ -57,51 +47,81 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
-extern	"C"
-{
-long double	alx_arithmetic_mean_ldbl(ptrdiff_t nmemb,
-					const long double *restrict arr);
-double		alx_arithmetic_mean	(ptrdiff_t nmemb,
-					const double *restrict arr);
-float		alx_arithmetic_mean_flt	(ptrdiff_t nmemb,
-					const float *restrict arr);
-double		alx_arithmetic_mean_uint(ptrdiff_t nmemb,
-					const unsigned *restrict arr);
-double		alx_arithmetic_mean_int	(ptrdiff_t nmemb,
-					const int *restrict arr);
-double		alx_arithmetic_mean_u8	(ptrdiff_t nmemb,
-					const uint8_t *restrict arr);
-double		alx_arithmetic_mean_s8	(ptrdiff_t nmemb,
-					const int8_t *restrict arr);
-double		alx_arithmetic_mean_u16	(ptrdiff_t nmemb,
-					const uint16_t *restrict arr);
-double		alx_arithmetic_mean_s16	(ptrdiff_t nmemb,
-					const int16_t *restrict arr);
-double		alx_arithmetic_mean_u32	(ptrdiff_t nmemb,
-					const uint32_t *restrict arr);
-double		alx_arithmetic_mean_s32	(ptrdiff_t nmemb,
-					const int32_t *restrict arr);
-double		alx_arithmetic_mean_u64	(ptrdiff_t nmemb,
-					const uint64_t *restrict arr);
-double		alx_arithmetic_mean_s64	(ptrdiff_t nmemb,
-					const int64_t *restrict arr);
-}
+long double alx_stats_mean_ldbl	(ptrdiff_t nmemb,
+				const long double arr[static restrict nmemb]);
+float	alx_stats_mean_flt	(ptrdiff_t nmemb,
+				const float arr[static restrict nmemb]);
+double	alx_stats_mean_s8	(ptrdiff_t nmemb,
+				const int8_t arr[static restrict nmemb]);
+long double alx_stats_mean_u64	(ptrdiff_t nmemb,
+				const uint64_t arr[static restrict nmemb]);
+long double alx_stats_mean_s64	(ptrdiff_t nmemb,
+				const int64_t arr[static restrict nmemb]);
 
 
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
+static inline
+double	alx_stats_mean_u8	(ptrdiff_t nmemb,
+				const uint8_t arr[static restrict nmemb]);
+static inline
+double	alx_stats_mean_u16	(ptrdiff_t nmemb,
+				const uint16_t arr[static restrict nmemb]);
+static inline
+double	alx_stats_mean_s16	(ptrdiff_t nmemb,
+				const int16_t arr[static restrict nmemb]);
+static inline
+double	alx_stats_mean_u32	(ptrdiff_t nmemb,
+				const uint32_t arr[static restrict nmemb]);
+static inline
+double	alx_stats_mean_s32	(ptrdiff_t nmemb,
+				const int32_t arr[static restrict nmemb]);
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
+static inline
+double	alx_stats_mean_u8	(ptrdiff_t nmemb,
+				const uint8_t arr[static restrict nmemb])
+{
+	return	gsl_stats_uchar_mean(arr, 1, nmemb);
+}
+
+static inline
+double	alx_stats_mean_u16	(ptrdiff_t nmemb,
+				const uint16_t arr[static restrict nmemb])
+{
+	return	gsl_stats_ushort_mean(arr, 1, nmemb);
+}
+
+static inline
+double	alx_stats_mean_s16	(ptrdiff_t nmemb,
+				const int16_t arr[static restrict nmemb])
+{
+	return	gsl_stats_short_mean(arr, 1, nmemb);
+}
+
+static inline
+double	alx_stats_mean_u32	(ptrdiff_t nmemb,
+				const uint32_t arr[static restrict nmemb])
+{
+	return	gsl_stats_uint_mean(arr, 1, nmemb);
+}
+
+static inline
+double	alx_stats_mean_s32	(ptrdiff_t nmemb,
+				const int32_t arr[static restrict nmemb])
+{
+	return	gsl_stats_int_mean(arr, 1, nmemb);
+}
 
 
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/base/math/arithmetic_mean.hpp */
+#endif		/* libalx/extra/gsl/statistics/mean.h */
 
 
 /******************************************************************************

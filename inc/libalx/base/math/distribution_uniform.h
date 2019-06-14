@@ -17,7 +17,7 @@
 #include <errno.h>
 #include <math.h>
 
-#include "libalx/base/math/arithmetic_mean.h"
+#include "libalx/base/stdlib/average.h"
 
 
 /******************************************************************************

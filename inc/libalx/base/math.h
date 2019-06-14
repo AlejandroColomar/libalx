@@ -16,7 +16,6 @@
  ******************************************************************************/
 #include <math.h>
 
-#include "libalx/base/math/arithmetic_mean.h"
 #include "libalx/base/math/array_division.h"
 #include "libalx/base/math/array_multiplication.h"
 #include "libalx/base/math/array_sum.h"
