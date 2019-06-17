@@ -11,7 +11,6 @@ MATH_OBJ	=							\
 		$(TMP_DIR)/base/math/binomial_coefficient.o		\
 		$(TMP_DIR)/base/math/matrix_addition.o			\
 		$(TMP_DIR)/base/math/matrix_subtraction.o		\
-		$(TMP_DIR)/base/math/median.o				\
 		$(TMP_DIR)/base/math/pascal_triangle.o			\
 		$(TMP_DIR)/base/math/prime.o				\
 		$(TMP_DIR)/base/math/prime_defactorization.o		\
@@ -55,6 +54,7 @@ GSL_OBJ		=							\
 		$(TMP_DIR)/extra/gsl/distributions/normal.o		\
 		$(TMP_DIR)/extra/gsl/distributions/poisson.o		\
 		$(TMP_DIR)/extra/gsl/distributions/uniform.o		\
+		$(TMP_DIR)/extra/gsl/rstat/median.o			\
 		$(TMP_DIR)/extra/gsl/statistics/mean.o
 NCURSES_OBJ	=							\
 		$(TMP_DIR)/extra/ncurses/common.o			\

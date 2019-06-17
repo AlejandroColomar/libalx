@@ -19,7 +19,6 @@ OBJ		=							\
 		binomial_coefficient.o					\
 		matrix_addition.o					\
 		matrix_subtraction.o					\
-		median.o						\
 		pascal_triangle.o					\
 		prime.o							\
 		prime_defactorization.o					\
@@ -60,13 +59,6 @@ MATRIX_SUBTRACTION_INC	=						\
 		$(INC_DIR)/libalx/base/math/matrix_subtraction.h
 MATRIX_SUBTRACTION_SRC	=						\
 		$(SRC_DIR)/base/math/matrix_subtraction.c
-
-MEDIAN_INC	=							\
-		$(INC_DIR)/libalx/base/math/median.h			\
-		$(INC_DIR)/libalx/base/stdlib/average.h			\
-		$(INC_DIR)/libalx/base/stdlib/compare.h
-MEDIAN_SRC	=							\
-		$(SRC_DIR)/base/math/median.c
 
 PASCAL_TRIANGLE_INC	=						\
 		$(INC_DIR)/libalx/base/math/pascal_triangle.h		\
@@ -151,13 +143,6 @@ matrix_subtraction.s: $(MATRIX_SUBTRACTION_SRC) $(MATRIX_SUBTRACTION_INC)
 	@echo	"	CC	libalx/tmp/base/math/$@"
 	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
 matrix_subtraction.o: matrix_subtraction.s
-	@echo	"	AS	libalx/tmp/base/math/$@"
-	$(Q)$(AS) $< -o $@
-
-median.s: $(MEDIAN_SRC) $(MEDIAN_INC)
-	@echo	"	CC	libalx/tmp/base/math/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
-median.o: median.s
 	@echo	"	AS	libalx/tmp/base/math/$@"
 	$(Q)$(AS) $< -o $@
 

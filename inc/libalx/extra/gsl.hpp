@@ -15,6 +15,7 @@
  ******* headers **************************************************************
  ******************************************************************************/
 #include "libalx/extra/gsl/distributions.hpp"
+#include "libalx/extra/gsl/rstat.hpp"
 #include "libalx/extra/gsl/statistics.hpp"
 
 

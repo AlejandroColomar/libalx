@@ -7,8 +7,8 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_MATH_MEDIAN_HPP
-#define ALX_MATH_MEDIAN_HPP
+#ifndef ALX_GSL_RSTAT_MEDIAN_HPP
+#define ALX_GSL_RSTAT_MEDIAN_HPP
 
 
 /******************************************************************************
@@ -45,19 +45,18 @@
  ******************************************************************************/
 extern	"C"
 {
-long double	alx_median_ldbl	(ptrdiff_t nmemb, const long double *restrict x);
-double		alx_median	(ptrdiff_t nmemb, const double *restrict x);
-float		alx_median_flt	(ptrdiff_t nmemb, const float *restrict x);
-double		alx_median_uint	(ptrdiff_t nmemb, const unsigned *restrict x);
-double		alx_median_int	(ptrdiff_t nmemb, const int *restrict x);
-double		alx_median_u8	(ptrdiff_t nmemb, const uint8_t *restrict x);
-double		alx_median_s8	(ptrdiff_t nmemb, const int8_t *restrict x);
-double		alx_median_u16	(ptrdiff_t nmemb, const uint16_t *restrict x);
-double		alx_median_s16	(ptrdiff_t nmemb, const int16_t *restrict x);
-double		alx_median_u32	(ptrdiff_t nmemb, const uint32_t *restrict x);
-double		alx_median_s32	(ptrdiff_t nmemb, const int32_t *restrict x);
-long double	alx_median_u64	(ptrdiff_t nmemb, const uint64_t *restrict x);
-long double	alx_median_s64	(ptrdiff_t nmemb, const int64_t *restrict x);
+long double alx_rstat_median_ldbl(ptrdiff_t nmemb,const long double*restrict x);
+float	alx_rstat_median_flt	(ptrdiff_t nmemb, const float *restrict x);
+double	alx_rstat_median_uint	(ptrdiff_t nmemb, const unsigned *restrict x);
+double	alx_rstat_median_int	(ptrdiff_t nmemb, const int *restrict x);
+double	alx_rstat_median_u8	(ptrdiff_t nmemb, const uint8_t *restrict x);
+double	alx_rstat_median_s8	(ptrdiff_t nmemb, const int8_t *restrict x);
+double	alx_rstat_median_u16	(ptrdiff_t nmemb, const uint16_t *restrict x);
+double	alx_rstat_median_s16	(ptrdiff_t nmemb, const int16_t *restrict x);
+double	alx_rstat_median_u32	(ptrdiff_t nmemb, const uint32_t *restrict x);
+double	alx_rstat_median_s32	(ptrdiff_t nmemb, const int32_t *restrict x);
+long double alx_rstat_median_u64(ptrdiff_t nmemb, const uint64_t *restrict x);
+long double alx_rstat_median_s64(ptrdiff_t nmemb, const int64_t *restrict x);
 }
 
 
@@ -74,7 +73,7 @@ long double	alx_median_s64	(ptrdiff_t nmemb, const int64_t *restrict x);
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/base/math/median.hpp */
+#endif		/* libalx/extra/gsl/rstat/median.hpp */
 
 
 /******************************************************************************

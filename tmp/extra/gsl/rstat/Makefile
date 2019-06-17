@@ -10,69 +10,35 @@
 ################################################################################
 
 ################################################################################
+# dependencies
+OBJ		=							\
+		median.o
+
+MEDIAN_INC	=							\
+		$(INC_DIR)/libalx/extra/gsl/rstat/median.h		\
+		$(INC_DIR)/libalx/base/stdlib/average.h			\
+		$(INC_DIR)/libalx/base/stdlib/compare.h
+MEDIAN_SRC	=							\
+		$(SRC_DIR)/extra/gsl/rstat/median.c
+
+################################################################################
 # target: dependencies
 #	action
 
 PHONY := all
-all: base extra
+all: $(OBJ)
 
 
-PHONY := base
-base: math stddef stdint stdio stdlib string
-
-PHONY += math
-math:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/math/
-
-PHONY += stddef
-stddef:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stddef/
-
-PHONY += stdint
-stdint:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stdint/
-
-PHONY += stdio
-stdio:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stdio/
-
-PHONY += stdlib
-stdlib:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stdlib/
-
-PHONY += string
-string:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/string/
-
-
-PHONY := extra
-extra: gsl ncurses
-
-
-PHONY := gsl
-gsl: gsl-distributions gsl-rstat gsl-statistics
-
-PHONY += gsl-distributions
-gsl-distributions:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/gsl/distributions/
-
-PHONY += gsl-rstat
-gsl-rstat:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/gsl/rstat/
-
-PHONY += gsl-statistics
-gsl-statistics:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/gsl/statistics/
-
-
-PHONY += ncurses
-ncurses:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/ncurses/
+median.s: $(MEDIAN_SRC) $(MEDIAN_INC)
+	@echo	"	CC	libalx/tmp/extra/gsl/rstat/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+median.o: median.s
+	@echo	"	AS	libalx/tmp/extra/gsl/rstat/$@"
+	$(Q)$(AS) $< -o $@
 
 
 PHONY += clean
 clean:
-	@echo	"	RM	*.o *.s"
 	$(Q)rm -f *.o *.s
 
 ################################################################################
