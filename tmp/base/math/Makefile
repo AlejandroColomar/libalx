@@ -17,7 +17,6 @@ OBJ		=							\
 		array_multiplication.o					\
 		array_sum.o						\
 		binomial_coefficient.o					\
-		factorial.o						\
 		matrix_addition.o					\
 		matrix_subtraction.o					\
 		median.o						\
@@ -51,16 +50,6 @@ BINOMIAL_COEFFICIENT_INC	=					\
 		$(INC_DIR)/libalx/base/stddef/size.h
 BINOMIAL_COEFFICIENT_SRC	=					\
 		$(SRC_DIR)/base/math/binomial_coefficient.c
-
-FACTORIAL_INC	=							\
-		$(INC_DIR)/libalx/base/math/factorial.h			\
-		$(INC_DIR)/libalx/base/math/matrix_addition.h		\
-		$(INC_DIR)/libalx/base/math/prime.h			\
-		$(INC_DIR)/libalx/base/math/prime_defactorization.h	\
-		$(INC_DIR)/libalx/base/math/prime_factorization.h	\
-		$(INC_DIR)/libalx/base/stddef/size.h
-FACTORIAL_SRC	=							\
-		$(SRC_DIR)/base/math/factorial.c
 
 MATRIX_ADDITION_INC	=						\
 		$(INC_DIR)/libalx/base/math/matrix_addition.h
@@ -148,13 +137,6 @@ binomial_coefficient.s: $(BINOMIAL_COEFFICIENT_SRC) $(BINOMIAL_COEFFICIENT_INC)
 	@echo	"	CC	libalx/tmp/base/math/$@"
 	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
 binomial_coefficient.o: binomial_coefficient.s
-	@echo	"	AS	libalx/tmp/base/math/$@"
-	$(Q)$(AS) $< -o $@
-
-factorial.s: $(FACTORIAL_SRC) $(FACTORIAL_INC)
-	@echo	"	CC	libalx/tmp/base/math/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
-factorial.o: factorial.s
 	@echo	"	AS	libalx/tmp/base/math/$@"
 	$(Q)$(AS) $< -o $@
 

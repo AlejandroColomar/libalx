@@ -9,7 +9,6 @@ MATH_OBJ	=							\
 		$(TMP_DIR)/base/math/array_multiplication.o		\
 		$(TMP_DIR)/base/math/array_sum.o			\
 		$(TMP_DIR)/base/math/binomial_coefficient.o		\
-		$(TMP_DIR)/base/math/factorial.o			\
 		$(TMP_DIR)/base/math/matrix_addition.o			\
 		$(TMP_DIR)/base/math/matrix_subtraction.o		\
 		$(TMP_DIR)/base/math/median.o				\
