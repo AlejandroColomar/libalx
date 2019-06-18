@@ -7,20 +7,18 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_BASE_HPP
-#define ALX_BASE_HPP
+#ifndef ALX_FLOAT_HPP
+#define ALX_FLOAT_HPP
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/base/float.hpp"
-#include "libalx/base/math.hpp"
-#include "libalx/base/stddef.hpp"
-#include "libalx/base/stdint.hpp"
-#include "libalx/base/stdio.hpp"
-#include "libalx/base/stdlib.hpp"
-#include "libalx/base/string.hpp"
+#include <cfloat>
+
+#include "libalx/base/float/constant.hpp"
+#include "libalx/base/float/printf.hpp"
+#include "libalx/base/float/scanf.hpp"
 
 
 /******************************************************************************
@@ -61,7 +59,7 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/base.hpp */
+#endif		/* libalx/base/float.hpp */
 
 
 /******************************************************************************

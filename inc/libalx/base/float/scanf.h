@@ -7,25 +7,52 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_BASE_HPP
-#define ALX_BASE_HPP
+#ifndef ALX_FLOAT_SCANF_H
+#define ALX_FLOAT_SCANF_H
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/base/float.hpp"
-#include "libalx/base/math.hpp"
-#include "libalx/base/stddef.hpp"
-#include "libalx/base/stdint.hpp"
-#include "libalx/base/stdio.hpp"
-#include "libalx/base/stdlib.hpp"
-#include "libalx/base/string.hpp"
+#include <float.h>
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+#if	(FLT_EVAL_METHOD == 0)
+#define SCNaFLT		"a"
+#define SCNeFLT		"e"
+#define SCNfFLT		"f"
+#define SCNgFLT		"g"
+
+#define SCNaDBL		"la"
+#define SCNeDBL		"le"
+#define SCNfDBL		"lf"
+#define SCNgDBL		"lg"
+
+#elif	(FLT_EVAL_METHOD == 1)
+#define SCNaFLT		"la"
+#define SCNeFLT		"le"
+#define SCNfFLT		"lf"
+#define SCNgFLT		"lg"
+
+#define SCNaDBL		"la"
+#define SCNeDBL		"le"
+#define SCNfDBL		"lf"
+#define SCNgDBL		"lg"
+
+#elif	(FLT_EVAL_METHOD == 2)
+#define SCNaFLT		"La"
+#define SCNeFLT		"Le"
+#define SCNfFLT		"Lf"
+#define SCNgFLT		"Lg"
+
+#define SCNaDBL		"La"
+#define SCNeDBL		"Le"
+#define SCNfDBL		"Lf"
+#define SCNgDBL		"Lg"
+#endif
 
 
 /******************************************************************************
@@ -61,7 +88,7 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/base.hpp */
+#endif		/* libalx/base/math/scanf.h */
 
 
 /******************************************************************************
