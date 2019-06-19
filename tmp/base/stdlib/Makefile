@@ -22,7 +22,8 @@ OBJ		=							\
 		popcnt.o						\
 		pow.o							\
 		search.o						\
-		seed_mix.o
+		seed_mix.o						\
+		swap.o
 
 ARRAY_SPLIT_POS_NEG_INC	=						\
 		$(INC_DIR)/libalx/base/stdlib/array_split_pos_neg.h
@@ -75,6 +76,11 @@ SEED_MIX_INC	=							\
 		$(INC_DIR)/libalx/base/stdlib/seed_mix.h
 SEED_MIX_SRC	=							\
 		$(SRC_DIR)/base/stdlib/seed_mix.c
+
+SWAP_INC	=							\
+		$(INC_DIR)/libalx/base/stdlib/swap.h
+SWAP_SRC	=							\
+		$(SRC_DIR)/base/stdlib/swap.c
 
 ################################################################################
 # target: dependencies
@@ -151,6 +157,13 @@ seed_mix.s: $(SEED_MIX_SRC) $(SEED_MIX_INC)
 	@echo	"	CC	libalx/tmp/base/stdlib/$@"
 	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
 seed_mix.o: seed_mix.s
+	@echo	"	AS	libalx/tmp/base/stdlib/$@"
+	$(Q)$(AS) $< -o $@
+
+swap.s: $(SWAP_SRC) $(SWAP_INC)
+	@echo	"	CC	libalx/tmp/base/stdlib/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+swap.o: swap.s
 	@echo	"	AS	libalx/tmp/base/stdlib/$@"
 	$(Q)$(AS) $< -o $@
 

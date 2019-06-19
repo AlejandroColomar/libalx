@@ -12,7 +12,19 @@
 ################################################################################
 # dependencies
 
-OBJ		=
+OBJ		=							\
+		constants.o						\
+		types.o
+
+CONSTANTS_INC	=							\
+		$(INC_DIR)/libalx/base/stdint/constants.h
+CONSTANTS_SRC	=							\
+		$(SRC_DIR)/base/stdint/constants.c
+
+TYPES_INC	=							\
+		$(INC_DIR)/libalx/base/stdint/types.h
+TYPES_SRC	=							\
+		$(SRC_DIR)/base/stdint/types.c
 
 ################################################################################
 # target: dependencies
@@ -21,6 +33,20 @@ OBJ		=
 PHONY := all
 all: $(OBJ)
 
+
+constants.s: $(CONSTANTS_SRC) $(CONSTANTS_INC)
+	@echo	"	CC	libalx/tmp/base/stdint/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+constants.o: constants.s
+	@echo	"	AS	libalx/tmp/base/stdint/$@"
+	$(Q)$(AS) $< -o $@
+
+types.s: $(TYPES_SRC) $(TYPES_INC)
+	@echo	"	CC	libalx/tmp/base/stdint/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+types.o: types.s
+	@echo	"	AS	libalx/tmp/base/stdint/$@"
+	$(Q)$(AS) $< -o $@
 
 
 PHONY += clean

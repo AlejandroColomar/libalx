@@ -13,18 +13,24 @@
 # dependencies
 
 OBJ		=							\
-		restrict.o						\
-		size.o
+		constant.o						\
+		printf.o						\
+		scanf.o
 
-RESTRICT_INC	=							\
-		$(INC_DIR)/libalx/base/stddef/restrict.hpp
-RESTRICT_SRC	=							\
-		$(SRC_DIR)/base/stddef/restrict.cpp
+CONSTANT_INC	=							\
+		$(INC_DIR)/libalx/base/float/constant.h
+CONSTANT_SRC	=							\
+		$(SRC_DIR)/base/float/constant.c
 
-SIZE_INC	=							\
-		$(INC_DIR)/libalx/base/stddef/size.h
-SIZE_SRC	=							\
-		$(SRC_DIR)/base/stddef/size.c
+PRINTF_INC	=							\
+		$(INC_DIR)/libalx/base/float/printf.h
+PRINTF_SRC	=							\
+		$(SRC_DIR)/base/float/printf.c
+
+SCANF_INC	=							\
+		$(INC_DIR)/libalx/base/float/scanf.h
+SCANF_SRC	=							\
+		$(SRC_DIR)/base/float/scanf.c
 
 ################################################################################
 # target: dependencies
@@ -34,18 +40,25 @@ PHONY := all
 all: $(OBJ)
 
 
-restrict.s: $(RESTRICT_SRC) $(RESTRICT_INC)
-	@echo	"	CXX	libalx/tmp/base/stddef/$@"
-	$(Q)$(CXX) $(CXXFLAGS) -I $(INC_DIR) -S $< -o $@
-restrict.o: restrict.s
-	@echo	"	AS	libalx/tmp/base/stddef/$@"
+constant.s: $(CONSTANT_SRC) $(CONSTANT_INC)
+	@echo	"	CC	libalx/tmp/base/float/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+constant.o: constant.s
+	@echo	"	AS	libalx/tmp/base/float/$@"
 	$(Q)$(AS) $< -o $@
 
-size.s: $(SIZE_SRC) $(SIZE_INC)
-	@echo	"	CC	libalx/tmp/base/stddef/$@"
+printf.s: $(PRINTF_SRC) $(PRINTF_INC)
+	@echo	"	CC	libalx/tmp/base/float/$@"
 	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
-size.o: size.s
-	@echo	"	AS	libalx/tmp/base/stddef/$@"
+printf.o: printf.s
+	@echo	"	AS	libalx/tmp/base/float/$@"
+	$(Q)$(AS) $< -o $@
+
+scanf.s: $(SCANF_SRC) $(SCANF_INC)
+	@echo	"	CC	libalx/tmp/base/float/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+scanf.o: scanf.s
+	@echo	"	AS	libalx/tmp/base/float/$@"
 	$(Q)$(AS) $< -o $@
 
 

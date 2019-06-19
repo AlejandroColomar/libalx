@@ -17,53 +17,26 @@ PHONY := all
 all: base extra
 
 
-PHONY := base
-base: math stddef stdint stdio stdlib string
-
-PHONY += math
-math:
+PHONY += base
+base:
+	$(Q)$(MAKE)	-C $(TMP_DIR)/base/float/
 	$(Q)$(MAKE)	-C $(TMP_DIR)/base/math/
-
-PHONY += stddef
-stddef:
 	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stddef/
-
-PHONY += stdint
-stdint:
 	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stdint/
-
-PHONY += stdio
-stdio:
 	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stdio/
-
-PHONY += stdlib
-stdlib:
 	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stdlib/
-
-PHONY += string
-string:
 	$(Q)$(MAKE)	-C $(TMP_DIR)/base/string/
 
 
-PHONY := extra
+PHONY += extra
 extra: gsl ncurses
 
 
-PHONY := gsl
-gsl: gsl-distributions gsl-rstat gsl-statistics
-
-PHONY += gsl-distributions
-gsl-distributions:
+PHONY += gsl
+gsl:
 	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/gsl/distributions/
-
-PHONY += gsl-rstat
-gsl-rstat:
 	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/gsl/rstat/
-
-PHONY += gsl-statistics
-gsl-statistics:
 	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/gsl/statistics/
-
 
 PHONY += ncurses
 ncurses:
