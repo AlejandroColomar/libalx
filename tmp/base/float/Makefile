@@ -42,21 +42,21 @@ all: $(OBJ)
 
 constant.s: $(CONSTANT_SRC) $(CONSTANT_INC)
 	@echo	"	CC	libalx/tmp/base/float/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 constant.o: constant.s
 	@echo	"	AS	libalx/tmp/base/float/$@"
 	$(Q)$(AS) $< -o $@
 
 printf.s: $(PRINTF_SRC) $(PRINTF_INC)
 	@echo	"	CC	libalx/tmp/base/float/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 printf.o: printf.s
 	@echo	"	AS	libalx/tmp/base/float/$@"
 	$(Q)$(AS) $< -o $@
 
 scanf.s: $(SCANF_SRC) $(SCANF_INC)
 	@echo	"	CC	libalx/tmp/base/float/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 scanf.o: scanf.s
 	@echo	"	AS	libalx/tmp/base/float/$@"
 	$(Q)$(AS) $< -o $@

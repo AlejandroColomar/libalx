@@ -104,77 +104,77 @@ all: $(OBJ)
 
 array_division.s: $(ARRAY_DIVISION_SRC) $(ARRAY_DIVISION_INC)
 	@echo	"	CC	libalx/tmp/base/math/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 array_division.o: array_division.s
 	@echo	"	AS	libalx/tmp/base/math/$@"
 	$(Q)$(AS) $< -o $@
 
 array_multiplication.s: $(ARRAY_MULTIPLICATION_SRC) $(ARRAY_MULTIPLICATION_INC)
 	@echo	"	CC	libalx/tmp/base/math/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 array_multiplication.o: array_multiplication.s
 	@echo	"	AS	libalx/tmp/base/math/$@"
 	$(Q)$(AS) $< -o $@
 
 array_sum.s: $(ARRAY_SUM_SRC) $(ARRAY_SUM_INC)
 	@echo	"	CC	libalx/tmp/base/math/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 array_sum.o: array_sum.s
 	@echo	"	AS	libalx/tmp/base/math/$@"
 	$(Q)$(AS) $< -o $@
 
 binomial_coefficient.s: $(BINOMIAL_COEFFICIENT_SRC) $(BINOMIAL_COEFFICIENT_INC)
 	@echo	"	CC	libalx/tmp/base/math/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 binomial_coefficient.o: binomial_coefficient.s
 	@echo	"	AS	libalx/tmp/base/math/$@"
 	$(Q)$(AS) $< -o $@
 
 matrix_addition.s: $(MATRIX_ADDITION_SRC) $(MATRIX_ADDITION_INC)
 	@echo	"	CC	libalx/tmp/base/math/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 matrix_addition.o: matrix_addition.s
 	@echo	"	AS	libalx/tmp/base/math/$@"
 	$(Q)$(AS) $< -o $@
 
 matrix_subtraction.s: $(MATRIX_SUBTRACTION_SRC) $(MATRIX_SUBTRACTION_INC)
 	@echo	"	CC	libalx/tmp/base/math/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 matrix_subtraction.o: matrix_subtraction.s
 	@echo	"	AS	libalx/tmp/base/math/$@"
 	$(Q)$(AS) $< -o $@
 
 pascal_triangle.s: $(PASCAL_TRIANGLE_SRC) $(PASCAL_TRIANGLE_INC)
 	@echo	"	CC	libalx/tmp/base/math/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 pascal_triangle.o: pascal_triangle.s
 	@echo	"	AS	libalx/tmp/base/math/$@"
 	$(Q)$(AS) $< -o $@
 
 prime.s: $(PRIME_SRC) $(PRIME_INC)
 	@echo	"	CC	libalx/tmp/base/math/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 prime.o: prime.s
 	@echo	"	AS	libalx/tmp/base/math/$@"
 	$(Q)$(AS) $< -o $@
 
 prime_defactorization.s: $(PRIME_DEFACTORIZATION_SRC) $(PRIME_DEFACTORIZATION_INC)
 	@echo	"	CC	libalx/tmp/base/math/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 prime_defactorization.o: prime_defactorization.s
 	@echo	"	AS	libalx/tmp/base/math/$@"
 	$(Q)$(AS) $< -o $@
 
 prime_factorization.s: $(PRIME_FACTORIZATION_SRC) $(PRIME_FACTORIZATION_INC)
 	@echo	"	CC	libalx/tmp/base/math/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 prime_factorization.o: prime_factorization.s
 	@echo	"	AS	libalx/tmp/base/math/$@"
 	$(Q)$(AS) $< -o $@
 
 scale_linear.s: $(SCALE_LINEAR_SRC) $(SCALE_LINEAR_INC)
 	@echo	"	CC	libalx/tmp/base/math/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 scale_linear.o: scale_linear.s
 	@echo	"	AS	libalx/tmp/base/math/$@"
 	$(Q)$(AS) $< -o $@

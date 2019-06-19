@@ -92,77 +92,77 @@ all: $(OBJ)
 
 array_split_pos_neg.s: $(ARRAY_SPLIT_POS_NEG_SRC) $(ARRAY_SPLIT_POS_NEG_INC)
 	@echo	"	CC	libalx/tmp/base/stdlib/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 array_split_pos_neg.o: array_split_pos_neg.s
 	@echo	"	AS	libalx/tmp/base/stdlib/$@"
 	$(Q)$(AS) $< -o $@
 
 average.s: $(AVERAGE_SRC) $(AVERAGE_INC)
 	@echo	"	CC	libalx/tmp/base/stdlib/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 average.o: average.s
 	@echo	"	AS	libalx/tmp/base/stdlib/$@"
 	$(Q)$(AS) $< -o $@
 
 compare.s: $(COMPARE_SRC) $(COMPARE_INC)
 	@echo	"	CC	libalx/tmp/base/stdlib/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 compare.o: compare.s
 	@echo	"	AS	libalx/tmp/base/stdlib/$@"
 	$(Q)$(AS) $< -o $@
 
 local_maxima.s: $(LOCAL_MAXIMA_SRC) $(LOCAL_MAXIMA_INC)
 	@echo	"	CC	libalx/tmp/base/stdlib/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 local_maxima.o: local_maxima.s
 	@echo	"	AS	libalx/tmp/base/stdlib/$@"
 	$(Q)$(AS) $< -o $@
 
 maximum.s: $(MAXIMUM_SRC) $(MAXIMUM_INC)
 	@echo	"	CC	libalx/tmp/base/stdlib/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 maximum.o: maximum.s
 	@echo	"	AS	libalx/tmp/base/stdlib/$@"
 	$(Q)$(AS) $< -o $@
 
 minimum.s: $(MINIMUM_SRC) $(MINIMUM_INC)
 	@echo	"	CC	libalx/tmp/base/stdlib/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 minimum.o: minimum.s
 	@echo	"	AS	libalx/tmp/base/stdlib/$@"
 	$(Q)$(AS) $< -o $@
 
 popcnt.s: $(POPCNT_SRC) $(POPCNT_INC)
 	@echo	"	CC	libalx/tmp/base/stdlib/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 popcnt.o: popcnt.s
 	@echo	"	AS	libalx/tmp/base/stdlib/$@"
 	$(Q)$(AS) $< -o $@
 
 pow.s: $(POW_SRC) $(POW_INC)
 	@echo	"	CC	libalx/tmp/base/stdlib/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 pow.o: pow.s
 	@echo	"	AS	libalx/tmp/base/stdlib/$@"
 	$(Q)$(AS) $< -o $@
 
 search.s: $(SEARCH_SRC) $(SEARCH_INC)
 	@echo	"	CC	libalx/tmp/base/stdlib/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 search.o: search.s
 	@echo	"	AS	libalx/tmp/base/stdlib/$@"
 	$(Q)$(AS) $< -o $@
 
 seed_mix.s: $(SEED_MIX_SRC) $(SEED_MIX_INC)
 	@echo	"	CC	libalx/tmp/base/stdlib/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 seed_mix.o: seed_mix.s
 	@echo	"	AS	libalx/tmp/base/stdlib/$@"
 	$(Q)$(AS) $< -o $@
 
 swap.s: $(SWAP_SRC) $(SWAP_INC)
 	@echo	"	CC	libalx/tmp/base/stdlib/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 swap.o: swap.s
 	@echo	"	AS	libalx/tmp/base/stdlib/$@"
 	$(Q)$(AS) $< -o $@

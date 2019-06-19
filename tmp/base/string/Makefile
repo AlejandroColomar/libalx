@@ -65,40 +65,40 @@ all: $(OBJ)
 
 memcpy.s: $(MEMCPY_SRC) $(MEMCPY_INC)
 	@echo	"	CC	libalx/tmp/base/string/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 memcpy.o: memcpy.s
 	@echo	"	AS	libalx/tmp/base/string/$@"
 	$(Q)$(AS) $< -o $@
 memcpy-test.s: $(TST_MEMCPY_SRC) $(TST_MEMCPY_INC)
 	@echo	"	CC	libalx/tmp/base/string/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 memcpy-test.o: memcpy-test.s
 	@echo	"	AS	libalx/tmp/base/string/$@"
 	$(Q)$(AS) $< -o $@
 
 strchr.s: $(STRCHR_SRC) $(STRCHR_INC)
 	@echo	"	CC	libalx/tmp/base/string/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 strchr.o: strchr.s
 	@echo	"	AS	libalx/tmp/base/string/$@"
 	$(Q)$(AS) $< -o $@
 
 strgrep.s: $(STRGREP_SRC) $(STRGREP_INC)
 	@echo	"	CC	libalx/tmp/base/string/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 strgrep.o: strgrep.s
 	@echo	"	AS	libalx/tmp/base/string/$@"
 	$(Q)$(AS) $< -o $@
 strgrep-test.s: $(TST_STRGREP_SRC) $(TST_STRGREP_INC)
 	@echo	"	CC	libalx/tmp/base/string/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 strgrep-test.o: strgrep-test.s
 	@echo	"	AS	libalx/tmp/base/string/$@"
 	$(Q)$(AS) $< -o $@
 
 strstr.s: $(STRSTR_SRC) $(STRSTR_INC)
 	@echo	"	CC	libalx/tmp/base/string/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 strstr.o: strstr.s
 	@echo	"	AS	libalx/tmp/base/string/$@"
 	$(Q)$(AS) $< -o $@

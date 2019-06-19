@@ -36,14 +36,14 @@ all: $(OBJ)
 
 restrict.s: $(RESTRICT_SRC) $(RESTRICT_INC)
 	@echo	"	CXX	libalx/tmp/base/stddef/$@"
-	$(Q)$(CXX) $(CXXFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CXX) $(CXXFLAGS) -S $< -o $@
 restrict.o: restrict.s
 	@echo	"	AS	libalx/tmp/base/stddef/$@"
 	$(Q)$(AS) $< -o $@
 
 size.s: $(SIZE_SRC) $(SIZE_INC)
 	@echo	"	CC	libalx/tmp/base/stddef/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 size.o: size.s
 	@echo	"	AS	libalx/tmp/base/stddef/$@"
 	$(Q)$(AS) $< -o $@

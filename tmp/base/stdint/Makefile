@@ -36,14 +36,14 @@ all: $(OBJ)
 
 constants.s: $(CONSTANTS_SRC) $(CONSTANTS_INC)
 	@echo	"	CC	libalx/tmp/base/stdint/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 constants.o: constants.s
 	@echo	"	AS	libalx/tmp/base/stdint/$@"
 	$(Q)$(AS) $< -o $@
 
 types.s: $(TYPES_SRC) $(TYPES_INC)
 	@echo	"	CC	libalx/tmp/base/stdint/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 types.o: types.s
 	@echo	"	AS	libalx/tmp/base/stdint/$@"
 	$(Q)$(AS) $< -o $@

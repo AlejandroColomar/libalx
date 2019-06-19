@@ -52,28 +52,28 @@ all: $(OBJ)
 
 get.s: $(GET_SRC) $(GET_INC)
 	@echo	"	CC	libalx/tmp/base/stdio/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 get.o: get.s
 	@echo	"	AS	libalx/tmp/base/stdio/$@"
 	$(Q)$(AS) $< -o $@
 
 printf_b.s: $(PRINTFB_SRC) $(PRINTFB_INC)
 	@echo	"	CC	libalx/tmp/base/stdio/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 printf_b.o: printf_b.s
 	@echo	"	AS	libalx/tmp/base/stdio/$@"
 	$(Q)$(AS) $< -o $@
 
 sscan.s: $(SSCAN_SRC) $(SSCAN_INC)
 	@echo	"	CC	libalx/tmp/base/stdio/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 sscan.o: sscan.s
 	@echo	"	AS	libalx/tmp/base/stdio/$@"
 	$(Q)$(AS) $< -o $@
 
 wait.s: $(WAIT_SRC) $(WAIT_INC)
 	@echo	"	CC	libalx/tmp/base/stdio/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 wait.o: wait.s
 	@echo	"	AS	libalx/tmp/base/stdio/$@"
 	$(Q)$(AS) $< -o $@
