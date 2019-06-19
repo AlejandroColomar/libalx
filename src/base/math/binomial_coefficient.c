@@ -12,12 +12,9 @@
 #include <errno.h>
 #include <math.h>
 #include <stdint.h>
-#include <string.h>
 
 #include "libalx/base/math/pascal_triangle.h"
 #include "libalx/base/math/prime.h"
-#include "libalx/base/math/prime_defactorization.h"
-#include "libalx/base/stddef/size.h"
 
 
 /******************************************************************************
@@ -48,9 +45,8 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-long double	alx_ldbl_binomial_coefficient		(int16_t n, int16_t k)
+long double alx_binomial_coefficient_ldbl	(int32_t n, int32_t k)
 {
-	int16_t	pf[PRIME_NUMS_QTY_16b];
 
 	if ((n < 0) || (k < 0)) {
 		errno	= EDOM;
@@ -63,16 +59,11 @@ long double	alx_ldbl_binomial_coefficient		(int16_t n, int16_t k)
 	if (k == 1)
 		return	n;
 
-	memset(pf, 0, sizeof(pf));
-	if (alx_binomial_coefficient_factorized(n, k, pf))
-		return	nanl("");
-
-	return	alx_ldbl_prime_defactorization_16b(pf);
+	return	alx_pascal_triangle_ldbl(n, k);
 }
 
-double		alx_binomial_coefficient		(int16_t n, int16_t k)
+double	alx_binomial_coefficient		(int16_t n, int16_t k)
 {
-	int16_t	pf[PRIME_NUMS_QTY_16b];
 
 	if ((n < 0) || (k < 0)) {
 		errno	= EDOM;
@@ -85,16 +76,11 @@ double		alx_binomial_coefficient		(int16_t n, int16_t k)
 	if (k == 1)
 		return	n;
 
-	memset(pf, 0, sizeof(pf));
-	if (alx_binomial_coefficient_factorized(n, k, pf))
-		return	nan("");
-
-	return	alx_prime_defactorization_16b(pf);
+	return	alx_pascal_triangle(n, k);
 }
 
-float		alx_flt_binomial_coefficient		(int16_t n, int16_t k)
+float	alx_binomial_coefficient_flt		(int16_t n, int16_t k)
 {
-	int16_t	pf[PRIME_NUMS_QTY_16b];
 
 	if ((n < 0) || (k < 0)) {
 		errno	= EDOM;
@@ -107,14 +93,10 @@ float		alx_flt_binomial_coefficient		(int16_t n, int16_t k)
 	if (k == 1)
 		return	n;
 
-	memset(pf, 0, sizeof(pf));
-	if (alx_binomial_coefficient_factorized(n, k, pf))
-		return	nanf("");
-
-	return	alx_flt_prime_defactorization_16b(pf);
+	return	alx_pascal_triangle_flt(n, k);
 }
 
-int		alx_binomial_coefficient_factorized	(int16_t n, int16_t k,
+int	alx_binomial_coefficient_factorized	(int16_t n, int16_t k,
 				int16_t pf[static restrict PRIME_NUMS_QTY_16b])
 {
 
@@ -122,7 +104,6 @@ int		alx_binomial_coefficient_factorized	(int16_t n, int16_t k,
 		errno	= EDOM;
 		return	-EDOM;
 	}
-
 	if (k > n) {
 		errno	= EDOM;
 		return	-EDOM;
