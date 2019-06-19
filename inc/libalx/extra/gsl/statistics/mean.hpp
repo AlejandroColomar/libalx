@@ -67,14 +67,19 @@ long double alx_stats_mean_s64	(ptrdiff_t nmemb,
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
+static inline
 double	alx_stats_mean_u8	(ptrdiff_t nmemb,
 				const uint8_t *restrict arr);
+static inline
 double	alx_stats_mean_u16	(ptrdiff_t nmemb,
 				const uint16_t *restrict arr);
+static inline
 double	alx_stats_mean_s16	(ptrdiff_t nmemb,
 				const int16_t *restrict arr);
+static inline
 double	alx_stats_mean_u32	(ptrdiff_t nmemb,
 				const uint32_t *restrict arr);
+static inline
 double	alx_stats_mean_s32	(ptrdiff_t nmemb,
 				const int32_t *restrict arr);
 
