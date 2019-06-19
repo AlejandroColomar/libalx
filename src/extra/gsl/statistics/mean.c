@@ -42,7 +42,7 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-long double alx_stats_mean_ldbl	(ptrdiff_t nmemb,
+long double alx_gsl_stats_mean_ldbl(ptrdiff_t nmemb,
 				const long double arr[static restrict nmemb])
 {
 	long double	sum;
@@ -57,7 +57,7 @@ long double alx_stats_mean_ldbl	(ptrdiff_t nmemb,
 	return	mean;
 }
 
-float	alx_stats_mean_flt	(ptrdiff_t nmemb,
+float	alx_gsl_stats_mean_flt	(ptrdiff_t nmemb,
 				const float arr[static restrict nmemb])
 {
 	float_t	sum;
@@ -72,7 +72,7 @@ float	alx_stats_mean_flt	(ptrdiff_t nmemb,
 	return	mean;
 }
 
-double	alx_arithmetic_mean_s8	(ptrdiff_t nmemb,
+double	alx_gsl_stats_mean_s8	(ptrdiff_t nmemb,
 				const int8_t arr[static restrict nmemb])
 {
 	int_fast8_t	quotients;
@@ -91,7 +91,7 @@ double	alx_arithmetic_mean_s8	(ptrdiff_t nmemb,
 	return	mean;
 }
 
-long double alx_arithmetic_mean_u64(ptrdiff_t nmemb,
+long double alx_gsl_stats_mean_u64(ptrdiff_t nmemb,
 				const uint64_t arr[static restrict nmemb])
 {
 	uint_fast64_t	quotients;
@@ -110,7 +110,7 @@ long double alx_arithmetic_mean_u64(ptrdiff_t nmemb,
 	return	mean;
 }
 
-long double alx_arithmetic_mean_s64(ptrdiff_t nmemb,
+long double alx_gsl_stats_mean_s64(ptrdiff_t nmemb,
 				const int64_t arr[static restrict nmemb])
 {
 	int_fast64_t	quotients;

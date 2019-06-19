@@ -47,7 +47,7 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-long double alx_rstat_median_ldbl(ptrdiff_t nmemb,
+long double alx_gsl_rstat_median_ldbl(ptrdiff_t nmemb,
 				const long double arr[static restrict nmemb])
 {
 	long double	sorted[nmemb];
@@ -64,7 +64,7 @@ long double alx_rstat_median_ldbl(ptrdiff_t nmemb,
 	return	median;
 }
 
-float	alx_rstat_median_flt	(ptrdiff_t nmemb,
+float	alx_gsl_rstat_median_flt(ptrdiff_t nmemb,
 				const float arr[static restrict nmemb])
 {
 	float	sorted[nmemb];
@@ -81,7 +81,7 @@ float	alx_rstat_median_flt	(ptrdiff_t nmemb,
 	return	median;
 }
 
-double	alx_rstat_median_uint	(ptrdiff_t nmemb,
+double	alx_gsl_rstat_median_uint(ptrdiff_t nmemb,
 				const unsigned arr[static restrict nmemb])
 {
 	unsigned	sorted[nmemb];
@@ -99,7 +99,7 @@ double	alx_rstat_median_uint	(ptrdiff_t nmemb,
 	return	median;
 }
 
-double	alx_rstat_median_int	(ptrdiff_t nmemb,
+double	alx_gsl_rstat_median_int(ptrdiff_t nmemb,
 				const int arr[static restrict nmemb])
 {
 	int	sorted[nmemb];
@@ -117,7 +117,7 @@ double	alx_rstat_median_int	(ptrdiff_t nmemb,
 	return	median;
 }
 
-double	alx_rstat_median_u8	(ptrdiff_t nmemb,
+double	alx_gsl_rstat_median_u8	(ptrdiff_t nmemb,
 				const uint8_t arr[static restrict nmemb])
 {
 	uint8_t	sorted[nmemb];
@@ -135,7 +135,7 @@ double	alx_rstat_median_u8	(ptrdiff_t nmemb,
 	return	median;
 }
 
-double	alx_rstat_median_s8	(ptrdiff_t nmemb,
+double	alx_gsl_rstat_median_s8	(ptrdiff_t nmemb,
 				const int8_t arr[static restrict nmemb])
 {
 	int8_t	sorted[nmemb];
@@ -153,7 +153,7 @@ double	alx_rstat_median_s8	(ptrdiff_t nmemb,
 	return	median;
 }
 
-double	alx_rstat_median_u16	(ptrdiff_t nmemb,
+double	alx_gsl_rstat_median_u16(ptrdiff_t nmemb,
 				const uint16_t arr[static restrict nmemb])
 {
 	uint16_t	sorted[nmemb];
@@ -189,7 +189,7 @@ double	alx_rstat_median_s16	(ptrdiff_t nmemb,
 	return	median;
 }
 
-double	alx_rstat_median_u32	(ptrdiff_t nmemb,
+double	alx_rgsl_stat_median_u32(ptrdiff_t nmemb,
 				const uint32_t arr[static restrict nmemb])
 {
 	uint32_t	sorted[nmemb];
@@ -207,7 +207,7 @@ double	alx_rstat_median_u32	(ptrdiff_t nmemb,
 	return	median;
 }
 
-double	alx_rstat_median_s32	(ptrdiff_t nmemb,
+double	alx_gsl_rstat_median_s32(ptrdiff_t nmemb,
 				const int32_t arr[static restrict nmemb])
 {
 	int32_t	sorted[nmemb];
@@ -225,7 +225,7 @@ double	alx_rstat_median_s32	(ptrdiff_t nmemb,
 	return	median;
 }
 
-long double alx_rstat_median_u64(ptrdiff_t nmemb,
+long double alx_gsl_rstat_median_u64(ptrdiff_t nmemb,
 				const uint64_t arr[static restrict nmemb])
 {
 	uint64_t	sorted[nmemb];
@@ -243,7 +243,7 @@ long double alx_rstat_median_u64(ptrdiff_t nmemb,
 	return	median;
 }
 
-long double alx_rstat_median_s64(ptrdiff_t nmemb,
+long double alx_gsl_rstat_median_s64(ptrdiff_t nmemb,
 				const int64_t arr[static restrict nmemb])
 {
 	int64_t		sorted[nmemb];
