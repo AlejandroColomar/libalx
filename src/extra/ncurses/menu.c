@@ -64,14 +64,14 @@ int8_t	alx_ncurses_menu	(int8_t height, int8_t width,
 	c	= (80 - width) / 2;
 	win	= newwin(height, width, r, c);
 
-	sel	= alx_ncurses_w_menu(win, N, mnu, title);
+	sel	= alx_ncurses_menu_w(win, N, mnu, title);
 
 	alx_ncurses_delwin(win);
 
 	return	sel;
 }
 
-int8_t	alx_ncurses_w_menu	(WINDOW *win,
+int8_t	alx_ncurses_menu_w	(WINDOW *win,
 				int8_t N,
 				const struct Alx_Ncurses_Menu mnu[restrict N],
 				const char *restrict title)

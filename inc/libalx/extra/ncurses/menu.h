@@ -51,7 +51,7 @@ int8_t	alx_ncurses_menu	(int8_t height, int8_t width,
 				int8_t N,
 				const struct Alx_Ncurses_Menu mnu[restrict N],
 				const char *restrict title);
-int8_t	alx_ncurses_w_menu	(WINDOW *win,
+int8_t	alx_ncurses_menu_w	(WINDOW *win,
 				int8_t N,
 				const struct Alx_Ncurses_Menu mnu[restrict N],
 				const char *restrict title);
