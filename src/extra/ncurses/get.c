@@ -46,61 +46,61 @@
 /******************************************************************************
  ******* static functions (prototypes) ****************************************
  ******************************************************************************/
-static	long double	loop_w_get_ldbl	(WINDOW *win,
+static	long double	loop_get_ldbl	(WINDOW *win,
 					long double m, long double def,
 								long double M,
 					uint8_t attempts);
-static	double		loop_w_get_dbl	(WINDOW *win,
+static	double		loop_get_dbl	(WINDOW *win,
 					double m, double def, double M,
 					uint8_t attempts);
-static	float		loop_w_get_flt	(WINDOW *win,
+static	float		loop_get_flt	(WINDOW *win,
 					float m, float def, float M,
 					uint8_t attempts);
-static	unsigned	loop_w_get_uint	(WINDOW *win,
+static	unsigned	loop_get_uint	(WINDOW *win,
 					unsigned m, unsigned def, unsigned M,
 					uint8_t attempts);
-static	int		loop_w_get_int	(WINDOW *win,
+static	int		loop_get_int	(WINDOW *win,
 					int m, int def, int M,
 					uint8_t attempts);
-static	uint8_t		loop_w_get_u8	(WINDOW *win,
+static	uint8_t		loop_get_u8	(WINDOW *win,
 					uint8_t m, uint8_t def, uint8_t M,
 					uint8_t attempts);
-static	int8_t		loop_w_get_s8	(WINDOW *win,
+static	int8_t		loop_get_s8	(WINDOW *win,
 					int8_t m, int8_t def, int8_t M,
 					uint8_t attempts);
-static	uint16_t	loop_w_get_u16	(WINDOW *win,
+static	uint16_t	loop_get_u16	(WINDOW *win,
 					uint16_t m, uint16_t def, uint16_t M,
 					uint8_t attempts);
-static	int16_t		loop_w_get_s16	(WINDOW *win,
+static	int16_t		loop_get_s16	(WINDOW *win,
 					int16_t m, int16_t def, int16_t M,
 					uint8_t attempts);
-static	uint32_t	loop_w_get_u32	(WINDOW *win,
+static	uint32_t	loop_get_u32	(WINDOW *win,
 					uint32_t m, uint32_t def, uint32_t M,
 					uint8_t attempts);
-static	int32_t		loop_w_get_s32	(WINDOW *win,
+static	int32_t		loop_get_s32	(WINDOW *win,
 					int32_t m, int32_t def, int32_t M,
 					uint8_t attempts);
-static	uint64_t	loop_w_get_u64	(WINDOW *win,
+static	uint64_t	loop_get_u64	(WINDOW *win,
 					uint64_t m, uint64_t def, uint64_t M,
 					uint8_t attempts);
-static	int64_t		loop_w_get_s64	(WINDOW *win,
+static	int64_t		loop_get_s64	(WINDOW *win,
 					int64_t m, int64_t def, int64_t M,
 					uint8_t attempts);
-static	ptrdiff_t	loop_w_get_pdif	(WINDOW *win,
+static	ptrdiff_t	loop_get_pdif	(WINDOW *win,
 					ptrdiff_t m, ptrdiff_t def, ptrdiff_t M,
 					uint8_t attempts);
-static	int		loop_w_get_fname(WINDOW *win,
+static	int		loop_get_fname	(WINDOW *win,
 					const char *restrict fpath,
 					char fname[restrict FILENAME_MAX],
 					bool exist,
 					uint8_t attempts);
-static	void		manage_w_error	(WINDOW *win, int err);
+static	void		manage_error	(WINDOW *win, int err);
 
 
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-long double	alx_w_get_ldbl	(long double m, long double def, long double M,
+long double alx_ncurses_get_ldbl(long double m, long double def, long double M,
 				int8_t width, int8_t row,
 				const char *restrict title,
 				const char *restrict help,
@@ -148,7 +148,7 @@ long double	alx_w_get_ldbl	(long double m, long double def, long double M,
 	win3	= newwin(h3, w3, r3, c3);
 	wbkgd(win3, A_REVERSE);
 	wrefresh(win3);
-	R	= loop_w_get_ldbl(win3, m, def, M, attempts);
+	R	= loop_get_ldbl(win3, m, def, M, attempts);
 
 	/* Delete window */
 	alx_ncurses_delwin(win3);
@@ -158,7 +158,7 @@ long double	alx_w_get_ldbl	(long double m, long double def, long double M,
 	return	R;
 }
 
-double		alx_w_get_dbl	(double m, double def, double M,
+double	alx_ncurses_get_dbl	(double m, double def, double M,
 				int8_t width, int8_t row,
 				const char *restrict title,
 				const char *restrict help,
@@ -206,7 +206,7 @@ double		alx_w_get_dbl	(double m, double def, double M,
 	win3	= newwin(h3, w3, r3, c3);
 	wbkgd(win3, A_REVERSE);
 	wrefresh(win3);
-	R	= loop_w_get_dbl(win3, m, def, M, attempts);
+	R	= loop_get_dbl(win3, m, def, M, attempts);
 
 	/* Delete window */
 	alx_ncurses_delwin(win3);
@@ -216,7 +216,7 @@ double		alx_w_get_dbl	(double m, double def, double M,
 	return	R;
 }
 
-float		alx_w_get_flt	(float m, float def, float M,
+float	alx_ncurses_get_flt	(float m, float def, float M,
 				int8_t width, int8_t row,
 				const char *restrict title,
 				const char *restrict help,
@@ -264,7 +264,7 @@ float		alx_w_get_flt	(float m, float def, float M,
 	win3	= newwin(h3, w3, r3, c3);
 	wbkgd(win3, A_REVERSE);
 	wrefresh(win3);
-	R	= loop_w_get_flt(win3, m, def, M, attempts);
+	R	= loop_get_flt(win3, m, def, M, attempts);
 
 	/* Delete window */
 	alx_ncurses_delwin(win3);
@@ -274,7 +274,7 @@ float		alx_w_get_flt	(float m, float def, float M,
 	return	R;
 }
 
-unsigned	alx_w_get_uint	(unsigned m, unsigned def, unsigned M,
+unsigned alx_ncurses_get_uint	(unsigned m, unsigned def, unsigned M,
 				int8_t width, int8_t row,
 				const char *restrict title,
 				const char *restrict help,
@@ -322,7 +322,7 @@ unsigned	alx_w_get_uint	(unsigned m, unsigned def, unsigned M,
 	win3	= newwin(h3, w3, r3, c3);
 	wbkgd(win3, A_REVERSE);
 	wrefresh(win3);
-	R	= loop_w_get_uint(win3, m, def, M, attempts);
+	R	= loop_get_uint(win3, m, def, M, attempts);
 
 	/* Delete window */
 	alx_ncurses_delwin(win3);
@@ -332,7 +332,7 @@ unsigned	alx_w_get_uint	(unsigned m, unsigned def, unsigned M,
 	return	R;
 }
 
-int		alx_w_get_int	(int m, int def, int M,
+int	alx_ncurses_get_int	(int m, int def, int M,
 				int8_t width, int8_t row,
 				const char *restrict title,
 				const char *restrict help,
@@ -380,7 +380,7 @@ int		alx_w_get_int	(int m, int def, int M,
 	win3	= newwin(h3, w3, r3, c3);
 	wbkgd(win3, A_REVERSE);
 	wrefresh(win3);
-	R	= loop_w_get_int(win3, m, def, M, attempts);
+	R	= loop_get_int(win3, m, def, M, attempts);
 
 	/* Delete window */
 	alx_ncurses_delwin(win3);
@@ -390,7 +390,7 @@ int		alx_w_get_int	(int m, int def, int M,
 	return	R;
 }
 
-uint8_t		alx_w_get_u8	(uint8_t m, uint8_t def, uint8_t M,
+uint8_t	alx_ncurses_get_u8	(uint8_t m, uint8_t def, uint8_t M,
 				int8_t width, int8_t row,
 				const char *restrict title,
 				const char *restrict help,
@@ -438,7 +438,7 @@ uint8_t		alx_w_get_u8	(uint8_t m, uint8_t def, uint8_t M,
 	win3	= newwin(h3, w3, r3, c3);
 	wbkgd(win3, A_REVERSE);
 	wrefresh(win3);
-	R	= loop_w_get_u8(win3, m, def, M, attempts);
+	R	= loop_get_u8(win3, m, def, M, attempts);
 
 	/* Delete window */
 	alx_ncurses_delwin(win3);
@@ -448,7 +448,7 @@ uint8_t		alx_w_get_u8	(uint8_t m, uint8_t def, uint8_t M,
 	return	R;
 }
 
-int8_t		alx_w_get_s8	(int8_t m, int8_t def, int8_t M,
+int8_t	alx_ncurses_get_s8	(int8_t m, int8_t def, int8_t M,
 				int8_t width, int8_t row,
 				const char *restrict title,
 				const char *restrict help,
@@ -496,7 +496,7 @@ int8_t		alx_w_get_s8	(int8_t m, int8_t def, int8_t M,
 	win3	= newwin(h3, w3, r3, c3);
 	wbkgd(win3, A_REVERSE);
 	wrefresh(win3);
-	R	= loop_w_get_s8(win3, m, def, M, attempts);
+	R	= loop_get_s8(win3, m, def, M, attempts);
 
 	/* Delete window */
 	alx_ncurses_delwin(win3);
@@ -506,7 +506,7 @@ int8_t		alx_w_get_s8	(int8_t m, int8_t def, int8_t M,
 	return	R;
 }
 
-uint16_t	alx_w_get_u16	(uint16_t m, uint16_t def, uint16_t M,
+uint16_t alx_ncurses_get_u16	(uint16_t m, uint16_t def, uint16_t M,
 				int8_t width, int8_t row,
 				const char *restrict title,
 				const char *restrict help,
@@ -554,7 +554,7 @@ uint16_t	alx_w_get_u16	(uint16_t m, uint16_t def, uint16_t M,
 	win3	= newwin(h3, w3, r3, c3);
 	wbkgd(win3, A_REVERSE);
 	wrefresh(win3);
-	R	= loop_w_get_u16(win3, m, def, M, attempts);
+	R	= loop_get_u16(win3, m, def, M, attempts);
 
 	/* Delete window */
 	alx_ncurses_delwin(win3);
@@ -564,7 +564,7 @@ uint16_t	alx_w_get_u16	(uint16_t m, uint16_t def, uint16_t M,
 	return	R;
 }
 
-int16_t		alx_w_get_s16	(int16_t m, int16_t def, int16_t M,
+int16_t	alx_ncurses_get_s16	(int16_t m, int16_t def, int16_t M,
 				int8_t width, int8_t row,
 				const char *restrict title,
 				const char *restrict help,
@@ -612,7 +612,7 @@ int16_t		alx_w_get_s16	(int16_t m, int16_t def, int16_t M,
 	win3	= newwin(h3, w3, r3, c3);
 	wbkgd(win3, A_REVERSE);
 	wrefresh(win3);
-	R	= loop_w_get_s16(win3, m, def, M, attempts);
+	R	= loop_get_s16(win3, m, def, M, attempts);
 
 	/* Delete window */
 	alx_ncurses_delwin(win3);
@@ -622,7 +622,7 @@ int16_t		alx_w_get_s16	(int16_t m, int16_t def, int16_t M,
 	return	R;
 }
 
-uint32_t	alx_w_get_u32	(uint32_t m, uint32_t def, uint32_t M,
+uint32_t alx_ncurses_get_u32	(uint32_t m, uint32_t def, uint32_t M,
 				int8_t width, int8_t row,
 				const char *restrict title,
 				const char *restrict help,
@@ -670,7 +670,7 @@ uint32_t	alx_w_get_u32	(uint32_t m, uint32_t def, uint32_t M,
 	win3	= newwin(h3, w3, r3, c3);
 	wbkgd(win3, A_REVERSE);
 	wrefresh(win3);
-	R	= loop_w_get_u32(win3, m, def, M, attempts);
+	R	= loop_get_u32(win3, m, def, M, attempts);
 
 	/* Delete window */
 	alx_ncurses_delwin(win3);
@@ -680,7 +680,7 @@ uint32_t	alx_w_get_u32	(uint32_t m, uint32_t def, uint32_t M,
 	return	R;
 }
 
-int32_t		alx_w_get_s32	(int32_t m, int32_t def, int32_t M,
+int32_t	alx_ncurses_get_s32	(int32_t m, int32_t def, int32_t M,
 				int8_t width, int8_t row,
 				const char *restrict title,
 				const char *restrict help,
@@ -728,7 +728,7 @@ int32_t		alx_w_get_s32	(int32_t m, int32_t def, int32_t M,
 	win3	= newwin(h3, w3, r3, c3);
 	wbkgd(win3, A_REVERSE);
 	wrefresh(win3);
-	R	= loop_w_get_s32(win3, m, def, M, attempts);
+	R	= loop_get_s32(win3, m, def, M, attempts);
 
 	/* Delete window */
 	alx_ncurses_delwin(win3);
@@ -738,7 +738,7 @@ int32_t		alx_w_get_s32	(int32_t m, int32_t def, int32_t M,
 	return	R;
 }
 
-uint64_t	alx_w_get_u64	(uint64_t m, uint64_t def, uint64_t M,
+uint64_t alx_ncurses_get_u64	(uint64_t m, uint64_t def, uint64_t M,
 				int8_t width, int8_t row,
 				const char *restrict title,
 				const char *restrict help,
@@ -786,7 +786,7 @@ uint64_t	alx_w_get_u64	(uint64_t m, uint64_t def, uint64_t M,
 	win3	= newwin(h3, w3, r3, c3);
 	wbkgd(win3, A_REVERSE);
 	wrefresh(win3);
-	R	= loop_w_get_u64(win3, m, def, M, attempts);
+	R	= loop_get_u64(win3, m, def, M, attempts);
 
 	/* Delete window */
 	alx_ncurses_delwin(win3);
@@ -796,7 +796,7 @@ uint64_t	alx_w_get_u64	(uint64_t m, uint64_t def, uint64_t M,
 	return	R;
 }
 
-int64_t		alx_w_get_s64	(int64_t m, int64_t def, int64_t M,
+int64_t	alx_ncurses_get_s64	(int64_t m, int64_t def, int64_t M,
 				int8_t width, int8_t row,
 				const char *restrict title,
 				const char *restrict help,
@@ -844,7 +844,7 @@ int64_t		alx_w_get_s64	(int64_t m, int64_t def, int64_t M,
 	win3	= newwin(h3, w3, r3, c3);
 	wbkgd(win3, A_REVERSE);
 	wrefresh(win3);
-	R	= loop_w_get_s64(win3, m, def, M, attempts);
+	R	= loop_get_s64(win3, m, def, M, attempts);
 
 	/* Delete window */
 	alx_ncurses_delwin(win3);
@@ -854,7 +854,7 @@ int64_t		alx_w_get_s64	(int64_t m, int64_t def, int64_t M,
 	return	R;
 }
 
-ptrdiff_t	alx_w_get_pdif	(ptrdiff_t m, ptrdiff_t def, ptrdiff_t M,
+ptrdiff_t alx_ncurses_get_pdif	(ptrdiff_t m, ptrdiff_t def, ptrdiff_t M,
 				int8_t width, int8_t row,
 				const char *restrict title,
 				const char *restrict help,
@@ -902,7 +902,7 @@ ptrdiff_t	alx_w_get_pdif	(ptrdiff_t m, ptrdiff_t def, ptrdiff_t M,
 	win3	= newwin(h3, w3, r3, c3);
 	wbkgd(win3, A_REVERSE);
 	wrefresh(win3);
-	R	= loop_w_get_pdif(win3, m, def, M, attempts);
+	R	= loop_get_pdif(win3, m, def, M, attempts);
 
 	/* Delete window */
 	alx_ncurses_delwin(win3);
@@ -912,7 +912,7 @@ ptrdiff_t	alx_w_get_pdif	(ptrdiff_t m, ptrdiff_t def, ptrdiff_t M,
 	return	R;
 }
 
-int		alx_w_get_nstr	(ptrdiff_t size, char dest[restrict size],
+int	alx_ncurses_get_nstr	(ptrdiff_t size, char dest[restrict size],
 				int8_t width, int8_t row,
 				const char *restrict title,
 				const char *restrict help)
@@ -973,7 +973,7 @@ int		alx_w_get_nstr	(ptrdiff_t size, char dest[restrict size],
 	return	err;
 }
 
-int		alx_w_get_fname	(const char *restrict fpath,
+int	alx_ncurses_get_fname	(const char *restrict fpath,
 				char fname[restrict FILENAME_MAX],
 				bool exist,
 				int8_t width, int8_t row,
@@ -1022,7 +1022,7 @@ int		alx_w_get_fname	(const char *restrict fpath,
 	win3	= newwin(h3, w3, r3, c3);
 	wbkgd(win3, A_REVERSE);
 	wrefresh(win3);
-	err	= loop_w_get_fname(win3, fpath, fname, exist, attempts);
+	err	= loop_get_fname(win3, fpath, fname, exist, attempts);
 
 	/* Delete window */
 	alx_ncurses_delwin(win3);
@@ -1036,7 +1036,7 @@ int		alx_w_get_fname	(const char *restrict fpath,
 /******************************************************************************
  ******* static functions (definitions) ***************************************
  ******************************************************************************/
-static	long double	loop_w_get_ldbl	(WINDOW *win,
+static	long double	loop_get_ldbl	(WINDOW *win,
 					long double m, long double def,
 								long double M,
 					uint8_t attempts)
@@ -1063,13 +1063,13 @@ static	long double	loop_w_get_ldbl	(WINDOW *win,
 err_getstr:
 		err	= ERR_GETSTR;
 err_sscan:
-		manage_w_error(win, err);
+		manage_error(win, err);
 	}
 
 	return	R;
 }
 
-static	double		loop_w_get_dbl	(WINDOW *win,
+static	double		loop_get_dbl	(WINDOW *win,
 					double m, double def, double M,
 					uint8_t attempts)
 {
@@ -1095,13 +1095,13 @@ static	double		loop_w_get_dbl	(WINDOW *win,
 err_getstr:
 		err	= ERR_GETSTR;
 err_sscan:
-		manage_w_error(win, err);
+		manage_error(win, err);
 	}
 
 	return	R;
 }
 
-static	float		loop_w_get_flt	(WINDOW *win,
+static	float		loop_get_flt	(WINDOW *win,
 					float m, float def, float M,
 					uint8_t attempts)
 {
@@ -1127,13 +1127,13 @@ static	float		loop_w_get_flt	(WINDOW *win,
 err_getstr:
 		err	= ERR_GETSTR;
 err_sscan:
-		manage_w_error(win, err);
+		manage_error(win, err);
 	}
 
 	return	R;
 }
 
-static	unsigned	loop_w_get_uint	(WINDOW *win,
+static	unsigned	loop_get_uint	(WINDOW *win,
 					unsigned m, unsigned def, unsigned M,
 					uint8_t attempts)
 {
@@ -1159,13 +1159,13 @@ static	unsigned	loop_w_get_uint	(WINDOW *win,
 err_getstr:
 		err	= ERR_GETSTR;
 err_sscan:
-		manage_w_error(win, err);
+		manage_error(win, err);
 	}
 
 	return	N;
 }
 
-static	int		loop_w_get_int	(WINDOW *win,
+static	int		loop_get_int	(WINDOW *win,
 					int m, int def, int M,
 					uint8_t attempts)
 {
@@ -1191,13 +1191,13 @@ static	int		loop_w_get_int	(WINDOW *win,
 err_getstr:
 		err	= ERR_GETSTR;
 err_sscan:
-		manage_w_error(win, err);
+		manage_error(win, err);
 	}
 
 	return	Z;
 }
 
-static	uint8_t		loop_w_get_u8	(WINDOW *win,
+static	uint8_t		loop_get_u8	(WINDOW *win,
 					uint8_t m, uint8_t def, uint8_t M,
 					uint8_t attempts)
 {
@@ -1223,13 +1223,13 @@ static	uint8_t		loop_w_get_u8	(WINDOW *win,
 err_getstr:
 		err	= ERR_GETSTR;
 err_sscan:
-		manage_w_error(win, err);
+		manage_error(win, err);
 	}
 
 	return	N;
 }
 
-static	int8_t		loop_w_get_s8	(WINDOW *win,
+static	int8_t		loop_get_s8	(WINDOW *win,
 					int8_t m, int8_t def, int8_t M,
 					uint8_t attempts)
 {
@@ -1255,13 +1255,13 @@ static	int8_t		loop_w_get_s8	(WINDOW *win,
 err_getstr:
 		err	= ERR_GETSTR;
 err_sscan:
-		manage_w_error(win, err);
+		manage_error(win, err);
 	}
 
 	return	Z;
 }
 
-static	uint16_t	loop_w_get_u16	(WINDOW *win,
+static	uint16_t	loop_get_u16	(WINDOW *win,
 					uint16_t m, uint16_t def, uint16_t M,
 					uint8_t attempts)
 {
@@ -1287,13 +1287,13 @@ static	uint16_t	loop_w_get_u16	(WINDOW *win,
 err_getstr:
 		err	= ERR_GETSTR;
 err_sscan:
-		manage_w_error(win, err);
+		manage_error(win, err);
 	}
 
 	return	N;
 }
 
-static	int16_t		loop_w_get_s16	(WINDOW *win,
+static	int16_t		loop_get_s16	(WINDOW *win,
 					int16_t m, int16_t def, int16_t M,
 					uint8_t attempts)
 {
@@ -1319,13 +1319,13 @@ static	int16_t		loop_w_get_s16	(WINDOW *win,
 err_getstr:
 		err	= ERR_GETSTR;
 err_sscan:
-		manage_w_error(win, err);
+		manage_error(win, err);
 	}
 
 	return	Z;
 }
 
-static	uint32_t	loop_w_get_u32	(WINDOW *win,
+static	uint32_t	loop_get_u32	(WINDOW *win,
 					uint32_t m, uint32_t def, uint32_t M,
 					uint8_t attempts)
 {
@@ -1351,13 +1351,13 @@ static	uint32_t	loop_w_get_u32	(WINDOW *win,
 err_getstr:
 		err	= ERR_GETSTR;
 err_sscan:
-		manage_w_error(win, err);
+		manage_error(win, err);
 	}
 
 	return	N;
 }
 
-static	int32_t		loop_w_get_s32	(WINDOW *win,
+static	int32_t		loop_get_s32	(WINDOW *win,
 					int32_t m, int32_t def, int32_t M,
 					uint8_t attempts)
 {
@@ -1383,13 +1383,13 @@ static	int32_t		loop_w_get_s32	(WINDOW *win,
 err_getstr:
 		err	= ERR_GETSTR;
 err_sscan:
-		manage_w_error(win, err);
+		manage_error(win, err);
 	}
 
 	return	Z;
 }
 
-static	uint64_t	loop_w_get_u64	(WINDOW *win,
+static	uint64_t	loop_get_u64	(WINDOW *win,
 					uint64_t m, uint64_t def, uint64_t M,
 					uint8_t attempts)
 {
@@ -1415,13 +1415,13 @@ static	uint64_t	loop_w_get_u64	(WINDOW *win,
 err_getstr:
 		err	= ERR_GETSTR;
 err_sscan:
-		manage_w_error(win, err);
+		manage_error(win, err);
 	}
 
 	return	N;
 }
 
-static	int64_t		loop_w_get_s64	(WINDOW *win,
+static	int64_t		loop_get_s64	(WINDOW *win,
 					int64_t m, int64_t def, int64_t M,
 					uint8_t attempts)
 {
@@ -1447,13 +1447,13 @@ static	int64_t		loop_w_get_s64	(WINDOW *win,
 err_getstr:
 		err	= ERR_GETSTR;
 err_sscan:
-		manage_w_error(win, err);
+		manage_error(win, err);
 	}
 
 	return	Z;
 }
 
-static	ptrdiff_t	loop_w_get_pdif	(WINDOW *win,
+static	ptrdiff_t	loop_get_pdif	(WINDOW *win,
 					int64_t m, int64_t def, int64_t M,
 					uint8_t attempts)
 {
@@ -1479,13 +1479,13 @@ static	ptrdiff_t	loop_w_get_pdif	(WINDOW *win,
 err_getstr:
 		err	= ERR_GETSTR;
 err_sscan:
-		manage_w_error(win, err);
+		manage_error(win, err);
 	}
 
 	return	Z;
 }
 
-static	int		loop_w_get_fname(WINDOW *win,
+static	int		loop_get_fname	(WINDOW *win,
 					const char *restrict fpath,
 					char fname[restrict FILENAME_MAX],
 					bool exist,
@@ -1511,13 +1511,13 @@ static	int		loop_w_get_fname(WINDOW *win,
 err_getstr:
 		err	= ERR_GETSTR;
 err_sscan:
-		manage_w_error(win, err);
+		manage_error(win, err);
 	}
 
 	return	err;
 }
 
-static	void		manage_w_error	(WINDOW *win, int err)
+static	void		manage_error	(WINDOW *win, int err)
 {
 
 	switch (err) {
