@@ -27,10 +27,10 @@
 
 #define	AVGsafe(a, b) (							\
 {									\
-	__auto_type	_a	= (a);					\
-	__auto_type	_b	= (b);					\
+	__auto_type	a_	= (a);					\
+	__auto_type	b_	= (b);					\
 									\
-	(_a / 2) + (_b / 2) + (((_a % 2) + (_b % 2)) / 2);		\
+	(a_ / 2) + (b_ / 2) + (((a_ % 2) + (b_ % 2)) / 2);		\
 }									\
 )
 
