@@ -10,43 +10,34 @@
 ################################################################################
 
 ################################################################################
+# dependencies
+
+OBJ		=							\
+		perror.o
+
+PERROR_INC	=							\
+		$(INC_DIR)/libalx/base/errno/perror.h
+PERROR_SRC	=							\
+		$(SRC_DIR)/base/errno/perror.c
+
+################################################################################
 # target: dependencies
 #	action
 
 PHONY := all
-all: base extra
+all: $(OBJ)
 
 
-PHONY += base
-base:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/errno/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/float/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/math/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stddef/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stdint/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stdio/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stdlib/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/string/
-
-
-PHONY += extra
-extra: gsl ncurses
-
-
-PHONY += gsl
-gsl:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/gsl/distributions/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/gsl/rstat/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/gsl/statistics/
-
-PHONY += ncurses
-ncurses:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/ncurses/
+perror.s: $(PERROR_SRC) $(PERROR_INC)
+	@echo	"	CC	libalx/tmp/base/errno/$@"
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
+perror.o: perror.s
+	@echo	"	AS	libalx/tmp/base/errno/$@"
+	$(Q)$(AS) $< -o $@
 
 
 PHONY += clean
 clean:
-	@echo	"	RM	*.o *.s"
 	$(Q)rm -f *.o *.s
 
 ################################################################################

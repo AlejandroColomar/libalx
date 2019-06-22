@@ -5,6 +5,7 @@
 # dependencies
 
 BASE_OBJ	=							\
+		$(TMP_DIR)/base/errno/perror.o				\
 		$(TMP_DIR)/base/float/constant.o			\
 		$(TMP_DIR)/base/float/printf.o				\
 		$(TMP_DIR)/base/float/scanf.o				\
