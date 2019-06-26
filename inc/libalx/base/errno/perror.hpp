@@ -29,7 +29,7 @@
 	fprintf(stderr, "%s:%i: %s():\n", __FILE__, __LINE__, __func__);\
 	if (str_)							\
 		fprintf(stderr, "	%s\n", str_);			\
-	fprintf(stderr, "E%u -	%s\n", errno, strerror(errno));		\
+	fprintf(stderr, "E%i -	%s\n", errno, strerror(errno));		\
 } while (0)
 
 
