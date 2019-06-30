@@ -14,7 +14,7 @@
 #include <stddef.h>
 #include <stdio.h>
 
-#include "libalx/base/stddef/size.h"
+#include "libalx/base/compiler/size.h"
 #include "libalx/base/stdio/common.h"
 #include "libalx/base/stdio/sscan.h"
 
@@ -22,7 +22,6 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-#define BUFF_SIZE	(0xFF)
 
 
 /******************************************************************************
@@ -367,7 +366,7 @@ static
 long double	loop_get_ldbl	(long double m, long double def, long double M,
 					uint8_t attempts)
 {
-	char		buff[BUFF_SIZE];
+	char		buff[BUFSIZ];
 	long double	R;
 	int		err;
 
@@ -392,7 +391,7 @@ err_sscan:
 static	double		loop_get_dbl	(double m, double def, double M,
 					uint8_t attempts)
 {
-	char	buff[BUFF_SIZE];
+	char	buff[BUFSIZ];
 	double	R;
 	int	err;
 
@@ -417,7 +416,7 @@ err_sscan:
 static	float		loop_get_flt	(float m, float def, float M,
 					uint8_t attempts)
 {
-	char	buff[BUFF_SIZE];
+	char	buff[BUFSIZ];
 	float	R;
 	int	err;
 
@@ -442,7 +441,7 @@ err_sscan:
 static	unsigned	loop_get_uint	(unsigned m, unsigned def, unsigned M,
 					uint8_t attempts)
 {
-	char		buff[BUFF_SIZE];
+	char		buff[BUFSIZ];
 	unsigned	N;
 	int		err;
 
@@ -467,7 +466,7 @@ err_sscan:
 static	int		loop_get_int	(int m, int def, int M,
 					uint8_t attempts)
 {
-	char	buff[BUFF_SIZE];
+	char	buff[BUFSIZ];
 	int	Z;
 	int	err;
 
@@ -492,7 +491,7 @@ err_sscan:
 static	uint8_t		loop_get_u8	(uint8_t m, uint8_t def, uint8_t M,
 					uint8_t attempts)
 {
-	char	buff[BUFF_SIZE];
+	char	buff[BUFSIZ];
 	uint8_t	N;
 	int	err;
 
@@ -517,7 +516,7 @@ err_sscan:
 static	int8_t		loop_get_s8	(int8_t m, int8_t def, int8_t M,
 					uint8_t attempts)
 {
-	char	buff[BUFF_SIZE];
+	char	buff[BUFSIZ];
 	int8_t	Z;
 	int	err;
 
@@ -542,7 +541,7 @@ err_sscan:
 static	uint16_t	loop_get_u16	(uint16_t m, uint16_t def, uint16_t M,
 					uint8_t attempts)
 {
-	char		buff[BUFF_SIZE];
+	char		buff[BUFSIZ];
 	uint16_t	N;
 	int		err;
 
@@ -567,7 +566,7 @@ err_sscan:
 static	int16_t		loop_get_s16	(int16_t m, int16_t def, int16_t M,
 					uint8_t attempts)
 {
-	char	buff[BUFF_SIZE];
+	char	buff[BUFSIZ];
 	int16_t	Z;
 	int	err;
 
@@ -592,7 +591,7 @@ err_sscan:
 static	uint32_t	loop_get_u32	(uint32_t m, uint32_t def, uint32_t M,
 					uint8_t attempts)
 {
-	char		buff[BUFF_SIZE];
+	char		buff[BUFSIZ];
 	uint32_t	N;
 	int		err;
 
@@ -617,7 +616,7 @@ err_sscan:
 static	int32_t		loop_get_s32	(int32_t m, int32_t def, int32_t M,
 					uint8_t attempts)
 {
-	char	buff[BUFF_SIZE];
+	char	buff[BUFSIZ];
 	int32_t	Z;
 	int	err;
 
@@ -642,7 +641,7 @@ err_sscan:
 static	uint64_t	loop_get_u64	(uint64_t m, uint64_t def, uint64_t M,
 					uint8_t attempts)
 {
-	char		buff[BUFF_SIZE];
+	char		buff[BUFSIZ];
 	uint64_t	N;
 	int		err;
 
@@ -667,7 +666,7 @@ err_sscan:
 static	int64_t		loop_get_s64	(int64_t m, int64_t def, int64_t M,
 					uint8_t attempts)
 {
-	char	buff[BUFF_SIZE];
+	char	buff[BUFSIZ];
 	int64_t	Z;
 	int	err;
 
@@ -692,7 +691,7 @@ err_sscan:
 static	ptrdiff_t	loop_get_pdif	(ptrdiff_t m, ptrdiff_t def, ptrdiff_t M,
 					uint8_t attempts)
 {
-	char		buff[BUFF_SIZE];
+	char		buff[BUFSIZ];
 	ptrdiff_t	Z;
 	int		err;
 
@@ -718,7 +717,7 @@ static	char		loop_get_ch	(const char *restrict valid,
 					bool skip_space, bool ignore_case,
 					uint8_t attempts)
 {
-	char	buff[BUFF_SIZE];
+	char	buff[BUFSIZ];
 	char	c;
 	int	err;
 
