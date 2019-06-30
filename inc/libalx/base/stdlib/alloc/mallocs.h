@@ -23,9 +23,9 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-#define mallocs(ptr, nmemb)	(					\
+#define alx_mallocs__(ptr, nmemb)	(				\
 {									\
-	ptrdiff_t	nmemb_	= (nmemb);				\
+	__label__	ret_;						\
 	__auto_type	ptr_	= (ptr);				\
 	int		err_;						\
 									\
@@ -35,22 +35,10 @@
 		err_	= EINVAL;					\
 		goto ret_;						\
 	}								\
-	if (nmemb_ < 0) {						\
-		*ptr_	= NULL;						\
-		errno	= EOVERFLOW;					\
-		err_	= -EOVERFLOW;					\
-		goto ret_;						\
-	}								\
-	if (nmemb_ > (PTRDIFF_MAX / (ptrdiff_t)sizeof(**ptr_))) {	\
-		*ptr_	= NULL;						\
-		errno	= EOVERFLOW;					\
-		err_	= EOVERFLOW;					\
-		goto ret_;						\
-	}								\
 									\
-	*ptr_	= malloc(sizeof(**ptr_) * nmemb_);			\
+	*ptr_	= alx_mallocs((nmemb), sizeof(**ptr_));			\
 	if (!(*ptr_))							\
-		err_	= ENOMEM;					\
+		err_	= errno;					\
 ret_:									\
 	err_;								\
 }									\
@@ -80,11 +68,26 @@ ret_:									\
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
+static inline	void	*alx_mallocs(ptrdiff_t nmemb, size_t size);
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
+static inline	void	*alx_mallocs(ptrdiff_t nmemb, size_t size)
+{
+
+	if (nmemb < 0)
+		goto neg;
+	if (nmemb > (PTRDIFF_MAX / (ptrdiff_t)size))
+		goto ovf;
+
+	return	malloc(size * nmemb);
+neg:
+ovf:
+	errno	= EOVERFLOW;
+	return	NULL;
+}
 
 
 /******************************************************************************
