@@ -12,7 +12,11 @@
 ################################################################################
 # dependencies
 
+DIRS		=							\
+		alloc
+
 OBJ		=							\
+		alloc/mallocs.o						\
 		array_split_pos_neg.o					\
 		average.o						\
 		compare.o						\
@@ -24,6 +28,11 @@ OBJ		=							\
 		search.o						\
 		seed_mix.o						\
 		swap.o
+
+ALLOC_MALLOCS_INC	=						\
+		$(INC_DIR)/libalx/base/stdlib/alloc/mallocs.h
+ALLOC_MALLOCS_SRC	=						\
+		$(SRC_DIR)/base/stdlib/alloc/mallocs.c
 
 ARRAY_SPLIT_POS_NEG_INC	=						\
 		$(INC_DIR)/libalx/base/stdlib/array_split_pos_neg.h
@@ -87,8 +96,20 @@ SWAP_SRC	=							\
 #	action
 
 PHONY := all
-all: $(OBJ)
+all: $(DIRS) $(OBJ)
 
+
+alloc:
+	@echo	"	MKDIR	libalx/tmp/base/stdlib/$@"
+	$(Q)mkdir -p		$@/
+
+
+alloc/mallocs.s: $(ALLOC_MALLOCS_SRC) $(ALLOC_MALLOCS_INC)
+	@echo	"	CC	libalx/tmp/base/stdlib/$@"
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
+alloc/mallocs.o: alloc/mallocs.s
+	@echo	"	AS	libalx/tmp/base/stdlib/$@"
+	$(Q)$(AS) $< -o $@
 
 array_split_pos_neg.s: $(ARRAY_SPLIT_POS_NEG_SRC) $(ARRAY_SPLIT_POS_NEG_INC)
 	@echo	"	CC	libalx/tmp/base/stdlib/$@"

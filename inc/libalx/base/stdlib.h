@@ -16,6 +16,7 @@
  ******************************************************************************/
 #include <stdlib.h>
 
+#include "libalx/base/stdlib/alloc/mallocs.h"
 #include "libalx/base/stdlib/array_split_pos_neg.h"
 #include "libalx/base/stdlib/average.h"
 #include "libalx/base/stdlib/compare.h"
