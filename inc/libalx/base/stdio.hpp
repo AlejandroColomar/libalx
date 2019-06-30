@@ -20,6 +20,7 @@
 #include "libalx/base/stdio/escape_sequences.hpp"
 #include "libalx/base/stdio/get.hpp"
 #include "libalx/base/stdio/printf.hpp"
+#include "libalx/base/stdio/sbprintf.hpp"
 #include "libalx/base/stdio/sscan.hpp"
 #include "libalx/base/stdio/wait.hpp"
 
