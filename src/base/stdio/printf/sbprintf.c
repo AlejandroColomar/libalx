@@ -9,6 +9,10 @@
  ******************************************************************************/
 #include "libalx/base/stdio/printf/sbprintf.h"
 
+#include <errno.h>
+#include <stdarg.h>
+#include <stdio.h>
+
 
 /******************************************************************************
  ******* macros ***************************************************************
@@ -38,6 +42,33 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
+int	alx_sbprintf(char buff[restrict], int *written, size_t nmemb,
+			char *restrict format, ...)
+{
+	va_list	ap;
+	int	len;
+
+	va_start(ap, format);
+	len	= vsnprintf(buff, nmemb, format, ap);
+	va_end(ap);
+
+	if (written != NULL)
+		*written = len;
+
+	if (len < 0)
+		goto err;
+	if ((unsigned)len >= nmemb)
+		goto trunc;
+
+	return	0;
+err:
+	return	-errno;
+trunc:
+	if (written)
+		*written = nmemb - 1;
+	errno	= ENOMEM;
+	return	ENOMEM;
+}
 
 
 /******************************************************************************

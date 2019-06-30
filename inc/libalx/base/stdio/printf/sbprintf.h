@@ -14,8 +14,7 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <errno.h>
-#include <stdio.h>
+#include <stddef.h>
 
 #include "libalx/base/assert/assert.h"
 
@@ -24,35 +23,14 @@
  ******* macros ***************************************************************
  ******************************************************************************/
 /*
- * int	alx_sbprintf(char buff[restrict], int *restrict written,
+ * int	alx_sbprintf__(char buff[restrict], int *restrict written,
  *				const char *restrict format, ...);
  */
-#define alx_sbprintf(buff, written, format, ...)	(		\
+#define alx_sbprintf__(buff, written, fmt, ...)	(			\
 {									\
-	__auto_type	w_	= (written);				\
-	int		len_;						\
-	int		err_;						\
 									\
 	alx_static_assert_array(buff);					\
-	err_	= 0;							\
-									\
-	len_	= snprintf(buff, sizeof(buff), format, ##__VA_ARGS__);	\
-	if (w_ != NULL)							\
-		*w_ = len_;						\
-									\
-	if (len_ < 0) {							\
-		err_	= -errno;					\
-		goto ret_;						\
-	}								\
-	if ((unsigned)len_ >= sizeof(buff)) {				\
-		if (w_ != NULL)						\
-			*w_ = sizeof(buff) - 1;				\
-		errno	= ENOMEM;					\
-		err_	= ENOMEM;					\
-		goto ret_;						\
-	}								\
-ret_:									\
-	err_;								\
+	alx_sbprintf(buff, written, sizeof(buff), fmt, ##__VA_ARGS__);	\
 }									\
 )
 
@@ -75,6 +53,8 @@ ret_:									\
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
+int	alx_sbprintf(char buff[restrict], int *written, size_t nmemb,
+			char *restrict format, ...);
 
 
 /******************************************************************************
