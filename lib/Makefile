@@ -5,6 +5,10 @@
 # dependencies
 
 BASE_OBJ	=							\
+		$(TMP_DIR)/base/assert/assert.o				\
+		$(TMP_DIR)/base/compiler/restrict.o			\
+		$(TMP_DIR)/base/compiler/size.o				\
+		$(TMP_DIR)/base/compiler/type.o				\
 		$(TMP_DIR)/base/errno/perror.o				\
 		$(TMP_DIR)/base/float/constant.o			\
 		$(TMP_DIR)/base/float/printf.o				\
@@ -20,14 +24,14 @@ BASE_OBJ	=							\
 		$(TMP_DIR)/base/math/prime_defactorization.o		\
 		$(TMP_DIR)/base/math/prime_factorization.o		\
 		$(TMP_DIR)/base/math/scale_linear.o			\
-		$(TMP_DIR)/base/stddef/restrict.o			\
-		$(TMP_DIR)/base/stddef/size.o				\
 		$(TMP_DIR)/base/stdint/constants.o			\
 		$(TMP_DIR)/base/stdint/types.o				\
 		$(TMP_DIR)/base/stdio/get.o				\
-		$(TMP_DIR)/base/stdio/printf_b.o			\
+		$(TMP_DIR)/base/stdio/printf/b.o			\
+		$(TMP_DIR)/base/stdio/printf/sbprintf.o			\
 		$(TMP_DIR)/base/stdio/sscan.o				\
 		$(TMP_DIR)/base/stdio/wait.o				\
+		$(TMP_DIR)/base/stdlib/alloc/mallocs.o			\
 		$(TMP_DIR)/base/stdlib/array_split_pos_neg.o		\
 		$(TMP_DIR)/base/stdlib/average.o			\
 		$(TMP_DIR)/base/stdlib/compare.o			\

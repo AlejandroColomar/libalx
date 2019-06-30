@@ -11,24 +11,35 @@
 
 ################################################################################
 # dependencies
+
+DIRS		=							\
+		printf
+
 OBJ		=							\
 		get.o							\
-		printf_b.o						\
+		printf/b.o						\
+		printf/sbprintf.o					\
 		sscan.o							\
 		wait.o
 
 GET_INC		=							\
 		$(INC_DIR)/libalx/base/stdio/get.h			\
-		$(INC_DIR)/libalx/base/stddef/size.h			\
+		$(INC_DIR)/libalx/base/compiler/size.h			\
 		$(INC_DIR)/libalx/base/stdio/common.h			\
 		$(INC_DIR)/libalx/base/stdio/sscan.h
 GET_SRC		=							\
 		$(SRC_DIR)/base/stdio/get.c
 
-PRINTFB_INC	=							\
-		$(INC_DIR)/libalx/base/stdio/printf_b.h
-PRINTFB_SRC	=							\
-		$(SRC_DIR)/base/stdio/printf_b.c
+PRINTF_B_INC	=							\
+		$(INC_DIR)/libalx/base/stdio/printf/b.h
+PRINTF_B_SRC	=							\
+		$(SRC_DIR)/base/stdio/printf/b.c
+
+PRINTF_SBPRINTF_INC	=						\
+		$(INC_DIR)/libalx/base/stdio/printf/sbprintf.h		\
+		$(INC_DIR)/libalx/base/assert/assert.h
+PRINTF_SBPRINTF_SRC	=						\
+		$(SRC_DIR)/base/stdio/printf/sbprintf.c
 
 SSCAN_INC	=							\
 		$(INC_DIR)/libalx/base/stdio/sscan.h			\
@@ -47,7 +58,12 @@ WAIT_SRC	=							\
 #	action
 
 PHONY := all
-all: $(OBJ)
+all: $(DIRS) $(OBJ)
+
+
+printf:
+	@echo	"	MKDIR	libalx/tmp/base/stdio/$@"
+	$(Q)mkdir -p		$@/
 
 
 get.s: $(GET_SRC) $(GET_INC)
@@ -57,10 +73,17 @@ get.o: get.s
 	@echo	"	AS	libalx/tmp/base/stdio/$@"
 	$(Q)$(AS) $< -o $@
 
-printf_b.s: $(PRINTFB_SRC) $(PRINTFB_INC)
+printf/b.s: $(PRINTF_B_SRC) $(PRINTF_B_INC)
 	@echo	"	CC	libalx/tmp/base/stdio/$@"
 	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-printf_b.o: printf_b.s
+printf/b.o: printf/b.s
+	@echo	"	AS	libalx/tmp/base/stdio/$@"
+	$(Q)$(AS) $< -o $@
+
+printf/sbprintf.s: $(PRINTF_SBPRINTF_SRC) $(PRINTF_SBPRINTF_INC)
+	@echo	"	CC	libalx/tmp/base/stdio/$@"
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
+printf/sbprintf.o: printf/sbprintf.s
 	@echo	"	AS	libalx/tmp/base/stdio/$@"
 	$(Q)$(AS) $< -o $@
 
