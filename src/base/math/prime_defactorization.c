@@ -15,7 +15,6 @@
 #include <stdlib.h>
 
 #include "libalx/base/math/prime.h"
-#include "libalx/base/stddef/size.h"
 
 
 /******************************************************************************

@@ -14,17 +14,23 @@
 
 OBJ		=							\
 		restrict.o						\
-		size.o
+		size.o							\
+		type.o
 
 RESTRICT_INC	=							\
-		$(INC_DIR)/libalx/base/stddef/restrict.hpp
+		$(INC_DIR)/libalx/base/compiler/restrict.hpp
 RESTRICT_SRC	=							\
-		$(SRC_DIR)/base/stddef/restrict.cpp
+		$(SRC_DIR)/base/compiler/restrict.cpp
 
 SIZE_INC	=							\
-		$(INC_DIR)/libalx/base/stddef/size.h
+		$(INC_DIR)/libalx/base/compiler/size.h
 SIZE_SRC	=							\
-		$(SRC_DIR)/base/stddef/size.c
+		$(SRC_DIR)/base/compiler/size.c
+
+TYPE_INC	=							\
+		$(INC_DIR)/libalx/base/compiler/type.h
+TYPE_SRC	=							\
+		$(SRC_DIR)/base/compiler/type.c
 
 ################################################################################
 # target: dependencies
@@ -35,17 +41,24 @@ all: $(OBJ)
 
 
 restrict.s: $(RESTRICT_SRC) $(RESTRICT_INC)
-	@echo	"	CXX	libalx/tmp/base/stddef/$@"
+	@echo	"	CXX	libalx/tmp/base/compiler/$@"
 	$(Q)$(CXX) $(CXXFLAGS) -S $< -o $@
 restrict.o: restrict.s
-	@echo	"	AS	libalx/tmp/base/stddef/$@"
+	@echo	"	AS	libalx/tmp/base/compiler/$@"
 	$(Q)$(AS) $< -o $@
 
 size.s: $(SIZE_SRC) $(SIZE_INC)
-	@echo	"	CC	libalx/tmp/base/stddef/$@"
+	@echo	"	CC	libalx/tmp/base/compiler/$@"
 	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 size.o: size.s
-	@echo	"	AS	libalx/tmp/base/stddef/$@"
+	@echo	"	AS	libalx/tmp/base/compiler/$@"
+	$(Q)$(AS) $< -o $@
+
+type.s: $(TYPE_SRC) $(TYPE_INC)
+	@echo	"	CC	libalx/tmp/base/compiler/$@"
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
+type.o: type.s
+	@echo	"	AS	libalx/tmp/base/compiler/$@"
 	$(Q)$(AS) $< -o $@
 
 
