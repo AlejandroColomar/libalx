@@ -23,14 +23,14 @@
  ******* macros ***************************************************************
  ******************************************************************************/
 /*
- * int	alx_sbprintf__(char buff[restrict], int *restrict written,
- *				const char *restrict format, ...);
+ * int	alx_sbprintf(char buff[restrict], int *restrict written,
+ *				const char *restrict fmt, ...);
  */
-#define alx_sbprintf__(buff, written, fmt, ...)	(			\
+#define alx_sbprintf(buff, written, fmt, ...)	(			\
 {									\
 									\
 	alx_static_assert_array(buff);					\
-	alx_sbprintf(buff, written, sizeof(buff), fmt, ##__VA_ARGS__);	\
+	alx_sbprintf__(buff, written, sizeof(buff), fmt, ##__VA_ARGS__);\
 }									\
 )
 
@@ -53,7 +53,7 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
-int	alx_sbprintf(char buff[restrict], int *written, size_t nmemb,
+int	alx_sbprintf__(char buff[restrict], int *written, size_t nmemb,
 			char *restrict format, ...);
 
 

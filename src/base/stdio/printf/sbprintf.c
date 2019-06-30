@@ -42,7 +42,7 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_sbprintf(char buff[restrict], int *written, size_t nmemb,
+int	alx_sbprintf__(char buff[restrict], int *written, size_t nmemb,
 			char *restrict format, ...)
 {
 	va_list	ap;

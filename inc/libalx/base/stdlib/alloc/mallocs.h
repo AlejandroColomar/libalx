@@ -23,7 +23,10 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-#define alx_mallocs__(ptr, nmemb)	(				\
+/*
+ * int	alx_mallocs(type **restrict p, ptrdiff_t nmemb);
+ */
+#define alx_mallocs(ptr, nmemb)	(					\
 {									\
 	__label__	ret_;						\
 	__auto_type	ptr_	= (ptr);				\
@@ -36,8 +39,8 @@
 		goto ret_;						\
 	}								\
 									\
-	*ptr_	= alx_mallocs((nmemb), sizeof(**ptr_));			\
-	if (!(*ptr_))							\
+	*ptr_	= alx_mallocs__(nmemb, sizeof(**ptr_));			\
+	if (!*ptr_)							\
 		err_	= errno;					\
 ret_:									\
 	err_;								\
@@ -68,22 +71,21 @@ ret_:									\
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
-static inline	void	*alx_mallocs(ptrdiff_t nmemb, size_t size);
+static inline	void	*alx_mallocs__(ptrdiff_t nmemb, size_t size);
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
-static inline	void	*alx_mallocs(ptrdiff_t nmemb, size_t size)
+static inline	void	*alx_mallocs__(ptrdiff_t nmemb, size_t size)
 {
 
 	if (nmemb < 0)
-		goto neg;
+		goto ovf;
 	if (nmemb > (PTRDIFF_MAX / (ptrdiff_t)size))
 		goto ovf;
 
 	return	malloc(size * nmemb);
-neg:
 ovf:
 	errno	= EOVERFLOW;
 	return	NULL;
