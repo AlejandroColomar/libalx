@@ -16,7 +16,7 @@
  ******************************************************************************/
 #include <cassert>
 
-#include "libalx/base/compiler/type.hpp"
+#include <type_traits>
 
 
 /******************************************************************************
@@ -28,9 +28,18 @@ namespace alx {
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-#define alx_static_assert_array(a)	do					\
+#define alx_static_assert_array(a)	do				\
 {									\
-	static_assert(!alx_same_type((a), &(a)[0]), "Not an array!");	\
+									\
+	static_assert(std::is_array<typeof(a)>::value, "Not a `[]`!");	\
+} while (0)
+
+#define alx_static_assert_char_array(a)	do				\
+{									\
+									\
+	alx_static_assert_array(a);					\
+	static_assert(std::is_same <char, typeof((a)[0])>::value,	\
+						"Not a `char[]` !");	\
 } while (0)
 
 

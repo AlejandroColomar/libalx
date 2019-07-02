@@ -50,7 +50,8 @@ PRINTF_SWNPRINTF_SRC	=						\
 		$(SRC_DIR)/base/stdio/printf/swnprintf.c
 
 PRINTF_SWNPRINTF_CXX_INC	=					\
-		$(INC_DIR)/libalx/base/stdio/printf/swnprintf.hpp
+		$(INC_DIR)/libalx/base/stdio/printf/swnprintf.hpp	\
+		$(INC_DIR)/libalx/base/compiler/restrict.hpp
 PRINTF_SWNPRINTF_CXX_SRC	=					\
 		$(SRC_DIR)/base/stdio/printf/swnprintf.cpp
 

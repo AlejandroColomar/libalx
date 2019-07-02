@@ -51,7 +51,7 @@ namespace alx {
  ******* global functions *****************************************************
  ******************************************************************************/
 int	swnprintf(char *restrict str, int *restrict written, size_t nmemb,
-			char *restrict format, ...)
+			const char *restrict format, ...)
 {
 	va_list	ap;
 	int	len;

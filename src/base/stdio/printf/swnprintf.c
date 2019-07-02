@@ -43,7 +43,7 @@
  ******* global functions *****************************************************
  ******************************************************************************/
 int	alx_swnprintf(char str[restrict], int *restrict written, size_t nmemb,
-			char *restrict format, ...)
+			const char *restrict format, ...)
 {
 	va_list	ap;
 	int	len;

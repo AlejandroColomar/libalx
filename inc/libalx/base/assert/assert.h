@@ -24,7 +24,15 @@
  ******************************************************************************/
 #define alx_static_assert_array(a)	do				\
 {									\
-	static_assert(!alx_same_type((a), &(a)[0]), "Not an array!");	\
+									\
+	static_assert(!alx_same_type((a), &(a)[0]), "Not a `[]` !");	\
+} while (0)
+
+#define alx_static_assert_char_array(a)	do				\
+{									\
+	alx_static_assert_array(a);					\
+	static_assert(__builtin_types_compatible_p(char, typeof((a)[0])),\
+						"Not a `char[]` !");	\
 } while (0)
 
 

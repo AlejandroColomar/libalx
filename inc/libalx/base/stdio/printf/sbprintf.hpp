@@ -15,7 +15,7 @@
  ******* headers **************************************************************
  ******************************************************************************/
 #include "libalx/base/assert/assert.hpp"
-#include "libalx/base/compiler/restrict.hpp"
+#include "libalx/base/stdio/printf/swnprintf.hpp"
 
 
 /******************************************************************************
@@ -34,7 +34,7 @@ namespace alx {
 #define alx_sbprintf(buff, written, fmt, ...)	(			\
 {									\
 									\
-	alx_static_assert_array(buff);					\
+	alx_static_assert_char_array(buff);				\
 	alx::swnprintf(buff, written, sizeof(buff), fmt, ##__VA_ARGS__);\
 }									\
 )
