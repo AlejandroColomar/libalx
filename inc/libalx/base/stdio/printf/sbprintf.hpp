@@ -28,13 +28,13 @@ namespace alx {
  ******* macros ***************************************************************
  ******************************************************************************/
 /*
- * int	alx::sbprintf(char buff[restrict], int *restrict written,
+ * int	alx_sbprintf(char buff[restrict], int *restrict written,
  *				const char *restrict fmt, ...);
  */
-#define sbprintf(buff, written, fmt, ...)	(			\
+#define alx_sbprintf(buff, written, fmt, ...)	(			\
 {									\
 									\
-	alx::static_assert_array(buff);					\
+	alx_static_assert_array(buff);					\
 	alx::swnprintf(buff, written, sizeof(buff), fmt, ##__VA_ARGS__);\
 }									\
 )
