@@ -29,7 +29,7 @@ namespace alx {
  ******************************************************************************/
 /*
  * int	alx_sbprintf(char buff[restrict], ptrdiff_t *restrict written,
- *				const char *restrict fmt, ...);
+ *		     const char *restrict fmt, ...);
  */
 #define alx_sbprintf(buff, written, fmt, ...)	(			\
 {									\
