@@ -78,6 +78,31 @@ trunc:
 	return	ENOMEM;
 }
 
+int	vswnprintf(char *restrict str, int *restrict written, size_t nmemb,
+			const char *restrict format, va_list ap)
+{
+	int	len;
+
+	len	= vsnprintf(str, nmemb, format, ap);
+
+	if (written != NULL)
+		*written = len;
+
+	if (len < 0)
+		goto err;
+	if ((unsigned)len >= nmemb)
+		goto trunc;
+
+	return	0;
+err:
+	return	-errno;
+trunc:
+	if (written)
+		*written = nmemb - 1;
+	errno	= ENOMEM;
+	return	ENOMEM;
+}
+
 
 /******************************************************************************
  ******* static functions (definitions) ***************************************

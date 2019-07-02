@@ -14,6 +14,7 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include <cstdarg>
 #include <cstddef>
 
 #include "libalx/base/compiler/restrict.hpp"
@@ -50,6 +51,8 @@ namespace alx {
  ******************************************************************************/
 int	swnprintf(char *restrict str, int *restrict written, size_t nmemb,
 			const char *restrict format, ...);
+int	vswnprintf(char *restrict str, int *restrict written, size_t nmemb,
+			const char *restrict format, va_list ap);
 
 
 /******************************************************************************

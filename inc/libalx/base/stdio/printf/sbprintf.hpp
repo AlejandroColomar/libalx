@@ -63,6 +63,9 @@ namespace alx {
 /******************************************************************************
  ******* template (declarations) **********************************************
  ******************************************************************************/
+template <typename T>
+int	sbprintf(typename T, int *restrict written,
+						const char *restrict fmt, ...);
 
 
 /******************************************************************************
@@ -78,6 +81,21 @@ namespace alx {
 /******************************************************************************
  ******* template (definitions) ***********************************************
  ******************************************************************************/
+template <typename T>
+int	sbprintf(typename T buff, int *restrict written,
+						const char *restrict fmt, ...)
+{
+	va_list	ap;
+	int	status;
+
+	alx::static_assert_char_array(buff);
+
+	va_start(ap, format);
+	status	= alx::vswnprintf(buff, written, sizeof(buff), fmt, ap);
+	va_end(ap);
+
+	return	status;
+}
 
 
 /******************************************************************************
