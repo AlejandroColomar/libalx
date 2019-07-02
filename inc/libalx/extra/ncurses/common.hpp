@@ -20,7 +20,7 @@
 
 #include <ncurses.h>
 
-#include "libalx/base/stddef/restrict.hpp"
+#include "libalx/base/compiler/restrict.hpp"
 
 
 /******************************************************************************
