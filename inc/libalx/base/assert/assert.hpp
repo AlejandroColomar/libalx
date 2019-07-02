@@ -31,7 +31,7 @@ namespace alx {
 #define alx_static_assert_array(a)	do				\
 {									\
 									\
-	static_assert(std::is_array<typeof(a)>::value, "Not a `[]`!");	\
+	static_assert(std::is_array <typeof(a)>::value, "Not a `[]`!");	\
 } while (0)
 
 #define alx_static_assert_char_array(a)	do				\
@@ -86,7 +86,7 @@ namespace alx {
 /******************************************************************************
  ******* namespace ************************************************************
  ******************************************************************************/
-}
+}	/* namespace alx */
 
 
 /******************************************************************************

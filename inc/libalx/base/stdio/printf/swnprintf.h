@@ -14,6 +14,7 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include <stdarg.h>
 #include <stddef.h>
 
 
@@ -40,8 +41,10 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
-int	alx_swnprintf(char str[restrict], int *restrict written, size_t nmemb,
-			const char *restrict format, ...);
+int	alx_swnprintf(char str[restrict], ptrdiff_t *restrict written,
+		      ptrdiff_t nmemb, const char *restrict format, ...);
+int	alx_vswnprintf(char str[restrict], ptrdiff_t *restrict written,
+		      ptrdiff_t nmemb, const char *restrict format, va_list ap);
 
 
 /******************************************************************************

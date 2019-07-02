@@ -49,10 +49,10 @@ namespace alx {
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
-int	swnprintf(char *restrict str, int *restrict written, size_t nmemb,
-			const char *restrict format, ...);
-int	vswnprintf(char *restrict str, int *restrict written, size_t nmemb,
-			const char *restrict format, va_list ap);
+int swnprintf(char *restrict str, ptrdiff_t *restrict written,
+	      ptrdiff_t nmemb, const char *restrict format, ...);
+int vswnprintf(char *restrict str, ptrdiff_t *restrict written,
+	       ptrdiff_t nmemb, const char *restrict format, va_list ap);
 
 
 /******************************************************************************
@@ -78,7 +78,7 @@ int	vswnprintf(char *restrict str, int *restrict written, size_t nmemb,
 /******************************************************************************
  ******* namespace ************************************************************
  ******************************************************************************/
-}
+}	/* namespace alx */
 
 
 /******************************************************************************

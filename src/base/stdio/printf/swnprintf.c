@@ -11,6 +11,7 @@
 
 #include <errno.h>
 #include <stdarg.h>
+#include <stddef.h>
 #include <stdio.h>
 
 
@@ -42,11 +43,14 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_swnprintf(char str[restrict], int *restrict written, size_t nmemb,
-			const char *restrict format, ...)
+int alx_swnprintf(char str[restrict], ptrdiff_t *restrict written,
+		  ptrdiff_t nmemb, const char *restrict format, ...)
 {
 	va_list	ap;
 	int	len;
+
+	if (nmemb < 0)
+		goto neg;
 
 	va_start(ap, format);
 	len	= vsnprintf(str, nmemb, format, ap);
@@ -68,6 +72,40 @@ trunc:
 		*written = nmemb - 1;
 	errno	= ENOMEM;
 	return	ENOMEM;
+neg:
+	errno	= EOVERFLOW;
+	return	-EOVERFLOW;
+}
+
+int alx_vswnprintf(char str[restrict], ptrdiff_t *restrict written,
+		   ptrdiff_t nmemb, const char *restrict format, va_list ap)
+{
+	int	len;
+
+	if (nmemb < 0)
+		goto neg;
+
+	len	= vsnprintf(str, nmemb, format, ap);
+
+	if (written != NULL)
+		*written = len;
+
+	if (len < 0)
+		goto err;
+	if ((unsigned)len >= nmemb)
+		goto trunc;
+
+	return	0;
+err:
+	return	-errno;
+trunc:
+	if (written)
+		*written = nmemb - 1;
+	errno	= ENOMEM;
+	return	ENOMEM;
+neg:
+	errno	= EOVERFLOW;
+	return	-EOVERFLOW;
 }
 
 

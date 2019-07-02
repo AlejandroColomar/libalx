@@ -28,7 +28,7 @@ namespace alx {
  ******* macros ***************************************************************
  ******************************************************************************/
 /*
- * int	alx_sbprintf(char buff[restrict], int *restrict written,
+ * int	alx_sbprintf(char buff[restrict], ptrdiff_t *restrict written,
  *				const char *restrict fmt, ...);
  */
 #define alx_sbprintf(buff, written, fmt, ...)	(			\
@@ -63,9 +63,6 @@ namespace alx {
 /******************************************************************************
  ******* template (declarations) **********************************************
  ******************************************************************************/
-template <typename T>
-int	sbprintf(typename T, int *restrict written,
-						const char *restrict fmt, ...);
 
 
 /******************************************************************************
@@ -81,27 +78,12 @@ int	sbprintf(typename T, int *restrict written,
 /******************************************************************************
  ******* template (definitions) ***********************************************
  ******************************************************************************/
-template <typename T>
-int	sbprintf(typename T buff, int *restrict written,
-						const char *restrict fmt, ...)
-{
-	va_list	ap;
-	int	status;
-
-	alx::static_assert_char_array(buff);
-
-	va_start(ap, format);
-	status	= alx::vswnprintf(buff, written, sizeof(buff), fmt, ap);
-	va_end(ap);
-
-	return	status;
-}
 
 
 /******************************************************************************
  ******* namespace ************************************************************
  ******************************************************************************/
-}
+}	/* namespace alx */
 
 
 /******************************************************************************

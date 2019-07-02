@@ -19,8 +19,9 @@
 #include "libalx/base/stdio/common.h"
 #include "libalx/base/stdio/escape_sequences.h"
 #include "libalx/base/stdio/get.h"
-#include "libalx/base/stdio/printf.h"
-#include "libalx/base/stdio/sbprintf.h"
+#include "libalx/base/stdio/printf/b.h"
+#include "libalx/base/stdio/printf/sbprintf.h"
+#include "libalx/base/stdio/printf/swnprintf.h"
 #include "libalx/base/stdio/sscan.h"
 #include "libalx/base/stdio/wait.h"
 

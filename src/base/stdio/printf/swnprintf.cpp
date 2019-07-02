@@ -11,6 +11,7 @@
 
 #include <cerrno>
 #include <cstdarg>
+#include <cstddef>
 #include <cstdio>
 
 #include "libalx/base/compiler/restrict.hpp"
@@ -50,11 +51,14 @@ namespace alx {
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	swnprintf(char *restrict str, int *restrict written, size_t nmemb,
-			const char *restrict format, ...)
+int swnprintf(char *restrict str, ptrdiff_t *restrict written,
+	      ptrdiff_t nmemb, const char *restrict format, ...)
 {
 	va_list	ap;
 	int	len;
+
+	if (nmemb < 0)
+		goto neg;
 
 	va_start(ap, format);
 	len	= vsnprintf(str, nmemb, format, ap);
@@ -76,12 +80,18 @@ trunc:
 		*written = nmemb - 1;
 	errno	= ENOMEM;
 	return	ENOMEM;
+neg:
+	errno	= EOVERFLOW;
+	return	-EOVERFLOW;
 }
 
-int	vswnprintf(char *restrict str, int *restrict written, size_t nmemb,
-			const char *restrict format, va_list ap)
+int vswnprintf(char *restrict str, ptrdiff_t *restrict written,
+	       ptrdiff_t nmemb, const char *restrict format, va_list ap)
 {
 	int	len;
+
+	if (nmemb < 0)
+		goto neg;
 
 	len	= vsnprintf(str, nmemb, format, ap);
 
@@ -101,6 +111,9 @@ trunc:
 		*written = nmemb - 1;
 	errno	= ENOMEM;
 	return	ENOMEM;
+neg:
+	errno	= EOVERFLOW;
+	return	-EOVERFLOW;
 }
 
 
