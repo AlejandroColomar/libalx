@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/base/stdio/printf/swnprintf.h"
+#include "libalx/base/stdio/printf/snprintfs.h"
 
 #include <errno.h>
 #include <stdarg.h>
@@ -43,7 +43,7 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int alx_swnprintf(char str[restrict], ptrdiff_t *restrict written,
+int alx_snprintfs(char str[restrict], ptrdiff_t *restrict written,
 		  ptrdiff_t nmemb, const char *restrict format, ...)
 {
 	va_list	ap;
@@ -76,7 +76,7 @@ err:	if (written)
 	return	-errno;
 }
 
-int alx_vswnprintf(char str[restrict], ptrdiff_t *restrict written,
+int alx_vsnprintfs(char str[restrict], ptrdiff_t *restrict written,
 		   ptrdiff_t nmemb, const char *restrict format, va_list ap)
 {
 	int	len;
