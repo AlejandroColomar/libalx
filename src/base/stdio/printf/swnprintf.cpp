@@ -18,12 +18,6 @@
 
 
 /******************************************************************************
- ******* namespace ************************************************************
- ******************************************************************************/
-namespace alx {
-
-
-/******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
 
@@ -51,81 +45,73 @@ namespace alx {
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int swnprintf(char *restrict str, ptrdiff_t *restrict written,
-	      ptrdiff_t nmemb, const char *restrict format, ...)
+int alx::swnprintf(char *restrict str, ptrdiff_t *restrict written,
+		   ptrdiff_t nmemb, const char *restrict format, ...)
 {
 	va_list	ap;
 	int	len;
 
-	if (nmemb < 0)
-		goto neg;
+	if (nmemb <= 0)
+		goto ovf;
 
 	va_start(ap, format);
 	len	= vsnprintf(str, nmemb, format, ap);
 	va_end(ap);
 
-	if (written != NULL)
-		*written = len;
-
 	if (len < 0)
 		goto err;
-	if ((unsigned)len >= nmemb)
+	if (len >= nmemb)
 		goto trunc;
+	if (written)
+		*written = len;
 
 	return	0;
-err:
-	return	-errno;
 trunc:
 	if (written)
 		*written = nmemb - 1;
 	errno	= ENOMEM;
 	return	ENOMEM;
-neg:
+ovf:
 	errno	= EOVERFLOW;
-	return	-EOVERFLOW;
+err:	if (written)
+		*written = 0;
+	return	-errno;
 }
 
-int vswnprintf(char *restrict str, ptrdiff_t *restrict written,
-	       ptrdiff_t nmemb, const char *restrict format, va_list ap)
+int alx::vswnprintf(char *restrict str, ptrdiff_t *restrict written,
+		    ptrdiff_t nmemb, const char *restrict format, va_list ap)
 {
 	int	len;
 
-	if (nmemb < 0)
-		goto neg;
+	if (nmemb <= 0)
+		goto ovf;
 
 	len	= vsnprintf(str, nmemb, format, ap);
 
-	if (written != NULL)
-		*written = len;
-
 	if (len < 0)
 		goto err;
-	if ((unsigned)len >= nmemb)
+	if (len >= nmemb)
 		goto trunc;
+	if (written)
+		*written = len;
 
 	return	0;
-err:
-	return	-errno;
 trunc:
 	if (written)
 		*written = nmemb - 1;
 	errno	= ENOMEM;
 	return	ENOMEM;
-neg:
+ovf:
 	errno	= EOVERFLOW;
-	return	-EOVERFLOW;
+err:	if (written)
+		*written = 0;
+	return	-errno;
 }
 
 
 /******************************************************************************
  ******* static functions (definitions) ***************************************
  ******************************************************************************/
-
-
-/******************************************************************************
- ******* namespace ************************************************************
- ******************************************************************************/
-}
 
 
 /******************************************************************************
