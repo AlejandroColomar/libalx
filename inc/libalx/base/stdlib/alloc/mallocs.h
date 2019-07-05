@@ -69,15 +69,16 @@ ret_:									\
 
 
 /******************************************************************************
- ******* static inline functions (prototypes) *********************************
+ ******* inline functions (prototypes) ****************************************
  ******************************************************************************/
-static inline	void	*alx_mallocs__(ptrdiff_t nmemb, size_t size);
+inline	void	*alx_mallocs__(ptrdiff_t nmemb, size_t size)
+__attribute__((malloc));
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
-static inline	void	*alx_mallocs__(ptrdiff_t nmemb, size_t size)
+inline	void	*alx_mallocs__(ptrdiff_t nmemb, size_t size)
 {
 
 	if (nmemb < 0)
