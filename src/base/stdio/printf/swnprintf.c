@@ -49,32 +49,31 @@ int alx_swnprintf(char str[restrict], ptrdiff_t *restrict written,
 	va_list	ap;
 	int	len;
 
-	if (nmemb < 0)
-		goto neg;
+	if (nmemb <= 0)
+		goto ovf;
 
 	va_start(ap, format);
 	len	= vsnprintf(str, nmemb, format, ap);
 	va_end(ap);
 
-	if (written != NULL)
-		*written = len;
-
 	if (len < 0)
 		goto err;
-	if ((unsigned)len >= nmemb)
+	if (len >= nmemb)
 		goto trunc;
+	if (written)
+		*written = len;
 
 	return	0;
-err:
-	return	-errno;
 trunc:
 	if (written)
 		*written = nmemb - 1;
 	errno	= ENOMEM;
 	return	ENOMEM;
-neg:
+ovf:
 	errno	= EOVERFLOW;
-	return	-EOVERFLOW;
+err:	if (written)
+		*written = 0;
+	return	-errno;
 }
 
 int alx_vswnprintf(char str[restrict], ptrdiff_t *restrict written,
@@ -82,29 +81,28 @@ int alx_vswnprintf(char str[restrict], ptrdiff_t *restrict written,
 {
 	int	len;
 
-	if (nmemb < 0)
-		goto neg;
+	if (nmemb <= 0)
+		goto ovf;
 
 	len	= vsnprintf(str, nmemb, format, ap);
 
-	if (written != NULL)
-		*written = len;
-
 	if (len < 0)
 		goto err;
-	if ((unsigned)len >= nmemb)
+	if (len >= nmemb)
 		goto trunc;
+	if (written)
+		*written = len;
 
 	return	0;
-err:
-	return	-errno;
 trunc:
 	if (written)
 		*written = nmemb - 1;
 	errno	= ENOMEM;
 	return	ENOMEM;
-neg:
+ovf:
 	errno	= EOVERFLOW;
+err:	if (written)
+		*written = 0;
 	return	-EOVERFLOW;
 }
 
