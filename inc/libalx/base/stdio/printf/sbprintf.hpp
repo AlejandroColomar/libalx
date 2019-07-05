@@ -35,7 +35,7 @@ namespace alx {
 {									\
 									\
 	alx_static_assert_char_array(buff);				\
-	alx::swnprintf(buff, written, sizeof(buff), fmt, ##__VA_ARGS__);\
+	alx::snprintfs(buff, written, sizeof(buff), fmt, ##__VA_ARGS__);\
 }									\
 )
 
