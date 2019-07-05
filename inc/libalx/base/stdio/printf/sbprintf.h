@@ -1,5 +1,5 @@
 /******************************************************************************
- *	Copyright (C) 2017	Alejandro Colomar Andrés		      *
+ *	Copyright (C) 2019	Alejandro Colomar Andrés		      *
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
@@ -29,7 +29,7 @@
 {									\
 									\
 	alx_static_assert_array(buff);					\
-	alx_swnprintf(buff, written, sizeof(buff), fmt, ##__VA_ARGS__);	\
+	alx_snprintfs(buff, written, sizeof(buff), fmt, ##__VA_ARGS__);	\
 }									\
 )
 
