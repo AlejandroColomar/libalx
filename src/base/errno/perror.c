@@ -38,7 +38,15 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
+void	alx_perror__(const char *restrict file, const char *restrict line,
+		     const char *restrict func, const char *restrict str)
+{
 
+	fprintf(stderr, "%s:%i: %s():\n", __FILE__, __LINE__, __func__);
+	if (str)
+		fprintf(stderr, "	%s\n", str);
+	fprintf(stderr, "E%i -	%s\n", errno, strerror(errno));
+}
 
 
 /******************************************************************************
