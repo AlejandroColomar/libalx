@@ -68,12 +68,12 @@ trunc:
 	if (written)
 		*written = nmemb - 1;
 	errno	= ENOMEM;
-	return	ENOMEM;
+	return	1;
 ovf:
 	errno	= EOVERFLOW;
 err:	if (written)
 		*written = 0;
-	return	-errno;
+	return	-1;
 }
 
 int alx_vsnprintfs(char str[restrict], ptrdiff_t *restrict written,
@@ -98,12 +98,12 @@ trunc:
 	if (written)
 		*written = nmemb - 1;
 	errno	= ENOMEM;
-	return	ENOMEM;
+	return	1;
 ovf:
 	errno	= EOVERFLOW;
 err:	if (written)
 		*written = 0;
-	return	-EOVERFLOW;
+	return	-1;
 }
 
 
