@@ -35,13 +35,13 @@
 	err_	= 0;							\
 	if (ptr_ == NULL) {						\
 		errno	= EINVAL;					\
-		err_	= EINVAL;					\
+		err_	= -1;					\
 		goto ret_;						\
 	}								\
 									\
 	*ptr_	= alx_mallocs__(nmemb, sizeof(**ptr_));			\
 	if (!*ptr_)							\
-		err_	= errno;					\
+		err_	= 1;					\
 ret_:									\
 	err_;								\
 }									\
