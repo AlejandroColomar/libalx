@@ -1,5 +1,5 @@
 /******************************************************************************
- *	Copyright (C) 2017	Alejandro Colomar Andrés		      *
+ *	Copyright (C) 2019	Alejandro Colomar Andrés		      *
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
@@ -7,8 +7,8 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#ifndef ALX_STDIO_PRINTF_SWNPRINTF_H
-#define ALX_STDIO_PRINTF_SWNPRINTF_H
+#ifndef ALX_STDIO_PRINTF_SNPRINTFS_H
+#define ALX_STDIO_PRINTF_SNPRINTFS_H
 
 
 /******************************************************************************
@@ -41,10 +41,12 @@
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
-int	alx_swnprintf(char str[restrict], ptrdiff_t *restrict written,
-		      ptrdiff_t nmemb, const char *restrict format, ...);
-int	alx_vswnprintf(char str[restrict], ptrdiff_t *restrict written,
-		      ptrdiff_t nmemb, const char *restrict format, va_list ap);
+int	alx_snprintfs(char str[restrict], ptrdiff_t *restrict written,
+		      ptrdiff_t nmemb, const char *restrict format, ...)
+__attribute__((format(printf, 4, 5)));
+int	alx_vsnprintfs(char str[restrict], ptrdiff_t *restrict written,
+		       ptrdiff_t nmemb, const char *restrict format, va_list ap)
+__attribute__((format(printf, 4, 0)));
 
 
 /******************************************************************************
@@ -60,7 +62,7 @@ int	alx_vswnprintf(char str[restrict], ptrdiff_t *restrict written,
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#endif		/* libalx/base/stdio/printf/swnprintf.h */
+#endif		/* libalx/base/stdio/printf/snprintfs.h */
 
 
 /******************************************************************************
