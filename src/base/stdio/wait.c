@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/base/stdio/wait.h"
+#include "libalx/base/stdio/seekc.h"
 
 #include <stdio.h>
 
@@ -40,13 +40,31 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-void	alx_wait4enter(void)
+int	alx_seekc(char c)
 {
-	int c;
+	int ch;
 
 	do {
-		c = getchar();
-	} while ((c != '\n')  &&  (c != EOF));
+		ch = getchar();
+	} while ((ch != c)  &&  (ch != EOF));
+
+	return	(ch == EOF);
+}
+
+int	alx_fseekc(FILE *stream, char c)
+{
+	int ch;
+
+	do {
+		ch = fgetc(stream);
+	} while ((ch != c)  &&  (ch != EOF));
+
+	return	(ch == EOF);
+}
+
+int	alx_wait4enter(void)
+{
+	return	alx_seekc('\n');
 }
 
 
