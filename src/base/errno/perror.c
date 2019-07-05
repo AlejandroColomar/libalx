@@ -9,6 +9,10 @@
  ******************************************************************************/
 #include "libalx/base/errno/perror.h"
 
+#include <errno.h>
+#include <studio.h>
+#include <string.h>
+
 
 /******************************************************************************
  ******* macros ***************************************************************
@@ -42,7 +46,7 @@ void	alx_perror__(const char *restrict file, const char *restrict line,
 		     const char *restrict func, const char *restrict str)
 {
 
-	fprintf(stderr, "%s:%i: %s():\n", __FILE__, __LINE__, __func__);
+	fprintf(stderr, "%s:%i: %s():\n", file, line, func);
 	if (str)
 		fprintf(stderr, "	%s\n", str);
 	fprintf(stderr, "E%i -	%s\n", errno, strerror(errno));
