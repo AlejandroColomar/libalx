@@ -40,32 +40,12 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_seekc(char c)
-{
-	int ch;
-
-	do {
-		ch = getchar();
-	} while ((ch != c)  &&  (ch != EOF));
-
-	return	(ch == EOF);
-}
-
-int	alx_fseekc(FILE *stream, char c)
-{
-	int ch;
-
-	do {
-		ch = fgetc(stream);
-	} while ((ch != c)  &&  (ch != EOF));
-
-	return	(ch == EOF);
-}
-
-int	alx_wait4enter(void)
-{
-	return	alx_seekc('\n');
-}
+extern
+int	alx_seekc(char c);
+extern
+int	alx_fseekc(FILE *stream, char c);
+extern
+int	alx_wait4enter(void);
 
 
 /******************************************************************************
