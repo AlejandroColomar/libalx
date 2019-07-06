@@ -44,10 +44,26 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
+extern
+void	alx_array_multiplication_ldbl	(ptrdiff_t nmemb,
+					 long double dest[static nmemb],
+					 const long double src1[static nmemb],
+					 const long double src2[static nmemb]);
+extern
+void	alx_array_multiplication	(ptrdiff_t nmemb,
+					 double dest[static nmemb],
+					 const double src1[static nmemb],
+					 const double src2[static nmemb]);
+extern
+void	alx_array_multiplication_flt	(ptrdiff_t nmemb,
+					 float dest[static nmemb],
+					 const float src1[static nmemb],
+					 const float src2[static nmemb]);
+
 int	alx_array_multiplication_uint	(ptrdiff_t nmemb,
-					unsigned dest[restrict nmemb],
-					const unsigned src1[nmemb],
-					const unsigned src2[nmemb])
+					unsigned dest[static nmemb],
+					const unsigned src1[static nmemb],
+					const unsigned src2[static nmemb])
 {
 	double_t	tmp;
 
@@ -66,9 +82,9 @@ err_wrap:
 }
 
 int	alx_array_multiplication_int	(ptrdiff_t nmemb,
-					int dest[restrict nmemb],
-					const int src1[nmemb],
-					const int src2[nmemb])
+					int dest[static nmemb],
+					const int src1[static nmemb],
+					const int src2[static nmemb])
 {
 	double_t	tmp;
 
@@ -92,9 +108,9 @@ err_ovf_lo:
 }
 
 int	alx_array_multiplication_u8	(ptrdiff_t nmemb,
-					uint8_t dest[restrict nmemb],
-					const uint8_t src1[nmemb],
-					const uint8_t src2[nmemb])
+					uint8_t dest[static nmemb],
+					const uint8_t src1[static nmemb],
+					const uint8_t src2[static nmemb])
 {
 	uint_fast16_t	tmp;
 
@@ -113,9 +129,9 @@ err_wrap:
 }
 
 int	alx_array_multiplication_s8	(ptrdiff_t nmemb,
-					int8_t dest[restrict nmemb],
-					const int8_t src1[nmemb],
-					const int8_t src2[nmemb])
+					int8_t dest[static nmemb],
+					const int8_t src1[static nmemb],
+					const int8_t src2[static nmemb])
 {
 	int_fast16_t	tmp;
 
@@ -139,9 +155,9 @@ err_ovf_lo:
 }
 
 int	alx_array_multiplication_u16	(ptrdiff_t nmemb,
-					uint16_t dest[restrict nmemb],
-					const uint16_t src1[nmemb],
-					const uint16_t src2[nmemb])
+					uint16_t dest[static nmemb],
+					const uint16_t src1[static nmemb],
+					const uint16_t src2[static nmemb])
 {
 	uint_fast32_t	tmp;
 
@@ -160,9 +176,9 @@ err_wrap:
 }
 
 int	alx_array_multiplication_s16	(ptrdiff_t nmemb,
-					int16_t dest[restrict nmemb],
-					const int16_t src1[nmemb],
-					const int16_t src2[nmemb])
+					int16_t dest[static nmemb],
+					const int16_t src1[static nmemb],
+					const int16_t src2[static nmemb])
 {
 	int_fast32_t	tmp;
 
@@ -186,9 +202,9 @@ err_ovf_lo:
 }
 
 int	alx_array_multiplication_u32	(ptrdiff_t nmemb,
-					uint32_t dest[restrict nmemb],
-					const uint32_t src1[nmemb],
-					const uint32_t src2[nmemb])
+					uint32_t dest[static nmemb],
+					const uint32_t src1[static nmemb],
+					const uint32_t src2[static nmemb])
 {
 	uint_fast64_t	tmp;
 
@@ -207,9 +223,9 @@ err_wrap:
 }
 
 int	alx_array_multiplication_s32	(ptrdiff_t nmemb,
-					int32_t dest[restrict nmemb],
-					const int32_t src1[nmemb],
-					const int32_t src2[nmemb])
+					int32_t dest[static nmemb],
+					const int32_t src1[static nmemb],
+					const int32_t src2[static nmemb])
 {
 	int_fast64_t	tmp;
 
@@ -233,9 +249,9 @@ err_ovf_lo:
 }
 
 int	alx_array_multiplication_u64	(ptrdiff_t nmemb,
-					uint64_t dest[restrict nmemb],
-					const uint64_t src1[nmemb],
-					const uint64_t src2[nmemb])
+					uint64_t dest[static nmemb],
+					const uint64_t src1[static nmemb],
+					const uint64_t src2[static nmemb])
 {
 	double_t	tmp;
 
@@ -254,9 +270,9 @@ err_wrap:
 }
 
 int	alx_array_multiplication_s64	(ptrdiff_t nmemb,
-					int64_t dest[restrict nmemb],
-					const int64_t src1[nmemb],
-					const int64_t src2[nmemb])
+					int64_t dest[static nmemb],
+					const int64_t src1[static nmemb],
+					const int64_t src2[static nmemb])
 {
 	double_t	tmp;
 
