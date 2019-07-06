@@ -24,26 +24,16 @@
  ******* macros ***************************************************************
  ******************************************************************************/
 /*
- * int	alx_mallocs(type **restrict p, ptrdiff_t nmemb);
+ * int	alx_mallocs(type **restrict p, ptrdiff_t nmemb)
+ * __attribute__((nonnull));
  */
 #define alx_mallocs(ptr, nmemb)	(					\
 {									\
-	__label__	ret_;						\
 	__auto_type	ptr_	= (ptr);				\
-	int		err_;						\
-									\
-	err_	= 0;							\
-	if (ptr_ == NULL) {						\
-		errno	= EINVAL;					\
-		err_	= -1;					\
-		goto ret_;						\
-	}								\
 									\
 	*ptr_	= alx_mallocs__(nmemb, sizeof(**ptr_));			\
-	if (!*ptr_)							\
-		err_	= 1;					\
-ret_:									\
-	err_;								\
+									\
+	*ptr_ ? 0 : 1;							\
 }									\
 )
 
@@ -64,21 +54,18 @@ ret_:									\
 
 
 /******************************************************************************
- ******* extern functions *****************************************************
+ ******* function prototypes **************************************************
  ******************************************************************************/
-
-
-/******************************************************************************
- ******* inline functions (prototypes) ****************************************
- ******************************************************************************/
-inline	void	*alx_mallocs__(ptrdiff_t nmemb, size_t size)
+inline
+void	*alx_mallocs__(ptrdiff_t nmemb, size_t size)
 __attribute__((malloc));
 
 
 /******************************************************************************
- ******* static inline functions (definitions) ********************************
+ ******* inline functions *****************************************************
  ******************************************************************************/
-inline	void	*alx_mallocs__(ptrdiff_t nmemb, size_t size)
+inline
+void	*alx_mallocs__(ptrdiff_t nmemb, size_t size)
 {
 
 	if (nmemb < 0)
