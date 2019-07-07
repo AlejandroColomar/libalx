@@ -21,37 +21,37 @@
  ******* macros ***************************************************************
  ******************************************************************************/
 #if	(FLT_EVAL_METHOD == 0)
-#define SCNaFLT		"a"
-#define SCNeFLT		"e"
-#define SCNfFLT		"f"
-#define SCNgFLT		"g"
+#define SCNaFLTT	"a"
+#define SCNeFLTT	"e"
+#define SCNfFLTT	"f"
+#define SCNgFLTT	"g"
 
-#define SCNaDBL		"la"
-#define SCNeDBL		"le"
-#define SCNfDBL		"lf"
-#define SCNgDBL		"lg"
+#define SCNaDBLT	"la"
+#define SCNeDBLT	"le"
+#define SCNfDBLT	"lf"
+#define SCNgDBLT	"lg"
 
 #elif	(FLT_EVAL_METHOD == 1)
-#define SCNaFLT		"la"
-#define SCNeFLT		"le"
-#define SCNfFLT		"lf"
-#define SCNgFLT		"lg"
+#define SCNaFLTT	"la"
+#define SCNeFLTT	"le"
+#define SCNfFLTT	"lf"
+#define SCNgFLTT	"lg"
 
-#define SCNaDBL		"la"
-#define SCNeDBL		"le"
-#define SCNfDBL		"lf"
-#define SCNgDBL		"lg"
+#define SCNaDBLT	"la"
+#define SCNeDBLT	"le"
+#define SCNfDBLT	"lf"
+#define SCNgDBLT	"lg"
 
 #elif	(FLT_EVAL_METHOD == 2)
-#define SCNaFLT		"La"
-#define SCNeFLT		"Le"
-#define SCNfFLT		"Lf"
-#define SCNgFLT		"Lg"
+#define SCNaFLTT	"La"
+#define SCNeFLTT	"Le"
+#define SCNfFLTT	"Lf"
+#define SCNgFLTT	"Lg"
 
-#define SCNaDBL		"La"
-#define SCNeDBL		"Le"
-#define SCNfDBL		"Lf"
-#define SCNgDBL		"Lg"
+#define SCNaDBLT	"La"
+#define SCNeDBLT	"Le"
+#define SCNfDBLT	"Lf"
+#define SCNgDBLT	"Lg"
 #endif
 
 
@@ -71,17 +71,12 @@
 
 
 /******************************************************************************
- ******* extern functions *****************************************************
+ ******* function prototypes **************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* static inline functions (prototypes) *********************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* static inline functions (definitions) ********************************
+ ******* inline functions *****************************************************
  ******************************************************************************/
 
 

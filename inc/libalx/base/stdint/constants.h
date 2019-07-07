@@ -25,33 +25,17 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-#define U8_MAX		(~(uint8_t)0)
-#define S8_MAX		((int8_t)(U8_MAX >> 1))
-#define S8_MIN		((int8_t)(-S8_MAX - 1))
+#define SQRT_U8_MAX	(UINT8_C(0xF))
+#define SQRT_S8_MAX	( INT8_C(0xB))
 
-#define U16_MAX		(~(uint16_t)0)
-#define S16_MAX		((int16_t)(U16_MAX >> 1))
-#define S16_MIN		((int16_t)(-S16_MAX - 1))
+#define SQRT_U16_MAX	(UINT16_C(0xFF))
+#define SQRT_S16_MAX	( INT16_C(0xB5))
 
-#define U32_MAX		(~(uint32_t)0)
-#define S32_MAX		((int32_t)(U32_MAX >> 1))
-#define S32_MIN		((int32_t)(-S32_MAX - 1))
+#define SQRT_U32_MAX	(UINT32_C(0xFFFF))
+#define SQRT_S32_MAX	( INT32_C(0xB504))
 
-#define U64_MAX		(~(uint64_t)0)
-#define S64_MAX		((int64_t)(U64_MAX >> 1))
-#define S64_MIN		((int64_t)(-S64_MAX - 1))
-
-#define SQRT_U8_MAX	((uint8_t)0xF)
-#define SQRT_S8_MAX	((int8_t)0xB)
-
-#define SQRT_U16_MAX	((uint16_t)0xFF)
-#define SQRT_S16_MAX	((int16_t)0xB5)
-
-#define SQRT_U32_MAX	((uint32_t)0xFFFF)
-#define SQRT_S32_MAX	((int32_t)0xB504)
-
-#define SQRT_U64_MAX	((uint64_t)0xFFFFFFFF)
-#define SQRT_S64_MAX	((int64_t)0xB504F333)
+#define SQRT_U64_MAX	(UINT64_C(0xFFFFFFFF))
+#define SQRT_S64_MAX	( INT64_C(0xB504F333))
 
 
 
@@ -72,17 +56,12 @@
 
 
 /******************************************************************************
- ******* extern functions *****************************************************
+ ******* function prototypes **************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* static inline functions (prototypes) *********************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* static inline functions (definitions) ********************************
+ ******* inline functions *****************************************************
  ******************************************************************************/
 
 

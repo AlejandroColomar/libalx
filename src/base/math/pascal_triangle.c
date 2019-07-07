@@ -57,7 +57,7 @@ long double alx_pascal_triangle_ldbl	(int32_t n, int32_t k)
 		return	nanl("");
 	}
 	if (!k)
-		return	1;
+		return	1.0L;
 	if (k > (n / 2))
 		return	alx_pascal_triangle_ldbl(n, n - k);
 
@@ -79,11 +79,11 @@ double	alx_pascal_triangle		(int16_t n, int16_t k)
 		return	nan("");
 	}
 	if (!k)
-		return	1;
+		return	1.0;
 	if (k > (n / 2))
 		return	alx_pascal_triangle(n, n - k);
 
-	x	= DBL_C(1.0);
+	x	= DBLT_C(1.0);
 	for (int_fast16_t i = 0; i < k; i++) {
 		x	*= n - i;
 		x	/= i + 1;
@@ -101,11 +101,11 @@ float	alx_pascal_triangle_flt		(int16_t n, int16_t k)
 		return	nanf("");
 	}
 	if (!k)
-		return	1;
+		return	1.0f;
 	if (k > (n / 2))
 		return	alx_pascal_triangle_flt(n, n - k);
 
-	x	= FLT_C(1.0);
+	x	= FLTT_C(1.0);
 	for (int_fast16_t i = 0; i < k; i++) {
 		x	*= n - i;
 		x	/= i + 1;

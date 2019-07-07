@@ -66,13 +66,12 @@ int	alx_array_division_uint	(ptrdiff_t nmemb,
 
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		if (!src2[i])
-			goto err_div0;
+			goto div0;
 		dest[i]	= src1[i] / src2[i];
 	}
 
 	return	0;
-
-err_div0:
+div0:
 	errno	= ERANGE;
 	return	-1;
 }
@@ -85,13 +84,12 @@ int	alx_array_division_int	(ptrdiff_t nmemb,
 
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		if (!src2[i])
-			goto err_div0;
+			goto div0;
 		dest[i]	= src1[i] / src2[i];
 	}
 
 	return	0;
-
-err_div0:
+div0:
 	errno	= ERANGE;
 	return	-1;
 }
@@ -104,13 +102,12 @@ int	alx_array_division_u8	(ptrdiff_t nmemb,
 
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		if (!src2[i])
-			goto err_div0;
+			goto div0;
 		dest[i]	= src1[i] / src2[i];
 	}
 
 	return	0;
-
-err_div0:
+div0:
 	errno	= ERANGE;
 	return	-1;
 }
@@ -123,13 +120,12 @@ int	alx_array_division_s8	(ptrdiff_t nmemb,
 
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		if (!src2[i])
-			goto err_div0;
+			goto div0;
 		dest[i]	= src1[i] / src2[i];
 	}
 
 	return	0;
-
-err_div0:
+div0:
 	errno	= ERANGE;
 	return	-1;
 }
@@ -142,13 +138,12 @@ int	alx_array_division_u16	(ptrdiff_t nmemb,
 
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		if (!src2[i])
-			goto err_div0;
+			goto div0;
 		dest[i]	= src1[i] / src2[i];
 	}
 
 	return	0;
-
-err_div0:
+div0:
 	errno	= ERANGE;
 	return	-1;
 }
@@ -161,13 +156,12 @@ int	alx_array_division_s16	(ptrdiff_t nmemb,
 
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		if (!src2[i])
-			goto err_div0;
+			goto div0;
 		dest[i]	= src1[i] / src2[i];
 	}
 
 	return	0;
-
-err_div0:
+div0:
 	errno	= ERANGE;
 	return	-1;
 }
@@ -180,13 +174,12 @@ int	alx_array_division_u32	(ptrdiff_t nmemb,
 
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		if (!src2[i])
-			goto err_div0;
+			goto div0;
 		dest[i]	= src1[i] / src2[i];
 	}
 
 	return	0;
-
-err_div0:
+div0:
 	errno	= ERANGE;
 	return	-1;
 }
@@ -199,13 +192,12 @@ int	alx_array_division_s32	(ptrdiff_t nmemb,
 
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		if (!src2[i])
-			goto err_div0;
+			goto div0;
 		dest[i]	= src1[i] / src2[i];
 	}
 
 	return	0;
-
-err_div0:
+div0:
 	errno	= ERANGE;
 	return	-1;
 }
@@ -218,13 +210,12 @@ int	alx_array_division_u64	(ptrdiff_t nmemb,
 
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		if (!src2[i])
-			goto err_div0;
+			goto div0;
 		dest[i]	= src1[i] / src2[i];
 	}
 
 	return	0;
-
-err_div0:
+div0:
 	errno	= ERANGE;
 	return	-1;
 }
@@ -237,13 +228,12 @@ int	alx_array_division_s64	(ptrdiff_t nmemb,
 
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		if (!src2[i])
-			goto err_div0;
+			goto div0;
 		dest[i]	= src1[i] / src2[i];
 	}
 
 	return	0;
-
-err_div0:
+div0:
 	errno	= ERANGE;
 	return	-1;
 }

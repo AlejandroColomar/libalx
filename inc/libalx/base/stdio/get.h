@@ -103,13 +103,15 @@ char		alx_get_ch	(const char *restrict valid,
 				bool skip_space, bool ignore_case,
 				const char *restrict title,
 				const char *restrict help,
-				uint8_t attempts);
+				uint8_t attempts)
+		__attribute__((nonnull(1)));
 int		alx_get_fname	(const char *restrict path,
-				char fname[restrict FILENAME_MAX],
+				char fname[static restrict FILENAME_MAX],
 				bool exist,
 				const char *restrict title,
 				const char *restrict help,
-				uint8_t attempts);
+				uint8_t attempts)
+		__attribute__((nonnull(1, 2)));
 
 
 /******************************************************************************

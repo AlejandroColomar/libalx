@@ -10,7 +10,7 @@
 #include "libalx/base/errno/perror.h"
 
 #include <errno.h>
-#include <studio.h>
+#include <stdio.h>
 #include <string.h>
 
 
@@ -42,7 +42,7 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-void	alx_perror__(const char *restrict file, const char *restrict line,
+void	alx_perror__(const char *restrict file, int line,
 		     const char *restrict func, const char *restrict str)
 {
 

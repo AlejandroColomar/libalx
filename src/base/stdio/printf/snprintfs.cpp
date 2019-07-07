@@ -45,8 +45,9 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int alx::snprintfs(char *restrict str, ptrdiff_t *restrict written,
-		   ptrdiff_t nmemb, const char *restrict format, ...)
+int	alx::snprintfs	(char *restrict str,
+			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
+			 const char *restrict format, ...)
 {
 	va_list	ap;
 	int	len;
@@ -78,8 +79,9 @@ err:	if (written)
 	return	-1;
 }
 
-int alx::vsnprintfs(char *restrict str, ptrdiff_t *restrict written,
-		    ptrdiff_t nmemb, const char *restrict format, va_list ap)
+int	alx::vsnprintfs	(char *restrict str,
+			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
+			 const char *restrict format, va_list ap)
 {
 	int	len;
 

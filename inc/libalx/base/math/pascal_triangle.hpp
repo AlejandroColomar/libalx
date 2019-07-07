@@ -45,11 +45,15 @@
  ******************************************************************************/
 extern	"C"
 {
-long double alx_pascal_triangle_ldbl	(int32_t n, int32_t k);
-double	alx_pascal_triangle		(int16_t n, int16_t k);
-float	alx_pascal_triangle_flt		(int16_t n, int16_t k);
+long double alx_pascal_triangle_ldbl	(int32_t n, int32_t k)
+	    __attribute__((const));
+double	alx_pascal_triangle		(int16_t n, int16_t k)
+	__attribute__((const));
+float	alx_pascal_triangle_flt		(int16_t n, int16_t k)
+	__attribute__((const));
 int	alx_pascal_triangle_factorized	(int16_t n, int16_t k,
-				int16_t pf[static restrict PRIME_NUMS_QTY_16b]);
+				int16_t pf[static restrict PRIME_NUMS_QTY_16b])
+	__attribute__((nonnull));
 }
 
 

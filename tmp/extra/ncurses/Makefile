@@ -23,9 +23,9 @@ COMMON_SRC	=							\
 
 GET_INC		=							\
 		$(INC_DIR)/libalx/extra/ncurses/get.h			\
-		$(INC_DIR)/libalx/base/stdio/common.h			\
 		$(INC_DIR)/libalx/base/stdio/sscan.h			\
-		$(INC_DIR)/libalx/extra/ncurses/common.h
+		$(INC_DIR)/libalx/extra/ncurses/common.h		\
+		$(INC_DIR)/libalx/extra/ncurses/perror.h	
 GET_SRC		=							\
 		$(SRC_DIR)/extra/ncurses/get.c
 

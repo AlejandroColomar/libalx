@@ -43,45 +43,47 @@
  ******* variables ************************************************************
  ******************************************************************************/
 /* extern --------------------------------------------------------------------*/
-extern const	uint8_t		alx_prime_8b [PRIME_NUMS_QTY_8b];
-extern		uint16_t	alx_prime_16b [PRIME_NUMS_QTY_16b];
-extern		uint32_t	alx_prime_32b [PRIME_NUMS_QTY_32b];
+extern const	uint8_t		alx_prime_8b[PRIME_NUMS_QTY_8b];
+extern		uint16_t	alx_prime_16b[PRIME_NUMS_QTY_16b];
+extern		uint32_t	alx_prime_32b[PRIME_NUMS_QTY_32b];
 
-extern		bool		alx_is_prime_32b [UINT32_MAX];
+extern		bool		alx_is_prime_32b[UINT32_MAX];
 /* static const --------------------------------------------------------------*/
 
 
 /******************************************************************************
- ******* extern functions *****************************************************
+ ******* function prototypes **************************************************
  ******************************************************************************/
 void	alx_prime_16b_init	(void);
 void	alx_prime_32b_init	(void);
 
+inline
+ptrdiff_t	alx_prime_index_8b	(uint8_t n)
+		__attribute__((always_inline, const));
+inline
+ptrdiff_t	alx_prime_index_16b	(uint16_t n)
+		__attribute__((always_inline, const));
+inline
+ptrdiff_t	alx_prime_index_32b	(uint32_t n)
+		__attribute__((always_inline, const));
+
 
 /******************************************************************************
- ******* static inline functions (prototypes) *********************************
+ ******* inline functions *****************************************************
  ******************************************************************************/
-static inline	ptrdiff_t	alx_prime_index_8b	(uint8_t n);
-static inline	ptrdiff_t	alx_prime_index_16b	(uint16_t n);
-static inline	ptrdiff_t	alx_prime_index_32b	(uint32_t n);
-
-
-/******************************************************************************
- ******* static inline functions (definitions) ********************************
- ******************************************************************************/
-static inline
+inline
 ptrdiff_t	alx_prime_index_8b	(uint8_t n)
 {
 	return	alx_bsearch_u8(PRIME_NUMS_QTY_8b, alx_prime_8b, n);
 }
 
-static inline
+inline
 ptrdiff_t	alx_prime_index_16b	(uint16_t n)
 {
 	return	alx_bsearch_u16(PRIME_NUMS_QTY_16b, alx_prime_16b, n);
 }
 
-static inline
+inline
 ptrdiff_t	alx_prime_index_32b	(uint32_t n)
 {
 	return	alx_bsearch_u32(PRIME_NUMS_QTY_32b, alx_prime_32b, n);

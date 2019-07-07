@@ -64,9 +64,15 @@ void	alx_prime_32b_init	(void);
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
-static inline	ptrdiff_t	alx_prime_index_8b	(uint8_t n);
-static inline	ptrdiff_t	alx_prime_index_16b	(uint16_t n);
-static inline	ptrdiff_t	alx_prime_index_32b	(uint32_t n);
+static inline
+ptrdiff_t	alx_prime_index_8b	(uint8_t n)
+		__attribute__((always_inline, const));
+static inline
+ptrdiff_t	alx_prime_index_16b	(uint16_t n)
+		__attribute__((always_inline, const));
+static inline
+ptrdiff_t	alx_prime_index_32b	(uint32_t n)
+		__attribute__((always_inline, const));
 
 
 /******************************************************************************

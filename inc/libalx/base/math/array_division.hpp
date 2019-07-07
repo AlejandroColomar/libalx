@@ -17,12 +17,16 @@
 #include <cstddef>
 #include <cstdint>
 
-#include "libalx/base/stddef/restrict.hpp"
-
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+
+
+/******************************************************************************
+ ******* namespace ************************************************************
+ ******************************************************************************/
+namespace alx {
 
 
 /******************************************************************************
@@ -46,73 +50,89 @@
 extern	"C"
 {
 int	alx_array_division_uint	(ptrdiff_t nmemb,
-					unsigned *restrict dest,
-					const unsigned *restrict src1,
-					const unsigned *restrict src2);
+				 unsigned dest[],
+				 const unsigned src1[],
+				 const unsigned src2[])
+	__attribute__((nonnull));
 int	alx_array_division_int	(ptrdiff_t nmemb,
-					int *restrict dest,
-					const int *restrict src1,
-					const int *restrict src2);
+				 int dest[],
+				 const int src1[],
+				 const int src2[])
+	__attribute__((nonnull));
 int	alx_array_division_u8	(ptrdiff_t nmemb,
-					uint8_t *restrict dest,
-					const uint8_t *restrict src1,
-					const uint8_t *restrict src2);
+				 uint8_t dest[],
+				 const uint8_t src1[],
+				 const uint8_t src2[])
+	__attribute__((nonnull));
 int	alx_array_division_s8	(ptrdiff_t nmemb,
-					int8_t *restrict dest,
-					const int8_t *restrict src1,
-					const int8_t *restrict src2);
+				 int8_t dest[],
+				 const int8_t src1[],
+				 const int8_t src2[])
+	__attribute__((nonnull));
 int	alx_array_division_u16	(ptrdiff_t nmemb,
-					uint16_t *restrict dest,
-					const uint16_t *restrict src1,
-					const uint16_t *restrict src2);
+				 uint16_t dest[],
+				 const uint16_t src1[],
+				 const uint16_t src2[])
+	__attribute__((nonnull));
 int	alx_array_division_s16	(ptrdiff_t nmemb,
-					int16_t *restrict dest,
-					const int16_t *restrict src1,
-					const int16_t *restrict src2);
+				 int16_t dest[],
+				 const int16_t src1[],
+				 const int16_t src2[])
+	__attribute__((nonnull));
 int	alx_array_division_u32	(ptrdiff_t nmemb,
-					uint32_t *restrict dest,
-					const uint32_t *restrict src1,
-					const uint32_t *restrict src2);
+				 uint32_t dest[],
+				 const uint32_t src1[],
+				 const uint32_t src2[])
+	__attribute__((nonnull));
 int	alx_array_division_s32	(ptrdiff_t nmemb,
-					int32_t *restrict dest,
-					const int32_t *restrict src1,
-					const int32_t *restrict src2);
+				 int32_t dest[],
+				 const int32_t src1[],
+				 const int32_t src2[])
+	__attribute__((nonnull));
 int	alx_array_division_u64	(ptrdiff_t nmemb,
-					uint64_t *restrict dest,
-					const uint64_t *restrict src1,
-					const uint64_t *restrict src2);
+				 uint64_t dest[],
+				 const uint64_t src1[],
+				 const uint64_t src2[])
+	__attribute__((nonnull));
 int	alx_array_division_s64	(ptrdiff_t nmemb,
-					int64_t *restrict dest,
-					const int64_t *restrict src1,
-					const int64_t *restrict src2);
+				 int64_t dest[],
+				 const int64_t src1[],
+				 const int64_t src2[])
+	__attribute__((nonnull));
 }
 
 
 /******************************************************************************
  ******* static inline functions (prototypes) *********************************
  ******************************************************************************/
-static inline	void	alx_array_division_ldbl	(ptrdiff_t nmemb,
-					long double *restrict dest,
-					const long double *restrict src1,
-					const long double *restrict src2);
-static inline	void	alx_array_division	(ptrdiff_t nmemb,
-					double *restrict dest,
-					const double *restrict src1,
-					const double *restrict src2);
-static inline	void	alx_array_division_flt	(ptrdiff_t nmemb,
-					float *restrict dest,
-					const float *restrict src1,
-					const float *restrict src2);
+static inline
+void	array_division_ldbl	(ptrdiff_t nmemb,
+				 long double dest[],
+				 const long double src1[],
+				 const long double src2[])
+	__attribute__((nonnull));
+static inline
+void	array_division		(ptrdiff_t nmemb,
+				 double dest[],
+				 const double src1[],
+				 const double src2[])
+	__attribute__((nonnull));
+static inline
+void	array_division_flt	(ptrdiff_t nmemb,
+				 float dest[],
+				 const float src1[],
+				 const float src2[])
+	__attribute__((nonnull));
 
 
 /******************************************************************************
  ******* static inline functions (definitions) ********************************
  ******************************************************************************/
 static inline
-void	alx_array_division_ldbl	(ptrdiff_t nmemb,
-					long double *restrict dest,
-					const long double *restrict src1,
-					const long double *restrict src2)
+void	array_division_ldbl	(ptrdiff_t nmemb,
+				 long double dest[],
+				 const long double src1[],
+				 const long double src2[])
 {
 
 	for (ptrdiff_t i = 0; i < nmemb; i++)
@@ -120,10 +140,10 @@ void	alx_array_division_ldbl	(ptrdiff_t nmemb,
 }
 
 static inline
-void	alx_array_division	(ptrdiff_t nmemb,
-					double *restrict dest,
-					const double *restrict src1,
-					const double *restrict src2)
+void	array_division		(ptrdiff_t nmemb,
+				 double dest[],
+				 const double src1[],
+				 const double src2[])
 {
 
 	for (ptrdiff_t i = 0; i < nmemb; i++)
@@ -131,15 +151,21 @@ void	alx_array_division	(ptrdiff_t nmemb,
 }
 
 static inline
-void	alx_array_division_flt	(ptrdiff_t nmemb,
-					float *restrict dest,
-					const float *restrict src1,
-					const float *restrict src2)
+void	array_division_flt	(ptrdiff_t nmemb,
+				 float dest[],
+				 const float src1[],
+				 const float src2[])
 {
 
 	for (ptrdiff_t i = 0; i < nmemb; i++)
 		dest[i]	= src1[i] / src2[i];
 }
+
+
+/******************************************************************************
+ ******* namespace ************************************************************
+ ******************************************************************************/
+}	/* namespace alx */
 
 
 /******************************************************************************

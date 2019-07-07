@@ -22,8 +22,8 @@
 #include "libalx/base/stdio/printf/b.h"
 #include "libalx/base/stdio/printf/sbprintf.h"
 #include "libalx/base/stdio/printf/swnprintf.h"
+#include "libalx/base/stdio/seekc.h"
 #include "libalx/base/stdio/sscan.h"
-#include "libalx/base/stdio/wait.h"
 
 
 /******************************************************************************

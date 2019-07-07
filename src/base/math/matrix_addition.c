@@ -53,14 +53,13 @@ int	alx_matrix_addition_uint	(ptrdiff_t n,
 	for (ptrdiff_t i = 0; i < n; i++) {
 		dest[i]	= src1[i] + src2[i];
 		if ((dest[i] < src1[i]) || (dest[i] < src2[i]))
-			goto err_wrap;
+			goto ovf;
 	}
 
 	return	0;
-
-err_wrap:
+ovf:
 	errno	= ERANGE;
-	return	ERANGE;
+	return	-1;
 }
 
 int	alx_matrix_addition_int		(ptrdiff_t n,
@@ -73,20 +72,16 @@ int	alx_matrix_addition_int		(ptrdiff_t n,
 	for (ptrdiff_t i = 0; i < n; i++) {
 		tmp	= (double_t)src1[i] + (double_t)src2[i];
 		if (nextafter(tmp, tmp + 1) > INT_MAX)
-			goto err_ovf_hi;
+			goto ovf;
 		if (nextafter(tmp, tmp - 1) < INT_MIN)
-			goto err_ovf_lo;
+			goto ovf;
 		dest[i]	= src1[i] + src2[i];
 	}
 
 	return	0;
-
-err_ovf_hi:
+ovf:
 	errno	= ERANGE;
-	return	ERANGE;
-err_ovf_lo:
-	errno	= ERANGE;
-	return	-ERANGE;
+	return	-1;
 }
 
 int	alx_matrix_addition_u8		(ptrdiff_t n,
@@ -98,14 +93,13 @@ int	alx_matrix_addition_u8		(ptrdiff_t n,
 	for (ptrdiff_t i = 0; i < n; i++) {
 		dest[i]	= src1[i] + src2[i];
 		if ((dest[i] < src1[i]) || (dest[i] < src2[i]))
-			goto err_wrap;
+			goto ovf;
 	}
 
 	return	0;
-
-err_wrap:
+ovf:
 	errno	= ERANGE;
-	return	ERANGE;
+	return	-1;
 }
 
 int	alx_matrix_addition_s8		(ptrdiff_t n,
@@ -118,20 +112,16 @@ int	alx_matrix_addition_s8		(ptrdiff_t n,
 	for (ptrdiff_t i = 0; i < n; i++) {
 		tmp	= (int_fast16_t)src1[i] + (int_fast16_t)src2[i];
 		if (tmp > INT8_MAX)
-			goto err_ovf_hi;
+			goto ovf;
 		if (tmp < INT8_MIN)
-			goto err_ovf_lo;
+			goto ovf;
 		dest[i]	= tmp;
 	}
 
 	return	0;
-
-err_ovf_hi:
+ovf:
 	errno	= ERANGE;
-	return	ERANGE;
-err_ovf_lo:
-	errno	= ERANGE;
-	return	-ERANGE;
+	return	-1;
 }
 
 int	alx_matrix_addition_u16		(ptrdiff_t n,
@@ -143,14 +133,13 @@ int	alx_matrix_addition_u16		(ptrdiff_t n,
 	for (ptrdiff_t i = 0; i < n; i++) {
 		dest[i]	= src1[i] + src2[i];
 		if ((dest[i] < src1[i]) || (dest[i] < src2[i]))
-			goto err_wrap;
+			goto ovf;
 	}
 
 	return	0;
-
-err_wrap:
+ovf:
 	errno	= ERANGE;
-	return	ERANGE;
+	return	-1;
 }
 
 int	alx_matrix_addition_s16		(ptrdiff_t n,
@@ -163,20 +152,16 @@ int	alx_matrix_addition_s16		(ptrdiff_t n,
 	for (ptrdiff_t i = 0; i < n; i++) {
 		tmp	= (int_fast32_t)src1[i] + (int_fast32_t)src2[i];
 		if (tmp > INT16_MAX)
-			goto err_ovf_hi;
+			goto ovf;
 		if (tmp < INT16_MIN)
-			goto err_ovf_lo;
+			goto ovf;
 		dest[i]	= tmp;
 	}
 
 	return	0;
-
-err_ovf_hi:
+ovf:
 	errno	= ERANGE;
-	return	ERANGE;
-err_ovf_lo:
-	errno	= ERANGE;
-	return	-ERANGE;
+	return	-1;
 }
 
 int	alx_matrix_addition_u32		(ptrdiff_t n,
@@ -188,14 +173,13 @@ int	alx_matrix_addition_u32		(ptrdiff_t n,
 	for (ptrdiff_t i = 0; i < n; i++) {
 		dest[i]	= src1[i] + src2[i];
 		if ((dest[i] < src1[i]) || (dest[i] < src2[i]))
-			goto err_wrap;
+			goto ovf;
 	}
 
 	return	0;
-
-err_wrap:
+ovf:
 	errno	= ERANGE;
-	return	ERANGE;
+	return	-1;
 }
 
 int	alx_matrix_addition_s32		(ptrdiff_t n,
@@ -208,20 +192,16 @@ int	alx_matrix_addition_s32		(ptrdiff_t n,
 	for (ptrdiff_t i = 0; i < n; i++) {
 		tmp	= (int_fast64_t)src1[i] + (int_fast64_t)src2[i];
 		if (tmp > INT32_MAX)
-			goto err_ovf_hi;
+			goto ovf;
 		if (tmp < INT32_MIN)
-			goto err_ovf_lo;
+			goto ovf;
 		dest[i]	= tmp;
 	}
 
 	return	0;
-
-err_ovf_hi:
+ovf:
 	errno	= ERANGE;
-	return	ERANGE;
-err_ovf_lo:
-	errno	= ERANGE;
-	return	-ERANGE;
+	return	-1;
 }
 
 int	alx_matrix_addition_u64		(ptrdiff_t n,
@@ -233,14 +213,13 @@ int	alx_matrix_addition_u64		(ptrdiff_t n,
 	for (ptrdiff_t i = 0; i < n; i++) {
 		dest[i]	= src1[i] + src2[i];
 		if ((dest[i] < src1[i]) || (dest[i] < src2[i]))
-			goto err_wrap;
+			goto ovf;
 	}
 
 	return	0;
-
-err_wrap:
+ovf:
 	errno	= ERANGE;
-	return	ERANGE;
+	return	-1;
 }
 
 int	alx_matrix_addition_s64		(ptrdiff_t n,
@@ -253,20 +232,16 @@ int	alx_matrix_addition_s64		(ptrdiff_t n,
 	for (ptrdiff_t i = 0; i < n; i++) {
 		tmp	= (double_t)src1[i] + (double_t)src2[i];
 		if (nextafter(tmp, tmp + 1) > INT8_MAX)
-			goto err_ovf_hi;
+			goto ovf;
 		if (nextafter(tmp, tmp - 1) < INT8_MIN)
-			goto err_ovf_lo;
+			goto ovf;
 		dest[i]	= src1[i] + src2[i];
 	}
 
 	return	0;
-
-err_ovf_hi:
+ovf:
 	errno	= ERANGE;
-	return	ERANGE;
-err_ovf_lo:
-	errno	= ERANGE;
-	return	-ERANGE;
+	return	-1;
 }
 
 

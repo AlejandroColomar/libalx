@@ -19,14 +19,15 @@ OBJ		=							\
 		get.o							\
 		printf/b.o						\
 		printf/sbprintf.o					\
-		printf/swnprintf.o					\
-		printf/swnprintf.cpp.o					\
-		sscan.o							\
-		wait.o
+		printf/snprintfs.o					\
+		printf/snprintfs.cpp.o					\
+		seekc.o							\
+		sscan.o
 
 GET_INC		=							\
 		$(INC_DIR)/libalx/base/stdio/get.h			\
 		$(INC_DIR)/libalx/base/compiler/size.h			\
+		$(INC_DIR)/libalx/base/errno/perror.h			\
 		$(INC_DIR)/libalx/base/stdio/common.h			\
 		$(INC_DIR)/libalx/base/stdio/sscan.h
 GET_SRC		=							\
@@ -40,20 +41,25 @@ PRINTF_B_SRC	=							\
 PRINTF_SBPRINTF_INC	=						\
 		$(INC_DIR)/libalx/base/stdio/printf/sbprintf.h		\
 		$(INC_DIR)/libalx/base/assert/assert.h			\
-		$(INC_DIR)/libalx/base/stdio/printf/swnprintf.h
+		$(INC_DIR)/libalx/base/stdio/printf/snprintfs.h
 PRINTF_SBPRINTF_SRC	=						\
 		$(SRC_DIR)/base/stdio/printf/sbprintf.c
 
-PRINTF_SWNPRINTF_INC	=						\
-		$(INC_DIR)/libalx/base/stdio/printf/swnprintf.h
-PRINTF_SWNPRINTF_SRC	=						\
-		$(SRC_DIR)/base/stdio/printf/swnprintf.c
+PRINTF_SNPRINTFS_INC	=						\
+		$(INC_DIR)/libalx/base/stdio/printf/snprintfs.h
+PRINTF_SNPRINTFS_SRC	=						\
+		$(SRC_DIR)/base/stdio/printf/snprintfs.c
 
-PRINTF_SWNPRINTF_CXX_INC	=					\
-		$(INC_DIR)/libalx/base/stdio/printf/swnprintf.hpp	\
+PRINTF_SNPRINTFS_CXX_INC	=					\
+		$(INC_DIR)/libalx/base/stdio/printf/snprintfs.hpp	\
 		$(INC_DIR)/libalx/base/compiler/restrict.hpp
-PRINTF_SWNPRINTF_CXX_SRC	=					\
-		$(SRC_DIR)/base/stdio/printf/swnprintf.cpp
+PRINTF_SNPRINTFS_CXX_SRC	=					\
+		$(SRC_DIR)/base/stdio/printf/snprintfs.cpp
+
+SEEKC_INC	=							\
+		$(INC_DIR)/libalx/base/stdio/seekc.h
+SEEKC_SRC	=							\
+		$(SRC_DIR)/base/stdio/seekc.c
 
 SSCAN_INC	=							\
 		$(INC_DIR)/libalx/base/stdio/sscan.h			\
@@ -61,11 +67,6 @@ SSCAN_INC	=							\
 		$(INC_DIR)/libalx/base/string/strchr.h
 SSCAN_SRC	=							\
 		$(SRC_DIR)/base/stdio/sscan.c
-
-WAIT_INC	=							\
-		$(INC_DIR)/libalx/base/stdio/wait.h
-WAIT_SRC	=							\
-		$(SRC_DIR)/base/stdio/wait.c
 
 ################################################################################
 # target: dependencies
@@ -101,17 +102,24 @@ printf/sbprintf.o: printf/sbprintf.s
 	@echo	"	AS	libalx/tmp/base/stdio/$@"
 	$(Q)$(AS) $< -o $@
 
-printf/swnprintf.s: $(PRINTF_SWNPRINTF_SRC) $(PRINTF_SWNPRINTF_INC)
+printf/snprintfs.s: $(PRINTF_SNPRINTFS_SRC) $(PRINTF_SNPRINTFS_INC)
 	@echo	"	CC	libalx/tmp/base/stdio/$@"
 	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-printf/swnprintf.o: printf/swnprintf.s
+printf/snprintfs.o: printf/snprintfs.s
 	@echo	"	AS	libalx/tmp/base/stdio/$@"
 	$(Q)$(AS) $< -o $@
 
-printf/swnprintf.cpp.s: $(PRINTF_SWNPRINTF_CXX_SRC) $(PRINTF_SWNPRINTF_CXX_INC)
+printf/snprintfs.cpp.s: $(PRINTF_SNPRINTFS_CXX_SRC) $(PRINTF_SNPRINTFS_CXX_INC)
 	@echo	"	CXX	libalx/tmp/base/stdio/$@"
 	$(Q)$(CXX) $(CXXFLAGS) -S $< -o $@
-printf/swnprintf.cpp.o: printf/swnprintf.cpp.s
+printf/snprintfs.cpp.o: printf/snprintfs.cpp.s
+	@echo	"	AS	libalx/tmp/base/stdio/$@"
+	$(Q)$(AS) $< -o $@
+
+seekc.s: $(SEEKC_SRC) $(SEEKC_INC)
+	@echo	"	CC	libalx/tmp/base/stdio/$@"
+	$(Q)$(CC) $(CFLAGS) -S $< -o $@
+seekc.o: seekc.s
 	@echo	"	AS	libalx/tmp/base/stdio/$@"
 	$(Q)$(AS) $< -o $@
 
@@ -119,13 +127,6 @@ sscan.s: $(SSCAN_SRC) $(SSCAN_INC)
 	@echo	"	CC	libalx/tmp/base/stdio/$@"
 	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 sscan.o: sscan.s
-	@echo	"	AS	libalx/tmp/base/stdio/$@"
-	$(Q)$(AS) $< -o $@
-
-wait.s: $(WAIT_SRC) $(WAIT_INC)
-	@echo	"	CC	libalx/tmp/base/stdio/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-wait.o: wait.s
 	@echo	"	AS	libalx/tmp/base/stdio/$@"
 	$(Q)$(AS) $< -o $@
 

@@ -48,6 +48,90 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
+extern
+long double	alx_ldbl_array_sum_ldbl	(ptrdiff_t nmemb,
+					 const long double arr[restrict nmemb]);
+extern
+long double	alx_ldbl_array_sum_uint	(ptrdiff_t nmemb,
+					 const unsigned arr[restrict nmemb]);
+extern
+long double	alx_ldbl_array_sum_int	(ptrdiff_t nmemb,
+					 const int arr[restrict nmemb]);
+extern
+long double	alx_ldbl_array_sum_u8	(ptrdiff_t nmemb,
+					 const uint8_t arr[restrict nmemb]);
+extern
+long double	alx_ldbl_array_sum_s8	(ptrdiff_t nmemb,
+					 const int8_t arr[restrict nmemb]);
+extern
+long double	alx_ldbl_array_sum_u16	(ptrdiff_t nmemb,
+					 const uint16_t arr[restrict nmemb]);
+extern
+long double	alx_ldbl_array_sum_s16	(ptrdiff_t nmemb,
+					 const int16_t arr[restrict nmemb]);
+extern
+long double	alx_ldbl_array_sum_u32	(ptrdiff_t nmemb,
+					 const uint32_t arr[restrict nmemb]);
+extern
+long double	alx_ldbl_array_sum_s32	(ptrdiff_t nmemb,
+					 const int32_t arr[restrict nmemb]);
+extern
+long double	alx_ldbl_array_sum_u64	(ptrdiff_t nmemb,
+					 const uint64_t arr[restrict nmemb]);
+extern
+long double	alx_ldbl_array_sum_s64	(ptrdiff_t nmemb,
+					 const int64_t arr[restrict nmemb]);
+
+extern
+double	alx_dbl_array_sum		(ptrdiff_t nmemb,
+					 const double arr[restrict nmemb]);
+extern
+double	alx_dbl_array_sum_uint		(ptrdiff_t nmemb,
+					 const unsigned arr[restrict nmemb]);
+extern
+double	alx_dbl_array_sum_int		(ptrdiff_t nmemb,
+					 const int arr[restrict nmemb]);
+extern
+double	alx_dbl_array_sum_u8		(ptrdiff_t nmemb,
+					 const uint8_t arr[restrict nmemb]);
+extern
+double	alx_dbl_array_sum_s8		(ptrdiff_t nmemb,
+					 const int8_t arr[restrict nmemb]);
+extern
+double	alx_dbl_array_sum_u16		(ptrdiff_t nmemb,
+					 const uint16_t arr[restrict nmemb]);
+extern
+double	alx_dbl_array_sum_s16		(ptrdiff_t nmemb,
+					 const int16_t arr[restrict nmemb]);
+extern
+double	alx_dbl_array_sum_u32		(ptrdiff_t nmemb,
+					 const uint32_t arr[restrict nmemb]);
+extern
+double	alx_dbl_array_sum_s32		(ptrdiff_t nmemb,
+					 const int32_t arr[restrict nmemb]);
+
+extern
+float	alx_flt_array_sum_flt		(ptrdiff_t nmemb,
+					 const float arr[restrict nmemb]);
+extern
+float	alx_flt_array_sum_uint		(ptrdiff_t nmemb,
+					 const unsigned arr[restrict nmemb]);
+extern
+float	alx_flt_array_sum_int		(ptrdiff_t nmemb,
+					 const int arr[restrict nmemb]);
+extern
+float	alx_flt_array_sum_u8		(ptrdiff_t nmemb,
+					 const uint8_t arr[restrict nmemb]);
+extern
+float	alx_flt_array_sum_s8		(ptrdiff_t nmemb,
+					 const int8_t arr[restrict nmemb]);
+extern
+float	alx_flt_array_sum_u16		(ptrdiff_t nmemb,
+					 const uint16_t arr[restrict nmemb]);
+extern
+float	alx_flt_array_sum_s16		(ptrdiff_t nmemb,
+					 const int16_t arr[restrict nmemb]);
+
 unsigned	alx_array_sum_uint	(ptrdiff_t nmemb,
 					const unsigned arr[restrict nmemb])
 {
@@ -57,12 +141,11 @@ unsigned	alx_array_sum_uint	(ptrdiff_t nmemb,
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		sum += arr[i];
 		if (sum < arr[i])
-			goto err_wrap;
+			goto ovf;
 	}
 
 	return	sum;
-
-err_wrap:
+ovf:
 	errno	= ERANGE;
 	return	UINT_MAX;
 }
@@ -87,15 +170,15 @@ int		alx_array_sum_int	(ptrdiff_t nmemb,
 		else
 			tmp += arr[j--];
 		if (nextafter(tmp, tmp + 1) > INT_MAX)
-			goto err_ovf_hi;
+			goto ovf;
 		if (nextafter(tmp, tmp - 1) < INT_MIN)
-			goto err_ovf_lo;
+			goto ovf;
 	}
 	tmp += arr[i];
 	if (nextafter(tmp, tmp + 1) > INT_MAX)
-		goto err_ovf_hi;
+		goto ovf;
 	if (nextafter(tmp, tmp - 1) < INT_MIN)
-		goto err_ovf_lo;
+		goto ovf;
 
 	sum	= 0;
 	i	= 0;
@@ -109,11 +192,7 @@ int		alx_array_sum_int	(ptrdiff_t nmemb,
 	sum += arr[i];
 
 	return	sum;
-
-err_ovf_hi:
-	errno	= ERANGE;
-	return	INT_MAX;
-err_ovf_lo:
+ovf:
 	errno	= ERANGE;
 	return	INT_MIN;
 }
@@ -127,12 +206,11 @@ uint8_t		alx_array_sum_u8	(ptrdiff_t nmemb,
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		sum += arr[i];
 		if (sum > UINT8_MAX)
-			goto err_wrap;
+			goto ovf;
 	}
 
 	return	sum;
-
-err_wrap:
+ovf:
 	errno	= ERANGE;
 	return	UINT8_MAX;
 }
@@ -157,15 +235,15 @@ int8_t		alx_array_sum_s8	(ptrdiff_t nmemb,
 		else
 			tmp += arr[j--];
 		if (nextafter(tmp, tmp + 1) > INT8_MAX)
-			goto err_ovf_hi;
+			goto ovf;
 		if (nextafter(tmp, tmp - 1) < INT8_MIN)
-			goto err_ovf_lo;
+			goto ovf;
 	}
 	tmp += arr[i];
 	if (nextafter(tmp, tmp + 1) > INT8_MAX)
-		goto err_ovf_hi;
+		goto ovf;
 	if (nextafter(tmp, tmp - 1) < INT8_MIN)
-		goto err_ovf_lo;
+		goto ovf;
 
 	sum	= 0;
 	i	= 0;
@@ -179,11 +257,7 @@ int8_t		alx_array_sum_s8	(ptrdiff_t nmemb,
 	sum += arr[i];
 
 	return	sum;
-
-err_ovf_hi:
-	errno	= ERANGE;
-	return	INT8_MAX;
-err_ovf_lo:
+ovf:
 	errno	= ERANGE;
 	return	INT8_MIN;
 }
@@ -197,12 +271,11 @@ uint16_t	alx_array_sum_u16	(ptrdiff_t nmemb,
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		sum += arr[i];
 		if (sum > UINT16_MAX)
-			goto err_wrap;
+			goto ovf;
 	}
 
 	return	sum;
-
-err_wrap:
+ovf:
 	errno	= ERANGE;
 	return	UINT16_MAX;
 }
@@ -227,15 +300,15 @@ int16_t		alx_array_sum_s16	(ptrdiff_t nmemb,
 		else
 			tmp += arr[j--];
 		if (nextafter(tmp, tmp + 1) > INT16_MAX)
-			goto err_ovf_hi;
+			goto ovf;
 		if (nextafter(tmp, tmp - 1) < INT16_MIN)
-			goto err_ovf_lo;
+			goto ovf;
 	}
 	tmp += arr[i];
 	if (nextafter(tmp, tmp + 1) > INT16_MAX)
-		goto err_ovf_hi;
+		goto ovf;
 	if (nextafter(tmp, tmp - 1) < INT16_MIN)
-		goto err_ovf_lo;
+		goto ovf;
 
 	sum	= 0;
 	i	= 0;
@@ -249,11 +322,7 @@ int16_t		alx_array_sum_s16	(ptrdiff_t nmemb,
 	sum += arr[i];
 
 	return	sum;
-
-err_ovf_hi:
-	errno	= ERANGE;
-	return	INT16_MAX;
-err_ovf_lo:
+ovf:
 	errno	= ERANGE;
 	return	INT16_MIN;
 }
@@ -267,12 +336,11 @@ uint32_t	alx_array_sum_u32	(ptrdiff_t nmemb,
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		sum += arr[i];
 		if (sum > UINT32_MAX)
-			goto err_wrap;
+			goto ovf;
 	}
 
 	return	0;
-
-err_wrap:
+ovf:
 	errno	= ERANGE;
 	return	UINT32_MAX;
 }
@@ -297,15 +365,15 @@ int32_t		alx_array_sum_s32	(ptrdiff_t nmemb,
 		else
 			tmp += arr[j--];
 		if (nextafter(tmp, tmp + 1) > INT32_MAX)
-			goto err_ovf_hi;
+			goto ovf;
 		if (nextafter(tmp, tmp - 1) < INT32_MIN)
-			goto err_ovf_lo;
+			goto ovf;
 	}
 	tmp += arr[i];
 	if (nextafter(tmp, tmp + 1) > INT32_MAX)
-		goto err_ovf_hi;
+		goto ovf;
 	if (nextafter(tmp, tmp - 1) < INT32_MIN)
-		goto err_ovf_lo;
+		goto ovf;
 
 	sum	= 0;
 	i	= 0;
@@ -319,11 +387,7 @@ int32_t		alx_array_sum_s32	(ptrdiff_t nmemb,
 	sum += arr[i];
 
 	return	sum;
-
-err_ovf_hi:
-	errno	= ERANGE;
-	return	INT32_MAX;
-err_ovf_lo:
+ovf:
 	errno	= ERANGE;
 	return	INT32_MIN;
 }
@@ -337,12 +401,11 @@ uint64_t	alx_array_sum_u64	(ptrdiff_t nmemb,
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
 		sum += arr[i];
 		if (sum < arr[i])
-			goto err_wrap;
+			goto ovf;
 	}
 
 	return	sum;
-
-err_wrap:
+ovf:
 	errno	= ERANGE;
 	return	UINT32_MAX;
 }
@@ -367,15 +430,15 @@ int64_t		alx_array_sum_s64	(ptrdiff_t nmemb,
 		else
 			tmp += arr[j--];
 		if (nextafter(tmp, tmp + 1) > INT64_MAX)
-			goto err_ovf_hi;
+			goto ovf;
 		if (nextafter(tmp, tmp - 1) < INT64_MIN)
-			goto err_ovf_lo;
+			goto ovf;
 	}
 	tmp += arr[i];
 	if (nextafter(tmp, tmp + 1) > INT64_MAX)
-		goto err_ovf_hi;
+		goto ovf;
 	if (nextafter(tmp, tmp - 1) < INT64_MIN)
-		goto err_ovf_lo;
+		goto ovf;
 
 	sum	= 0;
 	i	= 0;
@@ -389,11 +452,7 @@ int64_t		alx_array_sum_s64	(ptrdiff_t nmemb,
 	sum += arr[i];
 
 	return	sum;
-
-err_ovf_hi:
-	errno	= ERANGE;
-	return	INT64_MAX;
-err_ovf_lo:
+ovf:
 	errno	= ERANGE;
 	return	INT64_MIN;
 }

@@ -16,6 +16,7 @@
 #include <stdio.h>
 
 #include "libalx/base/stdio/common.h"
+#include "libalx/base/stdio/printf/sbprintf.h"
 #include "libalx/base/string/strchr.h"
 
 
@@ -59,12 +60,11 @@ int	alx_sscan_ldbl	(long double *restrict dest,
 
 	return	0;
 
+err_range:
+	errno	= ERANGE;
 err_sscanf:
 	*dest	= def;
-	return	ERR_SSCANF;
-err_range:
-	*dest	= def;
-	return	ERR_RANGE;
+	return	1;
 }
 
 int	alx_sscan_dbl	(double *restrict dest,
@@ -79,12 +79,11 @@ int	alx_sscan_dbl	(double *restrict dest,
 
 	return	0;
 
+err_range:
+	errno	= ERANGE;
 err_sscanf:
 	*dest	= def;
-	return	ERR_SSCANF;
-err_range:
-	*dest	= def;
-	return	ERR_RANGE;
+	return	1;
 }
 
 int	alx_sscan_flt	(float *restrict dest,
@@ -99,12 +98,11 @@ int	alx_sscan_flt	(float *restrict dest,
 
 	return	0;
 
+err_range:
+	errno	= ERANGE;
 err_sscanf:
 	*dest	= def;
-	return	ERR_SSCANF;
-err_range:
-	*dest	= def;
-	return	ERR_RANGE;
+	return	1;
 }
 
 int	alx_sscan_uint	(unsigned *restrict dest,
@@ -119,12 +117,11 @@ int	alx_sscan_uint	(unsigned *restrict dest,
 
 	return	0;
 
+err_range:
+	errno	= ERANGE;
 err_sscanf:
 	*dest	= def;
-	return	ERR_SSCANF;
-err_range:
-	*dest	= def;
-	return	ERR_RANGE;
+	return	1;
 }
 
 int	alx_sscan_int	(int *restrict dest,
@@ -139,12 +136,11 @@ int	alx_sscan_int	(int *restrict dest,
 
 	return	0;
 
+err_range:
+	errno	= ERANGE;
 err_sscanf:
 	*dest	= def;
-	return	ERR_SSCANF;
-err_range:
-	*dest	= def;
-	return	ERR_RANGE;
+	return	1;
 }
 
 int	alx_sscan_u8	(uint8_t *restrict dest,
@@ -159,12 +155,11 @@ int	alx_sscan_u8	(uint8_t *restrict dest,
 
 	return	0;
 
+err_range:
+	errno	= ERANGE;
 err_sscanf:
 	*dest	= def;
-	return	ERR_SSCANF;
-err_range:
-	*dest	= def;
-	return	ERR_RANGE;
+	return	1;
 }
 
 int	alx_sscan_s8	(int8_t *restrict dest,
@@ -179,12 +174,11 @@ int	alx_sscan_s8	(int8_t *restrict dest,
 
 	return	0;
 
+err_range:
+	errno	= ERANGE;
 err_sscanf:
 	*dest	= def;
-	return	ERR_SSCANF;
-err_range:
-	*dest	= def;
-	return	ERR_RANGE;
+	return	1;
 }
 
 int	alx_sscan_u16	(uint16_t *restrict dest,
@@ -199,12 +193,11 @@ int	alx_sscan_u16	(uint16_t *restrict dest,
 
 	return	0;
 
+err_range:
+	errno	= ERANGE;
 err_sscanf:
 	*dest	= def;
-	return	ERR_SSCANF;
-err_range:
-	*dest	= def;
-	return	ERR_RANGE;
+	return	1;
 }
 
 int	alx_sscan_s16	(int16_t *restrict dest,
@@ -219,12 +212,11 @@ int	alx_sscan_s16	(int16_t *restrict dest,
 
 	return	0;
 
+err_range:
+	errno	= ERANGE;
 err_sscanf:
 	*dest	= def;
-	return	ERR_SSCANF;
-err_range:
-	*dest	= def;
-	return	ERR_RANGE;
+	return	1;
 }
 
 int	alx_sscan_u32	(uint32_t *restrict dest,
@@ -239,12 +231,11 @@ int	alx_sscan_u32	(uint32_t *restrict dest,
 
 	return	0;
 
+err_range:
+	errno	= ERANGE;
 err_sscanf:
 	*dest	= def;
-	return	ERR_SSCANF;
-err_range:
-	*dest	= def;
-	return	ERR_RANGE;
+	return	1;
 }
 
 int	alx_sscan_s32	(int32_t *restrict dest,
@@ -259,12 +250,11 @@ int	alx_sscan_s32	(int32_t *restrict dest,
 
 	return	0;
 
+err_range:
+	errno	= ERANGE;
 err_sscanf:
 	*dest	= def;
-	return	ERR_SSCANF;
-err_range:
-	*dest	= def;
-	return	ERR_RANGE;
+	return	1;
 }
 
 int	alx_sscan_u64	(uint64_t *restrict dest,
@@ -279,12 +269,11 @@ int	alx_sscan_u64	(uint64_t *restrict dest,
 
 	return	0;
 
+err_range:
+	errno	= ERANGE;
 err_sscanf:
 	*dest	= def;
-	return	ERR_SSCANF;
-err_range:
-	*dest	= def;
-	return	ERR_RANGE;
+	return	1;
 }
 
 int	alx_sscan_s64	(int64_t *restrict dest,
@@ -299,12 +288,11 @@ int	alx_sscan_s64	(int64_t *restrict dest,
 
 	return	0;
 
+err_range:
+	errno	= ERANGE;
 err_sscanf:
 	*dest	= def;
-	return	ERR_SSCANF;
-err_range:
-	*dest	= def;
-	return	ERR_RANGE;
+	return	1;
 }
 
 int	alx_sscan_pdif	(ptrdiff_t *restrict dest,
@@ -319,12 +307,11 @@ int	alx_sscan_pdif	(ptrdiff_t *restrict dest,
 
 	return	0;
 
+err_range:
+	errno	= ERANGE;
 err_sscanf:
 	*dest	= def;
-	return	ERR_SSCANF;
-err_range:
-	*dest	= def;
-	return	ERR_RANGE;
+	return	1;
 }
 
 int	alx_sscan_ch	(char *restrict dest,
@@ -352,12 +339,11 @@ int	alx_sscan_ch	(char *restrict dest,
 
 	return	0;
 
+err_nfound:
+	errno	= ERANGE;
 err_sscanf:
 	*dest	= valid[0];
-	return	ERR_SSCANF;
-err_nfound:
-	*dest	= valid[0];
-	return	ERR_RANGE;
+	return	1;
 }
 
 int	alx_sscan_fname	(const char *restrict path,
@@ -370,28 +356,33 @@ int	alx_sscan_fname	(const char *restrict path,
 	FILE	*fp;
 
 	if (sscanf(str, " %s", buff) != 1)
-		return	ERR_SSCANF;
-	if (snprintf(fpath, FILENAME_MAX, "%s/%s", path, buff) >= FILENAME_MAX)
-		goto err_nametoolong;
+		return	-1;
+	if (alx_sbprintf(fpath, NULL, "%s/%s", path, buff))
+		return	-1;
 
 	fp	= fopen(fpath, "r");
 	if (fp) {
 		fclose(fp);
 		if (!exist)
-			return	ERR_FEXIST;
+			goto eexist;
 	} else {
 		if (exist)
-			return	ERR_FOPEN;
+			goto enoent;
 	}
 
 	if (snprintf(fname, FILENAME_MAX, "%s", buff) < 0)
-		return	ERR_SNPRINTF;
+		return	-1;
 
 	return	0;
 
-err_nametoolong:
-	errno	= ENAMETOOLONG;
-	return	-ENAMETOOLONG;
+enoent:
+	if (!errno)
+		errno	= ENOENT;
+	return	-1;
+eexist:
+	if (!errno)
+		errno	= EEXIST;
+	return	-1;
 }
 
 

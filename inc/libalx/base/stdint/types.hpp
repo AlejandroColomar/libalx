@@ -38,11 +38,11 @@ typedef	__int128		int128_t;
  ******* macros ***************************************************************
  ******************************************************************************/
 #if defined(uint128_t)
-#define U128_MAX	(~((uint128_t)0))
-#define S128_MAX	((int128_t)(U128_MAX >> 1))
-#define S128_MIN	((int128_t)(-S128_MAX - 1))
+#define U128_MAX	((uint128_t)(~((uint128_t)0)))
+#define S128_MAX	(( int128_t)(U128_MAX >> 1))
+#define S128_MIN	(( int128_t)(-S128_MAX - 1))
 #define SQRT_U128_MAX	((uint128_t)(0xFFFFFFFFFFFFFFFF))
-#define SQRT_S128_MAX	((int128_t)(0xB504F333F9DE6800))
+#define SQRT_S128_MAX	(( int128_t)(0xB504F333F9DE6800))
 #endif
 
 

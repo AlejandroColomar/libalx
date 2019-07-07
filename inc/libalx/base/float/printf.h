@@ -21,61 +21,61 @@
  ******* macros ***************************************************************
  ******************************************************************************/
 #if	(FLT_EVAL_METHOD == 0)
-#define PRIaFLT		"a"
-#define PRIAFLT		"A"
-#define PRIeFLT		"e"
-#define PRIEFLT		"E"
-#define PRIfFLT		"f"
-#define PRIFFLT		"F"
-#define PRIgFLT		"g"
-#define PRIGFLT		"G"
+#define PRIaFLTT	"a"
+#define PRIAFLTT	"A"
+#define PRIeFLTT	"e"
+#define PRIEFLTT	"E"
+#define PRIfFLTT	"f"
+#define PRIFFLTT	"F"
+#define PRIgFLTT	"g"
+#define PRIGFLTT	"G"
 
-#define PRIaDBL		"la"
-#define PRIADBL		"lA"
-#define PRIeDBL		"le"
-#define PRIEDBL		"lE"
-#define PRIfDBL		"lf"
-#define PRIFDBL		"lF"
-#define PRIgDBL		"lg"
-#define PRIGDBL		"lG"
+#define PRIaDBLT	"la"
+#define PRIADBLT	"lA"
+#define PRIeDBLT	"le"
+#define PRIEDBLT	"lE"
+#define PRIfDBLT	"lf"
+#define PRIFDBLT	"lF"
+#define PRIgDBLT	"lg"
+#define PRIGDBLT	"lG"
 
 #elif	(FLT_EVAL_METHOD == 1)
-#define PRIaFLT		"la"
-#define PRIAFLT		"lA"
-#define PRIeFLT		"le"
-#define PRIEFLT		"lE"
-#define PRIfFLT		"lf"
-#define PRIFFLT		"lF"
-#define PRIgFLT		"lg"
-#define PRIGFLT		"lG"
+#define PRIaFLTT	"la"
+#define PRIAFLTT	"lA"
+#define PRIeFLTT	"le"
+#define PRIEFLTT	"lE"
+#define PRIfFLTT	"lf"
+#define PRIFFLTT	"lF"
+#define PRIgFLTT	"lg"
+#define PRIGFLTT	"lG"
 
-#define PRIaDBL		"la"
-#define PRIADBL		"lA"
-#define PRIeDBL		"le"
-#define PRIEDBL		"lE"
-#define PRIfDBL		"lf"
-#define PRIFDBL		"lF"
-#define PRIgDBL		"lg"
-#define PRIGDBL		"lG"
+#define PRIaDBLT	"la"
+#define PRIADBLT	"lA"
+#define PRIeDBLT	"le"
+#define PRIEDBLT	"lE"
+#define PRIfDBLT	"lf"
+#define PRIFDBLT	"lF"
+#define PRIgDBLT	"lg"
+#define PRIGDBLT	"lG"
 
 #elif	(FLT_EVAL_METHOD == 2)
-#define PRIaFLT		"La"
-#define PRIAFLT		"LA"
-#define PRIeFLT		"Le"
-#define PRIEFLT		"LE"
-#define PRIfFLT		"Lf"
-#define PRIFFLT		"LF"
-#define PRIgFLT		"Lg"
-#define PRIGFLT		"LG"
+#define PRIaFLTT	"La"
+#define PRIAFLTT	"LA"
+#define PRIeFLTT	"Le"
+#define PRIEFLTT	"LE"
+#define PRIfFLTT	"Lf"
+#define PRIFFLTT	"LF"
+#define PRIgFLTT	"Lg"
+#define PRIGFLTT	"LG"
 
-#define PRIaDBL		"La"
-#define PRIADBL		"LA"
-#define PRIeDBL		"Le"
-#define PRIEDBL		"LE"
-#define PRIfDBL		"Lf"
-#define PRIFDBL		"LF"
-#define PRIgDBL		"Lg"
-#define PRIGDBL		"LG"
+#define PRIaDBLT	"La"
+#define PRIADBLT	"LA"
+#define PRIeDBLT	"Le"
+#define PRIEDBLT	"LE"
+#define PRIfDBLT	"Lf"
+#define PRIFDBLT	"LF"
+#define PRIgDBLT	"Lg"
+#define PRIGDBLT	"LG"
 #endif
 
 
@@ -95,17 +95,12 @@
 
 
 /******************************************************************************
- ******* extern functions *****************************************************
+ ******* function prototypes **************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* static inline functions (prototypes) *********************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* static inline functions (definitions) ********************************
+ ******* inline functions *****************************************************
  ******************************************************************************/
 
 

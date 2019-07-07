@@ -42,13 +42,13 @@
  ******************************************************************************/
 inline
 int	alx_seekc(char c)
-__attribute__((always_inline));
+	__attribute__((always_inline));
 inline
 int	alx_fseekc(FILE *stream, char c)
-__attribute__((nonnull));
+	__attribute__((nonnull));
 inline
 int	alx_wait4enter(void)
-__attribute__((always_inline));
+	__attribute__((always_inline));
 
 
 /******************************************************************************
@@ -57,7 +57,7 @@ __attribute__((always_inline));
 inline
 int	alx_seekc(char c)
 {
-	return	fseekc(stdin, c);
+	return	alx_fseekc(stdin, c);
 }
 
 inline

@@ -39,23 +39,20 @@
 
 
 /******************************************************************************
- ******* extern functions *****************************************************
+ ******* function prototypes **************************************************
  ******************************************************************************/
-int	alx_snprintfs(char str[restrict], ptrdiff_t *restrict written,
-		      ptrdiff_t nmemb, const char *restrict format, ...)
-__attribute__((format(printf, 4, 5)));
-int	alx_vsnprintfs(char str[restrict], ptrdiff_t *restrict written,
-		       ptrdiff_t nmemb, const char *restrict format, va_list ap)
-__attribute__((format(printf, 4, 0)));
+int	alx_snprintfs	(char str[restrict],
+			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
+			 const char *restrict format, ...)
+	__attribute__((nonnull(1, 4), format(printf, 4, 5)));
+int	alx_vsnprintfs	(char str[restrict],
+			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
+			 const char *restrict format, va_list ap)
+	__attribute__((nonnull(1, 4), format(printf, 4, 0)));
 
 
 /******************************************************************************
- ******* static inline functions (prototypes) *********************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* static inline functions (definitions) ********************************
+ ******* inline functions *****************************************************
  ******************************************************************************/
 
 
