@@ -15,6 +15,7 @@
  ******* headers **************************************************************
  ******************************************************************************/
 #include "libalx/base/assert/assert.h"
+#include "libalx/base/compiler/size.h"
 #include "libalx/base/stdio/printf/snprintfs.h"
 
 
