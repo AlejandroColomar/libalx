@@ -38,32 +38,53 @@
 
 
 /******************************************************************************
- ******* extern functions *****************************************************
+ ******* function prototypes **************************************************
  ******************************************************************************/
+inline
+int	alx_compare_ldbl(const void *a_ptr, const void *b_ptr)
+__attribute__((nonnull));
+inline	
+int	alx_compare	(const void *a_ptr, const void *b_ptr)
+__attribute__((nonnull));
+inline
+int	alx_compare_f	(const void *a_ptr, const void *b_ptr)
+__attribute__((nonnull));
+inline
+int	alx_compare_uint(const void *a_ptr, const void *b_ptr)
+__attribute__((nonnull));
+inline
+int	alx_compare_int	(const void *a_ptr, const void *b_ptr)
+__attribute__((nonnull));
+inline
+int	alx_compare_u8	(const void *a_ptr, const void *b_ptr)
+__attribute__((nonnull));
+inline
+int	alx_compare_s8	(const void *a_ptr, const void *b_ptr)
+__attribute__((nonnull));
+inline
+int	alx_compare_u16	(const void *a_ptr, const void *b_ptr)
+__attribute__((nonnull));
+inline
+int	alx_compare_s16	(const void *a_ptr, const void *b_ptr)
+__attribute__((nonnull));
+inline
+int	alx_compare_u32	(const void *a_ptr, const void *b_ptr)
+__attribute__((nonnull));
+inline
+int	alx_compare_s32	(const void *a_ptr, const void *b_ptr)
+__attribute__((nonnull));
+inline
+int	alx_compare_u64	(const void *a_ptr, const void *b_ptr)
+__attribute__((nonnull));
+inline
+int	alx_compare_s64	(const void *a_ptr, const void *b_ptr)
+__attribute__((nonnull));
 
 
 /******************************************************************************
- ******* static inline functions (prototypes) *********************************
+ ******* inline functions *****************************************************
  ******************************************************************************/
-static inline	int	alx_compare_ldbl(const void *a_ptr, const void *b_ptr);
-static inline	int	alx_compare	(const void *a_ptr, const void *b_ptr);
-static inline	int	alx_compare_f	(const void *a_ptr, const void *b_ptr);
-static inline	int	alx_compare_uint(const void *a_ptr, const void *b_ptr);
-static inline	int	alx_compare_int	(const void *a_ptr, const void *b_ptr);
-static inline	int	alx_compare_u8	(const void *a_ptr, const void *b_ptr);
-static inline	int	alx_compare_s8	(const void *a_ptr, const void *b_ptr);
-static inline	int	alx_compare_u16	(const void *a_ptr, const void *b_ptr);
-static inline	int	alx_compare_s16	(const void *a_ptr, const void *b_ptr);
-static inline	int	alx_compare_u32	(const void *a_ptr, const void *b_ptr);
-static inline	int	alx_compare_s32	(const void *a_ptr, const void *b_ptr);
-static inline	int	alx_compare_u64	(const void *a_ptr, const void *b_ptr);
-static inline	int	alx_compare_s64	(const void *a_ptr, const void *b_ptr);
-
-
-/******************************************************************************
- ******* static inline functions (definitions) ********************************
- ******************************************************************************/
-static inline
+inline
 int	alx_compare_ldbl(const void *a_ptr, const void *b_ptr)
 {
 	long double	a =	*(long double *)a_ptr;
@@ -77,7 +98,7 @@ int	alx_compare_ldbl(const void *a_ptr, const void *b_ptr)
 		return	0;
 }
 
-static inline
+inline
 int	alx_compare	(const void *a_ptr, const void *b_ptr)
 {
 	double	a =	*(double *)a_ptr;
@@ -91,7 +112,7 @@ int	alx_compare	(const void *a_ptr, const void *b_ptr)
 		return	0;
 }
 
-static inline
+inline
 int	alx_compare_f	(const void *a_ptr, const void *b_ptr)
 {
 	float	a =	*(float *)a_ptr;
@@ -105,7 +126,7 @@ int	alx_compare_f	(const void *a_ptr, const void *b_ptr)
 		return	0;
 }
 
-static inline
+inline
 int	alx_compare_uint(const void *a_ptr, const void *b_ptr)
 {
 	unsigned	a =	*(unsigned *)a_ptr;
@@ -119,7 +140,7 @@ int	alx_compare_uint(const void *a_ptr, const void *b_ptr)
 		return	0;
 }
 
-static inline
+inline
 int	alx_compare_int	(const void *a_ptr, const void *b_ptr)
 {
 	int	a =	*(int *)a_ptr;
@@ -133,7 +154,7 @@ int	alx_compare_int	(const void *a_ptr, const void *b_ptr)
 		return	0;
 }
 
-static inline
+inline
 int	alx_compare_u8	(const void *a_ptr, const void *b_ptr)
 {
 	uint8_t	a =	*(uint8_t *)a_ptr;
@@ -147,7 +168,7 @@ int	alx_compare_u8	(const void *a_ptr, const void *b_ptr)
 		return	0;
 }
 
-static inline
+inline
 int	alx_compare_s8	(const void *a_ptr, const void *b_ptr)
 {
 	int8_t	a =	*(int8_t *)a_ptr;
@@ -161,7 +182,7 @@ int	alx_compare_s8	(const void *a_ptr, const void *b_ptr)
 		return	0;
 }
 
-static inline
+inline
 int	alx_compare_u16	(const void *a_ptr, const void *b_ptr)
 {
 	uint16_t	a =	*(uint16_t *)a_ptr;
@@ -175,7 +196,7 @@ int	alx_compare_u16	(const void *a_ptr, const void *b_ptr)
 		return	0;
 }
 
-static inline
+inline
 int	alx_compare_s16	(const void *a_ptr, const void *b_ptr)
 {
 	int16_t	a =	*(int16_t *)a_ptr;
@@ -189,7 +210,7 @@ int	alx_compare_s16	(const void *a_ptr, const void *b_ptr)
 		return	0;
 }
 
-static inline
+inline
 int	alx_compare_u32	(const void *a_ptr, const void *b_ptr)
 {
 	uint32_t	a =	*(uint32_t *)a_ptr;
@@ -203,7 +224,7 @@ int	alx_compare_u32	(const void *a_ptr, const void *b_ptr)
 		return	0;
 }
 
-static inline
+inline
 int	alx_compare_s32	(const void *a_ptr, const void *b_ptr)
 {
 	int32_t	a =	*(int32_t *)a_ptr;
@@ -217,7 +238,7 @@ int	alx_compare_s32	(const void *a_ptr, const void *b_ptr)
 		return	0;
 }
 
-static inline
+inline
 int	alx_compare_u64	(const void *a_ptr, const void *b_ptr)
 {
 	uint64_t	a =	*(uint64_t *)a_ptr;
@@ -231,7 +252,7 @@ int	alx_compare_u64	(const void *a_ptr, const void *b_ptr)
 		return	0;
 }
 
-static inline
+inline
 int	alx_compare_s64	(const void *a_ptr, const void *b_ptr)
 {
 	int64_t	a =	*(int64_t *)a_ptr;
