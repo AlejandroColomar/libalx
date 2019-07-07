@@ -26,13 +26,8 @@
  *			 const char *restrict fmt, ...)
  *	__attribute__((nonnull(1, 3), format(printf, 3, 4)));
  */
-#define alx_sbprintf(buff, written, fmt, ...)	(			\
-{									\
-									\
-	alx_static_assert_char_array(buff);				\
-	alx_snprintfs(buff, written, sizeof(buff), fmt, ##__VA_ARGS__);	\
-}									\
-)
+#define alx_sbprintf(buff, written, fmt, ...)				\
+	alx_snprintfs(buff, written, ARRAY_SIZE(buff), fmt, ##__VA_ARGS__)
 
 
 /******************************************************************************

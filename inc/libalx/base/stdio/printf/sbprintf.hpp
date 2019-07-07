@@ -25,13 +25,8 @@
  * int	alx_sbprintf(char buff[restrict], ptrdiff_t *restrict written,
  *		     const char *restrict fmt, ...);
  */
-#define alx_sbprintf(buff, written, fmt, ...)	(			\
-{									\
-									\
-	alx_static_assert_char_array(buff);				\
-	alx::snprintfs(buff, written, sizeof(buff), fmt, ##__VA_ARGS__);\
-}									\
-)
+#define sbprintf(buff, written, fmt, ...)				\
+	snprintfs(buff, written, ARRAY_SIZE(buff), fmt, ##__VA_ARGS__);
 
 
 /******************************************************************************
