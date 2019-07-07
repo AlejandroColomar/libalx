@@ -40,7 +40,7 @@ PRINTF_B_SRC	=							\
 
 PRINTF_SBPRINTF_INC	=						\
 		$(INC_DIR)/libalx/base/stdio/printf/sbprintf.h		\
-		$(INC_DIR)/libalx/base/assert/assert.h			\
+		$(INC_DIR)/libalx/base/compiler/size.h			\
 		$(INC_DIR)/libalx/base/stdio/printf/snprintfs.h
 PRINTF_SBPRINTF_SRC	=						\
 		$(SRC_DIR)/base/stdio/printf/sbprintf.c
