@@ -44,8 +44,7 @@
 int	alx_snprintfs	(char str[restrict],
 			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
 			 const char *restrict format, ...)
-	__attribute__((nonnull(1, 4), format(printf, 4, 5),
-		       warn_unused_result));
+	__attribute__((warn_unused_result));
 int	alx_vsnprintfs	(char str[restrict],
 			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
 			 const char *restrict format, va_list ap)
