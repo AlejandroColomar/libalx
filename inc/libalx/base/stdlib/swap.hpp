@@ -21,9 +21,9 @@
  ******************************************************************************/
 #define ALX_SWAP(a_ptr, b_ptr)	do					\
 {									\
-	auto			a_ptr_ = (a_ptr);			\
-	auto			b_ptr_ = (b_ptr);			\
-	__typeof__(*a_ptr_)	tmp_;					\
+	auto		a_ptr_ = (a_ptr);				\
+	auto		b_ptr_ = (b_ptr);				\
+	typeof(*a_ptr_)	tmp_;						\
 									\
 	tmp_	= *a_ptr_;						\
 	*a_ptr_	= *b_ptr_;						\

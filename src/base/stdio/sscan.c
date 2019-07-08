@@ -15,7 +15,6 @@
 #include <stdint.h>
 #include <stdio.h>
 
-#include "libalx/base/stdio/common.h"
 #include "libalx/base/stdio/printf/sbprintf.h"
 #include "libalx/base/string/strchr.h"
 

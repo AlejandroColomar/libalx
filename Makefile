@@ -88,7 +88,6 @@ export	SZ
 ################################################################################
 # cflags
 CFLAGS_STD	= -std=gnu17
-#CFLAGS_STD    += -Wpedantic
 
 CFLAGS_MEM	= -mcmodel=large
 
@@ -102,12 +101,10 @@ CFLAGS_W	= -Wall
 CFLAGS_W       += -Wextra
 CFLAGS_W       += -Wstrict-prototypes
 CFLAGS_W       += -Werror
-CFLAGS_W       += -Wno-error=pedantic
-CFLAGS_W       += -Wno-error=unused-function
 
 CFLAGS_D	= -D _GNU_SOURCE
 
-CFLAGS_D	= -I $(INC_DIR)
+CFLAGS_I	= -I $(INC_DIR)
 
 CFLAGS		= $(CFLAGS_STD)
 CFLAGS         += $(CFLAGS_MEM)
@@ -122,7 +119,6 @@ export	CFLAGS
 ################################################################################
 # c++flags
 CXXFLAGS_STD	= -std=gnu++17
-#CXXFLAGS_STD  += -Wpedantic
 
 CXXFLAGS_MEM	= -mcmodel=large
 
