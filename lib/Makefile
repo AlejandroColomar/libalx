@@ -6,7 +6,6 @@
 
 BASE_OBJ	=							\
 		$(TMP_DIR)/base/assert/assert.o				\
-		$(TMP_DIR)/base/compiler/restrict.o			\
 		$(TMP_DIR)/base/compiler/size.o				\
 		$(TMP_DIR)/base/compiler/type.o				\
 		$(TMP_DIR)/base/errno/perror.o				\
@@ -30,7 +29,6 @@ BASE_OBJ	=							\
 		$(TMP_DIR)/base/stdio/printf/b.o			\
 		$(TMP_DIR)/base/stdio/printf/sbprintf.o			\
 		$(TMP_DIR)/base/stdio/printf/snprintfs.o		\
-		$(TMP_DIR)/base/stdio/printf/snprintfs.cpp.o		\
 		$(TMP_DIR)/base/stdio/seekc.o				\
 		$(TMP_DIR)/base/stdio/sscan.o				\
 		$(TMP_DIR)/base/stdlib/alloc/mallocs.o			\
@@ -45,7 +43,6 @@ BASE_OBJ	=							\
 		$(TMP_DIR)/base/stdlib/search.o				\
 		$(TMP_DIR)/base/stdlib/seed_mix.o			\
 		$(TMP_DIR)/base/stdlib/swap.o				\
-		$(TMP_DIR)/base/string/memcpy.o				\
 		$(TMP_DIR)/base/string/strchr.o				\
 		$(TMP_DIR)/base/string/strgrep.o			\
 		$(TMP_DIR)/base/string/strstr.o

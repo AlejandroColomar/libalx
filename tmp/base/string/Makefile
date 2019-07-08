@@ -13,23 +13,10 @@
 # dependencies
 
 OBJ		=							\
-		memcpy.o						\
-		memcpy-test.o						\
 		strchr.o						\
 		strgrep.o						\
 		strgrep-test.o						\
 		strstr.o
-
-MEMCPY_INC	=							\
-		$(INC_DIR)/libalx/base/string/memcpy.h
-MEMCPY_SRC	=							\
-		$(SRC_DIR)/base/string/memcpy.c
-TST_MEMCPY_INC	=							\
-		$(INC_DIR)/libalx/base/string/memcpy.h			\
-		$(INC_DIR)/libalx/../../test/test.h
-TST_MEMCPY_SRC	=							\
-		$(SRC_DIR)/base/string/memcpy-test.c			\
-		$(SRC_DIR)/base/string/memcpy.c
 
 STRCHR_INC	=							\
 		$(INC_DIR)/libalx/base/string/strchr.h
@@ -62,19 +49,6 @@ STRSTR_SRC	=							\
 PHONY := all
 all: $(OBJ)
 
-
-memcpy.s: $(MEMCPY_SRC) $(MEMCPY_INC)
-	@echo	"	CC	libalx/tmp/base/string/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-memcpy.o: memcpy.s
-	@echo	"	AS	libalx/tmp/base/string/$@"
-	$(Q)$(AS) $< -o $@
-memcpy-test.s: $(TST_MEMCPY_SRC) $(TST_MEMCPY_INC)
-	@echo	"	CC	libalx/tmp/base/string/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-memcpy-test.o: memcpy-test.s
-	@echo	"	AS	libalx/tmp/base/string/$@"
-	$(Q)$(AS) $< -o $@
 
 strchr.s: $(STRCHR_SRC) $(STRCHR_INC)
 	@echo	"	CC	libalx/tmp/base/string/$@"
