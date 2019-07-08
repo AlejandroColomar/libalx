@@ -75,7 +75,7 @@ long double	alx_gsl_dist_uniform_E_ldbl	(long double a, long double b)
 		return	nanl("");
 	}
 
-	return	AVGfast(a, b);
+	return	ALX_AVG(a, b);
 }
 
 static inline
@@ -87,7 +87,7 @@ double		alx_gsl_dist_uniform_E		(double a, double b)
 		return	nan("");
 	}
 
-	return	AVGfast(a, b);
+	return	ALX_AVG(a, b);
 }
 
 static inline
@@ -99,7 +99,7 @@ float		alx_gsl_dist_uniform_E_flt	(float a, float b)
 		return	nanf("");
 	}
 
-	return	AVGfast(a, b);
+	return	ALX_AVG(a, b);
 }
 
 

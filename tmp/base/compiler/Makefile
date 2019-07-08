@@ -13,14 +13,8 @@
 # dependencies
 
 OBJ		=							\
-		restrict.o						\
 		size.o							\
 		type.o
-
-RESTRICT_INC	=							\
-		$(INC_DIR)/libalx/base/compiler/restrict.hpp
-RESTRICT_SRC	=							\
-		$(SRC_DIR)/base/compiler/restrict.cpp
 
 SIZE_INC	=							\
 		$(INC_DIR)/libalx/base/compiler/size.h
@@ -39,13 +33,6 @@ TYPE_SRC	=							\
 PHONY := all
 all: $(OBJ)
 
-
-restrict.s: $(RESTRICT_SRC) $(RESTRICT_INC)
-	@echo	"	CXX	libalx/tmp/base/compiler/$@"
-	$(Q)$(CXX) $(CXXFLAGS) -S $< -o $@
-restrict.o: restrict.s
-	@echo	"	AS	libalx/tmp/base/compiler/$@"
-	$(Q)$(AS) $< -o $@
 
 size.s: $(SIZE_SRC) $(SIZE_INC)
 	@echo	"	CC	libalx/tmp/base/compiler/$@"

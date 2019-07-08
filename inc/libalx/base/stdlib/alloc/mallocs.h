@@ -33,7 +33,7 @@
 									\
 	*ptr_	= alx_mallocs__(nmemb, sizeof(**ptr_));			\
 									\
-	*ptr_ ? 0 : 1;							\
+	!(*ptr_);							\
 }									\
 )
 

@@ -20,7 +20,6 @@ OBJ		=							\
 		printf/b.o						\
 		printf/sbprintf.o					\
 		printf/snprintfs.o					\
-		printf/snprintfs.cpp.o					\
 		seekc.o							\
 		sscan.o
 
@@ -28,7 +27,6 @@ GET_INC		=							\
 		$(INC_DIR)/libalx/base/stdio/get.h			\
 		$(INC_DIR)/libalx/base/compiler/size.h			\
 		$(INC_DIR)/libalx/base/errno/perror.h			\
-		$(INC_DIR)/libalx/base/stdio/common.h			\
 		$(INC_DIR)/libalx/base/stdio/sscan.h
 GET_SRC		=							\
 		$(SRC_DIR)/base/stdio/get.c
@@ -50,12 +48,6 @@ PRINTF_SNPRINTFS_INC	=						\
 PRINTF_SNPRINTFS_SRC	=						\
 		$(SRC_DIR)/base/stdio/printf/snprintfs.c
 
-PRINTF_SNPRINTFS_CXX_INC	=					\
-		$(INC_DIR)/libalx/base/stdio/printf/snprintfs.hpp	\
-		$(INC_DIR)/libalx/base/compiler/restrict.hpp
-PRINTF_SNPRINTFS_CXX_SRC	=					\
-		$(SRC_DIR)/base/stdio/printf/snprintfs.cpp
-
 SEEKC_INC	=							\
 		$(INC_DIR)/libalx/base/stdio/seekc.h
 SEEKC_SRC	=							\
@@ -63,7 +55,6 @@ SEEKC_SRC	=							\
 
 SSCAN_INC	=							\
 		$(INC_DIR)/libalx/base/stdio/sscan.h			\
-		$(INC_DIR)/libalx/base/stdio/common.h			\
 		$(INC_DIR)/libalx/base/string/strchr.h
 SSCAN_SRC	=							\
 		$(SRC_DIR)/base/stdio/sscan.c
@@ -106,13 +97,6 @@ printf/snprintfs.s: $(PRINTF_SNPRINTFS_SRC) $(PRINTF_SNPRINTFS_INC)
 	@echo	"	CC	libalx/tmp/base/stdio/$@"
 	$(Q)$(CC) $(CFLAGS) -S $< -o $@
 printf/snprintfs.o: printf/snprintfs.s
-	@echo	"	AS	libalx/tmp/base/stdio/$@"
-	$(Q)$(AS) $< -o $@
-
-printf/snprintfs.cpp.s: $(PRINTF_SNPRINTFS_CXX_SRC) $(PRINTF_SNPRINTFS_CXX_INC)
-	@echo	"	CXX	libalx/tmp/base/stdio/$@"
-	$(Q)$(CXX) $(CXXFLAGS) -S $< -o $@
-printf/snprintfs.cpp.o: printf/snprintfs.cpp.s
 	@echo	"	AS	libalx/tmp/base/stdio/$@"
 	$(Q)$(AS) $< -o $@
 

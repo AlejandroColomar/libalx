@@ -24,31 +24,25 @@
 
 
 /******************************************************************************
- ******* namespace ************************************************************
- ******************************************************************************/
-namespace alx {
-
-
-/******************************************************************************
- ******* enums ****************************************************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* structs / unions *****************************************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* variables ************************************************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* extern functions *****************************************************
+ ******* extern "C" ***********************************************************
  ******************************************************************************/
 extern	"C"
 {
+void	array_multiplication_ldbl	(ptrdiff_t nmemb,
+					 long double dest[],
+					 const long double src1[],
+					 const long double src2[])
+	__attribute__((nonnull));
+void	array_multiplication		(ptrdiff_t nmemb,
+					 double dest[],
+					 const double src1[],
+					 const double src2[])
+	__attribute__((nonnull));
+void	array_multiplication_flt	(ptrdiff_t nmemb,
+					 float dest[],
+					 const float src1[],
+					 const float src2[])
+	__attribute__((nonnull));
 int	alx_array_multiplication_uint	(ptrdiff_t nmemb,
 					 unsigned dest[],
 					 const unsigned src1[],
@@ -103,63 +97,29 @@ int	alx_array_multiplication_s64	(ptrdiff_t nmemb,
 
 
 /******************************************************************************
- ******* static inline functions (prototypes) *********************************
+ ******* namespace ************************************************************
  ******************************************************************************/
-static inline
-void	array_multiplication_ldbl	(ptrdiff_t nmemb,
-					 long double dest[],
-					 const long double src1[],
-					 const long double src2[])
-	__attribute__((nonnull));
-static inline
-void	array_multiplication		(ptrdiff_t nmemb,
-					 double dest[],
-					 const double src1[],
-					 const double src2[])
-	__attribute__((nonnull));
-static inline
-void	array_multiplication_flt	(ptrdiff_t nmemb,
-					 float dest[],
-					 const float src1[],
-					 const float src2[])
-	__attribute__((nonnull));
+namespace alx {
 
 
 /******************************************************************************
- ******* static inline functions (definitions) ********************************
+ ******* enums ****************************************************************
  ******************************************************************************/
-static inline
-void	array_multiplication_ldbl	(ptrdiff_t nmemb,
-					 long double dest[],
-					 const long double src1[],
-					 const long double src2[])
-{
 
-	for (ptrdiff_t i = 0; i < nmemb; i++)
-		dest[i]	= src1[i] * src2[i];
-}
 
-static inline
-void	array_multiplication		(ptrdiff_t nmemb,
-					 double dest[],
-					 const double src1[],
-					 const double src2[])
-{
+/******************************************************************************
+ ******* structs / unions *****************************************************
+ ******************************************************************************/
 
-	for (ptrdiff_t i = 0; i < nmemb; i++)
-		dest[i]	= src1[i] * src2[i];
-}
 
-static inline
-void	array_multiplication_flt	(ptrdiff_t nmemb,
-					 float dest[],
-					 const float src1[],
-					 const float src2[])
-{
+/******************************************************************************
+ ******* variables ************************************************************
+ ******************************************************************************/
 
-	for (ptrdiff_t i = 0; i < nmemb; i++)
-		dest[i]	= src1[i] * src2[i];
-}
+
+/******************************************************************************
+ ******* extern functions *****************************************************
+ ******************************************************************************/
 
 
 /******************************************************************************

@@ -14,7 +14,6 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <cmath>
 #include <cstddef>
 #include <cstdint>
 
@@ -27,31 +26,94 @@
 
 
 /******************************************************************************
- ******* namespace ************************************************************
- ******************************************************************************/
-namespace alx {
-
-
-/******************************************************************************
- ******* enums ****************************************************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* structs / unions *****************************************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* variables ************************************************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* extern functions *****************************************************
+ ******* extern "C" ***********************************************************
  ******************************************************************************/
 extern	"C"
 {
+long double	alx_ldbl_array_sum_ldbl	(ptrdiff_t nmemb,
+					 const long double *restrict arr)
+		__attribute__((nonnull, pure));
+long double	alx_ldbl_array_sum_uint	(ptrdiff_t nmemb,
+					 const unsigned *restrict arr)
+		__attribute__((nonnull, pure));
+long double	alx_ldbl_array_sum_int	(ptrdiff_t nmemb,
+					 const int *restrict arr)
+		__attribute__((nonnull, pure));
+long double	alx_ldbl_array_sum_u8	(ptrdiff_t nmemb,
+					 const uint8_t *restrict arr)
+		__attribute__((nonnull, pure));
+long double	alx_ldbl_array_sum_s8	(ptrdiff_t nmemb,
+					 const int8_t *restrict arr)
+		__attribute__((nonnull, pure));
+long double	alx_ldbl_array_sum_u16	(ptrdiff_t nmemb,
+					 const uint16_t *restrict arr)
+		__attribute__((nonnull, pure));
+long double	alx_ldbl_array_sum_s16	(ptrdiff_t nmemb,
+					 const int16_t *restrict arr)
+		__attribute__((nonnull, pure));
+long double	alx_ldbl_array_sum_u32	(ptrdiff_t nmemb,
+					 const uint32_t *restrict arr)
+		__attribute__((nonnull, pure));
+long double	alx_ldbl_array_sum_s32	(ptrdiff_t nmemb,
+					 const int32_t *restrict arr)
+		__attribute__((nonnull, pure));
+long double	alx_ldbl_array_sum_u64	(ptrdiff_t nmemb,
+					 const uint64_t *restrict arr)
+		__attribute__((nonnull, pure));
+long double	alx_ldbl_array_sum_s64	(ptrdiff_t nmemb,
+					 const int64_t *restrict arr)
+		__attribute__((nonnull, pure));
+
+double	dbl_array_sum		(ptrdiff_t nmemb,
+				 const double *restrict arr)
+	__attribute__((nonnull, pure));
+double	dbl_array_sum_uint	(ptrdiff_t nmemb,
+				 const unsigned *restrict arr)
+	__attribute__((nonnull, pure));
+double	dbl_array_sum_int	(ptrdiff_t nmemb,
+				 const int *restrict arr)
+	__attribute__((nonnull, pure));
+double	dbl_array_sum_u8	(ptrdiff_t nmemb,
+				 const uint8_t *restrict arr)
+	__attribute__((nonnull, pure));
+double	dbl_array_sum_s8	(ptrdiff_t nmemb,
+				 const int8_t *restrict arr)
+	__attribute__((nonnull, pure));
+double	dbl_array_sum_u16	(ptrdiff_t nmemb,
+				 const uint16_t *restrict arr)
+	__attribute__((nonnull, pure));
+double	dbl_array_sum_s16	(ptrdiff_t nmemb,
+				 const int16_t *restrict arr)
+	__attribute__((nonnull, pure));
+double	dbl_array_sum_u32	(ptrdiff_t nmemb,
+				 const uint32_t *restrict arr)
+	__attribute__((nonnull, pure));
+double	dbl_array_sum_s32	(ptrdiff_t nmemb,
+				 const int32_t *restrict arr)
+	__attribute__((nonnull, pure));
+
+float	alx_flt_array_sum_flt	(ptrdiff_t nmemb,
+				 const float *restrict arr)
+	__attribute__((nonnull, pure));
+float	alx_flt_array_sum_uint	(ptrdiff_t nmemb,
+				 const unsigned *restrict arr)
+	__attribute__((nonnull, pure));
+float	alx_flt_array_sum_int	(ptrdiff_t nmemb,
+				 const int *restrict arr)
+	__attribute__((nonnull, pure));
+float	alx_flt_array_sum_u8	(ptrdiff_t nmemb,
+				 const uint8_t *restrict arr)
+	__attribute__((nonnull, pure));
+float	alx_flt_array_sum_s8	(ptrdiff_t nmemb,
+				 const int8_t *restrict arr)
+	__attribute__((nonnull, pure));
+float	alx_flt_array_sum_u16	(ptrdiff_t nmemb,
+				 const uint16_t *restrict arr)
+	__attribute__((nonnull, pure));
+float	alx_flt_array_sum_s16	(ptrdiff_t nmemb,
+				 const int16_t *restrict arr)
+	__attribute__((nonnull, pure));
+
 unsigned	alx_array_sum_uint	(ptrdiff_t nmemb,
 					 const unsigned *restrict arr)
 		__attribute__((nonnull, pure));
@@ -86,475 +148,29 @@ int64_t		alx_array_sum_s64	(ptrdiff_t nmemb,
 
 
 /******************************************************************************
- ******* static inline functions (prototypes) *********************************
+ ******* namespace ************************************************************
  ******************************************************************************/
-inline
-long double	ldbl_array_sum_ldbl	(ptrdiff_t nmemb,
-					 const long double *restrict arr)
-		__attribute__((nonnull, pure));
-inline
-long double	ldbl_array_sum_uint	(ptrdiff_t nmemb,
-					 const unsigned *restrict arr)
-		__attribute__((nonnull, pure));
-inline
-long double	ldbl_array_sum_int	(ptrdiff_t nmemb,
-					 const int *restrict arr)
-		__attribute__((nonnull, pure));
-inline
-long double	ldbl_array_sum_u8	(ptrdiff_t nmemb,
-					 const uint8_t *restrict arr)
-		__attribute__((nonnull, pure));
-inline
-long double	ldbl_array_sum_s8	(ptrdiff_t nmemb,
-					 const int8_t *restrict arr)
-		__attribute__((nonnull, pure));
-inline
-long double	ldbl_array_sum_u16	(ptrdiff_t nmemb,
-					 const uint16_t *restrict arr)
-		__attribute__((nonnull, pure));
-inline
-long double	ldbl_array_sum_s16	(ptrdiff_t nmemb,
-					 const int16_t *restrict arr)
-		__attribute__((nonnull, pure));
-inline
-long double	ldbl_array_sum_u32	(ptrdiff_t nmemb,
-					 const uint32_t *restrict arr)
-		__attribute__((nonnull, pure));
-inline
-long double	ldbl_array_sum_s32	(ptrdiff_t nmemb,
-					 const int32_t *restrict arr)
-		__attribute__((nonnull, pure));
-inline
-long double	ldbl_array_sum_u64	(ptrdiff_t nmemb,
-					 const uint64_t *restrict arr)
-		__attribute__((nonnull, pure));
-inline
-long double	ldbl_array_sum_s64	(ptrdiff_t nmemb,
-					 const int64_t *restrict arr)
-		__attribute__((nonnull, pure));
-
-inline
-double	dbl_array_sum		(ptrdiff_t nmemb,
-				 const double *restrict arr)
-	__attribute__((nonnull, pure));
-inline
-double	dbl_array_sum_uint	(ptrdiff_t nmemb,
-				 const unsigned *restrict arr)
-	__attribute__((nonnull, pure));
-inline
-double	dbl_array_sum_int	(ptrdiff_t nmemb,
-				 const int *restrict arr)
-	__attribute__((nonnull, pure));
-inline
-double	dbl_array_sum_u8	(ptrdiff_t nmemb,
-				 const uint8_t *restrict arr)
-	__attribute__((nonnull, pure));
-inline
-double	dbl_array_sum_s8	(ptrdiff_t nmemb,
-				 const int8_t *restrict arr)
-	__attribute__((nonnull, pure));
-inline
-double	dbl_array_sum_u16	(ptrdiff_t nmemb,
-				 const uint16_t *restrict arr)
-	__attribute__((nonnull, pure));
-inline
-double	dbl_array_sum_s16	(ptrdiff_t nmemb,
-				 const int16_t *restrict arr)
-	__attribute__((nonnull, pure));
-inline
-double	dbl_array_sum_u32	(ptrdiff_t nmemb,
-				 const uint32_t *restrict arr)
-	__attribute__((nonnull, pure));
-inline
-double	dbl_array_sum_s32	(ptrdiff_t nmemb,
-				 const int32_t *restrict arr)
-	__attribute__((nonnull, pure));
-
-inline
-float	flt_array_sum_flt	(ptrdiff_t nmemb,
-				 const float *restrict arr)
-	__attribute__((nonnull, pure));
-inline
-float	flt_array_sum_uint	(ptrdiff_t nmemb,
-				 const unsigned *restrict arr)
-	__attribute__((nonnull, pure));
-inline
-float	flt_array_sum_int	(ptrdiff_t nmemb,
-				 const int *restrict arr)
-	__attribute__((nonnull, pure));
-inline
-float	flt_array_sum_u8	(ptrdiff_t nmemb,
-				 const uint8_t *restrict arr)
-	__attribute__((nonnull, pure));
-inline
-float	flt_array_sum_s8	(ptrdiff_t nmemb,
-				 const int8_t *restrict arr)
-	__attribute__((nonnull, pure));
-inline
-float	flt_array_sum_u16	(ptrdiff_t nmemb,
-				 const uint16_t *restrict arr)
-	__attribute__((nonnull, pure));
-inline
-float	flt_array_sum_s16	(ptrdiff_t nmemb,
-				 const int16_t *restrict arr)
-	__attribute__((nonnull, pure));
+namespace alx {
 
 
 /******************************************************************************
- ******* static inline functions (definitions) ********************************
+ ******* enums ****************************************************************
  ******************************************************************************/
-inline
-long double	ldbl_array_sum_ldbl	(ptrdiff_t nmemb,
-					 const long double *restrict arr)
-{
-	long double	sum;
 
-	sum	= 0;
-	for (ptrdiff_t i = 0; i < nmemb; i++)
-		sum += arr[i];
 
-	return	sum;
-}
+/******************************************************************************
+ ******* structs / unions *****************************************************
+ ******************************************************************************/
 
-inline
-long double	ldbl_array_sum_uint	(ptrdiff_t nmemb,
-					 const unsigned *restrict arr)
-{
-	long double	sum;
 
-	sum	= 0;
-	for (ptrdiff_t i = 0; i < nmemb; i++)
-		sum += arr[i];
+/******************************************************************************
+ ******* variables ************************************************************
+ ******************************************************************************/
 
-	return	sum;
-}
 
-inline
-long double	ldbl_array_sum_int	(ptrdiff_t nmemb,
-					 const int *restrict arr)
-{
-	long double	sum;
-
-	sum	= 0;
-	for (ptrdiff_t i = 0; i < nmemb; i++)
-		sum += arr[i];
-
-	return	sum;
-}
-
-inline
-long double	ldbl_array_sum_u8	(ptrdiff_t nmemb,
-					 const uint8_t *restrict arr)
-{
-	long double	sum;
-
-	sum	= 0;
-	for (ptrdiff_t i = 0; i < nmemb; i++)
-		sum += arr[i];
-
-	return	sum;
-}
-
-inline
-long double	ldbl_array_sum_s8	(ptrdiff_t nmemb,
-					 const int8_t *restrict arr)
-{
-	long double	sum;
-
-	sum	= 0;
-	for (ptrdiff_t i = 0; i < nmemb; i++)
-		sum += arr[i];
-
-	return	sum;
-}
-
-inline
-long double	ldbl_array_sum_u16	(ptrdiff_t nmemb,
-					 const uint16_t *restrict arr)
-{
-	long double	sum;
-
-	sum	= 0;
-	for (ptrdiff_t i = 0; i < nmemb; i++)
-		sum += arr[i];
-
-	return	sum;
-}
-
-inline
-long double	ldbl_array_sum_s16	(ptrdiff_t nmemb,
-					 const int16_t *restrict arr)
-{
-	long double	sum;
-
-	sum	= 0;
-	for (ptrdiff_t i = 0; i < nmemb; i++)
-		sum += arr[i];
-
-	return	sum;
-}
-
-inline
-long double	ldbl_array_sum_u32	(ptrdiff_t nmemb,
-					 const uint32_t *restrict arr)
-{
-	long double	sum;
-
-	sum	= 0;
-	for (ptrdiff_t i = 0; i < nmemb; i++)
-		sum += arr[i];
-
-	return	sum;
-}
-
-inline
-long double	ldbl_array_sum_s32	(ptrdiff_t nmemb,
-					 const int32_t *restrict arr)
-{
-	long double	sum;
-
-	sum	= 0;
-	for (ptrdiff_t i = 0; i < nmemb; i++)
-		sum += arr[i];
-
-	return	sum;
-}
-
-inline
-long double	ldbl_array_sum_u64	(ptrdiff_t nmemb,
-					 const uint64_t *restrict arr)
-{
-	long double	sum;
-
-	sum	= 0;
-	for (ptrdiff_t i = 0; i < nmemb; i++)
-		sum += arr[i];
-
-	return	sum;
-}
-
-inline
-long double	ldbl_array_sum_s64	(ptrdiff_t nmemb,
-					 const int64_t *restrict arr)
-{
-	long double	sum;
-
-	sum	= 0;
-	for (ptrdiff_t i = 0; i < nmemb; i++)
-		sum += arr[i];
-
-	return	sum;
-}
-
-
-inline
-double	dbl_array_sum		(ptrdiff_t nmemb,
-				 const double *restrict arr)
-{
-	double_t	sum;
-
-	sum	= 0;
-	for (ptrdiff_t i = 0; i < nmemb; i++)
-		sum += arr[i];
-
-	return	sum;
-}
-
-inline
-double	dbl_array_sum_uint	(ptrdiff_t nmemb,
-				 const unsigned *restrict arr)
-{
-	double_t	sum;
-
-	sum	= 0;
-	for (ptrdiff_t i = 0; i < nmemb; i++)
-		sum += arr[i];
-
-	return	sum;
-}
-
-inline
-double	dbl_array_sum_int	(ptrdiff_t nmemb,
-				 const int *restrict arr)
-{
-	double_t	sum;
-
-	sum	= 0;
-	for (ptrdiff_t i = 0; i < nmemb; i++)
-		sum += arr[i];
-
-	return	sum;
-}
-
-inline
-double	dbl_array_sum_u8	(ptrdiff_t nmemb,
-				 const uint8_t *restrict arr)
-{
-	double_t	sum;
-
-	sum	= 0;
-	for (ptrdiff_t i = 0; i < nmemb; i++)
-		sum += arr[i];
-
-	return	sum;
-}
-
-inline
-double	dbl_array_sum_s8	(ptrdiff_t nmemb,
-				 const int8_t *restrict arr)
-{
-	double_t	sum;
-
-	sum	= 0;
-	for (ptrdiff_t i = 0; i < nmemb; i++)
-		sum += arr[i];
-
-	return	sum;
-}
-
-inline
-double	dbl_array_sum_u16	(ptrdiff_t nmemb,
-				 const uint16_t *restrict arr)
-{
-	double_t	sum;
-
-	sum	= 0;
-	for (ptrdiff_t i = 0; i < nmemb; i++)
-		sum += arr[i];
-
-	return	sum;
-}
-
-inline
-double	dbl_array_sum_s16	(ptrdiff_t nmemb,
-				 const int16_t *restrict arr)
-{
-	double_t	sum;
-
-	sum	= 0;
-	for (ptrdiff_t i = 0; i < nmemb; i++)
-		sum += arr[i];
-
-	return	sum;
-}
-
-inline
-double	dbl_array_sum_u32	(ptrdiff_t nmemb,
-				 const uint32_t *restrict arr)
-{
-	double_t	sum;
-
-	sum	= 0;
-	for (ptrdiff_t i = 0; i < nmemb; i++)
-		sum += arr[i];
-
-	return	sum;
-}
-
-inline
-double	dbl_array_sum_s32	(ptrdiff_t nmemb,
-				 const int32_t *restrict arr)
-{
-	double_t	sum;
-
-	sum	= 0;
-	for (ptrdiff_t i = 0; i < nmemb; i++)
-		sum += arr[i];
-
-	return	sum;
-}
-
-
-inline
-float	flt_array_sum_flt	(ptrdiff_t nmemb,
-				 const float *restrict arr)
-{
-	float_t	sum;
-
-	sum	= 0;
-	for (ptrdiff_t i = 0; i < nmemb; i++)
-		sum += arr[i];
-
-	return	sum;
-}
-
-inline
-float	flt_array_sum_uint	(ptrdiff_t nmemb,
-				 const unsigned *restrict arr)
-{
-	float_t	sum;
-
-	sum	= 0;
-	for (ptrdiff_t i = 0; i < nmemb; i++)
-		sum += arr[i];
-
-	return	sum;
-}
-
-inline
-float	flt_array_sum_int	(ptrdiff_t nmemb,
-				 const int *restrict arr)
-{
-	float_t	sum;
-
-	sum	= 0;
-	for (ptrdiff_t i = 0; i < nmemb; i++)
-		sum += arr[i];
-
-	return	sum;
-}
-
-inline
-float	flt_array_sum_u8	(ptrdiff_t nmemb,
-				 const uint8_t *restrict arr)
-{
-	float_t	sum;
-
-	sum	= 0;
-	for (ptrdiff_t i = 0; i < nmemb; i++)
-		sum += arr[i];
-
-	return	sum;
-}
-
-inline
-float	flt_array_sum_s8	(ptrdiff_t nmemb,
-				 const int8_t *restrict arr)
-{
-	float_t	sum;
-
-	sum	= 0;
-	for (ptrdiff_t i = 0; i < nmemb; i++)
-		sum += arr[i];
-
-	return	sum;
-}
-
-inline
-float	flt_array_sum_u16	(ptrdiff_t nmemb,
-				 const uint16_t *restrict arr)
-{
-	float_t	sum;
-
-	sum	= 0;
-	for (ptrdiff_t i = 0; i < nmemb; i++)
-		sum += arr[i];
-
-	return	sum;
-}
-
-inline
-float	flt_array_sum_s16	(ptrdiff_t nmemb,
-				 const int16_t *restrict arr)
-{
-	float_t	sum;
-
-	sum	= 0;
-	for (ptrdiff_t i = 0; i < nmemb; i++)
-		sum += arr[i];
-
-	return	sum;
-}
+/******************************************************************************
+ ******* extern functions *****************************************************
+ ******************************************************************************/
 
 
 /******************************************************************************

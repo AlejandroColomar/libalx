@@ -16,7 +16,6 @@
 
 #include "libalx/base/compiler/size.h"
 #include "libalx/base/errno/perror.h"
-#include "libalx/base/stdio/common.h"
 #include "libalx/base/stdio/sscan.h"
 
 

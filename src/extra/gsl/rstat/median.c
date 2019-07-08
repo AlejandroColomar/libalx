@@ -59,7 +59,7 @@ long double alx_gsl_rstat_median_ldbl(ptrdiff_t nmemb,
 	if (nmemb % 2)
 		median	= sorted[nmemb/2];
 	else
-		median	= AVGfast(sorted[nmemb/2], sorted[nmemb/2 - 1]);
+		median	= ALX_AVG(sorted[nmemb/2], sorted[nmemb/2 - 1]);
 
 	return	median;
 }
@@ -76,7 +76,7 @@ float	alx_gsl_rstat_median_flt(ptrdiff_t nmemb,
 	if (nmemb % 2)
 		median = sorted[nmemb/2];
 	else
-		median = AVGfast(sorted[nmemb/2], sorted[nmemb/2 - 1]);
+		median = ALX_AVG(sorted[nmemb/2], sorted[nmemb/2 - 1]);
 
 	return	median;
 }
@@ -93,7 +93,7 @@ double	alx_gsl_rstat_median_uint(ptrdiff_t nmemb,
 	if (nmemb % 2)
 		median = sorted[nmemb/2];
 	else
-		median = AVGfast((double_t)sorted[nmemb/2],
+		median = ALX_AVG((double_t)sorted[nmemb/2],
 					(double_t)sorted[nmemb/2 -1]);
 
 	return	median;
@@ -111,7 +111,7 @@ double	alx_gsl_rstat_median_int(ptrdiff_t nmemb,
 	if (nmemb % 2)
 		median = sorted[nmemb/2];
 	else
-		median = AVGfast((double_t)sorted[nmemb/2],
+		median = ALX_AVG((double_t)sorted[nmemb/2],
 					(double_t)sorted[nmemb/2 -1]);
 
 	return	median;
@@ -129,7 +129,7 @@ double	alx_gsl_rstat_median_u8	(ptrdiff_t nmemb,
 	if (nmemb % 2)
 		median	= sorted[nmemb/2];
 	else
-		median	= AVGfast((double_t)sorted[nmemb/2],
+		median	= ALX_AVG((double_t)sorted[nmemb/2],
 					(double_t)sorted[nmemb/2 - 1]);
 
 	return	median;
@@ -147,7 +147,7 @@ double	alx_gsl_rstat_median_s8	(ptrdiff_t nmemb,
 	if (nmemb % 2)
 		median	= sorted[nmemb/2];
 	else
-		median	= AVGfast((double_t)sorted[nmemb/2],
+		median	= ALX_AVG((double_t)sorted[nmemb/2],
 					(double_t)sorted[nmemb/2 - 1]);
 
 	return	median;
@@ -165,7 +165,7 @@ double	alx_gsl_rstat_median_u16(ptrdiff_t nmemb,
 	if (nmemb % 2)
 		median	= sorted[nmemb/2];
 	else
-		median	= AVGfast((double_t)sorted[nmemb/2],
+		median	= ALX_AVG((double_t)sorted[nmemb/2],
 					(double_t)sorted[nmemb/2 - 1]);
 
 	return	median;
@@ -183,7 +183,7 @@ double	alx_rstat_median_s16	(ptrdiff_t nmemb,
 	if (nmemb % 2)
 		median	= sorted[nmemb/2];
 	else
-		median	= AVGfast((double_t)sorted[nmemb/2],
+		median	= ALX_AVG((double_t)sorted[nmemb/2],
 					(double_t)sorted[nmemb/2 - 1]);
 
 	return	median;
@@ -201,7 +201,7 @@ double	alx_rgsl_stat_median_u32(ptrdiff_t nmemb,
 	if (nmemb % 2)
 		median	= sorted[nmemb/2];
 	else
-		median	= AVGfast((double_t)sorted[nmemb/2],
+		median	= ALX_AVG((double_t)sorted[nmemb/2],
 					(double_t)sorted[nmemb/2 - 1]);
 
 	return	median;
@@ -219,7 +219,7 @@ double	alx_gsl_rstat_median_s32(ptrdiff_t nmemb,
 	if (nmemb % 2)
 		median	= sorted[nmemb/2];
 	else
-		median	= AVGfast((double_t)sorted[nmemb/2],
+		median	= ALX_AVG((double_t)sorted[nmemb/2],
 					(double_t)sorted[nmemb/2 - 1]);
 
 	return	median;
@@ -237,7 +237,7 @@ long double alx_gsl_rstat_median_u64(ptrdiff_t nmemb,
 	if (nmemb % 2)
 		median	= sorted[nmemb/2];
 	else
-		median	= AVGfast((long double)sorted[nmemb/2],
+		median	= ALX_AVG((long double)sorted[nmemb/2],
 					(long double)sorted[nmemb/2 - 1]);
 
 	return	median;
@@ -255,7 +255,7 @@ long double alx_gsl_rstat_median_s64(ptrdiff_t nmemb,
 	if (nmemb % 2)
 		median	= sorted[nmemb/2];
 	else
-		median	= AVGfast((long double)sorted[nmemb/2],
+		median	= ALX_AVG((long double)sorted[nmemb/2],
 					(long double)sorted[nmemb/2 - 1]);
 
 	return	median;

@@ -26,6 +26,22 @@
 
 
 /******************************************************************************
+ ******* extern "C" ***********************************************************
+ ******************************************************************************/
+extern	"C"
+{
+int	alx_snprintfs	(char *restrict str,
+			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
+			 const char *restrict format, ...)
+	__attribute__((nonnull(1, 4), format(printf, 4, 5)));
+int	alx_vsnprintfs	(char *restrict str,
+			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
+			 const char *restrict format, va_list ap)
+	__attribute__((nonnull(1, 4), format(printf, 4, 0)));
+}
+
+
+/******************************************************************************
  ******* namespace ************************************************************
  ******************************************************************************/
 namespace alx {
@@ -47,20 +63,7 @@ namespace alx {
 
 
 /******************************************************************************
- ******* function prototypes **************************************************
- ******************************************************************************/
-int	snprintfs	(char *restrict str,
-			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
-			 const char *restrict format, ...)
-	__attribute__((nonnull(1, 4), format(printf, 4, 5)));
-int	vsnprintfs	(char *restrict str,
-			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
-			 const char *restrict format, va_list ap)
-	__attribute__((nonnull(1, 4), format(printf, 4, 0)));
-
-
-/******************************************************************************
- ******* inline functions *****************************************************
+ ******* extern functions *****************************************************
  ******************************************************************************/
 
 
