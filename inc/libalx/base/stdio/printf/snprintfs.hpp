@@ -33,11 +33,13 @@ extern	"C"
 int	alx_snprintfs	(char *restrict str,
 			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
 			 const char *restrict format, ...)
-	__attribute__((nonnull(1, 4), format(printf, 4, 5)));
+	__attribute__((nonnull(1, 4), format(printf, 4, 5),
+		       warn_unused_result));
 int	alx_vsnprintfs	(char *restrict str,
 			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
 			 const char *restrict format, va_list ap)
-	__attribute__((nonnull(1, 4), format(printf, 4, 0)));
+	__attribute__((nonnull(1, 4), format(printf, 4, 0),
+		       warn_unused_result));
 }
 
 
