@@ -60,7 +60,8 @@ void	alx_perror__(const char *restrict file, int line,
 		     const char *restrict func, const char *restrict str)
 {
 
-	fprintf(stderr, "%s:%i: %s():\n", file, line, func);
+	fprintf(stderr, "%s:%i:\n", file, line);
+	fprintf(stderr, "%s():\n", func);
 	if (str)
 		fprintf(stderr, "	%s\n", str);
 	fprintf(stderr, "E%i -	%s\n", errno, strerror(errno));
