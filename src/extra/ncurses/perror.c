@@ -33,6 +33,7 @@
 /******************************************************************************
  ******* variables ************************************************************
  ******************************************************************************/
+extern	char	*__progname;
 
 
 /******************************************************************************
@@ -48,11 +49,13 @@ void	alx_ncurses_perror__	(WINDOW *win,
 				 const char *restrict func,
 				 const char *restrict str)
 {
-	mvwprintw(win, 0, 0, "%s:%i: ", file, line);
-	mvwprintw(win, 1, 0, "%s(): ", func);
+
+	mvwprintw(win, 0, 0, "%s: ", __progname);
+	mvwprintw(win, 1, 0, "%s:%i: ", file, line);
+	mvwprintw(win, 2, 0, "%s(): ", func);
 	if (str)
-		mvwprintw(win, 2, 0, "	%s\n", str);
-	mvwprintw(win, 3, 0, "E%i -	%s\n", errno, strerror(errno));
+		mvwprintw(win, 3, 0, "	%s\n", str);
+	mvwprintw(win, 4, 0, "E%i -	%s\n", errno, strerror(errno));
 
 	wrefresh(win);
 	/* Wait for any key */

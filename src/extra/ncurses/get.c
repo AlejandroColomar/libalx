@@ -25,7 +25,6 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-#define BUFF_SIZE	(0xFF)
 
 
 /******************************************************************************
@@ -35,11 +34,6 @@
 
 /******************************************************************************
  ******* structs / unions *****************************************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* variables ************************************************************
  ******************************************************************************/
 
 
@@ -1054,14 +1048,14 @@ long double	loop_get_ldbl	(WINDOW *win,
 				 long double m, long double def, long double M,
 				 uint8_t attempts)
 {
-	char		buff [BUFF_SIZE];
+	char		buff[BUFSIZ];
 	int		tmp;
 	long double	R;
 
 	R	= def;
 	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
 		echo();
-		tmp	= mvwgetnstr(win, 0, 0, buff, BUFF_SIZE);
+		tmp	= mvwgetnstr(win, 0, 0, buff, BUFSIZ);
 		noecho();
 		wclear(win);
 		wrefresh(win);
@@ -1082,14 +1076,14 @@ double		loop_get_dbl	(WINDOW *win,
 				 double m, double def, double M,
 				 uint8_t attempts)
 {
-	char	buff [BUFF_SIZE];
+	char	buff[BUFSIZ];
 	int	tmp;
 	double	R;
 
 	R	= def;
 	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
 		echo();
-		tmp	= mvwgetnstr(win, 0, 0, buff, BUFF_SIZE);
+		tmp	= mvwgetnstr(win, 0, 0, buff, BUFSIZ);
 		noecho();
 		wclear(win);
 		wrefresh(win);
@@ -1110,14 +1104,14 @@ float		loop_get_flt	(WINDOW *win,
 				 float m, float def, float M,
 				 uint8_t attempts)
 {
-	char	buff [BUFF_SIZE];
+	char	buff[BUFSIZ];
 	int	tmp;
 	float	R;
 
 	R	= def;
 	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
 		echo();
-		tmp	= mvwgetnstr(win, 0, 0, buff, BUFF_SIZE);
+		tmp	= mvwgetnstr(win, 0, 0, buff, BUFSIZ);
 		noecho();
 		wclear(win);
 		wrefresh(win);
@@ -1138,14 +1132,14 @@ unsigned	loop_get_uint	(WINDOW *win,
 				 unsigned m, unsigned def, unsigned M,
 				 uint8_t attempts)
 {
-	char		buff [BUFF_SIZE];
+	char		buff[BUFSIZ];
 	int		tmp;
 	unsigned	N;
 
 	N	= def;
 	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
 		echo();
-		tmp	= mvwgetnstr(win, 0, 0, buff, BUFF_SIZE);
+		tmp	= mvwgetnstr(win, 0, 0, buff, BUFSIZ);
 		noecho();
 		wclear(win);
 		wrefresh(win);
@@ -1166,14 +1160,14 @@ int		loop_get_int	(WINDOW *win,
 				 int m, int def, int M,
 				 uint8_t attempts)
 {
-	char	buff [BUFF_SIZE];
+	char	buff[BUFSIZ];
 	int	tmp;
 	int	Z;
 
 	Z	= def;
 	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
 		echo();
-		tmp	= mvwgetnstr(win, 0, 0, buff, BUFF_SIZE);
+		tmp	= mvwgetnstr(win, 0, 0, buff, BUFSIZ);
 		noecho();
 		wclear(win);
 		wrefresh(win);
@@ -1194,14 +1188,14 @@ uint8_t		loop_get_u8	(WINDOW *win,
 				 uint8_t m, uint8_t def, uint8_t M,
 				 uint8_t attempts)
 {
-	char	buff [BUFF_SIZE];
+	char	buff[BUFSIZ];
 	int	tmp;
 	uint8_t	N;
 
 	N	= def;
 	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
 		echo();
-		tmp	= mvwgetnstr(win, 0, 0, buff, BUFF_SIZE);
+		tmp	= mvwgetnstr(win, 0, 0, buff, BUFSIZ);
 		noecho();
 		wclear(win);
 		wrefresh(win);
@@ -1222,14 +1216,14 @@ int8_t		loop_get_s8	(WINDOW *win,
 				 int8_t m, int8_t def, int8_t M,
 				 uint8_t attempts)
 {
-	char	buff [BUFF_SIZE];
+	char	buff[BUFSIZ];
 	int	tmp;
 	int8_t	Z;
 
 	Z	= def;
 	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
 		echo();
-		tmp	= mvwgetnstr(win, 0, 0, buff, BUFF_SIZE);
+		tmp	= mvwgetnstr(win, 0, 0, buff, BUFSIZ);
 		noecho();
 		wclear(win);
 		wrefresh(win);
@@ -1250,14 +1244,14 @@ uint16_t	loop_get_u16	(WINDOW *win,
 				 uint16_t m, uint16_t def, uint16_t M,
 				 uint8_t attempts)
 {
-	char		buff [BUFF_SIZE];
+	char		buff[BUFSIZ];
 	int		tmp;
 	uint16_t	N;
 
 	N	= def;
 	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
 		echo();
-		tmp	= mvwgetnstr(win, 0, 0, buff, BUFF_SIZE);
+		tmp	= mvwgetnstr(win, 0, 0, buff, BUFSIZ);
 		noecho();
 		wclear(win);
 		wrefresh(win);
@@ -1278,14 +1272,14 @@ int16_t		loop_get_s16	(WINDOW *win,
 				 int16_t m, int16_t def, int16_t M,
 				 uint8_t attempts)
 {
-	char	buff [BUFF_SIZE];
+	char	buff[BUFSIZ];
 	int	tmp;
 	int16_t	Z;
 
 	Z	= def;
 	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
 		echo();
-		tmp	= mvwgetnstr(win, 0, 0, buff, BUFF_SIZE);
+		tmp	= mvwgetnstr(win, 0, 0, buff, BUFSIZ);
 		noecho();
 		wclear(win);
 		wrefresh(win);
@@ -1306,14 +1300,14 @@ uint32_t	loop_get_u32	(WINDOW *win,
 				 uint32_t m, uint32_t def, uint32_t M,
 				 uint8_t attempts)
 {
-	char		buff [BUFF_SIZE];
+	char		buff[BUFSIZ];
 	int		tmp;
 	uint32_t	N;
 
 	N	= def;
 	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
 		echo();
-		tmp	= mvwgetnstr(win, 0, 0, buff, BUFF_SIZE);
+		tmp	= mvwgetnstr(win, 0, 0, buff, BUFSIZ);
 		noecho();
 		wclear(win);
 		wrefresh(win);
@@ -1334,14 +1328,14 @@ int32_t		loop_get_s32	(WINDOW *win,
 				 int32_t m, int32_t def, int32_t M,
 				 uint8_t attempts)
 {
-	char	buff [BUFF_SIZE];
+	char	buff[BUFSIZ];
 	int	tmp;
 	int32_t	Z;
 
 	Z	= def;
 	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
 		echo();
-		tmp	= mvwgetnstr(win, 0, 0, buff, BUFF_SIZE);
+		tmp	= mvwgetnstr(win, 0, 0, buff, BUFSIZ);
 		noecho();
 		wclear(win);
 		wrefresh(win);
@@ -1362,14 +1356,14 @@ uint64_t	loop_get_u64	(WINDOW *win,
 				 uint64_t m, uint64_t def, uint64_t M,
 				 uint8_t attempts)
 {
-	char		buff [BUFF_SIZE];
+	char		buff[BUFSIZ];
 	int		tmp;
 	uint64_t	N;
 
 	N	= def;
 	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
 		echo();
-		tmp	= mvwgetnstr(win, 0, 0, buff, BUFF_SIZE);
+		tmp	= mvwgetnstr(win, 0, 0, buff, BUFSIZ);
 		noecho();
 		wclear(win);
 		wrefresh(win);
@@ -1390,14 +1384,14 @@ int64_t		loop_get_s64	(WINDOW *win,
 				 int64_t m, int64_t def, int64_t M,
 				 uint8_t attempts)
 {
-	char	buff [BUFF_SIZE];
+	char	buff[BUFSIZ];
 	int	tmp;
 	int64_t	Z;
 
 	Z	= def;
 	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
 		echo();
-		tmp	= mvwgetnstr(win, 0, 0, buff, BUFF_SIZE);
+		tmp	= mvwgetnstr(win, 0, 0, buff, BUFSIZ);
 		noecho();
 		wclear(win);
 		wrefresh(win);
@@ -1418,14 +1412,14 @@ ptrdiff_t	loop_get_pdif	(WINDOW *win,
 				 int64_t m, int64_t def, int64_t M,
 				 uint8_t attempts)
 {
-	char		buff [BUFF_SIZE];
+	char		buff[BUFSIZ];
 	int		tmp;
 	ptrdiff_t	Z;
 
 	Z	= def;
 	for (uint8_t i = 0; i <= (attempts - 1u); i++) {
 		echo();
-		tmp	= mvwgetnstr(win, 0, 0, buff, BUFF_SIZE);
+		tmp	= mvwgetnstr(win, 0, 0, buff, BUFSIZ);
 		noecho();
 		wclear(win);
 		wrefresh(win);

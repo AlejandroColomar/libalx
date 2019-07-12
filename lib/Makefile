@@ -47,6 +47,10 @@ BASE_OBJ	=							\
 		$(TMP_DIR)/base/string/strgrep.o			\
 		$(TMP_DIR)/base/string/strstr.o
 
+CV_OBJ		=							\
+		$(TMP_DIR)/extra/cv/alx.o				\
+		$(TMP_DIR)/extra/cv/core.o				\
+		$(TMP_DIR)/extra/cv/imgproc.o
 GSL_OBJ		=							\
 		$(TMP_DIR)/extra/gsl/distributions/binomial.o		\
 		$(TMP_DIR)/extra/gsl/distributions/exponential.o	\
@@ -61,13 +65,14 @@ NCURSES_OBJ	=							\
 		$(TMP_DIR)/extra/ncurses/get.o				\
 		$(TMP_DIR)/extra/ncurses/menu.o
 EXTRA_OBJ	=							\
+		$(CV_OBJ)						\
 		$(GSL_OBJ)						\
 		$(NCURSES_OBJ)
 
 
 ALL	= libalx							\
 	base								\
-	gsl ncurses							\
+	cv gsl ncurses							\
 	extra
 
 # target: dependencies
@@ -80,6 +85,9 @@ PHONY += base
 base: libalx libalx/libalx-base.a
 
 
+PHONY += cv
+cv: libalx libalx/libalx-cv.a
+
 PHONY += gsl
 gsl: libalx libalx/libalx-gsl.a
 
@@ -87,7 +95,7 @@ PHONY += ncurses
 ncurses: libalx libalx/libalx-ncurses.a
 
 PHONY += extra
-extra: libalx libalx/libalx-extra.a
+extra: libalx cv gsl ncurses libalx/libalx-extra.a
 
 
 libalx:
@@ -99,11 +107,15 @@ libalx/libalx-base.a: $(BASE_OBJ)
 	$(Q)$(AR) -r -c -s -o $@ $^
 
 
-libalx/libalx-ncurses.a: $(NCURSES_OBJ)
+libalx/libalx-cv.a: $(CV_OBJ)
 	@echo	"	AR	libalx/lib/$@"
 	$(Q)$(AR) -r -c -s -o $@ $^
 
 libalx/libalx-gsl.a: $(GSL_OBJ)
+	@echo	"	AR	libalx/lib/$@"
+	$(Q)$(AR) -r -c -s -o $@ $^
+
+libalx/libalx-ncurses.a: $(NCURSES_OBJ)
 	@echo	"	AR	libalx/lib/$@"
 	$(Q)$(AR) -r -c -s -o $@ $^
 

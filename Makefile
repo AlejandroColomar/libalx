@@ -162,6 +162,12 @@ base:
 	$(Q)$(MAKE) $@	-C $(TMP_DIR)
 	$(Q)$(MAKE) $@	-C $(LIB_DIR)
 
+PHONY += cv
+cv:
+	@echo	"	MAKE	$@"
+	$(Q)$(MAKE) $@	-C $(TMP_DIR)
+	$(Q)$(MAKE) $@	-C $(LIB_DIR)
+
 PHONY += gsl
 gsl:
 	@echo	"	MAKE	$@"
@@ -175,7 +181,7 @@ ncurses:
 	$(Q)$(MAKE) $@	-C $(LIB_DIR)
 
 PHONY += extra
-extra: gsl ncurses
+extra: cv gsl ncurses
 	@echo	"	MAKE	$@"
 	$(Q)$(MAKE) $@	-C $(LIB_DIR)
 

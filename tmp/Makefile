@@ -31,8 +31,12 @@ base:
 
 
 PHONY += extra
-extra: gsl ncurses
+extra: cv gsl ncurses
 
+
+PHONY += cv
+cv:
+	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/cv/
 
 PHONY += gsl
 gsl:
