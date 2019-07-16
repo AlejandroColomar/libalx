@@ -13,12 +13,12 @@
 # dependencies
 
 OBJ		=							\
-		perror.o
+		error.o
 
-PERROR_INC	=							\
-		$(INC_DIR)/libalx/base/errno/perror.h
-PERROR_SRC	=							\
-		$(SRC_DIR)/base/errno/perror.c
+ERROR_INC	=							\
+		$(INC_DIR)/libalx/base/errno/error.h
+ERROR_SRC	=							\
+		$(SRC_DIR)/base/errno/error.c
 
 ################################################################################
 # target: dependencies
@@ -28,10 +28,10 @@ PHONY := all
 all: $(OBJ)
 
 
-perror.s: $(PERROR_SRC) $(PERROR_INC)
+error.s: $(ERROR_SRC) $(ERROR_INC)
 	@echo	"	CC	libalx/tmp/base/errno/$@"
 	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-perror.o: perror.s
+error.o: error.s
 	@echo	"	AS	libalx/tmp/base/errno/$@"
 	$(Q)$(AS) $< -o $@
 

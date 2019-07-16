@@ -26,7 +26,7 @@ OBJ		=							\
 GET_INC		=							\
 		$(INC_DIR)/libalx/base/stdio/get.h			\
 		$(INC_DIR)/libalx/base/compiler/size.h			\
-		$(INC_DIR)/libalx/base/errno/perror.h			\
+		$(INC_DIR)/libalx/base/errno/error.h			\
 		$(INC_DIR)/libalx/base/stdio/sscan.h
 GET_SRC		=							\
 		$(SRC_DIR)/base/stdio/get.c

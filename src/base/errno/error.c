@@ -7,7 +7,9 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/base/errno/perror.h"
+#include "libalx/base/errno/error.h"
+
+#include <stdnoreturn.h>
 
 
 /******************************************************************************
@@ -34,8 +36,11 @@
  ******* global functions *****************************************************
  ******************************************************************************/
 extern
-void	alx_perror__(const char *restrict file, int line,
-		     const char *restrict func, const char *restrict str);
+void	alx_perror__	(const char *restrict file, int line,
+			 const char *restrict func, const char *restrict str);
+extern noreturn
+void	alx_error__	(int status, const char *restrict file, int line,
+			 const char *restrict func, const char *restrict str);
 
 
 /******************************************************************************

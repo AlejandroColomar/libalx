@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/base/errno/perror.hpp */
+#pragma once	/* libalx/base/errno/error.hpp */
 
 
 /******************************************************************************
@@ -19,9 +19,14 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-#define alx_perror(str)	do						\
+#define alx_perror(str)		do					\
 {									\
 	alx_perror__(__FILE__, __LINE__, __func__, str);		\
+} while (0)
+
+#define alx_error(status, str)	do					\
+{									\
+	alx_error__(status, __FILE__, __LINE__, __func__, str);		\
 } while (0)
 
 
@@ -30,9 +35,12 @@
  ******************************************************************************/
 extern	"C"
 {
-void	alx_perror__(const char *restrict file, int line,
-		     const char *restrict func, const char *restrict str)
-	__attribute__((nonnull(1, 3)));
+[[gnu::nonnull(1, 3)]]
+void	alx_perror__	(const char *restrict file, int line,
+			 const char *restrict func, const char *restrict str);
+[[noreturn]][[gnu::nonnull(2, 4)]]
+void	alx_error__	(int status, const char *restrict file, int line,
+			 const char *restrict func, const char *restrict str);
 }
 
 

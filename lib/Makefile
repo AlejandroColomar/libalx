@@ -8,7 +8,7 @@ BASE_OBJ	=							\
 		$(TMP_DIR)/base/assert/assert.o				\
 		$(TMP_DIR)/base/compiler/size.o				\
 		$(TMP_DIR)/base/compiler/type.o				\
-		$(TMP_DIR)/base/errno/perror.o				\
+		$(TMP_DIR)/base/errno/error.o				\
 		$(TMP_DIR)/base/float/constant.o			\
 		$(TMP_DIR)/base/float/printf.o				\
 		$(TMP_DIR)/base/float/scanf.o				\
@@ -50,6 +50,7 @@ BASE_OBJ	=							\
 CV_OBJ		=							\
 		$(TMP_DIR)/extra/cv/alx.o				\
 		$(TMP_DIR)/extra/cv/core.o				\
+		$(TMP_DIR)/extra/cv/highgui.o				\
 		$(TMP_DIR)/extra/cv/imgproc.o
 GSL_OBJ		=							\
 		$(TMP_DIR)/extra/gsl/distributions/binomial.o		\
