@@ -34,6 +34,8 @@ int	alx_cv_local_max	(void *restrict img);
 [[gnu::nonnull]]
 int	alx_cv_skeleton		(void *restrict img);
 [[gnu::nonnull]]
+int	alx_cv_skeleton_endpts	(void *restrict img);
+[[gnu::nonnull]]
 int	alx_cv_lines_horizontal	(void *restrict img);
 [[gnu::nonnull]]
 int	alx_cv_lines_vertical	(void *restrict img);
@@ -72,6 +74,8 @@ namespace CV {
 int	local_max		(class cv::Mat *restrict img);
 [[gnu::nonnull]]
 int	skeleton		(class cv::Mat *restrict img);
+[[gnu::nonnull]]
+int	skeleton_endpts		(class cv::Mat *restrict img);
 [[gnu::nonnull]]
 int	lines_horizontal	(class cv::Mat *restrict img);
 [[gnu::nonnull]]

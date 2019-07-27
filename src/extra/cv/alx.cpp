@@ -241,6 +241,118 @@ int	alx_cv_skeleton			(void *restrict img)
 	return	alx::CV::skeleton((class cv::Mat *)img);
 }
 
+int	alx::CV::skeleton_endpts	(class cv::Mat *restrict img)
+{
+	const ptrdiff_t	rows = img->rows;
+	const ptrdiff_t	cols = img->cols;
+	const ptrdiff_t	step = img->step;
+	/* (Half of the) width of the skeleton */
+	const ptrdiff_t	width = 5;
+	bool		branch;
+	int_fast8_t	cnt_brnchs;
+	class cv::Mat	imgtmp;
+	/* pointer to a pixel (in img) */
+	const uint8_t	*img_pix;
+	/* pointer to a pixel near img_pix (in img) */
+	const uint8_t	*near_pix;
+	/* pointer to a pixel (same position as img_pix, but in imgtmp) */
+	uint8_t		*tmp_pix;
+
+	if (img->channels() != 1)
+		return	1;
+	/* Tmp image copy */
+	img->copyTo(imgtmp);
+
+#pragma GCC ivdep
+	for (ptrdiff_t i = 0; i < rows; i++) {
+#pragma GCC ivdep
+	for (ptrdiff_t j = 0; j < cols; j++) {
+		img_pix		= img->data + i * step + j;
+		tmp_pix		= imgtmp.data + i * step + j;
+
+		if (!(*img_pix)) {
+			*tmp_pix = 0;
+			continue;
+		}
+		if ((i - 3*width < 0)  ||  (i + 3*width >= rows)) {
+			*tmp_pix = 0;
+			continue;
+		}
+		if ((j - 3*width < 0)  ||  (j + 3*width >= cols)) {
+			*tmp_pix = 0;
+			continue;
+		}
+		cnt_brnchs	= 0;
+		if (img->data + (i+3*width) * step + (j+3*width - 1))
+			branch	= true;
+		else
+			branch	= false;
+
+		for (ptrdiff_t k = (i + 3*width); k >= (i - 3*width); k--) {
+			near_pix	= img->data + k * step + (j+3*width);
+
+			if (!branch) {
+				if (*near_pix) {
+					cnt_brnchs++;
+					branch	= true;
+				}
+			} else {
+				if (!*near_pix)
+					branch	= false;
+			}
+		}
+		for (ptrdiff_t l = (j + 3*width); l >= (j - 3*width); l--) {
+			near_pix	= img->data + (i-3*width) * step + l;
+
+			if (!branch) {
+				if (*near_pix) {
+					cnt_brnchs++;
+					branch	= true;
+				}
+			} else {
+				if (!*near_pix)
+					branch	= false;
+			}
+		}
+		for (ptrdiff_t k = (i - 3*width); k <= (i + 3*width); k++) {
+			near_pix	= img->data + k * step + (j-3*width);
+
+			if (!branch) {
+				if (*near_pix) {
+					cnt_brnchs++;
+					branch	= true;
+				}
+			} else {
+				if (!*near_pix)
+					branch	= false;
+			}
+		}
+		for (ptrdiff_t l = (j - 3*width); l <= (j + 3*width); l++) {
+			near_pix	= img->data + (i+3*width) * step + l;
+
+			if (!branch) {
+				if (*near_pix) {
+					cnt_brnchs++;
+					branch	= true;
+				}
+			} else {
+				if (!*near_pix)
+					branch	= false;
+			}
+		}
+
+		if (cnt_brnchs <= 1)
+			*tmp_pix	= *img_pix;
+		else
+			*tmp_pix	= 0;
+	}
+	}
+
+	imgtmp.copyTo(*img);
+	imgtmp.release();
+	return	0;
+}
+
 int	alx::CV::lines_horizontal	(class cv::Mat *restrict img)
 {
 	const ptrdiff_t	rows = img->rows;
