@@ -353,6 +353,11 @@ int	alx::CV::skeleton_endpts	(class cv::Mat *restrict img)
 	return	0;
 }
 
+int	alx_cv_skeleton_endpts		(void *restrict img)
+{
+	return	alx::CV::skeleton_endpts((class cv::Mat *)img);
+}
+
 int	alx::CV::lines_horizontal	(class cv::Mat *restrict img)
 {
 	const ptrdiff_t	rows = img->rows;
