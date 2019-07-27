@@ -187,7 +187,8 @@ int	alx::CV::skeleton		(class cv::Mat *restrict img)
 		img_pix		= img->data + i * step + j;
 		tmp_pix		= imgtmp.data + i * step + j;
 
-		if (!(*img_pix)) {
+		/* Discard pixels of value 1 in skeleton */
+		if (*img_pix < 2) {
 			*tmp_pix	= 0;
 			continue;
 		}
