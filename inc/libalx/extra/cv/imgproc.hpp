@@ -68,6 +68,10 @@ int	alx_cv_adaptive_thr	(void *restrict img,
 [[gnu::nonnull]]
 int	alx_cv_cvt_color	(void *restrict img, int method);
 [[gnu::nonnull]]
+void	alx_cv_cvt_res_8b	(void *restrict img);
+[[gnu::nonnull]]
+int	alx_cv_distance_transform(void *restrict img);
+[[gnu::nonnull]]
 int	alx_cv_distance_transform_8b(void *restrict img);
 [[gnu::nonnull]]
 int	alx_cv_threshold	(void *restrict img, int thr_typ, int thr_val);
@@ -161,6 +165,10 @@ int	adaptive_thr	(class cv::Mat *restrict img,
 			 int method, int thr_typ, int ksize);
 [[gnu::nonnull]]
 int	cvt_color	(class cv::Mat *restrict img, int method);
+[[gnu::nonnull]]
+void	cvt_res_8b	(class cv::Mat *restrict img);
+[[gnu::nonnull]]
+int	distance_transform(class cv::Mat *restrict img);
 [[gnu::nonnull]]
 int	distance_transform_8b(class cv::Mat *restrict img);
 [[gnu::nonnull]]

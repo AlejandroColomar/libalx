@@ -71,6 +71,10 @@ int	alx_cv_adaptive_thr	(img_s *restrict img,
 __attribute__((nonnull))
 int	alx_cv_cvt_color	(img_s *restrict img, int method);
 __attribute__((nonnull))
+void	alx_cv_cvt_res_8b	(img_s *restrict img);
+__attribute__((nonnull))
+int	alx_cv_distance_transform(img_s *restrict img);
+__attribute__((nonnull))
 int	alx_cv_distance_transform_8b(img_s *restrict img);
 __attribute__((nonnull))
 int	alx_cv_threshold	(img_s *restrict img, int thr_typ, int thr_val);

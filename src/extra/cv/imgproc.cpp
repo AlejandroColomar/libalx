@@ -325,6 +325,39 @@ int	alx_cv_cvt_color	(void *restrict img, int method)
 	return	alx::CV::cvt_color((class cv::Mat *)img, method);
 }
 
+void	alx::CV::cvt_res_8b	(class cv::Mat *restrict img)
+{
+	class cv::Mat	tmp;
+
+	img->convertTo(tmp, CV_8U);
+	tmp.copyTo(*img);
+
+	tmp.release();
+}
+
+void	alx_cv_cvt_res_8b	(void *restrict img)
+{
+	alx::CV::cvt_res_8b((class cv::Mat *)img);
+}
+
+int	alx::CV::distance_transform(class cv::Mat *restrict img)
+{
+	class cv::Mat	tmp;
+
+	if (img->channels() != 1)
+		return	1;
+	cv::distanceTransform(*img, tmp, CV_DIST_L2, CV_DIST_MASK_PRECISE);
+	tmp.copyTo(*img);
+
+	tmp.release();
+	return	0;
+}
+
+int	alx_cv_distance_transform(void *restrict img)
+{
+	return	alx::CV::distance_transform((class cv::Mat *)img);
+}
+
 int	alx::CV::distance_transform_8b(class cv::Mat *restrict img)
 {
 	class cv::Mat	tmp;
