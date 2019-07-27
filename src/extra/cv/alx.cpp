@@ -225,7 +225,7 @@ int	alx::CV::skeleton		(class cv::Mat *restrict img)
 		}
 
 		if (skeleton)
-			*tmp_pix	= *img_pix;
+			*tmp_pix	= 255;
 		else
 			*tmp_pix	= 0;
 	}
