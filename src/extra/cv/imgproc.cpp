@@ -325,7 +325,7 @@ int	alx_cv_cvt_color	(void *restrict img, int method)
 	return	alx::CV::cvt_color((class cv::Mat *)img, method);
 }
 
-int	alx::CV::distance_transform(class cv::Mat *restrict img)
+int	alx::CV::distance_transform_8b(class cv::Mat *restrict img)
 {
 	class cv::Mat	tmp;
 
@@ -339,9 +339,9 @@ int	alx::CV::distance_transform(class cv::Mat *restrict img)
 	return	0;
 }
 
-int	alx_cv_distance_transform(void *restrict img)
+int	alx_cv_distance_transform_8b(void *restrict img)
 {
-	return	alx::CV::distance_transform((class cv::Mat *)img);
+	return	alx::CV::distance_transform_8b((class cv::Mat *)img);
 }
 
 int	alx::CV::threshold	(class cv::Mat *restrict img,
