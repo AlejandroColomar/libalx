@@ -36,8 +36,12 @@
  ******************************************************************************/
 __attribute__((nonnull))
 int	alx_cv_local_max	(img_s *restrict img);
+#if 0
 __attribute__((nonnull))
-int	alx_cv_skeleton		(img_s *restrict img);
+int	alx_cv_skeleton_B	(img_s *restrict img);
+__attribute__((nonnull))
+int	alx_cv_skeleton_A	(img_s *restrict img);
+#endif
 __attribute__((nonnull))
 int	alx_cv_skeleton_endpts	(img_s *restrict img);
 __attribute__((nonnull))

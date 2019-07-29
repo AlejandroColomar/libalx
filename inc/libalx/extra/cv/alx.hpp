@@ -32,7 +32,9 @@ extern	"C"
 [[gnu::nonnull]]
 int	alx_cv_local_max	(void *restrict img);
 [[gnu::nonnull]]
-int	alx_cv_skeleton		(void *restrict img);
+int	alx_cv_skeleton_B	(void *restrict img);
+[[gnu::nonnull]]
+int	alx_cv_skeleton_A	(void *restrict img);
 [[gnu::nonnull]]
 int	alx_cv_skeleton_endpts	(void *restrict img);
 [[gnu::nonnull]]
@@ -72,8 +74,12 @@ namespace CV {
  ******************************************************************************/
 [[gnu::nonnull]]
 int	local_max		(class cv::Mat *restrict img);
+#if 0
 [[gnu::nonnull]]
-int	skeleton		(class cv::Mat *restrict img);
+int	skeleton_B		(class cv::Mat *restrict img);
+[[gnu::nonnull]]
+int	skeleton_A		(class cv::Mat *restrict img);
+#endif
 [[gnu::nonnull]]
 int	skeleton_endpts		(class cv::Mat *restrict img);
 [[gnu::nonnull]]

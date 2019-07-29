@@ -9,6 +9,7 @@
  ******************************************************************************/
 #include "libalx/extra/cv/alx.hpp"
 
+#include <cmath>
 #include <cstdbool>
 #include <cstddef>
 #include <cstdint>
@@ -55,43 +56,45 @@ int	alx::CV::local_max		(class cv::Mat *restrict img)
 {
 	const ptrdiff_t	rows = img->rows;
 	const ptrdiff_t	cols = img->cols;
-	const ptrdiff_t	step = img->step;
 	/* Minimum distance between local maxima */
-	const int	dist = 2;
+	const int	dist = 8;
 	/* Minimum value of local maxima */
-	const uint8_t	val_min = 1;
+	const float	val_min = 2.0f;
 	class cv::Mat	imgtmp;
 	int		arr_tmp[rows][cols];
 	bool		wh;
 	/* pointer to a pixel (in img) */
-	const uint8_t	*img_pix;
+	float		img_pix;
 	/* pointer to a pixel near img_pix (in img) */
-	const uint8_t	*near_pix;
-	/* pointer to a pixel (same position as img_pix, but in imgtmp) */
-	uint8_t		*tmp_pix;
+	float		near_pix;
 
 	if (img->channels() != 1)
 		return	1;
 	/* Tmp image copy */
 	img->copyTo(imgtmp);
+	imgtmp.convertTo(imgtmp, CV_8U);
+	imgtmp	= cv::Scalar(UINT8_MAX);
 
 	memset(arr_tmp, 0, sizeof(arr_tmp));
 #pragma GCC ivdep
 	for (ptrdiff_t i = 0; i < rows; i++) {
 #pragma GCC ivdep
 	for (ptrdiff_t j = 0; j < cols; j++) {
-		img_pix		= img->data + i*step + j;
-		if (*img_pix < val_min)
+		img_pix		= img->at<float>(i, j);
+
+		if (img_pix < val_min)
 			continue;
 		for (ptrdiff_t k = (i + dist); k >= (i - dist); k--) {
 		for (ptrdiff_t l = (j + dist); l >= (j - dist); l--) {
 			if ((k >= 0) && (k < rows)) {
 			if ((l >= 0) && (l < cols)) {
-				near_pix	= img->data + k*step + l;
-				if (*near_pix > *img_pix)
+			if ((l != i) || (k != j)) {
+				near_pix	= img->at<float>(k, l);
+				if (near_pix > img_pix)
 					goto not_maxima;
-				if (*near_pix == *img_pix)
+				if (near_pix == img_pix)
 					arr_tmp[i][j]	= MAYBE_LOCAL_MAX;
+			}
 			}
 			}
 		}
@@ -100,6 +103,7 @@ int	alx::CV::local_max		(class cv::Mat *restrict img)
 			arr_tmp[i][j]	= LOCAL_MAX;
 		continue;
 not_maxima:
+		arr_tmp[i][j]	= NOT_LOCAL_MAX;
 		;
 	}
 	}
@@ -110,18 +114,20 @@ not_maxima:
 		for (ptrdiff_t i = 0; i < rows; i++) {
 #pragma GCC ivdep
 		for (ptrdiff_t j = 0; j < cols; j++) {
-			img_pix		= img->data + i*step + j;
+			img_pix		= img->at<float>(i, j);
 			if (arr_tmp[i][j] != MAYBE_LOCAL_MAX)
 				continue;
 			for (ptrdiff_t k = (i+dist); k >= (i-dist); k--) {
 			for (ptrdiff_t l = (j+dist); l >= (j-dist); l--) {
 				if ((k >= 0) && (k < rows)) {
 				if ((l >= 0) && (l < cols)) {
-					near_pix = img->data + k*step + l;
-					if (*near_pix == *img_pix) {
+				if ((l != i) || (k != j)) {
+					near_pix = img->at<float>(k, l);
+					if (near_pix == img_pix) {
 						if (!arr_tmp[k][l])
 							goto not_maxima_2;
 					}
+				}
 				}
 				}
 			}
@@ -138,10 +144,8 @@ not_maxima_2:
 	for (ptrdiff_t i = 0; i < rows; i++) {
 #pragma GCC ivdep
 	for (ptrdiff_t j = 0; j < cols; j++) {
-		if (!arr_tmp[i][j]) {
-			tmp_pix		= imgtmp.data + i * step + j;
-			*tmp_pix	= 0;
-		}
+		if (!arr_tmp[i][j])
+			imgtmp.at<uint8_t>(i, j)	= 0;
 	}
 	}
 
@@ -154,14 +158,181 @@ int	alx_cv_local_max		(void *restrict img)
 {
 	return	alx::CV::local_max((class cv::Mat *)img);
 }
-
-int	alx::CV::skeleton		(class cv::Mat *restrict img)
+#if 0
+int	alx::CV::skeleton_B		(class cv::Mat *restrict img)
 {
 	const ptrdiff_t	rows = img->rows;
 	const ptrdiff_t	cols = img->cols;
-	const ptrdiff_t	step = img->step;
 	/* (Half of the) width of the skeleton */
-	const ptrdiff_t	width = 5;
+	const ptrdiff_t	width = 8;
+	int_fast16_t	cnt_slopes;
+	bool		slope_up;
+	class cv::Mat	imgtmp;
+	/* pointer to a pixel (in img) */
+	float		img_pix;
+	/* pointer to a pixel near img_pix (in img) */
+	float		near_pix;
+	float		near_pix_last;
+	float		near_pix_last2;
+	float		max_or_min;
+
+	if (img->channels() != 1)
+		return	1;
+	/* Tmp image copy */
+	img->copyTo(imgtmp);
+	imgtmp.convertTo(imgtmp, CV_8U);
+	imgtmp	= cv::Scalar(0);
+
+#pragma GCC ivdep
+	for (ptrdiff_t i = 0; i < rows; i++) {
+#pragma GCC ivdep
+	for (ptrdiff_t j = 0; j < cols; j++) {
+		img_pix		= img->at<float>(i, j);
+
+		/* Discard pixels of value 1 in skeleton */
+		if (img_pix <= 2 * width) {
+			imgtmp.at<uint8_t>(i, j)	= 0;
+			continue;
+		}
+		if ((i - width < 0)  ||  (i + width >= rows)) {
+			imgtmp.at<uint8_t>(i, j)	= 0;
+			continue;
+		}
+		if ((j - width < 0)  ||  (j + width >= cols)) {
+			imgtmp.at<uint8_t>(i, j)	= 0;
+			continue;
+		}
+		cnt_slopes	= 0;
+		max_or_min	= 0;
+		near_pix_last	= img->at<float>(i+width, j+width-1);
+		near_pix_last2	= img->at<float>(i+width, j+width-2);
+		if (near_pix_last > near_pix_last2)
+			slope_up	= true;
+		else
+			slope_up	= false;
+
+		for (ptrdiff_t k = (i + width); k >= (i - width); k--) {
+			near_pix	= img->at<float>(k, j+width);
+
+			if (!slope_up) {
+				if (near_pix > near_pix_last + 0.5f) {
+				if (near_pix_last > near_pix_last2 + 0.5f) {
+				if (fabsf(near_pix - max_or_min) > 1.0f) {
+					cnt_slopes++;
+					slope_up	= true;
+					max_or_min	= near_pix;
+				}
+				}
+				}
+			} else {
+				if (near_pix < near_pix_last - 0.5f) {
+				if (near_pix_last < near_pix_last2 - 0.5f) {
+				if (fabsf(near_pix - max_or_min) > 1.0f) {
+					slope_up	= false;
+				}
+				}
+				}
+			}
+			near_pix_last2	= near_pix_last;
+			near_pix_last	= near_pix;
+		}
+		for (ptrdiff_t l = (j + width); l >= (j - width); l--) {
+			near_pix	= img->at<float>(i-width, l);
+
+			if (!slope_up) {
+				if (near_pix > near_pix_last + 0.5f) {
+				if (near_pix_last > near_pix_last2 + 0.5f) {
+				if (fabsf(near_pix - max_or_min) > 1.0f) {
+					cnt_slopes++;
+					slope_up	= true;
+					max_or_min	= near_pix;
+				}
+				}
+				}
+			} else {
+				if (near_pix < near_pix_last - 0.5f) {
+				if (near_pix_last < near_pix_last2 - 0.5f) {
+				if (fabsf(near_pix - max_or_min) > 1.0f) {
+					slope_up	= false;
+				}
+				}
+				}
+			}
+			near_pix_last2	= near_pix_last;
+			near_pix_last	= near_pix;
+		}
+		for (ptrdiff_t k = (i - width); k <= (i + width); k++) {
+			near_pix	= img->at<float>(k, j-width);
+
+			if (!slope_up) {
+				if (near_pix > near_pix_last + 0.5f) {
+				if (near_pix_last > near_pix_last2 + 0.5f) {
+				if (fabsf(near_pix - max_or_min) > 1.0f) {
+					cnt_slopes++;
+					slope_up	= true;
+					max_or_min	= near_pix;
+				}
+				}
+				}
+			} else {
+				if (near_pix < near_pix_last - 0.5f) {
+				if (near_pix_last < near_pix_last2 - 0.5f) {
+				if (fabsf(near_pix - max_or_min) > 1.0f) {
+					slope_up	= false;
+				}
+				}
+				}
+			}
+			near_pix_last2	= near_pix_last;
+			near_pix_last	= near_pix;
+		}
+		for (ptrdiff_t l = (j - width); l <= (j + width); l++) {
+			near_pix	= img->at<float>(i+width, l);
+
+			if (!slope_up) {
+				if (near_pix > near_pix_last + 0.5f) {
+				if (near_pix_last > near_pix_last2 + 0.5f) {
+				if (fabsf(near_pix - max_or_min) > 1.0f) {
+					cnt_slopes++;
+					slope_up	= true;
+					max_or_min	= near_pix;
+				}
+				}
+				}
+			} else {
+				if (near_pix < near_pix_last - 0.5f) {
+				if (near_pix_last < near_pix_last2 - 0.5f) {
+				if (fabsf(near_pix - max_or_min) > 1.0f) {
+					slope_up	= false;
+				}
+				}
+				}
+			}
+			near_pix_last2	= near_pix_last;
+			near_pix_last	= near_pix;
+		}
+
+		if (cnt_slopes > 1)
+			imgtmp.at<uint8_t>(i, j)	= UINT8_MAX;
+	}
+	}
+
+	imgtmp.copyTo(*img);
+	imgtmp.release();
+	return	0;
+}
+
+int	alx_cv_skeleton_B			(void *restrict img)
+{
+	return	alx::CV::skeleton_B((class cv::Mat *)img);
+}
+
+int	alx::CV::skeleton_A		(class cv::Mat *restrict img)
+{
+	const ptrdiff_t	rows = img->rows;
+	const ptrdiff_t	cols = img->cols;
+	/* (Half of the) width of the skeleton */
+	const ptrdiff_t	width = 10;
 	ptrdiff_t	dist_x;
 	ptrdiff_t	dist_y;
 	bool		skeleton;
@@ -169,27 +340,26 @@ int	alx::CV::skeleton		(class cv::Mat *restrict img)
 	int_fast16_t	cnt_hi_or_eq[width];
 	class cv::Mat	imgtmp;
 	/* pointer to a pixel (in img) */
-	const uint8_t	*img_pix;
+	float		img_pix;
 	/* pointer to a pixel near img_pix (in img) */
-	const uint8_t	*near_pix;
-	/* pointer to a pixel (same position as img_pix, but in imgtmp) */
-	uint8_t		*tmp_pix;
+	float		near_pix;
 
 	if (img->channels() != 1)
 		return	1;
 	/* Tmp image copy */
 	img->copyTo(imgtmp);
+	imgtmp.convertTo(imgtmp, CV_8U);
+	imgtmp	= cv::Scalar(UINT8_MAX);
 
 #pragma GCC ivdep
 	for (ptrdiff_t i = 0; i < rows; i++) {
 #pragma GCC ivdep
 	for (ptrdiff_t j = 0; j < cols; j++) {
-		img_pix		= img->data + i * step + j;
-		tmp_pix		= imgtmp.data + i * step + j;
+		img_pix		= img->at<float>(i, j);
 
 		/* Discard pixels of value 1 in skeleton */
-		if (*img_pix < 2) {
-			*tmp_pix	= 0;
+		if (img_pix <= 2.0f) {
+			imgtmp.at<uint8_t>(i, j)	= 0;
 			continue;
 		}
 
@@ -200,7 +370,7 @@ int	alx::CV::skeleton		(class cv::Mat *restrict img)
 		for (ptrdiff_t k = (i + width); k >= (i - width); k--) {
 #pragma GCC ivdep
 		for (ptrdiff_t l = (j + width); l >= (j - width); l--) {
-			near_pix	= img->data + k * step + l;
+			near_pix	= img->at<float>(k, l);
 
 			dist_x	= abs(k - i);
 			dist_y	= abs(l - j);
@@ -208,7 +378,7 @@ int	alx::CV::skeleton		(class cv::Mat *restrict img)
 			if ((k >= 0)  &&  (k < rows)) {
 			if ((l >= 0)  &&  (l < cols)) {
 			if (dist_x  ||  dist_y) {
-				if (*near_pix < *img_pix)
+				if (near_pix < img_pix)
 					cnt_lo[std::max(dist_x, dist_y)]++;
 				else
 					cnt_hi_or_eq[std::max(dist_x, dist_y)]++;
@@ -221,14 +391,12 @@ int	alx::CV::skeleton		(class cv::Mat *restrict img)
 		skeleton	= false;
 #pragma GCC ivdep
 		for (ptrdiff_t r = 0; r < width; r++) {
-			if (cnt_lo[r] > (cnt_hi_or_eq[r] + (1.6) * (r + 1)))
+			if (cnt_lo[r] > (cnt_hi_or_eq[r] + (1.3) * (r + 1)))
 				skeleton	= true;
 		}
 
-		if (skeleton)
-			*tmp_pix	= 255;
-		else
-			*tmp_pix	= 0;
+		if (!skeleton)
+			imgtmp.at<uint8_t>(i, j)	= 0;
 	}
 	}
 
@@ -237,11 +405,11 @@ int	alx::CV::skeleton		(class cv::Mat *restrict img)
 	return	0;
 }
 
-int	alx_cv_skeleton			(void *restrict img)
+int	alx_cv_skeleton_A			(void *restrict img)
 {
-	return	alx::CV::skeleton((class cv::Mat *)img);
+	return	alx::CV::skeleton_A((class cv::Mat *)img);
 }
-
+#endif
 int	alx::CV::skeleton_endpts	(class cv::Mat *restrict img)
 {
 	const ptrdiff_t	rows = img->rows;
