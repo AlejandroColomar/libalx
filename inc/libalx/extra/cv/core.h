@@ -96,12 +96,15 @@ void	alx_cv_clone		(img_s *restrict clone,
 				 const img_s *restrict img);
 /* ----- Pixel */
 __attribute__((nonnull))
-int	alx_cv_pixel_get	(const img_s *restrict img,
+int	alx_cv_pixel_get_u8	(const img_s *restrict img,
 				 unsigned char *restrict val,
 				 ptrdiff_t x, ptrdiff_t y);
 __attribute__((nonnull))
-int	alx_cv_pixel_set	(img_s *restrict img,
+int	alx_cv_pixel_set_u8	(img_s *restrict img,
 				 unsigned char val, ptrdiff_t x, ptrdiff_t y);
+__attribute__((nonnull))
+int	alx_cv_pixel_get_flt	(const img_s *restrict img,
+				 float *restrict val, ptrdiff_t x, ptrdiff_t y);
 /* ----- ROI */
 __attribute__((nonnull))
 void	alx_cv_roi_set		(img_s *restrict img,

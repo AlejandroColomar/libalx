@@ -73,12 +73,15 @@ void	alx_cv_clone		(void *restrict clone,
 				 const void *restrict img);
 /* ----- Pixel */
 [[gnu::nonnull]]
-int	alx_cv_pixel_get	(const void *restrict img,
+int	alx_cv_pixel_get_u8	(const void *restrict img,
 				 unsigned char *restrict val,
 				 ptrdiff_t x, ptrdiff_t y);
 [[gnu::nonnull]]
-int	alx_cv_pixel_set	(void *restrict img,
+int	alx_cv_pixel_set_u8	(void *restrict img,
 				 unsigned char val, ptrdiff_t x, ptrdiff_t y);
+[[gnu::nonnull]]
+int	alx_cv_pixel_get_flt	(const void *restrict img,
+				 float *restrict val, ptrdiff_t x, ptrdiff_t y);
 /* ----- ROI */
 [[gnu::nonnull]]
 void	alx_cv_roi_set		(void *restrict img, const void *restrict rect);
@@ -172,11 +175,14 @@ void	clone		(class cv::Mat *restrict clone,
 			 const class cv::Mat *restrict img);
 /* ----- Pixel */
 [[gnu::nonnull]]
-int	pixel_get	(const class cv::Mat *restrict img,
+int	pixel_get_u8	(const class cv::Mat *restrict img,
 			 unsigned char *restrict val, ptrdiff_t x, ptrdiff_t y);
 [[gnu::nonnull]]
-int	pixel_set	(class cv::Mat *restrict img,
+int	pixel_set_u8	(class cv::Mat *restrict img,
 			 unsigned char val, ptrdiff_t x, ptrdiff_t y);
+[[gnu::nonnull]]
+int	pixel_get_flt	(const class cv::Mat *restrict img,
+			 float *restrict val, ptrdiff_t x, ptrdiff_t y);
 /* ----- ROI */
 [[gnu::nonnull]]
 void	roi_set		(class cv::Mat *restrict img,

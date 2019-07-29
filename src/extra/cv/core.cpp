@@ -248,7 +248,7 @@ void	alx_cv_clone		(void *restrict clone, const void *restrict img)
 }
 
 /* ----- Pixel */
-int	alx::CV::pixel_get	(const class cv::Mat *restrict img,
+int	alx::CV::pixel_get_u8	(const class cv::Mat *restrict img,
 				 unsigned char *restrict val,
 				 ptrdiff_t x, ptrdiff_t y)
 {
@@ -263,14 +263,14 @@ int	alx::CV::pixel_get	(const class cv::Mat *restrict img,
 	return	0;
 }
 
-int	alx_cv_pixel_get	(const void *restrict img,
+int	alx_cv_pixel_get_u8	(const void *restrict img,
 				 unsigned char *restrict val,
 				 ptrdiff_t x, ptrdiff_t y)
 {
-	return	alx::CV::pixel_get((const class cv::Mat *)img, val, x, y);
+	return	alx::CV::pixel_get_u8((const class cv::Mat *)img, val, x, y);
 }
 
-int	alx::CV::pixel_set	(class cv::Mat *restrict img,
+int	alx::CV::pixel_set_u8	(class cv::Mat *restrict img,
 				 unsigned char val, ptrdiff_t x, ptrdiff_t y)
 {
 
@@ -284,10 +284,30 @@ int	alx::CV::pixel_set	(class cv::Mat *restrict img,
 	return	0;
 }
 
-int	alx_cv_pixel_set	(void *restrict img,
+int	alx_cv_pixel_set_u8	(void *restrict img,
 				 unsigned char val, ptrdiff_t x, ptrdiff_t y)
 {
-	return	alx::CV::pixel_set((class cv::Mat *)img, val, x, y);
+	return	alx::CV::pixel_set_u8((class cv::Mat *)img, val, x, y);
+}
+
+int	alx::CV::pixel_get_flt	(const class cv::Mat *restrict img,
+				 float *restrict val, ptrdiff_t x, ptrdiff_t y)
+{
+
+	/* TODO: multichannel images */
+	if (img->channels() != 1)
+		return	-1;
+	if (x < 0 || y < 0)
+		return	-1;
+	*val	= img->at<float>(y, x);
+
+	return	0;
+}
+
+int	alx_cv_pixel_get_flt	(const void *restrict img,
+				 float *restrict val, ptrdiff_t x, ptrdiff_t y)
+{
+	return	alx::CV::pixel_get_flt((const class cv::Mat *)img, val, x, y);
 }
 
 /* ----- ROI */
