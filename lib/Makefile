@@ -51,7 +51,8 @@ CV_OBJ		=							\
 		$(TMP_DIR)/extra/cv/alx.o				\
 		$(TMP_DIR)/extra/cv/core.o				\
 		$(TMP_DIR)/extra/cv/highgui.o				\
-		$(TMP_DIR)/extra/cv/imgproc.o
+		$(TMP_DIR)/extra/cv/imgproc.o				\
+		$(TMP_DIR)/extra/cv/ximgproc.o
 GSL_OBJ		=							\
 		$(TMP_DIR)/extra/gsl/distributions/binomial.o		\
 		$(TMP_DIR)/extra/gsl/distributions/exponential.o	\

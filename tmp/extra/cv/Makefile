@@ -15,7 +15,8 @@ OBJ		=							\
 		alx.o							\
 		core.o							\
 		highgui.o						\
-		imgproc.o
+		imgproc.o						\
+		ximgproc.o
 
 ALX_INC	=								\
 		$(INC_DIR)/libalx/extra/cv/alx.hpp
@@ -36,6 +37,11 @@ IMGPROC_INC	=							\
 		$(INC_DIR)/libalx/extra/cv/imgproc.hpp
 IMGPROC_SRC	=							\
 		$(SRC_DIR)/extra/cv/imgproc.cpp
+
+XIMGPROC_INC	=							\
+		$(INC_DIR)/libalx/extra/cv/ximgproc.hpp
+XIMGPROC_SRC	=							\
+		$(SRC_DIR)/extra/cv/ximgproc.cpp
 
 ################################################################################
 # CFLAGS
@@ -77,6 +83,13 @@ imgproc.s: $(IMGPROC_SRC) $(IMGPROC_INC)
 	@echo	"	CXX	libalx/tmp/extra/cv/$@"
 	$(Q)$(CXX) $(CXXFLAGS) -I $(INC_DIR) -S $< -o $@
 imgproc.o: imgproc.s
+	@echo	"	AS	libalx/tmp/extra/cv/$@"
+	$(Q)$(AS) $< -o $@
+
+ximgproc.s: $(XIMGPROC_SRC) $(XIMGPROC_INC)
+	@echo	"	CXX	libalx/tmp/extra/cv/$@"
+	$(Q)$(CXX) $(CXXFLAGS) -I $(INC_DIR) -S $< -o $@
+ximgproc.o: ximgproc.s
 	@echo	"	AS	libalx/tmp/extra/cv/$@"
 	$(Q)$(AS) $< -o $@
 
