@@ -14,7 +14,8 @@
 OBJ		=							\
 		common.o						\
 		get.o							\
-		menu.o
+		menu.o							\
+		perror.o
 
 COMMON_INC	=							\
 		$(INC_DIR)/libalx/extra/ncurses/common.h
@@ -34,6 +35,11 @@ MENU_INC	=							\
 		$(INC_DIR)/libalx/extra/ncurses/common.h
 MENU_SRC	=							\
 		$(SRC_DIR)/extra/ncurses/menu.c
+
+PERROR_INC	=							\
+		$(INC_DIR)/libalx/extra/ncurses/perror.h
+PERROR_SRC	=							\
+		$(SRC_DIR)/extra/ncurses/perror.c
 
 ################################################################################
 # CFLAGS
@@ -65,6 +71,13 @@ menu.s: $(MENU_SRC) $(MENU_INC)
 	@echo	"	CC	libalx/tmp/extra/ncurses/$@"
 	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
 menu.o: menu.s
+	@echo	"	AS	libalx/tmp/extra/ncurses/$@"
+	$(Q)$(AS) $< -o $@
+
+perror.s: $(PERROR_SRC) $(PERROR_INC)
+	@echo	"	CC	libalx/tmp/extra/ncurses/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+perror.o: perror.s
 	@echo	"	AS	libalx/tmp/extra/ncurses/$@"
 	$(Q)$(AS) $< -o $@
 

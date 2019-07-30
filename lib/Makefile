@@ -65,7 +65,8 @@ GSL_OBJ		=							\
 NCURSES_OBJ	=							\
 		$(TMP_DIR)/extra/ncurses/common.o			\
 		$(TMP_DIR)/extra/ncurses/get.o				\
-		$(TMP_DIR)/extra/ncurses/menu.o
+		$(TMP_DIR)/extra/ncurses/menu.o				\
+		$(TMP_DIR)/extra/ncurses/perror.o
 EXTRA_OBJ	=							\
 		$(CV_OBJ)						\
 		$(GSL_OBJ)						\

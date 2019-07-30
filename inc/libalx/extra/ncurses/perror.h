@@ -37,11 +37,11 @@
 /******************************************************************************
  ******* function prototypes **************************************************
  ******************************************************************************/
+__attribute__((nonnull(1, 2, 4)))
 void	alx_ncurses_perror__	(WINDOW *win,
 				 const char *restrict file, int line,
 				 const char *restrict func,
-				 const char *restrict str)
-	__attribute__((nonnull(1, 2, 4)));
+				 const char *restrict str);
 
 
 /******************************************************************************
