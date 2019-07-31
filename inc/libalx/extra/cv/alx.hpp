@@ -13,6 +13,8 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include <cstdint>
+
 #include <opencv2/core/core.hpp>
 
 #include "libalx/base/compiler/restrict.hpp"
@@ -29,9 +31,11 @@
 extern	"C"
 {
 [[gnu::nonnull]]
-int	alx_cv_maximum_flt	(void *restrict img, float *restrict max);
+int	alx_cv_maximum_flt	(const void *restrict img,
+				 float *restrict max);
 [[gnu::nonnull]]
-int	alx_cv_maximum_u8	(void *restrict img, uint8_t *restrict max);
+int	alx_cv_maximum_u8	(const void *restrict img,
+				 uint8_t *restrict max);
 [[gnu::nonnull]]
 int	alx_cv_local_max	(void *restrict img);
 [[gnu::nonnull]]
@@ -76,10 +80,10 @@ namespace CV {
  ******* extern functions *****************************************************
  ******************************************************************************/
 [[gnu::nonnull]]
-int	maximum_flt		(class cv::Mat *restrict img,
+int	maximum_flt		(const class cv::Mat *restrict img,
 				 float *restrict max);
 [[gnu::nonnull]]
-int	maximum_u8		(class cv::Mat *restrict img,
+int	maximum_u8		(const class cv::Mat *restrict img,
 				 uint8_t *restrict max);
 [[gnu::nonnull]]
 int	local_max		(class cv::Mat *restrict img);

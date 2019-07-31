@@ -52,7 +52,7 @@ enum	Cell {
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx::CV::maximum_flt		(class cv::Mat *restrict img,
+int	alx::CV::maximum_flt		(const class cv::Mat *restrict img,
 					 float *restrict max)
 {
 	const ptrdiff_t	rows = img->rows;
@@ -74,7 +74,7 @@ int	alx::CV::maximum_flt		(class cv::Mat *restrict img,
 	return	0;
 }
 
-int	alx::CV::maximum_u8		(class cv::Mat *restrict img,
+int	alx::CV::maximum_u8		(const class cv::Mat *restrict img,
 					 uint8_t *restrict max)
 {
 	const ptrdiff_t	rows = img->rows;
