@@ -74,6 +74,12 @@ int	alx::CV::maximum_flt		(const class cv::Mat *restrict img,
 	return	0;
 }
 
+int	alx_cv_maximum_flt		(const void *restrict img,
+					 float *restrict max)
+{
+	return	alx::CV::maximum_flt((const class cv::Mat *)img, max);
+}
+
 int	alx::CV::maximum_u8		(const class cv::Mat *restrict img,
 					 uint8_t *restrict max)
 {
@@ -94,6 +100,12 @@ int	alx::CV::maximum_u8		(const class cv::Mat *restrict img,
 	}
 
 	return	0;
+}
+
+int	alx_cv_maximum_u8		(const void *restrict img,
+					 uint8_t *restrict max)
+{
+	return	alx::CV::maximum_u8((const class cv::Mat *)img, max);
 }
 
 int	alx::CV::local_max		(class cv::Mat *restrict img)
