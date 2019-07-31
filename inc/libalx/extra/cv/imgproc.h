@@ -60,7 +60,7 @@ __attribute__((nonnull))
 int	alx_cv_rotate_orto	(img_s *restrict img, int n);
 __attribute__((nonnull))
 int	alx_cv_rotate		(img_s *restrict img,
-				 ptrdiff_t x, ptrdiff_t y, double angle);
+				 double x, double y, double angle);
 __attribute__((nonnull))
 int	alx_cv_rotate_2rect	(img_s *restrict img,
 				 const rect_rot_s *restrict rect_rot);

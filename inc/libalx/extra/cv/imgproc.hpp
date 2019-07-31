@@ -57,7 +57,7 @@ int	alx_cv_mirror		(void *restrict img, int axis);
 int	alx_cv_rotate_orto	(void *restrict img, int n);
 [[gnu::nonnull]]
 int	alx_cv_rotate		(void *restrict img,
-				 ptrdiff_t x, ptrdiff_t y, double angle);
+				 double x, double y, double angle);
 [[gnu::nonnull]]
 int	alx_cv_rotate_2rect	(void *restrict img,
 				 const void *restrict rect_rot);
@@ -155,7 +155,7 @@ int	mirror		(class cv::Mat *restrict img, int axis);
 int	rotate_orto	(class cv::Mat *restrict img, int n);
 [[gnu::nonnull]]
 int	rotate		(class cv::Mat *restrict img,
-			 ptrdiff_t x, ptrdiff_t y, double angle);
+			 double x, double y, double angle);
 [[gnu::nonnull]]
 int	rotate_2rect	(class cv::Mat *restrict img,
 			 const class cv::RotatedRect *restrict rect_rot);

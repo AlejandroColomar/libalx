@@ -233,7 +233,7 @@ int	alx_cv_rotate_orto	(void *restrict img, int n)
 }
 
 int	alx::CV::rotate		(class cv::Mat *restrict img,
-				 ptrdiff_t x, ptrdiff_t y, double angle)
+				 double x, double y, double angle)
 {
 	class cv::Point_<float>	center;
 	class cv::Mat		map_matrix;
@@ -254,7 +254,7 @@ int	alx::CV::rotate		(class cv::Mat *restrict img,
 }
 
 int	alx_cv_rotate		(void *restrict img,
-				 ptrdiff_t x, ptrdiff_t y, double angle)
+				 double x, double y, double angle)
 {
 	return	alx::CV::rotate((class cv::Mat *)img, x, y, angle);
 }
