@@ -52,6 +52,50 @@ enum	Cell {
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
+int	alx::CV::maximum_flt		(class cv::Mat *restrict img,
+					 float *restrict max)
+{
+	const ptrdiff_t	rows = img->rows;
+	const ptrdiff_t	cols = img->cols;
+	float	img_pix;
+
+	if (img->channels() != 1)
+		return	-1;
+
+	*max	= 0.0f;
+	for (ptrdiff_t i = 0; i < rows; i++) {
+	for (ptrdiff_t j = 0; j < cols; j++) {
+		img_pix		= img->at<float>(i, j);
+		if (img_pix > *max)
+			*max = img_pix;
+	}
+	}
+
+	return	0;
+}
+
+int	alx::CV::maximum_u8		(class cv::Mat *restrict img,
+					 uint8_t *restrict max)
+{
+	const ptrdiff_t	rows = img->rows;
+	const ptrdiff_t	cols = img->cols;
+	uint8_t	img_pix;
+
+	if (img->channels() != 1)
+		return	-1;
+
+	*max	= 0;
+	for (ptrdiff_t i = 0; i < rows; i++) {
+	for (ptrdiff_t j = 0; j < cols; j++) {
+		img_pix		= img->at<uint8_t>(i, j);
+		if (img_pix > *max)
+			*max = img_pix;
+	}
+	}
+
+	return	0;
+}
+
 int	alx::CV::local_max		(class cv::Mat *restrict img)
 {
 	const ptrdiff_t	rows = img->rows;

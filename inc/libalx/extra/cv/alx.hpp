@@ -28,7 +28,10 @@
  ******************************************************************************/
 extern	"C"
 {
-/* ----- Alloc */
+[[gnu::nonnull]]
+int	alx_cv_maximum_flt	(void *restrict img, float *restrict max);
+[[gnu::nonnull]]
+int	alx_cv_maximum_u8	(void *restrict img, uint8_t *restrict max);
 [[gnu::nonnull]]
 int	alx_cv_local_max	(void *restrict img);
 [[gnu::nonnull]]
@@ -72,6 +75,12 @@ namespace CV {
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
+[[gnu::nonnull]]
+int	maximum_flt		(class cv::Mat *restrict img,
+				 float *restrict max);
+[[gnu::nonnull]]
+int	maximum_u8		(class cv::Mat *restrict img,
+				 uint8_t *restrict max);
 [[gnu::nonnull]]
 int	local_max		(class cv::Mat *restrict img);
 #if 0

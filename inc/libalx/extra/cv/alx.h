@@ -35,6 +35,10 @@
  ******* prototypes ***********************************************************
  ******************************************************************************/
 __attribute__((nonnull))
+int	alx_cv_maximum_flt	(img_s *restrict img, float *restrict max);
+__attribute__((nonnull))
+int	alx_cv_maximum_u8	(img_s *restrict img, uint8_t *restrict max);
+__attribute__((nonnull))
 int	alx_cv_local_max	(img_s *restrict img);
 #if 0
 __attribute__((nonnull))
