@@ -31,11 +31,6 @@
 /******************************************************************************
  ******* enums ****************************************************************
  ******************************************************************************/
-enum	Alx_Cv_Smooth {
-	ALX_CV_SMOOTH_MEAN = 1,
-	ALX_CV_SMOOTH_GAUSS,
-	ALX_CV_SMOOTH_MEDIAN
-};
 
 
 /******************************************************************************
@@ -122,15 +117,15 @@ int	alx::CV::smooth		(class cv::Mat *restrict img,
 		return	1;
 
 	switch (method) {
-	case ALX_CV_SMOOTH_MEAN:
+	case alx::CV::SMOOTH_MEAN:
 		cv::blur(*img, *img, cv::Size(ksize, ksize), cv::Point(-1,-1),
 							cv::BORDER_DEFAULT);
 		break;
-	case ALX_CV_SMOOTH_GAUSS:
+	case alx::CV::SMOOTH_GAUSS:
 		cv::GaussianBlur(*img, *img, cv::Size(ksize, ksize), 0, 0,
 							cv::BORDER_DEFAULT);
 		break;
-	case ALX_CV_SMOOTH_MEDIAN:
+	case alx::CV::SMOOTH_MEDIAN:
 		cv::medianBlur(*img, *img, ksize);
 		break;
 	default:
