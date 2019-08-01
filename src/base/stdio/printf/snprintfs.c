@@ -43,33 +43,13 @@ int	alx_snprintfs	(char str[restrict],
 			 const char *restrict format, ...)
 {
 	va_list	ap;
-	int	len;
-
-	if (nmemb <= 0)
-		goto ovf;
+	int	status;
 
 	va_start(ap, format);
-	len	= vsnprintf(str, nmemb, format, ap);
+	status	= alx_vsnprintfs(str, written, nmemb, format, ap);
 	va_end(ap);
 
-	if (len < 0)
-		goto err;
-	if (len >= nmemb)
-		goto trunc;
-	if (written)
-		*written = len;
-
-	return	0;
-trunc:
-	if (written)
-		*written = nmemb - 1;
-	errno	= ENOMEM;
-	return	1;
-ovf:
-	errno	= EOVERFLOW;
-err:	if (written)
-		*written = 0;
-	return	-1;
+	return	status;
 }
 
 int	alx_vsnprintfs	(char str[restrict],
