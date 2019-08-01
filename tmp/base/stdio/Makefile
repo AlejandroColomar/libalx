@@ -32,7 +32,8 @@ GET_SRC		=							\
 		$(SRC_DIR)/base/stdio/get.c
 
 PRINTF_B_INC	=							\
-		$(INC_DIR)/libalx/base/stdio/printf/b.h
+		$(INC_DIR)/libalx/base/stdio/printf/b.h			\
+		$(INC_DIR)/libalx/base/compiler/unused.h
 PRINTF_B_SRC	=							\
 		$(SRC_DIR)/base/stdio/printf/b.c
 

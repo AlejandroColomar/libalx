@@ -18,6 +18,8 @@
 
 #include <printf.h>
 
+#include "libalx/base/compiler/unused.h"
+
 
 /******************************************************************************
  ******* macros ***************************************************************
@@ -42,32 +44,34 @@ struct	Printf_Pad {
 /******************************************************************************
  ******* static functions (prototypes) ****************************************
  ******************************************************************************/
-static	int	printf_b_output		(FILE *stream,
-					const struct printf_info *info,
-					const void *const args[]);
-static	int	printf_b_arginf_sz	(const struct printf_info *info,
-					size_t n, int *argtypes, int *size);
+static
+int	b_output	(FILE *stream, const struct printf_info *info,
+			 const void *const args[]);
+static
+int	b_arginf_sz	(const struct printf_info *info,
+			 size_t n, int *argtypes, int *size);
 
-static	uintmax_t printf_b_value	(const struct printf_info *info,
-					const void *arg);
-static	int	printf_b_bin_repr	(bool bin[BIN_REPR_BUFSIZ],
-					const struct printf_info *info,
-					const void *arg);
-static	int	printf_b_bin_len	(const struct printf_info *info,
-					int min_len);
-static	int	printf_b_pad_len	(const struct printf_info *info,
-					int bin_len);
-static	int	printf_b_print_prefix	(FILE *stream,
-					const struct printf_info *info);
-static	int	printf_b_pad_zeros	(FILE *stream,
-					const struct printf_info *info,
-					int min_len);
-static	int	printf_b_print_number	(FILE *stream,
-					const struct printf_info *info,
-					bool bin[BIN_REPR_BUFSIZ],
-					int min_len, int bin_len);
-static	char	printf_pad_ch		(const struct printf_info *info);
-static	int	printf_pad_spaces	(FILE *stream, int pad_len);
+static
+uintmax_t b_value	(const struct printf_info *info, const void *arg);
+static
+int	b_bin_repr	(bool bin[BIN_REPR_BUFSIZ],
+			 const struct printf_info *info, const void *arg);
+static
+int	b_bin_len	(const struct printf_info *info, int min_len);
+static
+int	b_pad_len	(const struct printf_info *info, int bin_len);
+static
+int	b_print_prefix	(FILE *stream, const struct printf_info *info);
+static
+int	b_pad_zeros	(FILE *stream, const struct printf_info *info,
+			 int min_len);
+static
+int	b_print_number	(FILE *stream, const struct printf_info *info,
+			 bool bin[BIN_REPR_BUFSIZ], int min_len, int bin_len);
+static
+char	pad_ch		(const struct printf_info *info);
+static
+int	pad_spaces	(FILE *stream, int pad_len);
 
 
 
@@ -78,9 +82,9 @@ static	int	printf_pad_spaces	(FILE *stream, int pad_len);
 int	alx_printf_b_init	(void)
 {
 
-	if (register_printf_specifier('b', printf_b_output, printf_b_arginf_sz))
+	if (register_printf_specifier('b', b_output, b_arginf_sz))
 		return	-1;
-	if (register_printf_specifier('B', printf_b_output, printf_b_arginf_sz))
+	if (register_printf_specifier('B', b_output, b_arginf_sz))
 		return	-1;
 
 	return	0;
@@ -90,9 +94,9 @@ int	alx_printf_b_init	(void)
 /******************************************************************************
  ******* static functions (definitions) ***************************************
  ******************************************************************************/
-static	int	printf_b_output		(FILE *stream,
-					const struct printf_info *info,
-					const void *const args[])
+static
+int	b_output	(FILE *stream, const struct printf_info *info,
+			 const void *const args[])
 {
 	struct	Printf_Pad	pad = {0};
 	bool	bin[BIN_REPR_BUFSIZ];
@@ -103,16 +107,16 @@ static	int	printf_b_output		(FILE *stream,
 
 	len = 0;
 
-	min_len	= printf_b_bin_repr(bin, info, args[0]);
-	bin_len	= printf_b_bin_len(info, min_len);
+	min_len	= b_bin_repr(bin, info, args[0]);
+	bin_len	= b_bin_len(info, min_len);
 
-	pad.ch = printf_pad_ch(info);
+	pad.ch = pad_ch(info);
 	if (pad.ch == ' ')
-		pad.len = printf_b_pad_len(info, bin_len);
+		pad.len = b_pad_len(info, bin_len);
 
 	/* Padding with ' ' (right aligned) */
 	if ((pad.ch == ' ')  &&  !info->left) {
-		tmp = printf_pad_spaces(stream, pad.len);
+		tmp = pad_spaces(stream, pad.len);
 		if (tmp == EOF)
 			return	EOF;
 		len += tmp;
@@ -120,7 +124,7 @@ static	int	printf_b_output		(FILE *stream,
 
 	/* "0b"/"0B" prefix */
 	if (info->alt) {
-		tmp = printf_b_print_prefix(stream, info);
+		tmp = b_print_prefix(stream, info);
 		if (tmp == EOF)
 			return	EOF;
 		len += tmp;
@@ -128,21 +132,21 @@ static	int	printf_b_output		(FILE *stream,
 	
 	/* Padding with '0' */
 	if (pad.ch == '0') {
-		tmp = printf_b_pad_zeros(stream, info, min_len);
+		tmp = b_pad_zeros(stream, info, min_len);
 		if (tmp == EOF)
 			return	EOF;
 		len += tmp;
 	}
 
 	/* Print number (including leading 0s to fill precission) */
-	tmp = printf_b_print_number(stream, info, bin, min_len, bin_len);
+	tmp = b_print_number(stream, info, bin, min_len, bin_len);
 	if (tmp == EOF)
 		return	EOF;
 	len += tmp;
 
 	/* Padding with ' ' (left aligned) */
 	if (info->left) {
-		tmp = printf_pad_spaces(stream, pad.len);
+		tmp = pad_spaces(stream, pad.len);
 		if (tmp == EOF)
 			return	EOF;
 		len += tmp;
@@ -151,12 +155,13 @@ static	int	printf_b_output		(FILE *stream,
 	return	len;
 }
 
-static	int	printf_b_arginf_sz	(const struct printf_info *info,
-					size_t n, int *argtypes, int *size)
+static
+int	b_arginf_sz	(const struct printf_info *info,
+			 size_t n, int *argtypes, int *size)
 {
 
-	(void)info;
-	(void)size;
+	UNUSED(info);
+	UNUSED(size);
 
 	if (n > 0)
 		argtypes[0] = PA_INT;
@@ -164,8 +169,8 @@ static	int	printf_b_arginf_sz	(const struct printf_info *info,
 	return 1;
 }
 
-static	uintmax_t printf_b_value	(const struct printf_info *info,
-					const void *arg)
+static
+uintmax_t b_value	(const struct printf_info *info, const void *arg)
 {
 
 	if (info->is_long_double)
@@ -179,14 +184,14 @@ static	uintmax_t printf_b_value	(const struct printf_info *info,
 	return	*(unsigned *)arg;
 }
 
-static	int	printf_b_bin_repr	(bool bin[BIN_REPR_BUFSIZ],
-					const struct printf_info *info,
-					const void *arg)
+static
+int	b_bin_repr	(bool bin[BIN_REPR_BUFSIZ],
+			 const struct printf_info *info, const void *arg)
 {
 	uintmax_t	val;
 	int		min_len;
 
-	val	= printf_b_value(info, arg);
+	val	= b_value(info, arg);
 
 	memset(bin, 0, sizeof(bin[0]) * BIN_REPR_BUFSIZ);
 	for (min_len = 0; val; min_len++) {
@@ -200,8 +205,8 @@ static	int	printf_b_bin_repr	(bool bin[BIN_REPR_BUFSIZ],
 	return	min_len;
 }
 
-static	int	printf_b_bin_len	(const struct printf_info *info,
-					int min_len)
+static
+int	b_bin_len	(const struct printf_info *info, int min_len)
 {
 
 	if (info->prec > min_len)
@@ -209,8 +214,8 @@ static	int	printf_b_bin_len	(const struct printf_info *info,
 	return	min_len;
 }
 
-static	int	printf_b_pad_len	(const struct printf_info *info,
-					int bin_len)
+static
+int	b_pad_len	(const struct printf_info *info, int bin_len)
 {
 	int	pad_len;
 
@@ -225,8 +230,8 @@ static	int	printf_b_pad_len	(const struct printf_info *info,
 	return	pad_len;
 }
 
-static	int	printf_b_print_prefix	(FILE *stream,
-					const struct printf_info *info)
+static
+int	b_print_prefix	(FILE *stream, const struct printf_info *info)
 {
 	int	len;
 
@@ -241,9 +246,9 @@ static	int	printf_b_print_prefix	(FILE *stream,
 	return	len;
 }
 
-static	int	printf_b_pad_zeros	(FILE *stream,
-					const struct printf_info *info,
-					int min_len)
+static
+int	b_pad_zeros	(FILE *stream, const struct printf_info *info,
+			 int min_len)
 {
 	int	len;
 	int	tmp;
@@ -266,10 +271,9 @@ static	int	printf_b_pad_zeros	(FILE *stream,
 	return	len;
 }
 
-static	int	printf_b_print_number	(FILE *stream,
-					const struct printf_info *info,
-					bool bin[sizeof(uintmax_t) * CHAR_BIT],
-					int min_len, int bin_len)
+static
+int	b_print_number	(FILE *stream, const struct printf_info *info,
+			 bool bin[BIN_REPR_BUFSIZ], int min_len, int bin_len)
 {
 	int	len;
 
@@ -305,7 +309,8 @@ static	int	printf_b_print_number	(FILE *stream,
 	return	len;
 }
 
-static	char	printf_pad_ch		(const struct printf_info *info)
+static
+char	pad_ch		(const struct printf_info *info)
 {
 
 	if ((info->prec != -1)  ||  (info->pad == ' ')  ||  info->left)
@@ -313,7 +318,8 @@ static	char	printf_pad_ch		(const struct printf_info *info)
 	return	'0';
 }
 
-static	int	printf_pad_spaces	(FILE *stream, int pad_len)
+static
+int	pad_spaces	(FILE *stream, int pad_len)
 {
 	int	len;
 
