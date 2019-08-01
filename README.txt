@@ -1,6 +1,26 @@
 C library
 
-This library provides extensions to glibc and other libraries.
+This library provides extensions to glibc and other libraries (libbsd, OpenCV,
+GSL, ncurses).
+
+Dependencies:
+
+base:
+ - gcc-8
+ - libbsd-dev
+
+cv:
+ + base
+ - g++-8
+ - libopencv-dev (>= 3)
+
+gsl:
+ + base
+ - libgsl-dev
+
+ncurses:
+ + base
+ - libncurses-dev
 
 The majority of the library is licensed with LGPL-2.0-only
-The nix module is licensed with BSD-2-Clause
+The nix module (not yet available) is licensed with BSD-2-Clause
