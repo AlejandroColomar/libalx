@@ -231,8 +231,28 @@ void	alx_cv_extract_rect	(const void *restrict rect,
 				 ptrdiff_t *restrict x, ptrdiff_t *restrict y,
 				 ptrdiff_t *restrict w, ptrdiff_t *restrict h)
 {
-	return	alx::CV::extract_rect((const class cv::Rect_<int> *)rect,
-								x, y, w, h);
+	alx::CV::extract_rect((const class cv::Rect_<int> *)rect, x, y, w, h);
+}
+
+void	alx::CV::extract_rect_rot(const class cv::RotatedRect *restrict rect_rot,
+				 ptrdiff_t *restrict ctr_x,
+				 ptrdiff_t *restrict ctr_y,
+				 ptrdiff_t *restrict w, ptrdiff_t *restrict h)
+{
+
+	*ctr_x	= rect_rot->center.x;
+	*ctr_y	= rect_rot->center.y;
+	*w	= rect_rot->size.width;
+	*h	= rect_rot->size.height;
+}
+
+void	alx_cv_extract_rect_rot	(const void *restrict rect_rot,
+				 ptrdiff_t *restrict ctr_x,
+				 ptrdiff_t *restrict ctr_y,
+				 ptrdiff_t *restrict w, ptrdiff_t *restrict h)
+{
+	alx::CV::extract_rect_rot((const class cv::RotatedRect *)rect_rot,
+							ctr_x, ctr_y, w, h);
 }
 
 /* ----- Copy */

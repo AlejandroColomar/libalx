@@ -90,6 +90,11 @@ __attribute__((nonnull))
 void	alx_cv_extract_rect	(const rect_s *restrict rect,
 				 ptrdiff_t *restrict x, ptrdiff_t *restrict y,
 				 ptrdiff_t *restrict w, ptrdiff_t *restrict h);
+__attribute__((nonnull))
+void	alx_cv_extract_rect_rot	(const rect_rot_s *restrict rect_rot,
+				 ptrdiff_t *restrict ctr_x,
+				 ptrdiff_t *restrict ctr_y,
+				 ptrdiff_t *restrict w, ptrdiff_t *restrict h);
 /* ----- Copy */
 __attribute__((nonnull))
 void	alx_cv_clone		(img_s *restrict clone,
