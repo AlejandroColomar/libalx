@@ -29,16 +29,14 @@
  ******************************************************************************/
 extern	"C"
 {
+[[gnu::nonnull(1, 4), gnu::format(printf, 4, 5), gnu::warn_unused_result]]
 int	alx_snprintfs	(char *restrict str,
 			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
-			 const char *restrict format, ...)
-	__attribute__((nonnull(1, 4), format(printf, 4, 5),
-		       warn_unused_result));
+			 const char *restrict format, ...);
+[[gnu::nonnull(1, 4), gnu::format(printf, 4, 0), gnu::warn_unused_result]]
 int	alx_vsnprintfs	(char *restrict str,
 			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
-			 const char *restrict format, va_list ap)
-	__attribute__((nonnull(1, 4), format(printf, 4, 0),
-		       warn_unused_result));
+			 const char *restrict format, va_list ap);
 }
 
 
@@ -49,12 +47,12 @@ namespace alx {
 
 
 /******************************************************************************
- ******* enums ****************************************************************
+ ******* enum *****************************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* structs / unions *****************************************************
+ ******* struct / union *******************************************************
  ******************************************************************************/
 
 

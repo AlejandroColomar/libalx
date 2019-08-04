@@ -23,11 +23,18 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+/*
+ * int	alx_perror(const char *restrict str);
+ */
 #define alx_perror(str)		do					\
 {									\
 	alx_perror__(__FILE__, __LINE__, __func__, str);		\
 } while (0)
 
+/*
+ * noreturn
+ * void	alx_error(int status, const char *restrict str);
+ */
 #define alx_error(status, str)	do					\
 {									\
 	alx_error__(status, __FILE__, __LINE__, __func__, str);		\
@@ -35,26 +42,26 @@
 
 
 /******************************************************************************
- ******* enums ****************************************************************
+ ******* enum *****************************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* structs / unions *****************************************************
+ ******* struct / union *******************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
  ******* function prototypes **************************************************
  ******************************************************************************/
+__attribute__((nonnull(1, 3)))
 inline
 void	alx_perror__	(const char *restrict file, int line,
-			 const char *restrict func, const char *restrict str)
-	__attribute__((nonnull(1, 3)));
+			 const char *restrict func, const char *restrict str);
+__attribute__((nonnull(2, 4)))
 inline noreturn
 void	alx_error__	(int status, const char *restrict file, int line,
-			 const char *restrict func, const char *restrict str)
-	__attribute__((nonnull(2, 4)));
+			 const char *restrict func, const char *restrict str);
 
 
 /******************************************************************************

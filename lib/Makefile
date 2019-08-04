@@ -41,7 +41,7 @@ BASE_OBJ	=							\
 		$(TMP_DIR)/base/stdlib/popcnt.o				\
 		$(TMP_DIR)/base/stdlib/pow.o				\
 		$(TMP_DIR)/base/stdlib/search.o				\
-		$(TMP_DIR)/base/stdlib/seed_mix.o			\
+		$(TMP_DIR)/base/stdlib/seed.o				\
 		$(TMP_DIR)/base/stdlib/swap.o				\
 		$(TMP_DIR)/base/string/strchr.o				\
 		$(TMP_DIR)/base/string/strgrep.o			\
