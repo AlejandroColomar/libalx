@@ -26,7 +26,7 @@ OBJ		=							\
 		popcnt.o						\
 		pow.o							\
 		search.o						\
-		seed_mix.o						\
+		seed.o							\
 		swap.o
 
 ALLOC_MALLOCS_INC	=						\
@@ -81,10 +81,10 @@ SEARCH_INC	=							\
 SEARCH_SRC	=							\
 		$(SRC_DIR)/base/stdlib/search.c
 
-SEED_MIX_INC	=							\
-		$(INC_DIR)/libalx/base/stdlib/seed_mix.h
-SEED_MIX_SRC	=							\
-		$(SRC_DIR)/base/stdlib/seed_mix.c
+SEED_INC	=							\
+		$(INC_DIR)/libalx/base/stdlib/seed.h
+SEED_SRC	=							\
+		$(SRC_DIR)/base/stdlib/seed.c
 
 SWAP_INC	=							\
 		$(INC_DIR)/libalx/base/stdlib/swap.h
@@ -174,10 +174,10 @@ search.o: search.s
 	@echo	"	AS	libalx/tmp/base/stdlib/$@"
 	$(Q)$(AS) $< -o $@
 
-seed_mix.s: $(SEED_MIX_SRC) $(SEED_MIX_INC)
+seed.s: $(SEED_SRC) $(SEED_INC)
 	@echo	"	CC	libalx/tmp/base/stdlib/$@"
 	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-seed_mix.o: seed_mix.s
+seed.o: seed.s
 	@echo	"	AS	libalx/tmp/base/stdlib/$@"
 	$(Q)$(AS) $< -o $@
 
