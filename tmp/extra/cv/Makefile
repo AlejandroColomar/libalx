@@ -47,7 +47,6 @@ XIMGPROC_SRC	=							\
 # CFLAGS
 CXXFLAGS       += `pkg-config --cflags opencv`
 CXXFLAGS       += `pkg-config --cflags zbar`
-CXXFLAGS       += `pkg-config --cflags tesseract`
 CXXFLAGS       += `pkg-config --cflags lept`
 
 ################################################################################

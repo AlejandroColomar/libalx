@@ -47,9 +47,6 @@ const	uint8_t		alx_prime_8b [PRIME_NUMS_QTY_8b] = {
 		233, 239, 241, 251
 	};
 	uint16_t	alx_prime_16b [PRIME_NUMS_QTY_16b];
-	uint32_t	alx_prime_32b [PRIME_NUMS_QTY_32b];
-
-	bool		alx_is_prime_32b [UINT32_MAX];
 /* static --------------------------------------------------------------------*/
 
 
@@ -74,26 +71,6 @@ void	alx_prime_16b_init	(void)
 	for (uint_fast32_t n = 7; n < UINT16_MAX; n++) {
 		if (is_prime_16b(n))
 			alx_prime_16b[i++]	= n;
-	}
-}
-
-void	alx_prime_32b_init	(void)
-{
-
-	memset(alx_is_prime_32b, true, sizeof(alx_is_prime_32b));
-	alx_is_prime_32b[0]	= false;
-	alx_is_prime_32b[1]	= false;
-
-	for (ptrdiff_t i = 0; i < ARRAY_SSIZE(alx_is_prime_32b); i++) {
-		if (!alx_is_prime_32b[i])
-			continue;
-		for (ptrdiff_t j = 2*i; j < ARRAY_SSIZE(alx_is_prime_32b); j+=i)
-			alx_is_prime_32b[j]	= false;
-	}
-
-	for (ptrdiff_t i = 0, j = 0; i < ARRAY_SSIZE(alx_is_prime_32b); i++) {
-		if (alx_is_prime_32b[i])
-			alx_prime_32b[j++]	= i;
 	}
 }
 

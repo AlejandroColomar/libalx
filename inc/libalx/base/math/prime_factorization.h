@@ -25,7 +25,7 @@
 
 
 /******************************************************************************
- ******* enums ****************************************************************
+ ******* enum *****************************************************************
  ******************************************************************************/
 enum	{
 	PF_NUMERATOR,
@@ -34,7 +34,7 @@ enum	{
 
 
 /******************************************************************************
- ******* structs / unions *****************************************************
+ ******* struct / union *******************************************************
  ******************************************************************************/
 
 
@@ -43,20 +43,15 @@ enum	{
  ******************************************************************************/
 void	alx_prime_factorization_8b_init		(void);
 void	alx_prime_factorization_16b_init	(void);
-void	alx_prime_factorization_32b_init	(void);
 
+__attribute__((nonnull))
 int	alx_prime_factorization_8b(uint8_t n,
 				int8_t pf[static restrict PRIME_NUMS_QTY_8b],
-				bool denominator)
-	__attribute__((nonnull));
+				bool denominator);
+__attribute__((nonnull))
 int	alx_prime_factorization_16b(uint16_t n,
 				int16_t pf[static restrict PRIME_NUMS_QTY_16b],
-				bool denominator)
-	__attribute__((nonnull));
-int	alx_prime_factorization_32b(uint32_t n,
-				int32_t pf[static restrict PRIME_NUMS_QTY_32b],
-				bool denominator)
-	__attribute__((nonnull));
+				bool denominator);
 
 
 /******************************************************************************

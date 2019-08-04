@@ -10,52 +10,37 @@
 ################################################################################
 
 ################################################################################
+# dependencies
+OBJ		=							\
+		ocr.o
+
+OCR_INC	=								\
+		$(INC_DIR)/libalx/extra/ocr/ocr.h
+OCR_SRC	=								\
+		$(SRC_DIR)/extra/ocr/ocr.c
+
+################################################################################
+# CFLAGS
+CXXFLAGS       += `pkg-config --cflags tesseract`
+
+################################################################################
 # target: dependencies
 #	action
 
 PHONY := all
-all: base extra
+all: $(OBJ)
 
 
-PHONY += base
-base:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/assert/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/compiler/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/errno/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/float/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/math/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stdint/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stdio/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stdlib/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/string/
-
-
-PHONY += extra
-extra: cv gsl ncurses ocr
-
-
-PHONY += cv
-cv:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/cv/
-
-PHONY += gsl
-gsl:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/gsl/distributions/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/gsl/rstat/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/gsl/statistics/
-
-PHONY += ncurses
-ncurses:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/ncurses/
-
-PHONY += ocr
-ocr:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/ocr/
+ocr.s: $(OCR_SRC) $(OCR_INC)
+	@echo	"	CXX	libalx/tmp/extra/ocr/$@"
+	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
+ocr.o: ocr.s
+	@echo	"	AS	libalx/tmp/extra/ocr/$@"
+	$(Q)$(AS) $< -o $@
 
 
 PHONY += clean
 clean:
-	@echo	"	RM	*.o *.s"
 	$(Q)rm -f *.o *.s
 
 ################################################################################

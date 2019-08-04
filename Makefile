@@ -89,7 +89,7 @@ export	SZ
 # cflags
 CFLAGS_STD	= -std=gnu17
 
-CFLAGS_MEM	= -mcmodel=large
+CFLAGS_MEM	= -fpic
 
 CFLAGS_BSD	= `pkg-config --cflags libbsd-overlay`
 
@@ -103,6 +103,7 @@ CFLAGS_W       += -Wstrict-prototypes
 CFLAGS_W       += -Werror
 
 CFLAGS_D	= -D _GNU_SOURCE
+CFLAGS_D       += -D _POSIX_C_SOURCE=200809L
 
 CFLAGS_I	= -I $(INC_DIR)
 
@@ -120,7 +121,7 @@ export	CFLAGS
 # c++flags
 CXXFLAGS_STD	= -std=gnu++17
 
-CXXFLAGS_MEM	= -mcmodel=large
+CXXFLAGS_MEM	= -fpic
 
 CXXFLAGS_BSD	= `pkg-config --cflags libbsd-overlay`
 
@@ -133,6 +134,7 @@ CXXFLAGS_W     += -Wextra
 CXXFLAGS_W     += -Werror
 
 CXXFLAGS_D	= -D _GNU_SOURCE
+CXXFLAGS_D     += -D _POSIX_C_SOURCE=200809L
 
 CXXFLAGS_I	= -I $(INC_DIR)
 
@@ -147,6 +149,22 @@ CXXFLAGS       += $(CXXFLAGS_I)
 export	CXXFLAGS
 
 ################################################################################
+# libs
+LDFLAGS_OPT	= -O3
+LDFLAGS_OPT    += -march=native
+LDFLAGS_OPT    += -flto
+LDFLAGS_OPT    += -fuse-linker-plugin
+
+LDFLAGS_PKG	= `pkg-config --libs ncurses`
+
+LDFLAGS_STD	= -l m
+
+LDFLAGS		= -shared
+LDFLAGS        += $(LIBS_OPT)
+LDFLAGS        += $(LIBS_PKG)
+LDFLAGS        += $(LIBS_STD)
+
+export	LDFLAGS
 
 ################################################################################
 # target: dependencies
@@ -180,10 +198,14 @@ ncurses:
 	$(Q)$(MAKE) $@	-C $(TMP_DIR)
 	$(Q)$(MAKE) $@	-C $(LIB_DIR)
 
-PHONY += extra
-extra: cv gsl ncurses
+PHONY += ocr
+ocr:
 	@echo	"	MAKE	$@"
+	$(Q)$(MAKE) $@	-C $(TMP_DIR)
 	$(Q)$(MAKE) $@	-C $(LIB_DIR)
+
+PHONY += extra
+extra: cv gsl ncurses ocr
 
 
 PHONY += tst
@@ -192,12 +214,35 @@ tst: all
 	$(Q)$(MAKE)	-C $(TST_DIR)
 
 
+PHONY += install
+install: uninstall
+	@echo	"	Install:"
+	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/"
+	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/
+	@echo	"	CP -r	./inc/libalx/*"
+	$(Q)cp -v		./inc/libalx/*				\
+					$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/
+	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/"
+	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
+	@echo	"	CP -r	./lib/libalx/*"
+	$(Q)cp -v		./lib/libalx/*				\
+					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
+	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/"
+	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/
+	@echo	"	CP -r	./share/libalx/*"
+	$(Q)cp -r -v		./share/libalx/*			\
+					$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/
+	@echo	"	Done"
+	@echo
+
+
 PHONY += clean
 clean:
-	@echo	"	RM	*.o *.s *.a *-test"
+	@echo	"	RM	*.o *.s *.a *.so *-test"
 	$(Q)find $(TMP_DIR) -type f -name '*.o' -exec rm '{}' '+'
 	$(Q)find $(TMP_DIR) -type f -name '*.s' -exec rm '{}' '+'
 	$(Q)find $(LIB_DIR) -type f -name '*.a' -exec rm '{}' '+'
+	$(Q)find $(LIB_DIR) -type f -name '*.so' -exec rm '{}' '+'
 	$(Q)find $(TST_DIR) -type f -name '*-test' -exec rm '{}' '+'
 
 ################################################################################

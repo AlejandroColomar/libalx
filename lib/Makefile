@@ -67,16 +67,13 @@ NCURSES_OBJ	=							\
 		$(TMP_DIR)/extra/ncurses/get.o				\
 		$(TMP_DIR)/extra/ncurses/menu.o				\
 		$(TMP_DIR)/extra/ncurses/perror.o
-EXTRA_OBJ	=							\
-		$(CV_OBJ)						\
-		$(GSL_OBJ)						\
-		$(NCURSES_OBJ)
+OCR_OBJ		=							\
+		$(TMP_DIR)/extra/ocr/ocr.o
 
 
 ALL	= libalx							\
 	base								\
-	cv gsl ncurses							\
-	extra
+	cv gsl ncurses ocr
 
 # target: dependencies
 #	action
@@ -84,58 +81,78 @@ ALL	= libalx							\
 PHONY := all
 all: $(ALL)
 
+
 PHONY += base
-base: libalx libalx/libalx-base.a
+base: libalx libalx/libalx-base.a libalx/libalx-base.so
 
 
 PHONY += cv
-cv: libalx libalx/libalx-cv.a
+cv: libalx libalx/libalx-cv.a libalx/libalx-cv.so
 
 PHONY += gsl
-gsl: libalx libalx/libalx-gsl.a
+gsl: libalx libalx/libalx-gsl.a libalx/libalx-gsl.so
 
 PHONY += ncurses
-ncurses: libalx libalx/libalx-ncurses.a
+ncurses: libalx libalx/libalx-ncurses.a libalx/libalx-ncurses.so
 
-PHONY += extra
-extra: libalx cv gsl ncurses libalx/libalx-extra.a
+PHONY += ocr
+ocr: libalx libalx/libalx-ocr.a libalx/libalx-ocr.so
 
 
 libalx:
 	@echo	"	MKDIR	libalx/lib/$@"
 	$(Q)mkdir -p		$(LIB_DIR)/$@/
 
+
 libalx/libalx-base.a: $(BASE_OBJ)
 	@echo	"	AR	libalx/lib/$@"
 	$(Q)$(AR) -r -c -s -o $@ $^
+
+libalx/libalx-base.so: $(BASE_OBJ)
+	@echo	"	CC	libalx/lib/$@"
+	$(Q)$(CC) $(LDFLAGS) -o $@ $^
 
 
 libalx/libalx-cv.a: $(CV_OBJ)
 	@echo	"	AR	libalx/lib/$@"
 	$(Q)$(AR) -r -c -s -o $@ $^
 
+libalx/libalx-cv.so: $(CV_OBJ)
+	@echo	"	CC	libalx/lib/$@"
+	$(Q)$(CXX) $(LDFLAGS) -o $@ $^
+
 libalx/libalx-gsl.a: $(GSL_OBJ)
 	@echo	"	AR	libalx/lib/$@"
 	$(Q)$(AR) -r -c -s -o $@ $^
+
+libalx/libalx-gsl.so: $(GSL_OBJ)
+	@echo	"	CC	libalx/lib/$@"
+	$(Q)$(CC) $(LDFLAGS) -o $@ $^
 
 libalx/libalx-ncurses.a: $(NCURSES_OBJ)
 	@echo	"	AR	libalx/lib/$@"
 	$(Q)$(AR) -r -c -s -o $@ $^
 
-libalx/libalx-extra.a: $(EXTRA_OBJ)
+libalx/libalx-ncurses.so: $(NCURSES_OBJ)
+	@echo	"	CC	libalx/lib/$@"
+	$(Q)$(CC) $(LDFLAGS) -o $@ $^
+
+libalx/libalx-ocr.a: $(OCR_OBJ)
 	@echo	"	AR	libalx/lib/$@"
 	$(Q)$(AR) -r -c -s -o $@ $^
+
+libalx/libalx-ocr.so: $(OCR_OBJ)
+	@echo	"	CC	libalx/lib/$@"
+	$(Q)$(CC) $(LDFLAGS) -o $@ $^
 
 
 PHONY += clean
 clean:
-	$(Q)rm -f *.a
+	$(Q)rm -f *.a *.so
 
 ################################################################################
 # Declare the contents of the .PHONY variable as phony.
 .PHONY: $(PHONY)
-
-
 
 
 ################################################################################
