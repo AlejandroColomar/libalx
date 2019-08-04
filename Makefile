@@ -63,11 +63,22 @@ LIB_DIR = $(LIBALX_DIR)/lib/
 TST_DIR = $(LIBALX_DIR)/test/
 
 export	LIBALX_DIR
+
 export	INC_DIR
 export	SRC_DIR
 export	TMP_DIR
 export	LIB_DIR
 export	TST_DIR
+
+# XXX: Set local or not local when building a package
+LOCAL			= local
+INSTALL_INC_DIR		= /usr/$(LOCAL)/include/
+INSTALL_LIB_DIR		= /usr/$(LOCAL)/lib/
+INSTALL_SHARE_DIR	= /usr/$(LOCAL)/share/
+
+export	INSTALL_INC_DIR
+export	INSTALL_LIB_DIR
+export	INSTALL_SHARE_DIR
 
 ################################################################################
 # Make variables (CC, etc...)
@@ -180,6 +191,9 @@ base:
 	$(Q)$(MAKE) $@	-C $(TMP_DIR)
 	$(Q)$(MAKE) $@	-C $(LIB_DIR)
 
+PHONY += extra
+extra: cv gsl ncurses ocr
+
 PHONY += cv
 cv:
 	@echo	"	MAKE	$@"
@@ -204,9 +218,6 @@ ocr:
 	$(Q)$(MAKE) $@	-C $(TMP_DIR)
 	$(Q)$(MAKE) $@	-C $(LIB_DIR)
 
-PHONY += extra
-extra: cv gsl ncurses ocr
-
 
 PHONY += tst
 tst: all
@@ -220,18 +231,30 @@ install: uninstall
 	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/"
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/
 	@echo	"	CP -r	./inc/libalx/*"
-	$(Q)cp -v		./inc/libalx/*				\
+	$(Q)cp -r -v		./inc/libalx/*				\
 					$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/
 	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/"
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
 	@echo	"	CP -r	./lib/libalx/*"
-	$(Q)cp -v		./lib/libalx/*				\
+	$(Q)cp -r -v		./lib/libalx/*				\
 					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
 	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/"
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/
 	@echo	"	CP -r	./share/libalx/*"
 	$(Q)cp -r -v		./share/libalx/*			\
 					$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/
+	@echo	"	Done"
+	@echo
+
+PHONY += uninstall
+uninstall:
+	@echo	"	Clean old installations:"
+	@echo	"	RM -r	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/"
+	$(Q)rm -f -r		$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/
+	@echo	"	RM -r	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/"
+	$(Q)rm -f -r		$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
+	@echo	"	RM -r	$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/"
+	$(Q)rm -f -r		$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/
 	@echo	"	Done"
 	@echo
 
