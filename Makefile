@@ -75,10 +75,12 @@ LOCAL			= local
 INSTALL_INC_DIR		= /usr/$(LOCAL)/include/
 INSTALL_LIB_DIR		= /usr/$(LOCAL)/lib/
 INSTALL_SHARE_DIR	= /usr/$(LOCAL)/share/
+INSTALL_PKGCONFIG_DIR	= /usr/$(LOCAL)/lib/pkgconfig/
 
 export	INSTALL_INC_DIR
 export	INSTALL_LIB_DIR
 export	INSTALL_SHARE_DIR
+export	INSTALL_PKGCONFIG_DIR
 
 ################################################################################
 # Make variables (CC, etc...)
@@ -243,6 +245,11 @@ install: uninstall
 	@echo	"	CP -r	./share/libalx/*"
 	$(Q)cp -r -v		./share/libalx/*			\
 					$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/
+	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/"
+	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/
+	@echo	"	CP -r	./lib/pkgconfig/*"
+	$(Q)cp -r -v		./lib/pkgconfig/*			\
+					$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/
 	@echo	"	Done"
 	@echo
 
@@ -255,6 +262,10 @@ uninstall:
 	$(Q)rm -f -r		$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
 	@echo	"	RM -r	$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/"
 	$(Q)rm -f -r		$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/
+	@echo	"	RM	$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/libalx*.pc"
+	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/
+	$(Q)find		$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/	\
+				-type f -name 'libalx*.pc' -exec rm '{}' '+'
 	@echo	"	Done"
 	@echo
 
