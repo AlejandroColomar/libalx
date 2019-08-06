@@ -65,7 +65,7 @@ SSCAN_SRC	=							\
 #	action
 
 PHONY := all
-all: $(DIRS) $(OBJ)
+all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 
 printf:
@@ -73,47 +73,34 @@ printf:
 	$(Q)mkdir -p		$@/
 
 
-get.s: $(GET_SRC) $(GET_INC)
+%.a.s:
 	@echo	"	CC	libalx/tmp/base/stdio/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-get.o: get.s
+	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
+%.so.s:
+	@echo	"	CC	libalx/tmp/base/stdio/$@"
+	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
+%.o: %.s
 	@echo	"	AS	libalx/tmp/base/stdio/$@"
 	$(Q)$(AS) $< -o $@
 
-printf/b.s: $(PRINTF_B_SRC) $(PRINTF_B_INC)
-	@echo	"	CC	libalx/tmp/base/stdio/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-printf/b.o: printf/b.s
-	@echo	"	AS	libalx/tmp/base/stdio/$@"
-	$(Q)$(AS) $< -o $@
 
-printf/sbprintf.s: $(PRINTF_SBPRINTF_SRC) $(PRINTF_SBPRINTF_INC)
-	@echo	"	CC	libalx/tmp/base/stdio/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-printf/sbprintf.o: printf/sbprintf.s
-	@echo	"	AS	libalx/tmp/base/stdio/$@"
-	$(Q)$(AS) $< -o $@
+get.a.s: $(GET_SRC) $(GET_INC)
+get.so.s: $(GET_SRC) $(GET_INC)
 
-printf/snprintfs.s: $(PRINTF_SNPRINTFS_SRC) $(PRINTF_SNPRINTFS_INC)
-	@echo	"	CC	libalx/tmp/base/stdio/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-printf/snprintfs.o: printf/snprintfs.s
-	@echo	"	AS	libalx/tmp/base/stdio/$@"
-	$(Q)$(AS) $< -o $@
+printf/b.a.s: $(PRINTF_B_SRC) $(PRINTF_B_INC)
+printf/b.so.s: $(PRINTF_B_SRC) $(PRINTF_B_INC)
 
-seekc.s: $(SEEKC_SRC) $(SEEKC_INC)
-	@echo	"	CC	libalx/tmp/base/stdio/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-seekc.o: seekc.s
-	@echo	"	AS	libalx/tmp/base/stdio/$@"
-	$(Q)$(AS) $< -o $@
+printf/sbprintf.a.s: $(PRINTF_SBPRINTF_SRC) $(PRINTF_SBPRINTF_INC)
+printf/sbprintf.so.s: $(PRINTF_SBPRINTF_SRC) $(PRINTF_SBPRINTF_INC)
 
-sscan.s: $(SSCAN_SRC) $(SSCAN_INC)
-	@echo	"	CC	libalx/tmp/base/stdio/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-sscan.o: sscan.s
-	@echo	"	AS	libalx/tmp/base/stdio/$@"
-	$(Q)$(AS) $< -o $@
+printf/snprintfs.a.s: $(PRINTF_SNPRINTFS_SRC) $(PRINTF_SNPRINTFS_INC)
+printf/snprintfs.so.s: $(PRINTF_SNPRINTFS_SRC) $(PRINTF_SNPRINTFS_INC)
+
+seekc.a.s: $(SEEKC_SRC) $(SEEKC_INC)
+seekc.so.s: $(SEEKC_SRC) $(SEEKC_INC)
+
+sscan.a.s: $(SSCAN_SRC) $(SSCAN_INC)
+sscan.so.s: $(SSCAN_SRC) $(SSCAN_INC)
 
 
 PHONY += clean

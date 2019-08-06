@@ -96,7 +96,7 @@ SWAP_SRC	=							\
 #	action
 
 PHONY := all
-all: $(DIRS) $(OBJ)
+all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 
 alloc:
@@ -104,89 +104,52 @@ alloc:
 	$(Q)mkdir -p		$@/
 
 
-alloc/mallocs.s: $(ALLOC_MALLOCS_SRC) $(ALLOC_MALLOCS_INC)
+%.a.s:
 	@echo	"	CC	libalx/tmp/base/stdlib/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-alloc/mallocs.o: alloc/mallocs.s
+	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
+%.so.s:
+	@echo	"	CC	libalx/tmp/base/stdlib/$@"
+	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
+%.o: %.s
 	@echo	"	AS	libalx/tmp/base/stdlib/$@"
 	$(Q)$(AS) $< -o $@
 
-array_split_pos_neg.s: $(ARRAY_SPLIT_POS_NEG_SRC) $(ARRAY_SPLIT_POS_NEG_INC)
-	@echo	"	CC	libalx/tmp/base/stdlib/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-array_split_pos_neg.o: array_split_pos_neg.s
-	@echo	"	AS	libalx/tmp/base/stdlib/$@"
-	$(Q)$(AS) $< -o $@
 
-average.s: $(AVERAGE_SRC) $(AVERAGE_INC)
-	@echo	"	CC	libalx/tmp/base/stdlib/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-average.o: average.s
-	@echo	"	AS	libalx/tmp/base/stdlib/$@"
-	$(Q)$(AS) $< -o $@
+alloc/mallocs.a.s: $(ALLOC_MALLOCS_SRC) $(ALLOC_MALLOCS_INC)
+alloc/mallocs.so.s: $(ALLOC_MALLOCS_SRC) $(ALLOC_MALLOCS_INC)
 
-compare.s: $(COMPARE_SRC) $(COMPARE_INC)
-	@echo	"	CC	libalx/tmp/base/stdlib/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-compare.o: compare.s
-	@echo	"	AS	libalx/tmp/base/stdlib/$@"
-	$(Q)$(AS) $< -o $@
+array_split_pos_neg.a.s: $(ARRAY_SPLIT_POS_NEG_SRC) $(ARRAY_SPLIT_POS_NEG_INC)
+array_split_pos_neg.so.s: $(ARRAY_SPLIT_POS_NEG_SRC) $(ARRAY_SPLIT_POS_NEG_INC)
 
-local_maxima.s: $(LOCAL_MAXIMA_SRC) $(LOCAL_MAXIMA_INC)
-	@echo	"	CC	libalx/tmp/base/stdlib/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-local_maxima.o: local_maxima.s
-	@echo	"	AS	libalx/tmp/base/stdlib/$@"
-	$(Q)$(AS) $< -o $@
+average.a.s: $(AVERAGE_SRC) $(AVERAGE_INC)
+average.so.s: $(AVERAGE_SRC) $(AVERAGE_INC)
 
-maximum.s: $(MAXIMUM_SRC) $(MAXIMUM_INC)
-	@echo	"	CC	libalx/tmp/base/stdlib/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-maximum.o: maximum.s
-	@echo	"	AS	libalx/tmp/base/stdlib/$@"
-	$(Q)$(AS) $< -o $@
+compare.a.s: $(COMPARE_SRC) $(COMPARE_INC)
+compare.so.s: $(COMPARE_SRC) $(COMPARE_INC)
 
-minimum.s: $(MINIMUM_SRC) $(MINIMUM_INC)
-	@echo	"	CC	libalx/tmp/base/stdlib/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-minimum.o: minimum.s
-	@echo	"	AS	libalx/tmp/base/stdlib/$@"
-	$(Q)$(AS) $< -o $@
+local_maxima.a.s: $(LOCAL_MAXIMA_SRC) $(LOCAL_MAXIMA_INC)
+local_maxima.so.s: $(LOCAL_MAXIMA_SRC) $(LOCAL_MAXIMA_INC)
 
-popcnt.s: $(POPCNT_SRC) $(POPCNT_INC)
-	@echo	"	CC	libalx/tmp/base/stdlib/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-popcnt.o: popcnt.s
-	@echo	"	AS	libalx/tmp/base/stdlib/$@"
-	$(Q)$(AS) $< -o $@
+maximum.a.s: $(MAXIMUM_SRC) $(MAXIMUM_INC)
+maximum.so.s: $(MAXIMUM_SRC) $(MAXIMUM_INC)
 
-pow.s: $(POW_SRC) $(POW_INC)
-	@echo	"	CC	libalx/tmp/base/stdlib/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-pow.o: pow.s
-	@echo	"	AS	libalx/tmp/base/stdlib/$@"
-	$(Q)$(AS) $< -o $@
+minimum.a.s: $(MINIMUM_SRC) $(MINIMUM_INC)
+minimum.so.s: $(MINIMUM_SRC) $(MINIMUM_INC)
 
-search.s: $(SEARCH_SRC) $(SEARCH_INC)
-	@echo	"	CC	libalx/tmp/base/stdlib/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-search.o: search.s
-	@echo	"	AS	libalx/tmp/base/stdlib/$@"
-	$(Q)$(AS) $< -o $@
+popcnt.a.s: $(POPCNT_SRC) $(POPCNT_INC)
+popcnt.so.s: $(POPCNT_SRC) $(POPCNT_INC)
 
-seed.s: $(SEED_SRC) $(SEED_INC)
-	@echo	"	CC	libalx/tmp/base/stdlib/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-seed.o: seed.s
-	@echo	"	AS	libalx/tmp/base/stdlib/$@"
-	$(Q)$(AS) $< -o $@
+pow.a.s: $(POW_SRC) $(POW_INC)
+pow.so.s: $(POW_SRC) $(POW_INC)
 
-swap.s: $(SWAP_SRC) $(SWAP_INC)
-	@echo	"	CC	libalx/tmp/base/stdlib/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-swap.o: swap.s
-	@echo	"	AS	libalx/tmp/base/stdlib/$@"
-	$(Q)$(AS) $< -o $@
+search.a.s: $(SEARCH_SRC) $(SEARCH_INC)
+search.so.s: $(SEARCH_SRC) $(SEARCH_INC)
+
+seed.a.s: $(SEED_SRC) $(SEED_INC)
+seed.so.s: $(SEED_SRC) $(SEED_INC)
+
+swap.a.s: $(SWAP_SRC) $(SWAP_INC)
+swap.so.s: $(SWAP_SRC) $(SWAP_INC)
 
 
 PHONY += clean

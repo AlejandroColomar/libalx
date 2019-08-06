@@ -104,46 +104,36 @@ libalx:
 	$(Q)mkdir -p		$(LIB_DIR)/$@/
 
 
-libalx/libalx-base.a: $(BASE_OBJ)
+%.a:
 	@echo	"	AR	libalx/lib/$@"
 	$(Q)$(AR) -r -c -s -o $@ $^
 
-libalx/libalx-base.so: $(BASE_OBJ)
+
+libalx/libalx-base.a: $(patsubst %.o,%.a.o,$(BASE_OBJ))
+libalx/libalx-base.so: $(patsubst %.o,%.so.o,$(BASE_OBJ))
 	@echo	"	CC	libalx/lib/$@"
-	$(Q)$(CC) $(LDFLAGS) -o $@ $^
+	$(Q)$(CC) $(LDFLAGS) -o $@ $^ `pkg-config --libs libbsd-overlay`
 
 
-libalx/libalx-cv.a: $(CV_OBJ)
-	@echo	"	AR	libalx/lib/$@"
-	$(Q)$(AR) -r -c -s -o $@ $^
+libalx/libalx-cv.a: $(patsubst %.o,%.a.o,$(CV_OBJ))
+libalx/libalx-cv.so: $(patsubst %.o,%.so.o,$(CV_OBJ))
+	@echo	"	CXX	libalx/lib/$@"
+	$(Q)$(CXX) $(LDFLAGS) -o $@ $^ `pkg-config --libs opencv`
 
-libalx/libalx-cv.so: $(CV_OBJ)
+libalx/libalx-gsl.a: $(patsubst %.o,%.a.o,$(GSL_OBJ))
+libalx/libalx-gsl.so: $(patsubst %.o,%.so.o,$(GSL_OBJ))
 	@echo	"	CC	libalx/lib/$@"
-	$(Q)$(CXX) $(LDFLAGS) -o $@ $^
+	$(Q)$(CC) $(LDFLAGS) -o $@ $^ `pkg-config --libs gsl`
 
-libalx/libalx-gsl.a: $(GSL_OBJ)
-	@echo	"	AR	libalx/lib/$@"
-	$(Q)$(AR) -r -c -s -o $@ $^
-
-libalx/libalx-gsl.so: $(GSL_OBJ)
+libalx/libalx-ncurses.a: $(patsubst %.o,%.a.o,$(NCURSES_OBJ))
+libalx/libalx-ncurses.so: $(patsubst %.o,%.so.o,$(NCURSES_OBJ))
 	@echo	"	CC	libalx/lib/$@"
-	$(Q)$(CC) $(LDFLAGS) -o $@ $^
+	$(Q)$(CC) $(LDFLAGS) -o $@ $^ `pkg-config --libs ncurses`
 
-libalx/libalx-ncurses.a: $(NCURSES_OBJ)
-	@echo	"	AR	libalx/lib/$@"
-	$(Q)$(AR) -r -c -s -o $@ $^
-
-libalx/libalx-ncurses.so: $(NCURSES_OBJ)
+libalx/libalx-ocr.a: $(patsubst %.o,%.a.o,$(OCR_OBJ))
+libalx/libalx-ocr.so: $(patsubst %.o,%.so.o,$(OCR_OBJ))
 	@echo	"	CC	libalx/lib/$@"
-	$(Q)$(CC) $(LDFLAGS) -o $@ $^
-
-libalx/libalx-ocr.a: $(OCR_OBJ)
-	@echo	"	AR	libalx/lib/$@"
-	$(Q)$(AR) -r -c -s -o $@ $^
-
-libalx/libalx-ocr.so: $(OCR_OBJ)
-	@echo	"	CC	libalx/lib/$@"
-	$(Q)$(CC) $(LDFLAGS) -o $@ $^
+	$(Q)$(CC) $(LDFLAGS) -o $@ $^ `pkg-config --libs tesseract`
 
 
 PHONY += clean

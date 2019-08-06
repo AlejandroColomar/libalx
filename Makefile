@@ -102,10 +102,6 @@ export	SZ
 # cflags
 CFLAGS_STD	= -std=gnu17
 
-CFLAGS_MEM	= -fpic
-
-CFLAGS_BSD	= `pkg-config --cflags libbsd-overlay`
-
 CFLAGS_OPT	= -O3
 CFLAGS_OPT     += -march=native
 CFLAGS_OPT     += -flto
@@ -118,25 +114,29 @@ CFLAGS_W       += -Werror
 CFLAGS_D	= -D _GNU_SOURCE
 CFLAGS_D       += -D _POSIX_C_SOURCE=200809L
 
+CFLAGS_PKG	= `pkg-config --cflags libbsd-overlay`
+CFLAGS_PKG     += `pkg-config --cflags tesseract`
+
 CFLAGS_I	= -I $(INC_DIR)
 
 CFLAGS		= $(CFLAGS_STD)
-CFLAGS         += $(CFLAGS_MEM)
-CFLAGS         += $(CFLAGS_BSD)
 CFLAGS         += $(CFLAGS_OPT)
 CFLAGS         += $(CFLAGS_W)
 CFLAGS         += $(CFLAGS_D)
+CFLAGS         += $(CFLAGS_PKG)
 CFLAGS         += $(CFLAGS_I)
 
 export	CFLAGS
 
+CFLAGS_A	= $(CFLAGS)
+CFLAGS_SO	= $(CFLAGS) -fpic
+
+export	CFLAGS_A
+export	CFLAGS_SO
+
 ################################################################################
 # c++flags
 CXXFLAGS_STD	= -std=gnu++17
-
-CXXFLAGS_MEM	= -fpic
-
-CXXFLAGS_BSD	= `pkg-config --cflags libbsd-overlay`
 
 CXXFLAGS_OPT	= -O3
 CXXFLAGS_OPT   += -march=native
@@ -149,17 +149,24 @@ CXXFLAGS_W     += -Werror
 CXXFLAGS_D	= -D _GNU_SOURCE
 CXXFLAGS_D     += -D _POSIX_C_SOURCE=200809L
 
+CXXFLAGS_PKG	= `pkg-config --cflags libbsd-overlay`
+
 CXXFLAGS_I	= -I $(INC_DIR)
 
 CXXFLAGS	= $(CXXFLAGS_STD)
-CXXFLAGS       += $(CXXFLAGS_MEM)
-CXXFLAGS       += $(CXXFLAGS_BSD)
 CXXFLAGS       += $(CXXFLAGS_OPT)
 CXXFLAGS       += $(CXXFLAGS_W)
 CXXFLAGS       += $(CXXFLAGS_D)
+CXXFLAGS       += $(CXXFLAGS_PKG)
 CXXFLAGS       += $(CXXFLAGS_I)
 
 export	CXXFLAGS
+
+CXXFLAGS_A	= $(CXXFLAGS)
+CXXFLAGS_SO	= $(CXXFLAGS) -fpic
+
+export	CXXFLAGS_A
+export	CXXFLAGS_SO
 
 ################################################################################
 # libs
@@ -168,14 +175,11 @@ LDFLAGS_OPT    += -march=native
 LDFLAGS_OPT    += -flto
 LDFLAGS_OPT    += -fuse-linker-plugin
 
-LDFLAGS_PKG	= `pkg-config --libs ncurses`
-
 LDFLAGS_STD	= -l m
 
 LDFLAGS		= -shared
-LDFLAGS        += $(LIBS_OPT)
-LDFLAGS        += $(LIBS_PKG)
-LDFLAGS        += $(LIBS_STD)
+LDFLAGS        += $(LDFLAGS_OPT)
+LDFLAGS        += $(LDFLAGS_STD)
 
 export	LDFLAGS
 
@@ -250,6 +254,11 @@ install: uninstall
 	@echo	"	CP -r	./lib/pkgconfig/*"
 	$(Q)cp -r -v		./lib/pkgconfig/*			\
 					$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/
+	@echo	"	CP	./ect/ld.so.conf.d/*"
+	$(Q)cp -r -v		./etc/ld.so.conf.d/*			\
+					$(DESTDIR)/etc/ld.so.conf.d/
+	@echo	"	LDCONFIG"
+	$(Q)ldconfig
 	@echo	"	Done"
 	@echo
 
@@ -266,6 +275,9 @@ uninstall:
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/
 	$(Q)find		$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/	\
 				-type f -name 'libalx*.pc' -exec rm '{}' '+'
+	@echo	"	RM	$(DESTDIR)/etc/ld.so.conf.d/libalx*.conf"
+	$(Q)find		$(DESTDIR)/etc/ld.so.conf.d/		\
+				-type f -name 'libalx*.conf' -exec rm '{}' '+'
 	@echo	"	Done"
 	@echo
 

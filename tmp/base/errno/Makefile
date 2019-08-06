@@ -25,15 +25,22 @@ ERROR_SRC	=							\
 #	action
 
 PHONY := all
-all: $(OBJ)
+all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 
-error.s: $(ERROR_SRC) $(ERROR_INC)
+%.a.s:
 	@echo	"	CC	libalx/tmp/base/errno/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-error.o: error.s
+	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
+%.so.s:
+	@echo	"	CC	libalx/tmp/base/errno/$@"
+	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
+%.o: %.s
 	@echo	"	AS	libalx/tmp/base/errno/$@"
 	$(Q)$(AS) $< -o $@
+
+
+error.a.s: $(ERROR_SRC) $(ERROR_INC)
+error.so.s: $(ERROR_SRC) $(ERROR_INC)
 
 
 PHONY += clean

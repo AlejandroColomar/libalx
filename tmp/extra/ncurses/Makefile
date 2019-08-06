@@ -42,44 +42,40 @@ PERROR_SRC	=							\
 		$(SRC_DIR)/extra/ncurses/perror.c
 
 ################################################################################
-# CFLAGS
-CFLAGS	+= `pkg-config --cflags ncurses`
+# cflags
+CFLAGS_A	+= `pkg-config --cflags ncurses`
+CFLAGS_SO	+= `pkg-config --cflags ncurses`
 
 ################################################################################
 # target: dependencies
 #	action
 
 PHONY := all
-all: $(OBJ)
+all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 
-common.s: $(COMMON_SRC) $(COMMON_INC)
+%.a.s:
 	@echo	"	CC	libalx/tmp/extra/ncurses/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
-common.o: common.s
+	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
+%.so.s:
+	@echo	"	CC	libalx/tmp/extra/ncurses/$@"
+	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
+%.o: %.s
 	@echo	"	AS	libalx/tmp/extra/ncurses/$@"
 	$(Q)$(AS) $< -o $@
 
-get.s: $(GET_SRC) $(GET_INC)
-	@echo	"	CC	libalx/tmp/extra/ncurses/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
-get.o: get.s
-	@echo	"	AS	libalx/tmp/extra/ncurses/$@"
-	$(Q)$(AS) $< -o $@
 
-menu.s: $(MENU_SRC) $(MENU_INC)
-	@echo	"	CC	libalx/tmp/extra/ncurses/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
-menu.o: menu.s
-	@echo	"	AS	libalx/tmp/extra/ncurses/$@"
-	$(Q)$(AS) $< -o $@
+common.a.s: $(COMMON_SRC) $(COMMON_INC)
+common.so.s: $(COMMON_SRC) $(COMMON_INC)
 
-perror.s: $(PERROR_SRC) $(PERROR_INC)
-	@echo	"	CC	libalx/tmp/extra/ncurses/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
-perror.o: perror.s
-	@echo	"	AS	libalx/tmp/extra/ncurses/$@"
-	$(Q)$(AS) $< -o $@
+get.a.s: $(GET_SRC) $(GET_INC)
+get.so.s: $(GET_SRC) $(GET_INC)
+
+menu.a.s: $(MENU_SRC) $(MENU_INC)
+menu.so.s: $(MENU_SRC) $(MENU_INC)
+
+perror.a.s: $(PERROR_SRC) $(PERROR_INC)
+perror.so.s: $(PERROR_SRC) $(PERROR_INC)
 
 
 PHONY += clean

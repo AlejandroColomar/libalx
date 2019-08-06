@@ -25,15 +25,22 @@ ASSERT_SRC	=							\
 #	action
 
 PHONY := all
-all: $(OBJ)
+all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 
-assert.s: $(ASSERT_SRC) $(ASSERT_INC)
+%.a.s:
 	@echo	"	CC	libalx/tmp/base/assert/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-assert.o: assert.s
+	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
+%.so.s:
+	@echo	"	CC	libalx/tmp/base/assert/$@"
+	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
+%.o: %.s
 	@echo	"	AS	libalx/tmp/base/assert/$@"
 	$(Q)$(AS) $< -o $@
+
+
+assert.a.s: $(ASSERT_SRC) $(ASSERT_INC)
+assert.so.s: $(ASSERT_SRC) $(ASSERT_INC)
 
 
 PHONY += clean

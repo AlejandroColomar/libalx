@@ -20,19 +20,31 @@ MEAN_SRC	=							\
 		$(SRC_DIR)/extra/gsl/statistics/mean.c
 
 ################################################################################
+# cflags
+CFLAGS_A	+= `pkg-config --cflags gsl`
+CFLAGS_SO	+= `pkg-config --cflags gsl`
+
+################################################################################
 # target: dependencies
 #	action
 
 PHONY := all
-all: $(OBJ)
+all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 
-mean.s: $(MEAN_SRC) $(MEAN_INC)
+%.a.s:
 	@echo	"	CC	libalx/tmp/extra/gsl/statistics/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
-mean.o: mean.s
+	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
+%.so.s:
+	@echo	"	CC	libalx/tmp/extra/gsl/statistics/$@"
+	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
+%.o: %.s
 	@echo	"	AS	libalx/tmp/extra/gsl/statistics/$@"
 	$(Q)$(AS) $< -o $@
+
+
+mean.a.s: $(MEAN_SRC) $(MEAN_INC)
+mean.so.s: $(MEAN_SRC) $(MEAN_INC)
 
 
 PHONY += clean

@@ -97,85 +97,52 @@ SCALE_LINEAR_SRC	=						\
 #	action
 
 PHONY := all
-all: $(OBJ)
+all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 
-array_division.s: $(ARRAY_DIVISION_SRC) $(ARRAY_DIVISION_INC)
+%.a.s:
 	@echo	"	CC	libalx/tmp/base/math/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-array_division.o: array_division.s
+	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
+%.so.s:
+	@echo	"	CC	libalx/tmp/base/math/$@"
+	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
+%.o: %.s
 	@echo	"	AS	libalx/tmp/base/math/$@"
 	$(Q)$(AS) $< -o $@
 
-array_multiplication.s: $(ARRAY_MULTIPLICATION_SRC) $(ARRAY_MULTIPLICATION_INC)
-	@echo	"	CC	libalx/tmp/base/math/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-array_multiplication.o: array_multiplication.s
-	@echo	"	AS	libalx/tmp/base/math/$@"
-	$(Q)$(AS) $< -o $@
 
-array_sum.s: $(ARRAY_SUM_SRC) $(ARRAY_SUM_INC)
-	@echo	"	CC	libalx/tmp/base/math/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-array_sum.o: array_sum.s
-	@echo	"	AS	libalx/tmp/base/math/$@"
-	$(Q)$(AS) $< -o $@
+array_division.a.s: $(ARRAY_DIVISION_SRC) $(ARRAY_DIVISION_INC)
+array_division.so.s: $(ARRAY_DIVISION_SRC) $(ARRAY_DIVISION_INC)
 
-binomial_coefficient.s: $(BINOMIAL_COEFFICIENT_SRC) $(BINOMIAL_COEFFICIENT_INC)
-	@echo	"	CC	libalx/tmp/base/math/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-binomial_coefficient.o: binomial_coefficient.s
-	@echo	"	AS	libalx/tmp/base/math/$@"
-	$(Q)$(AS) $< -o $@
+array_multiplication.a.s: $(ARRAY_MULTIPLICATION_SRC) $(ARRAY_MULTIPLICATION_INC)
+array_multiplication.so.s: $(ARRAY_MULTIPLICATION_SRC) $(ARRAY_MULTIPLICATION_INC)
 
-matrix_addition.s: $(MATRIX_ADDITION_SRC) $(MATRIX_ADDITION_INC)
-	@echo	"	CC	libalx/tmp/base/math/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-matrix_addition.o: matrix_addition.s
-	@echo	"	AS	libalx/tmp/base/math/$@"
-	$(Q)$(AS) $< -o $@
+array_sum.a.s: $(ARRAY_SUM_SRC) $(ARRAY_SUM_INC)
+array_sum.so.s: $(ARRAY_SUM_SRC) $(ARRAY_SUM_INC)
 
-matrix_subtraction.s: $(MATRIX_SUBTRACTION_SRC) $(MATRIX_SUBTRACTION_INC)
-	@echo	"	CC	libalx/tmp/base/math/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-matrix_subtraction.o: matrix_subtraction.s
-	@echo	"	AS	libalx/tmp/base/math/$@"
-	$(Q)$(AS) $< -o $@
+binomial_coefficient.a.s: $(BINOMIAL_COEFFICIENT_SRC) $(BINOMIAL_COEFFICIENT_INC)
+binomial_coefficient.so.s: $(BINOMIAL_COEFFICIENT_SRC) $(BINOMIAL_COEFFICIENT_INC)
 
-pascal_triangle.s: $(PASCAL_TRIANGLE_SRC) $(PASCAL_TRIANGLE_INC)
-	@echo	"	CC	libalx/tmp/base/math/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-pascal_triangle.o: pascal_triangle.s
-	@echo	"	AS	libalx/tmp/base/math/$@"
-	$(Q)$(AS) $< -o $@
+matrix_addition.a.s: $(MATRIX_ADDITION_SRC) $(MATRIX_ADDITION_INC)
+matrix_addition.so.s: $(MATRIX_ADDITION_SRC) $(MATRIX_ADDITION_INC)
 
-prime.s: $(PRIME_SRC) $(PRIME_INC)
-	@echo	"	CC	libalx/tmp/base/math/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-prime.o: prime.s
-	@echo	"	AS	libalx/tmp/base/math/$@"
-	$(Q)$(AS) $< -o $@
+matrix_subtraction.a.s: $(MATRIX_SUBTRACTION_SRC) $(MATRIX_SUBTRACTION_INC)
+matrix_subtraction.so.s: $(MATRIX_SUBTRACTION_SRC) $(MATRIX_SUBTRACTION_INC)
 
-prime_defactorization.s: $(PRIME_DEFACTORIZATION_SRC) $(PRIME_DEFACTORIZATION_INC)
-	@echo	"	CC	libalx/tmp/base/math/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-prime_defactorization.o: prime_defactorization.s
-	@echo	"	AS	libalx/tmp/base/math/$@"
-	$(Q)$(AS) $< -o $@
+pascal_triangle.a.s: $(PASCAL_TRIANGLE_SRC) $(PASCAL_TRIANGLE_INC)
+pascal_triangle.so.s: $(PASCAL_TRIANGLE_SRC) $(PASCAL_TRIANGLE_INC)
 
-prime_factorization.s: $(PRIME_FACTORIZATION_SRC) $(PRIME_FACTORIZATION_INC)
-	@echo	"	CC	libalx/tmp/base/math/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-prime_factorization.o: prime_factorization.s
-	@echo	"	AS	libalx/tmp/base/math/$@"
-	$(Q)$(AS) $< -o $@
+prime.a.s: $(PRIME_SRC) $(PRIME_INC)
+prime.so.s: $(PRIME_SRC) $(PRIME_INC)
 
-scale_linear.s: $(SCALE_LINEAR_SRC) $(SCALE_LINEAR_INC)
-	@echo	"	CC	libalx/tmp/base/math/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-scale_linear.o: scale_linear.s
-	@echo	"	AS	libalx/tmp/base/math/$@"
-	$(Q)$(AS) $< -o $@
+prime_defactorization.a.s: $(PRIME_DEFACTORIZATION_SRC) $(PRIME_DEFACTORIZATION_INC)
+prime_defactorization.so.s: $(PRIME_DEFACTORIZATION_SRC) $(PRIME_DEFACTORIZATION_INC)
+
+prime_factorization.a.s: $(PRIME_FACTORIZATION_SRC) $(PRIME_FACTORIZATION_INC)
+prime_factorization.so.s: $(PRIME_FACTORIZATION_SRC) $(PRIME_FACTORIZATION_INC)
+
+scale_linear.a.s: $(SCALE_LINEAR_SRC) $(SCALE_LINEAR_INC)
+scale_linear.so.s: $(SCALE_LINEAR_SRC) $(SCALE_LINEAR_INC)
 
 
 PHONY += clean

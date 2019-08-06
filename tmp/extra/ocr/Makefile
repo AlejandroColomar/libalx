@@ -20,23 +20,31 @@ OCR_SRC	=								\
 		$(SRC_DIR)/extra/ocr/ocr.c
 
 ################################################################################
-# CFLAGS
-CXXFLAGS       += `pkg-config --cflags tesseract`
+# cflags
+CFLAGS_A	+= `pkg-config --cflags tesseract`
+CFLAGS_SO	+= `pkg-config --cflags tesseract`
 
 ################################################################################
 # target: dependencies
 #	action
 
 PHONY := all
-all: $(OBJ)
+all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 
-ocr.s: $(OCR_SRC) $(OCR_INC)
-	@echo	"	CXX	libalx/tmp/extra/ocr/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
-ocr.o: ocr.s
+%.a.s:
+	@echo	"	CC	libalx/tmp/extra/ocr/$@"
+	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
+%.so.s:
+	@echo	"	CC	libalx/tmp/extra/ocr/$@"
+	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
+%.o: %.s
 	@echo	"	AS	libalx/tmp/extra/ocr/$@"
 	$(Q)$(AS) $< -o $@
+
+
+ocr.a.s: $(OCR_SRC) $(OCR_INC)
+ocr.so.s: $(OCR_SRC) $(OCR_INC)
 
 
 PHONY += clean

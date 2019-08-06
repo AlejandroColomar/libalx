@@ -31,22 +31,25 @@ TYPES_SRC	=							\
 #	action
 
 PHONY := all
-all: $(OBJ)
+all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 
-constants.s: $(CONSTANTS_SRC) $(CONSTANTS_INC)
+%.a.s:
 	@echo	"	CC	libalx/tmp/base/stdint/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-constants.o: constants.s
+	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
+%.so.s:
+	@echo	"	CC	libalx/tmp/base/stdint/$@"
+	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
+%.o: %.s
 	@echo	"	AS	libalx/tmp/base/stdint/$@"
 	$(Q)$(AS) $< -o $@
 
-types.s: $(TYPES_SRC) $(TYPES_INC)
-	@echo	"	CC	libalx/tmp/base/stdint/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-types.o: types.s
-	@echo	"	AS	libalx/tmp/base/stdint/$@"
-	$(Q)$(AS) $< -o $@
+
+constants.a.s: $(CONSTANTS_SRC) $(CONSTANTS_INC)
+constants.so.s: $(CONSTANTS_SRC) $(CONSTANTS_INC)
+
+types.a.s: $(TYPES_SRC) $(TYPES_INC)
+types.so.s: $(TYPES_SRC) $(TYPES_INC)
 
 
 PHONY += clean

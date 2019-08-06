@@ -22,19 +22,31 @@ MEDIAN_SRC	=							\
 		$(SRC_DIR)/extra/gsl/rstat/median.c
 
 ################################################################################
+# cflags
+CFLAGS_A	+= `pkg-config --cflags gsl`
+CFLAGS_SO	+= `pkg-config --cflags gsl`
+
+################################################################################
 # target: dependencies
 #	action
 
 PHONY := all
-all: $(OBJ)
+all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 
-median.s: $(MEDIAN_SRC) $(MEDIAN_INC)
+%.a.s:
 	@echo	"	CC	libalx/tmp/extra/gsl/rstat/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
-median.o: median.s
+	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
+%.so.s:
+	@echo	"	CC	libalx/tmp/extra/gsl/rstat/$@"
+	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
+%.o: %.s
 	@echo	"	AS	libalx/tmp/extra/gsl/rstat/$@"
 	$(Q)$(AS) $< -o $@
+
+
+median.a.s: $(MEDIAN_SRC) $(MEDIAN_INC)
+median.so.s: $(MEDIAN_SRC) $(MEDIAN_INC)
 
 
 PHONY += clean

@@ -31,22 +31,25 @@ TYPE_SRC	=							\
 #	action
 
 PHONY := all
-all: $(OBJ)
+all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 
-size.s: $(SIZE_SRC) $(SIZE_INC)
+%.a.s:
 	@echo	"	CC	libalx/tmp/base/compiler/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-size.o: size.s
+	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
+%.so.s:
+	@echo	"	CC	libalx/tmp/base/compiler/$@"
+	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
+%.o: %.s
 	@echo	"	AS	libalx/tmp/base/compiler/$@"
 	$(Q)$(AS) $< -o $@
 
-type.s: $(TYPE_SRC) $(TYPE_INC)
-	@echo	"	CC	libalx/tmp/base/compiler/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-type.o: type.s
-	@echo	"	AS	libalx/tmp/base/compiler/$@"
-	$(Q)$(AS) $< -o $@
+
+size.a.s: $(SIZE_SRC) $(SIZE_INC)
+size.so.s: $(SIZE_SRC) $(SIZE_INC)
+
+type.a.s: $(TYPE_SRC) $(TYPE_INC)
+type.so.s: $(TYPE_SRC) $(TYPE_INC)
 
 
 PHONY += clean

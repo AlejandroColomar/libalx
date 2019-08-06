@@ -15,8 +15,10 @@
 OBJ		=							\
 		strchr.o						\
 		strgrep.o						\
-		strgrep-test.o						\
 		strstr.o
+
+OBJ_TST		=							\
+		strgrep-test.o
 
 STRCHR_INC	=							\
 		$(INC_DIR)/libalx/base/string/strchr.h
@@ -47,35 +49,32 @@ STRSTR_SRC	=							\
 #	action
 
 PHONY := all
-all: $(OBJ)
+all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o))) $(OBJ_TST)
 
 
-strchr.s: $(STRCHR_SRC) $(STRCHR_INC)
+%.a.s:
 	@echo	"	CC	libalx/tmp/base/string/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-strchr.o: strchr.s
+	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
+%.so.s:
+	@echo	"	CC	libalx/tmp/base/string/$@"
+	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
+%.o: %.s
 	@echo	"	AS	libalx/tmp/base/string/$@"
 	$(Q)$(AS) $< -o $@
-
-strgrep.s: $(STRGREP_SRC) $(STRGREP_INC)
+%-test.s:
 	@echo	"	CC	libalx/tmp/base/string/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-strgrep.o: strgrep.s
-	@echo	"	AS	libalx/tmp/base/string/$@"
-	$(Q)$(AS) $< -o $@
+	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
+
+
+strchr.a.s: $(STRCHR_SRC) $(STRCHR_INC)
+strchr.so.s: $(STRCHR_SRC) $(STRCHR_INC)
+
+strgrep.a.s: $(STRGREP_SRC) $(STRGREP_INC)
+strgrep.so.s: $(STRGREP_SRC) $(STRGREP_INC)
 strgrep-test.s: $(TST_STRGREP_SRC) $(TST_STRGREP_INC)
-	@echo	"	CC	libalx/tmp/base/string/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-strgrep-test.o: strgrep-test.s
-	@echo	"	AS	libalx/tmp/base/string/$@"
-	$(Q)$(AS) $< -o $@
 
-strstr.s: $(STRSTR_SRC) $(STRSTR_INC)
-	@echo	"	CC	libalx/tmp/base/string/$@"
-	$(Q)$(CC) $(CFLAGS) -S $< -o $@
-strstr.o: strstr.s
-	@echo	"	AS	libalx/tmp/base/string/$@"
-	$(Q)$(AS) $< -o $@
+strstr.a.s: $(STRSTR_SRC) $(STRSTR_INC)
+strstr.so.s: $(STRSTR_SRC) $(STRSTR_INC)
 
 
 PHONY += clean

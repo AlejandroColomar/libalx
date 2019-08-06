@@ -51,54 +51,46 @@ UNIFORM_SRC	=							\
 		$(SRC_DIR)/extra/gsl/distributions/uniform.c
 
 ################################################################################
+# cflags
+CFLAGS_A	+= `pkg-config --cflags gsl`
+CFLAGS_SO	+= `pkg-config --cflags gsl`
+
+################################################################################
 # target: dependencies
 #	action
 
 PHONY := all
-all: $(OBJ)
+all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 
-binomial.s: $(BINOMIAL_SRC) $(BINOMIAL_INC)
+%.a.s:
 	@echo	"	CC	libalx/tmp/extra/gsl/distributions/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
-binomial.o: binomial.s
+	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
+%.so.s:
+	@echo	"	CC	libalx/tmp/extra/gsl/distributions/$@"
+	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
+%.o: %.s
 	@echo	"	AS	libalx/tmp/extra/gsl/distributions/$@"
 	$(Q)$(AS) $< -o $@
 
-exponential.s: $(EXPONENTIAL_SRC) $(EXPONENTIAL_INC)
-	@echo	"	CC	libalx/tmp/extra/gsl/distributions/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
-exponential.o: exponential.s
-	@echo	"	AS	libalx/tmp/extra/gsl/distributions/$@"
-	$(Q)$(AS) $< -o $@
 
-geometric.s: $(GEOMETRIC_SRC) $(GEOMETRIC_INC)
-	@echo	"	CC	libalx/tmp/extra/gsl/distributions/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
-geometric.o: geometric.s
-	@echo	"	AS	libalx/tmp/extra/gsl/distributions/$@"
-	$(Q)$(AS) $< -o $@
+binomial.a.s: $(BINOMIAL_SRC) $(BINOMIAL_INC)
+binomial.so.s: $(BINOMIAL_SRC) $(BINOMIAL_INC)
 
-normal.s: $(NORMAL_SRC) $(NORMAL_INC)
-	@echo	"	CC	libalx/tmp/extra/gsl/distributions/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
-normal.o: normal.s
-	@echo	"	AS	libalx/tmp/extra/gsl/distributions/$@"
-	$(Q)$(AS) $< -o $@
+exponential.a.s: $(EXPONENTIAL_SRC) $(EXPONENTIAL_INC)
+exponential.so.s: $(EXPONENTIAL_SRC) $(EXPONENTIAL_INC)
 
-poisson.s: $(POISSON_SRC) $(POISSON_INC)
-	@echo	"	CC	libalx/tmp/extra/gsl/distributions/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
-poisson.o: poisson.s
-	@echo	"	AS	libalx/tmp/extra/gsl/distributions/$@"
-	$(Q)$(AS) $< -o $@
+geometric.a.s: $(GEOMETRIC_SRC) $(GEOMETRIC_INC)
+geometric.so.s: $(GEOMETRIC_SRC) $(GEOMETRIC_INC)
 
-uniform.s: $(UNIFORM_SRC) $(UNIFORM_INC)
-	@echo	"	CC	libalx/tmp/extra/gsl/distributions/$@"
-	$(Q)$(CC) $(CFLAGS) -I $(INC_DIR) -S $< -o $@
-uniform.o: uniform.s
-	@echo	"	AS	libalx/tmp/extra/gsl/distributions/$@"
-	$(Q)$(AS) $< -o $@
+normal.a.s: $(NORMAL_SRC) $(NORMAL_INC)
+normal.so.s: $(NORMAL_SRC) $(NORMAL_INC)
+
+poisson.a.s: $(POISSON_SRC) $(POISSON_INC)
+poisson.so.s: $(POISSON_SRC) $(POISSON_INC)
+
+uniform.a.s: $(UNIFORM_SRC) $(UNIFORM_INC)
+uniform.so.s: $(UNIFORM_SRC) $(UNIFORM_INC)
 
 
 PHONY += clean

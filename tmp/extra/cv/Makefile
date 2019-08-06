@@ -44,53 +44,43 @@ XIMGPROC_SRC	=							\
 		$(SRC_DIR)/extra/cv/ximgproc.cpp
 
 ################################################################################
-# CFLAGS
-CXXFLAGS       += `pkg-config --cflags opencv`
-CXXFLAGS       += `pkg-config --cflags zbar`
-CXXFLAGS       += `pkg-config --cflags lept`
+# cflags
+CXXFLAGS_A	+= `pkg-config --cflags opencv`
+CXXFLAGS_SO	+= `pkg-config --cflags opencv`
 
 ################################################################################
 # target: dependencies
 #	action
 
 PHONY := all
-all: $(OBJ)
+all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 
-alx.s: $(ALX_SRC) $(ALX_INC)
+%.a.s:
 	@echo	"	CXX	libalx/tmp/extra/cv/$@"
-	$(Q)$(CXX) $(CXXFLAGS) -I $(INC_DIR) -S $< -o $@
-alx.o: alx.s
+	$(Q)$(CC) $(CXXFLAGS_A) -S $< -o $@
+%.so.s:
+	@echo	"	CXX	libalx/tmp/extra/cv/$@"
+	$(Q)$(CC) $(CXXFLAGS_SO) -S $< -o $@
+%.o: %.s
 	@echo	"	AS	libalx/tmp/extra/cv/$@"
 	$(Q)$(AS) $< -o $@
 
-core.s: $(CORE_SRC) $(CORE_INC)
-	@echo	"	CXX	libalx/tmp/extra/cv/$@"
-	$(Q)$(CXX) $(CXXFLAGS) -I $(INC_DIR) -S $< -o $@
-core.o: core.s
-	@echo	"	AS	libalx/tmp/extra/cv/$@"
-	$(Q)$(AS) $< -o $@
 
-highgui.s: $(HIGHGUI_SRC) $(HIGHGUI_INC)
-	@echo	"	CXX	libalx/tmp/extra/cv/$@"
-	$(Q)$(CXX) $(CXXFLAGS) -I $(INC_DIR) -S $< -o $@
-highgui.o: highgui.s
-	@echo	"	AS	libalx/tmp/extra/cv/$@"
-	$(Q)$(AS) $< -o $@
+alx.a.s: $(ALX_SRC) $(ALX_INC)
+alx.so.s: $(ALX_SRC) $(ALX_INC)
 
-imgproc.s: $(IMGPROC_SRC) $(IMGPROC_INC)
-	@echo	"	CXX	libalx/tmp/extra/cv/$@"
-	$(Q)$(CXX) $(CXXFLAGS) -I $(INC_DIR) -S $< -o $@
-imgproc.o: imgproc.s
-	@echo	"	AS	libalx/tmp/extra/cv/$@"
-	$(Q)$(AS) $< -o $@
+core.a.s: $(CORE_SRC) $(CORE_INC)
+core.so.s: $(CORE_SRC) $(CORE_INC)
 
-ximgproc.s: $(XIMGPROC_SRC) $(XIMGPROC_INC)
-	@echo	"	CXX	libalx/tmp/extra/cv/$@"
-	$(Q)$(CXX) $(CXXFLAGS) -I $(INC_DIR) -S $< -o $@
-ximgproc.o: ximgproc.s
-	@echo	"	AS	libalx/tmp/extra/cv/$@"
-	$(Q)$(AS) $< -o $@
+highgui.a.s: $(HIGHGUI_SRC) $(HIGHGUI_INC)
+highgui.so.s: $(HIGHGUI_SRC) $(HIGHGUI_INC)
+
+imgproc.a.s: $(IMGPROC_SRC) $(IMGPROC_INC)
+imgproc.so.s: $(IMGPROC_SRC) $(IMGPROC_INC)
+
+ximgproc.a.s: $(XIMGPROC_SRC) $(XIMGPROC_INC)
+ximgproc.so.s: $(XIMGPROC_SRC) $(XIMGPROC_INC)
 
 
 PHONY += clean
