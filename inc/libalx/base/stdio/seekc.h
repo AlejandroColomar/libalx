@@ -34,28 +34,28 @@
 /******************************************************************************
  ******* function prototypes **************************************************
  ******************************************************************************/
+__attribute__((always_inline))
 inline
-int	alx_seekc(char c)
-	__attribute__((always_inline));
+int	alx_seekc	(char c);
+__attribute__((nonnull))
 inline
-int	alx_fseekc(FILE *stream, char c)
-	__attribute__((nonnull));
+int	alx_fseekc	(FILE *stream, char c);
+__attribute__((always_inline))
 inline
-int	alx_wait4enter(void)
-	__attribute__((always_inline));
+int	alx_wait4enter	(void);
 
 
 /******************************************************************************
  ******* inline functions *****************************************************
  ******************************************************************************/
 inline
-int	alx_seekc(char c)
+int	alx_seekc	(char c)
 {
 	return	alx_fseekc(stdin, c);
 }
 
 inline
-int	alx_fseekc(FILE *stream, char c)
+int	alx_fseekc	(FILE *stream, char c)
 {
 	int ch;
 
@@ -67,7 +67,7 @@ int	alx_fseekc(FILE *stream, char c)
 }
 
 inline
-int	alx_wait4enter(void)
+int	alx_wait4enter	(void)
 {
 	return	alx_seekc('\n');
 }

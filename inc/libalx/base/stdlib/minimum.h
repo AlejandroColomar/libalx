@@ -31,55 +31,64 @@
 
 
 /******************************************************************************
- ******* enums ****************************************************************
+ ******* enum *****************************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* structs / unions *****************************************************
+ ******* struct / union *******************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* extern functions *****************************************************
+ ******* function prototypes **************************************************
  ******************************************************************************/
+__attribute__((nonnull, pure))
 ptrdiff_t	alx_minimum_ldbl	(ptrdiff_t nmemb,
 					const long double arr[restrict nmemb]);
+__attribute__((nonnull, pure))
 ptrdiff_t	alx_minimum		(ptrdiff_t nmemb,
 					const double arr[restrict nmemb]);
+__attribute__((nonnull, pure))
 ptrdiff_t	alx_minimum_f		(ptrdiff_t nmemb,
 					const float arr[restrict nmemb]);
+__attribute__((nonnull, pure))
 ptrdiff_t	alx_minimum_uint	(ptrdiff_t nmemb,
 					const unsigned arr[restrict nmemb]);
+__attribute__((nonnull, pure))
 ptrdiff_t	alx_minimum_int		(ptrdiff_t nmemb,
 					const int arr[restrict nmemb]);
+__attribute__((nonnull, pure))
 ptrdiff_t	alx_minimum_u8		(ptrdiff_t nmemb,
 					const uint8_t arr[restrict nmemb]);
+__attribute__((nonnull, pure))
 ptrdiff_t	alx_minimum_s8		(ptrdiff_t nmemb,
 					const int8_t arr[restrict nmemb]);
+__attribute__((nonnull, pure))
 ptrdiff_t	alx_minimum_u16		(ptrdiff_t nmemb,
 					const uint16_t arr[restrict nmemb]);
+__attribute__((nonnull, pure))
 ptrdiff_t	alx_minimum_s16		(ptrdiff_t nmemb,
 					const int16_t arr[restrict nmemb]);
+__attribute__((nonnull, pure))
 ptrdiff_t	alx_minimum_u32		(ptrdiff_t nmemb,
 					const uint32_t arr[restrict nmemb]);
+__attribute__((nonnull, pure))
 ptrdiff_t	alx_minimum_s32		(ptrdiff_t nmemb,
 					const int32_t arr[restrict nmemb]);
+__attribute__((nonnull, pure))
 ptrdiff_t	alx_minimum_u64		(ptrdiff_t nmemb,
 					const uint64_t arr[restrict nmemb]);
+__attribute__((nonnull, pure))
 ptrdiff_t	alx_minimum_s64		(ptrdiff_t nmemb,
 					const int64_t arr[restrict nmemb]);
+__attribute__((nonnull, pure))
 ptrdiff_t	alx_minimum_pdif	(ptrdiff_t nmemb,
 					const ptrdiff_t arr[restrict nmemb]);
 
 
 /******************************************************************************
- ******* static inline functions (prototypes) *********************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* static inline functions (definitions) ********************************
+ ******* inline functions *****************************************************
  ******************************************************************************/
 
 

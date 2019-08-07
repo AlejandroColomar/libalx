@@ -22,12 +22,7 @@
 
 
 /******************************************************************************
- ******* enum *****************************************************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* struct / union *******************************************************
+ ******* enum / struct / union ************************************************
  ******************************************************************************/
 
 
@@ -77,7 +72,7 @@ void	alx_ncurses_deinit	(void)
 	endwin();
 }
 
-void	alx_ncurses_delwin	(WINDOW *win)
+void	alx_ncurses_delwin	(WINDOW *restrict win)
 {
 
 	wbkgd(win, 0);
@@ -86,7 +81,8 @@ void	alx_ncurses_delwin	(WINDOW *win)
 	delwin(win);
 }
 
-void	alx_ncurses_title	(WINDOW *win, const char *restrict title)
+void	alx_ncurses_title	(WINDOW *restrict win,
+				 const char *restrict title)
 {
 	int	w;
 	int	len;
@@ -103,7 +99,8 @@ void	alx_ncurses_title	(WINDOW *win, const char *restrict title)
 	waddch(win, ACS_LTEE);
 }
 
-void	alx_ncurses_subtitle	(WINDOW *win, const char *restrict subtitle)
+void	alx_ncurses_subtitle	(WINDOW *restrict win,
+				 const char *restrict subtitle)
 {
 	int	h;
 	int	w;

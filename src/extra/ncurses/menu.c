@@ -10,6 +10,7 @@
 #include "libalx/extra/ncurses/menu.h"
 
 #include <stdbool.h>
+#include <stddef.h>
 #include <stdint.h>
 
 #include <ncurses.h>
@@ -23,33 +24,31 @@
 
 
 /******************************************************************************
- ******* enums ****************************************************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* structs / unions *****************************************************
+ ******* enum / struct / union ************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
  ******* static functions (prototypes) ****************************************
  ******************************************************************************/
-static	void	_print_menu	(WINDOW *win,
-				int8_t N,
-				const struct Alx_Ncurses_Menu mnu[N]);
-static	int8_t	_usr_input_sel	(WINDOW *win,
-				int8_t N,
-				const struct Alx_Ncurses_Menu mnu[N]);
+static
+void	print_menu	(WINDOW *restrict win,
+			 ptrdiff_t N,
+			 const struct Alx_Ncurses_Menu mnu[static restrict N]);
+static
+ptrdiff_t usr_input_sel	(WINDOW *restrict win,
+			 ptrdiff_t N,
+			 const struct Alx_Ncurses_Menu mnu[static restrict N]);
 
 
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int8_t	alx_ncurses_menu	(int8_t height, int8_t width,
-				int8_t N,
-				const struct Alx_Ncurses_Menu mnu[restrict N],
-				const char *restrict title)
+ptrdiff_t alx_ncurses_menu	(int8_t height, int8_t width,
+				 ptrdiff_t N,
+				 const struct Alx_Ncurses_Menu
+					mnu[static restrict N],
+				 const char *restrict title)
 {
 	WINDOW		*win;
 	int_fast8_t	r, c;
@@ -66,10 +65,11 @@ int8_t	alx_ncurses_menu	(int8_t height, int8_t width,
 	return	sel;
 }
 
-int8_t	alx_ncurses_menu_w	(WINDOW *win,
-				int8_t N,
-				const struct Alx_Ncurses_Menu mnu[restrict N],
-				const char *restrict title)
+ptrdiff_t alx_ncurses_menu_w	(WINDOW *win,
+				 ptrdiff_t N,
+				 const struct Alx_Ncurses_Menu
+					mnu[static restrict N],
+				 const char *restrict title)
 {
 	int_fast8_t	sel;
 
@@ -78,9 +78,9 @@ int8_t	alx_ncurses_menu_w	(WINDOW *win,
 
 	box(win, 0, 0);
 	alx_ncurses_title(win, title);
-	_print_menu(win, N, mnu);
+	print_menu(win, N, mnu);
 
-	sel	= _usr_input_sel(win, N, mnu);
+	sel	= usr_input_sel(win, N, mnu);
 
 	return	sel;
 }
@@ -89,9 +89,10 @@ int8_t	alx_ncurses_menu_w	(WINDOW *win,
 /******************************************************************************
  ******* static functions (definitions) ***************************************
  ******************************************************************************/
-static	void	_print_menu	(WINDOW *win,
-				int8_t N,
-				const struct Alx_Ncurses_Menu mnu[N])
+static
+void	print_menu	(WINDOW *win,
+			 ptrdiff_t N,
+			 const struct Alx_Ncurses_Menu mnu[static restrict N])
 {
 
 	/* Print menu items */
@@ -100,9 +101,10 @@ static	void	_print_menu	(WINDOW *win,
 	wrefresh(win);
 }
 
-static	int8_t	_usr_input_sel	(WINDOW *win,
-				int8_t N,
-				const struct Alx_Ncurses_Menu mnu[N])
+static
+ptrdiff_t usr_input_sel	(WINDOW *win,
+			 ptrdiff_t N,
+			 const struct Alx_Ncurses_Menu mnu[static restrict N])
 {
 	int_fast8_t	sel;
 	bool		wh;

@@ -43,6 +43,7 @@ void	alx_rsrand	(void);
 inline
 uint32_t alx_seed	(void);
 /*	Robert Jenkins' 96 bit Mix Function	*/
+__attribute__((const))
 uint32_t alx_seed_mix	(uint32_t a, uint32_t b, uint32_t c);
 
 

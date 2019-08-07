@@ -13,8 +13,6 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <cerrno>
-#include <cmath>
 
 
 /******************************************************************************
@@ -23,12 +21,40 @@
 
 
 /******************************************************************************
- ******* enums ****************************************************************
+ ******* extern "C" ***********************************************************
+ ******************************************************************************/
+extern	"C"
+{
+[[gnu::const]]
+long double	alx_gsl_dist_poisson_E_ldbl	(long double l);
+[[gnu::const]]
+double		alx_gsl_dist_poisson_E		(double l);
+[[gnu::const]]
+float		alx_gsl_dist_poisson_E_flt	(float l);
+
+[[gnu::const]]
+long double	alx_gsl_dist_poisson_Var_ldbl	(long double l);
+[[gnu::const]]
+double		alx_gsl_dist_poisson_Var	(double l);
+[[gnu::const]]
+float		alx_gsl_dist_poisson_Var_flt	(float l);
+}
+
+
+/******************************************************************************
+ ******* namespace ************************************************************
+ ******************************************************************************/
+namespace alx {
+namespace gsl {
+
+
+/******************************************************************************
+ ******* enum *****************************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* structs / unions *****************************************************
+ ******* struct / union *******************************************************
  ******************************************************************************/
 
 
@@ -38,98 +64,10 @@
 
 
 /******************************************************************************
- ******* static inline functions (prototypes) *********************************
+ ******* namespace ************************************************************
  ******************************************************************************/
-static inline
-long double	alx_gsl_dist_poisson_E_ldbl	(long double l);
-static inline
-double		alx_gsl_dist_poisson_E		(double l);
-static inline
-float		alx_gsl_dist_poisson_E_flt	(float l);
-
-static inline
-long double	alx_gsl_dist_poisson_Var_ldbl	(long double l);
-static inline
-double		alx_gsl_dist_poisson_Var	(double l);
-static inline
-float		alx_gsl_dist_poisson_Var_flt	(float l);
-
-
-/******************************************************************************
- ******* static inline functions (definitions) ********************************
- ******************************************************************************/
-static inline
-long double	alx_gsl_dist_poisson_E_ldbl	(long double l)
-{
-
-	if (l <= 0.0L) {
-		errno	= EDOM;
-		return	nanl("");
-	}
-
-	return	l;
-}
-
-static inline
-double		alx_gsl_dist_poisson_E		(double l)
-{
-
-	if (l <= 0.0) {
-		errno	= EDOM;
-		return	nan("");
-	}
-
-	return	l;
-}
-
-static inline
-float		alx_gsl_dist_poisson_E_flt	(float l)
-{
-
-	if (l <= 0.0f) {
-		errno	= EDOM;
-		return	nanf("");
-	}
-
-	return	l;
-}
-
-
-static inline
-long double	alx_gsl_dist_poisson_Var_ldbl	(long double l)
-{
-
-	if (l <= 0.0L) {
-		errno	= EDOM;
-		return	nanl("");
-	}
-
-	return	l;
-}
-
-static inline
-double		alx_gsl_dist_poisson_Var	(double l)
-{
-
-	if (l <= 0.0) {
-		errno	= EDOM;
-		return	nan("");
-	}
-
-	return	l;
-}
-
-static inline
-float		alx_gsl_dist_poisson_Var_flt	(float l)
-{
-
-	if (l <= 0.0f) {
-		errno	= EDOM;
-		return	nanf("");
-	}
-
-	return	l;
-}
+}	/* namespace gsl */
+}	/* namespace alx */
 
 
 /******************************************************************************

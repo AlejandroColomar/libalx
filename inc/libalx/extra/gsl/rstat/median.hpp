@@ -25,55 +25,76 @@
 
 
 /******************************************************************************
- ******* enums ****************************************************************
+ ******* extern "C" ***********************************************************
+ ******************************************************************************/
+extern	"C"
+{
+[[gnu::nonnull]][[gnu::pure]]
+long double alx_gsl_rstat_median_ldbl	(ptrdiff_t nmemb,
+					 const long double *restrict x);
+[[gnu::nonnull]][[gnu::pure]]
+float	alx_gsl_rstat_median_flt	(ptrdiff_t nmemb,
+					 const float *restrict x);
+[[gnu::nonnull]][[gnu::pure]]
+double	alx_gsl_rstat_median_uint	(ptrdiff_t nmemb,
+					 const unsigned *restrict x);
+[[gnu::nonnull]][[gnu::pure]]
+double	alx_gsl_rstat_median_int	(ptrdiff_t nmemb,
+					 const int *restrict x);
+[[gnu::nonnull]][[gnu::pure]]
+double	alx_gsl_rstat_median_u8		(ptrdiff_t nmemb,
+					 const uint8_t *restrict x);
+[[gnu::nonnull]][[gnu::pure]]
+double	alx_gsl_rstat_median_s8		(ptrdiff_t nmemb,
+					 const int8_t *restrict x);
+[[gnu::nonnull]][[gnu::pure]]
+double	alx_gsl_rstat_median_u16	(ptrdiff_t nmemb,
+					 const uint16_t *restrict x);
+[[gnu::nonnull]][[gnu::pure]]
+double	alx_gsl_rstat_median_s16	(ptrdiff_t nmemb,
+					 const int16_t *restrict x);
+[[gnu::nonnull]][[gnu::pure]]
+double	alx_gsl_rstat_median_u32	(ptrdiff_t nmemb,
+					 const uint32_t *restrict x);
+[[gnu::nonnull]][[gnu::pure]]
+double	alx_gsl_rstat_median_s32	(ptrdiff_t nmemb,
+					 const int32_t *restrict x);
+[[gnu::nonnull]][[gnu::pure]]
+long double alx_gsl_rstat_median_u64	(ptrdiff_t nmemb,
+					 const uint64_t *restrict x);
+[[gnu::nonnull]][[gnu::pure]]
+long double alx_gsl_rstat_median_s64	(ptrdiff_t nmemb,
+					 const int64_t *restrict x);
+}
+
+
+/******************************************************************************
+ ******* namespace ************************************************************
+ ******************************************************************************/
+namespace alx {
+namespace gsl {
+
+
+/******************************************************************************
+ ******* enum *****************************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* structs / unions *****************************************************
+ ******* struct / union *******************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
-extern	"C"
-{
-long double alx_gsl_rstat_median_ldbl	(ptrdiff_t nmemb,
-					const long double *restrict x);
-float	alx_gsl_rstat_median_flt	(ptrdiff_t nmemb,
-					const float *restrict x);
-double	alx_gsl_rstat_median_uint	(ptrdiff_t nmemb,
-					const unsigned *restrict x);
-double	alx_gsl_rstat_median_int	(ptrdiff_t nmemb,
-					const int *restrict x);
-double	alx_gsl_rstat_median_u8		(ptrdiff_t nmemb,
-					const uint8_t *restrict x);
-double	alx_gsl_rstat_median_s8		(ptrdiff_t nmemb,
-					const int8_t *restrict x);
-double	alx_gsl_rstat_median_u16	(ptrdiff_t nmemb,
-					const uint16_t *restrict x);
-double	alx_gsl_rstat_median_s16	(ptrdiff_t nmemb,
-					const int16_t *restrict x);
-double	alx_gsl_rstat_median_u32	(ptrdiff_t nmemb,
-					const uint32_t *restrict x);
-double	alx_gsl_rstat_median_s32	(ptrdiff_t nmemb,
-					const int32_t *restrict x);
-long double alx_gsl_rstat_median_u64	(ptrdiff_t nmemb,
-					const uint64_t *restrict x);
-long double alx_gsl_rstat_median_s64	(ptrdiff_t nmemb,
-					const int64_t *restrict x);
-}
 
 
 /******************************************************************************
- ******* static inline functions (prototypes) *********************************
+ ******* namespace ************************************************************
  ******************************************************************************/
-
-
-/******************************************************************************
- ******* static inline functions (definitions) ********************************
- ******************************************************************************/
+}	/* namespace gsl */
+}	/* namespace alx */
 
 
 /******************************************************************************

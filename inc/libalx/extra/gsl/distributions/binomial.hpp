@@ -13,9 +13,6 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <cerrno>
-#include <cmath>
-#include <cstdint>
 
 
 /******************************************************************************
@@ -24,12 +21,40 @@
 
 
 /******************************************************************************
- ******* enums ****************************************************************
+ ******* extern "C" ***********************************************************
+ ******************************************************************************/
+extern	"C"
+{
+[[gnu::const]]
+long double	alx_gsl_dist_binomial_E_ldbl	(uint64_t n, long double p);
+[[gnu::const]]
+double		alx_gsl_dist_binomial_E		(uint32_t n, double p);
+[[gnu::const]]
+float		alx_gsl_dist_binomial_E_flt	(uint16_t n, float p);
+
+[[gnu::const]]
+long double	alx_gsl_dist_binomial_Var_ldbl	(uint64_t n, long double p);
+[[gnu::const]]
+double		alx_gsl_dist_binomial_Var	(uint32_t n, double p);
+[[gnu::const]]
+float		alx_gsl_dist_binomial_Var_flt	(uint16_t n, float p);
+}
+
+
+/******************************************************************************
+ ******* namespace ************************************************************
+ ******************************************************************************/
+namespace alx {
+namespace gsl {
+
+
+/******************************************************************************
+ ******* enum *****************************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* structs / unions *****************************************************
+ ******* struct / union *******************************************************
  ******************************************************************************/
 
 
@@ -39,101 +64,10 @@
 
 
 /******************************************************************************
- ******* static inline functions (prototypes) *********************************
+ ******* namespace ************************************************************
  ******************************************************************************/
-static inline
-long double	alx_gsl_dist_binomial_E_ldbl	(uint64_t n, long double p);
-static inline
-double		alx_gsl_dist_binomial_E		(uint32_t n, double p);
-static inline
-float		alx_gsl_dist_binomial_E_flt	(uint16_t n, float p);
-
-static inline
-long double	alx_gsl_dist_binomial_Var_ldbl	(uint64_t n, long double p);
-static inline
-double		alx_gsl_dist_binomial_Var	(uint32_t n, double p);
-static inline
-float		alx_gsl_dist_binomial_Var_flt	(uint16_t n, float p);
-
-
-/******************************************************************************
- ******* static inline functions (definitions) ********************************
- ******************************************************************************/
-static inline
-long double	alx_gsl_dist_binomial_E_ldbl	(uint64_t n, long double p)
-{
-
-	if ((p < 0.0L) || (p > 1.0L)) {
-		errno	= EDOM;
-		return	nanl("");
-	}
-
-	return	n * p;
-}
-
-static inline
-double		alx_gsl_dist_binomial_E		(uint32_t n, double p)
-{
-
-	if ((p < 0.0) || (p > 1.0)) {
-		errno	= EDOM;
-		return	nan("");
-	}
-
-	return	n * p;
-}
-
-static inline
-float		alx_gsl_dist_binomial_E_flt	(uint16_t n, float p)
-{
-
-	if ((p < 0.0f) || (p > 1.0f)) {
-		errno	= EDOM;
-		return	nanf("");
-	}
-
-	return	n * p;
-}
-
-
-static inline
-long double	alx_gsl_dist_binomial_Var_ldbl	(uint64_t n, long double p)
-{
-
-	if ((p < 0.0L) || (p > 1.0L)) {
-		errno	= EDOM;
-		return	nanl("");
-	}
-
-
-	return	n * p * (1.0L - p);
-}
-
-static inline
-double		alx_gsl_dist_binomial_Var	(uint32_t n, double p)
-{
-
-	if ((p < 0.0) || (p > 1.0)) {
-		errno	= EDOM;
-		return	nan("");
-	}
-
-
-	return	n * p * (1.0 - p);
-}
-
-static inline
-float		alx_gsl_dist_binomial_Var_flt	(uint16_t n, float p)
-{
-
-	if ((p < 0.0f) || (p > 1.0f)) {
-		errno	= EDOM;
-		return	nanf("");
-	}
-
-
-	return	n * p * (1.0f - p);
-}
+}	/* namespace gsl */
+}	/* namespace alx */
 
 
 /******************************************************************************

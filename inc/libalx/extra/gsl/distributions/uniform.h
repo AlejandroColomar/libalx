@@ -25,42 +25,43 @@
 
 
 /******************************************************************************
- ******* enums ****************************************************************
+ ******* enum *****************************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* structs / unions *****************************************************
+ ******* struct / union *******************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* extern functions *****************************************************
+ ******* prototypes ***********************************************************
  ******************************************************************************/
-
-
-/******************************************************************************
- ******* static inline functions (prototypes) *********************************
- ******************************************************************************/
-static inline
+__attribute__((const))
+inline
 long double	alx_gsl_dist_uniform_E_ldbl	(long double a, long double b);
-static inline
+__attribute__((const))
+inline
 double		alx_gsl_dist_uniform_E		(double a, double b);
-static inline
+__attribute__((const))
+inline
 float		alx_gsl_dist_uniform_E_flt	(float a, float b);
 
-static inline
+__attribute__((const))
+inline
 long double	alx_gsl_dist_uniform_Var_ldbl	(long double a, long double b);
-static inline
+__attribute__((const))
+inline
 double		alx_gsl_dist_uniform_Var	(double a, double b);
-static inline
+__attribute__((const))
+inline
 float		alx_gsl_dist_uniform_Var_flt	(float a, float b);
 
 
 /******************************************************************************
- ******* static inline functions (definitions) ********************************
+ ******* inline ***************************************************************
  ******************************************************************************/
-static inline
+inline
 long double	alx_gsl_dist_uniform_E_ldbl	(long double a, long double b)
 {
 
@@ -72,7 +73,7 @@ long double	alx_gsl_dist_uniform_E_ldbl	(long double a, long double b)
 	return	ALX_AVG(a, b);
 }
 
-static inline
+inline
 double		alx_gsl_dist_uniform_E		(double a, double b)
 {
 
@@ -84,7 +85,7 @@ double		alx_gsl_dist_uniform_E		(double a, double b)
 	return	ALX_AVG(a, b);
 }
 
-static inline
+inline
 float		alx_gsl_dist_uniform_E_flt	(float a, float b)
 {
 
@@ -97,7 +98,7 @@ float		alx_gsl_dist_uniform_E_flt	(float a, float b)
 }
 
 
-static inline
+inline
 long double	alx_gsl_dist_uniform_Var_ldbl	(long double a, long double b)
 {
 
@@ -109,7 +110,7 @@ long double	alx_gsl_dist_uniform_Var_ldbl	(long double a, long double b)
 	return	(b - a) * (b - a) / 12.0L;
 }
 
-static inline
+inline
 double		alx_gsl_dist_uniform_Var	(double a, double b)
 {
 
@@ -121,7 +122,7 @@ double		alx_gsl_dist_uniform_Var	(double a, double b)
 	return	(b - a) * (b - a) / 12.0;
 }
 
-static inline
+inline
 float		alx_gsl_dist_uniform_Var_flt	(float a, float b)
 {
 

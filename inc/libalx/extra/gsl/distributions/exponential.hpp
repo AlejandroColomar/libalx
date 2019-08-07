@@ -13,8 +13,6 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <cerrno>
-#include <cmath>
 
 
 /******************************************************************************
@@ -23,12 +21,40 @@
 
 
 /******************************************************************************
- ******* enums ****************************************************************
+ ******* extern "C" ***********************************************************
+ ******************************************************************************/
+extern	"C"
+{
+[[gnu::const]]
+long double	alx_gsl_dist_exponential_E_ldbl		(long double b);
+[[gnu::const]]
+double		alx_gsl_dist_exponential_E		(double b);
+[[gnu::const]]
+float		alx_gsl_dist_exponential_E_flt		(float b);
+
+[[gnu::const]]
+long double	alx_gsl_dist_exponential_Var_ldbl	(long double b);
+[[gnu::const]]
+double		alx_gsl_dist_exponential_Var		(double b);
+[[gnu::const]]
+float		alx_gsl_dist_exponential_Var_flt	(float b);
+}
+
+
+/******************************************************************************
+ ******* namespace ************************************************************
+ ******************************************************************************/
+namespace alx {
+namespace gsl {
+
+
+/******************************************************************************
+ ******* enum *****************************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* structs / unions *****************************************************
+ ******* struct / union *******************************************************
  ******************************************************************************/
 
 
@@ -38,98 +64,10 @@
 
 
 /******************************************************************************
- ******* static inline functions (prototypes) *********************************
+ ******* namespace ************************************************************
  ******************************************************************************/
-static inline
-long double	alx_gsl_dist_exponential_E_ldbl		(long double b);
-static inline
-double		alx_gsl_dist_exponential_E		(double b);
-static inline
-float		alx_gsl_dist_exponential_E_flt		(float b);
-
-static inline
-long double	alx_gsl_dist_exponential_Var_ldbl	(long double b);
-static inline
-double		alx_gsl_dist_exponential_Var		(double b);
-static inline
-float		alx_gsl_dist_exponential_Var_flt	(float b);
-
-
-/******************************************************************************
- ******* static inline functions (definitions) ********************************
- ******************************************************************************/
-static inline
-long double	alx_gsl_dist_exponential_E_ldbl		(long double b)
-{
-
-	if (b <= 0.0L) {
-		errno	= EDOM;
-		return	nanl("");
-	}
-
-	return	1.0L / b;
-}
-
-static inline
-double		alx_gsl_dist_exponential_E		(double b)
-{
-
-	if (b <= 0.0) {
-		errno	= EDOM;
-		return	nan("");
-	}
-
-	return	1.0 / b;
-}
-
-static inline
-float		alx_gsl_dist_exponential_E_flt		(float b)
-{
-
-	if (b <= 0.0f) {
-		errno	= EDOM;
-		return	nanf("");
-	}
-
-	return	1.0f / b;
-}
-
-
-static inline
-long double	alx_gsl_dist_exponential_Var_ldbl	(long double b)
-{
-
-	if (b <= 0.0L) {
-		errno	= EDOM;
-		return	nanl("");
-	}
-
-	return	1.0L / (b * b);
-}
-
-static inline
-double		alx_gsl_dist_exponential_Var		(double b)
-{
-
-	if (b <= 0.0) {
-		errno	= EDOM;
-		return	nan("");
-	}
-
-	return	1.0 / (b * b);
-}
-
-static inline
-float		alx_gsl_dist_exponential_Var_flt	(float b)
-{
-
-	if (b <= 0.0f) {
-		errno	= EDOM;
-		return	nanf("");
-	}
-
-	return	1.0f / (b * b);
-}
+}	/* namespace gsl */
+}	/* namespace alx */
 
 
 /******************************************************************************

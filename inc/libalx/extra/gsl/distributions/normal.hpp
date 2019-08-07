@@ -21,48 +21,69 @@
 
 
 /******************************************************************************
- ******* enums ****************************************************************
+ ******* extern "C" ***********************************************************
+ ******************************************************************************/
+extern	"C"
+{
+[[gnu::const]]
+long double	alx_gsl_dist_normal_A_ldbl	(long double o);
+[[gnu::const]]
+double		alx_gsl_dist_normal_A		(double o);
+[[gnu::const]]
+float		alx_gsl_dist_normal_A_flt	(float o);
+
+[[gnu::const]]
+long double	alx_gsl_dist_normal_B_ldbl	(long double u, long double o);
+[[gnu::const]]
+double		alx_gsl_dist_normal_B		(double u, double o);
+[[gnu::const]]
+float		alx_gsl_dist_normal_B_flt	(float u, float o);
+
+[[gnu::const]]
+long double	alx_gsl_dist_normal_X2Z_ldbl	(long double a, long double b,
+						 long double x);
+[[gnu::const]]
+double		alx_gsl_dist_normal_X2Z		(double a, double b, double x);
+[[gnu::const]]
+float		alx_gsl_dist_normal_X2Z_flt	(float a, float b, float x);
+
+[[gnu::const]]
+long double	alx_gsl_dist_normal_Z2X_ldbl	(long double a, long double b,
+						 long double z);
+[[gnu::const]]
+double		alx_gsl_dist_normal_Z2X		(double a, double b, double z);
+[[gnu::const]]
+float		alx_gsl_dist_normal_Z2X_flt	(float a, float b, float z);
+}
+
+
+/******************************************************************************
+ ******* namespace ************************************************************
+ ******************************************************************************/
+namespace alx {
+namespace gsl {
+
+
+/******************************************************************************
+ ******* enum *****************************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* structs / unions *****************************************************
+ ******* struct / union *******************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
-extern	"C"
-{
-long double	alx_gsl_dist_normal_A_ldbl	(long double o);
-double		alx_gsl_dist_normal_A		(double o);
-float		alx_gsl_dist_normal_A_flt	(float o);
-
-long double	alx_gsl_dist_normal_B_ldbl	(long double u, long double o);
-double		alx_gsl_dist_normal_B		(double u, double o);
-float		alx_gsl_dist_normal_B_flt	(float u, float o);
-
-long double	alx_gsl_dist_normal_X2Z_ldbl	(long double a, long double b,
-						long double x);
-double		alx_gsl_dist_normal_X2Z		(double a, double b, double x);
-float		alx_gsl_dist_normal_X2Z_flt	(float a, float b, float x);
-
-long double	alx_gsl_dist_normal_Z2X_ldbl	(long double a, long double b,
-						long double z);
-double		alx_gsl_dist_normal_Z2X		(double a, double b, double z);
-float		alx_gsl_dist_normal_Z2X_flt	(float a, float b, float z);
-}
 
 
 /******************************************************************************
- ******* static inline functions (prototypes) *********************************
+ ******* namespace ************************************************************
  ******************************************************************************/
-
-
-/******************************************************************************
- ******* static inline functions (definitions) ********************************
- ******************************************************************************/
+}	/* namespace gsl */
+}	/* namespace alx */
 
 
 /******************************************************************************

@@ -24,42 +24,43 @@
 
 
 /******************************************************************************
- ******* enums ****************************************************************
+ ******* enum *****************************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* structs / unions *****************************************************
+ ******* struct / union *******************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* extern functions *****************************************************
+ ******* prototypes ***********************************************************
  ******************************************************************************/
-
-
-/******************************************************************************
- ******* static inline functions (prototypes) *********************************
- ******************************************************************************/
-static inline
+__attribute__((const))
+inline
 long double	alx_gsl_dist_binomial_E_ldbl	(uint64_t n, long double p);
-static inline
+__attribute__((const))
+inline
 double		alx_gsl_dist_binomial_E		(uint32_t n, double p);
-static inline
+__attribute__((const))
+inline
 float		alx_gsl_dist_binomial_E_flt	(uint16_t n, float p);
 
-static inline
+__attribute__((const))
+inline
 long double	alx_gsl_dist_binomial_Var_ldbl	(uint64_t n, long double p);
-static inline
+__attribute__((const))
+inline
 double		alx_gsl_dist_binomial_Var	(uint32_t n, double p);
-static inline
+__attribute__((const))
+inline
 float		alx_gsl_dist_binomial_Var_flt	(uint16_t n, float p);
 
 
 /******************************************************************************
- ******* static inline functions (definitions) ********************************
+ ******* inline ***************************************************************
  ******************************************************************************/
-static inline
+inline
 long double	alx_gsl_dist_binomial_E_ldbl	(uint64_t n, long double p)
 {
 
@@ -71,7 +72,7 @@ long double	alx_gsl_dist_binomial_E_ldbl	(uint64_t n, long double p)
 	return	n * p;
 }
 
-static inline
+inline
 double		alx_gsl_dist_binomial_E		(uint32_t n, double p)
 {
 
@@ -83,7 +84,7 @@ double		alx_gsl_dist_binomial_E		(uint32_t n, double p)
 	return	n * p;
 }
 
-static inline
+inline
 float		alx_gsl_dist_binomial_E_flt	(uint16_t n, float p)
 {
 
@@ -96,7 +97,7 @@ float		alx_gsl_dist_binomial_E_flt	(uint16_t n, float p)
 }
 
 
-static inline
+inline
 long double	alx_gsl_dist_binomial_Var_ldbl	(uint64_t n, long double p)
 {
 
@@ -109,7 +110,7 @@ long double	alx_gsl_dist_binomial_Var_ldbl	(uint64_t n, long double p)
 	return	n * p * (1.0L - p);
 }
 
-static inline
+inline
 double		alx_gsl_dist_binomial_Var	(uint32_t n, double p)
 {
 
@@ -122,7 +123,7 @@ double		alx_gsl_dist_binomial_Var	(uint32_t n, double p)
 	return	n * p * (1.0 - p);
 }
 
-static inline
+inline
 float		alx_gsl_dist_binomial_Var_flt	(uint16_t n, float p)
 {
 

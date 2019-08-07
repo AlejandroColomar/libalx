@@ -13,10 +13,6 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <cerrno>
-#include <cmath>
-
-#include "libalx/base/stdlib/average.hpp"
 
 
 /******************************************************************************
@@ -25,12 +21,40 @@
 
 
 /******************************************************************************
- ******* enums ****************************************************************
+ ******* extern "C" ***********************************************************
+ ******************************************************************************/
+extern	"C"
+{
+[[gnu::const]]
+long double	alx_gsl_dist_uniform_E_ldbl	(long double a, long double b);
+[[gnu::const]]
+double		alx_gsl_dist_uniform_E		(double a, double b);
+[[gnu::const]]
+float		alx_gsl_dist_uniform_E_flt	(float a, float b);
+
+[[gnu::const]]
+long double	alx_gsl_dist_uniform_Var_ldbl	(long double a, long double b);
+[[gnu::const]]
+double		alx_gsl_dist_uniform_Var	(double a, double b);
+[[gnu::const]]
+float		alx_gsl_dist_uniform_Var_flt	(float a, float b);
+}
+
+
+/******************************************************************************
+ ******* namespace ************************************************************
+ ******************************************************************************/
+namespace alx {
+namespace gsl {
+
+
+/******************************************************************************
+ ******* enum *****************************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* structs / unions *****************************************************
+ ******* struct / union *******************************************************
  ******************************************************************************/
 
 
@@ -40,98 +64,10 @@
 
 
 /******************************************************************************
- ******* static inline functions (prototypes) *********************************
+ ******* namespace ************************************************************
  ******************************************************************************/
-static inline
-long double	alx_gsl_dist_uniform_E_ldbl	(long double a, long double b);
-static inline
-double		alx_gsl_dist_uniform_E		(double a, double b);
-static inline
-float		alx_gsl_dist_uniform_E_flt	(float a, float b);
-
-static inline
-long double	alx_gsl_dist_uniform_Var_ldbl	(long double a, long double b);
-static inline
-double		alx_gsl_dist_uniform_Var	(double a, double b);
-static inline
-float		alx_gsl_dist_uniform_Var_flt	(float a, float b);
-
-
-/******************************************************************************
- ******* static inline functions (definitions) ********************************
- ******************************************************************************/
-static inline
-long double	alx_gsl_dist_uniform_E_ldbl	(long double a, long double b)
-{
-
-	if (b < a) {
-		errno	= EDOM;
-		return	nanl("");
-	}
-
-	return	AVGfast(a, b);
-}
-
-static inline
-double		alx_gsl_dist_uniform_E		(double a, double b)
-{
-
-	if (b < a) {
-		errno	= EDOM;
-		return	nan("");
-	}
-
-	return	AVGfast(a, b);
-}
-
-static inline
-float		alx_gsl_dist_uniform_E_flt	(float a, float b)
-{
-
-	if (b < a) {
-		errno	= EDOM;
-		return	nanf("");
-	}
-
-	return	AVGfast(a, b);
-}
-
-
-static inline
-long double	alx_gsl_dist_uniform_Var_ldbl	(long double a, long double b)
-{
-
-	if (b < a) {
-		errno	= EDOM;
-		return	nanl("");
-	}
-
-	return	(b - a) * (b - a) / 12.0L;
-}
-
-static inline
-double		alx_gsl_dist_uniform_Var	(double a, double b)
-{
-
-	if (b < a) {
-		errno	= EDOM;
-		return	nan("");
-	}
-
-	return	(b - a) * (b - a) / 12.0;
-}
-
-static inline
-float		alx_gsl_dist_uniform_Var_flt	(float a, float b)
-{
-
-	if (b < a) {
-		errno	= EDOM;
-		return	nanf("");
-	}
-
-	return	(b - a) * (b - a) / 12.0f;
-}
+}	/* namespace gsl */
+}	/* namespace alx */
 
 
 /******************************************************************************

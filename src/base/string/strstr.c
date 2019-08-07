@@ -20,12 +20,7 @@
 
 
 /******************************************************************************
- ******* enums ****************************************************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* structs / unions *****************************************************
+ ******* enum / struct / union ************************************************
  ******************************************************************************/
 
 
@@ -38,8 +33,8 @@
  ******* global functions *****************************************************
  ******************************************************************************/
 ptrdiff_t alx_strsstr		(ptrdiff_t size,
-				const char str[restrict size],
-				const char pattern[restrict size])
+				 const char str[static restrict size],
+				 const char pattern[static restrict size])
 {
 	const ptrdiff_t	plen = strnlen(pattern, size);
 	ptrdiff_t	slen = strnlen(str, size);
@@ -61,8 +56,8 @@ ptrdiff_t alx_strsstr		(ptrdiff_t size,
 }
 
 ptrdiff_t alx_strncasestr	(ptrdiff_t size,
-				const char str[restrict size],
-				const char pattern[restrict])
+				 const char str[static restrict size],
+				 const char pattern[restrict])
 {
 	const ptrdiff_t	slen = strnlen(str, size);
 	const ptrdiff_t	plen = strlen(pattern);
@@ -90,8 +85,8 @@ ptrdiff_t alx_strncasestr	(ptrdiff_t size,
 }
 
 ptrdiff_t alx_strscasestr	(ptrdiff_t size,
-				const char str[restrict size],
-				const char pattern[restrict size])
+				 const char str[static restrict size],
+				 const char pattern[static restrict size])
 {
 	const ptrdiff_t	slen = strnlen(str, size);
 	const ptrdiff_t	plen = strnlen(pattern, size);

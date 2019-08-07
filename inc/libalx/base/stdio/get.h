@@ -93,19 +93,19 @@ ptrdiff_t	alx_get_pdif	(ptrdiff_t m, ptrdiff_t def, ptrdiff_t M,
 				const char *restrict title,
 				const char *restrict help,
 				uint8_t attempts);
+__attribute__((nonnull(1)))
 char		alx_get_ch	(const char *restrict valid,
 				bool skip_space, bool ignore_case,
 				const char *restrict title,
 				const char *restrict help,
-				uint8_t attempts)
-		__attribute__((nonnull(1)));
+				uint8_t attempts);
+__attribute__((nonnull(1, 2)))
 int		alx_get_fname	(const char *restrict path,
 				char fname[static restrict FILENAME_MAX],
 				bool exist,
 				const char *restrict title,
 				const char *restrict help,
-				uint8_t attempts)
-		__attribute__((nonnull(1, 2)));
+				uint8_t attempts);
 
 
 /******************************************************************************

@@ -28,12 +28,18 @@
  ******************************************************************************/
 extern	"C"
 {
+[[gnu::nonnull]][[gnu::pure]]
+ptrdiff_t alx_strsstr		(ptrdiff_t size,
+				 const char *restrict str,
+				 const char *restrict pattern);
+[[gnu::nonnull]][[gnu::pure]]
 ptrdiff_t alx_strncasestr	(ptrdiff_t size,
-				const char *restrict str,
-				const char *restrict pattern);
+				 const char *restrict str,
+				 const char *restrict pattern);
+[[gnu::nonnull]][[gnu::pure]]
 ptrdiff_t alx_strscasestr	(ptrdiff_t size,
-				const char *restrict str,
-				const char *restrict pattern);
+				 const char *restrict str,
+				 const char *restrict pattern);
 }
 
 

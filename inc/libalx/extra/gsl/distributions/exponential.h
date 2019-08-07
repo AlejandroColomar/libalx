@@ -23,42 +23,43 @@
 
 
 /******************************************************************************
- ******* enums ****************************************************************
+ ******* enum *****************************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* structs / unions *****************************************************
+ ******* struct / union *******************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* extern functions *****************************************************
+ ******* prototypes ***********************************************************
  ******************************************************************************/
-
-
-/******************************************************************************
- ******* static inline functions (prototypes) *********************************
- ******************************************************************************/
-static inline
+__attribute__((const))
+inline
 long double	alx_gsl_dist_exponential_E_ldbl		(long double b);
-static inline
+__attribute__((const))
+inline
 double		alx_gsl_dist_exponential_E		(double b);
-static inline
+__attribute__((const))
+inline
 float		alx_gsl_dist_exponential_E_flt		(float b);
 
-static inline
+__attribute__((const))
+inline
 long double	alx_gsl_dist_exponential_Var_ldbl	(long double b);
-static inline
+__attribute__((const))
+inline
 double		alx_gsl_dist_exponential_Var		(double b);
-static inline
+__attribute__((const))
+inline
 float		alx_gsl_dist_exponential_Var_flt	(float b);
 
 
 /******************************************************************************
- ******* static inline functions (definitions) ********************************
+ ******* inline ***************************************************************
  ******************************************************************************/
-static inline
+inline
 long double	alx_gsl_dist_exponential_E_ldbl		(long double b)
 {
 
@@ -70,7 +71,7 @@ long double	alx_gsl_dist_exponential_E_ldbl		(long double b)
 	return	1.0L / b;
 }
 
-static inline
+inline
 double		alx_gsl_dist_exponential_E		(double b)
 {
 
@@ -82,7 +83,7 @@ double		alx_gsl_dist_exponential_E		(double b)
 	return	1.0 / b;
 }
 
-static inline
+inline
 float		alx_gsl_dist_exponential_E_flt		(float b)
 {
 
@@ -95,7 +96,7 @@ float		alx_gsl_dist_exponential_E_flt		(float b)
 }
 
 
-static inline
+inline
 long double	alx_gsl_dist_exponential_Var_ldbl	(long double b)
 {
 
@@ -107,7 +108,7 @@ long double	alx_gsl_dist_exponential_Var_ldbl	(long double b)
 	return	1.0L / (b * b);
 }
 
-static inline
+inline
 double		alx_gsl_dist_exponential_Var		(double b)
 {
 
@@ -119,7 +120,7 @@ double		alx_gsl_dist_exponential_Var		(double b)
 	return	1.0 / (b * b);
 }
 
-static inline
+inline
 float		alx_gsl_dist_exponential_Var_flt	(float b)
 {
 

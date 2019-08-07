@@ -23,27 +23,30 @@
 
 
 /******************************************************************************
- ******* enums ****************************************************************
+ ******* enum *****************************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* structs / unions *****************************************************
+ ******* struct / union *******************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
+__attribute__((nonnull, pure))
 ptrdiff_t alx_strsstr		(ptrdiff_t size,
-				const char str[restrict size],
-				const char pattern[restrict size]);
+				 const char str[static restrict size],
+				 const char pattern[static restrict size]);
+__attribute__((nonnull, pure))
 ptrdiff_t alx_strncasestr	(ptrdiff_t size,
-				const char str[restrict size],
-				const char pattern[restrict]);
+				 const char str[static restrict size],
+				 const char pattern[restrict]);
+__attribute__((nonnull, pure))
 ptrdiff_t alx_strscasestr	(ptrdiff_t size,
-				const char str[restrict size],
-				const char pattern[restrict size]);
+				 const char str[static restrict size],
+				 const char pattern[static restrict size]);
 
 
 /******************************************************************************

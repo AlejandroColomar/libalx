@@ -23,55 +23,73 @@
 
 
 /******************************************************************************
- ******* enums ****************************************************************
+ ******* enum *****************************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* structs / unions *****************************************************
+ ******* struct / union *******************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* extern functions *****************************************************
+ ******* function prototypes **************************************************
  ******************************************************************************/
-ptrdiff_t alx_strcasechr	(const char str[restrict], char c);
-ptrdiff_t alx_strrcasechr	(const char str[restrict], char c);
-ptrdiff_t alx_strcasechrnul	(const char str[restrict], char c);
-ptrdiff_t alx_strrcasechrnul	(const char str[restrict], char c);
-ptrdiff_t alx_strncasechr	(ptrdiff_t size, const char str[restrict size],
-				char c);
-ptrdiff_t alx_strnrcasechr	(ptrdiff_t size, const char str[restrict size],
-				char c);
-ptrdiff_t alx_strncasechrnul	(ptrdiff_t size, const char str[restrict size],
-				char c);
-ptrdiff_t alx_strnrcasechrnul	(ptrdiff_t size, const char str[restrict size],
-				char c);
-
-
-/******************************************************************************
- ******* static inline functions (prototypes) *********************************
- ******************************************************************************/
-static inline
+__attribute__((nonnull, pure))
+inline
 ptrdiff_t alx_strrchrnul	(const char str[restrict], char c);
-static inline
-ptrdiff_t alx_strnchr		(ptrdiff_t size, const char str[restrict size],
-				char c);
-static inline
-ptrdiff_t alx_strnrchr		(ptrdiff_t size, const char str[restrict size],
-				char c);
-static inline
-ptrdiff_t alx_strnchrnul	(ptrdiff_t size, const char str[restrict size],
-				char c);
-static inline
-ptrdiff_t alx_strnrchrnul	(ptrdiff_t size, const char str[restrict size],
-				char c);
+__attribute__((nonnull, pure))
+inline
+ptrdiff_t alx_strnchr		(ptrdiff_t size,
+				 const char str[static restrict size],
+				 char c);
+__attribute__((nonnull, pure))
+inline
+ptrdiff_t alx_strnrchr		(ptrdiff_t size,
+				 const char str[static restrict size],
+				 char c);
+__attribute__((nonnull, pure))
+inline
+ptrdiff_t alx_strnchrnul	(ptrdiff_t size,
+				 const char str[static restrict size],
+				 char c);
+__attribute__((nonnull, pure))
+inline
+ptrdiff_t alx_strnrchrnul	(ptrdiff_t size,
+				 const char str[static restrict size],
+				 char c);
+
+__attribute__((nonnull, pure))
+ptrdiff_t alx_strcasechr	(const char str[restrict], char c);
+__attribute__((nonnull, pure))
+ptrdiff_t alx_strrcasechr	(const char str[restrict], char c);
+__attribute__((nonnull, pure))
+ptrdiff_t alx_strcasechrnul	(const char str[restrict], char c);
+__attribute__((nonnull, pure))
+ptrdiff_t alx_strrcasechrnul	(const char str[restrict], char c);
+__attribute__((nonnull, pure))
+ptrdiff_t alx_strncasechr	(ptrdiff_t size,
+				 const char str[static restrict size],
+				 char c);
+__attribute__((nonnull, pure))
+ptrdiff_t alx_strnrcasechr	(ptrdiff_t size,
+				 const char str[static restrict size],
+				 char c);
+__attribute__((nonnull, pure))
+ptrdiff_t alx_strncasechrnul	(ptrdiff_t size,
+				 const char str[static restrict size],
+				 char c);
+__attribute__((nonnull, pure))
+ptrdiff_t alx_strnrcasechrnul	(ptrdiff_t size,
+				 const char str[static restrict size],
+				 char c);
+
 
 
 /******************************************************************************
- ******* static inline functions (definitions) ********************************
+ ******* inline functions *****************************************************
  ******************************************************************************/
-static inline
+inline
 ptrdiff_t alx_strrchrnul	(const char str[restrict], char c)
 {
 	const char	*p = strrchr(str, c);
@@ -81,9 +99,10 @@ ptrdiff_t alx_strrchrnul	(const char str[restrict], char c)
 	return	p - str;
 }
 
-static inline
-ptrdiff_t alx_strnchr		(ptrdiff_t size, const char str[restrict size],
-				char c)
+inline
+ptrdiff_t alx_strnchr		(ptrdiff_t size,
+				 const char str[static restrict size],
+				 char c)
 {
 	const char	len = strnlen(str, size);
 	const char	*p = memchr(str, c, len);
@@ -93,9 +112,10 @@ ptrdiff_t alx_strnchr		(ptrdiff_t size, const char str[restrict size],
 	return	p - str;
 }
 
-static inline
-ptrdiff_t alx_strnrchr		(ptrdiff_t size, const char str[restrict size],
-				char c)
+inline
+ptrdiff_t alx_strnrchr		(ptrdiff_t size,
+				 const char str[static restrict size],
+				 char c)
 {
 	const char	len = strnlen(str, size);
 #if defined(_GNU_SOURCE)
@@ -113,9 +133,10 @@ ptrdiff_t alx_strnrchr		(ptrdiff_t size, const char str[restrict size],
 #endif
 }
 
-static inline
-ptrdiff_t alx_strnchrnul	(ptrdiff_t size, const char str[restrict size],
-				char c)
+inline
+ptrdiff_t alx_strnchrnul	(ptrdiff_t size,
+				 const char str[static restrict size],
+				 char c)
 {
 	const char	len = strnlen(str, size);
 	const char	*p = memchr(str, c, len);
@@ -125,9 +146,10 @@ ptrdiff_t alx_strnchrnul	(ptrdiff_t size, const char str[restrict size],
 	return	p - str;
 }
 
-static inline
-ptrdiff_t alx_strnrchrnul	(ptrdiff_t size, const char str[restrict size],
-				char c)
+inline
+ptrdiff_t alx_strnrchrnul	(ptrdiff_t size,
+				 const char str[static restrict size],
+				 char c)
 {
 	const char	len = strnlen(str, size);
 #if defined(_GNU_SOURCE)

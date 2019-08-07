@@ -23,42 +23,43 @@
 
 
 /******************************************************************************
- ******* enums ****************************************************************
+ ******* enum *****************************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* structs / unions *****************************************************
+ ******* struct / union *******************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* extern functions *****************************************************
+ ******* prototypes ***********************************************************
  ******************************************************************************/
-
-
-/******************************************************************************
- ******* static inline functions (prototypes) *********************************
- ******************************************************************************/
-static inline
+__attribute__((const))
+inline
 long double	alx_gsl_dist_poisson_E_ldbl	(long double l);
-static inline
+__attribute__((const))
+inline
 double		alx_gsl_dist_poisson_E		(double l);
-static inline
+__attribute__((const))
+inline
 float		alx_gsl_dist_poisson_E_flt	(float l);
 
-static inline
+__attribute__((const))
+inline
 long double	alx_gsl_dist_poisson_Var_ldbl	(long double l);
-static inline
+__attribute__((const))
+inline
 double		alx_gsl_dist_poisson_Var	(double l);
-static inline
+__attribute__((const))
+inline
 float		alx_gsl_dist_poisson_Var_flt	(float l);
 
 
 /******************************************************************************
- ******* static inline functions (definitions) ********************************
+ ******* inline ***************************************************************
  ******************************************************************************/
-static inline
+inline
 long double	alx_gsl_dist_poisson_E_ldbl	(long double l)
 {
 
@@ -70,7 +71,7 @@ long double	alx_gsl_dist_poisson_E_ldbl	(long double l)
 	return	l;
 }
 
-static inline
+inline
 double		alx_gsl_dist_poisson_E		(double l)
 {
 
@@ -82,7 +83,7 @@ double		alx_gsl_dist_poisson_E		(double l)
 	return	l;
 }
 
-static inline
+inline
 float		alx_gsl_dist_poisson_E_flt	(float l)
 {
 
@@ -95,7 +96,7 @@ float		alx_gsl_dist_poisson_E_flt	(float l)
 }
 
 
-static inline
+inline
 long double	alx_gsl_dist_poisson_Var_ldbl	(long double l)
 {
 
@@ -107,7 +108,7 @@ long double	alx_gsl_dist_poisson_Var_ldbl	(long double l)
 	return	l;
 }
 
-static inline
+inline
 double		alx_gsl_dist_poisson_Var	(double l)
 {
 
@@ -119,7 +120,7 @@ double		alx_gsl_dist_poisson_Var	(double l)
 	return	l;
 }
 
-static inline
+inline
 float		alx_gsl_dist_poisson_Var_flt	(float l)
 {
 

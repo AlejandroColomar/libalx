@@ -25,17 +25,17 @@
 
 
 /******************************************************************************
- ******* enums ****************************************************************
+ ******* enum *****************************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* structs / unions *****************************************************
+ ******* struct / union *******************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* extern functions *****************************************************
+ ******* prototypes ***********************************************************
  ******************************************************************************/
 long double alx_ncurses_get_ldbl(long double m, long double def, long double M,
 				int8_t width, int8_t row,
@@ -107,12 +107,14 @@ ptrdiff_t alx_ncurses_get_pdif	(ptrdiff_t m, ptrdiff_t def, ptrdiff_t M,
 				const char *restrict title,
 				const char *restrict help,
 				uint8_t attempts);
+__attribute__((nonnull(2)))
 int	alx_ncurses_get_nstr	(ptrdiff_t size, char dest[restrict size],
 				int8_t width, int8_t row,
 				const char *restrict title,
 				const char *restrict help);
+__attribute__((nonnull(1, 2)))
 int	alx_ncurses_get_fname	(const char *restrict fpath,
-				char fname[restrict FILENAME_MAX],
+				char fname[static restrict FILENAME_MAX],
 				bool exist,
 				int8_t width, int8_t row,
 				const char *restrict title,
@@ -121,12 +123,7 @@ int	alx_ncurses_get_fname	(const char *restrict fpath,
 
 
 /******************************************************************************
- ******* static inline functions (prototypes) *********************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* static inline functions (definitions) ********************************
+ ******* inline ***************************************************************
  ******************************************************************************/
 
 

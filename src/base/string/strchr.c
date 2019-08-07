@@ -19,12 +19,7 @@
 
 
 /******************************************************************************
- ******* enums ****************************************************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* structs / unions *****************************************************
+ ******* enum / struct / union ************************************************
  ******************************************************************************/
 
 
@@ -36,6 +31,25 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
+extern
+ptrdiff_t alx_strrchrnul	(const char str[restrict], char c);
+extern
+ptrdiff_t alx_strnchr		(ptrdiff_t size,
+				 const char str[static restrict size],
+				 char c);
+extern
+ptrdiff_t alx_strnrchr		(ptrdiff_t size,
+				 const char str[static restrict size],
+				 char c);
+extern
+ptrdiff_t alx_strnchrnul	(ptrdiff_t size,
+				 const char str[static restrict size],
+				 char c);
+extern
+ptrdiff_t alx_strnrchrnul	(ptrdiff_t size,
+				 const char str[static restrict size],
+				 char c);
+
 ptrdiff_t alx_strcasechr	(const char str[restrict], char c)
 {
 	const ptrdiff_t	len = strlen(str);
@@ -107,7 +121,7 @@ ptrdiff_t alx_strrcasechrnul	(const char str[restrict], char c)
 }
 
 ptrdiff_t alx_strncasechr	(ptrdiff_t size, const char str[restrict size],
-				char c)
+				 char c)
 {
 	const ptrdiff_t	len = strnlen(str, size);
 	char		str_lower[len + 1];
@@ -125,7 +139,7 @@ ptrdiff_t alx_strncasechr	(ptrdiff_t size, const char str[restrict size],
 }
 
 ptrdiff_t alx_strnrcasechr	(ptrdiff_t size, const char str[restrict size],
-				char c)
+				 char c)
 {
 	const ptrdiff_t	len = strnlen(str, size);
 	char		str_lower[len + 1];
@@ -143,7 +157,7 @@ ptrdiff_t alx_strnrcasechr	(ptrdiff_t size, const char str[restrict size],
 }
 
 ptrdiff_t alx_strncasechrnul	(ptrdiff_t size, const char str[restrict size],
-				char c)
+				 char c)
 {
 	const ptrdiff_t	len = strnlen(str, size);
 	char		str_lower[len + 1];
@@ -166,7 +180,7 @@ ptrdiff_t alx_strncasechrnul	(ptrdiff_t size, const char str[restrict size],
 }
 
 ptrdiff_t alx_strnrcasechrnul	(ptrdiff_t size, const char str[restrict size],
-				char c)
+				 char c)
 {
 	const ptrdiff_t	len = strnlen(str, size);
 	char		str_lower[len + 1];

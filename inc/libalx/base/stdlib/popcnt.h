@@ -27,64 +27,77 @@
 
 
 /******************************************************************************
- ******* enums ****************************************************************
+ ******* enum *****************************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* structs / unions *****************************************************
+ ******* struct / union *******************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* extern functions *****************************************************
+ ******* function prototypes **************************************************
  ******************************************************************************/
-
-
-/******************************************************************************
- ******* static inline functions (prototypes) *********************************
- ******************************************************************************/
-static inline	uint8_t		popcnt_u8	(uint8_t n);
-static inline	uint16_t	popcnt_u16	(uint16_t n);
-static inline	uint32_t	popcnt_u32	(uint32_t n);
-static inline	uint64_t	popcnt_u64	(uint64_t n);
+__attribute__((const))
+inline
+uint8_t		popcnt_u8	(uint8_t n);
+__attribute__((const))
+inline
+uint16_t	popcnt_u16	(uint16_t n);
+__attribute__((const))
+inline
+uint32_t	popcnt_u32	(uint32_t n);
+__attribute__((const))
+inline
+uint64_t	popcnt_u64	(uint64_t n);
+__attribute__((const))
 #if defined(uint128_t)
-static inline	uint64_t	popcnt_u128	(uint128_t n);
+__attribute__((const))
+inline
+uint64_t	popcnt_u128	(uint128_t n);
 #endif
 #if defined(uint256_t)
-static inline	uint64_t	popcnt_u256	(uint256_t n);
+__attribute__((const))
+inline
+uint64_t	popcnt_u256	(uint256_t n);
 #endif
 
 
 /******************************************************************************
- ******* static inline functions (definitions) ********************************
+ ******* inline functions *****************************************************
  ******************************************************************************/
-static inline	uint8_t		popcnt_u8	(uint8_t n)
+inline
+uint8_t		popcnt_u8	(uint8_t n)
 {
 
 	return	_mm_popcnt_u64(n);
 }
 
-static inline	uint16_t	popcnt_u16	(uint16_t n)
+inline
+uint16_t	popcnt_u16	(uint16_t n)
 {
 
 	return	_mm_popcnt_u64(n);
 }
 
-static inline	uint32_t	popcnt_u32	(uint32_t n)
+inline
+uint32_t	popcnt_u32	(uint32_t n)
 {
 
 	return	_mm_popcnt_u64(n);
 }
 
-static inline	uint64_t	popcnt_u64	(uint64_t n)
+inline
+uint64_t	popcnt_u64	(uint64_t n)
 {
 
 	return	_mm_popcnt_u64(n);
 }
 
 #if defined(uint128_t)
-static inline	uint64_t	popcnt_u128	(uint128_t n)
+inline
+uint64_t	popcnt_u128	(uint128_t n)
 {
 	const	uint_fast64_t	cnt_a	= popcnt_u64((uint64_t)n);
 	const	uint_fast64_t	cnt_b	= popcnt_u64((uint64_t)(n >> 64));
@@ -95,7 +108,8 @@ static inline	uint64_t	popcnt_u128	(uint128_t n)
 #endif
 
 #if defined(uint256_t)
-static inline	uint64_t	popcnt_u256	(uint256_t n)
+inline
+uint64_t	popcnt_u256	(uint256_t n)
 {
 	const	uint_fast64_t	cnt_a	= popcnt_u64((uint64_t)n);
 	const	uint_fast64_t	cnt_b	= popcnt_u64((uint64_t)(n >> 64));

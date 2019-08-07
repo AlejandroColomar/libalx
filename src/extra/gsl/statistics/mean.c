@@ -38,7 +38,7 @@
  ******* global functions *****************************************************
  ******************************************************************************/
 long double alx_gsl_stats_mean_ldbl(ptrdiff_t nmemb,
-				const long double arr[static restrict nmemb])
+				 const long double arr[static restrict nmemb])
 {
 	long double	sum;
 	long double	mean;
@@ -53,7 +53,7 @@ long double alx_gsl_stats_mean_ldbl(ptrdiff_t nmemb,
 }
 
 float	alx_gsl_stats_mean_flt	(ptrdiff_t nmemb,
-				const float arr[static restrict nmemb])
+				 const float arr[static restrict nmemb])
 {
 	float_t	sum;
 	float_t	mean;
@@ -67,8 +67,12 @@ float	alx_gsl_stats_mean_flt	(ptrdiff_t nmemb,
 	return	mean;
 }
 
+extern
+double	alx_gsl_stats_mean_u8	(ptrdiff_t nmemb,
+				 const uint8_t arr[static restrict nmemb]);
+
 double	alx_gsl_stats_mean_s8	(ptrdiff_t nmemb,
-				const int8_t arr[static restrict nmemb])
+				 const int8_t arr[static restrict nmemb])
 {
 	int_fast8_t	quotients;
 	double_t	remainders;
@@ -86,8 +90,21 @@ double	alx_gsl_stats_mean_s8	(ptrdiff_t nmemb,
 	return	mean;
 }
 
+extern
+double	alx_gsl_stats_mean_u16	(ptrdiff_t nmemb,
+				 const uint16_t arr[static restrict nmemb]);
+extern
+double	alx_gsl_stats_mean_s16	(ptrdiff_t nmemb,
+				 const int16_t arr[static restrict nmemb]);
+extern
+double	alx_gsl_stats_mean_u32	(ptrdiff_t nmemb,
+				 const uint32_t arr[static restrict nmemb]);
+extern
+double	alx_gsl_stats_mean_s32	(ptrdiff_t nmemb,
+				 const int32_t arr[static restrict nmemb]);
+
 long double alx_gsl_stats_mean_u64(ptrdiff_t nmemb,
-				const uint64_t arr[static restrict nmemb])
+				 const uint64_t arr[static restrict nmemb])
 {
 	uint_fast64_t	quotients;
 	long double	remainders;
@@ -106,7 +123,7 @@ long double alx_gsl_stats_mean_u64(ptrdiff_t nmemb,
 }
 
 long double alx_gsl_stats_mean_s64(ptrdiff_t nmemb,
-				const int64_t arr[static restrict nmemb])
+				 const int64_t arr[static restrict nmemb])
 {
 	int_fast64_t	quotients;
 	long double	remainders;

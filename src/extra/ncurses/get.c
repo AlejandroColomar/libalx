@@ -28,12 +28,7 @@
 
 
 /******************************************************************************
- ******* enums ****************************************************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* structs / unions *****************************************************
+ ******* enum / struct / union ************************************************
  ******************************************************************************/
 
 
@@ -99,7 +94,7 @@ ptrdiff_t	loop_get_pdif	(WINDOW *win,
 static
 int		loop_get_fname	(WINDOW *win,
 				 const char *restrict fpath,
-				 char fname[restrict FILENAME_MAX],
+				 char fname[static restrict FILENAME_MAX],
 				 bool exist,
 				 uint8_t attempts);
 
@@ -981,7 +976,7 @@ int	alx_ncurses_get_nstr	(ptrdiff_t size, char dest[restrict size],
 }
 
 int	alx_ncurses_get_fname	(const char *restrict fpath,
-				 char fname[restrict FILENAME_MAX],
+				 char fname[static restrict FILENAME_MAX],
 				 bool exist,
 				 int8_t width, int8_t row,
 				 const char *restrict title,

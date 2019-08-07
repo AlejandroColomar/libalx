@@ -37,32 +37,46 @@
  ******************************************************************************/
 extern	"C"
 {
+[[gnu::nonnull]][[gnu::pure]]
 ptrdiff_t	alx_minimum_ldbl	(ptrdiff_t nmemb,
 					const long double *restrict arr);
+[[gnu::nonnull]][[gnu::pure]]
 ptrdiff_t	alx_minimum		(ptrdiff_t nmemb,
 					const double *restrict arr);
+[[gnu::nonnull]][[gnu::pure]]
 ptrdiff_t	alx_minimum_f		(ptrdiff_t nmemb,
 					const float *restrict arr);
+[[gnu::nonnull]][[gnu::pure]]
 ptrdiff_t	alx_minimum_uint	(ptrdiff_t nmemb,
 					const unsigned *restrict arr);
+[[gnu::nonnull]][[gnu::pure]]
 ptrdiff_t	alx_minimum_int		(ptrdiff_t nmemb,
 					const int *restrict arr);
+[[gnu::nonnull]][[gnu::pure]]
 ptrdiff_t	alx_minimum_u8		(ptrdiff_t nmemb,
 					const uint8_t *restrict arr);
+[[gnu::nonnull]][[gnu::pure]]
 ptrdiff_t	alx_minimum_s8		(ptrdiff_t nmemb,
 					const int8_t *restrict arr);
+[[gnu::nonnull]][[gnu::pure]]
 ptrdiff_t	alx_minimum_u16		(ptrdiff_t nmemb,
 					const uint16_t *restrict arr);
+[[gnu::nonnull]][[gnu::pure]]
 ptrdiff_t	alx_minimum_s16		(ptrdiff_t nmemb,
 					const int16_t *restrict arr);
+[[gnu::nonnull]][[gnu::pure]]
 ptrdiff_t	alx_minimum_u32		(ptrdiff_t nmemb,
 					const uint32_t *restrict arr);
+[[gnu::nonnull]][[gnu::pure]]
 ptrdiff_t	alx_minimum_s32		(ptrdiff_t nmemb,
 					const int32_t *restrict arr);
+[[gnu::nonnull]][[gnu::pure]]
 ptrdiff_t	alx_minimum_u64		(ptrdiff_t nmemb,
 					const uint64_t *restrict arr);
+[[gnu::nonnull]][[gnu::pure]]
 ptrdiff_t	alx_minimum_s64		(ptrdiff_t nmemb,
 					const int64_t *restrict arr);
+[[gnu::nonnull]][[gnu::pure]]
 ptrdiff_t	alx_minimum_pdif	(ptrdiff_t nmemb,
 					const ptrdiff_t *restrict arr);
 }
@@ -75,12 +89,12 @@ namespace alx {
 
 
 /******************************************************************************
- ******* enums ****************************************************************
+ ******* enum *****************************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* structs / unions *****************************************************
+ ******* struct / union *******************************************************
  ******************************************************************************/
 
 

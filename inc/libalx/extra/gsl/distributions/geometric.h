@@ -23,42 +23,43 @@
 
 
 /******************************************************************************
- ******* enums ****************************************************************
+ ******* enum *****************************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* structs / unions *****************************************************
+ ******* struct / union *******************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* extern functions *****************************************************
+ ******* prototypes ***********************************************************
  ******************************************************************************/
-
-
-/******************************************************************************
- ******* static inline functions (prototypes) *********************************
- ******************************************************************************/
-static inline
+__attribute__((const))
+inline
 long double	alx_gsl_dist_geometric_E_ldbl	(long double p);
-static inline
+__attribute__((const))
+inline
 double		alx_gsl_dist_geometric_E	(double p);
-static inline
+__attribute__((const))
+inline
 float		alx_gsl_dist_geometric_E_flt	(float p);
 
-static inline
+__attribute__((const))
+inline
 long double	alx_gsl_dist_geometric_Var_ldbl	(long double p);
-static inline
+__attribute__((const))
+inline
 double		alx_gsl_dist_geometric_Var	(double p);
-static inline
+__attribute__((const))
+inline
 float		alx_gsl_dist_geometric_Var_flt	(float p);
 
 
 /******************************************************************************
- ******* static inline functions (definitions) ********************************
+ ******* inline ***************************************************************
  ******************************************************************************/
-static inline
+inline
 long double	alx_gsl_dist_geometric_E_ldbl	(long double p)
 {
 
@@ -70,7 +71,7 @@ long double	alx_gsl_dist_geometric_E_ldbl	(long double p)
 	return	1.0L / p;
 }
 
-static inline
+inline
 double		alx_gsl_dist_geometric_E	(double p)
 {
 
@@ -82,7 +83,7 @@ double		alx_gsl_dist_geometric_E	(double p)
 	return	1.0 / p;
 }
 
-static inline
+inline
 float		alx_gsl_dist_geometric_E_flt	(float p)
 {
 
@@ -95,7 +96,7 @@ float		alx_gsl_dist_geometric_E_flt	(float p)
 }
 
 
-static inline
+inline
 long double	alx_gsl_dist_geometric_Var_ldbl	(long double p)
 {
 
@@ -107,7 +108,7 @@ long double	alx_gsl_dist_geometric_Var_ldbl	(long double p)
 	return	(1.0L - p) / (p * p);
 }
 
-static inline
+inline
 double		alx_gsl_dist_geometric_Var	(double p)
 {
 
@@ -119,7 +120,7 @@ double		alx_gsl_dist_geometric_Var	(double p)
 	return	(1.0 - p) / (p * p);
 }
 
-static inline
+inline
 float		alx_gsl_dist_geometric_Var_flt	(float p)
 {
 

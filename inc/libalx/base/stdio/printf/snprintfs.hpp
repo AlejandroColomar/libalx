@@ -29,11 +29,11 @@
  ******************************************************************************/
 extern	"C"
 {
-[[gnu::nonnull(1, 4), gnu::format(printf, 4, 5), gnu::warn_unused_result]]
+[[gnu::nonnull(1, 4)]][[gnu::format(printf, 4, 5)]][[gnu::warn_unused_result]]
 int	alx_snprintfs	(char *restrict str,
 			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
 			 const char *restrict format, ...);
-[[gnu::nonnull(1, 4), gnu::format(printf, 4, 0), gnu::warn_unused_result]]
+[[gnu::nonnull(1, 4)]][[gnu::format(printf, 4, 0)]][[gnu::warn_unused_result]]
 int	alx_vsnprintfs	(char *restrict str,
 			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
 			 const char *restrict format, va_list ap);

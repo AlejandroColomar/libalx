@@ -29,24 +29,24 @@
  ******************************************************************************/
 extern	"C"
 {
-[[gnu::nonnull, gnu::pure]]
+[[gnu::nonnull]][[gnu::pure]]
 long double alx_ldbl_prime_defactorization_8b(
 			const int8_t pf[static restrict PRIME_NUMS_QTY_8b]);
-[[gnu::nonnull, gnu::pure]]
+[[gnu::nonnull]][[gnu::pure]]
 long double alx_ldbl_prime_defactorization_16b(
 			const int16_t pf[static restrict PRIME_NUMS_QTY_16b]);
 
-[[gnu::nonnull, gnu::pure]]
+[[gnu::nonnull]][[gnu::pure]]
 double	alx_prime_defactorization_8b(
 			const int8_t pf[static restrict PRIME_NUMS_QTY_8b]);
-[[gnu::nonnull, gnu::pure]]
+[[gnu::nonnull]][[gnu::pure]]
 double	alx_prime_defactorization_16b(
 			const int16_t pf[static restrict PRIME_NUMS_QTY_16b]);
 
-[[gnu::nonnull, gnu::pure]]
+[[gnu::nonnull]][[gnu::pure]]
 float	alx_flt_prime_defactorization_8b(
 			const int8_t pf[static restrict PRIME_NUMS_QTY_8b]);
-[[gnu::nonnull, gnu::pure]]
+[[gnu::nonnull]][[gnu::pure]]
 float	alx_flt_prime_defactorization_16b(
 			const int16_t pf[static restrict PRIME_NUMS_QTY_16b]);
 }

@@ -29,15 +29,15 @@
  ******************************************************************************/
 extern	"C"
 {
-long double alx_pascal_triangle_ldbl	(int32_t n, int32_t k)
-	    __attribute__((const));
-double	alx_pascal_triangle		(int16_t n, int16_t k)
-	__attribute__((const));
-float	alx_pascal_triangle_flt		(int16_t n, int16_t k)
-	__attribute__((const));
+[[gnu::const]]
+long double alx_pascal_triangle_ldbl	(int32_t n, int32_t k);
+[[gnu::const]]
+double	alx_pascal_triangle		(int16_t n, int16_t k);
+[[gnu::const]]
+float	alx_pascal_triangle_flt		(int16_t n, int16_t k);
+[[gnu::nonnull]]
 int	alx_pascal_triangle_factorized	(int16_t n, int16_t k,
-				int16_t pf[static restrict PRIME_NUMS_QTY_16b])
-	__attribute__((nonnull));
+				int16_t pf[static restrict PRIME_NUMS_QTY_16b]);
 }
 
 

@@ -25,10 +25,10 @@
  ******************************************************************************/
 extern	"C"
 {
-int	alx_seekc(char c);
-int	alx_fseekc(FILE *stream, char c)
-	__attribute__((nonnull));
-int	alx_wait4enter(void);
+int	alx_seekc	(char c);
+__attribute__((nonnull))
+int	alx_fseekc	(FILE *stream, char c);
+int	alx_wait4enter	(void);
 }
 
 

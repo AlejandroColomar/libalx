@@ -21,44 +21,51 @@
 
 
 /******************************************************************************
- ******* enums ****************************************************************
+ ******* enum *****************************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* structs / unions *****************************************************
+ ******* struct / union *******************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* extern functions *****************************************************
+ ******* prototypes ***********************************************************
  ******************************************************************************/
+__attribute__((const))
 long double	alx_gsl_dist_normal_A_ldbl	(long double o);
+__attribute__((const))
 double		alx_gsl_dist_normal_A		(double o);
+__attribute__((const))
 float		alx_gsl_dist_normal_A_flt	(float o);
 
+__attribute__((const))
 long double	alx_gsl_dist_normal_B_ldbl	(long double u, long double o);
+__attribute__((const))
 double		alx_gsl_dist_normal_B		(double u, double o);
+__attribute__((const))
 float		alx_gsl_dist_normal_B_flt	(float u, float o);
 
+__attribute__((const))
 long double	alx_gsl_dist_normal_X2Z_ldbl	(long double a, long double b,
-						long double x);
+						 long double x);
+__attribute__((const))
 double		alx_gsl_dist_normal_X2Z		(double a, double b, double x);
+__attribute__((const))
 float		alx_gsl_dist_normal_X2Z_flt	(float a, float b, float x);
 
+__attribute__((const))
 long double	alx_gsl_dist_normal_Z2X_ldbl	(long double a, long double b,
-						long double z);
+						 long double z);
+__attribute__((const))
 double		alx_gsl_dist_normal_Z2X		(double a, double b, double z);
+__attribute__((const))
 float		alx_gsl_dist_normal_Z2X_flt	(float a, float b, float z);
 
 
 /******************************************************************************
- ******* static inline functions (prototypes) *********************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* static inline functions (definitions) ********************************
+ ******* inline ***************************************************************
  ******************************************************************************/
 
 
