@@ -2,8 +2,8 @@ Name: libalx-ocr
 Description: The libalx C/C++ library (Tesseract-OCR extension)
 URL: https://github.com/alejandro-colomar/libalx
 Version: 1~b4
-Requires: tesseract libalx-base
-Requires.private:
+Requires:
+Requires.private: tesseract libalx-base
 
 prefix=/usr/local/
 libdir=${prefix}/lib/
