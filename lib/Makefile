@@ -119,26 +119,25 @@ libalx/libalx-cv.a: $(patsubst %.o,%.a.o,$(CV_OBJ))
 libalx/libalx-cv.so: $(patsubst %.o,%.so.o,$(CV_OBJ))
 	@echo	"	CXX	libalx/lib/$@"
 	$(Q)$(CXX) $(LDFLAGS) -o $@ $^ `pkg-config --libs opencv`	\
-					 `pkg-config --libs libalx-gsl`	\
-					 `pkg-config --libs libalx-base`
+						-l alx-gsl -l alx-base
 
 libalx/libalx-gsl.a: $(patsubst %.o,%.a.o,$(GSL_OBJ))
 libalx/libalx-gsl.so: $(patsubst %.o,%.so.o,$(GSL_OBJ))
 	@echo	"	CC	libalx/lib/$@"
 	$(Q)$(CC) $(LDFLAGS) -o $@ $^ `pkg-config --libs gsl`		\
-					 `pkg-config --libs libalx-base`
+						-l alx-base
 
 libalx/libalx-ncurses.a: $(patsubst %.o,%.a.o,$(NCURSES_OBJ))
 libalx/libalx-ncurses.so: $(patsubst %.o,%.so.o,$(NCURSES_OBJ))
 	@echo	"	CC	libalx/lib/$@"
 	$(Q)$(CC) $(LDFLAGS) -o $@ $^ `pkg-config --libs ncurses`	\
-					 `pkg-config --libs libalx-base`
+						-l alx-base
 
 libalx/libalx-ocr.a: $(patsubst %.o,%.a.o,$(OCR_OBJ))
 libalx/libalx-ocr.so: $(patsubst %.o,%.so.o,$(OCR_OBJ))
 	@echo	"	CC	libalx/lib/$@"
 	$(Q)$(CC) $(LDFLAGS) -o $@ $^ `pkg-config --libs tesseract`	\
-					 `pkg-config --libs libalx-base`
+						-l alx-base
 
 
 PHONY += clean

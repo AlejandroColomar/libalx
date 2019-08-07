@@ -19,10 +19,11 @@
 #	$(Q)some command here
 #
 # If BUILD_VERBOSE equals 0 then the above command will be hidden.
-# If BUILD_VERBOSE equals 1 then the above command is displayed.
+# If BUILD_VERBOSE equals 2 then the above command is displayed.
 #
 # To put more focus on warnings, be less verbose as default
-# Use 'make V=1' to see the full commands
+# Use 'make V=1' to see some verbose output
+# Use 'make V=2' to see the full commands
 
 ifeq ("$(origin V)","command line")
   BUILD_VERBOSE = $(V)
@@ -31,10 +32,15 @@ ifndef BUILD_VERBOSE
   BUILD_VERBOSE = 0
 endif
 
-ifeq ($(BUILD_VERBOSE), 1)
+ifeq ($(BUILD_VERBOSE), 2)
   Q =
+  v = -v
+else ifeq ($(BUILD_VERBOSE), 1)
+  Q = @
+  v = -v
 else
   Q = @
+  v =
 endif
 
 # If the user is running make -s (silent mode), suppress echoing of
@@ -42,6 +48,7 @@ endif
 
 ifneq ($(findstring s,$(filter-out --%,$(MAKEFLAGS))),)
   Q = @
+  v =
 endif
 
 export	Q
@@ -175,10 +182,13 @@ LDFLAGS_OPT    += -march=native
 LDFLAGS_OPT    += -flto
 LDFLAGS_OPT    += -fuse-linker-plugin
 
+LDFLAGS_L	= -L $(LIB_DIR)/libalx/
+
 LDFLAGS_STD	= -l m
 
 LDFLAGS		= -shared
 LDFLAGS        += $(LDFLAGS_OPT)
+LDFLAGS        += $(LDFLAGS_L)
 LDFLAGS        += $(LDFLAGS_STD)
 
 export	LDFLAGS
@@ -201,25 +211,25 @@ PHONY += extra
 extra: cv gsl ncurses ocr
 
 PHONY += cv
-cv:
+cv: base gsl
 	@echo	"	MAKE	$@"
 	$(Q)$(MAKE) $@	-C $(TMP_DIR)
 	$(Q)$(MAKE) $@	-C $(LIB_DIR)
 
 PHONY += gsl
-gsl:
+gsl: base
 	@echo	"	MAKE	$@"
 	$(Q)$(MAKE) $@	-C $(TMP_DIR)
 	$(Q)$(MAKE) $@	-C $(LIB_DIR)
 
 PHONY += ncurses
-ncurses:
+ncurses: base
 	@echo	"	MAKE	$@"
 	$(Q)$(MAKE) $@	-C $(TMP_DIR)
 	$(Q)$(MAKE) $@	-C $(LIB_DIR)
 
 PHONY += ocr
-ocr:
+ocr: base
 	@echo	"	MAKE	$@"
 	$(Q)$(MAKE) $@	-C $(TMP_DIR)
 	$(Q)$(MAKE) $@	-C $(LIB_DIR)
@@ -232,52 +242,87 @@ tst: all
 
 
 PHONY += install
-install: uninstall
+install:
 	@echo	"	Install:"
-	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/"
-	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/
-	@echo	"	CP -r	./inc/libalx/*"
-	$(Q)cp -r -v		./inc/libalx/*				\
-					$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/
+	@echo
+	$(Q)$(MAKE)	cp_files_base
+	$(Q)$(MAKE)	cp_files_extra
+	$(Q)$(MAKE)	conf_ld
+	@echo	"	Done"
+	@echo
+
+PHONY += cp_files_base
+cp_files_base:
+	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/base/"
+	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/base/
+	@echo	"	CP -r	./inc/libalx/base/*"
+	$(Q)cp -rf $(v)		./inc/libalx/base/*			\
+					$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/base/
 	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/"
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
-	@echo	"	CP -r	./lib/libalx/*"
-	$(Q)cp -r -v		./lib/libalx/*				\
+	@echo	"	CP -r	./lib/libalx/libalx-base.*"
+	$(Q)cp -rf $(v)		./lib/libalx/libalx-base.*		\
 					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
-	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/"
-	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/
-	@echo	"	CP -r	./share/libalx/*"
-	$(Q)cp -r -v		./share/libalx/*			\
-					$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/
+	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/"
+	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/
+	@echo	"	CP	./lib/pkgconfig/libalx-base.pc"
+	$(Q)cp $(v)		./lib/pkgconfig/libalx-base.pc		\
+					$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/
+	@echo	"	CP -r	./ect/ld.so.conf.d/*"
+	$(Q)cp -rf $(v)		./etc/ld.so.conf.d/*			\
+					$(DESTDIR)/etc/ld.so.conf.d/
+	@echo
+
+PHONY += cp_files_extra
+cp_files_extra:
+	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/extra/"
+	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/extra/
+	@echo	"	CP -r	./inc/libalx/extra/*"
+	$(Q)cp -r -f $(v)	./inc/libalx/extra/*			\
+					$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/extra/
+	@echo	"	CP -r	./lib/libalx/*"
+	$(Q)cp -r -f $(v)	./lib/libalx/*				\
+					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
+	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/extra/"
+	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/extra/
+	@echo	"	CP -r	./share/libalx/extra/*"
+	$(Q)cp -r -f $(v)	./share/libalx/extra/*			\
+					$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/extra/
 	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/"
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/
 	@echo	"	CP -r	./lib/pkgconfig/*"
-	$(Q)cp -r -v		./lib/pkgconfig/*			\
+	$(Q)cp -r -f $(v)	./lib/pkgconfig/*			\
 					$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/
-	@echo	"	CP	./ect/ld.so.conf.d/*"
-	$(Q)cp -r -v		./etc/ld.so.conf.d/*			\
+	@echo
+
+PHONY += conf_ld
+conf_ld:
+	@echo	"	CP -r	./ect/ld.so.conf.d/*"
+	$(Q)cp -r -f $(v)	./etc/ld.so.conf.d/*			\
 					$(DESTDIR)/etc/ld.so.conf.d/
 	@echo	"	LDCONFIG"
 	$(Q)ldconfig
-	@echo	"	Done"
 	@echo
 
 PHONY += uninstall
 uninstall:
 	@echo	"	Clean old installations:"
-	@echo	"	RM -r	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/"
+	@echo
+	@echo	"	RM -rf	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/"
 	$(Q)rm -f -r		$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/
-	@echo	"	RM -r	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/"
+	@echo	"	RM -rf	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/"
 	$(Q)rm -f -r		$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
-	@echo	"	RM -r	$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/"
+	@echo	"	RM -rf	$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/"
 	$(Q)rm -f -r		$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/
-	@echo	"	RM	$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/libalx*.pc"
+	@echo	"	RM -rf	$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/libalx*.pc"
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/
 	$(Q)find		$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/	\
 				-type f -name 'libalx*.pc' -exec rm '{}' '+'
 	@echo	"	RM	$(DESTDIR)/etc/ld.so.conf.d/libalx*.conf"
 	$(Q)find		$(DESTDIR)/etc/ld.so.conf.d/		\
 				-type f -name 'libalx*.conf' -exec rm '{}' '+'
+	@echo	"	LDCONFIG"
+	$(Q)ldconfig
 	@echo	"	Done"
 	@echo
 
