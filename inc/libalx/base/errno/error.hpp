@@ -20,7 +20,7 @@
  ******* macros ***************************************************************
  ******************************************************************************/
 /*
- * int	alx_perror(const char *restrict str);
+ * void	alx_perror(const char *restrict str);
  */
 #define alx_perror(str)		do					\
 {									\
