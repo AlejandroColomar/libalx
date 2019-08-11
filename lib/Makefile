@@ -45,7 +45,9 @@ BASE_OBJ	=							\
 		$(TMP_DIR)/base/stdlib/swap.o				\
 		$(TMP_DIR)/base/string/strchr.o				\
 		$(TMP_DIR)/base/string/strgrep.o			\
-		$(TMP_DIR)/base/string/strstr.o
+		$(TMP_DIR)/base/string/strstr/strncasestr.o		\
+		$(TMP_DIR)/base/string/strstr/strscasestr.o		\
+		$(TMP_DIR)/base/string/strstr/strsstr.o
 
 CV_OBJ		=							\
 		$(TMP_DIR)/extra/cv/alx.o				\

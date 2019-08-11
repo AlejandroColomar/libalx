@@ -12,23 +12,37 @@
 ################################################################################
 # dependencies
 
+DIRS		=							\
+		strchr							\
+		strstr
+
 OBJ		=							\
-		strchr.o						\
+		strchr/strnchr.o					\
+		strchr/strnrchr.o					\
 		strgrep.o						\
-		strstr.o
+		strstr/strncasestr.o					\
+		strstr/strscasestr.o					\
+		strstr/strsstr.o
 
 OBJ_TST		=							\
 		strgrep-test.o
 
-STRCHR_INC	=							\
-		$(INC_DIR)/libalx/base/string/strchr.h
-STRCHR_SRC	=							\
-		$(SRC_DIR)/base/string/strchr.c
+STRCHR_N_INC	=							\
+		$(INC_DIR)/libalx/base/string/strchr/strnchr.h
+STRCHR_N_SRC	=							\
+		$(SRC_DIR)/base/string/strchr/strnchr.c
+
+STRCHR_NR_INC	=							\
+		$(INC_DIR)/libalx/base/string/strchr/strnrchr.h
+STRCHR_NR_SRC	=							\
+		$(SRC_DIR)/base/string/strchr/strnrchr.c
 
 STRGREP_INC	=							\
 		$(INC_DIR)/libalx/base/string/strgrep.h			\
 		$(INC_DIR)/libalx/base/string/strchr.h			\
-		$(INC_DIR)/libalx/base/string/strstr.h
+		$(INC_DIR)/libalx/base/string/strstr/strncasestr.h	\
+		$(INC_DIR)/libalx/base/string/strstr/strscasestr.h	\
+		$(INC_DIR)/libalx/base/string/strstr/strsstr.h
 STRGREP_SRC	=							\
 		$(SRC_DIR)/base/string/strgrep.c
 TST_STRGREP_INC	=							\
@@ -38,18 +52,32 @@ TST_STRGREP_SRC	=							\
 		$(SRC_DIR)/base/string/strgrep-test.c			\
 		$(SRC_DIR)/base/string/strgrep.c
 
-STRSTR_INC	=							\
-		$(INC_DIR)/libalx/base/string/strstr.h			\
-		$(INC_DIR)/libalx/base/stdint/types.h
-STRSTR_SRC	=							\
-		$(SRC_DIR)/base/string/strstr.c
+STRSTR_NCASE_INC	=						\
+		$(INC_DIR)/libalx/base/string/strstr/strncasestr.h
+STRSTR_NCASE_SRC	=						\
+		$(SRC_DIR)/base/string/strstr/strncasestr.c
+
+STRSTR_SCASE_INC	=						\
+		$(INC_DIR)/libalx/base/string/strstr/strscasestr.h
+STRSTR_SCASE_SRC	=						\
+		$(SRC_DIR)/base/string/strstr/strscasestr.c
+
+STRSTR_S_INC	=							\
+		$(INC_DIR)/libalx/base/string/strstr/strsstr.h
+STRSTR_S_SRC	=							\
+		$(SRC_DIR)/base/string/strstr/strsstr.c
 
 ################################################################################
 # target: dependencies
 #	action
 
 PHONY := all
-all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o))) $(OBJ_TST)
+all: $(DIRS) $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o))) $(OBJ_TST)
+
+
+$(DIRS):
+	@echo	"	MKDIR	libalx/tmp/base/string/$@"
+	$(Q)mkdir -p		$@/
 
 
 %.a.s:
@@ -66,15 +94,24 @@ all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o))) $(OBJ_TST)
 	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
 
 
-strchr.a.s: $(STRCHR_SRC) $(STRCHR_INC)
-strchr.so.s: $(STRCHR_SRC) $(STRCHR_INC)
+strchr/strnchr.a.s: $(STRCHR_N_SRC) $(STRCHR_N_INC)
+strchr/strnchr.so.s: $(STRCHR_N_SRC) $(STRCHR_N_INC)
+
+strchr/strnrchr.a.s: $(STRCHR_NR_SRC) $(STRCHR_NR_INC)
+strchr/strnrchr.so.s: $(STRCHR_NR_SRC) $(STRCHR_NR_INC)
 
 strgrep.a.s: $(STRGREP_SRC) $(STRGREP_INC)
 strgrep.so.s: $(STRGREP_SRC) $(STRGREP_INC)
 strgrep-test.s: $(TST_STRGREP_SRC) $(TST_STRGREP_INC)
 
-strstr.a.s: $(STRSTR_SRC) $(STRSTR_INC)
-strstr.so.s: $(STRSTR_SRC) $(STRSTR_INC)
+strstr/strncasestr.a.s: $(STRSTR_NCASE_SRC) $(STRSTR_NCASE_INC)
+strstr/strncasestr.so.s: $(STRSTR_NCASE_SRC) $(STRSTR_NCASE_INC)
+
+strstr/strscasestr.a.s: $(STRSTR_SCASE_SRC) $(STRSTR_SCASE_INC)
+strstr/strscasestr.so.s: $(STRSTR_SCASE_SRC) $(STRSTR_SCASE_INC)
+
+strstr/strsstr.a.s: $(STRSTR_S_SRC) $(STRSTR_S_INC)
+strstr/strsstr.so.s: $(STRSTR_S_SRC) $(STRSTR_S_INC)
 
 
 PHONY += clean
