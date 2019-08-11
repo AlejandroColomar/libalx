@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/base/string/strstr.h */
+#pragma once	/* libalx/base/string/strchr/strnrchr.h */
 
 
 /******************************************************************************
@@ -33,30 +33,30 @@
 
 
 /******************************************************************************
- ******* extern functions *****************************************************
+ ******* prototypes ***********************************************************
  ******************************************************************************/
 __attribute__((nonnull, pure))
-ptrdiff_t alx_strsstr		(ptrdiff_t size,
+inline
+ptrdiff_t alx_strnrchr		(ptrdiff_t size,
 				 const char str[static restrict size],
-				 const char pattern[static restrict size]);
-__attribute__((nonnull, pure))
-ptrdiff_t alx_strncasestr	(ptrdiff_t size,
-				 const char str[static restrict size],
-				 const char pattern[restrict]);
-__attribute__((nonnull, pure))
-ptrdiff_t alx_strscasestr	(ptrdiff_t size,
-				 const char str[static restrict size],
-				 const char pattern[static restrict size]);
+				 char c);
 
 
 /******************************************************************************
- ******* static inline functions (prototypes) *********************************
+ ******* inline ***************************************************************
  ******************************************************************************/
+inline
+ptrdiff_t alx_strnrchr		(ptrdiff_t size,
+				 const char str[static restrict size],
+				 char c)
+{
+	const char	len = strnlen(str, size);
+	const char	*p = memrchr(str, c, len);
 
-
-/******************************************************************************
- ******* static inline functions (definitions) ********************************
- ******************************************************************************/
+	if (!p)
+		return	-1;
+	return	p - str;
+}
 
 
 /******************************************************************************

@@ -14,9 +14,10 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "libalx/base/stdio/printf/sbprintf.h"
-#include "libalx/base/string/strchr.h"
+#include "libalx/base/string/strchr/strcasechr.h"
 
 
 /******************************************************************************
@@ -319,7 +320,7 @@ int	alx_sscan_ch	(char *restrict dest,
 		goto err_sscanf;
 
 	if (ignore_case) {
-		if (!alx_strcasechr(valid, *dest))
+		if (alx_strcasechr(valid, *dest) < 0)
 			goto err_nfound;
 	} else {
 		if (!strchr(valid, *dest))

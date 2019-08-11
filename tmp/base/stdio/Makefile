@@ -56,7 +56,7 @@ SEEKC_SRC	=							\
 
 SSCAN_INC	=							\
 		$(INC_DIR)/libalx/base/stdio/sscan.h			\
-		$(INC_DIR)/libalx/base/string/strchr.h
+		$(INC_DIR)/libalx/base/string/strchr/strcasechr.h
 SSCAN_SRC	=							\
 		$(SRC_DIR)/base/stdio/sscan.c
 

@@ -14,7 +14,7 @@
 #include <stddef.h>
 #include <string.h>
 
-#include "libalx/base/string/strchr.h"
+#include "libalx/base/string/strchr/strnchrnul.h"
 #include "libalx/base/string/strstr/strncasestr.h"
 #include "libalx/base/string/strstr/strscasestr.h"
 #include "libalx/base/string/strstr/strsstr.h"
