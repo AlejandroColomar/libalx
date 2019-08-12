@@ -18,19 +18,21 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+#include "libalx/base/stdlib/alloc/mallocarray.h"
+
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
 /*
- * __attribute__((nonnull))
+ * [[gnu::nonnull]]
  * int	alx_mallocs(type **restrict p, ptrdiff_t nmemb);
  */
 #define alx_mallocs(ptr, nmemb)	(					\
 {									\
 	__auto_type	ptr_	= (ptr);				\
 									\
-	*ptr_	= alx_mallocs__(nmemb, sizeof(**ptr_));			\
+	*ptr_	= alx_mallocarray(nmemb, sizeof(**ptr_));		\
 									\
 	!(*ptr_);							\
 }									\
@@ -50,28 +52,11 @@
 /******************************************************************************
  ******* function prototypes **************************************************
  ******************************************************************************/
-__attribute__((malloc))
-inline
-void	*alx_mallocs__(ptrdiff_t nmemb, size_t size);
 
 
 /******************************************************************************
  ******* inline functions *****************************************************
  ******************************************************************************/
-inline
-void	*alx_mallocs__(ptrdiff_t nmemb, size_t size)
-{
-
-	if (nmemb < 0)
-		goto ovf;
-	if (nmemb > (PTRDIFF_MAX / (ptrdiff_t)size))
-		goto ovf;
-
-	return	malloc(size * nmemb);
-ovf:
-	errno	= EOVERFLOW;
-	return	NULL;
-}
 
 
 /******************************************************************************

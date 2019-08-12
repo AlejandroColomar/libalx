@@ -16,7 +16,10 @@ DIRS		=							\
 		alloc
 
 OBJ		=							\
+		alloc/callocs.o						\
+		alloc/mallocarray.o					\
 		alloc/mallocs.o						\
+		alloc/reallocs.o					\
 		array_split_pos_neg.o					\
 		average.o						\
 		compare.o						\
@@ -29,10 +32,25 @@ OBJ		=							\
 		seed.o							\
 		swap.o
 
+ALLOC_CALLOCS_INC	=						\
+		$(INC_DIR)/libalx/base/stdlib/alloc/callocs.h
+ALLOC_CALLOCS_SRC	=						\
+		$(SRC_DIR)/base/stdlib/alloc/callocs.c
+
+ALLOC_MALLOCARRAY_INC	=						\
+		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarray.h
+ALLOC_MALLOCARRAY_SRC	=						\
+		$(SRC_DIR)/base/stdlib/alloc/mallocarray.c
+
 ALLOC_MALLOCS_INC	=						\
 		$(INC_DIR)/libalx/base/stdlib/alloc/mallocs.h
 ALLOC_MALLOCS_SRC	=						\
 		$(SRC_DIR)/base/stdlib/alloc/mallocs.c
+
+ALLOC_REALLOCS_INC	=						\
+		$(INC_DIR)/libalx/base/stdlib/alloc/reallocs.h
+ALLOC_REALLOCS_SRC	=						\
+		$(SRC_DIR)/base/stdlib/alloc/reallocs.c
 
 ARRAY_SPLIT_POS_NEG_INC	=						\
 		$(INC_DIR)/libalx/base/stdlib/array_split_pos_neg.h
@@ -115,8 +133,17 @@ alloc:
 	$(Q)$(AS) $< -o $@
 
 
+alloc/callocs.a.s: $(ALLOC_CALLOCS_SRC) $(ALLOC_CALLOCS_INC)
+alloc/callocs.so.s: $(ALLOC_CALLOCS_SRC) $(ALLOC_CALLOCS_INC)
+
+alloc/mallocarray.a.s: $(ALLOC_MALLOCARRAY_SRC) $(ALLOC_MALLOCARRAY_INC)
+alloc/mallocarray.so.s: $(ALLOC_MALLOCARRAY_SRC) $(ALLOC_MALLOCARRAY_INC)
+
 alloc/mallocs.a.s: $(ALLOC_MALLOCS_SRC) $(ALLOC_MALLOCS_INC)
 alloc/mallocs.so.s: $(ALLOC_MALLOCS_SRC) $(ALLOC_MALLOCS_INC)
+
+alloc/reallocs.a.s: $(ALLOC_REALLOCS_SRC) $(ALLOC_REALLOCS_INC)
+alloc/reallocs.so.s: $(ALLOC_REALLOCS_SRC) $(ALLOC_REALLOCS_INC)
 
 array_split_pos_neg.a.s: $(ARRAY_SPLIT_POS_NEG_SRC) $(ARRAY_SPLIT_POS_NEG_INC)
 array_split_pos_neg.so.s: $(ARRAY_SPLIT_POS_NEG_SRC) $(ARRAY_SPLIT_POS_NEG_INC)
