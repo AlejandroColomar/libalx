@@ -1,4 +1,4 @@
-C library
+C/C++ library
 
 This library provides extensions to glibc and other libraries (libbsd, OpenCV,
 GSL, ncurses).
