@@ -35,8 +35,8 @@
  ******* global functions *****************************************************
  ******************************************************************************/
 int	alx_ocr_read	(ptrdiff_t bufsiz, char text[static restrict bufsiz],
-			 void *restrict img, ptrdiff_t w, ptrdiff_t h,
-			 int B_per_pix, int B_per_line,
+			 void *restrict imgdata, ptrdiff_t w, ptrdiff_t h,
+			 ptrdiff_t B_per_pix, ptrdiff_t B_per_line,
 			 int lang, int conf)
 {
 	struct TessBaseAPI	*handle_ocr;
@@ -103,7 +103,7 @@ int	alx_ocr_read	(ptrdiff_t bufsiz, char text[static restrict bufsiz],
 		TessBaseAPIReadConfigFile(handle_ocr, conf_str);
 
 	/* scan image for text */
-	TessBaseAPISetImage(handle_ocr, img, w, h, B_per_pix, B_per_line);
+	TessBaseAPISetImage(handle_ocr, imgdata, w, h, B_per_pix, B_per_line);
 	if (TessBaseAPIRecognize(handle_ocr, NULL))
 		goto err;
 	txt	= TessBaseAPIGetUTF8Text(handle_ocr);

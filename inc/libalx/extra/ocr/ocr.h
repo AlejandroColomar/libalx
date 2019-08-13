@@ -51,8 +51,8 @@ enum	Alx_Ocr_Conf {
  ******************************************************************************/
 __attribute__((nonnull))
 int	alx_ocr_read	(ptrdiff_t bufsiz, char text[static restrict bufsiz],
-			 void *restrict img, ptrdiff_t w, ptrdiff_t h,
-			 int B_per_pix, int B_per_line,
+			 void *restrict imgdata, ptrdiff_t w, ptrdiff_t h,
+			 ptrdiff_t B_per_pix, ptrdiff_t B_per_line,
 			 int lang, int conf);
 
 
