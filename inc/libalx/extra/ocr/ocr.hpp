@@ -53,7 +53,8 @@ enum	Lang {
 };
 
 enum	Conf {
-	CONF_PRICE = 1,
+	CONF_NONE,
+	CONF_PRICE,
 	CONF_PRICE_EUR,
 	CONF_PRICE_GBP,
 	CONF_PRICE_USD

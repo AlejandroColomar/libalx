@@ -68,6 +68,9 @@ int	alx_ocr_read	(ptrdiff_t bufsiz, char text[static restrict bufsiz],
 
 	/* Config file */
 	switch (conf) {
+	case ALX_OCR_CONF_NONE:
+		conf_str = "";
+		break;
 	case ALX_OCR_CONF_PRICE:
 		conf_str = "usr/local/share/libalx/extra/ocr/price";
 		break;
