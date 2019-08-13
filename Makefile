@@ -245,14 +245,14 @@ PHONY += install
 install:
 	@echo	"	Install:"
 	@echo
-	$(Q)$(MAKE)	cp_files_base
-	$(Q)$(MAKE)	cp_files_extra
+	$(Q)$(MAKE)	install_base
+	$(Q)$(MAKE)	install_extra
 	$(Q)$(MAKE)	conf_ld
 	@echo	"	Done"
 	@echo
 
-PHONY += cp_files_base
-cp_files_base:
+PHONY += install_base
+install_base:
 	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/base/"
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/base/
 	@echo	"	CP -r	./inc/libalx/base/*"
@@ -273,8 +273,8 @@ cp_files_base:
 					$(DESTDIR)/etc/ld.so.conf.d/
 	@echo
 
-PHONY += cp_files_extra
-cp_files_extra:
+PHONY += install_extra
+install_extra:
 	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/extra/"
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/extra/
 	@echo	"	CP -r	./inc/libalx/extra/*"
