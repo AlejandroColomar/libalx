@@ -28,7 +28,7 @@ extern	"C"
 {
 [[gnu::nonnull]]
 int	alx_ocr_read	(ptrdiff_t bufsiz, char text[static restrict bufsiz],
-			 void *restrict imgdata, ptrdiff_t w, ptrdiff_t h,
+			 const void *restrict imgdata, ptrdiff_t w, ptrdiff_t h,
 			 ptrdiff_t B_per_pix, ptrdiff_t B_per_line,
 			 int lang, int conf);
 }
