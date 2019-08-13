@@ -64,6 +64,11 @@ int	alx_cv_init_rect	(void *restrict rect,
 				 ptrdiff_t w, ptrdiff_t h);
 /* ----- Extract */
 [[gnu::nonnull]]
+void	alx_cv_extract_imgdata	(const void *restrict img, void **data,
+				 ptrdiff_t *restrict w, ptrdiff_t *restrict h,
+				 ptrdiff_t *restrict B_per_pix,
+				 ptrdiff_t *restrict B_per_line);
+[[gnu::nonnull]]
 void	alx_cv_extract_rect	(const void *restrict rect,
 				 ptrdiff_t *restrict x, ptrdiff_t *restrict y,
 				 ptrdiff_t *restrict w, ptrdiff_t *restrict h);
@@ -152,10 +157,10 @@ void	free_conts	(class std::vector<
 					int>>> *restrict contours);
 /* ----- Init */
 [[gnu::nonnull]]
-int	init_img	(class cv::Mat *restrict rect,
+int	init_img	(class cv::Mat *restrict img,
 			 ptrdiff_t w, ptrdiff_t h);
 [[gnu::nonnull]]
-void	deinit_img	(class cv::Mat *restrict rect);
+void	deinit_img	(class cv::Mat *restrict img);
 [[gnu::nonnull]]
 void	init_conts	(class std::vector<
 					class std::vector<
@@ -170,6 +175,11 @@ void	deinit_conts	(class std::vector<
 int	init_rect	(class cv::Rect_<int> *restrict rect,
 			 ptrdiff_t x, ptrdiff_t y, ptrdiff_t w, ptrdiff_t h);
 /* ----- Extract */
+[[gnu::nonnull]]
+void	extract_imgdata	(const class cv::Mat *restrict img, void **data,
+			 ptrdiff_t *restrict w, ptrdiff_t *restrict h,
+			 ptrdiff_t *restrict B_per_pix,
+			 ptrdiff_t *restrict B_per_line);
 [[gnu::nonnull]]
 void	extract_rect	(const class cv::Rect_<int> *restrict rect,
 			 ptrdiff_t *restrict x, ptrdiff_t *restrict y,

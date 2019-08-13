@@ -211,6 +211,28 @@ int	alx_cv_init_rect	(void *restrict rect,
 }
 
 /* ----- Extract */
+void	alx::CV::extract_imgdata(const class cv::Mat *restrict img, void **data,
+				 ptrdiff_t *restrict w, ptrdiff_t *restrict h,
+				 ptrdiff_t *restrict B_per_pix,
+				 ptrdiff_t *restrict B_per_line)
+{
+
+	*data		= img->data;
+	*w		= img->size().width;
+	*h		= img->size().height;
+	*B_per_pix	= img->channels();
+	*B_per_line	= img->step1();
+}
+
+void	alx_cv_extract_imgdata	(const void *restrict img, void **data,
+				 ptrdiff_t *restrict w, ptrdiff_t *restrict h,
+				 ptrdiff_t *restrict B_per_pix,
+				 ptrdiff_t *restrict B_per_line)
+{
+	alx::CV::extract_imgdata((const class cv::Mat *)img, data, w, h,
+							B_per_pix, B_per_line);
+}
+
 void	alx::CV::extract_rect	(const class cv::Rect_<int> *restrict rect,
 				 ptrdiff_t *restrict x, ptrdiff_t *restrict y,
 				 ptrdiff_t *restrict w, ptrdiff_t *restrict h)
