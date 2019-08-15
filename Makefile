@@ -122,7 +122,6 @@ CFLAGS_D	= -D _GNU_SOURCE
 CFLAGS_D       += -D _POSIX_C_SOURCE=200809L
 
 CFLAGS_PKG	= `pkg-config --cflags libbsd-overlay`
-CFLAGS_PKG     += `pkg-config --cflags tesseract`
 
 CFLAGS_I	= -I $(INC_DIR)
 
@@ -208,7 +207,7 @@ base:
 	$(Q)$(MAKE) $@	-C $(LIB_DIR)
 
 PHONY += extra
-extra: cv gsl ncurses ocr
+extra: cv gsl ncurses ocr zbar
 
 PHONY += cv
 cv: base gsl
@@ -230,6 +229,12 @@ ncurses: base
 
 PHONY += ocr
 ocr: base
+	@echo	"	MAKE	$@"
+	$(Q)$(MAKE) $@	-C $(TMP_DIR)
+	$(Q)$(MAKE) $@	-C $(LIB_DIR)
+
+PHONY += zbar
+zbar: base
 	@echo	"	MAKE	$@"
 	$(Q)$(MAKE) $@	-C $(TMP_DIR)
 	$(Q)$(MAKE) $@	-C $(LIB_DIR)

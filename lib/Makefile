@@ -86,11 +86,13 @@ NCURSES_OBJ	=							\
 		$(TMP_DIR)/extra/ncurses/perror.o
 OCR_OBJ		=							\
 		$(TMP_DIR)/extra/ocr/ocr.o
+ZBAR_OBJ	=							\
+		$(TMP_DIR)/extra/zbar/zbar.o
 
 
 ALL	= libalx							\
 	base								\
-	cv gsl ncurses ocr
+	cv gsl ncurses ocr zbar
 
 # target: dependencies
 #	action
@@ -114,6 +116,9 @@ ncurses: libalx libalx/libalx-ncurses.a libalx/libalx-ncurses.so
 
 PHONY += ocr
 ocr: libalx libalx/libalx-ocr.a libalx/libalx-ocr.so
+
+PHONY += zbar
+zbar: libalx libalx/libalx-zbar.a libalx/libalx-zbar.so
 
 
 libalx:
@@ -154,6 +159,12 @@ libalx/libalx-ocr.a: $(patsubst %.o,%.a.o,$(OCR_OBJ))
 libalx/libalx-ocr.so: $(patsubst %.o,%.so.o,$(OCR_OBJ))
 	@echo	"	CC	libalx/lib/$@"
 	$(Q)$(CC) $(LDFLAGS) -o $@ $^ `pkg-config --libs tesseract`	\
+						-l alx-base
+
+libalx/libalx-zbar.a: $(patsubst %.o,%.a.o,$(ZBAR_OBJ))
+libalx/libalx-zbar.so: $(patsubst %.o,%.so.o,$(ZBAR_OBJ))
+	@echo	"	CC	libalx/lib/$@"
+	$(Q)$(CC) $(LDFLAGS) -o $@ $^ `pkg-config --libs zbar`		\
 						-l alx-base
 
 

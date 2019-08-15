@@ -10,56 +10,45 @@
 ################################################################################
 
 ################################################################################
+# dependencies
+OBJ		=							\
+		zbar.o
+
+ZBAR_INC	=							\
+		$(INC_DIR)/libalx/extra/zbar/zbar.h
+ZBAR_SRC	=							\
+		$(SRC_DIR)/extra/zbar/zbar.c
+
+################################################################################
+# cflags
+CFLAGS_A	+= `pkg-config --cflags zbar`
+CFLAGS_SO	+= `pkg-config --cflags zbar`
+
+################################################################################
 # target: dependencies
 #	action
 
 PHONY := all
-all: base extra
+all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 
-PHONY += base
-base:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/assert/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/compiler/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/errno/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/float/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/math/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stdint/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stdio/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stdlib/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/string/
+%.a.s:
+	@echo	"	CC	libalx/tmp/extra/zbar/$@"
+	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
+%.so.s:
+	@echo	"	CC	libalx/tmp/extra/zbar/$@"
+	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
+%.o: %.s
+	@echo	"	AS	libalx/tmp/extra/zbar/$@"
+	$(Q)$(AS) $< -o $@
 
 
-PHONY += extra
-extra: cv gsl ncurses ocr zbar
-
-
-PHONY += cv
-cv:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/cv/
-
-PHONY += gsl
-gsl:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/gsl/distributions/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/gsl/rstat/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/gsl/statistics/
-
-PHONY += ncurses
-ncurses:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/ncurses/
-
-PHONY += ocr
-ocr:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/ocr/
-
-PHONY += zbar
-zbar:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/zbar/
+zbar.a.s: $(ZBAR_SRC) $(ZBAR_INC)
+zbar.so.s: $(ZBAR_SRC) $(ZBAR_INC)
 
 
 PHONY += clean
 clean:
-	@echo	"	RM	*.o *.s"
 	$(Q)rm -f *.o *.s
 
 ################################################################################
