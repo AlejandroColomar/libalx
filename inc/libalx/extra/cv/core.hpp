@@ -63,16 +63,19 @@ int	alx_cv_init_rect	(void *restrict rect,
 				 ptrdiff_t x, ptrdiff_t y,
 				 ptrdiff_t w, ptrdiff_t h);
 /* ----- Extract */
-[[gnu::nonnull]]
+[[gnu::nonnull(1)]]
 void	alx_cv_extract_imgdata	(const void *restrict img, void **data,
-				 ptrdiff_t *restrict w, ptrdiff_t *restrict h,
+				 ptrdiff_t *restrict rows,
+				 ptrdiff_t *restrict cols,
+				 ptrdiff_t *restrict width,
+				 ptrdiff_t *restrict height,
 				 ptrdiff_t *restrict B_per_pix,
 				 ptrdiff_t *restrict B_per_line);
-[[gnu::nonnull]]
+[[gnu::nonnull(1)]]
 void	alx_cv_extract_rect	(const void *restrict rect,
 				 ptrdiff_t *restrict x, ptrdiff_t *restrict y,
 				 ptrdiff_t *restrict w, ptrdiff_t *restrict h);
-[[gnu::nonnull]]
+[[gnu::nonnull(1)]]
 void	alx_cv_extract_rect_rot	(const void *restrict rect_rot,
 				 ptrdiff_t *restrict ctr_x,
 				 ptrdiff_t *restrict ctr_y,
@@ -175,16 +178,19 @@ void	deinit_conts	(class std::vector<
 int	init_rect	(class cv::Rect_<int> *restrict rect,
 			 ptrdiff_t x, ptrdiff_t y, ptrdiff_t w, ptrdiff_t h);
 /* ----- Extract */
-[[gnu::nonnull]]
+[[gnu::nonnull(1)]]
 void	extract_imgdata	(const class cv::Mat *restrict img, void **data,
-			 ptrdiff_t *restrict w, ptrdiff_t *restrict h,
+			 ptrdiff_t *restrict rows,
+			 ptrdiff_t *restrict cols,
+			 ptrdiff_t *restrict width,
+			 ptrdiff_t *restrict height,
 			 ptrdiff_t *restrict B_per_pix,
 			 ptrdiff_t *restrict B_per_line);
-[[gnu::nonnull]]
+[[gnu::nonnull(1)]]
 void	extract_rect	(const class cv::Rect_<int> *restrict rect,
 			 ptrdiff_t *restrict x, ptrdiff_t *restrict y,
 			 ptrdiff_t *restrict w, ptrdiff_t *restrict h);
-[[gnu::nonnull]]
+[[gnu::nonnull(1)]]
 void	extract_rect_rot(const class cv::RotatedRect *restrict rect_rot,
 			 ptrdiff_t *restrict ctr_x, ptrdiff_t *restrict ctr_y,
 			 ptrdiff_t *restrict w, ptrdiff_t *restrict h);

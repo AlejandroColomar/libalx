@@ -212,25 +212,41 @@ int	alx_cv_init_rect	(void *restrict rect,
 
 /* ----- Extract */
 void	alx::CV::extract_imgdata(const class cv::Mat *restrict img, void **data,
-				 ptrdiff_t *restrict w, ptrdiff_t *restrict h,
+				 ptrdiff_t *restrict rows,
+				 ptrdiff_t *restrict cols,
+				 ptrdiff_t *restrict width,
+				 ptrdiff_t *restrict height,
 				 ptrdiff_t *restrict B_per_pix,
 				 ptrdiff_t *restrict B_per_line)
 {
 
-	*data		= img->data;
-	*w		= img->size().width;
-	*h		= img->size().height;
-	*B_per_pix	= img->channels();
-	*B_per_line	= img->step1();
+	if (data)
+		*data		= img->data;
+	if (rows)
+		*rows		= img->rows;
+	if (cols)
+		*cols		= img->cols;
+	if (width)
+		*width		= img->size().width;
+	if (height)
+		*height		= img->size().height;
+	if (B_per_pix)
+		*B_per_pix	= img->channels();
+	if (B_per_line)
+		*B_per_line	= img->step1();
 }
 
 void	alx_cv_extract_imgdata	(const void *restrict img, void **data,
-				 ptrdiff_t *restrict w, ptrdiff_t *restrict h,
+				 ptrdiff_t *restrict rows,
+				 ptrdiff_t *restrict cols,
+				 ptrdiff_t *restrict width,
+				 ptrdiff_t *restrict height,
 				 ptrdiff_t *restrict B_per_pix,
 				 ptrdiff_t *restrict B_per_line)
 {
-	alx::CV::extract_imgdata((const class cv::Mat *)img, data, w, h,
-							B_per_pix, B_per_line);
+	alx::CV::extract_imgdata((const class cv::Mat *)img, data,
+						rows, cols, width, height,
+						B_per_pix, B_per_line);
 }
 
 void	alx::CV::extract_rect	(const class cv::Rect_<int> *restrict rect,
@@ -238,10 +254,14 @@ void	alx::CV::extract_rect	(const class cv::Rect_<int> *restrict rect,
 				 ptrdiff_t *restrict w, ptrdiff_t *restrict h)
 {
 
-	*x = rect->x;
-	*y = rect->y;
-	*w = rect->width;
-	*h = rect->height;
+	if (x)
+		*x = rect->x;
+	if (y)
+		*y = rect->y;
+	if (w)
+		*w = rect->width;
+	if (h)
+		*h = rect->height;
 }
 
 void	alx_cv_extract_rect	(const void *restrict rect,
@@ -257,10 +277,14 @@ void	alx::CV::extract_rect_rot(const class cv::RotatedRect *restrict rect_rot,
 				 ptrdiff_t *restrict w, ptrdiff_t *restrict h)
 {
 
-	*ctr_x	= rect_rot->center.x;
-	*ctr_y	= rect_rot->center.y;
-	*w	= rect_rot->size.width;
-	*h	= rect_rot->size.height;
+	if (ctr_x)
+		*ctr_x	= rect_rot->center.x;
+	if (ctr_y)
+		*ctr_y	= rect_rot->center.y;
+	if (w)
+		*w	= rect_rot->size.width;
+	if (h)
+		*h	= rect_rot->size.height;
 }
 
 void	alx_cv_extract_rect_rot	(const void *restrict rect_rot,
