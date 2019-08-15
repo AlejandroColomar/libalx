@@ -28,7 +28,7 @@
  ******************************************************************************/
 extern	"C"
 {
-[[gnu::nonnull]]
+[[gnu::nonnull(2, 4)]]
 int	alx_zbar_read	(ptrdiff_t bufsiz,
 			 char *restrict bcode_data, char *restrict bcode_type,
 			 const void *restrict imgdata,

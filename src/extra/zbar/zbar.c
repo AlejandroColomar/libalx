@@ -67,11 +67,14 @@ int	alx_zbar_read	(ptrdiff_t bufsiz,
 
 	/* extract results */
 	symbol	= zbar_image_first_symbol(image_zb);
-	if (alx_snprintfs(bcode_type, NULL, bufsiz, "%s", zbar_get_symbol_name(
+	if (bcode_type) {
+		if (alx_snprintfs(bcode_type, NULL, bufsiz, "%s",
+						zbar_get_symbol_name(
 						zbar_symbol_get_type(symbol))))
-		goto err;
-	if (alx_snprintfs(bcode_data, NULL, bufsiz, "%s", zbar_symbol_get_data(
-						symbol)))
+			goto err;
+	}
+	if (alx_snprintfs(bcode_data, NULL, bufsiz, "%s",
+						zbar_symbol_get_data(symbol)))
 		goto err;
 
 	status	= 0;
