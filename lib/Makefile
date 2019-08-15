@@ -31,7 +31,10 @@ BASE_OBJ	=							\
 		$(TMP_DIR)/base/stdio/printf/snprintfs.o		\
 		$(TMP_DIR)/base/stdio/seekc.o				\
 		$(TMP_DIR)/base/stdio/sscan.o				\
+		$(TMP_DIR)/base/stdlib/alloc/callocs.o			\
+		$(TMP_DIR)/base/stdlib/alloc/mallocarray.o		\
 		$(TMP_DIR)/base/stdlib/alloc/mallocs.o			\
+		$(TMP_DIR)/base/stdlib/alloc/reallocs.o			\
 		$(TMP_DIR)/base/stdlib/array_split_pos_neg.o		\
 		$(TMP_DIR)/base/stdlib/average.o			\
 		$(TMP_DIR)/base/stdlib/compare.o			\
