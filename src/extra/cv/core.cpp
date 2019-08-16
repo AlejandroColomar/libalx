@@ -16,7 +16,7 @@
 #include <memory>
 #include <vector>
 
-#include <opencv2/core/core.hpp>
+#include <opencv2/core.hpp>
 
 #include "libalx/base/compiler/restrict.hpp"
 #include "libalx/base/stdlib/alloc/mallocs.hpp"

@@ -14,6 +14,7 @@
 OBJ		=							\
 		alx.o							\
 		core.o							\
+		features2d.o						\
 		highgui.o						\
 		imgproc.o						\
 		ximgproc.o
@@ -27,6 +28,11 @@ CORE_INC	=							\
 		$(INC_DIR)/libalx/extra/cv/core.hpp
 CORE_SRC	=							\
 		$(SRC_DIR)/extra/cv/core.cpp
+
+FEATURES2D_INC	=							\
+		$(INC_DIR)/libalx/extra/cv/features2d.hpp
+FEATURES2D_SRC	=							\
+		$(SRC_DIR)/extra/cv/features2d.cpp
 
 HIGHGUI_INC	=							\
 		$(INC_DIR)/libalx/extra/cv/highgui.hpp
@@ -72,6 +78,9 @@ alx.so.s: $(ALX_SRC) $(ALX_INC)
 
 core.a.s: $(CORE_SRC) $(CORE_INC)
 core.so.s: $(CORE_SRC) $(CORE_INC)
+
+features2d.a.s: $(FEATURES2D_SRC) $(FEATURES2D_INC)
+features2d.so.s: $(FEATURES2D_SRC) $(FEATURES2D_INC)
 
 highgui.a.s: $(HIGHGUI_SRC) $(HIGHGUI_INC)
 highgui.so.s: $(HIGHGUI_SRC) $(HIGHGUI_INC)

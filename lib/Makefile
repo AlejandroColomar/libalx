@@ -67,6 +67,7 @@ BASE_OBJ	=							\
 CV_OBJ		=							\
 		$(TMP_DIR)/extra/cv/alx.o				\
 		$(TMP_DIR)/extra/cv/core.o				\
+		$(TMP_DIR)/extra/cv/features2d.o			\
 		$(TMP_DIR)/extra/cv/highgui.o				\
 		$(TMP_DIR)/extra/cv/imgproc.o				\
 		$(TMP_DIR)/extra/cv/ximgproc.o
