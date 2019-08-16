@@ -32,9 +32,10 @@
  ******************************************************************************/
 extern	"C"
 {
-[[gnu::nonnull]]
+[[gnu::nonnull(1, 2)]]
 void	alx_cv_orb_align	(const void *restrict ref,
-				 void *restrict img);
+				 void *restrict img,
+				 void *restrict img_matches);
 }
 
 
@@ -58,9 +59,10 @@ namespace CV {
 /******************************************************************************
  ******* extern functions *****************************************************
  ******************************************************************************/
-[[gnu::nonnull]]
+[[gnu::nonnull(1, 2)]]
 void	orb_align	(const class cv::Mat *restrict ref,
-			 class cv::Mat *restrict img);
+			 class cv::Mat *restrict img,
+			 class cv::Mat *restrict img_matches);
 
 
 /******************************************************************************

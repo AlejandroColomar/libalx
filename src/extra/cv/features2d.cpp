@@ -40,7 +40,8 @@
  ******* global functions *****************************************************
  ******************************************************************************/
 void	alx::CV::orb_align	(const class cv::Mat *restrict ref,
-				 class cv::Mat *restrict img)
+				 class cv::Mat *restrict img,
+				 class cv::Mat *restrict img_matches)
 {
 	class std::vector <class cv::KeyPoint>		keypoints_0;
 	class std::vector <class cv::KeyPoint>		keypoints_1;
@@ -72,6 +73,11 @@ void	alx::CV::orb_align	(const class cv::Mat *restrict ref,
 	good_matches	= GOOD_MATCH_P * matches.size();
 	matches.erase(matches.begin() + good_matches, matches.end());
 
+	/* Draw top matches */
+	if (img_matches)
+		cv::drawMatches(*img, keypoints_1, *ref, keypoints_0, matches,
+								*img_matches);
+
 	/* Extract location of good matches */
 	size	= matches.size();
 	for (ptrdiff_t i = 0; i < size; i++) {
@@ -88,6 +94,15 @@ void	alx::CV::orb_align	(const class cv::Mat *restrict ref,
 	/* Write img_align into img */
 	*img	= img_align;
 	img_align.release();
+}
+
+void	alx_cv_orb_align	(const void *restrict ref,
+				 void *restrict img,
+				 void *restrict img_matches)
+{
+	return	alx::CV::orb_align((const class cv::Mat *)ref,
+					(class cv::Mat *)img,
+					(class cv::Mat *)img_matches);
 }
 
 
