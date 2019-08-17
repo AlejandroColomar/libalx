@@ -29,6 +29,7 @@
 #define SSIZEOF(x)		((ssize_t)sizeof(x))
 #define ARRAY_SIZE(arr)		(sizeof(arr) / sizeof((arr)[0]))
 #define ARRAY_SSIZE(arr)	((ptrdiff_t)ARRAY_SIZE(arr))
+#define ARRAY_BYTES(arr)	(sizeof((arr)[0]) * ARRAY_SIZE(arr))
 
 
 /******************************************************************************

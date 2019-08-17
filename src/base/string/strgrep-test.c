@@ -12,6 +12,8 @@
 #include <stdbool.h>
 #include <stdio.h>
 
+#include "libalx/base/compiler/size.h"
+
 #include "libalx/../../test/test.h"
 
 
@@ -128,8 +130,8 @@ static	int	test_alx_strnfgrep(void)
 	char	buff[BUFF_SIZE];
 	int	cmp;
 
-	alx_strnfgrep(sizeof(buff), buff, str, pattern);
-	cmp	= strncmp(buff, expected[TEST_ALX_STRNFGREP], sizeof(buff));
+	alx_strnfgrep(ARRAY_SIZE(buff), buff, str, pattern);
+	cmp = strncmp(buff, expected[TEST_ALX_STRNFGREP], ARRAY_SIZE(buff));
 	if (cmp) {
 		print_fail("	libalx/string/strgrep:	alx_strnfgrep()\n");
 		printf("Expected:\n%s\n", expected[TEST_ALX_STRNFGREP]);
@@ -145,8 +147,8 @@ static	int	test_alx_strlfgrep(void)
 	char	buff[BUFF_SIZE];
 	int	cmp;
 
-	alx_strlfgrep(sizeof(buff), buff, str, pattern);
-	cmp	= strncmp(buff, expected[TEST_ALX_STRLFGREP], sizeof(buff));
+	alx_strlfgrep(ARRAY_SIZE(buff), buff, str, pattern);
+	cmp = strncmp(buff, expected[TEST_ALX_STRLFGREP], ARRAY_SIZE(buff));
 	if (cmp) {
 		print_fail("	libalx/string/strgrep:	alx_strlfgrep()\n");
 		printf("Expected:\n%s\n", expected[TEST_ALX_STRLFGREP]);
@@ -162,8 +164,8 @@ static	int	test_alx_strsfgrep(void)
 	char	buff[BUFF_SIZE];
 	int	cmp;
 
-	alx_strsfgrep(sizeof(buff), buff, str, pattern);
-	cmp	= strncmp(buff, expected[TEST_ALX_STRSFGREP], sizeof(buff));
+	alx_strsfgrep(ARRAY_SIZE(buff), buff, str, pattern);
+	cmp = strncmp(buff, expected[TEST_ALX_STRSFGREP], ARRAY_SIZE(buff));
 	if (cmp) {
 		print_fail("	libalx/string/strgrep:	alx_strsfgrep()\n");
 		printf("Expected:\n%s\n", expected[TEST_ALX_STRSFGREP]);
@@ -179,8 +181,8 @@ static	int	test_alx_strncasefgrep(void)
 	char	buff[BUFF_SIZE];
 	int	cmp;
 
-	alx_strncasefgrep(sizeof(buff), buff, str, pattern);
-	cmp	= strncmp(buff, expected[TEST_ALX_STRNCASEFGREP], sizeof(buff));
+	alx_strncasefgrep(ARRAY_SIZE(buff), buff, str, pattern);
+	cmp = strncmp(buff, expected[TEST_ALX_STRNCASEFGREP], ARRAY_SIZE(buff));
 	if (cmp) {
 		print_fail("	libalx/string/strgrep:	alx_strncasefgrep()\n");
 		printf("Expected:\n%s\n", expected[TEST_ALX_STRNCASEFGREP]);
@@ -196,8 +198,8 @@ static	int	test_alx_strlcasefgrep(void)
 	char	buff[BUFF_SIZE];
 	int	cmp;
 
-	alx_strlcasefgrep(sizeof(buff), buff, str, pattern);
-	cmp	= strncmp(buff, expected[TEST_ALX_STRLCASEFGREP], sizeof(buff));
+	alx_strlcasefgrep(ARRAY_SIZE(buff), buff, str, pattern);
+	cmp = strncmp(buff, expected[TEST_ALX_STRLCASEFGREP], ARRAY_SIZE(buff));
 	if (cmp) {
 		print_fail("	libalx/string/strgrep:	alx_strlcasefgrep()\n");
 		printf("Expected:\n%s\n", expected[TEST_ALX_STRLCASEFGREP]);
@@ -213,8 +215,8 @@ static	int	test_alx_strscasefgrep(void)
 	char	buff[BUFF_SIZE];
 	int	cmp;
 
-	alx_strscasefgrep(sizeof(buff), buff, str, pattern);
-	cmp	= strncmp(buff, expected[TEST_ALX_STRSCASEFGREP], sizeof(buff));
+	alx_strscasefgrep(ARRAY_SIZE(buff), buff, str, pattern);
+	cmp = strncmp(buff, expected[TEST_ALX_STRSCASEFGREP], ARRAY_SIZE(buff));
 	if (cmp) {
 		print_fail("	libalx/string/strgrep:	alx_strscasefgrep()\n");
 		printf("Expected:\n%s\n", expected[TEST_ALX_STRSCASEFGREP]);
@@ -230,8 +232,8 @@ static	int	test_alx_strnfgrepv(void)
 	char	buff[BUFF_SIZE];
 	int	cmp;
 
-	alx_strnfgrepv(sizeof(buff), buff, str, pattern);
-	cmp	= strncmp(buff, expected[TEST_ALX_STRNFGREPV], sizeof(buff));
+	alx_strnfgrepv(ARRAY_SIZE(buff), buff, str, pattern);
+	cmp = strncmp(buff, expected[TEST_ALX_STRNFGREPV], ARRAY_SIZE(buff));
 	if (cmp) {
 		print_fail("	libalx/string/strgrep:	alx_strnfgrepv()\n");
 		printf("Expected:\n%s\n", expected[TEST_ALX_STRNFGREPV]);
@@ -247,8 +249,8 @@ static	int	test_alx_strlfgrepv(void)
 	char	buff[BUFF_SIZE];
 	int	cmp;
 
-	alx_strlfgrepv(sizeof(buff), buff, str, pattern);
-	cmp	= strncmp(buff, expected[TEST_ALX_STRLFGREPV], sizeof(buff));
+	alx_strlfgrepv(ARRAY_SIZE(buff), buff, str, pattern);
+	cmp = strncmp(buff, expected[TEST_ALX_STRLFGREPV], ARRAY_SIZE(buff));
 	if (cmp) {
 		print_fail("	libalx/string/strgrep:	alx_strlfgrepv()\n");
 		printf("Expected:\n%s\n", expected[TEST_ALX_STRLFGREPV]);
@@ -264,8 +266,8 @@ static	int	test_alx_strsfgrepv(void)
 	char	buff[BUFF_SIZE];
 	int	cmp;
 
-	alx_strsfgrepv(sizeof(buff), buff, str, pattern);
-	cmp	= strncmp(buff, expected[TEST_ALX_STRSFGREPV], sizeof(buff));
+	alx_strsfgrepv(ARRAY_SIZE(buff), buff, str, pattern);
+	cmp = strncmp(buff, expected[TEST_ALX_STRSFGREPV], ARRAY_SIZE(buff));
 	if (cmp) {
 		print_fail("	libalx/string/strgrep:	alx_strsfgrepv()\n");
 		printf("Expected:\n%s\n", expected[TEST_ALX_STRSFGREPV]);
@@ -281,8 +283,8 @@ static	int	test_alx_strncasefgrepv(void)
 	char	buff[BUFF_SIZE];
 	int	cmp;
 
-	alx_strncasefgrepv(sizeof(buff), buff, str, pattern);
-	cmp	= strncmp(buff, expected[TEST_ALX_STRNCASEFGREPV], sizeof(buff));
+	alx_strncasefgrepv(ARRAY_SIZE(buff), buff, str, pattern);
+	cmp = strncmp(buff, expected[TEST_ALX_STRNCASEFGREPV], ARRAY_SIZE(buff));
 	if (cmp) {
 		print_fail("	libalx/string/strgrep:	alx_strncasefgrepv()\n");
 		printf("Expected:\n%s\n", expected[TEST_ALX_STRNCASEFGREPV]);
@@ -298,8 +300,8 @@ static	int	test_alx_strlcasefgrepv(void)
 	char	buff[BUFF_SIZE];
 	int	cmp;
 
-	alx_strlcasefgrepv(sizeof(buff), buff, str, pattern);
-	cmp	= strncmp(buff, expected[TEST_ALX_STRLCASEFGREPV], sizeof(buff));
+	alx_strlcasefgrepv(ARRAY_SIZE(buff), buff, str, pattern);
+	cmp = strncmp(buff, expected[TEST_ALX_STRLCASEFGREPV], ARRAY_SIZE(buff));
 	if (cmp) {
 		print_fail("	libalx/string/strgrep:	alx_strlcasefgrepv()\n");
 		printf("Expected:\n%s\n", expected[TEST_ALX_STRLCASEFGREPV]);
@@ -315,8 +317,8 @@ static	int	test_alx_strscasefgrepv(void)
 	char	buff[BUFF_SIZE];
 	int	cmp;
 
-	alx_strscasefgrepv(sizeof(buff), buff, str, pattern);
-	cmp	= strncmp(buff, expected[TEST_ALX_STRSCASEFGREPV], sizeof(buff));
+	alx_strscasefgrepv(ARRAY_SIZE(buff), buff, str, pattern);
+	cmp = strncmp(buff, expected[TEST_ALX_STRSCASEFGREPV], ARRAY_SIZE(buff));
 	if (cmp) {
 		print_fail("	libalx/string/strgrep:	alx_strscasefgrepv()\n");
 		printf("Expected:\n%s\n", expected[TEST_ALX_STRSCASEFGREPV]);

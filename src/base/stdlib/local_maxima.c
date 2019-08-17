@@ -16,6 +16,8 @@
 #include <stdint.h>
 #include <string.h>
 
+#include "libalx/base/compiler/size.h"
+
 
 /******************************************************************************
  ******* macros ***************************************************************
@@ -113,6 +115,10 @@ void	alx_local_maxima_f	(ptrdiff_t rows, ptrdiff_t cols,
 		errno	= EOVERFLOW;
 		return;
 	}
+	if (rows > (PTRDIFF_MAX / (cols * sizeof(arr_out[0][0])))) {
+		errno	= EOVERFLOW;
+		return;
+	}
 
 	memset(arr_out, 0, sizeof(arr_out[0][0]) * rows * cols);
 
@@ -148,7 +154,7 @@ void	alx_local_maxima_uint	(ptrdiff_t rows, ptrdiff_t cols,
 		return;
 	}
 
-	memset(arr_tmp, 0, sizeof(arr_tmp));
+	memset(arr_tmp, 0, ARRAY_BYTES(arr_tmp));
 
 	for (ptrdiff_t i = 0; i < rows; i++) {
 	for (ptrdiff_t j = 0; j < cols; j++) {
@@ -216,7 +222,7 @@ void	alx_local_maxima_int	(ptrdiff_t rows, ptrdiff_t cols,
 		return;
 	}
 
-	memset(arr_tmp, 0, sizeof(arr_tmp));
+	memset(arr_tmp, 0, ARRAY_BYTES(arr_tmp));
 
 	for (ptrdiff_t i = 0; i < rows; i++) {
 	for (ptrdiff_t j = 0; j < cols; j++) {
@@ -284,7 +290,7 @@ void	alx_local_maxima_u8	(ptrdiff_t rows, ptrdiff_t cols,
 		return;
 	}
 
-	memset(arr_tmp, 0, sizeof(arr_tmp));
+	memset(arr_tmp, 0, ARRAY_BYTES(arr_tmp));
 
 	for (ptrdiff_t i = 0; i < rows; i++) {
 	for (ptrdiff_t j = 0; j < cols; j++) {
@@ -352,7 +358,7 @@ void	alx_local_maxima_s8	(ptrdiff_t rows, ptrdiff_t cols,
 		return;
 	}
 
-	memset(arr_tmp, 0, sizeof(arr_tmp));
+	memset(arr_tmp, 0, ARRAY_BYTES(arr_tmp));
 
 	for (ptrdiff_t i = 0; i < rows; i++) {
 	for (ptrdiff_t j = 0; j < cols; j++) {
@@ -420,7 +426,7 @@ void	alx_local_maxima_u16	(ptrdiff_t rows, ptrdiff_t cols,
 		return;
 	}
 
-	memset(arr_tmp, 0, sizeof(arr_tmp));
+	memset(arr_tmp, 0, ARRAY_BYTES(arr_tmp));
 
 	for (ptrdiff_t i = 0; i < rows; i++) {
 	for (ptrdiff_t j = 0; j < cols; j++) {
@@ -488,7 +494,7 @@ void	alx_local_maxima_s16	(ptrdiff_t rows, ptrdiff_t cols,
 		return;
 	}
 
-	memset(arr_tmp, 0, sizeof(arr_tmp));
+	memset(arr_tmp, 0, ARRAY_BYTES(arr_tmp));
 
 	for (ptrdiff_t i = 0; i < rows; i++) {
 	for (ptrdiff_t j = 0; j < cols; j++) {
@@ -556,7 +562,7 @@ void	alx_local_maxima_u32	(ptrdiff_t rows, ptrdiff_t cols,
 		return;
 	}
 
-	memset(arr_tmp, 0, sizeof(arr_tmp));
+	memset(arr_tmp, 0, ARRAY_BYTES(arr_tmp));
 
 	for (ptrdiff_t i = 0; i < rows; i++) {
 	for (ptrdiff_t j = 0; j < cols; j++) {
@@ -624,7 +630,7 @@ void	alx_local_maxima_s32	(ptrdiff_t rows, ptrdiff_t cols,
 		return;
 	}
 
-	memset(arr_tmp, 0, sizeof(arr_tmp));
+	memset(arr_tmp, 0, ARRAY_BYTES(arr_tmp));
 
 	for (ptrdiff_t i = 0; i < rows; i++) {
 	for (ptrdiff_t j = 0; j < cols; j++) {
@@ -692,7 +698,7 @@ void	alx_local_maxima_u64	(ptrdiff_t rows, ptrdiff_t cols,
 		return;
 	}
 
-	memset(arr_tmp, 0, sizeof(arr_tmp));
+	memset(arr_tmp, 0, ARRAY_BYTES(arr_tmp));
 
 	for (ptrdiff_t i = 0; i < rows; i++) {
 	for (ptrdiff_t j = 0; j < cols; j++) {
@@ -760,7 +766,7 @@ void	alx_local_maxima_s64	(ptrdiff_t rows, ptrdiff_t cols,
 		return;
 	}
 
-	memset(arr_tmp, 0, sizeof(arr_tmp));
+	memset(arr_tmp, 0, ARRAY_BYTES(arr_tmp));
 
 	for (ptrdiff_t i = 0; i < rows; i++) {
 	for (ptrdiff_t j = 0; j < cols; j++) {

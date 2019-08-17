@@ -20,6 +20,7 @@
 #include <opencv2/core.hpp>
 
 #include "libalx/base/compiler/restrict.hpp"
+#include "libalx/base/compiler/size.hpp"
 #include "libalx/extra/gsl/rstat/median.hpp"
 #include "libalx/extra/gsl/statistics/mean.hpp"
 
@@ -126,7 +127,7 @@ int	alx::CV::local_max		(class cv::Mat *restrict img)
 	imgtmp.convertTo(imgtmp, CV_8U);
 	imgtmp	= cv::Scalar(UINT8_MAX);
 
-	memset(arr_tmp, 0, sizeof(arr_tmp));
+	memset(arr_tmp, 0, ARRAY_BYTES(arr_tmp));
 #pragma GCC ivdep
 	for (ptrdiff_t i = 0; i < rows; i++) {
 #pragma GCC ivdep
@@ -414,8 +415,8 @@ int	alx::CV::skeleton_A		(class cv::Mat *restrict img)
 			continue;
 		}
 
-		memset(cnt_lo, 0, sizeof(cnt_lo));
-		memset(cnt_hi_or_eq, 0, sizeof(cnt_hi_or_eq));
+		memset(cnt_lo, 0, ARRAY_BYTES(cnt_lo));
+		memset(cnt_hi_or_eq, 0, ARRAY_BYTES(cnt_hi_or_eq));
 
 #pragma GCC ivdep
 		for (ptrdiff_t k = (i + width); k >= (i - width); k--) {

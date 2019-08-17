@@ -17,6 +17,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "libalx/base/compiler/size.h"
 #include "libalx/base/stdlib/compare.h"
 
 
@@ -148,7 +149,7 @@ int		alx_array_sum_int	(ptrdiff_t nmemb,
 	double_t	tmp;
 	int		sum;
 
-	memcpy(sorted, arr, sizeof(sorted));
+	memcpy(sorted, arr, ARRAY_BYTES(sorted));
 	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_int);
 
 	tmp	= 0;
@@ -213,7 +214,7 @@ int8_t		alx_array_sum_s8	(ptrdiff_t nmemb,
 	double_t	tmp;
 	int_fast8_t	sum;
 
-	memcpy(sorted, arr, sizeof(sorted));
+	memcpy(sorted, arr, ARRAY_BYTES(sorted));
 	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_s8);
 
 	tmp	= 0;
@@ -278,7 +279,7 @@ int16_t		alx_array_sum_s16	(ptrdiff_t nmemb,
 	double_t	tmp;
 	int_fast16_t	sum;
 
-	memcpy(sorted, arr, sizeof(sorted));
+	memcpy(sorted, arr, ARRAY_BYTES(sorted));
 	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_s16);
 
 	tmp	= 0;
@@ -343,7 +344,7 @@ int32_t		alx_array_sum_s32	(ptrdiff_t nmemb,
 	double_t	tmp;
 	int_fast32_t	sum;
 
-	memcpy(sorted, arr, sizeof(sorted));
+	memcpy(sorted, arr, ARRAY_BYTES(sorted));
 	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_s32);
 
 	tmp	= 0;
@@ -408,7 +409,7 @@ int64_t		alx_array_sum_s64	(ptrdiff_t nmemb,
 	double_t	tmp;
 	int_fast64_t	sum;
 
-	memcpy(sorted, arr, sizeof(sorted));
+	memcpy(sorted, arr, ARRAY_BYTES(sorted));
 	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_s64);
 
 	tmp	= 0;
