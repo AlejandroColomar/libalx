@@ -183,12 +183,9 @@ LDFLAGS_OPT    += -fuse-linker-plugin
 
 LDFLAGS_L	= -L $(LIB_DIR)/libalx/
 
-LDFLAGS_STD	= -l m
-
 LDFLAGS		= -shared
 LDFLAGS        += $(LDFLAGS_OPT)
 LDFLAGS        += $(LDFLAGS_L)
-LDFLAGS        += $(LDFLAGS_STD)
 
 export	LDFLAGS
 
