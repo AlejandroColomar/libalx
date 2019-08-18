@@ -47,6 +47,10 @@ void	alx_local_maxima_ldbl	(ptrdiff_t rows, ptrdiff_t cols,
 				bool arr_out[restrict rows][cols])
 {
 
+	if ((size_t)rows > (SIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
+		errno	= EOVERFLOW;
+		return;
+	}
 	if ((rows >= (PTRDIFF_MAX - 1))  ||  (cols >= (PTRDIFF_MAX - 1))) {
 		errno	= EOVERFLOW;
 		return;
@@ -79,6 +83,10 @@ void	alx_local_maxima	(ptrdiff_t rows, ptrdiff_t cols,
 				bool arr_out[restrict rows][cols])
 {
 
+	if ((size_t)rows > (SIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
+		errno	= EOVERFLOW;
+		return;
+	}
 	if ((rows >= (PTRDIFF_MAX - 1))  ||  (cols >= (PTRDIFF_MAX - 1))) {
 		errno	= EOVERFLOW;
 		return;
@@ -111,11 +119,11 @@ void	alx_local_maxima_f	(ptrdiff_t rows, ptrdiff_t cols,
 				bool arr_out[restrict rows][cols])
 {
 
-	if ((rows >= (PTRDIFF_MAX - 1))  ||  (cols >= (PTRDIFF_MAX - 1))) {
+	if ((size_t)rows > (SIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
 		errno	= EOVERFLOW;
 		return;
 	}
-	if (rows > (PTRDIFF_MAX / (cols * sizeof(arr_out[0][0])))) {
+	if ((rows >= (PTRDIFF_MAX - 1))  ||  (cols >= (PTRDIFF_MAX - 1))) {
 		errno	= EOVERFLOW;
 		return;
 	}
@@ -149,6 +157,10 @@ void	alx_local_maxima_uint	(ptrdiff_t rows, ptrdiff_t cols,
 	int	arr_tmp[rows][cols];
 	bool	wh;
 
+	if ((size_t)rows > (SIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
+		errno	= EOVERFLOW;
+		return;
+	}
 	if ((rows >= (PTRDIFF_MAX - 1))  ||  (cols >= (PTRDIFF_MAX - 1))) {
 		errno	= EOVERFLOW;
 		return;
@@ -217,6 +229,10 @@ void	alx_local_maxima_int	(ptrdiff_t rows, ptrdiff_t cols,
 	int	arr_tmp[rows][cols];
 	bool	wh;
 
+	if ((size_t)rows > (SIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
+		errno	= EOVERFLOW;
+		return;
+	}
 	if ((rows >= (PTRDIFF_MAX - 1))  ||  (cols >= (PTRDIFF_MAX - 1))) {
 		errno	= EOVERFLOW;
 		return;
@@ -285,6 +301,10 @@ void	alx_local_maxima_u8	(ptrdiff_t rows, ptrdiff_t cols,
 	int	arr_tmp[rows][cols];
 	bool	wh;
 
+	if ((size_t)rows > (SIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
+		errno	= EOVERFLOW;
+		return;
+	}
 	if ((rows >= (PTRDIFF_MAX - 1))  ||  (cols >= (PTRDIFF_MAX - 1))) {
 		errno	= EOVERFLOW;
 		return;
@@ -353,6 +373,10 @@ void	alx_local_maxima_s8	(ptrdiff_t rows, ptrdiff_t cols,
 	int	arr_tmp[rows][cols];
 	bool	wh;
 
+	if ((size_t)rows > (SIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
+		errno	= EOVERFLOW;
+		return;
+	}
 	if ((rows >= (PTRDIFF_MAX - 1))  ||  (cols >= (PTRDIFF_MAX - 1))) {
 		errno	= EOVERFLOW;
 		return;
@@ -421,6 +445,10 @@ void	alx_local_maxima_u16	(ptrdiff_t rows, ptrdiff_t cols,
 	int	arr_tmp[rows][cols];
 	bool	wh;
 
+	if ((size_t)rows > (SIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
+		errno	= EOVERFLOW;
+		return;
+	}
 	if ((rows >= (PTRDIFF_MAX - 1))  ||  (cols >= (PTRDIFF_MAX - 1))) {
 		errno	= EOVERFLOW;
 		return;
@@ -489,6 +517,10 @@ void	alx_local_maxima_s16	(ptrdiff_t rows, ptrdiff_t cols,
 	int	arr_tmp[rows][cols];
 	bool	wh;
 
+	if ((size_t)rows > (SIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
+		errno	= EOVERFLOW;
+		return;
+	}
 	if ((rows >= (PTRDIFF_MAX - 1))  ||  (cols >= (PTRDIFF_MAX - 1))) {
 		errno	= EOVERFLOW;
 		return;
@@ -557,6 +589,10 @@ void	alx_local_maxima_u32	(ptrdiff_t rows, ptrdiff_t cols,
 	int	arr_tmp[rows][cols];
 	bool	wh;
 
+	if ((size_t)rows > (SIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
+		errno	= EOVERFLOW;
+		return;
+	}
 	if ((rows >= (PTRDIFF_MAX - 1))  ||  (cols >= (PTRDIFF_MAX - 1))) {
 		errno	= EOVERFLOW;
 		return;
@@ -625,6 +661,10 @@ void	alx_local_maxima_s32	(ptrdiff_t rows, ptrdiff_t cols,
 	int	arr_tmp[rows][cols];
 	bool	wh;
 
+	if ((size_t)rows > (SIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
+		errno	= EOVERFLOW;
+		return;
+	}
 	if ((rows >= (PTRDIFF_MAX - 1))  ||  (cols >= (PTRDIFF_MAX - 1))) {
 		errno	= EOVERFLOW;
 		return;
@@ -693,6 +733,10 @@ void	alx_local_maxima_u64	(ptrdiff_t rows, ptrdiff_t cols,
 	int	arr_tmp[rows][cols];
 	bool	wh;
 
+	if ((size_t)rows > (SIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
+		errno	= EOVERFLOW;
+		return;
+	}
 	if ((rows >= (PTRDIFF_MAX - 1))  ||  (cols >= (PTRDIFF_MAX - 1))) {
 		errno	= EOVERFLOW;
 		return;
@@ -761,6 +805,10 @@ void	alx_local_maxima_s64	(ptrdiff_t rows, ptrdiff_t cols,
 	int	arr_tmp[rows][cols];
 	bool	wh;
 
+	if ((size_t)rows > (SIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
+		errno	= EOVERFLOW;
+		return;
+	}
 	if ((rows >= (PTRDIFF_MAX - 1))  ||  (cols >= (PTRDIFF_MAX - 1))) {
 		errno	= EOVERFLOW;
 		return;
