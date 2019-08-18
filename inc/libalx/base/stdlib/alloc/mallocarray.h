@@ -51,10 +51,10 @@ void	*alx_mallocarray(ptrdiff_t nmemb, size_t size)
 
 	if (nmemb < 0)
 		goto ovf;
-	if (nmemb > (PTRDIFF_MAX / (ptrdiff_t)size))
+	if ((size_t)nmemb > (SIZE_MAX / size))
 		goto ovf;
 
-	return	malloc(size * nmemb);
+	return	malloc(size * (size_t)nmemb);
 ovf:
 	errno	= EOVERFLOW;
 	return	NULL;
