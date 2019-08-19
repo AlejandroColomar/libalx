@@ -38,7 +38,7 @@ ptrdiff_t alx_strscpy		(char dest[restrict /*size*/],
 {
 	ptrdiff_t	len;
 
-	if (!size)
+	if (size <= 0)
 		return	-E2BIG;
 
 	len	= strnlen(src, size - 1);
