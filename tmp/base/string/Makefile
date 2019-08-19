@@ -13,11 +13,13 @@
 # dependencies
 
 DIRS		=							\
+		strcat							\
 		strchr							\
 		strcpy							\
 		strstr
 
 OBJ		=							\
+		strcat/strscat.o					\
 		strchr/strcasechr.o					\
 		strchr/strcasechrnul.o					\
 		strchr/strncasechr.o					\
@@ -39,6 +41,11 @@ OBJ		=							\
 
 OBJ_TST		=							\
 		strgrep-test.o
+
+STRCAT_S_INC	=							\
+		$(INC_DIR)/libalx/base/string/strcat/strscat.h
+STRCAT_S_SRC	=							\
+		$(SRC_DIR)/base/string/strcat/strscat.c
 
 STRCHR_CASE_INC	=							\
 		$(INC_DIR)/libalx/base/string/strchr/strcasechr.h
@@ -166,6 +173,9 @@ $(DIRS):
 	@echo	"	CC	libalx/tmp/base/string/$@"
 	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
 
+
+strcat/strscat.a.s: $(STRCAT_S_SRC) $(STRCAT_S_INC)
+strcat/strscat.so.s: $(STRCAT_S_SRC) $(STRCAT_S_INC)
 
 strchr/strcasechr.a.s: $(STRCHR_CASE_SRC) $(STRCHR_CASE_INC)
 strchr/strcasechr.so.s: $(STRCHR_CASE_SRC) $(STRCHR_CASE_INC)

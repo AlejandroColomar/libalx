@@ -46,6 +46,7 @@ BASE_OBJ	=							\
 		$(TMP_DIR)/base/stdlib/search.o				\
 		$(TMP_DIR)/base/stdlib/seed.o				\
 		$(TMP_DIR)/base/stdlib/swap.o				\
+		$(TMP_DIR)/base/string/strcat/strscat.o			\
 		$(TMP_DIR)/base/string/strchr/strcasechr.o		\
 		$(TMP_DIR)/base/string/strchr/strcasechrnul.o		\
 		$(TMP_DIR)/base/string/strchr/strncasechr.o		\
