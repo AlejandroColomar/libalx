@@ -45,14 +45,15 @@ ptrdiff_t alx_strscat		(ptrdiff_t size,
 
 	dlen	= strnlen(dest, size);
 	if (dlen == size) {
-		dest[size - 1] = '\0';
-		return	-EILSEQ;
+		len	= size - 1;
+		goto nul;
 	}
 
 	slen	= strnlen(src, size - dlen - 1);
 	memcpy(dest + dlen, src, slen);
 
 	len	= dlen + slen;
+nul:
 	dest[len] = '\0';
 
 	return	len;
