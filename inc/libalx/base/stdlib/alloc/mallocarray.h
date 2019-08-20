@@ -56,7 +56,7 @@ void	*alx_mallocarray(ptrdiff_t nmemb, size_t size)
 
 	return	malloc(size * (size_t)nmemb);
 ovf:
-	errno	= EOVERFLOW;
+	errno	= ENOMEM;
 	return	NULL;
 }
 
