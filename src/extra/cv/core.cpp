@@ -20,6 +20,7 @@
 
 #include "libalx/base/compiler/restrict.hpp"
 #include "libalx/base/stdlib/alloc/mallocs.hpp"
+#include "libalx/base/stdlib/swap.hpp"
 
 
 /******************************************************************************
@@ -274,7 +275,8 @@ void	alx_cv_extract_rect	(const void *restrict rect,
 void	alx::CV::extract_rect_rot(const class cv::RotatedRect *restrict rect_rot,
 				 ptrdiff_t *restrict ctr_x,
 				 ptrdiff_t *restrict ctr_y,
-				 ptrdiff_t *restrict w, ptrdiff_t *restrict h)
+				 ptrdiff_t *restrict w, ptrdiff_t *restrict h,
+				 double *restrict angle)
 {
 
 	if (ctr_x)
@@ -285,15 +287,24 @@ void	alx::CV::extract_rect_rot(const class cv::RotatedRect *restrict rect_rot,
 		*w	= rect_rot->size.width;
 	if (h)
 		*h	= rect_rot->size.height;
+	if (angle) {
+		*angle	= rect_rot->angle;
+		/* If angle < -45º, it is taking the incorrect side */
+		if (*angle < -45.0) {
+			*angle += 90.0;
+			ALX_SWAP(w, h);
+		}
+	}
 }
 
 void	alx_cv_extract_rect_rot	(const void *restrict rect_rot,
 				 ptrdiff_t *restrict ctr_x,
 				 ptrdiff_t *restrict ctr_y,
-				 ptrdiff_t *restrict w, ptrdiff_t *restrict h)
+				 ptrdiff_t *restrict w, ptrdiff_t *restrict h,
+				 double *restrict angle)
 {
 	alx::CV::extract_rect_rot((const class cv::RotatedRect *)rect_rot,
-							ctr_x, ctr_y, w, h);
+						ctr_x, ctr_y, w, h, angle);
 }
 
 /* ----- Copy */

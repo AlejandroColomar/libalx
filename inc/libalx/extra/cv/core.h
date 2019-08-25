@@ -102,7 +102,8 @@ __attribute__((nonnull(1)))
 void	alx_cv_extract_rect_rot	(const rect_rot_s *restrict rect_rot,
 				 ptrdiff_t *restrict ctr_x,
 				 ptrdiff_t *restrict ctr_y,
-				 ptrdiff_t *restrict w, ptrdiff_t *restrict h);
+				 ptrdiff_t *restrict w, ptrdiff_t *restrict h,
+				 double *restrict angle);
 /* ----- Copy */
 __attribute__((nonnull))
 void	alx_cv_clone		(img_s *restrict clone,

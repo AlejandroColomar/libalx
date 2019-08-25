@@ -79,7 +79,8 @@ void	alx_cv_extract_rect	(const void *restrict rect,
 void	alx_cv_extract_rect_rot	(const void *restrict rect_rot,
 				 ptrdiff_t *restrict ctr_x,
 				 ptrdiff_t *restrict ctr_y,
-				 ptrdiff_t *restrict w, ptrdiff_t *restrict h);
+				 ptrdiff_t *restrict w, ptrdiff_t *restrict h,
+				 double *restrict angle);
 /* ----- Copy */
 [[gnu::nonnull]]
 void	alx_cv_clone		(void *restrict clone,
@@ -193,7 +194,8 @@ void	extract_rect	(const class cv::Rect_<int> *restrict rect,
 [[gnu::nonnull(1)]]
 void	extract_rect_rot(const class cv::RotatedRect *restrict rect_rot,
 			 ptrdiff_t *restrict ctr_x, ptrdiff_t *restrict ctr_y,
-			 ptrdiff_t *restrict w, ptrdiff_t *restrict h);
+			 ptrdiff_t *restrict w, ptrdiff_t *restrict h,
+			 double *restrict angle);
 /* ----- Copy */
 [[gnu::nonnull]]
 void	clone		(class cv::Mat *restrict clone,
