@@ -13,7 +13,8 @@
 # dependencies
 
 DIRS		=							\
-		alloc
+		alloc							\
+		strto
 
 OBJ		=							\
 		alloc/callocs.o						\
@@ -30,6 +31,9 @@ OBJ		=							\
 		pow.o							\
 		search.o						\
 		seed.o							\
+		strto/strtof_s.o					\
+		strto/strtoi_s.o					\
+		strto/strtou_s.o					\
 		swap.o
 
 ALLOC_CALLOCS_INC	=						\
@@ -104,6 +108,21 @@ SEED_INC	=							\
 SEED_SRC	=							\
 		$(SRC_DIR)/base/stdlib/seed.c
 
+STRTO_STRTOFS_INC	=						\
+		$(INC_DIR)/libalx/base/stdlib/strto/strtof_s.h
+STRTO_STRTOFS_SRC	=						\
+		$(SRC_DIR)/base/stdlib/strto/strtof_s.c
+
+STRTO_STRTOIS_INC	=						\
+		$(INC_DIR)/libalx/base/stdlib/strto/strtoi_s.h
+STRTO_STRTOIS_SRC	=						\
+		$(SRC_DIR)/base/stdlib/strto/strtoi_s.c
+
+STRTO_STRTOUS_INC	=						\
+		$(INC_DIR)/libalx/base/stdlib/strto/strtou_s.h
+STRTO_STRTOUS_SRC	=						\
+		$(SRC_DIR)/base/stdlib/strto/strtou_s.c
+
 SWAP_INC	=							\
 		$(INC_DIR)/libalx/base/stdlib/swap.h
 SWAP_SRC	=							\
@@ -118,6 +137,9 @@ all: $(DIRS) $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 
 alloc:
+	@echo	"	MKDIR	libalx/tmp/base/stdlib/$@"
+	$(Q)mkdir -p		$@/
+strto:
 	@echo	"	MKDIR	libalx/tmp/base/stdlib/$@"
 	$(Q)mkdir -p		$@/
 
@@ -174,6 +196,15 @@ search.so.s: $(SEARCH_SRC) $(SEARCH_INC)
 
 seed.a.s: $(SEED_SRC) $(SEED_INC)
 seed.so.s: $(SEED_SRC) $(SEED_INC)
+
+strto/strtof_s.a.s: $(STRTO_STRTOFS_SRC) $(STRTO_STRTOFS_INC)
+strto/strtof_s.so.s: $(STRTO_STRTOFS_SRC) $(STRTO_STRTOFS_INC)
+
+strto/strtoi_s.a.s: $(STRTO_STRTOIS_SRC) $(STRTO_STRTOIS_INC)
+strto/strtoi_s.so.s: $(STRTO_STRTOIS_SRC) $(STRTO_STRTOIS_INC)
+
+strto/strtou_s.a.s: $(STRTO_STRTOUS_SRC) $(STRTO_STRTOUS_INC)
+strto/strtou_s.so.s: $(STRTO_STRTOUS_SRC) $(STRTO_STRTOUS_INC)
 
 swap.a.s: $(SWAP_SRC) $(SWAP_INC)
 swap.so.s: $(SWAP_SRC) $(SWAP_INC)
