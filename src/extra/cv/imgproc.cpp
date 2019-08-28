@@ -534,8 +534,10 @@ void	alx::CV::contour_dimensions(const class std::vector <
 				 double *restrict perimeter)
 {
 
-	*area		= cv::contourArea(*contour, false);
-	*perimeter	= cv::arcLength(*contour, true);
+	if (area)
+		*area		= cv::contourArea(*contour, false);
+	if (perimeter)
+		*perimeter	= cv::arcLength(*contour, true);
 }
 
 void	alx_cv_contour_dimensions(const void *restrict contour,

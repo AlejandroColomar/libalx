@@ -348,8 +348,8 @@ int	alx_cv_histogram3D	(img_s *restrict hist, const img_s *restrict img);
 /* ----- Structural analysis and shape descriptors */
 __attribute__((nonnull))
 int	alx_cv_contours		(img_s *restrict img, conts_s *restrict contours);
-__attribute__((nonnull))
-int	alx_cv_contour_dimensions(const cont_s *restrict contour,
+__attribute__((nonnull(1)))
+void	alx_cv_contour_dimensions(const cont_s *restrict cont,
 				 double *restrict area,
 				 double *restrict perimeter);
 __attribute__((nonnull))
