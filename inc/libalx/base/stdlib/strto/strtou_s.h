@@ -15,7 +15,6 @@
  ******************************************************************************/
 #include <errno.h>
 #include <inttypes.h>
-#include <limits.h>
 #include <stddef.h>
 #include <stdint.h>
 
@@ -71,13 +70,10 @@ int	alx_strtou8_s	(uint8_t *restrict num, const char *restrict str,
 	case 0:
 		return	0;
 	case ENOTSUP:
-		return	ENOTSUP;
+		return	rstatus;
 	case ECANCELED:
-		return	-ECANCELED;
 	case EINVAL:
-		return	-EINVAL;
 	case ERANGE:
-		return	-ERANGE;
 	default:
 		return	-rstatus;
 	}
@@ -95,13 +91,10 @@ int	alx_strtou16_s	(uint16_t *restrict num, const char *restrict str,
 	case 0:
 		return	0;
 	case ENOTSUP:
-		return	ENOTSUP;
+		return	rstatus;
 	case ECANCELED:
-		return	-ECANCELED;
 	case EINVAL:
-		return	-EINVAL;
 	case ERANGE:
-		return	-ERANGE;
 	default:
 		return	-rstatus;
 	}
@@ -119,13 +112,10 @@ int	alx_strtou32_s	(uint32_t *restrict num, const char *restrict str,
 	case 0:
 		return	0;
 	case ENOTSUP:
-		return	ENOTSUP;
+		return	rstatus;
 	case ECANCELED:
-		return	-ECANCELED;
 	case EINVAL:
-		return	-EINVAL;
 	case ERANGE:
-		return	-ERANGE;
 	default:
 		return	-rstatus;
 	}
@@ -143,13 +133,10 @@ int	alx_strtou64_s	(uint64_t *restrict num, const char *restrict str,
 	case 0:
 		return	0;
 	case ENOTSUP:
-		return	ENOTSUP;
+		return	rstatus;
 	case ECANCELED:
-		return	-ECANCELED;
 	case EINVAL:
-		return	-EINVAL;
 	case ERANGE:
-		return	-ERANGE;
 	default:
 		return	-rstatus;
 	}
