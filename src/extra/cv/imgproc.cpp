@@ -527,50 +527,6 @@ int	alx_cv_contours		(void *restrict img, void *restrict contours)
 					class cv::Point_<int>>>  *)contours);
 }
 
-ptrdiff_t alx::CV::contours_size(const class std::vector<
-					class std::vector<
-					class cv::Point_<
-					int>>>  *restrict contours)
-{
-	return	static_cast<ptrdiff_t>(contours->size());
-}
-
-ptrdiff_t alx_cv_contours_size	(const void *restrict contours)
-{
-	return	alx::CV::contours_size((const class std::vector<
-						class std::vector<
-						class cv::Point_<
-						int>>>  *)contours);
-}
-
-int	alx::CV::contours_contour(const class std::vector <
-					class cv::Point_ <
-					int>>  **restrict contour,
-				 const class std::vector<
-					class std::vector<
-					class cv::Point_<
-					int>>>  *restrict contours,
-				 ptrdiff_t i)
-{
-
-	if (i < 0 || (size_t)i > contours->size())
-		return	-1;
-	*contour	= &(*contours)[i];
-
-	return	0;
-}
-
-int	alx_cv_contours_contour	(const void **restrict contour,
-				 const void *restrict contours, ptrdiff_t i)
-{
-	return	alx::CV::contours_contour((const class std::vector<
-					class cv::Point_<int>>  **)contour,
-				 (const class std::vector<
-					class std::vector<
-					class cv::Point_<int>>>  *)contours,
-				 i);
-}
-
 void	alx::CV::contour_dimensions(const class std::vector <
 					class cv::Point_ <
 					int>>  *restrict contour,

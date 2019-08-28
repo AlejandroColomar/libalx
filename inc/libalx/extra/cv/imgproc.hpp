@@ -82,11 +82,6 @@ int	alx_cv_histogram3D	(void *restrict hist, const void *restrict img);
 /* ----- Structural analysis and shape descriptors */
 [[gnu::nonnull]]
 int	alx_cv_contours		(void *restrict img, void *restrict contours);
-[[gnu::nonnull]] [[gnu::pure]]
-ptrdiff_t alx_cv_contours_size	(const void *restrict contours);
-[[gnu::nonnull]]
-int	alx_cv_contours_contour	(const void **restrict contour,
-				 const void *restrict contours, ptrdiff_t i);
 [[gnu::nonnull]]
 int	alx_cv_contours_dimensions(const void *restrict contours,
 				 double *restrict area,
@@ -192,20 +187,6 @@ int	contours	(class cv::Mat *restrict img,
 				class std::vector<
 				class cv::Point_<
 				int>>>  *restrict contours);
-[[gnu::nonnull]] [[gnu::pure]]
-ptrdiff_t contours_size	(const class std::vector<
-				class std::vector<
-				class cv::Point_<
-				int>>>  *restrict contours);
-[[gnu::nonnull]]
-int	contours_contour(const class std::vector <
-				class cv::Point_ <
-				int>>  **restrict contour,
-			const class std::vector<
-				class std::vector<
-				class cv::Point_<
-				int>>>  *restrict contours,
-			ptrdiff_t i);
 [[gnu::nonnull]]
 void	contour_dimensions(const class std::vector<
 				class cv::Point_<
