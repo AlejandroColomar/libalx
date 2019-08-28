@@ -26,16 +26,16 @@
  ******************************************************************************/
 extern	"C"
 {
-[[gnu::nonnull]]
+[[gnu::nonnull]][[gnu::warn_unused_result]]
 int	alx_strtou8_s	(uint8_t *restrict num, const char *restrict str,
 			 int base);
-[[gnu::nonnull]]
+[[gnu::nonnull]][[gnu::warn_unused_result]]
 int	alx_strtou16_s	(uint16_t *restrict num, const char *restrict str,
 			 int base);
-[[gnu::nonnull]]
+[[gnu::nonnull]][[gnu::warn_unused_result]]
 int	alx_strtou32_s	(uint32_t *restrict num, const char *restrict str,
 			 int base);
-[[gnu::nonnull]]
+[[gnu::nonnull]][[gnu::warn_unused_result]]
 int	alx_strtou64_s	(uint64_t *restrict num, const char *restrict str,
 			 int base);
 }

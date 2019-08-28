@@ -25,11 +25,11 @@
  ******************************************************************************/
 extern	"C"
 {
-[[gnu::nonnull]]
+[[gnu::nonnull]][[gnu::warn_unused_result]]
 int	alx_strtod_s	(double *restrict num, const char *restrict str);
-[[gnu::nonnull]]
+[[gnu::nonnull]][[gnu::warn_unused_result]]
 int	alx_strtof_s	(float *restrict num, const char *restrict str);
-[[gnu::nonnull]]
+[[gnu::nonnull]][[gnu::warn_unused_result]]
 int	alx_strtold_s	(long double *restrict num, const char *restrict str);
 }
 

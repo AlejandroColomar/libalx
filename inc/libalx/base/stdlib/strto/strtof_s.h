@@ -39,13 +39,13 @@
  * `errno` needs to be cleared before calling these functions.  If not, false
  * negatives could happen (the function succeds, but it reports error).
  */
-__attribute__((nonnull))
+__attribute__((nonnull, warn_unused_result))
 inline
 int	alx_strtod_s	(double *restrict num, const char *restrict str);
-__attribute__((nonnull))
+__attribute__((nonnull, warn_unused_result))
 inline
 int	alx_strtof_s	(float *restrict num, const char *restrict str);
-__attribute__((nonnull))
+__attribute__((nonnull, warn_unused_result))
 inline
 int	alx_strtold_s	(long double *restrict num, const char *restrict str);
 

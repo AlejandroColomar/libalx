@@ -37,19 +37,19 @@
 /******************************************************************************
  ******* function prototypes **************************************************
  ******************************************************************************/
-__attribute__((nonnull))
+__attribute__((nonnull, warn_unused_result))
 inline
 int	alx_strtou8_s	(uint8_t *restrict num, const char *restrict str,
 			 int base);
-__attribute__((nonnull))
+__attribute__((nonnull, warn_unused_result))
 inline
 int	alx_strtou16_s	(uint16_t *restrict num, const char *restrict str,
 			 int base);
-__attribute__((nonnull))
+__attribute__((nonnull, warn_unused_result))
 inline
 int	alx_strtou32_s	(uint32_t *restrict num, const char *restrict str,
 			 int base);
-__attribute__((nonnull))
+__attribute__((nonnull, warn_unused_result))
 inline
 int	alx_strtou64_s	(uint64_t *restrict num, const char *restrict str,
 			 int base);
