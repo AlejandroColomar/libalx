@@ -17,10 +17,20 @@
 #include <stdint.h>
 
 #include <gsl/gsl_statistics_uchar.h>
+#include <gsl/gsl_statistics_char.h>
 #include <gsl/gsl_statistics_ushort.h>
 #include <gsl/gsl_statistics_short.h>
 #include <gsl/gsl_statistics_uint.h>
 #include <gsl/gsl_statistics_int.h>
+
+#include "libalx/base/assert/assert.h"
+
+
+/******************************************************************************
+ ******* _Static_assert *******************************************************
+ ******************************************************************************/
+alx_Static_assert_stdint_types();
+alx_Static_assert_char_signed();
 
 
 /******************************************************************************
@@ -51,7 +61,8 @@ __attribute__((always_inline, nonnull, pure))
 inline
 double	alx_gsl_stats_mean_u8	(ptrdiff_t nmemb,
 				 const uint8_t arr[static restrict nmemb]);
-__attribute__((nonnull, pure))
+__attribute__((always_inline, nonnull, pure))
+inline
 double	alx_gsl_stats_mean_s8	(ptrdiff_t nmemb,
 				 const int8_t arr[static restrict nmemb]);
 __attribute__((always_inline, nonnull, pure))
@@ -86,6 +97,13 @@ double	alx_gsl_stats_mean_u8	(ptrdiff_t nmemb,
 				 const uint8_t arr[static restrict nmemb])
 {
 	return	gsl_stats_uchar_mean(arr, 1, nmemb);
+}
+
+inline
+double	alx_gsl_stats_mean_s8	(ptrdiff_t nmemb,
+				 const int8_t arr[static restrict nmemb])
+{
+	return	gsl_stats_char_mean((char *)arr, 1, nmemb);
 }
 
 inline

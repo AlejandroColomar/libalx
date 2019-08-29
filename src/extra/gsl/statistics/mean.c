@@ -65,26 +65,9 @@ float	alx_gsl_stats_mean_flt	(ptrdiff_t nmemb,
 extern
 double	alx_gsl_stats_mean_u8	(ptrdiff_t nmemb,
 				 const uint8_t arr[static restrict nmemb]);
-
+extern
 double	alx_gsl_stats_mean_s8	(ptrdiff_t nmemb,
-				 const int8_t arr[static restrict nmemb])
-{
-	int_fast8_t	quotients;
-	double_t	remainders;
-	double_t	mean;
-
-	quotients	= 0;
-	remainders	= 0;
-	for (ptrdiff_t i = 0; i < nmemb; i++) {
-		quotients	+= arr[i] / nmemb;
-		remainders	+= arr[i] % nmemb;
-	}
-
-	mean	= quotients + remainders / nmemb;
-
-	return	mean;
-}
-
+				 const int8_t arr[static restrict nmemb]);
 extern
 double	alx_gsl_stats_mean_u16	(ptrdiff_t nmemb,
 				 const uint16_t arr[static restrict nmemb]);
