@@ -34,7 +34,7 @@
  ******* global functions *****************************************************
  ******************************************************************************/
 ptrdiff_t	alx_maximum_ldbl(ptrdiff_t nmemb,
-				const long double arr[restrict nmemb])
+				 const long double arr[static restrict nmemb])
 {
 	ptrdiff_t	pos;
 	long double	val;
@@ -52,7 +52,7 @@ ptrdiff_t	alx_maximum_ldbl(ptrdiff_t nmemb,
 }
 
 ptrdiff_t	alx_maximum	(ptrdiff_t nmemb,
-				const double arr[restrict nmemb])
+				 const double arr[static restrict nmemb])
 {
 	ptrdiff_t	pos;
 	double		val;
@@ -70,7 +70,7 @@ ptrdiff_t	alx_maximum	(ptrdiff_t nmemb,
 }
 
 ptrdiff_t	alx_maximum_f	(ptrdiff_t nmemb,
-				const float arr[restrict nmemb])
+				 const float arr[static restrict nmemb])
 {
 	ptrdiff_t	pos;
 	float		val;
@@ -88,7 +88,7 @@ ptrdiff_t	alx_maximum_f	(ptrdiff_t nmemb,
 }
 
 ptrdiff_t	alx_maximum_uint(ptrdiff_t nmemb,
-				const unsigned arr[restrict nmemb])
+				 const unsigned arr[static restrict nmemb])
 {
 	ptrdiff_t	pos;
 	unsigned	val;
@@ -106,7 +106,7 @@ ptrdiff_t	alx_maximum_uint(ptrdiff_t nmemb,
 }
 
 ptrdiff_t	alx_maximum_int	(ptrdiff_t nmemb,
-				const int arr[restrict nmemb])
+				 const int arr[static restrict nmemb])
 {
 	ptrdiff_t	pos;
 	int		val;
@@ -124,7 +124,7 @@ ptrdiff_t	alx_maximum_int	(ptrdiff_t nmemb,
 }
 
 ptrdiff_t	alx_maximum_u8	(ptrdiff_t nmemb,
-				const uint8_t arr[restrict nmemb])
+				 const uint8_t arr[static restrict nmemb])
 {
 	ptrdiff_t	pos;
 	uint_fast8_t	val;
@@ -142,7 +142,7 @@ ptrdiff_t	alx_maximum_u8	(ptrdiff_t nmemb,
 }
 
 ptrdiff_t	alx_maximum_s8	(ptrdiff_t nmemb,
-				const int8_t arr[restrict nmemb])
+				 const int8_t arr[static restrict nmemb])
 {
 	ptrdiff_t	pos;
 	int_fast8_t	val;
@@ -160,7 +160,7 @@ ptrdiff_t	alx_maximum_s8	(ptrdiff_t nmemb,
 }
 
 ptrdiff_t	alx_maximum_u16	(ptrdiff_t nmemb,
-				const uint16_t arr[restrict nmemb])
+				 const uint16_t arr[static restrict nmemb])
 {
 	ptrdiff_t	pos;
 	uint_fast16_t	val;
@@ -178,7 +178,7 @@ ptrdiff_t	alx_maximum_u16	(ptrdiff_t nmemb,
 }
 
 ptrdiff_t	alx_maximum_s16	(ptrdiff_t nmemb,
-				const int16_t arr[restrict nmemb])
+				 const int16_t arr[static restrict nmemb])
 {
 	ptrdiff_t	pos;
 	int_fast16_t	val;
@@ -196,7 +196,7 @@ ptrdiff_t	alx_maximum_s16	(ptrdiff_t nmemb,
 }
 
 ptrdiff_t	alx_maximum_u32	(ptrdiff_t nmemb,
-				const uint32_t arr[restrict nmemb])
+				 const uint32_t arr[static restrict nmemb])
 {
 	ptrdiff_t	pos;
 	uint_fast32_t	val;
@@ -214,7 +214,7 @@ ptrdiff_t	alx_maximum_u32	(ptrdiff_t nmemb,
 }
 
 ptrdiff_t	alx_maximum_s32	(ptrdiff_t nmemb,
-				const int32_t arr[restrict nmemb])
+				 const int32_t arr[static restrict nmemb])
 {
 	ptrdiff_t	pos;
 	int_fast32_t	val;
@@ -232,7 +232,7 @@ ptrdiff_t	alx_maximum_s32	(ptrdiff_t nmemb,
 }
 
 ptrdiff_t	alx_maximum_u64	(ptrdiff_t nmemb,
-				const uint64_t arr[restrict nmemb])
+				 const uint64_t arr[static restrict nmemb])
 {
 	ptrdiff_t	pos;
 	uint_fast64_t	val;
@@ -250,7 +250,7 @@ ptrdiff_t	alx_maximum_u64	(ptrdiff_t nmemb,
 }
 
 ptrdiff_t	alx_maximum_s64	(ptrdiff_t nmemb,
-				const int64_t arr[restrict nmemb])
+				 const int64_t arr[static restrict nmemb])
 {
 	ptrdiff_t	pos;
 	int_fast64_t	val;
@@ -268,7 +268,7 @@ ptrdiff_t	alx_maximum_s64	(ptrdiff_t nmemb,
 }
 
 ptrdiff_t	alx_maximum_pdif(ptrdiff_t nmemb,
-				const ptrdiff_t arr[restrict nmemb])
+				 const ptrdiff_t arr[static restrict nmemb])
 {
 	ptrdiff_t	pos;
 	ptrdiff_t	val;
