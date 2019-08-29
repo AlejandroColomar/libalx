@@ -103,7 +103,7 @@ inline
 double	alx_gsl_stats_mean_s8	(ptrdiff_t nmemb,
 				 const int8_t arr[static restrict nmemb])
 {
-	return	gsl_stats_char_mean((char *)arr, 1, nmemb);
+	return	gsl_stats_char_mean((const char *)arr, 1, nmemb);
 }
 
 inline
