@@ -28,18 +28,65 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
+int	alx_strtou8_s		(uint8_t *restrict num,
+				 const char *restrict str,
+				 int base, ptrdiff_t *restrict read)
+{
+	char	*endptr;
+	int	rstatus;
+
+	*num	= strtou(str, &endptr, base, 0, UINT8_MAX, &rstatus);
+	if (read)
+		*read	= endptr - str;
+
+	return	alx_strtou_status(rstatus);
+}
+
+int	alx_strtou16_s		(uint16_t *restrict num,
+				 const char *restrict str,
+				 int base, ptrdiff_t *restrict read)
+{
+	char	*endptr;
+	int	rstatus;
+
+	*num	= strtou(str, &endptr, base, 0, UINT16_MAX, &rstatus);
+	if (read)
+		*read	= endptr - str;
+
+	return	alx_strtou_status(rstatus);
+}
+
+int	alx_strtou32_s		(uint32_t *restrict num,
+				 const char *restrict str,
+				 int base, ptrdiff_t *restrict read)
+{
+	char	*endptr;
+	int	rstatus;
+
+	*num	= strtou(str, &endptr, base, 0, UINT32_MAX, &rstatus);
+	if (read)
+		*read	= endptr - str;
+
+	return	alx_strtou_status(rstatus);
+}
+
+int	alx_strtou64_s		(uint64_t *restrict num,
+				 const char *restrict str,
+				 int base, ptrdiff_t *restrict read)
+{
+	char	*endptr;
+	int	rstatus;
+
+	*num	= strtou(str, &endptr, base, 0, UINT64_MAX, &rstatus);
+	if (read)
+		*read	= endptr - str;
+
+	return	alx_strtou_status(rstatus);
+}
+
+
 extern
-int	alx_strtou8_s	(uint8_t *restrict num, const char *restrict str,
-			 int base);
-extern
-int	alx_strtou16_s	(uint16_t *restrict num, const char *restrict str,
-			 int base);
-extern
-int	alx_strtou32_s	(uint32_t *restrict num, const char *restrict str,
-			 int base);
-extern
-int	alx_strtou64_s	(uint64_t *restrict num, const char *restrict str,
-			 int base);
+int	alx_strtou_status	(int rstatus);
 
 
 /******************************************************************************

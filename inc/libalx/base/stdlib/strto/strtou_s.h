@@ -18,6 +18,8 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#include "libalx/base/stdlib/strto/strtoi_s.h"
+
 
 /******************************************************************************
  ******* macros ***************************************************************
@@ -37,109 +39,35 @@
 /******************************************************************************
  ******* function prototypes **************************************************
  ******************************************************************************/
-__attribute__((nonnull, warn_unused_result))
+__attribute__((nonnull(1, 2), warn_unused_result))
+int	alx_strtou8_s		(uint8_t *restrict num,
+				 const char *restrict str,
+				 int base, ptrdiff_t *restrict read);
+__attribute__((nonnull(1, 2), warn_unused_result))
+int	alx_strtou16_s		(uint16_t *restrict num,
+				 const char *restrict str,
+				 int base, ptrdiff_t *restrict read);
+__attribute__((nonnull(1, 2), warn_unused_result))
+int	alx_strtou32_s		(uint32_t *restrict num,
+				 const char *restrict str,
+				 int base, ptrdiff_t *restrict read);
+__attribute__((nonnull(1, 2), warn_unused_result))
+int	alx_strtou64_s		(uint64_t *restrict num,
+				 const char *restrict str,
+				 int base, ptrdiff_t *restrict read);
+
+__attribute__((warn_unused_result))
 inline
-int	alx_strtou8_s	(uint8_t *restrict num, const char *restrict str,
-			 int base);
-__attribute__((nonnull, warn_unused_result))
-inline
-int	alx_strtou16_s	(uint16_t *restrict num, const char *restrict str,
-			 int base);
-__attribute__((nonnull, warn_unused_result))
-inline
-int	alx_strtou32_s	(uint32_t *restrict num, const char *restrict str,
-			 int base);
-__attribute__((nonnull, warn_unused_result))
-inline
-int	alx_strtou64_s	(uint64_t *restrict num, const char *restrict str,
-			 int base);
+int	alx_strtou_status	(int rstatus);
 
 
 /******************************************************************************
  ******* inline functions *****************************************************
  ******************************************************************************/
 inline
-int	alx_strtou8_s	(uint8_t *restrict num, const char *restrict str,
-			 int base)
+int	alx_strtou_status	(int rstatus)
 {
-	int	rstatus;
-
-	*num	= strtou(str, NULL, base, 0, UINT8_MAX, &rstatus);
-
-	switch (rstatus) {
-	case 0:
-		return	0;
-	case ENOTSUP:
-		return	rstatus;
-	case ECANCELED:
-	case EINVAL:
-	case ERANGE:
-	default:
-		return	-rstatus;
-	}
-}
-
-inline
-int	alx_strtou16_s	(uint16_t *restrict num, const char *restrict str,
-			 int base)
-{
-	int	rstatus;
-
-	*num	= strtou(str, NULL, base, 0, UINT16_MAX, &rstatus);
-
-	switch (rstatus) {
-	case 0:
-		return	0;
-	case ENOTSUP:
-		return	rstatus;
-	case ECANCELED:
-	case EINVAL:
-	case ERANGE:
-	default:
-		return	-rstatus;
-	}
-}
-
-inline
-int	alx_strtou32_s	(uint32_t *restrict num, const char *restrict str,
-			 int base)
-{
-	int	rstatus;
-
-	*num	= strtou(str, NULL, base, 0, UINT32_MAX, &rstatus);
-
-	switch (rstatus) {
-	case 0:
-		return	0;
-	case ENOTSUP:
-		return	rstatus;
-	case ECANCELED:
-	case EINVAL:
-	case ERANGE:
-	default:
-		return	-rstatus;
-	}
-}
-
-inline
-int	alx_strtou64_s	(uint64_t *restrict num, const char *restrict str,
-			 int base)
-{
-	int	rstatus;
-
-	*num	= strtou(str, NULL, base, 0, UINT64_MAX, &rstatus);
-
-	switch (rstatus) {
-	case 0:
-		return	0;
-	case ENOTSUP:
-		return	rstatus;
-	case ECANCELED:
-	case EINVAL:
-	case ERANGE:
-	default:
-		return	-rstatus;
-	}
+	return	alx_strtoi_status(rstatus);
 }
 
 
