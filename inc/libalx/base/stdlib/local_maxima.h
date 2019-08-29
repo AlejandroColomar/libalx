@@ -34,64 +34,64 @@
 
 
 /******************************************************************************
- ******* function prototypes **************************************************
+ ******* prototypes ***********************************************************
  ******************************************************************************/
 __attribute__((nonnull))
 void	alx_local_maxima_ldbl	(ptrdiff_t rows, ptrdiff_t cols,
-				const long double arr_in[restrict rows][cols],
-				bool arr_out[restrict rows][cols]);
+		 const long double arr_in[static restrict rows][cols],
+		 bool arr_out[static restrict rows][cols]);
 __attribute__((nonnull))
 void	alx_local_maxima	(ptrdiff_t rows, ptrdiff_t cols,
-				const double arr_in[restrict rows][cols],
-				bool arr_out[restrict rows][cols]);
+		 const double arr_in[static restrict rows][cols],
+		 bool arr_out[static restrict rows][cols]);
 __attribute__((nonnull))
 void	alx_local_maxima_f	(ptrdiff_t rows, ptrdiff_t cols,
-				const float arr_in[restrict rows][cols],
-				bool arr_out[restrict rows][cols]);
+		 const float arr_in[static restrict rows][cols],
+		 bool arr_out[static restrict rows][cols]);
 __attribute__((nonnull))
 void	alx_local_maxima_uint	(ptrdiff_t rows, ptrdiff_t cols,
-				const unsigned arr_in[restrict rows][cols],
-				bool arr_out[restrict rows][cols]);
+		 const unsigned arr_in[static restrict rows][cols],
+		 bool arr_out[static restrict rows][cols]);
 __attribute__((nonnull))
 void	alx_local_maxima_int	(ptrdiff_t rows, ptrdiff_t cols,
-				const int arr_in[restrict rows][cols],
-				bool arr_out[restrict rows][cols]);
+		 const int arr_in[static restrict rows][cols],
+		 bool arr_out[static restrict rows][cols]);
 __attribute__((nonnull))
 void	alx_local_maxima_u8	(ptrdiff_t rows, ptrdiff_t cols,
-				const uint8_t arr_in[restrict rows][cols],
-				bool arr_out[restrict rows][cols]);
+		 const uint8_t arr_in[static restrict rows][cols],
+		 bool arr_out[static restrict rows][cols]);
 __attribute__((nonnull))
 void	alx_local_maxima_s8	(ptrdiff_t rows, ptrdiff_t cols,
-				const int8_t arr_in[restrict rows][cols],
-				bool arr_out[restrict rows][cols]);
+		 const int8_t arr_in[static restrict rows][cols],
+		 bool arr_out[static restrict rows][cols]);
 __attribute__((nonnull))
 void	alx_local_maxima_u16	(ptrdiff_t rows, ptrdiff_t cols,
-				const uint16_t arr_in[restrict rows][cols],
-				bool arr_out[restrict rows][cols]);
+		 const uint16_t arr_in[static restrict rows][cols],
+		 bool arr_out[static restrict rows][cols]);
 __attribute__((nonnull))
 void	alx_local_maxima_s16	(ptrdiff_t rows, ptrdiff_t cols,
-				const int16_t arr_in[restrict rows][cols],
-				bool arr_out[restrict rows][cols]);
+		 const int16_t arr_in[static restrict rows][cols],
+		 bool arr_out[static restrict rows][cols]);
 __attribute__((nonnull))
 void	alx_local_maxima_u32	(ptrdiff_t rows, ptrdiff_t cols,
-				const uint32_t arr_in[restrict rows][cols],
-				bool arr_out[restrict rows][cols]);
+		 const uint32_t arr_in[static restrict rows][cols],
+		 bool arr_out[static restrict rows][cols]);
 __attribute__((nonnull))
 void	alx_local_maxima_s32	(ptrdiff_t rows, ptrdiff_t cols,
-				const int32_t arr_in[restrict rows][cols],
-				bool arr_out[restrict rows][cols]);
+		 const int32_t arr_in[static restrict rows][cols],
+		 bool arr_out[static restrict rows][cols]);
 __attribute__((nonnull))
 void	alx_local_maxima_u64	(ptrdiff_t rows, ptrdiff_t cols,
-				const uint64_t arr_in[restrict rows][cols],
-				bool arr_out[restrict rows][cols]);
+		 const uint64_t arr_in[static restrict rows][cols],
+		 bool arr_out[static restrict rows][cols]);
 __attribute__((nonnull))
 void	alx_local_maxima_s64	(ptrdiff_t rows, ptrdiff_t cols,
-				const int64_t arr_in[restrict rows][cols],
-				bool arr_out[restrict rows][cols]);
+		 const int64_t arr_in[static restrict rows][cols],
+		 bool arr_out[static restrict rows][cols]);
 
 
 /******************************************************************************
- ******* inline functions *****************************************************
+ ******* inline ***************************************************************
  ******************************************************************************/
 
 
