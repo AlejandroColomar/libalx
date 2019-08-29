@@ -32,10 +32,10 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-void	alx_array_split_pos_neg_ldbl	(ptrdiff_t nmemb,
-					const long double mix[restrict nmemb],
-					long double pos[restrict nmemb],
-					long double neg[restrict nmemb])
+void	alx_array_split_pos_neg_ldbl(ptrdiff_t nmemb,
+				 const long double mix[static restrict nmemb],
+				 long double pos[static restrict nmemb],
+				 long double neg[static restrict nmemb])
 {
 
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
@@ -49,10 +49,10 @@ void	alx_array_split_pos_neg_ldbl	(ptrdiff_t nmemb,
 	}
 }
 
-void	alx_array_split_pos_neg		(ptrdiff_t nmemb,
-					const double mix[restrict nmemb],
-					double pos[restrict nmemb],
-					double neg[restrict nmemb])
+void	alx_array_split_pos_neg	(ptrdiff_t nmemb,
+				 const double mix[static restrict nmemb],
+				 double pos[static restrict nmemb],
+				 double neg[static restrict nmemb])
 {
 
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
@@ -66,10 +66,10 @@ void	alx_array_split_pos_neg		(ptrdiff_t nmemb,
 	}
 }
 
-void	alx_array_split_pos_neg_flt	(ptrdiff_t nmemb,
-					const float mix[restrict nmemb],
-					float pos[restrict nmemb],
-					float neg[restrict nmemb])
+void	alx_array_split_pos_neg_flt(ptrdiff_t nmemb,
+				 const float mix[static restrict nmemb],
+				 float pos[static restrict nmemb],
+				 float neg[static restrict nmemb])
 {
 
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
@@ -83,10 +83,10 @@ void	alx_array_split_pos_neg_flt	(ptrdiff_t nmemb,
 	}
 }
 
-void	alx_array_split_pos_neg_int	(ptrdiff_t nmemb,
-					const int mix[restrict nmemb],
-					int pos[restrict nmemb],
-					int neg[restrict nmemb])
+void	alx_array_split_pos_neg_int(ptrdiff_t nmemb,
+				 const int mix[static restrict nmemb],
+				 int pos[static restrict nmemb],
+				 int neg[static restrict nmemb])
 {
 
 	memset(pos, 0, sizeof(pos[0]) * nmemb);
@@ -102,10 +102,10 @@ void	alx_array_split_pos_neg_int	(ptrdiff_t nmemb,
 	}
 }
 
-void	alx_array_split_pos_neg_s8	(ptrdiff_t nmemb,
-					const int8_t mix[restrict nmemb],
-					int8_t pos[restrict nmemb],
-					int8_t neg[restrict nmemb])
+void	alx_array_split_pos_neg_s8(ptrdiff_t nmemb,
+				 const int8_t mix[static restrict nmemb],
+				 int8_t pos[static restrict nmemb],
+				 int8_t neg[static restrict nmemb])
 {
 
 	memset(pos, 0, sizeof(pos[0]) * nmemb);
@@ -121,10 +121,10 @@ void	alx_array_split_pos_neg_s8	(ptrdiff_t nmemb,
 	}
 }
 
-void	alx_array_split_pos_neg_s16	(ptrdiff_t nmemb,
-					const int16_t mix[restrict nmemb],
-					int16_t pos[restrict nmemb],
-					int16_t neg[restrict nmemb])
+void	alx_array_split_pos_neg_s16(ptrdiff_t nmemb,
+				 const int16_t mix[static restrict nmemb],
+				 int16_t pos[static restrict nmemb],
+				 int16_t neg[static restrict nmemb])
 {
 
 	memset(pos, 0, sizeof(pos[0]) * nmemb);
@@ -140,10 +140,10 @@ void	alx_array_split_pos_neg_s16	(ptrdiff_t nmemb,
 	}
 }
 
-void	alx_array_split_pos_neg_s32	(ptrdiff_t nmemb,
-					const int32_t mix[restrict nmemb],
-					int32_t pos[restrict nmemb],
-					int32_t neg[restrict nmemb])
+void	alx_array_split_pos_neg_s32(ptrdiff_t nmemb,
+				 const int32_t mix[static restrict nmemb],
+				 int32_t pos[static restrict nmemb],
+				 int32_t neg[static restrict nmemb])
 {
 
 	memset(pos, 0, sizeof(pos[0]) * nmemb);
@@ -159,10 +159,10 @@ void	alx_array_split_pos_neg_s32	(ptrdiff_t nmemb,
 	}
 }
 
-void	alx_array_split_pos_neg_s64	(ptrdiff_t nmemb,
-					const int64_t mix[restrict nmemb],
-					int64_t pos[restrict nmemb],
-					int64_t neg[restrict nmemb])
+void	alx_array_split_pos_neg_s64(ptrdiff_t nmemb,
+				 const int64_t mix[static restrict nmemb],
+				 int64_t pos[static restrict nmemb],
+				 int64_t neg[static restrict nmemb])
 {
 
 	memset(pos, 0, sizeof(pos[0]) * nmemb);
