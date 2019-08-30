@@ -71,21 +71,21 @@ inline
 uint8_t		popcnt_u8	(uint8_t n)
 {
 
-	return	_mm_popcnt_u64(n);
+	return	_mm_popcnt_u32(n);
 }
 
 inline
 uint16_t	popcnt_u16	(uint16_t n)
 {
 
-	return	_mm_popcnt_u64(n);
+	return	_mm_popcnt_u32(n);
 }
 
 inline
 uint32_t	popcnt_u32	(uint32_t n)
 {
 
-	return	_mm_popcnt_u64(n);
+	return	_mm_popcnt_u32(n);
 }
 
 inline
