@@ -23,6 +23,7 @@ OBJ		=							\
 		alloc/reallocs.o					\
 		array_split_pos_neg.o					\
 		average.o						\
+		clz.o							\
 		compare.o						\
 		ctz.o							\
 		local_maxima.o						\
@@ -66,6 +67,11 @@ AVERAGE_INC	=							\
 		$(INC_DIR)/libalx/base/stdlib/average.h
 AVERAGE_SRC	=							\
 		$(SRC_DIR)/base/stdlib/average.c
+
+CLZ_INC		=							\
+		$(INC_DIR)/libalx/base/stdlib/clz.h
+CLZ_SRC		=							\
+		$(SRC_DIR)/base/stdlib/clz.c
 
 COMPARE_INC	=							\
 		$(INC_DIR)/libalx/base/stdlib/compare.h
@@ -178,6 +184,9 @@ array_split_pos_neg.so.s: $(ARRAY_SPLIT_POS_NEG_SRC) $(ARRAY_SPLIT_POS_NEG_INC)
 
 average.a.s: $(AVERAGE_SRC) $(AVERAGE_INC)
 average.so.s: $(AVERAGE_SRC) $(AVERAGE_INC)
+
+clz.a.s: $(CLZ_SRC) $(CLZ_INC)
+clz.so.s: $(CLZ_SRC) $(CLZ_INC)
 
 compare.a.s: $(COMPARE_SRC) $(COMPARE_INC)
 compare.so.s: $(COMPARE_SRC) $(COMPARE_INC)

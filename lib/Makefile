@@ -37,6 +37,7 @@ BASE_OBJ	=							\
 		$(TMP_DIR)/base/stdlib/alloc/reallocs.o			\
 		$(TMP_DIR)/base/stdlib/array_split_pos_neg.o		\
 		$(TMP_DIR)/base/stdlib/average.o			\
+		$(TMP_DIR)/base/stdlib/clz.o				\
 		$(TMP_DIR)/base/stdlib/compare.o			\
 		$(TMP_DIR)/base/stdlib/ctz.o				\
 		$(TMP_DIR)/base/stdlib/local_maxima.o			\
@@ -77,6 +78,8 @@ CV_OBJ		=							\
 		$(TMP_DIR)/extra/cv/highgui.o				\
 		$(TMP_DIR)/extra/cv/imgproc.o				\
 		$(TMP_DIR)/extra/cv/ximgproc.o
+GMP_OBJ		=							\
+		$(TMP_DIR)/extra/gmp/mpz/set.o
 GSL_OBJ		=							\
 		$(TMP_DIR)/extra/gsl/distributions/binomial.o		\
 		$(TMP_DIR)/extra/gsl/distributions/exponential.o	\
@@ -99,7 +102,7 @@ ZBAR_OBJ	=							\
 
 ALL	= libalx							\
 	base								\
-	cv gsl ncurses ocr zbar
+	cv gmp gsl ncurses ocr zbar
 
 # target: dependencies
 #	action
@@ -114,6 +117,9 @@ base: libalx libalx/libalx-base.a libalx/libalx-base.so
 
 PHONY += cv
 cv: libalx libalx/libalx-cv.a libalx/libalx-cv.so
+
+PHONY += gmp
+gmp: libalx libalx/libalx-gmp.a libalx/libalx-gmp.so
 
 PHONY += gsl
 gsl: libalx libalx/libalx-gsl.a libalx/libalx-gsl.so
@@ -149,6 +155,12 @@ libalx/libalx-cv.so: $(patsubst %.o,%.so.o,$(CV_OBJ))
 	@echo	"	CXX	libalx/lib/$@"
 	$(Q)$(CXX) $(LDFLAGS) -o $@ $^ `pkg-config --libs opencv`	\
 						-l alx-gsl -l alx-base
+
+libalx/libalx-gmp.a: $(patsubst %.o,%.a.o,$(GMP_OBJ))
+libalx/libalx-gmp.so: $(patsubst %.o,%.so.o,$(GMP_OBJ))
+	@echo	"	CC	libalx/lib/$@"
+	$(Q)$(CC) $(LDFLAGS) -o $@ $^ -l gmp				\
+						-l alx-base
 
 libalx/libalx-gsl.a: $(patsubst %.o,%.a.o,$(GSL_OBJ))
 libalx/libalx-gsl.so: $(patsubst %.o,%.so.o,$(GSL_OBJ))
