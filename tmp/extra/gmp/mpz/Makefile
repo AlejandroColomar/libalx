@@ -12,9 +12,15 @@
 ################################################################################
 # dependencies
 OBJ		=							\
+		arithmetic.o						\
 		get.o							\
 		init_set.o						\
 		set.o	
+
+ARITHMETIC_INC	=							\
+		$(INC_DIR)/libalx/extra/gmp/mpz/arithmetic.h
+ARITHMETIC_SRC	=							\
+		$(SRC_DIR)/extra/gmp/mpz/arithmetic.c	
 
 GET_INC		=							\
 		$(INC_DIR)/libalx/extra/gmp/mpz/get.h
@@ -54,6 +60,9 @@ all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 	@echo	"	AS	libalx/tmp/extra/gmp/mpz/$@"
 	$(Q)$(AS) $< -o $@
 
+
+arithmetic.a.s: $(ARITHMETIC_SRC) $(ARITHMETIC_INC)
+arithmetic.so.s: $(ARITHMETIC_SRC) $(ARITHMETIC_INC)
 
 get.a.s: $(GET_SRC) $(GET_INC)
 get.so.s: $(GET_SRC) $(GET_INC)
