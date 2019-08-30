@@ -38,6 +38,7 @@ BASE_OBJ	=							\
 		$(TMP_DIR)/base/stdlib/array_split_pos_neg.o		\
 		$(TMP_DIR)/base/stdlib/average.o			\
 		$(TMP_DIR)/base/stdlib/compare.o			\
+		$(TMP_DIR)/base/stdlib/ctz.o				\
 		$(TMP_DIR)/base/stdlib/local_maxima.o			\
 		$(TMP_DIR)/base/stdlib/maximum.o			\
 		$(TMP_DIR)/base/stdlib/minimum.o			\

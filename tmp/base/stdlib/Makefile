@@ -24,6 +24,7 @@ OBJ		=							\
 		array_split_pos_neg.o					\
 		average.o						\
 		compare.o						\
+		ctz.o							\
 		local_maxima.o						\
 		maximum.o						\
 		minimum.o						\
@@ -70,6 +71,11 @@ COMPARE_INC	=							\
 		$(INC_DIR)/libalx/base/stdlib/compare.h
 COMPARE_SRC	=							\
 		$(SRC_DIR)/base/stdlib/compare.c
+
+CTZ_INC		=							\
+		$(INC_DIR)/libalx/base/stdlib/ctz.h
+CTZ_SRC		=							\
+		$(SRC_DIR)/base/stdlib/ctz.c
 
 LOCAL_MAXIMA_INC	=						\
 		$(INC_DIR)/libalx/base/stdlib/local_maxima.h
@@ -175,6 +181,9 @@ average.so.s: $(AVERAGE_SRC) $(AVERAGE_INC)
 
 compare.a.s: $(COMPARE_SRC) $(COMPARE_INC)
 compare.so.s: $(COMPARE_SRC) $(COMPARE_INC)
+
+ctz.a.s: $(CTZ_SRC) $(CTZ_INC)
+ctz.so.s: $(CTZ_SRC) $(CTZ_INC)
 
 local_maxima.a.s: $(LOCAL_MAXIMA_SRC) $(LOCAL_MAXIMA_INC)
 local_maxima.so.s: $(LOCAL_MAXIMA_SRC) $(LOCAL_MAXIMA_INC)
