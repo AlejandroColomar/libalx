@@ -14,6 +14,7 @@
 OBJ		=							\
 		arithmetic.o						\
 		division.o						\
+		exp.o							\
 		get.o							\
 		init_set.o						\
 		set.o
@@ -27,6 +28,11 @@ DIVISION_INC	=							\
 		$(INC_DIR)/libalx/extra/gmp/mpz/division.h
 DIVISION_SRC	=							\
 		$(SRC_DIR)/extra/gmp/mpz/division.c
+
+EXP_INC		=							\
+		$(INC_DIR)/libalx/extra/gmp/mpz/exp.h
+EXP_SRC		=							\
+		$(SRC_DIR)/extra/gmp/mpz/exp.c
 
 GET_INC		=							\
 		$(INC_DIR)/libalx/extra/gmp/mpz/get.h
@@ -72,6 +78,9 @@ arithmetic.so.s: $(ARITHMETIC_SRC) $(ARITHMETIC_INC)
 
 division.a.s: $(DIVISION_SRC) $(DIVISION_INC)
 division.so.s: $(DIVISION_SRC) $(DIVISION_INC)
+
+exp.a.s: $(EXP_SRC) $(EXP_INC)
+exp.so.s: $(EXP_SRC) $(EXP_INC)
 
 get.a.s: $(GET_SRC) $(GET_INC)
 get.so.s: $(GET_SRC) $(GET_INC)

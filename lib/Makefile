@@ -81,6 +81,7 @@ CV_OBJ		=							\
 GMP_OBJ		=							\
 		$(TMP_DIR)/extra/gmp/mpz/arithmetic.o			\
 		$(TMP_DIR)/extra/gmp/mpz/division.o			\
+		$(TMP_DIR)/extra/gmp/mpz/exp.o				\
 		$(TMP_DIR)/extra/gmp/mpz/get.o				\
 		$(TMP_DIR)/extra/gmp/mpz/init_set.o			\
 		$(TMP_DIR)/extra/gmp/mpz/set.o
