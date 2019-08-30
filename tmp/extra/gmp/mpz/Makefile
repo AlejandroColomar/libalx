@@ -17,6 +17,7 @@ OBJ		=							\
 		exp.o							\
 		get.o							\
 		init_set.o						\
+		root.o							\
 		set.o
 
 ARITHMETIC_INC	=							\
@@ -43,6 +44,11 @@ INITSET_INC	=							\
 		$(INC_DIR)/libalx/extra/gmp/mpz/init_set.h
 INITSET_SRC	=							\
 		$(SRC_DIR)/extra/gmp/mpz/init_set.c
+
+ROOT_INC	=							\
+		$(INC_DIR)/libalx/extra/gmp/mpz/root.h
+ROOT_SRC	=							\
+		$(SRC_DIR)/extra/gmp/mpz/root.c
 
 SET_INC		=							\
 		$(INC_DIR)/libalx/extra/gmp/mpz/set.h
@@ -87,6 +93,9 @@ get.so.s: $(GET_SRC) $(GET_INC)
 
 init_set.a.s: $(INITSET_SRC) $(INITSET_INC)
 init_set.so.s: $(INITSET_SRC) $(INITSET_INC)
+
+root.a.s: $(ROOT_SRC) $(ROOT_INC)
+root.so.s: $(ROOT_SRC) $(ROOT_INC)
 
 set.a.s: $(SET_SRC) $(SET_INC)
 set.so.s: $(SET_SRC) $(SET_INC)
