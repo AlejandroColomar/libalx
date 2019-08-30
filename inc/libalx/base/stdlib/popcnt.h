@@ -15,10 +15,14 @@
  ******************************************************************************/
 #include <stdint.h>
 
-#include <immintrin.h>
-#include <nmmintrin.h>
-
+#include "libalx/base/assert/assert.h"
 #include "libalx/base/stdint/types.h"
+
+
+/******************************************************************************
+ ******* _Static_assert *******************************************************
+ ******************************************************************************/
+alx_Static_assert_stdint_types();
 
 
 /******************************************************************************
@@ -71,28 +75,28 @@ inline
 uint8_t		popcnt_u8	(uint8_t n)
 {
 
-	return	_mm_popcnt_u32(n);
+	return	__builtin_popcount(n);
 }
 
 inline
 uint16_t	popcnt_u16	(uint16_t n)
 {
 
-	return	_mm_popcnt_u32(n);
+	return	__builtin_popcount(n);
 }
 
 inline
 uint32_t	popcnt_u32	(uint32_t n)
 {
 
-	return	_mm_popcnt_u32(n);
+	return	__builtin_popcount(n);
 }
 
 inline
 uint64_t	popcnt_u64	(uint64_t n)
 {
 
-	return	_mm_popcnt_u64(n);
+	return	__builtin_popcountl(n);
 }
 
 #if defined(uint128_t)
