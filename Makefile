@@ -204,10 +204,16 @@ base:
 	$(Q)$(MAKE) $@	-C $(LIB_DIR)
 
 PHONY += extra
-extra: cv gsl ncurses ocr zbar
+extra: cv gmp gsl ncurses ocr zbar
 
 PHONY += cv
 cv: base gsl
+	@echo	"	MAKE	$@"
+	$(Q)$(MAKE) $@	-C $(TMP_DIR)
+	$(Q)$(MAKE) $@	-C $(LIB_DIR)
+
+PHONY += gmp
+gmp: base
 	@echo	"	MAKE	$@"
 	$(Q)$(MAKE) $@	-C $(TMP_DIR)
 	$(Q)$(MAKE) $@	-C $(LIB_DIR)
