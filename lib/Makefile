@@ -79,6 +79,7 @@ CV_OBJ		=							\
 		$(TMP_DIR)/extra/cv/imgproc.o				\
 		$(TMP_DIR)/extra/cv/ximgproc.o
 GMP_OBJ		=							\
+		$(TMP_DIR)/extra/gmp/mpz/get.o				\
 		$(TMP_DIR)/extra/gmp/mpz/init_set.o			\
 		$(TMP_DIR)/extra/gmp/mpz/set.o
 GSL_OBJ		=							\

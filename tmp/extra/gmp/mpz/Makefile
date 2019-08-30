@@ -12,8 +12,14 @@
 ################################################################################
 # dependencies
 OBJ		=							\
-		set.o							\
-		init_set.o
+		get.o							\
+		init_set.o						\
+		set.o	
+
+GET_INC		=							\
+		$(INC_DIR)/libalx/extra/gmp/mpz/get.h
+GET_SRC		=							\
+		$(SRC_DIR)/extra/gmp/mpz/get.c
 
 INITSET_INC	=							\
 		$(INC_DIR)/libalx/extra/gmp/mpz/init_set.h
@@ -48,6 +54,9 @@ all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 	@echo	"	AS	libalx/tmp/extra/gmp/mpz/$@"
 	$(Q)$(AS) $< -o $@
 
+
+get.a.s: $(GET_SRC) $(GET_INC)
+get.so.s: $(GET_SRC) $(GET_INC)
 
 init_set.a.s: $(INITSET_SRC) $(INITSET_INC)
 init_set.so.s: $(INITSET_SRC) $(INITSET_INC)
