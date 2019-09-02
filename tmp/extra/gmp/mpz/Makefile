@@ -18,7 +18,8 @@ OBJ		=							\
 		get.o							\
 		init_set.o						\
 		root.o							\
-		set.o
+		set.o							\
+		theoretic.o
 
 ARITHMETIC_INC	=							\
 		$(INC_DIR)/libalx/extra/gmp/mpz/arithmetic.h
@@ -54,6 +55,11 @@ SET_INC		=							\
 		$(INC_DIR)/libalx/extra/gmp/mpz/set.h
 SET_SRC		=							\
 		$(SRC_DIR)/extra/gmp/mpz/set.c
+
+THEORETIC_INC	=							\
+		$(INC_DIR)/libalx/extra/gmp/mpz/theoretic.h
+THEORETIC_SRC	=							\
+		$(SRC_DIR)/extra/gmp/mpz/theoretic.c
 
 ################################################################################
 # cflags
@@ -99,6 +105,9 @@ root.so.s: $(ROOT_SRC) $(ROOT_INC)
 
 set.a.s: $(SET_SRC) $(SET_INC)
 set.so.s: $(SET_SRC) $(SET_INC)
+
+theoretic.a.s: $(THEORETIC_SRC) $(THEORETIC_INC)
+theoretic.so.s: $(THEORETIC_SRC) $(THEORETIC_INC)
 
 
 PHONY += clean

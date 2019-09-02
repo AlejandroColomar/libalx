@@ -85,7 +85,8 @@ GMP_OBJ		=							\
 		$(TMP_DIR)/extra/gmp/mpz/get.o				\
 		$(TMP_DIR)/extra/gmp/mpz/init_set.o			\
 		$(TMP_DIR)/extra/gmp/mpz/root.o				\
-		$(TMP_DIR)/extra/gmp/mpz/set.o
+		$(TMP_DIR)/extra/gmp/mpz/set.o				\
+		$(TMP_DIR)/extra/gmp/mpz/theoretic.o
 GSL_OBJ		=							\
 		$(TMP_DIR)/extra/gsl/distributions/binomial.o		\
 		$(TMP_DIR)/extra/gsl/distributions/exponential.o	\
