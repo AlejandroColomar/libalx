@@ -1,7 +1,7 @@
 C/C++ library
 
 This library provides extensions to glibc and other libraries (libbsd, OpenCV,
-GSL, ncurses, tesseract-ocr, zbar).
+GMP, GSL, ncurses, tesseract-ocr, zbar).
 
 Dependencies:
 
@@ -13,6 +13,10 @@ cv:
  + base
  - g++-8
  - libopencv-dev (>= 3)
+
+gmp:
+ + base
+ - libgmp-dev
 
 gsl:
  + base
