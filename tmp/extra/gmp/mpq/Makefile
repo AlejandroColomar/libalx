@@ -10,61 +10,45 @@
 ################################################################################
 
 ################################################################################
+# dependencies
+OBJ		=							\
+		cmp.o
+
+CMP_INC		=							\
+		$(INC_DIR)/libalx/extra/gmp/mpq/cmp.h
+CMP_SRC		=							\
+		$(SRC_DIR)/extra/gmp/mpq/cmp.c
+
+################################################################################
+# cflags
+#CFLAGS_A	+=
+#CFLAGS_SO	+=
+
+################################################################################
 # target: dependencies
 #	action
 
 PHONY := all
-all: base extra
+all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 
-PHONY += base
-base:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/assert/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/compiler/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/errno/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/float/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/math/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stdint/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stdio/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stdlib/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/base/string/
+%.a.s:
+	@echo	"	CC	libalx/tmp/extra/gmp/mpq/$@"
+	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
+%.so.s:
+	@echo	"	CC	libalx/tmp/extra/gmp/mpq/$@"
+	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
+%.o: %.s
+	@echo	"	AS	libalx/tmp/extra/gmp/mpq/$@"
+	$(Q)$(AS) $< -o $@
 
 
-PHONY += extra
-extra: cv gmp gsl ncurses ocr zbar
-
-
-PHONY += cv
-cv:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/cv/
-
-PHONY += gmp
-gmp:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/gmp/mpq/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/gmp/mpz/
-
-PHONY += gsl
-gsl:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/gsl/distributions/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/gsl/rstat/
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/gsl/statistics/
-
-PHONY += ncurses
-ncurses:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/ncurses/
-
-PHONY += ocr
-ocr:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/ocr/
-
-PHONY += zbar
-zbar:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/zbar/
+cmp.a.s: $(CMP_SRC) $(CMP_INC)
+cmp.so.s: $(CMP_SRC) $(CMP_INC)
 
 
 PHONY += clean
 clean:
-	@echo	"	RM	*.o *.s"
 	$(Q)rm -f *.o *.s
 
 ################################################################################
