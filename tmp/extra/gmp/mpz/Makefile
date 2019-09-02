@@ -13,6 +13,7 @@
 # dependencies
 OBJ		=							\
 		arithmetic.o						\
+		cmp.o							\
 		division.o						\
 		exp.o							\
 		get.o							\
@@ -25,6 +26,11 @@ ARITHMETIC_INC	=							\
 		$(INC_DIR)/libalx/extra/gmp/mpz/arithmetic.h
 ARITHMETIC_SRC	=							\
 		$(SRC_DIR)/extra/gmp/mpz/arithmetic.c
+
+CMP_INC		=							\
+		$(INC_DIR)/libalx/extra/gmp/mpz/cmp.h
+CMP_SRC		=							\
+		$(SRC_DIR)/extra/gmp/mpz/cmp.c
 
 DIVISION_INC	=							\
 		$(INC_DIR)/libalx/extra/gmp/mpz/division.h
@@ -87,6 +93,9 @@ all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 arithmetic.a.s: $(ARITHMETIC_SRC) $(ARITHMETIC_INC)
 arithmetic.so.s: $(ARITHMETIC_SRC) $(ARITHMETIC_INC)
+
+cmp.a.s: $(CMP_SRC) $(CMP_INC)
+cmp.so.s: $(CMP_SRC) $(CMP_INC)
 
 division.a.s: $(DIVISION_SRC) $(DIVISION_INC)
 division.so.s: $(DIVISION_SRC) $(DIVISION_INC)

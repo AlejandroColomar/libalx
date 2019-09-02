@@ -80,6 +80,7 @@ CV_OBJ		=							\
 		$(TMP_DIR)/extra/cv/ximgproc.o
 GMP_OBJ		=							\
 		$(TMP_DIR)/extra/gmp/mpz/arithmetic.o			\
+		$(TMP_DIR)/extra/gmp/mpz/cmp.o				\
 		$(TMP_DIR)/extra/gmp/mpz/division.o			\
 		$(TMP_DIR)/extra/gmp/mpz/exp.o				\
 		$(TMP_DIR)/extra/gmp/mpz/get.o				\
