@@ -85,6 +85,7 @@ GMP_OBJ		=							\
 		$(TMP_DIR)/extra/gmp/mpz/exp.o				\
 		$(TMP_DIR)/extra/gmp/mpz/get.o				\
 		$(TMP_DIR)/extra/gmp/mpz/init_set.o			\
+		$(TMP_DIR)/extra/gmp/mpz/misc.o				\
 		$(TMP_DIR)/extra/gmp/mpz/root.o				\
 		$(TMP_DIR)/extra/gmp/mpz/set.o				\
 		$(TMP_DIR)/extra/gmp/mpz/theoretic.o

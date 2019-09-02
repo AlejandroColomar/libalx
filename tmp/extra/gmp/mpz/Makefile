@@ -18,6 +18,7 @@ OBJ		=							\
 		exp.o							\
 		get.o							\
 		init_set.o						\
+		misc.o							\
 		root.o							\
 		set.o							\
 		theoretic.o
@@ -51,6 +52,11 @@ INITSET_INC	=							\
 		$(INC_DIR)/libalx/extra/gmp/mpz/init_set.h
 INITSET_SRC	=							\
 		$(SRC_DIR)/extra/gmp/mpz/init_set.c
+
+MISC_INC	=							\
+		$(INC_DIR)/libalx/extra/gmp/mpz/misc.h
+MISC_SRC	=							\
+		$(SRC_DIR)/extra/gmp/mpz/misc.c
 
 ROOT_INC	=							\
 		$(INC_DIR)/libalx/extra/gmp/mpz/root.h
@@ -108,6 +114,9 @@ get.so.s: $(GET_SRC) $(GET_INC)
 
 init_set.a.s: $(INITSET_SRC) $(INITSET_INC)
 init_set.so.s: $(INITSET_SRC) $(INITSET_INC)
+
+misc.a.s: $(MISC_SRC) $(MISC_INC)
+misc.so.s: $(MISC_SRC) $(MISC_INC)
 
 root.a.s: $(ROOT_SRC) $(ROOT_INC)
 root.so.s: $(ROOT_SRC) $(ROOT_INC)
