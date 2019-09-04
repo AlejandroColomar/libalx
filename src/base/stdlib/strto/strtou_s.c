@@ -49,7 +49,7 @@ int	alx_strtou8_s		(uint8_t *restrict num,
 	if (tmp > UINT8_MAX)
 		errno	= ERANGE;
 
-	return	alx_strtou_status(str, endptr, errno, errno_before);
+	return	alx_strtoul_status(str, endptr, errno, errno_before);
 }
 
 int	alx_strtou16_s		(uint16_t *restrict num,
@@ -67,7 +67,7 @@ int	alx_strtou16_s		(uint16_t *restrict num,
 	if (tmp > UINT16_MAX)
 		errno	= ERANGE;
 
-	return	alx_strtou_status(str, endptr, errno, errno_before);
+	return	alx_strtoul_status(str, endptr, errno, errno_before);
 }
 
 int	alx_strtou32_s		(uint32_t *restrict num,
@@ -85,7 +85,7 @@ int	alx_strtou32_s		(uint32_t *restrict num,
 	if (tmp > UINT32_MAX)
 		errno	= ERANGE;
 
-	return	alx_strtou_status(str, endptr, errno, errno_before);
+	return	alx_strtoul_status(str, endptr, errno, errno_before);
 }
 
 int	alx_strtou64_s		(uint64_t *restrict num,
@@ -99,12 +99,12 @@ int	alx_strtou64_s		(uint64_t *restrict num,
 	if (read)
 		*read	= endptr - str;
 
-	return	alx_strtou_status(str, endptr, errno, errno_before);
+	return	alx_strtoul_status(str, endptr, errno, errno_before);
 }
 
 
 extern
-int	alx_strtou_status	(const char *restrict str,
+int	alx_strtoul_status	(const char *restrict str,
 				 const char *restrict endptr,
 				 int errno_after, int errno_before);
 

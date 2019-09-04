@@ -47,7 +47,7 @@ int	alx_strtou64_s		(uint64_t *restrict num,
 				 int base, ptrdiff_t *restrict read);
 
 [[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_strtou_status	(const char *restrict str,
+int	alx_strtoul_status	(const char *restrict str,
 				 const char *restrict endptr,
 				 int errno_after, int errno_before);
 }

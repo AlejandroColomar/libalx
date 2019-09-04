@@ -65,7 +65,7 @@ int	alx_strtof_status	(const char *restrict str,
 				 const char *restrict endptr,
 				 int errno_after, int errno_before)
 {
-	return	alx_strtoi_status(str, endptr, errno_after, errno_before);
+	return	alx_strtol_status(str, endptr, errno_after, errno_before);
 }
 
 
