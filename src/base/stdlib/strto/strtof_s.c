@@ -10,6 +10,9 @@
 #include "libalx/base/stdlib/strto/strtof_s.h"
 
 #include <ctype.h>
+#include <errno.h>
+#include <stddef.h>
+#include <stdlib.h>
 
 
 /******************************************************************************
