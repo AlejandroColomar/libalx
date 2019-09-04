@@ -102,8 +102,8 @@ int	alx_strtof_status	(const char *restrict str,
 		goto out;
 	}
 
-	if (errno_after) {
-		status	= errno_after;
+	if (errno_after == ERANGE) {
+		status	= ERANGE;
 		goto out;
 	}
 out:
