@@ -13,7 +13,6 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <errno.h>
 #include <stddef.h>
 #include <stdint.h>
 
@@ -53,30 +52,10 @@ int	alx_strtoi64_s		(int64_t *restrict num,
 				 const char *restrict str,
 				 int base, ptrdiff_t *restrict read);
 
-__attribute__((warn_unused_result))
-inline
-int	alx_strtoi_status	(int rstatus);
-
 
 /******************************************************************************
  ******* inline ***************************************************************
  ******************************************************************************/
-inline
-int	alx_strtoi_status	(int rstatus)
-{
-
-	switch (rstatus) {
-	case 0:
-		return	0;
-	case ENOTSUP:
-		return	rstatus;
-	case ECANCELED:
-	case EINVAL:
-	case ERANGE:
-	default:
-		return	-rstatus;
-	}
-}
 
 
 /******************************************************************************

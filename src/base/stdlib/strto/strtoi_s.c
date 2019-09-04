@@ -9,9 +9,11 @@
  ******************************************************************************/
 #include "libalx/base/stdlib/strto/strtoi_s.h"
 
-#include <inttypes.h>
+#include <ctype.h>
+#include <errno.h>
 #include <stddef.h>
 #include <stdint.h>
+#include <stdlib.h>
 
 
 /******************************************************************************
@@ -27,6 +29,11 @@
 /******************************************************************************
  ******* static prototypes ****************************************************
  ******************************************************************************/
+__attribute__((nonnull, warn_unused_result))
+static
+int	alx_strtoi_status	(const char *restrict str,
+				 const char *restrict endptr,
+				 int errno_after, int errno_before);
 
 
 /******************************************************************************
@@ -36,66 +43,106 @@ int	alx_strtoi8_s		(int8_t *restrict num,
 				 const char *restrict str,
 				 int base, ptrdiff_t *restrict read)
 {
-	char	*endptr;
-	int	rstatus;
+	const int	errno_before = errno;
+	char		*endptr;
+	long		tmp;
 
-	*num	= strtoi(str, &endptr, base, INT8_MIN, INT8_MAX, &rstatus);
+	tmp	= strtol(str, &endptr, base);
+	*num	= tmp;
 	if (read)
 		*read	= endptr - str;
+	if (tmp < INT8_MIN || tmp > INT8_MAX)
+		errno	= ERANGE;
 
-	return	alx_strtoi_status(rstatus);
+	return	alx_strtoi_status(str, endptr, errno, errno_before);
 }
 
 int	alx_strtoi16_s		(int16_t *restrict num,
 				 const char *restrict str,
 				 int base, ptrdiff_t *restrict read)
 {
-	char	*endptr;
-	int	rstatus;
+	const int	errno_before = errno;
+	char		*endptr;
+	long		tmp;
 
-	*num	= strtoi(str, &endptr, base, INT16_MIN, INT16_MAX, &rstatus);
+	tmp	= strtol(str, &endptr, base);
+	*num	= tmp;
 	if (read)
 		*read	= endptr - str;
+	if (tmp < INT16_MIN || tmp > INT16_MAX)
+		errno	= ERANGE;
 
-	return	alx_strtoi_status(rstatus);
+	return	alx_strtoi_status(str, endptr, errno, errno_before);
 }
 
 int	alx_strtoi32_s		(int32_t *restrict num,
 				 const char *restrict str,
 				 int base, ptrdiff_t *restrict read)
 {
-	char	*endptr;
-	int	rstatus;
+	const int	errno_before = errno;
+	char		*endptr;
+	long		tmp;
 
-	*num	= strtoi(str, &endptr, base, INT32_MIN, INT32_MAX, &rstatus);
+	tmp	= strtol(str, &endptr, base);
+	*num	= tmp;
 	if (read)
 		*read	= endptr - str;
+	if (tmp < INT32_MIN || tmp > INT32_MAX)
+		errno	= ERANGE;
 
-	return	alx_strtoi_status(rstatus);
+	return	alx_strtoi_status(str, endptr, errno, errno_before);
 }
 
 int	alx_strtoi64_s		(int64_t *restrict num,
 				 const char *restrict str,
 				 int base, ptrdiff_t *restrict read)
 {
-	char	*endptr;
-	int	rstatus;
+	const int	errno_before = errno;
+	char		*endptr;
 
-	*num	= strtoi(str, &endptr, base, INT64_MIN, INT64_MAX, &rstatus);
+	*num	= strtol(str, &endptr, base);
 	if (read)
 		*read	= endptr - str;
 
-	return	alx_strtoi_status(rstatus);
+	return	alx_strtoi_status(str, endptr, errno, errno_before);
 }
-
-
-extern
-int	alx_strtoi_status	(int rstatus);
 
 
 /******************************************************************************
  ******* static function definitions ******************************************
  ******************************************************************************/
+static
+int	alx_strtoi_status	(const char *restrict str,
+				 const char *restrict endptr,
+				 int errno_after, int errno_before)
+{
+	int	status;
+
+	status	= 0;
+
+	if (str == endptr) {
+		status	= -ECANCELED;
+		goto out;
+	}
+
+	while (isspace((unsigned char)*endptr))
+		endptr++;
+	if (*endptr) {
+		status	= ENOTSUP;
+		goto out;
+	}
+
+	/* EINVAL or ERANGE */
+	if (errno_after) {
+		status	= errno_after;
+		goto out;
+	}
+out:
+	if (!errno)
+		errno	= errno_before;
+
+	return	status;
+}
 
 
 /******************************************************************************
