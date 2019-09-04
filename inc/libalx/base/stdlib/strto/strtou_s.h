@@ -13,7 +13,6 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <errno.h>
 #include <stddef.h>
 #include <stdint.h>
 
@@ -55,18 +54,22 @@ int	alx_strtou64_s		(uint64_t *restrict num,
 				 const char *restrict str,
 				 int base, ptrdiff_t *restrict read);
 
-__attribute__((warn_unused_result))
+__attribute__((nonnull, warn_unused_result))
 inline
-int	alx_strtou_status	(int rstatus);
+int	alx_strtou_status	(const char *restrict str,
+				 const char *restrict endptr,
+				 int errno_after, int errno_before);
 
 
 /******************************************************************************
  ******* inline ***************************************************************
  ******************************************************************************/
 inline
-int	alx_strtou_status	(int rstatus)
+int	alx_strtou_status	(const char *restrict str,
+				 const char *restrict endptr,
+				 int errno_after, int errno_before)
 {
-	return	alx_strtoi_status(rstatus);
+	return	alx_strtoi_status(str, endptr, errno_after, errno_before);
 }
 
 

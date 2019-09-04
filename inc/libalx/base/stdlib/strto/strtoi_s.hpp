@@ -16,6 +16,8 @@
 #include <cstddef>
 #include <cstdint>
 
+#include "libalx/base/compiler/restrict.hpp"
+
 
 /******************************************************************************
  ******* macros ***************************************************************
@@ -44,8 +46,10 @@ int	alx_strtoi64_s		(int64_t *restrict num,
 				 const char *restrict str,
 				 int base, ptrdiff_t *restrict read);
 
-[[gnu::warn_unused_result]]
-int	alx_strtoi_status	(int rstatus);
+[[gnu::nonnull]][[gnu::warn_unused_result]]
+int	alx_strtoi_status	(const char *restrict str,
+				 const char *restrict endptr,
+				 int errno_after, int errno_before);
 }
 
 
