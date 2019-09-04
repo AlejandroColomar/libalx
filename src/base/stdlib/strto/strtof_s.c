@@ -100,7 +100,7 @@ int	alx_strtof_status	(const char *restrict str,
 
 	while (isspace((unsigned char)*endptr))
 		endptr++;
-	if (*endptr != '\0') {
+	if (*endptr) {
 		status	= ENOTSUP;
 		goto out;
 	}
