@@ -28,11 +28,6 @@
 /******************************************************************************
  ******* static prototypes ****************************************************
  ******************************************************************************/
-__attribute__((nonnull, warn_unused_result))
-static
-int	alx_strtof_status	(const char *restrict str,
-				 const char *restrict endptr,
-				 int errno_after, int errno_before);
 
 
 /******************************************************************************
@@ -81,41 +76,15 @@ int	alx_strtold_s	(long double *restrict num, const char *restrict str,
 }
 
 
+extern
+int	alx_strtof_status	(const char *restrict str,
+				 const char *restrict endptr,
+				 int errno_after, int errno_before);
+
+
 /******************************************************************************
  ******* static function definitions ******************************************
  ******************************************************************************/
-static
-int	alx_strtof_status	(const char *restrict str,
-				 const char *restrict endptr,
-				 int errno_after, int errno_before)
-{
-	int	status;
-
-	status	= 0;
-
-	if (str == endptr) {
-		status	= -ECANCELED;
-		goto out;
-	}
-
-	while (isspace((unsigned char)*endptr))
-		endptr++;
-	if (*endptr) {
-		status	= ENOTSUP;
-		goto out;
-	}
-
-	/* ERANGE */
-	if (errno_after) {
-		status	= errno_after;
-		goto out;
-	}
-out:
-	if (!errno)
-		errno	= errno_before;
-
-	return	status;
-}
 
 
 /******************************************************************************

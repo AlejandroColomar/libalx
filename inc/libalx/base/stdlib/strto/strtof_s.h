@@ -15,6 +15,8 @@
  ******************************************************************************/
 #include <stddef.h>
 
+#include "libalx/base/stdlib/strto/strtoi_s.h"
+
 
 /******************************************************************************
  ******* macros ***************************************************************
@@ -48,10 +50,23 @@ __attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_strtold_s	(long double *restrict num, const char *restrict str,
 			 ptrdiff_t *restrict read);
 
+__attribute__((nonnull, warn_unused_result))
+inline
+int	alx_strtof_status	(const char *restrict str,
+				 const char *restrict endptr,
+				 int errno_after, int errno_before);
+
 
 /******************************************************************************
  ******* inline ***************************************************************
  ******************************************************************************/
+inline
+int	alx_strtof_status	(const char *restrict str,
+				 const char *restrict endptr,
+				 int errno_after, int errno_before)
+{
+	return	alx_strtoi_status(str, endptr, errno_after, errno_before);
+}
 
 
 /******************************************************************************
