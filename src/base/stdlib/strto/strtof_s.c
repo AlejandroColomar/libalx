@@ -27,7 +27,7 @@ __attribute__((nonnull, warn_unused_result))
 static
 int	alx_strtof_status	(const char *restrict str,
 				 const char *restrict endptr,
-				 int _errno, int _errno_before);
+				 int errno_after, int errno_before);
 
 
 /******************************************************************************
@@ -36,7 +36,7 @@ int	alx_strtof_status	(const char *restrict str,
 int	alx_strtod_s	(double *restrict num, const char *restrict str,
 			 ptrdiff_t *restrict read)
 {
-	const int	_errno = errno;
+	const int	errno_before = errno;
 	char		*endptr;
 
 	errno	= 0;
@@ -44,13 +44,13 @@ int	alx_strtod_s	(double *restrict num, const char *restrict str,
 	if (read)
 		*read	= endptr - str;
 
-	return	alx_strtof_status(str, endptr, errno, _errno);
+	return	alx_strtof_status(str, endptr, errno, errno_before);
 }
 
 int	alx_strtof_s	(float *restrict num, const char *restrict str,
 			 ptrdiff_t *restrict read)
 {
-	const int	_errno = errno;
+	const int	errno_before = errno;
 	char		*endptr;
 
 	errno	= 0;
@@ -58,13 +58,13 @@ int	alx_strtof_s	(float *restrict num, const char *restrict str,
 	if (read)
 		*read	= endptr - str;
 
-	return	alx_strtof_status(str, endptr, errno, _errno);
+	return	alx_strtof_status(str, endptr, errno, errno_before);
 }
 
 int	alx_strtold_s	(long double *restrict num, const char *restrict str,
 			 ptrdiff_t *restrict read)
 {
-	const int	_errno = errno;
+	const int	errno_before = errno;
 	char		*endptr;
 
 	errno	= 0;
@@ -72,7 +72,7 @@ int	alx_strtold_s	(long double *restrict num, const char *restrict str,
 	if (read)
 		*read	= endptr - str;
 
-	return	alx_strtof_status(str, endptr, errno, _errno);
+	return	alx_strtof_status(str, endptr, errno, errno_before);
 }
 
 
@@ -82,7 +82,7 @@ int	alx_strtold_s	(long double *restrict num, const char *restrict str,
 static
 int	alx_strtof_status	(const char *restrict str,
 				 const char *restrict endptr,
-				 int _errno, int _errno_before)
+				 int errno_after, int errno_before)
 {
 	int	status;
 
@@ -98,13 +98,13 @@ int	alx_strtof_status	(const char *restrict str,
 		goto out;
 	}
 
-	if (_errno == ERANGE) {
-		status	= ERANGE;
+	if (errno_after) {
+		status	= errno_after;
 		goto out;
 	}
 out:
 	if (!errno)
-		errno	= _errno_before;
+		errno	= errno_before;
 
 	return	status;
 }
