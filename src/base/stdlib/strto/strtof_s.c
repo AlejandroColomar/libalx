@@ -9,6 +9,8 @@
  ******************************************************************************/
 #include "libalx/base/stdlib/strto/strtof_s.h"
 
+#include <ctype.h>
+
 
 /******************************************************************************
  ******* macros ***************************************************************
@@ -93,6 +95,8 @@ int	alx_strtof_status	(const char *restrict str,
 		goto out;
 	}
 
+	while (isspace((unsigned char)*endptr))
+		endptr++;
 	if (*endptr != '\0') {
 		status	= ENOTSUP;
 		goto out;
