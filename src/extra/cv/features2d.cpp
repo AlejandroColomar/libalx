@@ -86,7 +86,7 @@ void	alx::CV::orb_align	(const class cv::Mat *restrict ref,
 	}
 
 	/* Find homography */
-	img_hg	= cv::findHomography(points_1, points_0, CV_RANSAC);
+	img_hg	= cv::findHomography(points_1, points_0, cv::RANSAC);
 
 	/* Use homography to warp image */
 	cv::warpPerspective(*img, img_align, img_hg, ref->size());

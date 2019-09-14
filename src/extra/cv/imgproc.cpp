@@ -336,7 +336,7 @@ int	alx::CV::distance_transform(class cv::Mat *restrict img)
 
 	if (img->channels() != 1)
 		return	1;
-	cv::distanceTransform(*img, tmp, CV_DIST_L2, CV_DIST_MASK_PRECISE);
+	cv::distanceTransform(*img, tmp, cv::DIST_L2, cv::DIST_MASK_PRECISE);
 	tmp.copyTo(*img);
 
 	tmp.release();
@@ -354,7 +354,7 @@ int	alx::CV::distance_transform_8b(class cv::Mat *restrict img)
 
 	if (img->channels() != 1)
 		return	1;
-	cv::distanceTransform(*img, tmp, CV_DIST_L2, CV_DIST_MASK_PRECISE);
+	cv::distanceTransform(*img, tmp, cv::DIST_L2, cv::DIST_MASK_PRECISE);
 	/* DistanceTransform gives CV_32F image */
 	tmp.convertTo(*img, CV_8U);
 
@@ -507,13 +507,13 @@ int	alx::CV::contours	(class cv::Mat *restrict img,
 
 	if (img->channels() != 1)
 		return	-1;
-	cv::findContours(*img, *contours, hierarchy, CV_RETR_EXTERNAL,
-							CV_CHAIN_APPROX_SIMPLE);
+	cv::findContours(*img, *contours, hierarchy, cv::RETR_EXTERNAL,
+							cv::CHAIN_APPROX_SIMPLE);
 	/* Set image to black */
 	img->setTo(cv::Scalar(0));
 	/* Draw contours in color */
 	cv::drawContours(*img, *contours, -1, cv::Scalar(UINT8_MAX), 1, 8,
-						hierarchy, 1, cvPoint(0, 0));
+						hierarchy, 1, cv::Point(0, 0));
 
 	hierarchy.release();
 	return	0;

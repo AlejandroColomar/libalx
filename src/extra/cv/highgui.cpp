@@ -38,7 +38,7 @@ int	alx::CV::imread	(class cv::Mat *restrict img,
 			 const char *restrict fname)
 {
 
-	*img	= cv::imread(fname, CV_LOAD_IMAGE_COLOR);
+	*img	= cv::imread(fname, cv::IMREAD_UNCHANGED);
 	if (img->empty())
 		return	-1;
 	return	0;
