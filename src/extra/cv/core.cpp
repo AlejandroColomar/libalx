@@ -218,7 +218,8 @@ void	alx::CV::extract_imgdata(const class cv::Mat *restrict img, void **data,
 				 ptrdiff_t *restrict width,
 				 ptrdiff_t *restrict height,
 				 ptrdiff_t *restrict B_per_pix,
-				 ptrdiff_t *restrict B_per_line)
+				 ptrdiff_t *restrict B_per_line,
+				 int *restrict type)
 {
 
 	if (data)
@@ -235,6 +236,8 @@ void	alx::CV::extract_imgdata(const class cv::Mat *restrict img, void **data,
 		*B_per_pix	= img->channels();
 	if (B_per_line)
 		*B_per_line	= img->step1();
+	if (type)
+		*type		= img->type();
 }
 
 void	alx_cv_extract_imgdata	(const void *restrict img, void **data,
@@ -243,11 +246,12 @@ void	alx_cv_extract_imgdata	(const void *restrict img, void **data,
 				 ptrdiff_t *restrict width,
 				 ptrdiff_t *restrict height,
 				 ptrdiff_t *restrict B_per_pix,
-				 ptrdiff_t *restrict B_per_line)
+				 ptrdiff_t *restrict B_per_line,
+				 int *restrict type)
 {
 	alx::CV::extract_imgdata((const class cv::Mat *)img, data,
 						rows, cols, width, height,
-						B_per_pix, B_per_line);
+						B_per_pix, B_per_line, type);
 }
 
 void	alx::CV::extract_rect	(const class cv::Rect_<int> *restrict rect,

@@ -93,7 +93,8 @@ void	alx_cv_extract_imgdata	(const img_s *restrict img, void **data,
 				 ptrdiff_t *restrict width,
 				 ptrdiff_t *restrict height,
 				 ptrdiff_t *restrict B_per_pix,
-				 ptrdiff_t *restrict B_per_line);
+				 ptrdiff_t *restrict B_per_line,
+				 int *restrict type);
 __attribute__((nonnull(1)))
 void	alx_cv_extract_rect	(const rect_s *restrict rect,
 				 ptrdiff_t *restrict x, ptrdiff_t *restrict y,
