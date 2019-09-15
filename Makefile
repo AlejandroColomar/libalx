@@ -285,14 +285,7 @@ install_base:
 	@echo	"	CP -r	./share/libalx/*"
 	$(Q)cp -rf $(v)		./share/libalx/*			\
 					$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/
-	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/"
-	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/
-	@echo	"	CP	./lib/pkgconfig/libalx-base.pc"
-	$(Q)cp $(v)		./lib/pkgconfig/libalx-base.pc		\
-					$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/
-	@echo	"	CP -r	./ect/ld.so.conf.d/*"
-	$(Q)cp -rf $(v)		./etc/ld.so.conf.d/*			\
-					$(DESTDIR)/etc/ld.so.conf.d/
+	$(Q)$(MAKE)	libalx-base.pc
 	@echo
 
 PHONY += install_extra
@@ -310,11 +303,12 @@ install_extra:
 	@echo	"	CP -r	./lib/libalx/*"
 	$(Q)cp -r -f $(v)	./lib/libalx/*				\
 					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
-	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/"
-	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/
-	@echo	"	CP -r	./lib/pkgconfig/*"
-	$(Q)cp -r -f $(v)	./lib/pkgconfig/*			\
-					$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/
+	$(Q)$(MAKE)	libalx-cv.pc
+	$(Q)$(MAKE)	libalx-gmp.pc
+	$(Q)$(MAKE)	libalx-gsl.pc
+	$(Q)$(MAKE)	libalx-ncurses.pc
+	$(Q)$(MAKE)	libalx-ocr.pc
+	$(Q)$(MAKE)	libalx-zbar.pc
 	@echo
 
 PHONY += conf_ld
@@ -326,10 +320,19 @@ conf_ld:
 	$(Q)ldconfig
 	@echo
 
+PHONY += libalx-%.pc
+libalx-%.pc:
+	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/
+	@echo	"	CP	./lib/pkgconfig/$@"
+	$(Q)cp $(v)		./lib/pkgconfig/$@			\
+					$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/
+
 PHONY += uninstall
 uninstall:
 	@echo	"	Clean old installations:"
 	@echo
+	@echo	"	RM -rf	$(DESTDIR)/$(INSTALL_ETC_DIR)/libalx/"
+	$(Q)rm -f -r		$(DESTDIR)/$(INSTALL_ETC_DIR)/libalx/
 	@echo	"	RM -rf	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/"
 	$(Q)rm -f -r		$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/
 	@echo	"	RM -rf	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/"
