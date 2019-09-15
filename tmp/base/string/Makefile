@@ -118,11 +118,11 @@ STRCPY_S_SRC	=							\
 		$(SRC_DIR)/base/string/strcpy/strscpy.c
 
 STRGREP_INC	=							\
-		$(INC_DIR)/libalx/base/string/strgrep.h			\
 		$(INC_DIR)/libalx/base/string/strchr/strnchrnul.h	\
 		$(INC_DIR)/libalx/base/string/strstr/strncasestr.h	\
 		$(INC_DIR)/libalx/base/string/strstr/strscasestr.h	\
-		$(INC_DIR)/libalx/base/string/strstr/strsstr.h
+		$(INC_DIR)/libalx/base/string/strstr/strsstr.h		\
+		$(INC_DIR)/libalx/base/string/strgrep.h
 STRGREP_SRC	=							\
 		$(SRC_DIR)/base/string/strgrep.c
 TST_STRGREP_INC	=							\

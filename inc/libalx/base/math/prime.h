@@ -17,7 +17,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#include "libalx/base/stdlib/search.h"
+#include "libalx/base/stdlib/bsearch.h"
 
 
 /******************************************************************************

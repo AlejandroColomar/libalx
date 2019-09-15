@@ -23,16 +23,16 @@ COMMON_SRC	=							\
 		$(SRC_DIR)/extra/ncurses/common.c
 
 GET_INC		=							\
-		$(INC_DIR)/libalx/extra/ncurses/get.h			\
 		$(INC_DIR)/libalx/base/stdio/sscan.h			\
 		$(INC_DIR)/libalx/extra/ncurses/common.h		\
-		$(INC_DIR)/libalx/extra/ncurses/perror.h	
+		$(INC_DIR)/libalx/extra/ncurses/perror.h		\
+		$(INC_DIR)/libalx/extra/ncurses/get.h	
 GET_SRC		=							\
 		$(SRC_DIR)/extra/ncurses/get.c
 
 MENU_INC	=							\
-		$(INC_DIR)/libalx/extra/ncurses/menu.h			\
-		$(INC_DIR)/libalx/extra/ncurses/common.h
+		$(INC_DIR)/libalx/extra/ncurses/common.h		\
+		$(INC_DIR)/libalx/extra/ncurses/menu.h
 MENU_SRC	=							\
 		$(SRC_DIR)/extra/ncurses/menu.c
 

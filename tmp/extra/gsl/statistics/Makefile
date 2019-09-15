@@ -15,6 +15,7 @@ OBJ		=							\
 		mean.o
 
 MEAN_INC	=							\
+		$(INC_DIR)/libalx/base/assert/assert.h			\
 		$(INC_DIR)/libalx/extra/gsl/statistics/mean.h
 MEAN_SRC	=							\
 		$(SRC_DIR)/extra/gsl/statistics/mean.c

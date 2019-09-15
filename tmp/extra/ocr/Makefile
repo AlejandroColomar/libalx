@@ -15,6 +15,7 @@ OBJ		=							\
 		ocr.o
 
 OCR_INC	=								\
+		$(INC_DIR)/libalx/base/stdio/printf/snprintfs.h		\
 		$(INC_DIR)/libalx/extra/ocr/ocr.h
 OCR_SRC	=								\
 		$(SRC_DIR)/extra/ocr/ocr.c

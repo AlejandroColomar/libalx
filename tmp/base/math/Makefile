@@ -36,15 +36,16 @@ ARRAY_MULTIPLICATION_SRC	=					\
 		$(SRC_DIR)/base/math/array_multiplication.c
 
 ARRAY_SUM_INC	=							\
-		$(INC_DIR)/libalx/base/math/array_sum.h			\
-		$(INC_DIR)/libalx/base/stdlib/compare.h
+		$(INC_DIR)/libalx/base/compiler/size.h			\
+		$(INC_DIR)/libalx/base/stdlib/compare.h			\
+		$(INC_DIR)/libalx/base/math/array_sum.h
 ARRAY_SUM_SRC	=							\
 		$(SRC_DIR)/base/math/array_sum.c
 
 BINOMIAL_COEFFICIENT_INC	=					\
-		$(INC_DIR)/libalx/base/math/binomial_coefficient.h	\
 		$(INC_DIR)/libalx/base/math/pascal_triangle.h		\
-		$(INC_DIR)/libalx/base/math/prime.h
+		$(INC_DIR)/libalx/base/math/prime.h			\
+		$(INC_DIR)/libalx/base/math/binomial_coefficient.h
 BINOMIAL_COEFFICIENT_SRC	=					\
 		$(SRC_DIR)/base/math/binomial_coefficient.c
 
@@ -59,31 +60,29 @@ MATRIX_SUBTRACTION_SRC	=						\
 		$(SRC_DIR)/base/math/matrix_subtraction.c
 
 PASCAL_TRIANGLE_INC	=						\
-		$(INC_DIR)/libalx/base/math/pascal_triangle.h		\
 		$(INC_DIR)/libalx/base/float/constant.h			\
-		$(INC_DIR)/libalx/base/math/matrix_addition.h		\
-		$(INC_DIR)/libalx/base/math/matrix_subtraction.h	\
 		$(INC_DIR)/libalx/base/math/prime.h			\
-		$(INC_DIR)/libalx/base/math/prime_factorization.h
+		$(INC_DIR)/libalx/base/math/prime_factorization.h	\
+		$(INC_DIR)/libalx/base/math/pascal_triangle.h
 PASCAL_TRIANGLE_SRC	=						\
 		$(SRC_DIR)/base/math/pascal_triangle.c
 
 PRIME_INC	=							\
-		$(INC_DIR)/libalx/base/math/prime.h			\
 		$(INC_DIR)/libalx/base/compiler/size.h			\
-		$(INC_DIR)/libalx/base/stdlib/search.h
+		$(INC_DIR)/libalx/base/stdlib/search.h			\
+		$(INC_DIR)/libalx/base/math/prime.h
 PRIME_SRC	=							\
 		$(SRC_DIR)/base/math/prime.c
 
 PRIME_DEFACTORIZATION_INC	=					\
-		$(INC_DIR)/libalx/base/math/prime_defactorization.h	\
-		$(INC_DIR)/libalx/base/math/prime.h
+		$(INC_DIR)/libalx/base/math/prime.h			\
+		$(INC_DIR)/libalx/base/math/prime_defactorization.h
 PRIME_DEFACTORIZATION_SRC	=					\
 		$(SRC_DIR)/base/math/prime_defactorization.c
 
 PRIME_FACTORIZATION_INC	=						\
-		$(INC_DIR)/libalx/base/math/prime_factorization.h	\
-		$(INC_DIR)/libalx/base/math/prime.h
+		$(INC_DIR)/libalx/base/math/prime.h			\
+		$(INC_DIR)/libalx/base/math/prime_factorization.h
 PRIME_FACTORIZATION_SRC	=						\
 		$(SRC_DIR)/base/math/prime_factorization.c
 

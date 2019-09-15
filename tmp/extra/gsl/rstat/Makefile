@@ -15,9 +15,10 @@ OBJ		=							\
 		median.o
 
 MEDIAN_INC	=							\
-		$(INC_DIR)/libalx/extra/gsl/rstat/median.h		\
+		$(INC_DIR)/libalx/base/compiler/size.h			\
 		$(INC_DIR)/libalx/base/stdlib/average.h			\
-		$(INC_DIR)/libalx/base/stdlib/compare.h
+		$(INC_DIR)/libalx/base/stdlib/compare.h			\
+		$(INC_DIR)/libalx/extra/gsl/rstat/median.h
 MEDIAN_SRC	=							\
 		$(SRC_DIR)/extra/gsl/rstat/median.c
 

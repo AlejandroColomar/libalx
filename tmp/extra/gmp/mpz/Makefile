@@ -24,51 +24,61 @@ OBJ		=							\
 		theoretic.o
 
 ARITHMETIC_INC	=							\
+		$(INC_DIR)/libalx/base/assert/assert.h			\
 		$(INC_DIR)/libalx/extra/gmp/mpz/arithmetic.h
 ARITHMETIC_SRC	=							\
 		$(SRC_DIR)/extra/gmp/mpz/arithmetic.c
 
 CMP_INC		=							\
+		$(INC_DIR)/libalx/base/assert/assert.h			\
 		$(INC_DIR)/libalx/extra/gmp/mpz/cmp.h
 CMP_SRC		=							\
 		$(SRC_DIR)/extra/gmp/mpz/cmp.c
 
 DIVISION_INC	=							\
+		$(INC_DIR)/libalx/base/assert/assert.h			\
 		$(INC_DIR)/libalx/extra/gmp/mpz/division.h
 DIVISION_SRC	=							\
 		$(SRC_DIR)/extra/gmp/mpz/division.c
 
 EXP_INC		=							\
+		$(INC_DIR)/libalx/base/assert/assert.h			\
 		$(INC_DIR)/libalx/extra/gmp/mpz/exp.h
 EXP_SRC		=							\
 		$(SRC_DIR)/extra/gmp/mpz/exp.c
 
 GET_INC		=							\
+		$(INC_DIR)/libalx/base/assert/assert.h			\
 		$(INC_DIR)/libalx/extra/gmp/mpz/get.h
 GET_SRC		=							\
 		$(SRC_DIR)/extra/gmp/mpz/get.c
 
 INITSET_INC	=							\
+		$(INC_DIR)/libalx/base/assert/assert.h			\
 		$(INC_DIR)/libalx/extra/gmp/mpz/init_set.h
 INITSET_SRC	=							\
 		$(SRC_DIR)/extra/gmp/mpz/init_set.c
 
 MISC_INC	=							\
+		$(INC_DIR)/libalx/base/assert/assert.h			\
 		$(INC_DIR)/libalx/extra/gmp/mpz/misc.h
 MISC_SRC	=							\
 		$(SRC_DIR)/extra/gmp/mpz/misc.c
 
 ROOT_INC	=							\
+		$(INC_DIR)/libalx/base/assert/assert.h			\
 		$(INC_DIR)/libalx/extra/gmp/mpz/root.h
 ROOT_SRC	=							\
 		$(SRC_DIR)/extra/gmp/mpz/root.c
 
 SET_INC		=							\
+		$(INC_DIR)/libalx/base/assert/assert.h			\
 		$(INC_DIR)/libalx/extra/gmp/mpz/set.h
 SET_SRC		=							\
 		$(SRC_DIR)/extra/gmp/mpz/set.c
 
 THEORETIC_INC	=							\
+		$(INC_DIR)/libalx/base/assert/assert.h			\
 		$(INC_DIR)/libalx/extra/gmp/mpz/theoretic.h
 THEORETIC_SRC	=							\
 		$(SRC_DIR)/extra/gmp/mpz/theoretic.c

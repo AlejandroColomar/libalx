@@ -45,8 +45,8 @@ POISSON_SRC	=							\
 		$(SRC_DIR)/extra/gsl/distributions/poisson.c
 
 UNIFORM_INC	=							\
-		$(INC_DIR)/libalx/extra/gsl/distributions/uniform.h	\
-		$(INC_DIR)/libalx/base/stdlib/average.h
+		$(INC_DIR)/libalx/base/stdlib/average.h			\
+		$(INC_DIR)/libalx/extra/gsl/distributions/uniform.h
 UNIFORM_SRC	=							\
 		$(SRC_DIR)/extra/gsl/distributions/uniform.c
 

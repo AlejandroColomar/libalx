@@ -15,6 +15,7 @@ OBJ		=							\
 		cmp.o
 
 CMP_INC		=							\
+		$(INC_DIR)/libalx/base/assert/assert.h			\
 		$(INC_DIR)/libalx/extra/gmp/mpq/cmp.h
 CMP_SRC		=							\
 		$(SRC_DIR)/extra/gmp/mpq/cmp.c

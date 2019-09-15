@@ -24,23 +24,23 @@ OBJ		=							\
 		sscan.o
 
 GET_INC		=							\
-		$(INC_DIR)/libalx/base/stdio/get.h			\
 		$(INC_DIR)/libalx/base/compiler/size.h			\
 		$(INC_DIR)/libalx/base/errno/error.h			\
-		$(INC_DIR)/libalx/base/stdio/sscan.h
+		$(INC_DIR)/libalx/base/stdio/sscan.h			\
+		$(INC_DIR)/libalx/base/stdio/get.h
 GET_SRC		=							\
 		$(SRC_DIR)/base/stdio/get.c
 
 PRINTF_B_INC	=							\
-		$(INC_DIR)/libalx/base/stdio/printf/b.h			\
-		$(INC_DIR)/libalx/base/compiler/unused.h
+		$(INC_DIR)/libalx/base/compiler/unused.h		\
+		$(INC_DIR)/libalx/base/stdio/printf/b.h
 PRINTF_B_SRC	=							\
 		$(SRC_DIR)/base/stdio/printf/b.c
 
 PRINTF_SBPRINTF_INC	=						\
-		$(INC_DIR)/libalx/base/stdio/printf/sbprintf.h		\
 		$(INC_DIR)/libalx/base/compiler/size.h			\
-		$(INC_DIR)/libalx/base/stdio/printf/snprintfs.h
+		$(INC_DIR)/libalx/base/stdio/printf/snprintfs.h		\
+		$(INC_DIR)/libalx/base/stdio/printf/sbprintf.h
 PRINTF_SBPRINTF_SRC	=						\
 		$(SRC_DIR)/base/stdio/printf/sbprintf.c
 
@@ -55,8 +55,9 @@ SEEKC_SRC	=							\
 		$(SRC_DIR)/base/stdio/seekc.c
 
 SSCAN_INC	=							\
-		$(INC_DIR)/libalx/base/stdio/sscan.h			\
-		$(INC_DIR)/libalx/base/string/strchr/strcasechr.h
+		$(INC_DIR)/libalx/base/stdio/printf/sbprintf.h		\
+		$(INC_DIR)/libalx/base/string/strchr/strcasechr.h	\
+		$(INC_DIR)/libalx/base/stdio/sscan.h
 SSCAN_SRC	=							\
 		$(SRC_DIR)/base/stdio/sscan.c
 

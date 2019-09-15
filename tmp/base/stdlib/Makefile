@@ -23,6 +23,7 @@ OBJ		=							\
 		alloc/reallocs.o					\
 		array_split_pos_neg.o					\
 		average.o						\
+		bsearch.o						\
 		clz.o							\
 		compare.o						\
 		ctz.o							\
@@ -49,6 +50,7 @@ ALLOC_MALLOCARRAY_SRC	=						\
 		$(SRC_DIR)/base/stdlib/alloc/mallocarray.c
 
 ALLOC_MALLOCS_INC	=						\
+		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarray.h	\
 		$(INC_DIR)/libalx/base/stdlib/alloc/mallocs.h
 ALLOC_MALLOCS_SRC	=						\
 		$(SRC_DIR)/base/stdlib/alloc/mallocs.c
@@ -68,7 +70,15 @@ AVERAGE_INC	=							\
 AVERAGE_SRC	=							\
 		$(SRC_DIR)/base/stdlib/average.c
 
+BSEARCH_INC	=							\
+		$(INC_DIR)/libalx/base/stdlib/average.h			\
+		$(INC_DIR)/libalx/base/stdlib/bsearch.h
+BSEARCH_SRC	=							\
+		$(SRC_DIR)/base/stdlib/bsearch.c
+
 CLZ_INC		=							\
+		$(INC_DIR)/libalx/base/assert/assert.h			\
+		$(INC_DIR)/libalx/base/stdint/types.h			\
 		$(INC_DIR)/libalx/base/stdlib/clz.h
 CLZ_SRC		=							\
 		$(SRC_DIR)/base/stdlib/clz.c
@@ -79,11 +89,14 @@ COMPARE_SRC	=							\
 		$(SRC_DIR)/base/stdlib/compare.c
 
 CTZ_INC		=							\
+		$(INC_DIR)/libalx/base/assert/assert.h			\
+		$(INC_DIR)/libalx/base/stdint/types.h			\
 		$(INC_DIR)/libalx/base/stdlib/ctz.h
 CTZ_SRC		=							\
 		$(SRC_DIR)/base/stdlib/ctz.c
 
 LOCAL_MAXIMA_INC	=						\
+		$(INC_DIR)/libalx/base/compiler/size.h			\
 		$(INC_DIR)/libalx/base/stdlib/local_maxima.h
 LOCAL_MAXIMA_SRC	=						\
 		$(SRC_DIR)/base/stdlib/local_maxima.c
@@ -99,19 +112,20 @@ MINIMUM_SRC	=							\
 		$(SRC_DIR)/base/stdlib/minimum.c
 
 POPCNT_INC	=							\
+		$(INC_DIR)/libalx/base/assert/assert.h			\
+		$(INC_DIR)/libalx/base/stdint/types.h			\
 		$(INC_DIR)/libalx/base/stdlib/popcnt.h
 POPCNT_SRC	=							\
 		$(SRC_DIR)/base/stdlib/popcnt.c
 
 POW_INC		=							\
-		$(INC_DIR)/libalx/base/stdlib/pow.h			\
-		$(INC_DIR)/libalx/base/stdint/constants.h
+		$(INC_DIR)/libalx/base/stdint/constants.h		\
+		$(INC_DIR)/libalx/base/stdlib/pow.h	
 POW_SRC		=							\
 		$(SRC_DIR)/base/stdlib/pow.c
 
 SEARCH_INC	=							\
-		$(INC_DIR)/libalx/base/stdlib/search.h			\
-		$(INC_DIR)/libalx/base/stdlib/average.h
+		$(INC_DIR)/libalx/base/stdlib/search.h
 SEARCH_SRC	=							\
 		$(SRC_DIR)/base/stdlib/search.c
 
@@ -121,6 +135,7 @@ SEED_SRC	=							\
 		$(SRC_DIR)/base/stdlib/seed.c
 
 STRTO_STRTOFS_INC	=						\
+		$(INC_DIR)/libalx/base/stdlib/strto/strtoi_s.h		\
 		$(INC_DIR)/libalx/base/stdlib/strto/strtof_s.h
 STRTO_STRTOFS_SRC	=						\
 		$(SRC_DIR)/base/stdlib/strto/strtof_s.c
@@ -131,6 +146,7 @@ STRTO_STRTOIS_SRC	=						\
 		$(SRC_DIR)/base/stdlib/strto/strtoi_s.c
 
 STRTO_STRTOUS_INC	=						\
+		$(INC_DIR)/libalx/base/stdlib/strto/strtoi_s.h		\
 		$(INC_DIR)/libalx/base/stdlib/strto/strtou_s.h
 STRTO_STRTOUS_SRC	=						\
 		$(SRC_DIR)/base/stdlib/strto/strtou_s.c
@@ -184,6 +200,9 @@ array_split_pos_neg.so.s: $(ARRAY_SPLIT_POS_NEG_SRC) $(ARRAY_SPLIT_POS_NEG_INC)
 
 average.a.s: $(AVERAGE_SRC) $(AVERAGE_INC)
 average.so.s: $(AVERAGE_SRC) $(AVERAGE_INC)
+
+bsearch.a.s: $(BSEARCH_SRC) $(BSEARCH_INC)
+bsearch.so.s: $(BSEARCH_SRC) $(BSEARCH_INC)
 
 clz.a.s: $(CLZ_SRC) $(CLZ_INC)
 clz.so.s: $(CLZ_SRC) $(CLZ_INC)

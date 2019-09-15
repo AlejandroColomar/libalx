@@ -20,31 +20,47 @@ OBJ		=							\
 		ximgproc.o
 
 ALX_INC	=								\
+		$(INC_DIR)/libalx/extra/cv/core.hpp			\
+		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
+		$(INC_DIR)/libalx/base/compiler/size.hpp		\
+		$(INC_DIR)/libalx/extra/gsl/rstat/median.hpp		\
+		$(INC_DIR)/libalx/extra/gsl/statistics/mean.hpp		\
 		$(INC_DIR)/libalx/extra/cv/alx.hpp
 ALX_SRC	=								\
 		$(SRC_DIR)/extra/cv/alx.cpp
 
 CORE_INC	=							\
+		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
+		$(INC_DIR)/libalx/base/stdlib/alloc/mallocs.hpp		\
+		$(INC_DIR)/libalx/base/stdlib/swap.hpp			\
 		$(INC_DIR)/libalx/extra/cv/core.hpp
 CORE_SRC	=							\
 		$(SRC_DIR)/extra/cv/core.cpp
 
 FEATURES2D_INC	=							\
+		$(INC_DIR)/libalx/extra/cv/core.hpp			\
 		$(INC_DIR)/libalx/extra/cv/features2d.hpp
 FEATURES2D_SRC	=							\
 		$(SRC_DIR)/extra/cv/features2d.cpp
 
 HIGHGUI_INC	=							\
+		$(INC_DIR)/libalx/extra/cv/core.hpp			\
+		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
+		$(INC_DIR)/libalx/base/errno/error.hpp			\
 		$(INC_DIR)/libalx/extra/cv/highgui.hpp
 HIGHGUI_SRC	=							\
 		$(SRC_DIR)/extra/cv/highgui.cpp
 
 IMGPROC_INC	=							\
+		$(INC_DIR)/libalx/extra/cv/core.hpp			\
+		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
 		$(INC_DIR)/libalx/extra/cv/imgproc.hpp
 IMGPROC_SRC	=							\
 		$(SRC_DIR)/extra/cv/imgproc.cpp
 
 XIMGPROC_INC	=							\
+		$(INC_DIR)/libalx/extra/cv/core.hpp			\
+		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
 		$(INC_DIR)/libalx/extra/cv/ximgproc.hpp
 XIMGPROC_SRC	=							\
 		$(SRC_DIR)/extra/cv/ximgproc.cpp

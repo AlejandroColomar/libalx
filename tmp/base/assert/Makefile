@@ -16,6 +16,7 @@ OBJ		=							\
 		assert.o
 
 ASSERT_INC	=							\
+		$(INC_DIR)/libalx/base/compiler/type.h			\
 		$(INC_DIR)/libalx/base/assert/assert.h
 ASSERT_SRC	=							\
 		$(SRC_DIR)/base/assert/assert.c

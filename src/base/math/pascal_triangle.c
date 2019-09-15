@@ -14,8 +14,6 @@
 #include <stdint.h>
 
 #include "libalx/base/float/constant.h"
-#include "libalx/base/math/matrix_addition.h"
-#include "libalx/base/math/matrix_subtraction.h"
 #include "libalx/base/math/prime.h"
 #include "libalx/base/math/prime_factorization.h"
 

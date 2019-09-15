@@ -15,6 +15,7 @@ OBJ		=							\
 		zbar.o
 
 ZBAR_INC	=							\
+		$(INC_DIR)/libalx/base/stdio/printf/snprintfs.h		\
 		$(INC_DIR)/libalx/extra/zbar/zbar.h
 ZBAR_SRC	=							\
 		$(SRC_DIR)/extra/zbar/zbar.c
