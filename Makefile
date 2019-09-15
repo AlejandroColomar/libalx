@@ -63,7 +63,7 @@ MAKEFLAGS += --no-print-directory
 
 LIBALX_DIR	= $(CURDIR)
 
-INC_DIR = $(LIBALX_DIR)/inc/
+INC_DIR = $(LIBALX_DIR)/include/
 SRC_DIR = $(LIBALX_DIR)/src/
 TMP_DIR	= $(LIBALX_DIR)/tmp/
 LIB_DIR = $(LIBALX_DIR)/lib/
@@ -79,11 +79,13 @@ export	TST_DIR
 
 # XXX: Set local or not local when building a package
 LOCAL			= local
+INSTALL_ETC_DIR		= /usr/local/etc/
 INSTALL_INC_DIR		= /usr/$(LOCAL)/include/
 INSTALL_LIB_DIR		= /usr/$(LOCAL)/lib/
 INSTALL_SHARE_DIR	= /usr/$(LOCAL)/share/
 INSTALL_PKGCONFIG_DIR	= /usr/$(LOCAL)/lib/pkgconfig/
 
+export	INSTALL_ETC_DIR
 export	INSTALL_INC_DIR
 export	INSTALL_LIB_DIR
 export	INSTALL_SHARE_DIR
@@ -120,6 +122,7 @@ CFLAGS_W       += -Werror
 
 CFLAGS_D	= -D _GNU_SOURCE
 CFLAGS_D       += -D _POSIX_C_SOURCE=200809L
+CFLAGS_D       += -D INSTALL_ETC_DIR=\"$(INSTALL_ETC_DIR)\"
 
 CFLAGS_PKG	= `pkg-config --cflags libbsd-overlay`
 
@@ -154,6 +157,7 @@ CXXFLAGS_W     += -Werror
 
 CXXFLAGS_D	= -D _GNU_SOURCE
 CXXFLAGS_D     += -D _POSIX_C_SOURCE=200809L
+CXXFLAGS_D     += -D INSTALL_ETC_DIR=\"$(INSTALL_ETC_DIR)\"
 
 CXXFLAGS_PKG	= `pkg-config --cflags libbsd-overlay`
 
@@ -263,14 +267,24 @@ PHONY += install_base
 install_base:
 	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/base/"
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/base/
-	@echo	"	CP -r	./inc/libalx/base/*"
-	$(Q)cp -rf $(v)		./inc/libalx/base/*			\
+	@echo	"	CP -r	./include/libalx/base/*"
+	$(Q)cp -rf $(v)		./include/libalx/base/*			\
 					$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/base/
 	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/"
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
 	@echo	"	CP -r	./lib/libalx/libalx-base.*"
 	$(Q)cp -rf $(v)		./lib/libalx/libalx-base.*		\
 					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
+	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/sh/"
+	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/sh/
+	@echo	"	CP -r	./lib/libalx/sh/*"
+	$(Q)cp -rf $(v)		./lib/libalx/sh/*			\
+					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/sh/
+	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/"
+	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/
+	@echo	"	CP -r	./share/libalx/*"
+	$(Q)cp -rf $(v)		./share/libalx/*			\
+					$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/
 	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/"
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/
 	@echo	"	CP	./lib/pkgconfig/libalx-base.pc"
@@ -283,19 +297,19 @@ install_base:
 
 PHONY += install_extra
 install_extra:
+	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_ETC_DIR)/libalx/extra/"
+	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_ETC_DIR)/libalx/extra/
+	@echo	"	CP -r	./etc/libalx/extra/*"
+	$(Q)cp -r -f $(v)	./etc/libalx/extra/*			\
+					$(DESTDIR)/$(INSTALL_ETC_DIR)/libalx/extra/
 	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/extra/"
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/extra/
-	@echo	"	CP -r	./inc/libalx/extra/*"
-	$(Q)cp -r -f $(v)	./inc/libalx/extra/*			\
+	@echo	"	CP -r	./include/libalx/extra/*"
+	$(Q)cp -r -f $(v)	./include/libalx/extra/*		\
 					$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/extra/
 	@echo	"	CP -r	./lib/libalx/*"
 	$(Q)cp -r -f $(v)	./lib/libalx/*				\
 					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
-	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/extra/"
-	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/extra/
-	@echo	"	CP -r	./share/libalx/extra/*"
-	$(Q)cp -r -f $(v)	./share/libalx/extra/*			\
-					$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/extra/
 	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/"
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/
 	@echo	"	CP -r	./lib/pkgconfig/*"
