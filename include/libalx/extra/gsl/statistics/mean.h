@@ -30,7 +30,6 @@
  ******* _Static_assert *******************************************************
  ******************************************************************************/
 alx_Static_assert_stdint_types();
-alx_Static_assert_char_signed();
 
 
 /******************************************************************************
@@ -103,6 +102,8 @@ inline
 double	alx_gsl_stats_mean_s8	(ptrdiff_t nmemb,
 				 const int8_t arr[static restrict nmemb])
 {
+
+	alx_assert_char_signed();
 	return	gsl_stats_char_mean((const char *)arr, 1, nmemb);
 }
 
