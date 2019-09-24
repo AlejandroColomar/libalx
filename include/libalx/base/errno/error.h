@@ -71,13 +71,14 @@ inline
 void	alx_perror__	(const char *restrict file, int line,
 		 	 const char *restrict func, const char *restrict str)
 {
+	const int	errno_cpy = errno;
 
 	fprintf(stderr, "%s:\n", program_invocation_name);
 	fprintf(stderr, "	%s:%i:\n", file, line);
 	fprintf(stderr, "	%s():\n", func);
 	if (str)
 		fprintf(stderr, "		%s\n", str);
-	fprintf(stderr, "	E%i -	%s\n", errno, strerror(errno));
+	fprintf(stderr, "	E%i -	%s\n", errno_cpy, strerror(errno_cpy));
 }
 
 inline noreturn
