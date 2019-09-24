@@ -16,7 +16,7 @@
 #include <cassert>
 #include <climits>
 #include <cstdbool>
-#include <cstdint.h>
+#include <cstdint>
 #include <cstdio>
 
 #include <type_traits>
