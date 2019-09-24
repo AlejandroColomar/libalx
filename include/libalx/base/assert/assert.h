@@ -15,6 +15,7 @@
  ******************************************************************************/
 #include <assert.h>
 #include <limits.h>
+#include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 
@@ -32,11 +33,12 @@
 #if !defined(NDEBUG)
 #define alx_assert(expr, msg)	do					\
 {									\
+	const bool	e_ = expr;					\
 									\
-	if (!(expr)) {							\
+	if (!e_) {							\
 		fputs(msg, stderr);					\
 		fputc('\n', stderr);					\
-		assert(expr);						\
+		assert(e_);						\
 	}								\
 } while (0)
 #else
