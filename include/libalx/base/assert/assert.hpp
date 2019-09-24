@@ -28,13 +28,13 @@
  ******************************************************************************/
 /*
  * [[gnu::nonnull]]
- * void	alx_assert(bool expr, const char *msg)
+ * void	alx_assert(bool expr, const char *msg);
  */
 #if !defined(NDEBUG)
 #define alx_assert(expr, msg)	do					\
 {									\
 									\
-	if (!expr) {							\
+	if (!(expr)) {							\
 		fputs(msg, stderr);					\
 		fputc('\n', stderr);					\
 		assert(expr);						\
@@ -44,7 +44,7 @@
 #define alx_assert(expr, msg)	do					\
 {									\
 									\
-	if (!expr)							\
+	if (!(expr))							\
 		alx_perror(msg);					\
 } while (0)
 #endif
