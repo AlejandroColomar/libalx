@@ -260,6 +260,7 @@ install:
 	$(Q)$(MAKE)	install_base
 	$(Q)$(MAKE)	install_extra
 	$(Q)$(MAKE)	conf_ld
+	$(Q)$(MAKE)	conf_pkgconfig
 	@echo	"	Done"
 	@echo
 
@@ -320,11 +321,18 @@ conf_ld:
 	$(Q)ldconfig
 	@echo
 
+PHONY += conf_pkgconfig
+conf_pkgconfig:
+	@echo	"	CP 	./ect/profile.d/pkgconfig-local.sh"
+	$(Q)cp -f $(v)		./etc/profile.d/pkgconfig-local.sh	\
+					$(DESTDIR)/etc/profile.d/
+	@echo
+
 PHONY += libalx-%.pc
 libalx-%.pc:
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/
 	@echo	"	CP	./lib/pkgconfig/$@"
-	$(Q)cp $(v)		./lib/pkgconfig/$@			\
+	$(Q)cp -f $(v)		./lib/pkgconfig/$@			\
 					$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/
 
 PHONY += uninstall
