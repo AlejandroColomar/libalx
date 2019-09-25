@@ -37,8 +37,8 @@ typedef	__int128		int128_t;
  ******* macros ***************************************************************
  ******************************************************************************/
 #if defined(uint128_t)
-#define UINT128_C(c)	((uint128)c)
-#define INT128_C(c)	(( int128)c)
+#define UINT128_C(c)	((uint128_t)c)
+#define INT128_C(c)	(( int128_t)c)
 #define UINT128_MAX	((uint128_t)~UINT128_C(0))
 #define INT128_MAX	(( int128_t)(UINT128_MAX >> 1))
 #define INT128_MIN	(( int128_t)(-INT128_MAX - 1))
