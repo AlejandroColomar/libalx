@@ -39,8 +39,8 @@
 
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define perrorx(str)	alx_perrorx(str)
-#define errorx(str)	alx_errorx(str)
+#define perrorx(str)		alx_perrorx(str)
+#define errorx(status, str)	alx_errorx(status, str)
 #endif
 
 
