@@ -24,10 +24,10 @@
  ******************************************************************************/
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define strtoi8_s(num, str, read)	alx_strtoi8_s(num, str, read)
-#define strtoi16_s(num, str, read)	alx_strtoi16_s(num, str, read)
-#define strtoi32_s(num, str, read)	alx_strtoi32_s(num, str, read)
-#define strtoi64_s(num, str, read)	alx_strtoi64_s(num, str, read)
+#define strtoi8_s(num, str, base, read)	  alx_strtoi8_s(num, str, base, read)
+#define strtoi16_s(num, str, base, read)  alx_strtoi16_s(num, str, base, read)
+#define strtoi32_s(num, str, base, read)  alx_strtoi32_s(num, str, base, read)
+#define strtoi64_s(num, str, base, read)  alx_strtoi64_s(num, str, base, read)
 #endif
 
 
