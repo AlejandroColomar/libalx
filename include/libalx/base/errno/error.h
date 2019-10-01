@@ -24,21 +24,28 @@
  ******* macros ***************************************************************
  ******************************************************************************/
 /*
- * void	alx_perror(const char *restrict str);
+ * void	alx_perrorx(const char *restrict str);
  */
-#define alx_perror(str)		do					\
+#define alx_perrorx(str)		do				\
 {									\
-	alx_perror__(__FILE__, __LINE__, __func__, str);		\
+	alx__perrorx__(__FILE__, __LINE__, __func__, str);		\
 } while (0)
 
 /*
  * noreturn
- * void	alx_error(int status, const char *restrict str);
+ * void	alx_errorx(int status, const char *restrict str);
  */
-#define alx_error(status, str)	do					\
+#define alx_errorx(status, str)	do					\
 {									\
-	alx_error__(status, __FILE__, __LINE__, __func__, str);		\
+	alx__errorx__(status, __FILE__, __LINE__, __func__, str);	\
 } while (0)
+
+
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define perrorx(str)	alx_perrorx(str)
+#define errorx(str)	alx_errorx(str)
+#endif
 
 
 /******************************************************************************
@@ -55,38 +62,23 @@
  ******* prototypes ***********************************************************
  ******************************************************************************/
 __attribute__((nonnull(1, 3)))
-inline
-void	alx_perror__	(const char *restrict file, int line,
+void	alx__perrorx__	(const char *restrict file, int line,
 			 const char *restrict func, const char *restrict str);
 __attribute__((nonnull(2, 4)))
 inline noreturn
-void	alx_error__	(int status, const char *restrict file, int line,
+void	alx__errorx__	(int status, const char *restrict file, int line,
 			 const char *restrict func, const char *restrict str);
 
 
 /******************************************************************************
  ******* inline ***************************************************************
  ******************************************************************************/
-inline
-void	alx_perror__	(const char *restrict file, int line,
-		 	 const char *restrict func, const char *restrict str)
-{
-	const int	errno_cpy = errno;
-
-	fprintf(stderr, "%s:\n", program_invocation_name);
-	fprintf(stderr, "	%s:%i:\n", file, line);
-	fprintf(stderr, "	%s():\n", func);
-	if (str)
-		fprintf(stderr, "		%s\n", str);
-	fprintf(stderr, "	E%i -	%s\n", errno_cpy, strerror(errno_cpy));
-}
-
 inline noreturn
-void	alx_error__	(int status, const char *restrict file, int line,
+void	alx__errorx__	(int status, const char *restrict file, int line,
 			 const char *restrict func, const char *restrict str)
 {
 
-	alx_perror__(file, line, func, str);
+	alx__perrorx__(file, line, func, str);
 	exit(status);
 }
 

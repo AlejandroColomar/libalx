@@ -20,21 +20,28 @@
  ******* macros ***************************************************************
  ******************************************************************************/
 /*
- * void	alx_perror(const char *restrict str);
+ * void	alx_perrorx(const char *restrict str);
  */
-#define alx_perror(str)		do					\
+#define alx_perrorx(str)		do				\
 {									\
-	alx_perror__(__FILE__, __LINE__, __func__, str);		\
+	alx__perrorx__(__FILE__, __LINE__, __func__, str);		\
 } while (0)
 
 /*
  * [[noreturn]]
- * void	alx_error(int status, const char *restrict str);
+ * void	alx_errorx(int status, const char *restrict str);
  */
-#define alx_error(status, str)	do					\
+#define alx_errorx(status, str)	do					\
 {									\
-	alx_error__(status, __FILE__, __LINE__, __func__, str);		\
+	alx__errorx__(status, __FILE__, __LINE__, __func__, str);	\
 } while (0)
+
+
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define perrorx(str)	alx_perrorx(str)
+#define errorx(str)	alx_errorx(str)
+#endif
 
 
 /******************************************************************************
@@ -43,10 +50,10 @@
 extern	"C"
 {
 [[gnu::nonnull(1, 3)]]
-void	alx_perror__	(const char *restrict file, int line,
+void	alx__perrorx__	(const char *restrict file, int line,
 			 const char *restrict func, const char *restrict str);
 [[noreturn]][[gnu::nonnull(2, 4)]]
-void	alx_error__	(int status, const char *restrict file, int line,
+void	alx__errorx__	(int status, const char *restrict file, int line,
 			 const char *restrict func, const char *restrict str);
 }
 

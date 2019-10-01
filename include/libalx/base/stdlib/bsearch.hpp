@@ -20,6 +20,24 @@
 
 
 /******************************************************************************
+ ******* macros ***************************************************************
+ ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define bsearch_uint(nmemb, arr, x)	alx_bsearch_uint(nmemb, arr, x)
+#define bsearch_int(nmemb, arr, x)	alx_bsearch_int(nmemb, arr, x)
+#define bsearch_u8(nmemb, arr, x)	alx_bsearch_u8(nmemb, arr, x)
+#define bsearch_s8(nmemb, arr, x)	alx_bsearch_s8(nmemb, arr, x)
+#define bsearch_u16(nmemb, arr, x)	alx_bsearch_u16(nmemb, arr, x)
+#define bsearch_s16(nmemb, arr, x)	alx_bsearch_s16(nmemb, arr, x)
+#define bsearch_u32(nmemb, arr, x)	alx_bsearch_u32(nmemb, arr, x)
+#define bsearch_s32(nmemb, arr, x)	alx_bsearch_s32(nmemb, arr, x)
+#define bsearch_u64(nmemb, arr, x)	alx_bsearch_u64(nmemb, arr, x)
+#define bsearch_s64(nmemb, arr, x)	alx_bsearch_s64(nmemb, arr, x)
+#endif
+
+
+/******************************************************************************
  ******* extern "C" ***********************************************************
  ******************************************************************************/
 extern	"C"
@@ -71,11 +89,6 @@ ptrdiff_t	alx_bsearch_s64	(ptrdiff_t nmemb,
  ******* namespace ************************************************************
  ******************************************************************************/
 namespace alx {
-
-
-/******************************************************************************
- ******* macros ***************************************************************
- ******************************************************************************/
 
 
 /******************************************************************************

@@ -32,7 +32,7 @@
  * void	alx_assert(bool expr, const char *msg);
  */
 #if !defined(NDEBUG)
-#define alx_assert(expr, msg)	do					\
+#define alx_assert_msg(expr, msg)	do				\
 {									\
 	const bool	e_ = expr;					\
 									\
@@ -43,7 +43,7 @@
 	}								\
 } while (0)
 #else
-#define alx_assert(expr, msg)	do					\
+#define alx_assert_msg(expr, msg)	do				\
 {									\
 									\
 	if (!(expr))							\
@@ -66,10 +66,10 @@
 	_Static_assert(CHAR_MIN == 0, "char != unsigned char")
 
 #define alx_assert_char_signed()					\
-	alx_assert(CHAR_MIN < 0, "BUG:   char != signed char")
+	alx_assert_msg(CHAR_MIN < 0, "BUG:   char != signed char")
 
 #define alx_assert_char_unsigned()					\
-	alx_assert(CHAR_MIN == 0, "BUG:   char != unsigned char")
+	alx_assert_msg(CHAR_MIN == 0, "BUG:   char != unsigned char")
 
 #define alx_Static_assert_stdint_types()				\
 	alx_Static_assert_u8_uchar();					\
@@ -124,36 +124,66 @@
 	alx_assert_s64_long()
 
 #define alx_assert_u8_uchar()						\
-	alx_assert(std::is_same <uint8_t, unsigned char>::value,	\
+	alx_assert_msg(std::is_same <uint8_t, unsigned char>::value,	\
 			 "BUG:   uint8_t != unsigned char")
 
 #define alx_assert_s8_schar()						\
-	alx_assert(std::is_same <int8_t, signed char>::value,		\
+	alx_assert_msg(std::is_same <int8_t, signed char>::value,	\
 			 "BUG:   int8_t != signed char")
 
 #define alx_assert_u16_ushort()						\
-	alx_assert(std::is_same <uint16_t, unsigned short>::value,	\
+	alx_assert_msg(std::is_same <uint16_t, unsigned short>::value,	\
 			 "BUG:   uint16_t != unsigned short")
 
 #define alx_assert_s16_short()						\
-	alx_assert(std::is_same <int16_t, short>::value,		\
+	alx_assert_msg(std::is_same <int16_t, short>::value,		\
 			 "BUG:   int16_t != short")
 
 #define alx_assert_u32_unsigned()					\
-	alx_assert(std::is_same <uint32_t, unsigned>::value,		\
+	alx_assert_msg(std::is_same <uint32_t, unsigned>::value,	\
 			 "BUG:   uint32_t != unsigned")
 
 #define alx_assert_s32_int()						\
-	alx_assert(std::is_same <int32_t, int>::value,			\
+	alx_assert_msg(std::is_same <int32_t, int>::value,		\
 			 "BUG:   int32_t != int")
 
 #define alx_assert_u64_ulong()						\
-	alx_assert(std::is_same <uint64_t, unsigned long>::value,	\
+	alx_assert_msg(std::is_same <uint64_t, unsigned long>::value,	\
 			 "BUG:   uint64_t != unsigned long")
 
 #define alx_assert_s64_long()						\
-	alx_assert(std::is_same <int64_t, long>::value,			\
+	alx_assert_msg(std::is_same <int64_t, long>::value,		\
 			 "BUG:   int64_t != long")
+
+
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define assert_msg(expr, msg)		alx_assert_msg(expr, msg)
+#define _Static_assert_array(a)		alx_Static_assert_array(a)
+#define _Static_assert_char_array(a)	alx_Static_assert_char_array(a)
+#define _Static_assert_char_signed()	alx_Static_assert_char_signed()
+#define _Static_assert_char_unsigned()	alx_Static_assert_char_unsigned()
+#define assert_char_signed()		alx_assert_char_signed()
+#define assert_char_unsigned()		alx_assert_char_unsigned()
+#define _Static_assert_stdint_types()	alx_Static_assert_stdint_types()
+#define _Static_assert_u8_uchar()	alx_Static_assert_u8_uchar()
+#define _Static_assert_s8_schar()	alx_Static_assert_s8_schar()
+#define _Static_assert_u16_ushort()	alx_Static_assert_u16_ushort()
+#define _Static_assert_s16_short()	alx_Static_assert_s16_short()
+#define _Static_assert_u32_unsigned()	alx_Static_assert_u32_unsigned()
+#define _Static_assert_s32_int()	alx_Static_assert_s32_int()
+#define _Static_assert_u64_ulong()	alx_Static_assert_u64_ulong()
+#define _Static_assert_s64_long()	alx_Static_assert_s64_long()
+#define assert_stdint_types()		alx_assert_stdint_types()
+#define assert_u8_uchar()		alx_assert_u8_uchar()
+#define assert_s8_schar()		alx_assert_s8_schar()
+#define assert_u16_ushort()		alx_assert_u16_ushort()
+#define assert_s16_short()		alx_assert_s16_short()
+#define assert_u32_unsigned()		alx_assert_u32_unsigned()
+#define assert_s32_int()		alx_assert_s32_int()
+#define assert_u64_ulong()		alx_assert_u64_ulong()
+#define assert_s64_long()		alx_assert_s64_long()
+#endif
 
 
 /******************************************************************************

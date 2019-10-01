@@ -29,6 +29,13 @@
 	alx_snprintfs(buff, written, ARRAY_SIZE(buff), fmt, ##__VA_ARGS__)
 
 
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define sbprintf(buff, written, fmt, ...)				\
+	alx_sbprintf(buff, written, fmt, ##__VA_ARGS__)
+#endif
+
+
 /******************************************************************************
  ******* enum *****************************************************************
  ******************************************************************************/

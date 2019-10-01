@@ -20,6 +20,13 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define snprintfs(str, written, nmemb, fmt, ...)			\
+	alx_snprintfs(str, written, nmemb, fmt, ##__VA_ARGS__)
+#define vsnprintfs(str, written, nmemb, fmt, ap)			\
+	alx_vsnprintfs(str, written, nmemb, fmt, ap)
+#endif
 
 
 /******************************************************************************

@@ -21,6 +21,12 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define strtod_s(num, str, read)	alx_strtod_s(num, str, read)
+#define strtof_s(num, str, read)	alx_strtof_s(num, str, read)
+#define strtold_s(num, str, read)	alx_strtold_s(num, str, read)
+#endif
 
 
 /******************************************************************************

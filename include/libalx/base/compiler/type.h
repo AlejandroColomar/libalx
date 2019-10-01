@@ -27,6 +27,12 @@
 #define alx_same_type(a, b) __builtin_types_compatible_p(typeof(a), typeof(b))
 
 
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define same_type(a, b)		alx_same_type(a, b)
+#endif
+
+
 /******************************************************************************
  ******* enums ****************************************************************
  ******************************************************************************/

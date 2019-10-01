@@ -21,7 +21,7 @@
  ******************************************************************************/
 /*
  * [[gnu::nonnull]]
- * int	alx_callocs(type **restrict p, ptrdiff_t nmemb);
+ * int	alx_callocs(type **restrict ptr, ptrdiff_t nmemb);
  */
 #define alx_callocs(ptr, nmemb)	(					\
 {									\
@@ -32,6 +32,12 @@
 	!(*ptr_);							\
 }									\
 )
+
+
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define callocs(ptr, nmemb)	alx_callocs(ptr, nmemb)
+#endif
 
 
 /******************************************************************************

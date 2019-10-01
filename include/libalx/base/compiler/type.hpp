@@ -23,6 +23,12 @@
 #define alx_same_type(a, b) (std::is_same <typeof(a), typeof(b)>::value)
 
 
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define same_type(a, b)		alx_same_type(a, b)
+#endif
+
+
 /******************************************************************************
  ******* extern "C" ***********************************************************
  ******************************************************************************/

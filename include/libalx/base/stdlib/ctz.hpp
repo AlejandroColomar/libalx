@@ -21,6 +21,15 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define ctz_u8(n)	alx_ctz_u8(n)
+#define ctz_u16(n)	alx_ctz_u16(n)
+#define ctz_u32(n)	alx_ctz_u32(n)
+#define ctz_u64(n)	alx_ctz_u64(n)
+#define ctz_u128(n)	alx_ctz_u128(n)
+#define ctz_u256(n)	alx_ctz_u256(n)
+#endif
 
 
 /******************************************************************************
@@ -29,21 +38,21 @@
 extern	"C"
 {
 [[gnu::const]]
-uint8_t		ctz_u8		(uint8_t n);
+uint8_t		alx_ctz_u8	(uint8_t n);
 [[gnu::const]]
-uint16_t	ctz_u16		(uint16_t n);
+uint16_t	alx_ctz_u16	(uint16_t n);
 [[gnu::const]]
-uint32_t	ctz_u32		(uint32_t n);
+uint32_t	alx_ctz_u32	(uint32_t n);
 [[gnu::const]]
-uint64_t	ctz_u64		(uint64_t n);
+uint64_t	alx_ctz_u64	(uint64_t n);
 [[gnu::const]]
 #if defined(uint128_t)
 [[gnu::const]]
-uint64_t	ctz_u128	(uint128_t n);
+uint64_t	alx_ctz_u128	(uint128_t n);
 #endif
 #if defined(uint256_t)
 [[gnu::const]]
-uint64_t	ctz_u256	(uint256_t n);
+uint64_t	alx_ctz_u256	(uint256_t n);
 #endif
 }
 

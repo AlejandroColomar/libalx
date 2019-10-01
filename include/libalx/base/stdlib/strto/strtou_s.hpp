@@ -22,6 +22,13 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define strtou8_s(num, str, read)	alx_strtou8_s(num, str, read)
+#define strtou16_s(num, str, read)	alx_strtou16_s(num, str, read)
+#define strtou32_s(num, str, read)	alx_strtou32_s(num, str, read)
+#define strtou64_s(num, str, read)	alx_strtou64_s(num, str, read)
+#endif
 
 
 /******************************************************************************

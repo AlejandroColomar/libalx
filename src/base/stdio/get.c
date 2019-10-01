@@ -381,7 +381,7 @@ long double	loop_get_ldbl	(long double m, long double def, long double M,
 			goto err;
 		break;
 err:
-		alx_perror(NULL);
+		alx_perrorx(NULL);
 	}
 
 	return	R;
@@ -402,7 +402,7 @@ double		loop_get_dbl	(double m, double def, double M,
 			goto err;
 		break;
 err:
-		alx_perror(NULL);
+		alx_perrorx(NULL);
 	}
 
 	return	R;
@@ -423,7 +423,7 @@ float		loop_get_flt	(float m, float def, float M,
 			goto err;
 		break;
 err:
-		alx_perror(NULL);
+		alx_perrorx(NULL);
 	}
 
 	return	R;
@@ -444,7 +444,7 @@ unsigned	loop_get_uint	(unsigned m, unsigned def, unsigned M,
 			goto err;
 		break;
 err:
-		alx_perror(NULL);
+		alx_perrorx(NULL);
 	}
 
 	return	N;
@@ -465,7 +465,7 @@ int		loop_get_int	(int m, int def, int M,
 			goto err;
 		break;
 err:
-		alx_perror(NULL);
+		alx_perrorx(NULL);
 	}
 
 	return	Z;
@@ -486,7 +486,7 @@ uint8_t		loop_get_u8	(uint8_t m, uint8_t def, uint8_t M,
 			goto err;
 		break;
 err:
-		alx_perror(NULL);
+		alx_perrorx(NULL);
 	}
 
 	return	N;
@@ -507,7 +507,7 @@ int8_t		loop_get_s8	(int8_t m, int8_t def, int8_t M,
 			goto err;
 		break;
 err:
-		alx_perror(NULL);
+		alx_perrorx(NULL);
 	}
 
 	return	Z;
@@ -528,7 +528,7 @@ uint16_t	loop_get_u16	(uint16_t m, uint16_t def, uint16_t M,
 			goto err;
 		break;
 err:
-		alx_perror(NULL);
+		alx_perrorx(NULL);
 	}
 
 	return	N;
@@ -549,7 +549,7 @@ int16_t		loop_get_s16	(int16_t m, int16_t def, int16_t M,
 			goto err;
 		break;
 err:
-		alx_perror(NULL);
+		alx_perrorx(NULL);
 	}
 
 	return	Z;
@@ -570,7 +570,7 @@ uint32_t	loop_get_u32	(uint32_t m, uint32_t def, uint32_t M,
 			goto err;
 		break;
 err:
-		alx_perror(NULL);
+		alx_perrorx(NULL);
 	}
 
 	return	N;
@@ -591,7 +591,7 @@ int32_t		loop_get_s32	(int32_t m, int32_t def, int32_t M,
 			goto err;
 		break;
 err:
-		alx_perror(NULL);
+		alx_perrorx(NULL);
 	}
 
 	return	Z;
@@ -612,7 +612,7 @@ uint64_t	loop_get_u64	(uint64_t m, uint64_t def, uint64_t M,
 			goto err;
 		break;
 err:
-		alx_perror(NULL);
+		alx_perrorx(NULL);
 	}
 
 	return	N;
@@ -633,7 +633,7 @@ int64_t		loop_get_s64	(int64_t m, int64_t def, int64_t M,
 			goto err;
 		break;
 err:
-		alx_perror(NULL);
+		alx_perrorx(NULL);
 	}
 
 	return	Z;
@@ -654,7 +654,7 @@ ptrdiff_t	loop_get_pdif	(ptrdiff_t m, ptrdiff_t def, ptrdiff_t M,
 			goto err;
 		break;
 err:
-		alx_perror(NULL);
+		alx_perrorx(NULL);
 	}
 
 	return	Z;
@@ -676,7 +676,7 @@ char		loop_get_ch	(const char *restrict valid,
 			goto err;
 		break;
 err:
-		alx_perror(NULL);
+		alx_perrorx(NULL);
 	}
 
 	return	c;
@@ -697,7 +697,7 @@ int		loop_get_fname	(const char *restrict path,
 			goto err;
 		return	0;
 err:
-		alx_perror(NULL);
+		alx_perrorx(NULL);
 	}
 
 	return	-1;

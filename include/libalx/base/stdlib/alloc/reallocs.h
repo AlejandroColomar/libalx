@@ -21,7 +21,7 @@
  ******************************************************************************/
 /*
  * [[gnu::nonnull]]
- * int	alx_reallocs(type **restrict p, ptrdiff_t nmemb);
+ * int	alx_reallocs(type **restrict ptr, ptrdiff_t nmemb);
  */
 #define alx_reallocs(ptr, nmemb)	(				\
 {									\
@@ -32,6 +32,12 @@
 	!(*ptr_);							\
 }									\
 )
+
+
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define reallocs(ptr, nmemb)	alx_reallocs(ptr, nmemb)
+#endif
 
 
 /******************************************************************************

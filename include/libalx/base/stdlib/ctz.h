@@ -28,6 +28,15 @@ alx_Static_assert_stdint_types();
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define ctz_u8(n)	alx_ctz_u8(n)
+#define ctz_u16(n)	alx_ctz_u16(n)
+#define ctz_u32(n)	alx_ctz_u32(n)
+#define ctz_u64(n)	alx_ctz_u64(n)
+#define ctz_u128(n)	alx_ctz_u128(n)
+#define ctz_u256(n)	alx_ctz_u256(n)
+#endif
 
 
 /******************************************************************************
@@ -45,26 +54,26 @@ alx_Static_assert_stdint_types();
  ******************************************************************************/
 __attribute__((const))
 inline
-uint8_t		ctz_u8		(uint8_t n);
+uint8_t		alx_ctz_u8	(uint8_t n);
 __attribute__((const))
 inline
-uint16_t	ctz_u16		(uint16_t n);
+uint16_t	alx_ctz_u16	(uint16_t n);
 __attribute__((const))
 inline
-uint32_t	ctz_u32		(uint32_t n);
+uint32_t	alx_ctz_u32	(uint32_t n);
 __attribute__((const))
 inline
-uint64_t	ctz_u64		(uint64_t n);
+uint64_t	alx_ctz_u64	(uint64_t n);
 __attribute__((const))
 #if defined(uint128_t)
 __attribute__((const))
 inline
-uint64_t	ctz_u128	(uint128_t n);
+uint64_t	alx_ctz_u128	(uint128_t n);
 #endif
 #if defined(uint256_t)
 __attribute__((const))
 inline
-uint64_t	ctz_u256	(uint256_t n);
+uint64_t	alx_ctz_u256	(uint256_t n);
 #endif
 
 
@@ -72,28 +81,28 @@ uint64_t	ctz_u256	(uint256_t n);
  ******* inline ***************************************************************
  ******************************************************************************/
 inline
-uint8_t		ctz_u8		(uint8_t n)
+uint8_t		alx_ctz_u8	(uint8_t n)
 {
 
 	return	__builtin_ctz(n);
 }
 
 inline
-uint16_t	ctz_u16		(uint16_t n)
+uint16_t	alx_ctz_u16	(uint16_t n)
 {
 
 	return	__builtin_ctz(n);
 }
 
 inline
-uint32_t	ctz_u32		(uint32_t n)
+uint32_t	alx_ctz_u32	(uint32_t n)
 {
 
 	return	__builtin_ctz(n);
 }
 
 inline
-uint64_t	ctz_u64		(uint64_t n)
+uint64_t	alx_ctz_u64	(uint64_t n)
 {
 
 	return	__builtin_ctzl(n);
@@ -101,23 +110,23 @@ uint64_t	ctz_u64		(uint64_t n)
 
 #if defined(uint128_t)
 inline
-uint64_t	ctz_u128	(uint128_t n)
+uint64_t	alx_ctz_u128	(uint128_t n)
 {
 
 	if (!(uint64_t)n)
-		return	64 + ctz_u64(n >> 64);
-	return	ctz_u64(n);
+		return	64 + alx_ctz_u64(n >> 64);
+	return	alx_ctz_u64(n);
 }
 #endif
 
 #if defined(uint256_t)
 inline
-uint64_t	ctz_u256	(uint256_t n)
+uint64_t	alx_ctz_u256	(uint256_t n)
 {
 
 	if (!(uint128_t)n)
-		return	128 + ctz_u128(n >> 128);
-	return	ctz_u128(n);
+		return	128 + alx_ctz_u128(n >> 128);
+	return	alx_ctz_u128(n);
 }
 #endif
 

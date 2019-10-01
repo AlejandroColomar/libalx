@@ -29,6 +29,15 @@ alx_Static_assert_stdint_types();
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define clz_u8(n)	alx_clz_u8(n)
+#define clz_u16(n)	alx_clz_u16(n)
+#define clz_u32(n)	alx_clz_u32(n)
+#define clz_u64(n)	alx_clz_u64(n)
+#define clz_u128(n)	alx_clz_u128(n)
+#define clz_u256(n)	alx_clz_u256(n)
+#endif
 
 
 /******************************************************************************
@@ -46,26 +55,26 @@ alx_Static_assert_stdint_types();
  ******************************************************************************/
 __attribute__((const))
 inline
-uint8_t		clz_u8		(uint8_t n);
+uint8_t		alx_clz_u8	(uint8_t n);
 __attribute__((const))
 inline
-uint16_t	clz_u16		(uint16_t n);
+uint16_t	alx_clz_u16	(uint16_t n);
 __attribute__((const))
 inline
-uint32_t	clz_u32		(uint32_t n);
+uint32_t	alx_clz_u32	(uint32_t n);
 __attribute__((const))
 inline
-uint64_t	clz_u64		(uint64_t n);
+uint64_t	alx_clz_u64	(uint64_t n);
 __attribute__((const))
 #if defined(uint128_t)
 __attribute__((const))
 inline
-uint64_t	clz_u128	(uint128_t n);
+uint64_t	alx_clz_u128	(uint128_t n);
 #endif
 #if defined(uint256_t)
 __attribute__((const))
 inline
-uint64_t	clz_u256	(uint256_t n);
+uint64_t	alx_clz_u256	(uint256_t n);
 #endif
 
 
@@ -73,7 +82,7 @@ uint64_t	clz_u256	(uint256_t n);
  ******* inline ***************************************************************
  ******************************************************************************/
 inline
-uint8_t		clz_u8		(uint8_t n)
+uint8_t		alx_clz_u8	(uint8_t n)
 {
 	static const uint8_t unused_bytes = sizeof(unsigned) - sizeof(uint8_t);
 	static const uint8_t unused_bits = unused_bytes * CHAR_BIT;
@@ -82,7 +91,7 @@ uint8_t		clz_u8		(uint8_t n)
 }
 
 inline
-uint16_t	clz_u16		(uint16_t n)
+uint16_t	alx_clz_u16	(uint16_t n)
 {
 	static const uint8_t unused_bytes = sizeof(unsigned) - sizeof(uint16_t);
 	static const uint8_t unused_bits = unused_bytes * CHAR_BIT;
@@ -91,14 +100,14 @@ uint16_t	clz_u16		(uint16_t n)
 }
 
 inline
-uint32_t	clz_u32		(uint32_t n)
+uint32_t	alx_clz_u32	(uint32_t n)
 {
 
 	return	__builtin_clz(n);
 }
 
 inline
-uint64_t	clz_u64		(uint64_t n)
+uint64_t	alx_clz_u64	(uint64_t n)
 {
 
 	return	__builtin_clzl(n);
@@ -106,23 +115,23 @@ uint64_t	clz_u64		(uint64_t n)
 
 #if defined(uint128_t)
 inline
-uint64_t	clz_u128	(uint128_t n)
+uint64_t	alx_clz_u128	(uint128_t n)
 {
 
 	if (!(uint64_t)(n >> 64))
-		return	64 + clz_u64(n);
-	return	clz_u64(n >> 64);
+		return	64 + alx_clz_u64(n);
+	return	alx_clz_u64(n >> 64);
 }
 #endif
 
 #if defined(uint256_t)
 inline
-uint64_t	clz_u256	(uint256_t n)
+uint64_t	alx_clz_u256	(uint256_t n)
 {
 
 	if (!(uint128_t)(n >> 128))
-		return	128 + clz_u128(n);
-	return	clz_u128(n >> 128);
+		return	128 + alx_clz_u128(n);
+	return	alx_clz_u128(n >> 128);
 }
 #endif
 

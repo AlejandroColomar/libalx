@@ -30,10 +30,10 @@
  ******* global functions *****************************************************
  ******************************************************************************/
 extern
-void	alx_rsrand	(void);
+void	alx_prsrand	(void);
 
 extern
-uint32_t alx_seed	(void);
+uint32_t alx_prseed	(void);
 
 /*	Robert Jenkins' 96 bit Mix Function	*/
 uint32_t alx_seed_mix(uint32_t a, uint32_t b, uint32_t c)

@@ -26,7 +26,7 @@
  ******************************************************************************/
 /*
  * [[gnu::nonnull]]
- * int	alx_mallocs(type **restrict p, ptrdiff_t nmemb);
+ * int	alx_mallocs(type **restrict ptr, ptrdiff_t nmemb);
  */
 #define alx_mallocs(ptr, nmemb)	(					\
 {									\
@@ -37,6 +37,12 @@
 	!(*ptr_);							\
 }									\
 )
+
+
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define mallocs(ptr, nmemb)	alx_mallocs(ptr, nmemb)
+#endif
 
 
 /******************************************************************************

@@ -29,20 +29,20 @@
  ******* global functions *****************************************************
  ******************************************************************************/
 extern
-uint8_t		clz_u8		(uint8_t n);
+uint8_t		alx_clz_u8	(uint8_t n);
 extern
-uint16_t	clz_u16		(uint16_t n);
+uint16_t	alx_clz_u16	(uint16_t n);
 extern
-uint32_t	clz_u32		(uint32_t n);
+uint32_t	alx_clz_u32	(uint32_t n);
 extern
-uint64_t	clz_u64		(uint64_t n);
+uint64_t	alx_clz_u64	(uint64_t n);
 #if defined(uint128_t)
 extern
-uint64_t	clz_u128	(uint128_t n);
+uint64_t	alx_clz_u128	(uint128_t n);
 #endif
 #if defined(uint256_t)
 extern
-uint64_t	clz_u256	(uint256_t n);
+uint64_t	alx_clz_u256	(uint256_t n);
 #endif
 
 

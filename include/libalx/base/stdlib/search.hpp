@@ -20,6 +20,24 @@
 
 
 /******************************************************************************
+ ******* macros ***************************************************************
+ ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define search_uint(nmemb, arr, x)	alx_search_uint(nmemb, arr, x)
+#define search_int(nmemb, arr, x)	alx_search_int(nmemb, arr, x)
+#define search_u8(nmemb, arr, x)	alx_search_u8(nmemb, arr, x)
+#define search_s8(nmemb, arr, x)	alx_search_s8(nmemb, arr, x)
+#define search_u16(nmemb, arr, x)	alx_search_u16(nmemb, arr, x)
+#define search_s16(nmemb, arr, x)	alx_search_s16(nmemb, arr, x)
+#define search_u32(nmemb, arr, x)	alx_search_u32(nmemb, arr, x)
+#define search_s32(nmemb, arr, x)	alx_search_s32(nmemb, arr, x)
+#define search_u64(nmemb, arr, x)	alx_search_u64(nmemb, arr, x)
+#define search_s64(nmemb, arr, x)	alx_search_s64(nmemb, arr, x)
+#endif
+
+
+/******************************************************************************
  ******* extern "C" ***********************************************************
  ******************************************************************************/
 extern	"C"
@@ -71,11 +89,6 @@ ptrdiff_t	alx_search_s64	(ptrdiff_t nmemb,
  ******* namespace ************************************************************
  ******************************************************************************/
 namespace alx {
-
-
-/******************************************************************************
- ******* macros ***************************************************************
- ******************************************************************************/
 
 
 /******************************************************************************
