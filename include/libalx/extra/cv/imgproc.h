@@ -290,7 +290,7 @@ enum	Alx_Cv_ColorConversionCodes {
 	ALX_CV_COLOR_COLORCVT_MAX  = 139
 };
 
-enum	Alx_Cv_ColorConversionCodes {
+enum	Alx_Cv_Thresh {
 	ALX_CV_THRESH_BINARY      = 0,  /**< value = value > threshold ? max_value : 0       */
 	ALX_CV_THRESH_BINARY_INV  = 1,  /**< value = value > threshold ? 0 : max_value       */
 	ALX_CV_THRESH_TRUNC       = 2,  /**< value = value > threshold ? threshold : value   */
