@@ -30,6 +30,11 @@ alx_Static_assert_stdint_types();
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define mpz_root_u64(rop, op, n)	  alx_mpz_root_u64(rop, op, n)
+#define mpz_rootrem_u64(root, rem, u, n)  alx_mpz_rootrem_u64(root, rem, u, n)
+#endif
 
 
 /******************************************************************************

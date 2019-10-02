@@ -21,6 +21,15 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define mpz_fits_u64(op)	alx_mpz_fits_u64(op)
+#define mpz_fits_s64(op)	alx_mpz_fits_s64(op)
+#define mpz_fits_u32(op)	alx_mpz_fits_u32(op)
+#define mpz_fits_s32(op)	alx_mpz_fits_s32(op)
+#define mpz_fits_u16(op)	alx_mpz_fits_u16(op)
+#define mpz_fits_s16(op)	alx_mpz_fits_s16(op)
+#endif
 
 
 /******************************************************************************

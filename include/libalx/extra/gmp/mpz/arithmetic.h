@@ -29,6 +29,16 @@ alx_Static_assert_stdint_types();
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define mpz_add_u64(rop, op1, op2)	alx_mpz_add_u64(rop, op1, op2)
+#define mpz_sub_u64(rop, op1, op2)	alx_mpz_sub_u64(rop, op1, op2)
+#define mpz_u64_sub(rop, op1, op2)	alx_mpz_u64_sub(rop, op1, op2)
+#define mpz_mul_u64(rop, op1, op2)	alx_mpz_mul_u64(rop, op1, op2)
+#define mpz_mul_s64(rop, op1, op2)	alx_mpz_mul_s64(rop, op1, op2)
+#define mpz_addmul_u64(rop, op1, op2)	alx_mpz_addmul_u64(rop, op1, op2)
+#define mpz_submul_u64(rop, op1, op2)	alx_mpz_submul_u64(rop, op1, op2)
+#endif
 
 
 /******************************************************************************

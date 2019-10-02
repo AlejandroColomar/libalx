@@ -29,6 +29,12 @@ alx_Static_assert_stdint_types();
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define mpz_get_u64(op)			alx_mpz_get_u64(op)
+#define mpz_get_s64(op)			alx_mpz_get_s64(op)
+#define mpz_get_d_2exp_s64(exp, op)	alx_mpz_get_d_2exp_s64(exp, op)
+#endif
 
 
 /******************************************************************************
