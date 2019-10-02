@@ -78,8 +78,8 @@ export	LIB_DIR
 export	TST_DIR
 
 # XXX: Set local or not local when building a package
-LOCAL			= local
-INSTALL_ETC_DIR		= /usr/local/etc/
+LOCAL			=
+INSTALL_ETC_DIR		= /usr/etc/
 INSTALL_INC_DIR		= /usr/$(LOCAL)/include/
 INSTALL_LIB_DIR		= /usr/$(LOCAL)/lib/
 INSTALL_SHARE_DIR	= /usr/$(LOCAL)/share/
@@ -260,7 +260,6 @@ install:
 	$(Q)$(MAKE)	install_base
 	$(Q)$(MAKE)	install_extra
 	$(Q)$(MAKE)	conf_ld
-	$(Q)$(MAKE)	conf_pkgconfig
 	@echo	"	Done"
 	@echo
 
@@ -321,8 +320,8 @@ conf_ld:
 	$(Q)ldconfig
 	@echo
 
-PHONY += conf_pkgconfig
-conf_pkgconfig:
+PHONY += conf_pkgconfig_local
+conf_pkgconfig_local:
 	@echo	"	CP 	./ect/profile.d/pkgconfig-local.sh"
 	$(Q)cp -f $(v)		./etc/profile.d/pkgconfig-local.sh	\
 					$(DESTDIR)/etc/profile.d/
