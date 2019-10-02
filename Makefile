@@ -77,9 +77,15 @@ export	TMP_DIR
 export	LIB_DIR
 export	TST_DIR
 
-# XXX: Set local or not local when building a package
-LOCAL			=
-INSTALL_ETC_DIR		= /usr/etc/
+# XXX: make ... LOCAL=local to build in /usr/local/
+ifndef LOCAL
+  LOCAL			=
+endif
+ifeq ("$(LOCAL)","local")
+  INSTALL_ETC_DIR	= /usr/local/etc/
+else
+  INSTALL_ETC_DIR	= /usr/etc/
+endif
 INSTALL_INC_DIR		= /usr/$(LOCAL)/include/
 INSTALL_LIB_DIR		= /usr/$(LOCAL)/lib/
 INSTALL_SHARE_DIR	= /usr/$(LOCAL)/share/
@@ -318,13 +324,6 @@ conf_ld:
 					$(DESTDIR)/etc/ld.so.conf.d/
 	@echo	"	LDCONFIG"
 	$(Q)ldconfig
-	@echo
-
-PHONY += conf_pkgconfig_local
-conf_pkgconfig_local:
-	@echo	"	CP 	./ect/profile.d/pkgconfig-local.sh"
-	$(Q)cp -f $(v)		./etc/profile.d/pkgconfig-local.sh	\
-					$(DESTDIR)/etc/profile.d/
 	@echo
 
 PHONY += libalx-%.pc
