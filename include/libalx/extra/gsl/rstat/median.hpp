@@ -22,6 +22,21 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define gsl_rstat_median_ldbl(nmemb, x)	alx_gsl_rstat_median_ldbl(nmemb, x)
+#define gsl_rstat_median_flt(nmemb, x)	alx_gsl_rstat_median_flt(nmemb, x)
+#define gsl_rstat_median_uint(nmemb, x)	alx_gsl_rstat_median_uint(nmemb, x)
+#define gsl_rstat_median_int(nmemb, x)	alx_gsl_rstat_median_int(nmemb, x)
+#define gsl_rstat_median_u8(nmemb, x)	alx_gsl_rstat_median_u8(nmemb, x)
+#define gsl_rstat_median_s8(nmemb, x)	alx_gsl_rstat_median_s8(nmemb, x)
+#define gsl_rstat_median_u16(nmemb, x)	alx_gsl_rstat_median_u16(nmemb, x)
+#define gsl_rstat_median_s16(nmemb, x)	alx_gsl_rstat_median_s16(nmemb, x)
+#define gsl_rstat_median_u32(nmemb, x)	alx_gsl_rstat_median_u32(nmemb, x)
+#define gsl_rstat_median_s32(nmemb, x)	alx_gsl_rstat_median_s32(nmemb, x)
+#define gsl_rstat_median_u64(nmemb, x)	alx_gsl_rstat_median_u64(nmemb, x)
+#define gsl_rstat_median_s64(nmemb, x)	alx_gsl_rstat_median_s64(nmemb, x)
+#endif
 
 
 /******************************************************************************
