@@ -39,8 +39,6 @@ alx_Static_assert_stdint_types();
 #if defined(ALX_NO_PREFIX)
 #define gsl_stats_mean_ldbl(nmemb, arr)	 alx_gsl_stats_mean_ldbl(nmemb, arr)
 #define gsl_stats_mean_flt(nmemb, arr)	 alx_gsl_stats_mean_flt(nmemb, arr)
-#define gsl_stats_mean_uint(nmemb, arr)	 alx_gsl_stats_mean_uint(nmemb, arr)
-#define gsl_stats_mean_int(nmemb, arr)	 alx_gsl_stats_mean_int(nmemb, arr)
 #define gsl_stats_mean_u8(nmemb, arr)	 alx_gsl_stats_mean_u8(nmemb, arr)
 #define gsl_stats_mean_s8(nmemb, arr)	 alx_gsl_stats_mean_s8(nmemb, arr)
 #define gsl_stats_mean_u16(nmemb, arr)	 alx_gsl_stats_mean_u16(nmemb, arr)
