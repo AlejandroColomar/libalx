@@ -21,7 +21,7 @@
  ******************************************************************************/
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define mallocarray(ptr, nmemb)		alx_mallocarray(ptr, nmemb)
+#define mallocarray(nmemb, size)	alx_mallocarray(nmemb, size)
 #endif
 
 

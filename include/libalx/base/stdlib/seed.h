@@ -23,11 +23,6 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define prsrand()	alx_prsrand()
-#define prseed()	alx_prseed()
-#endif
 
 
 /******************************************************************************
@@ -50,6 +45,27 @@ uint32_t alx_prseed	(void);
 /*	Robert Jenkins' 96 bit Mix Function	*/
 __attribute__((const))
 uint32_t alx_seed_mix	(uint32_t a, uint32_t b, uint32_t c);
+
+
+/******************************************************************************
+ ******* static inline ********************************************************
+ ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+__attribute__((always_inline))
+static inline
+void	prsrand		(void)
+{
+	alx_prsrand();
+}
+
+__attribute__((always_inline))
+static inline
+uint32_t prseed		(void)
+{
+	return	alx_prseed();
+}
+#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************

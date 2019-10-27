@@ -24,8 +24,6 @@
 #if defined(ALX_NO_PREFIX)
 #define snprintfs(str, written, nmemb, fmt, ...)			\
 	alx_snprintfs(str, written, nmemb, fmt, ##__VA_ARGS__)
-#define vsnprintfs(str, written, nmemb, fmt, ap)			\
-	alx_vsnprintfs(str, written, nmemb, fmt, ap)
 #endif
 
 
@@ -40,7 +38,7 @@
 
 
 /******************************************************************************
- ******* function prototypes **************************************************
+ ******* prototypes ***********************************************************
  ******************************************************************************/
 __attribute__((nonnull(1, 4), format(printf, 4, 5), warn_unused_result))
 int	alx_snprintfs	(char str[restrict],
@@ -53,7 +51,24 @@ int	alx_vsnprintfs	(char str[restrict],
 
 
 /******************************************************************************
- ******* inline functions *****************************************************
+ ******* static inline ********************************************************
+ ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+__attribute__((always_inline))
+__attribute__((nonnull(1, 4), format(printf, 4, 0), warn_unused_result))
+static inline
+int	vsnprintfs	(char str[restrict],
+			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
+			 const char *restrict format, va_list ap)
+{
+	return	alx_vsnprintfs(str, written, nmemb, format, ap);
+}
+#endif
+
+
+/******************************************************************************
+ ******* inline ***************************************************************
  ******************************************************************************/
 
 
