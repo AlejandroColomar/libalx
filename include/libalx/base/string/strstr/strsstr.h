@@ -19,10 +19,6 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define strsstr(size, str, pattern)	alx_strsstr(size, str, pattern)
-#endif
 
 
 /******************************************************************************
@@ -42,6 +38,22 @@ __attribute__((nonnull, pure))
 ptrdiff_t alx_strsstr		(ptrdiff_t size,
 				 const char str[static restrict size],
 				 const char pattern[static restrict size]);
+
+
+/******************************************************************************
+ ******* static inline ********************************************************
+ ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+__attribute__((always_inline, nonnull, pure))
+static inline
+ptrdiff_t strsstr		(ptrdiff_t size,
+				 const char str[static restrict size],
+				 const char pattern[static restrict size])
+{
+	return	alx_strsstr(size, str, pattern);
+}
+#endif
 
 
 /******************************************************************************

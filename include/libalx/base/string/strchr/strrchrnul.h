@@ -20,10 +20,6 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define strrchrnul(str, c)	alx_strrchrnul(str, c)
-#endif
 
 
 /******************************************************************************
@@ -42,6 +38,20 @@
 __attribute__((nonnull, pure))
 inline
 ptrdiff_t alx_strrchrnul	(const char str[restrict], char c);
+
+
+/******************************************************************************
+ ******* static inline ********************************************************
+ ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+__attribute__((always_inline, nonnull, pure))
+static inline
+ptrdiff_t strrchrnul		(const char str[restrict], char c)
+{
+	return	alx_strrchrnul(str, c);
+}
+#endif
 
 
 /******************************************************************************

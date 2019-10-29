@@ -19,10 +19,6 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define strscat(size, dest, src)	alx_strscat(size, dest, src)
-#endif
 
 
 /******************************************************************************
@@ -42,6 +38,22 @@ __attribute__((nonnull))
 ptrdiff_t alx_strscat		(ptrdiff_t size,
 				 char dest[static restrict size],
 				 const char src[static restrict size]);
+
+
+/******************************************************************************
+ ******* static inline ********************************************************
+ ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+__attribute__((always_inline, nonnull))
+static inline
+ptrdiff_t strscat		(ptrdiff_t size,
+				 char dest[static restrict size],
+				 const char src[static restrict size])
+{
+	return	alx_strscat(size, dest, src);
+}
+#endif
 
 
 /******************************************************************************

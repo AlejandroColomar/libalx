@@ -20,10 +20,6 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define strnrchr(size, str, c)	alx_strnrchr(size, str, c)
-#endif
 
 
 /******************************************************************************
@@ -44,6 +40,22 @@ inline
 ptrdiff_t alx_strnrchr		(ptrdiff_t size,
 				 const char str[static restrict size],
 				 char c);
+
+
+/******************************************************************************
+ ******* static inline ********************************************************
+ ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+__attribute__((always_inline, nonnull, pure))
+static inline
+ptrdiff_t strnrchr		(ptrdiff_t size,
+				 const char str[static restrict size],
+				 char c)
+{
+	return	alx_strnrchr(size, str, c);
+}
+#endif
 
 
 /******************************************************************************

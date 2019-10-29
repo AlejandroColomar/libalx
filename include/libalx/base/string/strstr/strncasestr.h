@@ -19,10 +19,6 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define strncasestr(size, str, pattern)	alx_strncasestr(size, str, pattern)
-#endif
 
 
 /******************************************************************************
@@ -42,6 +38,22 @@ __attribute__((nonnull, pure))
 ptrdiff_t alx_strncasestr	(ptrdiff_t size,
 				 const char str[static restrict size],
 				 const char pattern[restrict]);
+
+
+/******************************************************************************
+ ******* static inline ********************************************************
+ ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+__attribute__((always_inline, nonnull, pure))
+static inline
+ptrdiff_t strncasestr		(ptrdiff_t size,
+				 const char str[static restrict size],
+				 const char pattern[restrict])
+{
+	return	alx_strncasestr(size, str, pattern);
+}
+#endif
 
 
 /******************************************************************************

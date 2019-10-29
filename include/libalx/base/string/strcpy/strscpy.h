@@ -19,10 +19,6 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define strscpy(dest, src, size)	alx_strscpy(dest, src, size)
-#endif
 
 
 /******************************************************************************
@@ -42,6 +38,22 @@ __attribute__((nonnull))
 ptrdiff_t alx_strscpy		(char dest[restrict /*size*/],
 				 const char src[restrict /*size*/],
 				 ptrdiff_t size);
+
+
+/******************************************************************************
+ ******* static inline ********************************************************
+ ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+__attribute__((always_inline, nonnull))
+static inline
+ptrdiff_t strscpy		(char dest[restrict /*size*/],
+				 const char src[restrict /*size*/],
+				 ptrdiff_t size)
+{
+	return	alx_strscpy(dest, src, size);
+}
+#endif
 
 
 /******************************************************************************
