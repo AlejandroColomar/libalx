@@ -13,6 +13,7 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include <limits.h>
 #include <stddef.h>
 
 #include <sys/types.h>
@@ -29,6 +30,7 @@
 #define ARRAY_SIZE(arr)		(sizeof(arr) / sizeof((arr)[0]))
 #define ARRAY_SSIZE(arr)	((ptrdiff_t)ARRAY_SIZE(arr))
 #define ARRAY_BYTES(arr)	(sizeof((arr)[0]) * ARRAY_SIZE(arr))
+#define ARRAY_BITS(arr)		(ARRAY_BYTES(arr) * CHAR_BIT)
 
 #define FIELD_SIZEOF(t, f)	(sizeof(((t *)NULL)->f))
 
