@@ -54,20 +54,6 @@ double		alx_gsl_units_F_to_K		(double f);
 float		alx_gsl_units_F_to_K_flt	(float f);
 
 [[gnu::const]]
-long double	alx_gsl_units_C_to_F_ldbl	(long double c);
-[[gnu::const]]
-double		alx_gsl_units_C_to_F		(double c);
-[[gnu::const]]
-float		alx_gsl_units_C_to_F_flt	(float c);
-
-[[gnu::const]]
-long double	alx_gsl_units_F_to_C_ldbl	(long double f);
-[[gnu::const]]
-double		alx_gsl_units_F_to_C		(double f);
-[[gnu::const]]
-float		alx_gsl_units_F_to_C_flt	(float f);
-
-[[gnu::const]]
 long double	alx_gsl_units_K_to_R_ldbl	(long double k);
 [[gnu::const]]
 double		alx_gsl_units_K_to_R		(double k);
@@ -80,34 +66,6 @@ long double	alx_gsl_units_R_to_K_ldbl	(long double r);
 double		alx_gsl_units_R_to_K		(double r);
 [[gnu::const]]
 float		alx_gsl_units_R_to_K_flt	(float r);
-
-[[gnu::const]]
-long double	alx_gsl_units_C_to_R_ldbl	(long double c);
-[[gnu::const]]
-double		alx_gsl_units_C_to_R		(double c);
-[[gnu::const]]
-float		alx_gsl_units_C_to_R_flt	(float c);
-
-[[gnu::const]]
-long double	alx_gsl_units_R_to_C_ldbl	(long double r);
-[[gnu::const]]
-double		alx_gsl_units_R_to_C		(double r);
-[[gnu::const]]
-float		alx_gsl_units_R_to_C_flt	(float r);
-
-[[gnu::const]]
-long double	alx_gsl_units_F_to_R_ldbl	(long double f);
-[[gnu::const]]
-double		alx_gsl_units_F_to_R		(double f);
-[[gnu::const]]
-float		alx_gsl_units_F_to_R_flt	(float f);
-
-[[gnu::const]]
-long double	alx_gsl_units_R_to_F_ldbl	(long double r);
-[[gnu::const]]
-double		alx_gsl_units_R_to_F		(double r);
-[[gnu::const]]
-float		alx_gsl_units_R_to_F_flt	(float r);
 }
 
 
