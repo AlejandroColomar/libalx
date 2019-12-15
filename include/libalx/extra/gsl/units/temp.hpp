@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/gsl/temperature/units.hpp */
+#pragma once	/* libalx/extra/gsl/units/temp.hpp */
 
 
 /******************************************************************************
@@ -26,88 +26,88 @@
 extern	"C"
 {
 [[gnu::const]]
-long double	alx_gsl_temp_K_to_C_ldbl	(long double k);
+long double	alx_gsl_units_K_to_C_ldbl	(long double k);
 [[gnu::const]]
-double		alx_gsl_temp_K_to_C		(double k);
+double		alx_gsl_units_K_to_C		(double k);
 [[gnu::const]]
-float		alx_gsl_temp_K_to_C_flt		(float k);
+float		alx_gsl_units_K_to_C_flt	(float k);
 
 [[gnu::const]]
-long double	alx_gsl_temp_C_to_K_ldbl	(long double c);
+long double	alx_gsl_units_C_to_K_ldbl	(long double c);
 [[gnu::const]]
-double		alx_gsl_temp_C_to_K		(double c);
+double		alx_gsl_units_C_to_K		(double c);
 [[gnu::const]]
-float		alx_gsl_temp_C_to_K_flt		(float c);
+float		alx_gsl_units_C_to_K_flt	(float c);
 
 [[gnu::const]]
-long double	alx_gsl_temp_K_to_F_ldbl	(long double k);
+long double	alx_gsl_units_K_to_F_ldbl	(long double k);
 [[gnu::const]]
-double		alx_gsl_temp_K_to_F		(double k);
+double		alx_gsl_units_K_to_F		(double k);
 [[gnu::const]]
-float		alx_gsl_temp_K_to_F_flt		(float k);
+float		alx_gsl_units_K_to_F_flt	(float k);
 
 [[gnu::const]]
-long double	alx_gsl_temp_F_to_K_ldbl	(long double f);
+long double	alx_gsl_units_F_to_K_ldbl	(long double f);
 [[gnu::const]]
-double		alx_gsl_temp_F_to_K		(double f);
+double		alx_gsl_units_F_to_K		(double f);
 [[gnu::const]]
-float		alx_gsl_temp_F_to_K_flt		(float f);
+float		alx_gsl_units_F_to_K_flt	(float f);
 
 [[gnu::const]]
-long double	alx_gsl_temp_C_to_F_ldbl	(long double c);
+long double	alx_gsl_units_C_to_F_ldbl	(long double c);
 [[gnu::const]]
-double		alx_gsl_temp_C_to_F		(double c);
+double		alx_gsl_units_C_to_F		(double c);
 [[gnu::const]]
-float		alx_gsl_temp_C_to_F_flt		(float c);
+float		alx_gsl_units_C_to_F_flt	(float c);
 
 [[gnu::const]]
-long double	alx_gsl_temp_F_to_C_ldbl	(long double f);
+long double	alx_gsl_units_F_to_C_ldbl	(long double f);
 [[gnu::const]]
-double		alx_gsl_temp_F_to_C		(double f);
+double		alx_gsl_units_F_to_C		(double f);
 [[gnu::const]]
-float		alx_gsl_temp_F_to_C_flt		(float f);
+float		alx_gsl_units_F_to_C_flt	(float f);
 
 [[gnu::const]]
-long double	alx_gsl_temp_K_to_R_ldbl	(long double k);
+long double	alx_gsl_units_K_to_R_ldbl	(long double k);
 [[gnu::const]]
-double		alx_gsl_temp_K_to_R		(double k);
+double		alx_gsl_units_K_to_R		(double k);
 [[gnu::const]]
-float		alx_gsl_temp_K_to_R_flt		(float k);
+float		alx_gsl_units_K_to_R_flt	(float k);
 
 [[gnu::const]]
-long double	alx_gsl_temp_R_to_K_ldbl	(long double r);
+long double	alx_gsl_units_R_to_K_ldbl	(long double r);
 [[gnu::const]]
-double		alx_gsl_temp_R_to_K		(double r);
+double		alx_gsl_units_R_to_K		(double r);
 [[gnu::const]]
-float		alx_gsl_temp_R_to_K_flt		(float r);
+float		alx_gsl_units_R_to_K_flt	(float r);
 
 [[gnu::const]]
-long double	alx_gsl_temp_C_to_R_ldbl	(long double c);
+long double	alx_gsl_units_C_to_R_ldbl	(long double c);
 [[gnu::const]]
-double		alx_gsl_temp_C_to_R		(double c);
+double		alx_gsl_units_C_to_R		(double c);
 [[gnu::const]]
-float		alx_gsl_temp_C_to_R_flt		(float c);
+float		alx_gsl_units_C_to_R_flt	(float c);
 
 [[gnu::const]]
-long double	alx_gsl_temp_R_to_C_ldbl	(long double r);
+long double	alx_gsl_units_R_to_C_ldbl	(long double r);
 [[gnu::const]]
-double		alx_gsl_temp_R_to_C		(double r);
+double		alx_gsl_units_R_to_C		(double r);
 [[gnu::const]]
-float		alx_gsl_temp_R_to_C_flt		(float r);
+float		alx_gsl_units_R_to_C_flt	(float r);
 
 [[gnu::const]]
-long double	alx_gsl_temp_F_to_R_ldbl	(long double f);
+long double	alx_gsl_units_F_to_R_ldbl	(long double f);
 [[gnu::const]]
-double		alx_gsl_temp_F_to_R		(double f);
+double		alx_gsl_units_F_to_R		(double f);
 [[gnu::const]]
-float		alx_gsl_temp_F_to_R_flt		(float f);
+float		alx_gsl_units_F_to_R_flt	(float f);
 
 [[gnu::const]]
-long double	alx_gsl_temp_R_to_F_ldbl	(long double r);
+long double	alx_gsl_units_R_to_F_ldbl	(long double r);
 [[gnu::const]]
-double		alx_gsl_temp_R_to_F		(double r);
+double		alx_gsl_units_R_to_F		(double r);
 [[gnu::const]]
-float		alx_gsl_temp_R_to_F_flt		(float r);
+float		alx_gsl_units_R_to_F_flt	(float r);
 }
 
 

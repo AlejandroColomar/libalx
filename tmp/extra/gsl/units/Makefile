@@ -12,12 +12,12 @@
 ################################################################################
 # dependencies
 OBJ		=							\
-		units.o
+		temp.o
 
-UNITS_INC	=							\
-		$(INC_DIR)/libalx/extra/gsl/temperature/units.h
-UNITS_SRC	=							\
-		$(SRC_DIR)/extra/gsl/temperature/units.c
+TEMP_INC	=							\
+		$(INC_DIR)/libalx/extra/gsl/units/temp.h
+TEMP_SRC	=							\
+		$(SRC_DIR)/extra/gsl/units/temp.c
 
 ################################################################################
 # cflags
@@ -33,18 +33,18 @@ all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 
 %.a.s:
-	@echo	"	CC	libalx/tmp/extra/gsl/temperature/$@"
+	@echo	"	CC	libalx/tmp/extra/gsl/units/$@"
 	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
 %.so.s:
-	@echo	"	CC	libalx/tmp/extra/gsl/temperature/$@"
+	@echo	"	CC	libalx/tmp/extra/gsl/units/$@"
 	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
 %.o: %.s
-	@echo	"	AS	libalx/tmp/extra/gsl/temperature/$@"
+	@echo	"	AS	libalx/tmp/extra/gsl/units/$@"
 	$(Q)$(AS) $< -o $@
 
 
-units.a.s: $(UNITS_SRC) $(UNITS_INC)
-units.so.s: $(UNITS_SRC) $(UNITS_INC)
+temp.a.s: $(TEMP_SRC) $(TEMP_INC)
+temp.so.s: $(TEMP_SRC) $(TEMP_INC)
 
 
 PHONY += clean
