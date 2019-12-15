@@ -41,11 +41,11 @@
  ******* prototypes ***********************************************************
  ******************************************************************************/
 __attribute__((nonnull(1, 4), format(printf, 4, 5), warn_unused_result))
-int	alx_snprintfs	(char str[restrict],
+int	alx_snprintfs	(char str[restrict /*nmemb*/],
 			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
 			 const char *restrict format, ...);
 __attribute__((nonnull(1, 4), format(printf, 4, 0), warn_unused_result))
-int	alx_vsnprintfs	(char str[restrict],
+int	alx_vsnprintfs	(char str[restrict /*nmemb*/],
 			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
 			 const char *restrict format, va_list ap);
 
@@ -58,7 +58,7 @@ int	alx_vsnprintfs	(char str[restrict],
 __attribute__((always_inline))
 __attribute__((nonnull(1, 4), format(printf, 4, 0), warn_unused_result))
 static inline
-int	vsnprintfs	(char str[restrict],
+int	vsnprintfs	(char str[restrict /*nmemb*/],
 			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
 			 const char *restrict format, va_list ap)
 {

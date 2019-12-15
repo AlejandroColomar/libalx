@@ -32,7 +32,8 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-ptrdiff_t alx_strncasechrnul	(ptrdiff_t size, const char str[restrict size],
+ptrdiff_t alx_strncasechrnul	(ptrdiff_t size,
+				 const char str[static restrict size],
 				 char c)
 {
 	const ptrdiff_t	len	= strnlen(str, size);
@@ -44,7 +45,7 @@ ptrdiff_t alx_strncasechrnul	(ptrdiff_t size, const char str[restrict size],
 		if (c_lower == s_lower)
 			return	i;
 		if (!s_lower)
-			return	len;
+			break;
 	}
 
 	return	len;

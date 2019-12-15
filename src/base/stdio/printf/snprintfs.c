@@ -33,7 +33,7 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_snprintfs	(char str[restrict],
+int	alx_snprintfs	(char str[restrict /*nmemb*/],
 			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
 			 const char *restrict format, ...)
 {
@@ -47,7 +47,7 @@ int	alx_snprintfs	(char str[restrict],
 	return	status;
 }
 
-int	alx_vsnprintfs	(char str[restrict],
+int	alx_vsnprintfs	(char str[restrict /*nmemb*/],
 			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
 			 const char *restrict format, va_list ap)
 {
