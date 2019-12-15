@@ -12,7 +12,13 @@
 ################################################################################
 # dependencies
 OBJ		=							\
+		len.o							\
 		temp.o
+
+LEN_INC		=							\
+		$(INC_DIR)/libalx/extra/gsl/units/len.h
+LEN_SRC		=							\
+		$(SRC_DIR)/extra/gsl/units/len.c
 
 TEMP_INC	=							\
 		$(INC_DIR)/libalx/extra/gsl/units/temp.h
@@ -42,6 +48,9 @@ all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 	@echo	"	AS	libalx/tmp/extra/gsl/units/$@"
 	$(Q)$(AS) $< -o $@
 
+
+len.a.s: $(LEN_SRC) $(LEN_INC)
+len.so.s: $(LEN_SRC) $(LEN_INC)
 
 temp.a.s: $(TEMP_SRC) $(TEMP_INC)
 temp.so.s: $(TEMP_SRC) $(TEMP_INC)
