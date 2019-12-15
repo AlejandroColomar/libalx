@@ -16,12 +16,18 @@ DIRS		=							\
 		printf
 
 OBJ		=							\
+		fgets.o							\
 		get.o							\
 		printf/b.o						\
 		printf/sbprintf.o					\
 		printf/snprintfs.o					\
 		seekc.o							\
 		sscan.o
+
+FGETS_INC	=							\
+		$(INC_DIR)/libalx/base/stdio/fgets.h
+FGETS_SRC	=							\
+		$(SRC_DIR)/base/stdio/fgets.c
 
 GET_INC		=							\
 		$(INC_DIR)/libalx/base/compiler/size.h			\
@@ -84,6 +90,9 @@ printf:
 	@echo	"	AS	libalx/tmp/base/stdio/$@"
 	$(Q)$(AS) $< -o $@
 
+
+fgets.a.s: $(FGETS_SRC) $(FGETS_INC)
+fgets.so.s: $(FGETS_SRC) $(FGETS_INC)
 
 get.a.s: $(GET_SRC) $(GET_INC)
 get.so.s: $(GET_SRC) $(GET_INC)

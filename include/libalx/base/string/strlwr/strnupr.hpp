@@ -7,18 +7,24 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/base/stdlib/compare.hpp */
+#pragma once	/* libalx/base/string/strlwr/strnupr.hpp */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <cstdint>
+#include <stddef.h>
+
+#include "libalx/base/compiler/restrict.hpp"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define strnupr(n, str)		alx_strnupr(n, str)
+#endif
 
 
 /******************************************************************************
@@ -26,34 +32,8 @@
  ******************************************************************************/
 extern	"C"
 {
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_ldbl(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare	(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_f	(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_uint(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_int	(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_char(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_u8	(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_s8	(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_u16	(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_s16	(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_u32	(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_s32	(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_u64	(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_s64	(const void *a_ptr, const void *b_ptr);
+[[gnu::nonnull]]
+char	*alx_strnupr	(ptrdiff_t n, char *restrict str);
 }
 
 
@@ -64,12 +44,12 @@ namespace alx {
 
 
 /******************************************************************************
- ******* enum *****************************************************************
+ ******* enums ****************************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* struct / union *******************************************************
+ ******* structs / unions *****************************************************
  ******************************************************************************/
 
 

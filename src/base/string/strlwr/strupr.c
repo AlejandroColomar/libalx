@@ -7,7 +7,10 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/base/stdlib/compare.h"
+#include "libalx/base/string/strlwr/strupr.h"
+
+#include <ctype.h>
+#include <stddef.h>
 
 
 /******************************************************************************
@@ -28,34 +31,14 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-extern
-int	alx_compare_ldbl(const void *a_ptr, const void *b_ptr);
-extern
-int	alx_compare	(const void *a_ptr, const void *b_ptr);
-extern
-int	alx_compare_f	(const void *a_ptr, const void *b_ptr);
-extern
-int	alx_compare_uint(const void *a_ptr, const void *b_ptr);
-extern
-int	alx_compare_int	(const void *a_ptr, const void *b_ptr);
-extern
-int	alx_compare_char(const void *a_ptr, const void *b_ptr);
-extern
-int	alx_compare_u8	(const void *a_ptr, const void *b_ptr);
-extern
-int	alx_compare_s8	(const void *a_ptr, const void *b_ptr);
-extern
-int	alx_compare_u16	(const void *a_ptr, const void *b_ptr);
-extern
-int	alx_compare_s16	(const void *a_ptr, const void *b_ptr);
-extern
-int	alx_compare_u32	(const void *a_ptr, const void *b_ptr);
-extern
-int	alx_compare_s32	(const void *a_ptr, const void *b_ptr);
-extern
-int	alx_compare_u64	(const void *a_ptr, const void *b_ptr);
-extern
-int	alx_compare_s64	(const void *a_ptr, const void *b_ptr);
+char	*alx_strupr	(char *restrict str)
+{
+
+	for (ptrdiff_t i = 0; str[i]; i++)
+		str[i] = toupper((unsigned char)str[i]);
+
+	return	str;
+}
 
 
 /******************************************************************************

@@ -51,6 +51,9 @@ inline
 int	alx_compare_int	(const void *a_ptr, const void *b_ptr);
 __attribute__((nonnull, pure))
 inline
+int	alx_compare_char(const void *a_ptr, const void *b_ptr);
+__attribute__((nonnull, pure))
+inline
 int	alx_compare_u8	(const void *a_ptr, const void *b_ptr);
 __attribute__((nonnull, pure))
 inline
@@ -139,6 +142,20 @@ int	alx_compare_int	(const void *a_ptr, const void *b_ptr)
 {
 	int	a =	*(int *)a_ptr;
 	int	b =	*(int *)b_ptr;
+
+	if (a < b)
+		return	-1;
+	else if (a > b)
+		return	1;
+	else
+		return	0;
+}
+
+inline
+int	alx_compare_char(const void *a_ptr, const void *b_ptr)
+{
+	char	a =	*(char *)a_ptr;
+	char	b =	*(char *)b_ptr;
 
 	if (a < b)
 		return	-1;

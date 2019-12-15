@@ -25,6 +25,7 @@ BASE_OBJ	=							\
 		$(TMP_DIR)/base/math/scale_linear.o			\
 		$(TMP_DIR)/base/stdint/constants.o			\
 		$(TMP_DIR)/base/stdint/types.o				\
+		$(TMP_DIR)/base/stdio/fgets.o				\
 		$(TMP_DIR)/base/stdio/get.o				\
 		$(TMP_DIR)/base/stdio/printf/b.o			\
 		$(TMP_DIR)/base/stdio/printf/sbprintf.o			\
@@ -66,6 +67,10 @@ BASE_OBJ	=							\
 		$(TMP_DIR)/base/string/strchr/strrcasechrnul.o		\
 		$(TMP_DIR)/base/string/strchr/strrchrnul.o		\
 		$(TMP_DIR)/base/string/strcpy/strscpy.o			\
+		$(TMP_DIR)/base/string/strlwr/strlwr.o			\
+		$(TMP_DIR)/base/string/strlwr/strnlwr.o			\
+		$(TMP_DIR)/base/string/strlwr/strupr.o			\
+		$(TMP_DIR)/base/string/strlwr/strnupr.o			\
 		$(TMP_DIR)/base/string/strgrep.o			\
 		$(TMP_DIR)/base/string/strstr/strncasestr.o		\
 		$(TMP_DIR)/base/string/strstr/strscasestr.o		\

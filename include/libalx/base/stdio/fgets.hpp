@@ -7,13 +7,16 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/base/stdlib/compare.hpp */
+#pragma once	/* libalx/base/stdio/fgets.hpp */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <cstdint>
+#include <cstddef>
+#include <cstdio>
+
+#include "libalx/base/stddef/restrict.hpp"
 
 
 /******************************************************************************
@@ -26,34 +29,8 @@
  ******************************************************************************/
 extern	"C"
 {
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_ldbl(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare	(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_f	(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_uint(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_int	(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_char(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_u8	(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_s8	(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_u16	(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_s16	(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_u32	(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_s32	(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_u64	(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_s64	(const void *a_ptr, const void *b_ptr);
+int	alx_fgets_nonl	(char *restrict buf, int bufsiz, FILE *restrict stream,
+			 ptrdiff_t *restrict len);
 }
 
 
@@ -64,17 +41,12 @@ namespace alx {
 
 
 /******************************************************************************
- ******* enum *****************************************************************
+ ******* enums ****************************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* struct / union *******************************************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* extern functions *****************************************************
+ ******* structs / unions *****************************************************
  ******************************************************************************/
 
 

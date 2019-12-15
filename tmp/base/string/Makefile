@@ -16,6 +16,7 @@ DIRS		=							\
 		strcat							\
 		strchr							\
 		strcpy							\
+		strlwr							\
 		strstr
 
 OBJ		=							\
@@ -34,6 +35,10 @@ OBJ		=							\
 		strchr/strrcasechrnul.o					\
 		strchr/strrchrnul.o					\
 		strcpy/strscpy.o					\
+		strlwr/strlwr.o						\
+		strlwr/strnlwr.o					\
+		strlwr/strupr.o						\
+		strlwr/strnupr.o					\
 		strgrep.o						\
 		strstr/strncasestr.o					\
 		strstr/strscasestr.o					\
@@ -116,6 +121,26 @@ STRCPY_S_INC	=							\
 		$(INC_DIR)/libalx/base/string/strcpy/strscpy.h
 STRCPY_S_SRC	=							\
 		$(SRC_DIR)/base/string/strcpy/strscpy.c
+
+STRLWR_S_INC	=							\
+		$(INC_DIR)/libalx/base/string/strlwr/strlwr.h
+STRLWR_S_SRC	=							\
+		$(SRC_DIR)/base/string/strlwr/strlwr.c
+
+STRNLWR_S_INC	=							\
+		$(INC_DIR)/libalx/base/string/strlwr/strnlwr.h
+STRNLWR_S_SRC	=							\
+		$(SRC_DIR)/base/string/strlwr/strnlwr.c
+
+STRUPR_S_INC	=							\
+		$(INC_DIR)/libalx/base/string/strlwr/strupr.h
+STRUPR_S_SRC	=							\
+		$(SRC_DIR)/base/string/strlwr/strupr.c
+
+STRNUPR_S_INC	=							\
+		$(INC_DIR)/libalx/base/string/strlwr/strnupr.h
+STRNUPR_S_SRC	=							\
+		$(SRC_DIR)/base/string/strlwr/strnupr.c
 
 STRGREP_INC	=							\
 		$(INC_DIR)/libalx/base/string/strchr/strnchrnul.h	\
@@ -218,6 +243,18 @@ strchr/strrchrnul.so.s: $(STRCHR_RNUL_SRC) $(STRCHR_RNUL_INC)
 
 strcpy/strscpy.a.s: $(STRCPY_S_SRC) $(STRCPY_S_INC)
 strcpy/strscpy.so.s: $(STRCPY_S_SRC) $(STRCPY_S_INC)
+
+strlwr/strlwr.a.s: $(STRLWR_S_SRC) $(STRLWR_S_INC)
+strlwr/strlwr.so.s: $(STRLWR_S_SRC) $(STRLWR_S_INC)
+
+strlwr/strnlwr.a.s: $(STRNLWR_S_SRC) $(STRNLWR_S_INC)
+strlwr/strnlwr.so.s: $(STRNLWR_S_SRC) $(STRNLWR_S_INC)
+
+strlwr/strupr.a.s: $(STRUPR_S_SRC) $(STRUPR_S_INC)
+strlwr/strupr.so.s: $(STRUPR_S_SRC) $(STRUPR_S_INC)
+
+strlwr/strnupr.a.s: $(STRNUPR_S_SRC) $(STRNUPR_S_INC)
+strlwr/strnupr.so.s: $(STRNUPR_S_SRC) $(STRNUPR_S_INC)
 
 strgrep.a.s: $(STRGREP_SRC) $(STRGREP_INC)
 strgrep.so.s: $(STRGREP_SRC) $(STRGREP_INC)

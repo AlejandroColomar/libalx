@@ -7,13 +7,15 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/base/stdlib/compare.hpp */
+#pragma once	/* libalx/base/stdio/fgets.h */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <cstdint>
+#include <stddef.h>
+#include <stdio.h>
+#include <string.h>
 
 
 /******************************************************************************
@@ -22,66 +24,63 @@
 
 
 /******************************************************************************
- ******* extern "C" ***********************************************************
+ ******* enums ****************************************************************
  ******************************************************************************/
-extern	"C"
+
+
+/******************************************************************************
+ ******* structs / unions *****************************************************
+ ******************************************************************************/
+
+
+/******************************************************************************
+ ******* prototypes ***********************************************************
+ ******************************************************************************/
+__attribute__((nonnull(1, 3)))
+inline
+int	alx_fgets_nonl	(char buf[restrict /*bufsiz*/], int bufsiz,
+			 FILE *restrict stream, ptrdiff_t *restrict len);
+
+
+/******************************************************************************
+ ******* static inline ********************************************************
+ ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+__attribute__((always_inline, nonnull(1, 3)))
+static inline
+int	fgets_nonl	(char buf[restrict /*bufsiz*/], int bufsiz,
+			 FILE *restrict stream, ptrdiff_t *restrict len)
 {
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_ldbl(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare	(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_f	(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_uint(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_int	(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_char(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_u8	(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_s8	(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_u16	(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_s16	(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_u32	(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_s32	(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_u64	(const void *a_ptr, const void *b_ptr);
-[[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_s64	(const void *a_ptr, const void *b_ptr);
+	return	alx_fgets_nonl(buf, bufsiz, stream, len);
 }
+#endif
 
 
 /******************************************************************************
- ******* namespace ************************************************************
+ ******* inline ***************************************************************
  ******************************************************************************/
-namespace alx {
+inline
+int	alx_fgets_nonl	(char buf[restrict /*bufsiz*/], int bufsiz,
+			 FILE *restrict stream, ptrdiff_t *restrict len)
+{
+	ptrdiff_t	l;
 
+	if (!fgets(buf, bufsiz, stream))
+		goto err;
 
-/******************************************************************************
- ******* enum *****************************************************************
- ******************************************************************************/
+	l	= strlen(buf);
+	if (l > 0  &&  buf[l-1] == '\n')
+		buf[--l] = '\0';
+	if (len)
+		*len	= l;
 
-
-/******************************************************************************
- ******* struct / union *******************************************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* extern functions *****************************************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* namespace ************************************************************
- ******************************************************************************/
-}	/* namespace alx */
+	return	!l;
+err:
+	if (len)
+		*len	= 0;
+	return	-1;
+}
 
 
 /******************************************************************************
