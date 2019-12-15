@@ -103,7 +103,8 @@ GSL_OBJ		=							\
 		$(TMP_DIR)/extra/gsl/distributions/poisson.o		\
 		$(TMP_DIR)/extra/gsl/distributions/uniform.o		\
 		$(TMP_DIR)/extra/gsl/rstat/median.o			\
-		$(TMP_DIR)/extra/gsl/statistics/mean.o
+		$(TMP_DIR)/extra/gsl/statistics/mean.o			\
+		$(TMP_DIR)/extra/gsl/temperature/units.o
 NCURSES_OBJ	=							\
 		$(TMP_DIR)/extra/ncurses/common.o			\
 		$(TMP_DIR)/extra/ncurses/get.o				\

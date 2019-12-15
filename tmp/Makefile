@@ -48,6 +48,7 @@ gsl:
 	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/gsl/distributions/
 	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/gsl/rstat/
 	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/gsl/statistics/
+	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/gsl/temperature/
 
 PHONY += ncurses
 ncurses:
