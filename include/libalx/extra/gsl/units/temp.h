@@ -18,6 +18,17 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+#define ALX_GSL_UNITS_0K_TO_C_LDBL	(-273.15L)
+#define ALX_GSL_UNITS_0K_TO_C		(-273.15)
+#define ALX_GSL_UNITS_0K_TO_C_FLT	(-273.15f)
+
+#define ALX_GSL_UNITS_0K_TO_F_LDBL	(-459.67L)
+#define ALX_GSL_UNITS_0K_TO_F		(-459.67)
+#define ALX_GSL_UNITS_0K_TO_F_FLT	(-459.67f)
+
+#define ALX_GSL_UNITS_R_TO_K_LDBL	(5.0L / 9.0L)
+#define ALX_GSL_UNITS_R_TO_K		(5.0 / 9.0)
+#define ALX_GSL_UNITS_R_TO_K_FLT	(5.0f / 9.0f)
 
 
 /******************************************************************************
@@ -100,114 +111,114 @@ float		alx_gsl_units_R_to_K_flt	(float r);
 inline
 long double	alx_gsl_units_K_to_C_ldbl	(long double k)
 {
-	return	k - 273.15L;
+	return	k + ALX_GSL_UNITS_0K_TO_C_LDBL;
 }
 
 inline
 double		alx_gsl_units_K_to_C		(double k)
 {
-	return	k - 273.15;
+	return	k + ALX_GSL_UNITS_0K_TO_C;
 }
 
 inline
 float		alx_gsl_units_K_to_C_flt	(float k)
 {
-	return	k - 273.15f;
+	return	k + ALX_GSL_UNITS_0K_TO_C_FLT;
 }
 
 
 inline
 long double	alx_gsl_units_C_to_K_ldbl	(long double c)
 {
-	return	c + 273.15L;
+	return	c - ALX_GSL_UNITS_0K_TO_C_LDBL;
 }
 
 inline
 double		alx_gsl_units_C_to_K		(double c)
 {
-	return	c + 273.15;
+	return	c - ALX_GSL_UNITS_0K_TO_C;
 }
 
 inline
 float		alx_gsl_units_C_to_K_flt	(float c)
 {
-	return	c + 273.15f;
+	return	c - ALX_GSL_UNITS_0K_TO_C_FLT;
 }
 
 
 inline
 long double	alx_gsl_units_K_to_F_ldbl	(long double k)
 {
-	return	k * 1.8L + 459.67L;
+	return	k / ALX_GSL_UNITS_R_TO_K_LDBL + ALX_GSL_UNITS_0K_TO_F_LDBL;
 }
 
 inline
 double		alx_gsl_units_K_to_F		(double k)
 {
-	return	k * 1.8 + 459.67;
+	return	k / ALX_GSL_UNITS_R_TO_K + ALX_GSL_UNITS_0K_TO_F;
 }
 
 inline
 float		alx_gsl_units_K_to_F_flt	(float k)
 {
-	return	k * 1.8f + 459.67f;
+	return	k / ALX_GSL_UNITS_R_TO_K_FLT + ALX_GSL_UNITS_0K_TO_F_FLT;
 }
 
 
 inline
 long double	alx_gsl_units_F_to_K_ldbl	(long double f)
 {
-	return	(f - 459.67L) / 1.8L;
+	return	(f - ALX_GSL_UNITS_0K_TO_F_LDBL) * ALX_GSL_UNITS_R_TO_K_LDBL;
 }
 
 inline
 double		alx_gsl_units_F_to_K		(double f)
 {
-	return	(f - 459.67) / 1.8;
+	return	(f - ALX_GSL_UNITS_0K_TO_F) * ALX_GSL_UNITS_R_TO_K;
 }
 
 inline
 float		alx_gsl_units_F_to_K_flt	(float f)
 {
-	return	(f - 459.67f) / 1.8f;
+	return	(f - ALX_GSL_UNITS_0K_TO_F_FLT) * ALX_GSL_UNITS_R_TO_K_FLT;
 }
 
 
 inline
 long double	alx_gsl_units_K_to_R_ldbl	(long double k)
 {
-	return	k * 1.8L;
+	return	k / ALX_GSL_UNITS_R_TO_K_LDBL;
 }
 
 inline
 double		alx_gsl_units_K_to_R		(double k)
 {
-	return	k * 1.8;
+	return	k / ALX_GSL_UNITS_R_TO_K;
 }
 
 inline
 float		alx_gsl_units_K_to_R_flt	(float k)
 {
-	return	k * 1.8f;
+	return	k / ALX_GSL_UNITS_R_TO_K_FLT;
 }
 
 
 inline
 long double	alx_gsl_units_R_to_K_ldbl	(long double r)
 {
-	return	r / 1.8L;
+	return	r * ALX_GSL_UNITS_R_TO_K_LDBL;
 }
 
 inline
 double		alx_gsl_units_R_to_K		(double r)
 {
-	return	r / 1.8;
+	return	r * ALX_GSL_UNITS_R_TO_K;
 }
 
 inline
 float		alx_gsl_units_R_to_K_flt	(float r)
 {
-	return	r / 1.8f;
+	return	r * ALX_GSL_UNITS_R_TO_K_FLT;
 }
 
 
