@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/gsl/units/len.hpp */
+#pragma once	/* libalx/extra/gsl/units/weight.h */
 
 
 /******************************************************************************
@@ -18,37 +18,9 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-#define ALX_GSL_UNITS_ft_TO_m_LDBL	(0.3048L)
-#define ALX_GSL_UNITS_ft_TO_m		(0.3048)
-#define ALX_GSL_UNITS_ft_TO_m_FLT	(0.3048f)
-
-
-/******************************************************************************
- ******* extern "C" ***********************************************************
- ******************************************************************************/
-extern	"C"
-{
-[[gnu::const]]
-long double	alx_gsl_units_m_to_ft_ldbl	(long double m);
-[[gnu::const]]
-double		alx_gsl_units_m_to_ft		(double m);
-[[gnu::const]]
-float		alx_gsl_units_m_to_ft_flt	(float m);
-
-[[gnu::const]]
-long double	alx_gsl_units_ft_to_m_ldbl	(long double ft);
-[[gnu::const]]
-double		alx_gsl_units_ft_to_m		(double ft);
-[[gnu::const]]
-float		alx_gsl_units_ft_to_m_flt	(float ft);
-}
-
-
-/******************************************************************************
- ******* namespace ************************************************************
- ******************************************************************************/
-namespace alx {
-namespace gsl {
+#define ALX_GSL_UNITS_lb_TO_kg_LDBL	(0.45359237L)
+#define ALX_GSL_UNITS_lb_TO_kg		(0.45359237)
+#define ALX_GSL_UNITS_lb_TO_kg_FLT	(0.45359237f)
 
 
 /******************************************************************************
@@ -62,15 +34,68 @@ namespace gsl {
 
 
 /******************************************************************************
- ******* extern functions *****************************************************
+ ******* prototypes ***********************************************************
  ******************************************************************************/
+__attribute__((const))
+inline
+long double	alx_gsl_units_kg_to_lb_ldbl	(long double kg);
+__attribute__((const))
+inline
+double		alx_gsl_units_kg_to_lb		(double kg);
+__attribute__((const))
+inline
+float		alx_gsl_units_kg_to_lb_flt	(float kg);
+
+__attribute__((const))
+inline
+long double	alx_gsl_units_lb_to_kg_ldbl	(long double lb);
+__attribute__((const))
+inline
+double		alx_gsl_units_lb_to_kg		(double lb);
+__attribute__((const))
+inline
+float		alx_gsl_units_lb_to_kg_flt	(float lb);
 
 
 /******************************************************************************
- ******* namespace ************************************************************
+ ******* inline ***************************************************************
  ******************************************************************************/
-}	/* namespace gsl */
-}	/* namespace alx */
+inline
+long double	alx_gsl_units_kg_to_lb_ldbl	(long double kg)
+{
+	return	kg / ALX_GSL_UNITS_lb_TO_kg_LDBL;
+}
+
+inline
+double		alx_gsl_units_kg_to_lb		(double kg)
+{
+	return	kg / ALX_GSL_UNITS_lb_TO_kg;
+}
+
+inline
+float		alx_gsl_units_kg_to_lb_flt	(float kg)
+{
+	return	kg / ALX_GSL_UNITS_lb_TO_kg_FLT;
+}
+
+
+inline
+long double	alx_gsl_units_lb_to_kg_ldbl	(long double lb)
+{
+	return	lb * ALX_GSL_UNITS_lb_TO_kg_LDBL;
+}
+
+inline
+double		alx_gsl_units_lb_to_kg		(double lb)
+{
+	return	lb * ALX_GSL_UNITS_lb_TO_kg;
+}
+
+inline
+float		alx_gsl_units_lb_to_kg_flt	(float lb)
+{
+	return	lb * ALX_GSL_UNITS_lb_TO_kg_FLT;
+}
 
 
 /******************************************************************************

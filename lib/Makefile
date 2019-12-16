@@ -105,7 +105,8 @@ GSL_OBJ		=							\
 		$(TMP_DIR)/extra/gsl/rstat/median.o			\
 		$(TMP_DIR)/extra/gsl/statistics/mean.o			\
 		$(TMP_DIR)/extra/gsl/units/len.o			\
-		$(TMP_DIR)/extra/gsl/units/temp.o
+		$(TMP_DIR)/extra/gsl/units/temp.o			\
+		$(TMP_DIR)/extra/gsl/units/weight.o
 NCURSES_OBJ	=							\
 		$(TMP_DIR)/extra/ncurses/common.o			\
 		$(TMP_DIR)/extra/ncurses/get.o				\

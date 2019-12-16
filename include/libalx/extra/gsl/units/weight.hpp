@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/gsl/units/len.hpp */
+#pragma once	/* libalx/extra/gsl/units/weight.hpp */
 
 
 /******************************************************************************
@@ -18,9 +18,9 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-#define ALX_GSL_UNITS_ft_TO_m_LDBL	(0.3048L)
-#define ALX_GSL_UNITS_ft_TO_m		(0.3048)
-#define ALX_GSL_UNITS_ft_TO_m_FLT	(0.3048f)
+#define ALX_GSL_UNITS_lb_TO_kg_LDBL	(0.45359237L)
+#define ALX_GSL_UNITS_lb_TO_kg		(0.45359237)
+#define ALX_GSL_UNITS_lb_TO_kg_FLT	(0.45359237f)
 
 
 /******************************************************************************
@@ -29,18 +29,18 @@
 extern	"C"
 {
 [[gnu::const]]
-long double	alx_gsl_units_m_to_ft_ldbl	(long double m);
+long double	alx_gsl_units_kg_to_lb_ldbl	(long double kg);
 [[gnu::const]]
-double		alx_gsl_units_m_to_ft		(double m);
+double		alx_gsl_units_kg_to_lb		(double kg);
 [[gnu::const]]
-float		alx_gsl_units_m_to_ft_flt	(float m);
+float		alx_gsl_units_kg_to_lb_flt	(float kg);
 
 [[gnu::const]]
-long double	alx_gsl_units_ft_to_m_ldbl	(long double ft);
+long double	alx_gsl_units_lb_to_kg_ldbl	(long double lb);
 [[gnu::const]]
-double		alx_gsl_units_ft_to_m		(double ft);
+double		alx_gsl_units_lb_to_kg		(double lb);
 [[gnu::const]]
-float		alx_gsl_units_ft_to_m_flt	(float ft);
+float		alx_gsl_units_lb_to_kg_flt	(float lb);
 }
 
 

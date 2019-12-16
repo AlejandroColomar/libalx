@@ -13,7 +13,8 @@
 # dependencies
 OBJ		=							\
 		len.o							\
-		temp.o
+		temp.o							\
+		weight.o
 
 LEN_INC		=							\
 		$(INC_DIR)/libalx/extra/gsl/units/len.h
@@ -24,6 +25,11 @@ TEMP_INC	=							\
 		$(INC_DIR)/libalx/extra/gsl/units/temp.h
 TEMP_SRC	=							\
 		$(SRC_DIR)/extra/gsl/units/temp.c
+
+WEIGHT_INC	=							\
+		$(INC_DIR)/libalx/extra/gsl/units/weight.h
+WEIGHT_SRC	=							\
+		$(SRC_DIR)/extra/gsl/units/weight.c
 
 ################################################################################
 # cflags
@@ -54,6 +60,9 @@ len.so.s: $(LEN_SRC) $(LEN_INC)
 
 temp.a.s: $(TEMP_SRC) $(TEMP_INC)
 temp.so.s: $(TEMP_SRC) $(TEMP_INC)
+
+weight.a.s: $(WEIGHT_SRC) $(WEIGHT_INC)
+weight.so.s: $(WEIGHT_SRC) $(WEIGHT_INC)
 
 
 PHONY += clean
