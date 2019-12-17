@@ -76,6 +76,8 @@ BASE_OBJ	=							\
 		$(TMP_DIR)/base/string/strstr/strscasestr.o		\
 		$(TMP_DIR)/base/string/strstr/strsstr.o
 
+ALX_OBJ		=							\
+		$(TMP_DIR)/extra/alx/linked-list/circular-doubly.o
 CV_OBJ		=							\
 		$(TMP_DIR)/extra/cv/alx.o				\
 		$(TMP_DIR)/extra/cv/core.o				\
@@ -120,7 +122,7 @@ ZBAR_OBJ	=							\
 
 ALL	= libalx							\
 	base								\
-	cv gmp gsl ncurses ocr zbar
+	alx cv gmp gsl ncurses ocr zbar
 
 # target: dependencies
 #	action
@@ -132,6 +134,9 @@ all: $(ALL)
 PHONY += base
 base: libalx libalx/libalx-base.a libalx/libalx-base.so
 
+
+PHONY += alx
+alx: libalx libalx/libalx-alx.a libalx/libalx-alx.so
 
 PHONY += cv
 cv: libalx libalx/libalx-cv.a libalx/libalx-cv.so
@@ -167,6 +172,11 @@ libalx/libalx-base.so: $(patsubst %.o,%.so.o,$(BASE_OBJ))
 	@echo	"	CC	libalx/lib/$@"
 	$(Q)$(CC) $(LDFLAGS) -o $@ $^ `pkg-config --libs libbsd-overlay`
 
+
+libalx/libalx-alx.a: $(patsubst %.o,%.a.o,$(ALX_OBJ))
+libalx/libalx-alx.so: $(patsubst %.o,%.so.o,$(ALX_OBJ))
+	@echo	"	CXX	libalx/lib/$@"
+	$(Q)$(CXX) $(LDFLAGS) -o $@ $^ -l alx-base
 
 libalx/libalx-cv.a: $(patsubst %.o,%.a.o,$(CV_OBJ))
 libalx/libalx-cv.so: $(patsubst %.o,%.so.o,$(CV_OBJ))

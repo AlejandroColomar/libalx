@@ -1,7 +1,7 @@
 Name: libalx-gsl
 Description: The libalx C/C++ library (GSL extension)
 URL: https://github.com/alejandro-colomar/libalx
-Version: 1~b6
+Version: 1~b8
 Requires: gsl
 Requires.private: libalx-base
 

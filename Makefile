@@ -214,7 +214,13 @@ base:
 	$(Q)$(MAKE) $@	-C $(LIB_DIR)
 
 PHONY += extra
-extra: cv gmp gsl ncurses ocr zbar
+extra: alx cv gmp gsl ncurses ocr zbar
+
+PHONY += alx
+alx: base
+	@echo	"	MAKE	$@"
+	$(Q)$(MAKE) $@	-C $(TMP_DIR)
+	$(Q)$(MAKE) $@	-C $(LIB_DIR)
 
 PHONY += cv
 cv: base gsl
@@ -309,6 +315,7 @@ install_extra:
 	@echo	"	CP -r	./lib/libalx/*"
 	$(Q)cp -r -f $(v)	./lib/libalx/*				\
 					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
+	$(Q)$(MAKE)	libalx-alx.pc
 	$(Q)$(MAKE)	libalx-cv.pc
 	$(Q)$(MAKE)	libalx-gmp.pc
 	$(Q)$(MAKE)	libalx-gsl.pc
