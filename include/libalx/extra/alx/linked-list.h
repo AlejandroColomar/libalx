@@ -52,21 +52,21 @@ __attribute__((nonnull))
 int	alx_llist_deinit	(struct Alx_LinkedList *list);
 __attribute__((nonnull))
 int	alx_llist_first_element	(struct Alx_LinkedList *list,
-				 size_t size, const void *data);
+				 const void *data, size_t size);
 __attribute__((nonnull))
 int	alx_llist_remove_last	(struct Alx_LinkedList *list);
 __attribute__((nonnull))
 int	alx_llist_prepend	(struct Alx_LinkedList *list,
-				 size_t size, const void *data);
+				 const void *data, size_t size);
 __attribute__((nonnull))
 int	alx_llist_append	(struct Alx_LinkedList *list,
-				 size_t size, const void *data);
+				 const void *data, size_t size);
 __attribute__((nonnull))
 int	alx_llist_insert_before	(struct Alx_LinkedList *list,
-				 size_t size, const void *data);
+				 const void *data, size_t size);
 __attribute__((nonnull))
 int	alx_llist_insert_after	(struct Alx_LinkedList *list,
-				 size_t size, const void *data);
+				 const void *data, size_t size);
 __attribute__((nonnull))
 int	alx_llist_remove_head	(struct Alx_LinkedList *list);
 __attribute__((nonnull))
@@ -84,6 +84,9 @@ __attribute__((nonnull))
 int	alx_llist_move_bwd	(struct Alx_LinkedList *list, ptrdiff_t n);
 __attribute__((nonnull))
 int	alx_llist_move_to	(struct Alx_LinkedList *list, ptrdiff_t pos);
+__attribute__((nonnull))
+int	alx_llist_edit_current	(struct Alx_LinkedList *list,
+				 const void *data, size_t size);
 
 
 /******************************************************************************

@@ -14,6 +14,7 @@
 
 #include "libalx/base/stdlib/alloc/mallocarrays.h"
 #include "libalx/base/stdlib/alloc/mallocs.h"
+#include "libalx/base/stdlib/alloc/reallocs.h"
 
 
 /******************************************************************************
@@ -37,7 +38,7 @@
 int	alx_llist_init		(struct Alx_LinkedList **list)
 {
 
-	if (alx_mallocs(list, 1))
+	if (alx_mallocarrays(list, 1))
 		return	-1;
 
 	(*list)->head		= NULL;
@@ -59,7 +60,7 @@ int	alx_llist_deinit	(struct Alx_LinkedList *list)
 }
 
 int	alx_llist_first_element	(struct Alx_LinkedList *list,
-				 size_t size, const void *data)
+				 const void *data, size_t size)
 {
 	struct Alx_LLNode	*node;
 
@@ -106,12 +107,12 @@ int	alx_llist_remove_last	(struct Alx_LinkedList *list)
 }
 
 int	alx_llist_prepend	(struct Alx_LinkedList *list,
-				 size_t size, const void *data)
+				 const void *data, size_t size)
 {
 	struct Alx_LLNode	*node;
 
 	if (!list->nmemb) {
-		alx_llist_first_element(list, size, data);
+		alx_llist_first_element(list, data, size);
 		return	1;
 	}
 
@@ -137,12 +138,12 @@ err:
 }
 
 int	alx_llist_append	(struct Alx_LinkedList *list,
-				 size_t size, const void *data)
+				 const void *data, size_t size)
 {
 	struct Alx_LLNode	*node;
 
 	if (!list->nmemb) {
-		alx_llist_first_element(list, size, data);
+		alx_llist_first_element(list, data, size);
 		return	1;
 	}
 
@@ -168,12 +169,12 @@ err:
 }
 
 int	alx_llist_insert_before	(struct Alx_LinkedList *list,
-				 size_t size, const void *data)
+				 const void *data, size_t size)
 {
 	struct Alx_LLNode	*node;
 
 	if (!list->nmemb) {
-		alx_llist_first_element(list, size, data);
+		alx_llist_first_element(list, data, size);
 		return	1;
 	}
 
@@ -198,12 +199,12 @@ err:
 }
 
 int	alx_llist_insert_after	(struct Alx_LinkedList *list,
-				 size_t size, const void *data)
+				 const void *data, size_t size)
 {
 	struct Alx_LLNode	*node;
 
 	if (!list->nmemb) {
-		alx_llist_first_element(list, size, data);
+		alx_llist_first_element(list, data, size);
 		return	1;
 	}
 
@@ -235,8 +236,7 @@ int	alx_llist_remove_head	(struct Alx_LinkedList *list)
 	case 0:
 		return	1;
 	case 1:
-		alx_llist_remove_last(list);
-		return	0;
+		return	alx_llist_remove_last(list);
 	}
 
 	node	= list->head;
@@ -261,8 +261,7 @@ int	alx_llist_remove_tail	(struct Alx_LinkedList *list)
 	case 0:
 		return	1;
 	case 1:
-		alx_llist_remove_last(list);
-		return	0;
+		return	alx_llist_remove_last(list);
 	}
 
 	node	= list->tail;
@@ -287,8 +286,7 @@ int	alx_llist_remove_current(struct Alx_LinkedList *list)
 	case 0:
 		return	1;
 	case 1:
-		alx_llist_remove_last(list);
-		return	0;
+		return	alx_llist_remove_last(list);
 	}
 
 	node	= list->current;
@@ -382,6 +380,23 @@ int	alx_llist_move_to	(struct Alx_LinkedList *list, ptrdiff_t pos)
 	if (pos < 0)
 		return	alx_llist_move_bwd(list, -pos);
 	return	alx_llist_move_fwd(list, pos);
+}
+
+int	alx_llist_edit_current	(struct Alx_LinkedList *list,
+				 const void *data, size_t size)
+{
+	struct Alx_LLNode	*node;
+
+	if (!list->nmemb)
+		return	-1;
+
+	node	= list->current;
+	if (alx_reallocs(&node->data, size))
+		return	-2;
+
+	memmove(node->data, data, size);
+
+	return	0;
 }
 
 

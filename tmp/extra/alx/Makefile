@@ -17,6 +17,7 @@ OBJ		=							\
 LLIST_INC	=							\
 		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.h	\
 		$(INC_DIR)/libalx/base/stdlib/alloc/mallocs.h		\
+		$(INC_DIR)/libalx/base/stdlib/alloc/reallocs.h		\
 		$(INC_DIR)/libalx/extra/alx/linked-list.h
 LLIST_SRC	=							\
 		$(SRC_DIR)/extra/alx/linked-list.c
