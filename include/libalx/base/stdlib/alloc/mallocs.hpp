@@ -13,7 +13,6 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/base/stdlib/alloc/mallocarray.hpp"
 
 
 /******************************************************************************
@@ -21,14 +20,14 @@
  ******************************************************************************/
 /*
  * [[gnu::nonnull]]
- * int	alx_mallocs(type **restrict ptr, ptrdiff_t nmemb);
+ * int	alx_mallocs(void **restrict ptr, size_t size);
  */
-#define alx_mallocs(ptr, nmemb)	(					\
+#define alx_mallocs(ptr, size)	(					\
 {									\
 	auto	ptr_	= (ptr);					\
 	void	*vp;							\
 									\
-	vp	= alx_mallocarray(nmemb, sizeof(**ptr_));		\
+	vp	= malloc(size);						\
 	*ptr_	= static_cast<typeof(*ptr_)>(vp);			\
 									\
 	!(*ptr_);							\
@@ -38,7 +37,7 @@
 
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define mallocs(ptr, nmemb)	alx_mallocs(ptr, nmemb)
+#define mallocs(ptr, size)	alx_mallocs(ptr, size)
 #endif
 
 
