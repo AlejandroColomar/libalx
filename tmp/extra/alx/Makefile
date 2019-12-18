@@ -12,13 +12,14 @@
 ################################################################################
 # dependencies
 OBJ		=							\
-		circular-doubly.o
+		linked-list.o
 
-CD_INC		=							\
+LLIST_INC	=							\
+		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.h	\
 		$(INC_DIR)/libalx/base/stdlib/alloc/mallocs.h		\
-		$(INC_DIR)/libalx/extra/alx/linked-list/circular-doubly.h
-CD_SRC		=							\
-		$(SRC_DIR)/extra/alx/linked-list/circular-doubly.c
+		$(INC_DIR)/libalx/extra/alx/linked-list.h
+LLIST_SRC	=							\
+		$(SRC_DIR)/extra/alx/linked-list.c
 
 ################################################################################
 # target: dependencies
@@ -29,18 +30,18 @@ all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 
 %.a.s:
-	@echo	"	CC	libalx/tmp/extra/alx/linked-list/$@"
+	@echo	"	CC	libalx/tmp/extra/alx/$@"
 	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
 %.so.s:
-	@echo	"	CC	libalx/tmp/extra/alx/linked-list/$@"
+	@echo	"	CC	libalx/tmp/extra/alx/$@"
 	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
 %.o: %.s
-	@echo	"	AS	libalx/tmp/extra/alx/linked-list/$@"
+	@echo	"	AS	libalx/tmp/extra/alx/$@"
 	$(Q)$(AS) $< -o $@
 
 
-circular-doubly.a.s: $(CD_SRC) $(CD_INC)
-circular-doubly.so.s: $(CD_SRC) $(CD_INC)
+linked-list.a.s: $(LLIST_SRC) $(LLIST_INC)
+linked-list.so.s: $(LLIST_SRC) $(LLIST_INC)
 
 
 PHONY += clean

@@ -26,13 +26,13 @@
  ******************************************************************************/
 /*
  * [[gnu::nonnull]]
- * int	alx_mallocs(type **restrict ptr, ptrdiff_t nmemb);
+ * int	alx_mallocs(void **restrict ptr, size_t size);
  */
-#define alx_mallocs(ptr, nmemb)	(					\
+#define alx_mallocs(ptr, size)	(					\
 {									\
 	__auto_type	ptr_	= (ptr);				\
 									\
-	*ptr_	= alx_mallocarray(nmemb, sizeof(**ptr_));		\
+	*ptr_	= malloc(size);						\
 									\
 	!(*ptr_);							\
 }									\

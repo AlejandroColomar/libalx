@@ -19,7 +19,7 @@
 #include <opencv2/core.hpp>
 
 #include "libalx/base/compiler/restrict.hpp"
-#include "libalx/base/stdlib/alloc/mallocs.hpp"
+#include "libalx/base/stdlib/alloc/mallocarrays.hpp"
 #include "libalx/base/stdlib/swap.hpp"
 
 
@@ -44,7 +44,7 @@
 /* ----- alloc / free */
 int	alx::CV::alloc_img	(class cv::Mat **restrict img)
 {
-	return	alx_mallocs(img, 1);
+	return	alx_mallocarrays(img, 1);
 }
 
 int	alx_cv_alloc_img	(void **restrict img)
@@ -66,7 +66,7 @@ void	alx_cv_free_img		(void *restrict img)
 
 int	alx::CV::alloc_rect	(class cv::Rect_<int> **restrict rect)
 {
-	return	alx_mallocs(rect, 1);
+	return	alx_mallocarrays(rect, 1);
 }
 
 int	alx_cv_alloc_rect	(void **restrict rect)
@@ -86,7 +86,7 @@ void	alx_cv_free_rect	(void *restrict rect)
 
 int	alx::CV::alloc_rect_rot	(class cv::RotatedRect **restrict rect_rot)
 {
-	return	alx_mallocs(rect_rot, 1);
+	return	alx_mallocarrays(rect_rot, 1);
 }
 
 int	alx_cv_alloc_rect_rot	(void **restrict rect_rot)
@@ -109,7 +109,7 @@ int	alx::CV::alloc_conts	(class std::vector<
 					class cv::Point_<
 					int>>> **restrict contours)
 {
-	return	alx_mallocs(contours, 1);
+	return	alx_mallocarrays(contours, 1);
 }
 
 int	alx_cv_alloc_conts	(void **restrict contours)

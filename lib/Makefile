@@ -34,7 +34,9 @@ BASE_OBJ	=							\
 		$(TMP_DIR)/base/stdio/sscan.o				\
 		$(TMP_DIR)/base/stdlib/alloc/callocs.o			\
 		$(TMP_DIR)/base/stdlib/alloc/mallocarray.o		\
+		$(TMP_DIR)/base/stdlib/alloc/mallocarrays.o		\
 		$(TMP_DIR)/base/stdlib/alloc/mallocs.o			\
+		$(TMP_DIR)/base/stdlib/alloc/reallocarrays.o		\
 		$(TMP_DIR)/base/stdlib/alloc/reallocs.o			\
 		$(TMP_DIR)/base/stdlib/array_split_pos_neg.o		\
 		$(TMP_DIR)/base/stdlib/average.o			\
@@ -77,7 +79,7 @@ BASE_OBJ	=							\
 		$(TMP_DIR)/base/string/strstr/strsstr.o
 
 ALX_OBJ		=							\
-		$(TMP_DIR)/extra/alx/linked-list/circular-doubly.o
+		$(TMP_DIR)/extra/alx/linked-list.o
 CV_OBJ		=							\
 		$(TMP_DIR)/extra/cv/alx.o				\
 		$(TMP_DIR)/extra/cv/core.o				\

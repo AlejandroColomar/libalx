@@ -7,10 +7,12 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/extra/alx/linked-list/circular-doubly.h"
+#include "libalx/extra/alx/linked-list.h"
 
 #include <stdlib.h>
+#include <string.h>
 
+#include "libalx/base/stdlib/alloc/mallocarrays.h"
 #include "libalx/base/stdlib/alloc/mallocs.h"
 
 
@@ -32,7 +34,7 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_cdllist_init		(struct Alx_DLinkedList **list)
+int	alx_llist_init		(struct Alx_LinkedList **list)
 {
 
 	if (alx_mallocs(list, 1))
@@ -46,28 +48,30 @@ int	alx_cdllist_init		(struct Alx_DLinkedList **list)
 	return	0;
 }
 
-int	alx_cdllist_deinit		(struct Alx_DLinkedList *list)
+int	alx_llist_deinit	(struct Alx_LinkedList *list)
 {
 	int	status;
 
-	status	= alx_cdllist_remove_all(list);
+	status	= alx_llist_remove_all(list);
 	free(list);
 
 	return	status;
 }
 
-int	alx_cdllist_first_element	(struct Alx_DLinkedList *list,
-					 void *data)
+int	alx_llist_first_element	(struct Alx_LinkedList *list,
+				 size_t size, const void *data)
 {
-	struct Alx_DLLNode	*node;
+	struct Alx_LLNode	*node;
 
 	if (list->nmemb)
+		return	-3;
+
+	if (alx_mallocarrays(&node, 1))
 		return	-1;
+	if (alx_mallocs(&node->data, size))
+		goto err;
 
-	if (alx_mallocs(&node, 1))
-		return	-2;
-
-	node->data	= data;
+	memcpy(node->data, data, size);
 	node->prev	= node;
 	node->next	= node;
 
@@ -77,16 +81,20 @@ int	alx_cdllist_first_element	(struct Alx_DLinkedList *list,
 	list->nmemb	= 1;
 
 	return	0;
+err:
+	free(node);
+	return	-2;
 }
 
-int	alx_cdllist_remove_last		(struct Alx_DLinkedList *list)
+int	alx_llist_remove_last	(struct Alx_LinkedList *list)
 {
-	struct Alx_DLLNode	*node;
+	struct Alx_LLNode	*node;
 
 	if (list->nmemb != 1)
 		return	-1;
 
 	node	= list->head;
+	free(node->data);
 
 	list->head	= NULL;
 	list->tail	= NULL;
@@ -97,20 +105,22 @@ int	alx_cdllist_remove_last		(struct Alx_DLinkedList *list)
 	return	0;
 }
 
-int	alx_cdllist_prepend		(struct Alx_DLinkedList *list,
-					 void *data)
+int	alx_llist_prepend	(struct Alx_LinkedList *list,
+				 size_t size, const void *data)
 {
-	struct Alx_DLLNode	*node;
+	struct Alx_LLNode	*node;
 
 	if (!list->nmemb) {
-		alx_cdllist_first_element(list, data);
+		alx_llist_first_element(list, size, data);
 		return	1;
 	}
 
-	if (alx_mallocs(&node, 1))
+	if (alx_mallocarrays(&node, 1))
 		return	-1;
+	if (alx_mallocs(&node->data, size))
+		goto err;
 
-	node->data	= data;
+	memcpy(node->data, data, size);
 	node->prev	= list->tail;
 	node->next	= list->head;
 
@@ -121,22 +131,27 @@ int	alx_cdllist_prepend		(struct Alx_DLinkedList *list,
 	(list->nmemb)++;
 
 	return	0;
+err:
+	free(node);
+	return	-2;
 }
 
-int	alx_cdllist_append		(struct Alx_DLinkedList *list,
-					 void *data)
+int	alx_llist_append	(struct Alx_LinkedList *list,
+				 size_t size, const void *data)
 {
-	struct Alx_DLLNode	*node;
+	struct Alx_LLNode	*node;
 
 	if (!list->nmemb) {
-		alx_cdllist_first_element(list, data);
+		alx_llist_first_element(list, size, data);
 		return	1;
 	}
 
-	if (alx_mallocs(&node, 1))
+	if (alx_mallocarrays(&node, 1))
 		return	-1;
+	if (alx_mallocs(&node->data, size))
+		goto err;
 
-	node->data	= data;
+	memcpy(node->data, data, size);
 	node->prev	= list->tail;
 	node->next	= list->head;
 
@@ -147,22 +162,27 @@ int	alx_cdllist_append		(struct Alx_DLinkedList *list,
 	(list->nmemb)++;
 
 	return	0;
+err:
+	free(node);
+	return	-2;
 }
 
-int	alx_cdllist_add_before		(struct Alx_DLinkedList *list,
-					 void *data)
+int	alx_llist_insert_before	(struct Alx_LinkedList *list,
+				 size_t size, const void *data)
 {
-	struct Alx_DLLNode	*node;
+	struct Alx_LLNode	*node;
 
 	if (!list->nmemb) {
-		alx_cdllist_first_element(list, data);
+		alx_llist_first_element(list, size, data);
 		return	1;
 	}
 
-	if (alx_mallocs(&node, 1))
+	if (alx_mallocarrays(&node, 1))
 		return	-1;
+	if (alx_mallocs(&node->data, size))
+		goto err;
 
-	node->data	= data;
+	memcpy(node->data, data, size);
 	node->prev	= list->current->prev;
 	node->next	= list->current;
 
@@ -172,22 +192,27 @@ int	alx_cdllist_add_before		(struct Alx_DLinkedList *list,
 	(list->nmemb)++;
 
 	return	0;
+err:
+	free(node);
+	return	-2;
 }
 
-int	alx_cdllist_add_after		(struct Alx_DLinkedList *list,
-					 void *data)
+int	alx_llist_insert_after	(struct Alx_LinkedList *list,
+				 size_t size, const void *data)
 {
-	struct Alx_DLLNode	*node;
+	struct Alx_LLNode	*node;
 
 	if (!list->nmemb) {
-		alx_cdllist_first_element(list, data);
+		alx_llist_first_element(list, size, data);
 		return	1;
 	}
 
-	if (alx_mallocs(&node, 1))
+	if (alx_mallocarrays(&node, 1))
 		return	-1;
+	if (alx_mallocs(&node->data, size))
+		goto err;
 
-	node->data	= data;
+	memcpy(node->data, data, size);
 	node->prev	= list->current;
 	node->next	= list->current->next;
 
@@ -197,21 +222,26 @@ int	alx_cdllist_add_after		(struct Alx_DLinkedList *list,
 	(list->nmemb)++;
 
 	return	0;
+err:
+	free(node);
+	return	-2;
 }
 
-int	alx_cdllist_remove_head		(struct Alx_DLinkedList *list)
+int	alx_llist_remove_head	(struct Alx_LinkedList *list)
 {
-	struct Alx_DLLNode	*node;
+	struct Alx_LLNode	*node;
 
 	switch (list->nmemb) {
 	case 0:
 		return	1;
 	case 1:
-		alx_cdllist_remove_last(list);
+		alx_llist_remove_last(list);
 		return	0;
 	}
 
 	node	= list->head;
+	free(node->data);
+
 	list->head->prev->next	= node->next;
 	list->head->next->prev	= node->prev;
 	if (list->current == list->head)
@@ -223,19 +253,21 @@ int	alx_cdllist_remove_head		(struct Alx_DLinkedList *list)
 	return	0;
 }
 
-int	alx_cdllist_remove_tail		(struct Alx_DLinkedList *list)
+int	alx_llist_remove_tail	(struct Alx_LinkedList *list)
 {
-	struct Alx_DLLNode	*node;
+	struct Alx_LLNode	*node;
 
 	switch (list->nmemb) {
 	case 0:
 		return	1;
 	case 1:
-		alx_cdllist_remove_last(list);
+		alx_llist_remove_last(list);
 		return	0;
 	}
 
 	node	= list->tail;
+	free(node->data);
+
 	list->tail->prev->next	= node->next;
 	list->tail->next->prev	= node->prev;
 	if (list->current == list->tail)
@@ -247,19 +279,21 @@ int	alx_cdllist_remove_tail		(struct Alx_DLinkedList *list)
 	return	0;
 }
 
-int	alx_cdllist_remove_current	(struct Alx_DLinkedList *list)
+int	alx_llist_remove_current(struct Alx_LinkedList *list)
 {
-	struct Alx_DLLNode	*node;
+	struct Alx_LLNode	*node;
 
 	switch (list->nmemb) {
 	case 0:
 		return	1;
 	case 1:
-		alx_cdllist_remove_last(list);
+		alx_llist_remove_last(list);
 		return	0;
 	}
 
 	node	= list->current;
+	free(node->data);
+
 	list->current->prev->next	= node->next;
 	list->current->next->prev	= node->prev;
 	if (list->tail == list->current) {
@@ -277,7 +311,7 @@ int	alx_cdllist_remove_current	(struct Alx_DLinkedList *list)
 	return	0;
 }
 
-int	alx_cdllist_remove_all		(struct Alx_DLinkedList *list)
+int	alx_llist_remove_all	(struct Alx_LinkedList *list)
 {
 	ptrdiff_t	n;
 
@@ -286,15 +320,15 @@ int	alx_cdllist_remove_all		(struct Alx_DLinkedList *list)
 		return	1;
 
 	for (ptrdiff_t i = 0; i < n; i++)
-		alx_cdllist_remove_tail(list);
+		alx_llist_remove_tail(list);
 
 	return	0;
 }
 
-ptrdiff_t alx_cdllist_find		(struct Alx_DLinkedList *list,
-					 struct Alx_DLLNode *node)
+ptrdiff_t alx_llist_find	(struct Alx_LinkedList *list,
+				 struct Alx_LLNode *node)
 {
-	struct Alx_DLLNode	*tmp;
+	struct Alx_LLNode	*tmp;
 
 	tmp	= list->head;
 	for (ptrdiff_t i = 0; i < list->nmemb; i++) {
@@ -306,13 +340,12 @@ ptrdiff_t alx_cdllist_find		(struct Alx_DLinkedList *list,
 	return	-1;
 }
 
-int	alx_cdllist_move_fwd		(struct Alx_DLinkedList *list,
-					 ptrdiff_t n)
+int	alx_llist_move_fwd	(struct Alx_LinkedList *list, ptrdiff_t n)
 {
 	int	status;
 
 	if (n < 0)
-		return	alx_cdllist_move_bwd(list, -n);
+		return	alx_llist_move_bwd(list, -n);
 
 	status	= 0;
 	for (ptrdiff_t i = 0; i < n; i++) {
@@ -324,13 +357,12 @@ int	alx_cdllist_move_fwd		(struct Alx_DLinkedList *list,
 	return	0;
 }
 
-int	alx_cdllist_move_bwd		(struct Alx_DLinkedList *list,
-					 ptrdiff_t n)
+int	alx_llist_move_bwd	(struct Alx_LinkedList *list, ptrdiff_t n)
 {
 	int	status;
 
 	if (n < 0)
-		return	alx_cdllist_move_fwd(list, -n);
+		return	alx_llist_move_fwd(list, -n);
 
 	status	= 0;
 	for (ptrdiff_t i = 0; i < n; i++) {
@@ -342,15 +374,14 @@ int	alx_cdllist_move_bwd		(struct Alx_DLinkedList *list,
 	return	0;
 }
 
-int	alx_cdllist_move_to		(struct Alx_DLinkedList *list,
-					 ptrdiff_t pos)
+int	alx_llist_move_to	(struct Alx_LinkedList *list, ptrdiff_t pos)
 {
 
 	list->current	= list->head;
 
 	if (pos < 0)
-		return	alx_cdllist_move_bwd(list, -pos);
-	return	alx_cdllist_move_fwd(list, pos);
+		return	alx_llist_move_bwd(list, -pos);
+	return	alx_llist_move_fwd(list, pos);
 }
 
 

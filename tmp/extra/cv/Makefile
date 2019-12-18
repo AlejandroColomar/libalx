@@ -31,7 +31,7 @@ ALX_SRC	=								\
 
 CORE_INC	=							\
 		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
-		$(INC_DIR)/libalx/base/stdlib/alloc/mallocs.hpp		\
+		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.hpp	\
 		$(INC_DIR)/libalx/base/stdlib/swap.hpp			\
 		$(INC_DIR)/libalx/extra/cv/core.hpp
 CORE_SRC	=							\

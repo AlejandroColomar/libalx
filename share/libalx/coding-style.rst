@@ -750,13 +750,13 @@ The preferred form for passing a size of a struct is the following:
 
 .. code-block:: c
 
-	p = mallocs(sizeof(*p), 1);
+	p = malloc(sizeof(*p));
 
 or
 
 .. code-block:: c
 
-	if (mallocs__(&p, 1))
+	if (mallocs(&p, sz))
 		goto err;
 
 The alternative form where struct name is spelled out hurts readability and
@@ -771,14 +771,14 @@ The preferred form for allocating an array is the following:
 
 .. code-block:: c
 
-	if (mallocs__(&p, n))
+	if (mallocarrays(&p, n))
 		goto err;
 
 The preferred form for allocating a zeroed array is the following:
 
 .. code-block:: c
 
-	if (callocs__(&p, n))
+	if (callocs(&p, n))
 		goto err;
 
 Both forms check for overflow on the allocation size n * sizeof(...),

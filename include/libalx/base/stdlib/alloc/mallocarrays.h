@@ -7,18 +7,42 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/alx/linked-list/doubly.h */
+#pragma once	/* libalx/base/stdlib/alloc/mallocarrays.h */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include <errno.h>
 #include <stddef.h>
+#include <stdint.h>
+#include <stdlib.h>
+
+#include "libalx/base/stdlib/alloc/mallocarray.h"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+/*
+ * [[gnu::nonnull]]
+ * int	alx_mallocarrays(type **restrict ptr, ptrdiff_t nmemb);
+ */
+#define alx_mallocarrays(ptr, nmemb)	(				\
+{									\
+	__auto_type	ptr_	= (ptr);				\
+									\
+	*ptr_	= alx_mallocarray(nmemb, sizeof(**ptr_));		\
+									\
+	!(*ptr_);							\
+}									\
+)
+
+
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define mallocarrays(ptr, nmemb)	alx_mallocarrays(ptr, nmemb)
+#endif
 
 
 /******************************************************************************
@@ -29,68 +53,15 @@
 /******************************************************************************
  ******* struct / union *******************************************************
  ******************************************************************************/
-struct	Alx_DLLNode {
-	void			*data;
-	struct Alx_DLLNode	*prev;
-	struct Alx_DLLNode	*next;
-};
-
-struct	Alx_DLinkedList {
-	struct Alx_DLLNode	*head;
-	struct Alx_DLLNode	*tail;
-	struct Alx_DLLNode	*current;
-	ptrdiff_t		nmemb;
-};
 
 
 /******************************************************************************
- ******* prototypes ***********************************************************
+ ******* function prototypes **************************************************
  ******************************************************************************/
-__attribute__((nonnull))
-int	alx_dllist_init			(struct Alx_DLinkedList **list);
-__attribute__((nonnull))
-int	alx_dllist_deinit		(struct Alx_DLinkedList *list);
-__attribute__((nonnull))
-int	alx_dllist_first_element	(struct Alx_DLinkedList *list,
-					 void *data);
-__attribute__((nonnull))
-int	alx_dllist_remove_last		(struct Alx_DLinkedList *list);
-__attribute__((nonnull))
-int	alx_dllist_prepend		(struct Alx_DLinkedList *list,
-					 void *data);
-__attribute__((nonnull))
-int	alx_dllist_append		(struct Alx_DLinkedList *list,
-					 void *data);
-__attribute__((nonnull))
-int	alx_dllist_add_before		(struct Alx_DLinkedList *list,
-					 void *data);
-__attribute__((nonnull))
-int	alx_dllist_add_after		(struct Alx_DLinkedList *list,
-					 void *data);
-__attribute__((nonnull))
-int	alx_dllist_remove_head		(struct Alx_DLinkedList *list);
-__attribute__((nonnull))
-int	alx_dllist_remove_tail		(struct Alx_DLinkedList *list);
-__attribute__((nonnull))
-int	alx_dllist_remove_current	(struct Alx_DLinkedList *list);
-__attribute__((nonnull))
-int	alx_dllist_remove_all		(struct Alx_DLinkedList *list);
-__attribute__((nonnull, pure))
-ptrdiff_t alx_dllist_find		(struct Alx_DLinkedList *list,
-					 struct Alx_DLLNode *node);
-__attribute__((nonnull))
-int	alx_dllist_move_fwd		(struct Alx_DLinkedList *list,
-					 ptrdiff_t n);
-__attribute__((nonnull))
-int	alx_dllist_move_bwd		(struct Alx_DLinkedList *list,
-					 ptrdiff_t n);
-__attribute__((nonnull))
-int	alx_dllist_move_to		(struct Alx_DLinkedList *list,
-					 ptrdiff_t pos);
 
 
 /******************************************************************************
- ******* inline ***************************************************************
+ ******* inline functions *****************************************************
  ******************************************************************************/
 
 

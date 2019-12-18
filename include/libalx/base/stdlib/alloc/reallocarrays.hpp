@@ -1,5 +1,5 @@
 /******************************************************************************
- *	Copyright (C) 2018	Alejandro Colomar Andrés		      *
+ *	Copyright (C) 2019	Alejandro Colomar Andrés		      *
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/alx/linked-list/circular-doubly.hpp */
+#pragma once	/* libalx/base/stdlib/alloc/reallocarrays.hpp */
 
 
 /******************************************************************************
@@ -15,81 +15,42 @@
  ******************************************************************************/
 #include <cstdlib>
 
-#include "libalx/extra/alx/linked-list/doubly.hpp"
-
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+/*
+ * [[gnu::nonnull]]
+ * int	alx_reallocarrays(type **restrict ptr, ptrdiff_t nmemb);
+ */
+#define alx_reallocarrays(ptr, nmemb)	(				\
+{									\
+	auto	ptr_	= (ptr);					\
+	void	*vp;							\
+									\
+	vp	= reallocarray(*ptr_, nmemb, sizeof(**ptr_));		\
+	*ptr_	= static_cast<typeof(*ptr_)>(vp);			\
+									\
+	!(*ptr_);							\
+}									\
+)
+
+
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define reallocarrays(ptr, nmemb)	alx_reallocarrays(ptr, nmemb)
+#endif
 
 
 /******************************************************************************
  ******* extern "C" ***********************************************************
  ******************************************************************************/
-struct	Alx_DLLNode {
-	void			*data;
-	struct Alx_DLLNode	*prev;
-	struct Alx_DLLNode	*next;
-};
-
-struct	Alx_DLinkedList {
-	struct Alx_DLLNode	*head;
-	struct Alx_DLLNode	*tail;
-	struct Alx_DLLNode	*current;
-	ptrdiff_t		nmemb;
-}
-
-extern	"C"
-{
-[[gnu::nonnull]]
-int	alx_dllist_init			(struct Alx_DLinkedList **list);
-[[gnu::nonnull]]
-int	alx_dllist_deinit		(struct Alx_DLinkedList *list);
-[[gnu::nonnull]]
-int	alx_dllist_first_element	(struct Alx_DLinkedList *list,
-					 void *data);
-[[gnu::nonnull]]
-int	alx_dllist_remove_last		(struct Alx_DLinkedList *list);
-[[gnu::nonnull]]
-int	alx_dllist_prepend		(struct Alx_DLinkedList *list,
-					 void *data);
-[[gnu::nonnull]]
-int	alx_dllist_append		(struct Alx_DLinkedList *list,
-					 void *data);
-[[gnu::nonnull]]
-int	alx_dllist_add_before		(struct Alx_DLinkedList *list,
-					 void *data);
-[[gnu::nonnull]]
-int	alx_dllist_add_after		(struct Alx_DLinkedList *list,
-					 void *data);
-[[gnu::nonnull]]
-int	alx_dllist_remove_head		(struct Alx_DLinkedList *list);
-[[gnu::nonnull]]
-int	alx_dllist_remove_tail		(struct Alx_DLinkedList *list);
-[[gnu::nonnull]]
-int	alx_dllist_remove_current	(struct Alx_DLinkedList *list);
-[[gnu::nonnull]]
-int	alx_dllist_remove_all		(struct Alx_DLinkedList *list);
-[[gnu::nonnull]][[gnu::pure]]
-ptrdiff_t alx_dllist_find		(struct Alx_DLinkedList *list,
-					 struct Alx_DLLNode *node);
-[[gnu::nonnull]]
-int	alx_dllist_move_fwd		(struct Alx_DLinkedList *list,
-					 ptrdiff_t n);
-[[gnu::nonnull]]
-int	alx_dllist_move_bwd		(struct Alx_DLinkedList *list,
-					 ptrdiff_t n);
-[[gnu::nonnull]]
-int	alx_dllist_move_to		(struct Alx_DLinkedList *list,
-					 ptrdiff_t pos);
-}
 
 
 /******************************************************************************
  ******* namespace ************************************************************
  ******************************************************************************/
 namespace alx {
-namespace CV {
 
 
 /******************************************************************************
@@ -110,7 +71,6 @@ namespace CV {
 /******************************************************************************
  ******* namespace ************************************************************
  ******************************************************************************/
-}	/* namespace CV */
 }	/* namespace alx */
 
 
