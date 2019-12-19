@@ -9,6 +9,7 @@
  ******************************************************************************/
 #include "libalx/extra/alx/linked-list.h"
 
+#include <errno.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -30,6 +31,13 @@
 /******************************************************************************
  ******* static prototypes ****************************************************
  ******************************************************************************/
+__attribute__((nonnull))
+static
+int	alx_llist_add_first_element	(struct Alx_LinkedList *list,
+					 const void *data, size_t size);
+__attribute__((nonnull))
+static
+int	alx_llist_remove_last		(struct Alx_LinkedList *list);
 
 
 /******************************************************************************
@@ -39,71 +47,20 @@ int	alx_llist_init		(struct Alx_LinkedList **list)
 {
 
 	if (alx_mallocarrays(list, 1))
-		return	-1;
+		return	-ENOMEM;
 
 	(*list)->head		= NULL;
 	(*list)->tail		= NULL;
-	(*list)->current	= NULL;
 	(*list)->nmemb		= 0;
 
 	return	0;
 }
 
-int	alx_llist_deinit	(struct Alx_LinkedList *list)
+void	alx_llist_deinit	(struct Alx_LinkedList *list)
 {
-	int	status;
 
-	status	= alx_llist_remove_all(list);
+	alx_llist_remove_all(list);
 	free(list);
-
-	return	status;
-}
-
-int	alx_llist_first_element	(struct Alx_LinkedList *list,
-				 const void *data, size_t size)
-{
-	struct Alx_LLNode	*node;
-
-	if (list->nmemb)
-		return	-3;
-
-	if (alx_mallocarrays(&node, 1))
-		return	-1;
-	if (alx_mallocs(&node->data, size))
-		goto err;
-
-	memcpy(node->data, data, size);
-	node->prev	= node;
-	node->next	= node;
-
-	list->head	= node;
-	list->tail	= node;
-	list->current	= node;
-	list->nmemb	= 1;
-
-	return	0;
-err:
-	free(node);
-	return	-2;
-}
-
-int	alx_llist_remove_last	(struct Alx_LinkedList *list)
-{
-	struct Alx_LLNode	*node;
-
-	if (list->nmemb != 1)
-		return	-1;
-
-	node	= list->head;
-	free(node->data);
-
-	list->head	= NULL;
-	list->tail	= NULL;
-	list->current	= NULL;
-	free(node);
-	list->nmemb	= 0;
-
-	return	0;
 }
 
 int	alx_llist_prepend	(struct Alx_LinkedList *list,
@@ -111,15 +68,14 @@ int	alx_llist_prepend	(struct Alx_LinkedList *list,
 {
 	struct Alx_LLNode	*node;
 
-	if (!list->nmemb) {
-		alx_llist_first_element(list, data, size);
-		return	1;
-	}
+	if (!list->nmemb)
+		return	alx_llist_add_first_element(list, data, size);
 
 	if (alx_mallocarrays(&node, 1))
-		return	-1;
+		return	-ENOMEM;
 	if (alx_mallocs(&node->data, size))
 		goto err;
+	node->size	= size;
 
 	memcpy(node->data, data, size);
 	node->prev	= list->tail;
@@ -134,7 +90,7 @@ int	alx_llist_prepend	(struct Alx_LinkedList *list,
 	return	0;
 err:
 	free(node);
-	return	-2;
+	return	-ENOMEM;
 }
 
 int	alx_llist_append	(struct Alx_LinkedList *list,
@@ -142,15 +98,14 @@ int	alx_llist_append	(struct Alx_LinkedList *list,
 {
 	struct Alx_LLNode	*node;
 
-	if (!list->nmemb) {
-		alx_llist_first_element(list, data, size);
-		return	1;
-	}
+	if (!list->nmemb)
+		return	alx_llist_add_first_element(list, data, size);
 
 	if (alx_mallocarrays(&node, 1))
-		return	-1;
+		return	-ENOMEM;
 	if (alx_mallocs(&node->data, size))
 		goto err;
+	node->size	= size;
 
 	memcpy(node->data, data, size);
 	node->prev	= list->tail;
@@ -165,67 +120,83 @@ int	alx_llist_append	(struct Alx_LinkedList *list,
 	return	0;
 err:
 	free(node);
-	return	-2;
+	return	-ENOMEM;
 }
 
 int	alx_llist_insert_before	(struct Alx_LinkedList *list,
-				 const void *data, size_t size)
+				 const void *data, size_t size,
+				 struct Alx_LLNode *ref)
 {
-	struct Alx_LLNode	*node;
+	struct Alx_LLNode	*new;
 
-	if (!list->nmemb) {
-		alx_llist_first_element(list, data, size);
-		return	1;
-	}
+	if (!list->nmemb)
+		return	alx_llist_add_first_element(list, data, size);
 
-	if (alx_mallocarrays(&node, 1))
-		return	-1;
-	if (alx_mallocs(&node->data, size))
+	if (ref == list->head)
+		return	alx_llist_prepend(list, data, size);
+
+	if (alx_mallocarrays(&new, 1))
+		return	-ENOMEM;
+	if (alx_mallocs(&new->data, size))
 		goto err;
+	new->size	= size;
 
-	memcpy(node->data, data, size);
-	node->prev	= list->current->prev;
-	node->next	= list->current;
+	memcpy(new->data, data, size);
+	new->prev	= ref->prev;
+	new->next	= ref;
 
-	list->current->prev->next	= node;
-	list->current->prev	= node;
-	list->current		= node;
+	ref->prev->next	= new;
+	ref->prev	= new;
 	(list->nmemb)++;
 
 	return	0;
 err:
-	free(node);
-	return	-2;
+	free(new);
+	return	-ENOMEM;
 }
 
 int	alx_llist_insert_after	(struct Alx_LinkedList *list,
-				 const void *data, size_t size)
+				 const void *data, size_t size,
+				 struct Alx_LLNode *ref)
 {
-	struct Alx_LLNode	*node;
+	struct Alx_LLNode	*new;
 
-	if (!list->nmemb) {
-		alx_llist_first_element(list, data, size);
-		return	1;
-	}
+	if (!list->nmemb)
+		return	alx_llist_add_first_element(list, data, size);
 
-	if (alx_mallocarrays(&node, 1))
-		return	-1;
-	if (alx_mallocs(&node->data, size))
+	if (ref == list->tail)
+		return	alx_llist_append(list, data, size);
+
+	if (alx_mallocarrays(&new, 1))
+		return	-ENOMEM;
+	if (alx_mallocs(&new->data, size))
 		goto err;
+	new->size	= size;
 
-	memcpy(node->data, data, size);
-	node->prev	= list->current;
-	node->next	= list->current->next;
+	memcpy(new->data, data, size);
+	new->prev	= ref;
+	new->next	= ref->next;
 
-	list->current->next->prev	= node;
-	list->current->next	= node;
-	list->current		= node;
+	ref->next->prev	= new;
+	ref->next	= new;
 	(list->nmemb)++;
 
 	return	0;
 err:
-	free(node);
-	return	-2;
+	free(new);
+	return	-ENOMEM;
+}
+
+int	alx_llist_insert_at	(struct Alx_LinkedList *list,
+				 const void *data, size_t size, ptrdiff_t pos)
+{
+	struct Alx_LLNode	*tmp;
+
+	if (!list->nmemb)
+		return	alx_llist_add_first_element(list, data, size);
+
+	alx_llist_get_node_at(list, &tmp, pos);
+	return	alx_llist_insert_before(list, data, size, tmp);
 }
 
 int	alx_llist_remove_head	(struct Alx_LinkedList *list)
@@ -234,7 +205,7 @@ int	alx_llist_remove_head	(struct Alx_LinkedList *list)
 
 	switch (list->nmemb) {
 	case 0:
-		return	1;
+		return	-ENOENT;
 	case 1:
 		return	alx_llist_remove_last(list);
 	}
@@ -244,8 +215,6 @@ int	alx_llist_remove_head	(struct Alx_LinkedList *list)
 
 	list->head->prev->next	= node->next;
 	list->head->next->prev	= node->prev;
-	if (list->current == list->head)
-		list->current	= node->next;
 	list->head		= node->next;
 	free(node);
 	(list->nmemb)--;
@@ -259,7 +228,7 @@ int	alx_llist_remove_tail	(struct Alx_LinkedList *list)
 
 	switch (list->nmemb) {
 	case 0:
-		return	1;
+		return	-ENOENT;
 	case 1:
 		return	alx_llist_remove_last(list);
 	}
@@ -269,8 +238,6 @@ int	alx_llist_remove_tail	(struct Alx_LinkedList *list)
 
 	list->tail->prev->next	= node->next;
 	list->tail->next->prev	= node->prev;
-	if (list->current == list->tail)
-		list->current	= node->prev;
 	list->tail		= node->prev;
 	free(node);
 	(list->nmemb)--;
@@ -278,53 +245,46 @@ int	alx_llist_remove_tail	(struct Alx_LinkedList *list)
 	return	0;
 }
 
-int	alx_llist_remove_current(struct Alx_LinkedList *list)
+int	alx_llist_remove_node	(struct Alx_LinkedList *list,
+				 struct Alx_LLNode *node)
 {
-	struct Alx_LLNode	*node;
 
 	switch (list->nmemb) {
 	case 0:
-		return	1;
+		return	-ENOENT;
 	case 1:
 		return	alx_llist_remove_last(list);
 	}
 
-	node	= list->current;
+	if (node == list->head)
+		return	alx_llist_remove_head(list);
+	if (node == list->tail)
+		return	alx_llist_remove_tail(list);
+
 	free(node->data);
 
-	list->current->prev->next	= node->next;
-	list->current->next->prev	= node->prev;
-	if (list->tail == list->current) {
-		list->tail		= node->prev;
-		list->current		= node->prev;
-	} else if (list->head == list->current) {
-		list->head		= node->next;
-		list->current		= node->next;
-	} else {
-		list->current		= node->prev;
-	}
+	node->prev->next	= node->next;
+	node->next->prev	= node->prev;
 	free(node);
 	(list->nmemb)--;
 
 	return	0;
 }
 
-int	alx_llist_remove_all	(struct Alx_LinkedList *list)
+void	alx_llist_remove_all	(struct Alx_LinkedList *list)
 {
 	ptrdiff_t	n;
 
 	n	= list->nmemb;
 	if (!n)
-		return	1;
+		return;
 
 	for (ptrdiff_t i = 0; i < n; i++)
 		alx_llist_remove_tail(list);
-
-	return	0;
 }
 
-ptrdiff_t alx_llist_find	(struct Alx_LinkedList *list,
-				 struct Alx_LLNode *node)
+ptrdiff_t alx_llist_find	(const struct Alx_LinkedList *list,
+				 const struct Alx_LLNode *node)
 {
 	struct Alx_LLNode	*tmp;
 
@@ -335,64 +295,110 @@ ptrdiff_t alx_llist_find	(struct Alx_LinkedList *list,
 		tmp	= tmp->next;
 	}
 
-	return	-1;
+	return	-ENOENT;
 }
 
-int	alx_llist_move_fwd	(struct Alx_LinkedList *list, ptrdiff_t n)
+int	alx_llist_get_node_at	(const struct Alx_LinkedList *list,
+				 struct Alx_LLNode **node,
+				 ptrdiff_t pos)
+{
+
+	return	alx_llist_get_relative(list, node, list->head, pos);
+}
+
+int	alx_llist_get_relative	(const struct Alx_LinkedList *list,
+				 struct Alx_LLNode **node,
+				 const struct Alx_LLNode *ref,
+				 ptrdiff_t pos)
 {
 	int	status;
 
-	if (n < 0)
-		return	alx_llist_move_bwd(list, -n);
-
 	status	= 0;
-	for (ptrdiff_t i = 0; i < n; i++) {
-		list->current	= list->current->next;
-		if (list->current == list->head)
-			status++;
+	*node	= (struct Alx_LLNode *)ref;
+	if (pos >= 0) {
+		for (ptrdiff_t i = 0; i < pos; i++) {
+			*node	= (*node)->next;
+			if (*node == list->head)
+				status++;
+		}
+	} else {
+		for (ptrdiff_t i = 0; i < pos; i++) {
+			*node	= (*node)->prev;
+			if (*node == list->tail)
+				status++;
+		}
 	}
 
-	return	0;
+	return	status;
 }
 
-int	alx_llist_move_bwd	(struct Alx_LinkedList *list, ptrdiff_t n)
+void	alx_llist_move_node_to	(struct Alx_LinkedList *list,
+				 struct Alx_LLNode *node, ptrdiff_t pos)
 {
-	int	status;
+	struct Alx_LLNode	*ref;
 
-	if (n < 0)
-		return	alx_llist_move_fwd(list, -n);
+	if (list->nmemb < 2)
+		return;
 
-	status	= 0;
-	for (ptrdiff_t i = 0; i < n; i++) {
-		list->current	= list->current->prev;
-		if (list->current == list->tail)
-			status--;
-	}
+	node->prev->next	= node->next;
+	node->next->prev	= node->prev;
+	if (node == list->tail)
+		list->tail		= node->prev;
+	if (node == list->head)
+		list->head		= node->next;
 
-	return	0;
+	if (pos <= -list->nmemb)
+		ref	= list->head;
+	else if (pos >= list->nmemb)
+		ref	= list->tail;
+	else
+		alx_llist_get_node_at(list, &ref, pos);
+	node->prev	= ref->prev;
+	node->next	= ref;
+
+	ref->prev->next	= node;
+	ref->prev	= node;
+	if (ref == list->head)
+		list->head	= node;
 }
 
-int	alx_llist_move_to	(struct Alx_LinkedList *list, ptrdiff_t pos)
+void	alx_llist_move_relative	(struct Alx_LinkedList *list,
+				 struct Alx_LLNode *node, ptrdiff_t pos)
 {
+	struct Alx_LLNode	*ref;
 
-	list->current	= list->head;
+	if (list->nmemb < 2)
+		return;
+	if (!pos)
+		return;
+	if (pos > 0)
+		pos++;
 
-	if (pos < 0)
-		return	alx_llist_move_bwd(list, -pos);
-	return	alx_llist_move_fwd(list, pos);
+	alx_llist_get_relative(list, &ref, node, pos);
+
+	node->prev->next	= node->next;
+	node->next->prev	= node->prev;
+	if (node == list->tail)
+		list->tail		= node->prev;
+	if (node == list->head)
+		list->head		= node->next;
+
+	node->prev	= ref->prev;
+	node->next	= ref;
+
+	ref->prev->next	= node;
+	ref->prev	= node;
+	if (ref == list->head)
+		list->head	= node;
 }
 
-int	alx_llist_edit_current	(struct Alx_LinkedList *list,
+int	alx_llist_edit_node_data(struct Alx_LLNode *node,
 				 const void *data, size_t size)
 {
-	struct Alx_LLNode	*node;
 
-	if (!list->nmemb)
-		return	-1;
-
-	node	= list->current;
 	if (alx_reallocs(&node->data, size))
-		return	-2;
+		return	-ENOMEM;
+	node->size	= size;
 
 	memmove(node->data, data, size);
 
@@ -403,6 +409,52 @@ int	alx_llist_edit_current	(struct Alx_LinkedList *list,
 /******************************************************************************
  ******* static function definitions ******************************************
  ******************************************************************************/
+static
+int	alx_llist_add_first_element	(struct Alx_LinkedList *list,
+					 const void *data, size_t size)
+{
+	struct Alx_LLNode	*node;
+
+	if (list->nmemb)
+		return	-ENOTEMPTY;
+
+	if (alx_mallocarrays(&node, 1))
+		return	-ENOMEM;
+	if (alx_mallocs(&node->data, size))
+		goto err;
+
+	memcpy(node->data, data, size);
+	node->prev	= node;
+	node->next	= node;
+
+	list->head	= node;
+	list->tail	= node;
+	list->nmemb	= 1;
+
+	return	0;
+err:
+	free(node);
+	return	-ENOMEM;
+}
+
+static
+int	alx_llist_remove_last		(struct Alx_LinkedList *list)
+{
+	struct Alx_LLNode	*node;
+
+	if (list->nmemb != 1)
+		return	-ETOOMANYREFS;
+
+	node	= list->head;
+	free(node->data);
+
+	list->head	= NULL;
+	list->tail	= NULL;
+	free(node);
+	list->nmemb	= 0;
+
+	return	0;
+}
 
 
 /******************************************************************************

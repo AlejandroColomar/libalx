@@ -26,6 +26,7 @@
  ******************************************************************************/
 struct	Alx_LLNode {
 	void			*data;
+	size_t			size;
 	struct Alx_LLNode	*prev;
 	struct Alx_LLNode	*next;
 };
@@ -33,52 +34,61 @@ struct	Alx_LLNode {
 struct	Alx_LinkedList {
 	struct Alx_LLNode	*head;
 	struct Alx_LLNode	*tail;
-	struct Alx_LLNode	*current;
 	ptrdiff_t		nmemb;
 }
 
 extern	"C"
 {
-[[gnu::nonnull]]
+[[gnu::nonnull]][[gnu::warn_unused_result]]
 int	alx_llist_init		(struct Alx_LinkedList **list);
 [[gnu::nonnull]]
-int	alx_llist_deinit	(struct Alx_LinkedList *list);
-[[gnu::nonnull]]
-int	alx_llist_first_element	(struct Alx_LinkedList *list,
-				 const void *data, size_t size);
-[[gnu::nonnull]]
-int	alx_llist_remove_last	(struct Alx_LinkedList *list);
-[[gnu::nonnull]]
+void	alx_llist_deinit	(struct Alx_LinkedList *list);
+[[gnu::nonnull]][[gnu::warn_unused_result]]
 int	alx_llist_prepend	(struct Alx_LinkedList *list,
 				 const void *data, size_t size);
-[[gnu::nonnull]]
+[[gnu::nonnull]][[gnu::warn_unused_result]]
 int	alx_llist_append	(struct Alx_LinkedList *list,
 				 const void *data, size_t size);
-[[gnu::nonnull]]
+[[gnu::nonnull]][[gnu::warn_unused_result]]
 int	alx_llist_insert_before	(struct Alx_LinkedList *list,
-				 const void *data, size_t size);
-[[gnu::nonnull]]
+				 const void *data, size_t size,
+				 struct Alx_LLNode *ref);
+[[gnu::nonnull]][[gnu::warn_unused_result]]
 int	alx_llist_insert_after	(struct Alx_LinkedList *list,
-				 const void *data, size_t size);
+				 const void *data, size_t size,
+				 struct Alx_LLNode *ref);
+[[gnu::nonnull]][[gnu::warn_unused_result]]
+int	alx_llist_insert_at	(struct Alx_LinkedList *list,
+				 const void *data, size_t size, ptrdiff_t pos);
 [[gnu::nonnull]]
 int	alx_llist_remove_head	(struct Alx_LinkedList *list);
 [[gnu::nonnull]]
 int	alx_llist_remove_tail	(struct Alx_LinkedList *list);
 [[gnu::nonnull]]
-int	alx_llist_remove_current(struct Alx_LinkedList *list);
-[[gnu::nonnull]]
-int	alx_llist_remove_all	(struct Alx_LinkedList *list);
-[[gnu::nonnull]][[gnu::pure]]
-ptrdiff_t alx_llist_find	(struct Alx_LinkedList *list,
+int	alx_llist_remove_node	(struct Alx_LinkedList *list,
 				 struct Alx_LLNode *node);
 [[gnu::nonnull]]
-int	alx_llist_move_fwd	(struct Alx_LinkedList *list, ptrdiff_t n);
+void	alx_llist_remove_all	(struct Alx_LinkedList *list);
+[[gnu::nonnull]][[gnu::pure]][[gnu::warn_unused_result]]
+ptrdiff_t alx_llist_find	(const struct Alx_LinkedList *list,
+				 const struct Alx_LLNode *node);
 [[gnu::nonnull]]
-int	alx_llist_move_bwd	(struct Alx_LinkedList *list, ptrdiff_t n);
+int	alx_llist_get_node_at	(const struct Alx_LinkedList *list,
+				 struct Alx_LLNode **node,
+				 ptrdiff_t pos);
 [[gnu::nonnull]]
-int	alx_llist_move_to	(struct Alx_LinkedList *list, ptrdiff_t pos);
+int	alx_llist_get_relative	(const struct Alx_LinkedList *list,
+				 struct Alx_LLNode **node,
+				 const struct Alx_LLNode *ref,
+				 ptrdiff_t pos);
 [[gnu::nonnull]]
-int	alx_llist_edit_current	(struct Alx_LinkedList *list,
+void	alx_llist_move_node_to	(struct Alx_LinkedList *list,
+				 struct Alx_LLNode *node, ptrdiff_t pos);
+[[gnu::nonnull]]
+void	alx_llist_move_relative	(struct Alx_LinkedList *list,
+				 struct Alx_LLNode *node, ptrdiff_t pos);
+[[gnu::nonnull]][[gnu::warn_unused_result]]
+int	alx_llist_edit_node_data(struct Alx_LLNode *node,
 				 const void *data, size_t size);
 }
 
