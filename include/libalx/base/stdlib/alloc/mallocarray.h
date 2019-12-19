@@ -65,6 +65,8 @@ void	*alx_mallocarray	(ptrdiff_t nmemb, size_t size)
 
 	if (nmemb < 0)
 		goto ovf;
+	if (!size)
+		return	NULL;
 	if ((size_t)nmemb > (SIZE_MAX / size))
 		goto ovf;
 
