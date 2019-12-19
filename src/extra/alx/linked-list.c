@@ -31,7 +31,7 @@
 /******************************************************************************
  ******* static prototypes ****************************************************
  ******************************************************************************/
-__attribute__((nonnull))
+__attribute__((nonnull, warn_unused_result))
 static
 int	alx_llist_add_first_element	(struct Alx_LinkedList *list,
 					 const void *data, size_t size);
