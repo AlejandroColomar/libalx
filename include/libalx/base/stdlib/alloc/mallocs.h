@@ -35,7 +35,7 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull))
+__attribute__((nonnull, warn_unused_result))
 inline
 int	alx_mallocs	(void **restrict ptr, size_t size);
 
@@ -45,7 +45,7 @@ int	alx_mallocs	(void **restrict ptr, size_t size);
  ******************************************************************************/
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, nonnull))
+__attribute__((always_inline, nonnull, warn_unused_result))
 static inline
 int	mallocs		(void **restrict ptr, size_t size)
 {

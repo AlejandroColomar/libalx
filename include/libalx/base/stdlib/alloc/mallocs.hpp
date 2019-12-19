@@ -30,7 +30,7 @@
  ******************************************************************************/
 extern	"C"
 {
-[[gnu::nonnull]]
+[[gnu::nonnull]][[gnu::warn_unused_result]]
 int	alx_mallocs(void **ptr, size_t size);
 }
 

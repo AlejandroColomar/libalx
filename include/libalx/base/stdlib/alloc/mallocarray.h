@@ -37,7 +37,7 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((malloc))
+__attribute__((malloc, warn_unused_result))
 inline
 void	*alx_mallocarray	(ptrdiff_t nmemb, size_t size);
 
@@ -47,7 +47,7 @@ void	*alx_mallocarray	(ptrdiff_t nmemb, size_t size);
  ******************************************************************************/
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, malloc))
+__attribute__((always_inline, malloc, warn_unused_result))
 static inline
 void	*mallocarray		(ptrdiff_t nmemb, size_t size)
 {
