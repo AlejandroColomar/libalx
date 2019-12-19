@@ -52,6 +52,14 @@
 /******************************************************************************
  ******* struct / union *******************************************************
  ******************************************************************************/
+/*
+ * Doubly-linked list node
+ *
+ * data:	Pointer to allocated memory containing useful data.
+ * size:	Size of the allocated buffer (in bytes).
+ * prev:	Pointer to the previous node.
+ * next:	Pointer to the next node.
+ */
 struct	Alx_LLNode {
 	void			*data;
 	size_t			size;
@@ -59,6 +67,13 @@ struct	Alx_LLNode {
 	struct Alx_LLNode	*next;
 };
 
+/*
+ * Doubly-linked list
+ *
+ * head:	Pointer to the first node.
+ * tail:	Pointer to the last node.
+ * nmemb:	Number of nodes in the list.
+ */
 struct	Alx_LinkedList {
 	struct Alx_LLNode	*head;
 	struct Alx_LLNode	*tail;
