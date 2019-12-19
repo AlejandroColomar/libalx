@@ -37,7 +37,7 @@ int	alx_llist_add_first_element	(struct Alx_LinkedList *list,
 					 const void *data, size_t size);
 __attribute__((nonnull))
 static
-int	alx_llist_remove_last		(struct Alx_LinkedList *list);
+void	alx_llist_remove_last		(struct Alx_LinkedList *list);
 
 
 /******************************************************************************
@@ -205,9 +205,10 @@ int	alx_llist_remove_head	(struct Alx_LinkedList *list)
 
 	switch (list->nmemb) {
 	case 0:
-		return	-ENOENT;
+		return	ENOENT;
 	case 1:
-		return	alx_llist_remove_last(list);
+		alx_llist_remove_last(list);
+		return	0;
 	}
 
 	node	= list->head;
@@ -228,9 +229,10 @@ int	alx_llist_remove_tail	(struct Alx_LinkedList *list)
 
 	switch (list->nmemb) {
 	case 0:
-		return	-ENOENT;
+		return	ENOENT;
 	case 1:
-		return	alx_llist_remove_last(list);
+		alx_llist_remove_last(list);
+		return	0;
 	}
 
 	node	= list->tail;
@@ -253,7 +255,8 @@ int	alx_llist_remove_node	(struct Alx_LinkedList *list,
 	case 0:
 		return	-ENOENT;
 	case 1:
-		return	alx_llist_remove_last(list);
+		alx_llist_remove_last(list);
+		return	0;
 	}
 
 	if (node == list->head)
@@ -347,19 +350,26 @@ void	alx_llist_move_node_to	(struct Alx_LinkedList *list,
 	if (node == list->head)
 		list->head		= node->next;
 
-	if (pos <= -list->nmemb)
+	if (pos <= (-list->nmemb + 1)  ||  pos >= (list->nmemb - 1)) {
 		ref	= list->head;
-	else if (pos >= list->nmemb)
-		ref	= list->tail;
-	else
-		alx_llist_get_node_at(list, &ref, pos);
+	} else {
+		if (pos < 0)
+			alx_llist_get_node_at(list, &ref, pos + 1);
+		else
+			alx_llist_get_node_at(list, &ref, pos);
+	}
+
 	node->prev	= ref->prev;
 	node->next	= ref;
 
 	ref->prev->next	= node;
 	ref->prev	= node;
-	if (ref == list->head)
-		list->head	= node;
+	if (ref == list->head) {
+		if (pos == -1  ||  pos > 0)
+			list->tail	= node;
+		else
+			list->head	= node;
+	}
 }
 
 void	alx_llist_move_relative	(struct Alx_LinkedList *list,
@@ -369,7 +379,7 @@ void	alx_llist_move_relative	(struct Alx_LinkedList *list,
 
 	if (list->nmemb < 2)
 		return;
-	if (!pos)
+	if (!pos  ||  pos <= (-list->nmemb + 1)  ||  pos >= (list->nmemb - 1))
 		return;
 	if (pos > 0)
 		pos++;
@@ -388,8 +398,12 @@ void	alx_llist_move_relative	(struct Alx_LinkedList *list,
 
 	ref->prev->next	= node;
 	ref->prev	= node;
-	if (ref == list->head)
-		list->head	= node;
+	if (ref == list->head) {
+		if (pos < 0)
+			list->head	= node;
+		else
+			list->tail	= node;
+	}
 }
 
 int	alx_llist_edit_node_data(struct Alx_LLNode *node,
@@ -405,6 +419,18 @@ int	alx_llist_edit_node_data(struct Alx_LLNode *node,
 	return	0;
 }
 
+void	alx_llist_set_head	(struct Alx_LinkedList *list, ptrdiff_t pos)
+{
+	struct Alx_LLNode	*node;
+
+	if (list->nmemb < 2)
+		return;
+
+	alx_llist_get_node_at(list, &node, pos);
+	list->head	= node;
+	list->tail	= node->prev;
+}
+
 
 /******************************************************************************
  ******* static function definitions ******************************************
@@ -414,9 +440,6 @@ int	alx_llist_add_first_element	(struct Alx_LinkedList *list,
 					 const void *data, size_t size)
 {
 	struct Alx_LLNode	*node;
-
-	if (list->nmemb)
-		return	-ENOTEMPTY;
 
 	if (alx_mallocarrays(&node, 1))
 		return	-ENOMEM;
@@ -438,12 +461,9 @@ err:
 }
 
 static
-int	alx_llist_remove_last		(struct Alx_LinkedList *list)
+void	alx_llist_remove_last		(struct Alx_LinkedList *list)
 {
 	struct Alx_LLNode	*node;
-
-	if (list->nmemb != 1)
-		return	-ETOOMANYREFS;
 
 	node	= list->head;
 	free(node->data);
@@ -452,8 +472,6 @@ int	alx_llist_remove_last		(struct Alx_LinkedList *list)
 	list->tail	= NULL;
 	free(node);
 	list->nmemb	= 0;
-
-	return	0;
 }
 
 

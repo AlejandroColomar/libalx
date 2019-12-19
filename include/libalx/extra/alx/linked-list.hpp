@@ -11,6 +11,16 @@
 
 
 /******************************************************************************
+ ******* about ****************************************************************
+ ******************************************************************************/
+/*
+ * Circular doubly-linked list
+ *
+ * Read  <libalx/extra/alx/linked-list.h>  for documentation.
+ */
+
+
+/******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
 #include <cstddef>
@@ -90,6 +100,8 @@ void	alx_llist_move_relative	(struct Alx_LinkedList *list,
 [[gnu::nonnull]][[gnu::warn_unused_result]]
 int	alx_llist_edit_node_data(struct Alx_LLNode *node,
 				 const void *data, size_t size);
+[[gnu::nonnull]]
+void	alx_llist_set_head	(struct Alx_LinkedList *list, ptrdiff_t pos);
 }
 
 
