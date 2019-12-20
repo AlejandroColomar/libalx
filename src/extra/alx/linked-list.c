@@ -31,10 +31,27 @@
 /******************************************************************************
  ******* static prototypes ****************************************************
  ******************************************************************************/
+/*
+ * Inserts the first node into the list.  It should be called if and only if
+ * the list is empty (list->nmemb == 0).
+ * Allocates memory for the node and for the data, copies the data passed
+ * by the user to the newly allocated space, and updates any necessary metadata.
+ *
+ * return:
+ *	0:		OK.
+ *	ENOMEM:		Aborted; failure to allocate the node.
+ */
 __attribute__((nonnull, warn_unused_result))
 static
 int	alx_llist_add_first_element	(struct Alx_LinkedList *list,
 					 const void *data, size_t size);
+
+/*
+ * Removes the last node from the list. It should be called if and only if
+ * the list has only one element (list->nmemb == 1).
+ * Deallocates memory from the node and from the data, and updates any
+ * necessary metadata.
+ */
 __attribute__((nonnull))
 static
 void	alx_llist_remove_last		(struct Alx_LinkedList *list);

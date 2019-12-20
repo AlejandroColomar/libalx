@@ -85,7 +85,10 @@ struct	Alx_LinkedList {
  ******* prototypes ***********************************************************
  ******************************************************************************/
 /*
- * Initialize list
+ * Initialize list.
+ * The alx_llist_init() function allocates a list and assigns a pointer to it
+ * to `*list`.  On error, the function assigns NULL, which can later be
+ * successfully passed to alx_llist_deinit().
  *
  * return:
  *	0:		OK.
@@ -95,7 +98,12 @@ __attribute__((nonnull, warn_unused_result))
 int	alx_llist_init		(struct Alx_LinkedList **list);
 
 /*
- * Deinitialize list
+ * Deinitialize list.
+ * The alx_llist_deinit() function frees all the memory space used by the list
+ * and all of its remaining nodes.  The list must have been initialized by a
+ * previous call to alx_llist_init().  Otherwise, or if alx_llist_deinit(list)
+ * has already been called before, undefined behavior occurs.
+ * If list is NULL, no operation is performed.
  */
 void	alx_llist_deinit	(struct Alx_LinkedList *list);
 
@@ -306,17 +314,17 @@ void	alx_llist_set_node_as_head(struct Alx_LinkedList *list,
 /*
  * Apply function `*f` to each node in the list (starting at the head).
  * The order of the nodes is taken in the following way:
- * Just before applying the function `*f` to a node, the `next` node is stored
- * in a pointer, so that if `*f` modifies the position of the current node in
- * the list, the function still remembers which one was the next node before
- * applying the function.
+ * Just before applying `*f` to a node, the `next` node is stored in a
+ * pointer, so that if `*f` modifies the position of the current node in the
+ * list, the function still remembers which one was the `next` node before
+ * applying `*f`.
  * The function passes to `*f` the iteration of the loop in which `*f` has
  * been called through `i`.
- * If no function call fails, the loop iterates exactly `list->nmemb` times.
+ * If no `*f` call fails, the loop iterates exactly `list->nmemb` times.
  *
  * return:
  *	0:		OK.
- *	else:		If `f` fails (returns != 0), the loop breaks there and
+ *	else:		If `*f` fails (returns != 0), the loop breaks and
  *			the return value is passed to the caller.
  */
 __attribute__((nonnull(1, 2)))
@@ -330,17 +338,17 @@ int	alx_llist_apply		(struct Alx_LinkedList *list,
  * Apply function `f` to each node in the list (backwards; starting at the
  * tail).
  * The order of the nodes is taken in the following way:
- * Just before applying the function `f` to a node, the `prev` node is stored
- * in a pointer, so that if `f` modifies the position of the current node in
- * the list, the function still remembers which one was the `prev` node before
- * applying the function.
+ * Just before applying `*f` to a node, the `prev` node is stored in a
+ * pointer, so that if `*f` modifies the position of the current node in the
+ * list, the function still remembers which one was the `prev` node before
+ * applying `*f`.
  * The function passes to `*f` the iteration of the loop in which `*f` has
  * been called through `i`.
- * If no function call fails, the loop iterates exactly `list->nmemb` times.
+ * If no `*f` call fails, the loop iterates exactly `list->nmemb` times.
  *
  * return:
  *	0:		OK.
- *	else:		If `f` fails (returns != 0), the loop breaks and
+ *	else:		If `*f` fails (returns != 0), the loop breaks and
  *			the return value is passed to the caller.
  */
 __attribute__((nonnull(1, 2)))
