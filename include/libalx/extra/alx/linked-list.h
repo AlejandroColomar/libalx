@@ -89,7 +89,7 @@ struct	Alx_LinkedList {
  *
  * return:
  *	0:		OK.
- *	-ENOMEM:	Aborted; failure to allocate the list.
+ *	ENOMEM:		Aborted; failure to allocate the list.
  */
 __attribute__((nonnull, warn_unused_result))
 int	alx_llist_init		(struct Alx_LinkedList **list);
@@ -97,7 +97,6 @@ int	alx_llist_init		(struct Alx_LinkedList **list);
 /*
  * Deinitialize list
  */
-__attribute__((nonnull))
 void	alx_llist_deinit	(struct Alx_LinkedList *list);
 
 /*
@@ -107,7 +106,7 @@ void	alx_llist_deinit	(struct Alx_LinkedList *list);
  *
  * return:
  *	0:		OK.
- *	-ENOMEM:	Aborted; failure to allocate the node.
+ *	ENOMEM:		Aborted; failure to allocate the node.
  */
 __attribute__((nonnull, warn_unused_result))
 int	alx_llist_prepend	(struct Alx_LinkedList *list,
@@ -120,7 +119,7 @@ int	alx_llist_prepend	(struct Alx_LinkedList *list,
  *
  * return:
  *	0:		OK.
- *	-ENOMEM:	Aborted; failure to allocate the node.
+ *	ENOMEM:		Aborted; failure to allocate the node.
  */
 __attribute__((nonnull, warn_unused_result))
 int	alx_llist_append	(struct Alx_LinkedList *list,
@@ -133,7 +132,7 @@ int	alx_llist_append	(struct Alx_LinkedList *list,
  *
  * return:
  *	0:		OK.
- *	-ENOMEM:	Aborted; failure to allocate the node.
+ *	ENOMEM:		Aborted; failure to allocate the node.
  */
 __attribute__((nonnull, warn_unused_result))
 int	alx_llist_insert_before	(struct Alx_LinkedList *list,
@@ -147,7 +146,7 @@ int	alx_llist_insert_before	(struct Alx_LinkedList *list,
  *
  * return:
  *	0:		OK.
- *	-ENOMEM:	Aborted; failure to allocate the node.
+ *	ENOMEM:		Aborted; failure to allocate the node.
  */
 __attribute__((nonnull, warn_unused_result))
 int	alx_llist_insert_after	(struct Alx_LinkedList *list,
@@ -164,7 +163,7 @@ int	alx_llist_insert_after	(struct Alx_LinkedList *list,
  *
  * return:
  *	0:		OK.
- *	-ENOMEM:	Aborted; failure to allocate the node.
+ *	ENOMEM:		Aborted; failure to allocate the node.
  */
 __attribute__((nonnull, warn_unused_result))
 int	alx_llist_insert_at	(struct Alx_LinkedList *list,
@@ -201,7 +200,7 @@ int	alx_llist_remove_tail	(struct Alx_LinkedList *list);
  *
  * return:
  *	0:		OK.
- *	-ENOENT:	Aborted; the list is already empty.
+ *	ENOENT:		Aborted; the list is already empty.
  */
 __attribute__((nonnull))
 int	alx_llist_remove_node	(struct Alx_LinkedList *list,
@@ -283,7 +282,7 @@ void	alx_llist_move_relative	(struct Alx_LinkedList *list,
  *
  * return:
  *	0:		OK.
- *	-ENOMEM:	Aborted; failure to reallocate the data.  Previous
+ *	ENOMEM:		Aborted; failure to reallocate the data.  Previous
  *			data is left untouched.
  */
 __attribute__((nonnull, warn_unused_result))

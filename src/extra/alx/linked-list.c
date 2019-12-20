@@ -47,7 +47,7 @@ int	alx_llist_init		(struct Alx_LinkedList **list)
 {
 
 	if (alx_mallocarrays(list, 1))
-		return	-ENOMEM;
+		return	ENOMEM;
 
 	(*list)->head		= NULL;
 	(*list)->tail		= NULL;
@@ -58,6 +58,9 @@ int	alx_llist_init		(struct Alx_LinkedList **list)
 
 void	alx_llist_deinit	(struct Alx_LinkedList *list)
 {
+
+	if (!list)
+		return;
 
 	alx_llist_remove_all(list);
 	free(list);
@@ -72,7 +75,7 @@ int	alx_llist_prepend	(struct Alx_LinkedList *list,
 		return	alx_llist_add_first_element(list, data, size);
 
 	if (alx_mallocarrays(&node, 1))
-		return	-ENOMEM;
+		return	ENOMEM;
 	if (alx_mallocs(&node->data, size))
 		goto err;
 	node->size	= size;
@@ -90,7 +93,7 @@ int	alx_llist_prepend	(struct Alx_LinkedList *list,
 	return	0;
 err:
 	free(node);
-	return	-ENOMEM;
+	return	ENOMEM;
 }
 
 int	alx_llist_append	(struct Alx_LinkedList *list,
@@ -102,7 +105,7 @@ int	alx_llist_append	(struct Alx_LinkedList *list,
 		return	alx_llist_add_first_element(list, data, size);
 
 	if (alx_mallocarrays(&node, 1))
-		return	-ENOMEM;
+		return	ENOMEM;
 	if (alx_mallocs(&node->data, size))
 		goto err;
 	node->size	= size;
@@ -120,7 +123,7 @@ int	alx_llist_append	(struct Alx_LinkedList *list,
 	return	0;
 err:
 	free(node);
-	return	-ENOMEM;
+	return	ENOMEM;
 }
 
 int	alx_llist_insert_before	(struct Alx_LinkedList *list,
@@ -136,7 +139,7 @@ int	alx_llist_insert_before	(struct Alx_LinkedList *list,
 		return	alx_llist_prepend(list, data, size);
 
 	if (alx_mallocarrays(&new, 1))
-		return	-ENOMEM;
+		return	ENOMEM;
 	if (alx_mallocs(&new->data, size))
 		goto err;
 	new->size	= size;
@@ -152,7 +155,7 @@ int	alx_llist_insert_before	(struct Alx_LinkedList *list,
 	return	0;
 err:
 	free(new);
-	return	-ENOMEM;
+	return	ENOMEM;
 }
 
 int	alx_llist_insert_after	(struct Alx_LinkedList *list,
@@ -168,7 +171,7 @@ int	alx_llist_insert_after	(struct Alx_LinkedList *list,
 		return	alx_llist_append(list, data, size);
 
 	if (alx_mallocarrays(&new, 1))
-		return	-ENOMEM;
+		return	ENOMEM;
 	if (alx_mallocs(&new->data, size))
 		goto err;
 	new->size	= size;
@@ -184,7 +187,7 @@ int	alx_llist_insert_after	(struct Alx_LinkedList *list,
 	return	0;
 err:
 	free(new);
-	return	-ENOMEM;
+	return	ENOMEM;
 }
 
 int	alx_llist_insert_at	(struct Alx_LinkedList *list,
@@ -253,7 +256,7 @@ int	alx_llist_remove_node	(struct Alx_LinkedList *list,
 
 	switch (list->nmemb) {
 	case 0:
-		return	-ENOENT;
+		return	ENOENT;
 	case 1:
 		alx_llist_remove_last(list);
 		return	0;
@@ -411,7 +414,7 @@ int	alx_llist_edit_node_data(struct Alx_LLNode *node,
 {
 
 	if (alx_reallocs(&node->data, size))
-		return	-ENOMEM;
+		return	ENOMEM;
 	node->size	= size;
 
 	memmove(node->data, data, size);
@@ -442,7 +445,7 @@ int	alx_llist_add_first_element	(struct Alx_LinkedList *list,
 	struct Alx_LLNode	*node;
 
 	if (alx_mallocarrays(&node, 1))
-		return	-ENOMEM;
+		return	ENOMEM;
 	if (alx_mallocs(&node->data, size))
 		goto err;
 
@@ -457,7 +460,7 @@ int	alx_llist_add_first_element	(struct Alx_LinkedList *list,
 	return	0;
 err:
 	free(node);
-	return	-ENOMEM;
+	return	ENOMEM;
 }
 
 static
