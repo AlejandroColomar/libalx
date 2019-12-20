@@ -290,11 +290,49 @@ int	alx_llist_edit_node_data(struct Alx_LLNode *node,
 				 const void *data, size_t size);
 
 /*
- * Sets the `node` in the position `pos` as the new head, and updates any
+ * Sets the node in the position `pos` as the new head, and updates any
  * necessary metadata.
  */
 __attribute__((nonnull))
 void	alx_llist_set_head	(struct Alx_LinkedList *list, ptrdiff_t pos);
+
+/*
+ * Sets `node` as the new head, and updates any necessary metadata.
+ */
+__attribute__((nonnull))
+void	alx_llist_set_node_as_head(struct Alx_LinkedList *list,
+				 struct Alx_LLNode *node);
+
+/*
+ * Apply function `f` to each node in the list (starting at the head).
+ *
+ * return:
+ *	0:		OK.
+ *	else:		If `f` fails (returns != 0), the loop breaks there and
+ *			the return value is passed to the caller.
+ */
+__attribute__((nonnull(1, 2)))
+int	alx_llist_apply		(struct Alx_LinkedList *list,
+				 int (*f)	(struct Alx_LinkedList *list,
+						 struct Alx_LLNode *node,
+						 void *state),
+				 void *state);
+
+/*
+ * Apply function `f` to each node in the list (backwards; starting at the
+ * tail).
+ *
+ * return:
+ *	0:		OK.
+ *	else:		If `f` fails (returns != 0), the loop breaks and
+ *			the return value is passed to the caller.
+ */
+__attribute__((nonnull(1, 2)))
+int	alx_llist_apply_bwd	(struct Alx_LinkedList *list,
+				 int (*f)	(struct Alx_LinkedList *list,
+						 struct Alx_LLNode *node,
+						 void *state),
+				 void *state);
 
 
 /******************************************************************************

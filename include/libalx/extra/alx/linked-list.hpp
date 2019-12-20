@@ -51,7 +51,6 @@ extern	"C"
 {
 [[gnu::nonnull]][[gnu::warn_unused_result]]
 int	alx_llist_init		(struct Alx_LinkedList **list);
-[[gnu::nonnull]]
 void	alx_llist_deinit	(struct Alx_LinkedList *list);
 [[gnu::nonnull]][[gnu::warn_unused_result]]
 int	alx_llist_prepend	(struct Alx_LinkedList *list,
@@ -102,6 +101,21 @@ int	alx_llist_edit_node_data(struct Alx_LLNode *node,
 				 const void *data, size_t size);
 [[gnu::nonnull]]
 void	alx_llist_set_head	(struct Alx_LinkedList *list, ptrdiff_t pos);
+[[gnu::nonnull]]
+void	alx_llist_set_node_as_head(struct Alx_LinkedList *list,
+				 struct Alx_LLNode *node);
+[[gnu::nonnull(1, 2)]]
+int	alx_llist_apply		(struct Alx_LinkedList *list,
+				 int (*f)	(struct Alx_LinkedList *list,
+						 struct Alx_LLNode *node,
+						 void *state),
+				 void *state);
+[[gnu::nonnull(1, 2)]]
+int	alx_llist_apply_bwd	(struct Alx_LinkedList *list,
+				 int (*f)	(struct Alx_LinkedList *list,
+						 struct Alx_LLNode *node,
+						 void *state),
+				 void *state);
 }
 
 

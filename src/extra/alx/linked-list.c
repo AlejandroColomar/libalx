@@ -434,6 +434,57 @@ void	alx_llist_set_head	(struct Alx_LinkedList *list, ptrdiff_t pos)
 	list->tail	= node->prev;
 }
 
+void	alx_llist_set_node_as_head(struct Alx_LinkedList *list,
+				 struct Alx_LLNode *node)
+{
+
+	if (list->nmemb < 2)
+		return;
+
+	list->head	= node;
+	list->tail	= node->prev;
+}
+
+int	alx_llist_apply		(struct Alx_LinkedList *list,
+				 int (*f)	(struct Alx_LinkedList *list,
+						 struct Alx_LLNode *node,
+						 void *state),
+				 void *state)
+{
+	struct Alx_LLNode	*node;
+	int			status;
+
+	node	= list->head;
+	for (ptrdiff_t i = 0; i < list->nmemb; i++) {
+		status	= (*f)(list, node, state);
+		if (status)
+			return	status;
+		node	= node->next;
+	}
+
+	return	0;
+}
+
+int	alx_llist_apply_bwd	(struct Alx_LinkedList *list,
+				 int (*f)	(struct Alx_LinkedList *list,
+						 struct Alx_LLNode *node,
+						 void *state),
+				 void *state)
+{
+	struct Alx_LLNode	*node;
+	int			status;
+
+	node	= list->tail;
+	for (ptrdiff_t i = 0; i < list->nmemb; i++) {
+		status	= (*f)(list, node, state);
+		if (status)
+			return	status;
+		node	= node->prev;
+	}
+
+	return	0;
+}
+
 
 /******************************************************************************
  ******* static function definitions ******************************************
