@@ -230,7 +230,7 @@ ptrdiff_t alx_llist_find	(const struct Alx_LinkedList *list,
  *
  * return:
  *	0:		OK.
- *	> 0:		OK; wrapped around the end of the list those many times.
+ *	!= 0:		OK; wrapped around the end of the list those many times.
  */
 __attribute__((nonnull))
 int	alx_llist_get_node_at	(const struct Alx_LinkedList *list,
@@ -242,7 +242,7 @@ int	alx_llist_get_node_at	(const struct Alx_LinkedList *list,
  *
  * return:
  *	0:		OK.
- *	> 0:		OK; wrapped around the end of the list those many times.
+ *	!= 0:		OK; wrapped around the end of the list those many times.
  */
 __attribute__((nonnull))
 int	alx_llist_get_relative	(const struct Alx_LinkedList *list,
@@ -304,7 +304,15 @@ void	alx_llist_set_node_as_head(struct Alx_LinkedList *list,
 				 struct Alx_LLNode *node);
 
 /*
- * Apply function `f` to each node in the list (starting at the head).
+ * Apply function `*f` to each node in the list (starting at the head).
+ * The order of the nodes is taken in the following way:
+ * Just before applying the function `*f` to a node, the `next` node is stored
+ * in a pointer, so that if `*f` modifies the position of the current node in
+ * the list, the function still remembers which one was the next node before
+ * applying the function.
+ * The function passes to `*f` the iteration of the loop in which `*f` has
+ * been called through `i`.
+ * If no function call fails, the loop iterates exactly `list->nmemb` times.
  *
  * return:
  *	0:		OK.
@@ -315,12 +323,20 @@ __attribute__((nonnull(1, 2)))
 int	alx_llist_apply		(struct Alx_LinkedList *list,
 				 int (*f)	(struct Alx_LinkedList *list,
 						 struct Alx_LLNode *node,
-						 void *state),
+						 void *state, ptrdiff_t i),
 				 void *state);
 
 /*
  * Apply function `f` to each node in the list (backwards; starting at the
  * tail).
+ * The order of the nodes is taken in the following way:
+ * Just before applying the function `f` to a node, the `prev` node is stored
+ * in a pointer, so that if `f` modifies the position of the current node in
+ * the list, the function still remembers which one was the `prev` node before
+ * applying the function.
+ * The function passes to `*f` the iteration of the loop in which `*f` has
+ * been called through `i`.
+ * If no function call fails, the loop iterates exactly `list->nmemb` times.
  *
  * return:
  *	0:		OK.
@@ -331,7 +347,7 @@ __attribute__((nonnull(1, 2)))
 int	alx_llist_apply_bwd	(struct Alx_LinkedList *list,
 				 int (*f)	(struct Alx_LinkedList *list,
 						 struct Alx_LLNode *node,
-						 void *state),
+						 void *state, ptrdiff_t i),
 				 void *state);
 
 

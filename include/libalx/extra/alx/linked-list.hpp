@@ -108,13 +108,13 @@ void	alx_llist_set_node_as_head(struct Alx_LinkedList *list,
 int	alx_llist_apply		(struct Alx_LinkedList *list,
 				 int (*f)	(struct Alx_LinkedList *list,
 						 struct Alx_LLNode *node,
-						 void *state),
+						 void *state, ptrdiff_t i),
 				 void *state);
 [[gnu::nonnull(1, 2)]]
 int	alx_llist_apply_bwd	(struct Alx_LinkedList *list,
 				 int (*f)	(struct Alx_LinkedList *list,
 						 struct Alx_LLNode *node,
-						 void *state),
+						 void *state, ptrdiff_t i),
 				 void *state);
 }
 

@@ -331,7 +331,7 @@ int	alx_llist_get_relative	(const struct Alx_LinkedList *list,
 		for (ptrdiff_t i = 0; i < pos; i++) {
 			*node	= (*node)->prev;
 			if (*node == list->tail)
-				status++;
+				status--;
 		}
 	}
 
@@ -448,18 +448,20 @@ void	alx_llist_set_node_as_head(struct Alx_LinkedList *list,
 int	alx_llist_apply		(struct Alx_LinkedList *list,
 				 int (*f)	(struct Alx_LinkedList *list,
 						 struct Alx_LLNode *node,
-						 void *state),
+						 void *state, ptrdiff_t i),
 				 void *state)
 {
-	struct Alx_LLNode	*node;
+	struct Alx_LLNode	*current;
+	struct Alx_LLNode	*next;
 	int			status;
 
-	node	= list->head;
+	current	= list->head;
 	for (ptrdiff_t i = 0; i < list->nmemb; i++) {
-		status	= (*f)(list, node, state);
+		next	= current->next;
+		status	= (*f)(list, current, state, i);
 		if (status)
 			return	status;
-		node	= node->next;
+		current	= next;
 	}
 
 	return	0;
@@ -468,18 +470,20 @@ int	alx_llist_apply		(struct Alx_LinkedList *list,
 int	alx_llist_apply_bwd	(struct Alx_LinkedList *list,
 				 int (*f)	(struct Alx_LinkedList *list,
 						 struct Alx_LLNode *node,
-						 void *state),
+						 void *state, ptrdiff_t i),
 				 void *state)
 {
-	struct Alx_LLNode	*node;
+	struct Alx_LLNode	*current;
+	struct Alx_LLNode	*next;
 	int			status;
 
-	node	= list->tail;
+	current	= list->tail;
 	for (ptrdiff_t i = 0; i < list->nmemb; i++) {
-		status	= (*f)(list, node, state);
+		next	= current->prev;
+		status	= (*f)(list, current, state, i);
 		if (status)
 			return	status;
-		node	= node->prev;
+		current	= next;
 	}
 
 	return	0;
