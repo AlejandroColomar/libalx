@@ -60,6 +60,7 @@ int	alx_strtoi16_s		(int16_t *restrict num,
 	char		*endptr;
 	long		tmp;
 
+	errno	= 0;
 	tmp	= strtol(str, &endptr, base);
 	*num	= tmp;
 	if (read)
@@ -78,6 +79,7 @@ int	alx_strtoi32_s		(int32_t *restrict num,
 	char		*endptr;
 	long		tmp;
 
+	errno	= 0;
 	tmp	= strtol(str, &endptr, base);
 	*num	= tmp;
 	if (read)
@@ -95,6 +97,7 @@ int	alx_strtoi64_s		(int64_t *restrict num,
 	const int	errno_before = errno;
 	char		*endptr;
 
+	errno	= 0;
 	*num	= strtol(str, &endptr, base);
 	if (read)
 		*read	= endptr - str;

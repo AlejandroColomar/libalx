@@ -42,6 +42,7 @@ int	alx_strtou8_s		(uint8_t *restrict num,
 	char		*endptr;
 	unsigned long	tmp;
 
+	errno	= 0;
 	tmp	= strtoul(str, &endptr, base);
 	*num	= tmp;
 	if (read)
@@ -60,6 +61,7 @@ int	alx_strtou16_s		(uint16_t *restrict num,
 	char		*endptr;
 	unsigned long	tmp;
 
+	errno	= 0;
 	tmp	= strtoul(str, &endptr, base);
 	*num	= tmp;
 	if (read)
@@ -78,6 +80,7 @@ int	alx_strtou32_s		(uint32_t *restrict num,
 	char		*endptr;
 	unsigned long	tmp;
 
+	errno	= 0;
 	tmp	= strtoul(str, &endptr, base);
 	*num	= tmp;
 	if (read)
@@ -95,6 +98,7 @@ int	alx_strtou64_s		(uint64_t *restrict num,
 	const int	errno_before = errno;
 	char		*endptr;
 
+	errno	= 0;
 	*num	= strtoul(str, &endptr, base);
 	if (read)
 		*read	= endptr - str;
