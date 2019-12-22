@@ -36,7 +36,7 @@ extra: alx cv gmp gsl ncurses ocr zbar
 
 PHONY += alx
 alx:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/alx/
+	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/alx/linked-list/
 
 PHONY += cv
 cv:
