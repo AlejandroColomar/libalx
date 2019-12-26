@@ -69,7 +69,7 @@ int	alx_vsnprintfs	(char str[restrict /*nmemb*/],
 trunc:
 	if (written)
 		*written = nmemb - 1;
-	errno	= ENOMEM;
+	errno	= ENOBUFS;
 	return	1;
 ovf:
 	errno	= EOVERFLOW;
