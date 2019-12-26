@@ -60,10 +60,13 @@ int	reallocs	(void **restrict ptr, size_t size)
 inline
 int	alx_reallocs	(void **restrict ptr, size_t size)
 {
+	void	*p;
 
-	*ptr	= realloc(*ptr, size);
+	p	= realloc(*ptr, size);
+	if (p)
+		*ptr	= p;
 
-	return	!(*ptr);
+	return	!p;
 }
 
 

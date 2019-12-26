@@ -26,12 +26,13 @@
 #define alx_reallocarrays(ptr, nmemb)	(				\
 {									\
 	auto	ptr_	= (ptr);					\
-	void	*vp;							\
+	void	*vp_;							\
 									\
-	vp	= reallocarray(*ptr_, nmemb, sizeof(**ptr_));		\
-	*ptr_	= static_cast<typeof(*ptr_)>(vp);			\
+	vp_	= reallocarray(*ptr_, nmemb, sizeof(**ptr_));		\
+	if (vp_)							\
+		*ptr_	= static_cast<typeof(*ptr_)>(vp_);		\
 									\
-	!(*ptr_);							\
+	!vp_;								\
 }									\
 )
 

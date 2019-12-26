@@ -26,10 +26,13 @@
 #define alx_reallocarrays(ptr, nmemb)	(				\
 {									\
 	__auto_type	ptr_	= (ptr);				\
+	void		*vp_;						\
 									\
-	*ptr_	= reallocarray(*ptr_, nmemb, sizeof(**ptr_));		\
+	vp_	= reallocarray(*ptr_, nmemb, sizeof(**ptr_));		\
+	if (vp_)							\
+		*ptr_	= vp_;						\
 									\
-	!(*ptr_);							\
+	!vp_;								\
 }									\
 )
 
