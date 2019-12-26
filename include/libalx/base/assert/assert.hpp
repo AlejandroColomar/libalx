@@ -155,6 +155,14 @@
 	alx_assert_msg(std::is_same <int64_t, long>::value,		\
 			 "BUG:   int64_t != long")
 
+#define alx_Static_assert_size_ptrdiff()				\
+	_Static_assert(sizeof(size_t) == sizeof(ptrdiff_t),		\
+			"sizeof(size_t) != sizeof(ptrdiff_t)")
+
+#define alx_assert_size_ptrdiff()					\
+	alx_assert_msg(sizeof(size_t) == sizeof(ptrdiff_t),		\
+			"BUG:   sizeof(size_t) != sizeof(ptrdiff_t)")
+
 
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
@@ -183,6 +191,8 @@
 #define assert_s32_int()		alx_assert_s32_int()
 #define assert_u64_ulong()		alx_assert_u64_ulong()
 #define assert_s64_long()		alx_assert_s64_long()
+#define _Static_assert_size_ptrdiff()	alx_Static_assert_size_ptrdiff()
+#define assert_size_ptrdiff()		alx_assert_size_ptrdiff()
 #endif
 
 
