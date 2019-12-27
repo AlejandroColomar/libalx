@@ -23,13 +23,12 @@
  * Data is copied into `malloc`ed memory, and `free`d or `realloc`ed
  * automatically by the functions.
  *
- * Each node stores a pointer to its allocated data, the size of the data,
- * and pointers to the two connecting nodes.
+ * Each node stores a pointer to a dynamic buffer, and pointers to the two
+ * connecting nodes.  More info about the nodes can be found in
+ *  <libalx/extra/alx/data-structures/node.h>.
  *
  * If any of the list metadata is manually modified by the user, the list may
- * be corrupted, and the behavior is undefined.  The only thing that the user
- * can safely manually modify are the contents of data, being careful of not
- * overrunning the buffer.
+ * be corrupted, and the behavior is undefined.
  */
 
 
@@ -72,10 +71,13 @@ struct	Alx_LinkedList {
  ******* prototypes ***********************************************************
  ******************************************************************************/
 /*
- * Initialize list.
+ * Initializes list.
  * The alx_llist_init() function allocates a list and assigns a pointer to it
  * to `*list`.  On error, the function assigns NULL, which can later be
  * successfully passed to alx_llist_deinit().
+ *
+ * list:	Pointer to a pointer to a list.  A list will be allocated,
+ *		and a pointer to it will be stored in *list.
  *
  * return:
  *	0:		OK.
@@ -85,12 +87,14 @@ __attribute__((nonnull, warn_unused_result))
 int	alx_llist_init			(struct Alx_LinkedList **list);
 
 /*
- * Deinitialize list.
+ * Deinitializes list.
  * The alx_llist_deinit() function frees all the memory space used by the list
  * and all of its remaining nodes.  The list must have been initialized by a
  * leftious call to alx_llist_init().  Otherwise, or if alx_llist_deinit(list)
  * has already been called before, undefined behavior occurs.
  * If list is NULL, no operation is performed.
+ *
+ * node:	Pointer to a node.  It is invalid after the call.
  */
 void	alx_llist_deinit		(struct Alx_LinkedList *list);
 
@@ -98,6 +102,10 @@ void	alx_llist_deinit		(struct Alx_LinkedList *list);
  * Inserts a new node at the begining of the list.
  * Allocates memory for the node and for the data, copies the data passed by
  * the user to the newly allocated space, and updates any necessary metadata.
+ *
+ * list:	Pointer to a list.
+ * data:	Pointer to the first byte of the data to be copied.
+ * size:	Size of the data to be copied.
  *
  * return:
  *	0:		OK.
@@ -110,6 +118,9 @@ int	alx_llist_prepend		(struct Alx_LinkedList *list,
 /*
  * Inserts an already existing node at the begining of the list.
  * Updates any necessary metadata.
+ *
+ * list:	Pointer to a list.
+ * node:	Pointer to the node to be prepended.
  */
 __attribute__((nonnull))
 void	alx_llist_prepend_node		(struct Alx_LinkedList *list,
@@ -119,6 +130,10 @@ void	alx_llist_prepend_node		(struct Alx_LinkedList *list,
  * Inserts a new node at the end of the list.
  * Allocates memory for the node and for the data, copies the data passed by
  * the user to the newly allocated space, and updates any necessary metadata.
+ *
+ * list:	Pointer to a list.
+ * data:	Pointer to the first byte of the data to be copied.
+ * size:	Size of the data to be copied.
  *
  * return:
  *	0:		OK.
@@ -131,6 +146,9 @@ int	alx_llist_append		(struct Alx_LinkedList *list,
 /*
  * Inserts an already existing node at the end of the list.
  * Updates any necessary metadata.
+ *
+ * list:	Pointer to a list.
+ * node:	Pointer to the node to be appended.
  */
 __attribute__((nonnull))
 void	alx_llist_append_node		(struct Alx_LinkedList *list,
@@ -140,6 +158,10 @@ void	alx_llist_append_node		(struct Alx_LinkedList *list,
  * Inserts a new node just before the `ref` node.
  * Allocates memory for the node and for the data, copies the data passed by
  * the user to the newly allocated space, and updates any necessary metadata.
+ *
+ * list:	Pointer to a list.
+ * data:	Pointer to the first byte of the data to be copied.
+ * size:	Size of the data to be copied.
  *
  * return:
  *	0:		OK.
@@ -153,6 +175,9 @@ int	alx_llist_insert_before		(struct Alx_LinkedList *list,
 /*
  * Inserts an already existing node just before the `ref` node.
  * Updates any necessary metadata.
+ *
+ * list:	Pointer to a list.
+ * node:	Pointer to the node to be inserted.
  */
 __attribute__((nonnull))
 void	alx_llist_insert_node_before	(struct Alx_LinkedList *list,
@@ -163,6 +188,10 @@ void	alx_llist_insert_node_before	(struct Alx_LinkedList *list,
  * Inserts a new node just after the `ref` node.
  * Allocates memory for the node and for the data, copies the data passed by
  * the user to the newly allocated space, and updates any necessary metadata.
+ *
+ * list:	Pointer to a list.
+ * data:	Pointer to the first byte of the data to be copied.
+ * size:	Size of the data to be copied.
  *
  * return:
  *	0:		OK.
@@ -176,6 +205,9 @@ int	alx_llist_insert_after		(struct Alx_LinkedList *list,
 /*
  * Inserts an already existing node just after the `ref` node.
  * Updates any necessary metadata.
+ *
+ * list:	Pointer to a list.
+ * node:	Pointer to the node to be inserted.
  */
 __attribute__((nonnull))
 void	alx_llist_insert_node_after	(struct Alx_LinkedList *list,
@@ -186,6 +218,11 @@ void	alx_llist_insert_node_after	(struct Alx_LinkedList *list,
  * Inserts a new node at the desired position in the list.
  * Allocates memory for the node and for the data, copies the data passed by
  * the user to the newly allocated space, and updates any necessary metadata.
+ *
+ * list:	Pointer to a list.
+ * data:	Pointer to the first byte of the data to be copied.
+ * size:	Size of the data to be copied.
+ * pos:		Position where to insert a new node.
  *
  * `pos` can be too large or negative, which results in natural wrapping
  * around the list (a value of -1 would be the tail, and so on).
@@ -203,8 +240,11 @@ int	alx_llist_insert_at		(struct Alx_LinkedList *list,
  * Inserts an already existing node at the desired position in the list.
  * Updates any necessary metadata.
  *
- * `pos` can be too large or negative, which results in natural wrapping
- * around the list (a value of -1 would be the tail, and so on).
+ * list:	Pointer to a list.
+ * node:	Pointer to the node to be inserted.
+ * pos:		Position where to insert the node.  It can be too large or
+ *		negative, which results in natural wrapping around the list
+ *		(a value of -1 would be the tail, and so on).
  */
 __attribute__((nonnull))
 void	alx_llist_insert_node_at	(struct Alx_LinkedList *list,
@@ -213,7 +253,10 @@ void	alx_llist_insert_node_at	(struct Alx_LinkedList *list,
 
 /*
  * Removes the first node from the list and updates any necessary metadata.
- * A pointer to the orphan node is passed through `node`.
+ *
+ * list:	Pointer to a list.
+ * node:	Pointer to a pointer to a node.  A pointer to the orphan node
+ *		is passed through `node`.
  *
  * return:
  *	0:		OK.
@@ -228,6 +271,8 @@ int	alx_llist_remove_head		(struct Alx_LinkedList *list,
  * Deallocates memory from the node and from the data, and updates any
  * necessary metadata.
  *
+ * list:	Pointer to a list.
+ *
  * return:
  *	0:		OK.
  *	ENOENT:		Aborted; the list is already empty.
@@ -238,6 +283,10 @@ int	alx_llist_delete_head		(struct Alx_LinkedList *list);
 /*
  * Removes the last node from the list and updates any necessary metadata.
  * A pointer to the orphan node is passed through `node`.
+ *
+ * list:	Pointer to a list.
+ * node:	Pointer to a pointer to a node.  A pointer to the orphan node
+ *		is passed through `node`.
  *
  * return:
  *	0:		OK.
@@ -251,6 +300,8 @@ int	alx_llist_remove_tail		(struct Alx_LinkedList *list,
  * Deletes the last node from the list.
  * Deallocates memory from the node and from the data, and updates any
  * necessary metadata.
+ *
+ * list:	Pointer to a list.
  *
  * return:
  *	0:		OK.
@@ -267,6 +318,9 @@ int	alx_llist_delete_tail		(struct Alx_LinkedList *list);
  * pointer to a node which is not the same as the remaining node in the list,
  * no node is removed.
  *
+ * list:	Pointer to a list.
+ * node:	Pointer to a node.
+ *
  * return:
  *	0:		OK.
  *	ENOENT:		Aborted; either the list is already empty, or
@@ -278,28 +332,33 @@ int	alx_llist_remove_node		(struct Alx_LinkedList *list,
 
 /*
  * Deletes `node` from the list.
- * If `list` is NULL, it deletes an orphan node.
- * Deallocates memory from the node and from the data, and updates any
- * necessary metadata.
+ * Deallocates all memory from the node, and updates any necessary metadata.
+ *
+ * list:	Pointer to a list.
+ * node:	Pointer to a node.
  *
  * return:
  *	0:		OK.
  *	ENOENT:		Aborted; the list is already empty.
  */
-__attribute__((nonnull(2), warn_unused_result))
+__attribute__((nonnull, warn_unused_result))
 int	alx_llist_delete_node		(struct Alx_LinkedList *list,
 					 struct Alx_Node *node);
 
 /*
  * Removes all nodes from the list.
- * Deallocates memory from the nodes and from the data, and updates any
- * necessary metadata.
+ * Deallocates all memory from the nodes, and updates any necessary metadata.
+ *
+ * list:	Pointer to a list.
  */
 __attribute__((nonnull))
 void	alx_llist_delete_all		(struct Alx_LinkedList *list);
 
 /*
  * Finds the `node` in the list.
+ *
+ * list:	Pointer to a list.
+ * node:	Pointer to a node.
  *
  * return:
  *	>= 0:		Found at that position relative to the head.
@@ -312,6 +371,13 @@ ptrdiff_t alx_llist_find		(const struct Alx_LinkedList *list,
 /*
  * Gets a pointer to the `node` in the position `pos` relative to the head.
  *
+ * list:	Pointer to a list.
+ * node:	Pointer to a pointer to a node.  A pointer to the found node
+ *		is passed through `node`.
+ * pos:		Position where to retrieve the node.  It can be too large or
+ *		negative, which results in natural wrapping around the list
+ *		(a value of -1 would be the tail, and so on).
+ *
  * return:
  *	0:		OK.
  *	ENOENT:		List is empty.
@@ -323,6 +389,14 @@ int	alx_llist_get_node_at		(const struct Alx_LinkedList *list,
 
 /*
  * Gets a pointer to the `node` in the position `pos` relative to `ref`.
+ *
+ * list:	Pointer to a list.
+ * node:	Pointer to a pointer to a node.  A pointer to the found node
+ *		is passed through `node`.
+ * node:	Pointer to a node.  This node will be the reference for `pos`.
+ * pos:		Position where to retrieve the node.  It can be too large or
+ *		negative, which results in natural wrapping around the list
+ *		(a value of -1 would be the previous one, and so on).
  *
  * return:
  *	0:		OK.
@@ -341,6 +415,10 @@ int	alx_llist_get_relative		(const struct Alx_LinkedList *list,
  * (pos <= (-list->nmemb + 1)  ||  pos >= (list->nmemb - 1)), it doesn't
  * wrap around.  In that case, if `pos` is negative, the node is moved to the
  * head, and if `pos` is positive, the node is moved to the tail.
+ *
+ * list:	Pointer to a list.
+ * node:	Pointer to the node to be moved.
+ * pos:		Position where to put the node.
  */
 __attribute__((nonnull))
 void	alx_llist_move_node_to		(struct Alx_LinkedList *list,
@@ -350,11 +428,15 @@ void	alx_llist_move_node_to		(struct Alx_LinkedList *list,
 /*
  * Moves the `node` in the list to the position `pos` relative to the `node`'s
  * position at the moment of the call.
- * If `pos` is negative, it wraps around (-1 is the leftious, and so on).  If
+ * If `pos` is negative, it wraps around (-1 is the left node, and so on).  If
  * `pos` is negative and sufficiently large, it wraps around to the tail.
  * If the position is too large
  * (pos <= (-list->nmemb + 1)  ||  pos >= (list->nmemb - 1)), it doesn't
  * wrap around any more.  In those cases, the node isn't moved at all.
+ *
+ * list:	Pointer to a list.
+ * node:	Pointer to the node to be moved.
+ * pos:		Position where to put the node.
  */
 __attribute__((nonnull))
 void	alx_llist_move_relative		(struct Alx_LinkedList *list,
@@ -364,6 +446,9 @@ void	alx_llist_move_relative		(struct Alx_LinkedList *list,
 /*
  * Sets the node in the position `pos` as the new head, and updates any
  * necessary metadata.
+ *
+ * list:	Pointer to a list.
+ * pos:		Position.
  */
 __attribute__((nonnull))
 void	alx_llist_set_head		(struct Alx_LinkedList *list,
@@ -371,6 +456,9 @@ void	alx_llist_set_head		(struct Alx_LinkedList *list,
 
 /*
  * Sets `node` as the new head, and updates any necessary metadata.
+ *
+ * list:	Pointer to a list.
+ * node:	Pointer to a node.
  */
 __attribute__((nonnull))
 void	alx_llist_set_node_as_head	(struct Alx_LinkedList *list,
@@ -386,6 +474,10 @@ void	alx_llist_set_node_as_head	(struct Alx_LinkedList *list,
  * The function passes to `*f` the iteration of the loop in which `*f` has
  * been called through `i`.
  * If no `*f` call fails, the loop iterates exactly `list->nmemb` times.
+ *
+ * list:	Pointer to a list.
+ * f:		Pointer to the function to be applied.
+ * state:	External data to be used within the function.
  *
  * return:
  *	0:		OK.
@@ -410,6 +502,10 @@ int	alx_llist_apply			(struct Alx_LinkedList *list,
  * The function passes to `*f` the iteration of the loop in which `*f` has
  * been called through `i`.
  * If no `*f` call fails, the loop iterates exactly `list->nmemb` times.
+ *
+ * list:	Pointer to a list.
+ * f:		Pointer to the function to be applied.
+ * state:	External data to be used within the function.
  *
  * return:
  *	0:		OK.

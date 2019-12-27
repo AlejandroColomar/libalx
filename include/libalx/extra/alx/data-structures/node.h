@@ -28,8 +28,9 @@
  * connecting nodes.
  *
  * If any of the node metadata is manually modified by the user, the node may
- * be corrupted, and the behavior is undefined.  alx_dynbuf_ functions may
- * be called with the buffer pointer for lower level management.
+ * be corrupted, and the behavior is undefined.  Functions in
+ *  <libalx/extra/alx/data-structures/dyn-buffer.h>  may be called with
+ * `node->buf` for lower level management.
  */
 
 
@@ -70,6 +71,7 @@ struct	Alx_Node {
  ******* prototypes ***********************************************************
  ******************************************************************************/
 /*
+ * Initializes node.
  * Allocates memory for the node and for the buffer, copies the data passed by
  * the user to the newly allocated space, and updates any necessary metadata.
  *
@@ -87,6 +89,7 @@ int	alx_node_init		(struct Alx_Node **restrict node,
 				 const void *restrict data, size_t size);
 
 /*
+ * Initializes empty node.
  * Allocates memory for the node (not for the buffer), and updates any
  * necessary metadata.
  *
@@ -101,7 +104,7 @@ __attribute__((nonnull, warn_unused_result))
 int	alx_node_init_empty	(struct Alx_Node **node);
 
 /*
- * Deletes `node`.
+ * Deinitializes node.
  * Deallocates memory from the node and from the data.
  * If node is NULL, no operation is performed.
  *

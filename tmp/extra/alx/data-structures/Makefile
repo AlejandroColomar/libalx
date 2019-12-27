@@ -14,7 +14,8 @@
 OBJ		=							\
 		dyn-array.o						\
 		dyn-buffer.o						\
-		llist.o
+		llist.o							\
+		node.o
 
 DYNARR_INC	=							\
 		$(INC_DIR)/libalx/base/assert/assert.h			\
@@ -34,12 +35,20 @@ DYNBUF_SRC	=							\
 		$(SRC_DIR)/extra/alx/data-structures/dyn-buffer.c
 
 LLIST_INC	=							\
+		$(INC_DIR)/libalx/base/compiler/unused.h		\
 		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.h	\
 		$(INC_DIR)/libalx/base/stdlib/alloc/mallocs.h		\
-		$(INC_DIR)/libalx/base/stdlib/alloc/reallocs.h		\
+		$(INC_DIR)/libalx/extra/alx/data-structures/node.h	\
 		$(INC_DIR)/libalx/extra/alx/data-structures/llist.h
 LLIST_SRC	=							\
 		$(SRC_DIR)/extra/alx/data-structures/llist.c
+
+NODE_INC	=							\
+		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.h	\
+		$(INC_DIR)/libalx/extra/alx/data-structures/dyn-buffer.h \
+		$(INC_DIR)/libalx/extra/alx/data-structures/node.h
+NODE_SRC	=							\
+		$(SRC_DIR)/extra/alx/data-structures/node.c
 
 ################################################################################
 # target: dependencies
@@ -60,14 +69,17 @@ all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 	$(Q)$(AS) $< -o $@
 
 
-llist.a.s: $(LLIST_SRC) $(LLIST_INC)
-llist.so.s: $(LLIST_SRC) $(LLIST_INC)
-
 dyn-array.a.s: $(DYNARR_SRC) $(DYNARR_INC)
 dyn-array.so.s: $(DYNARR_SRC) $(DYNARR_INC)
 
 dyn-buffer.a.s: $(DYNBUF_SRC) $(DYNBUF_INC)
 dyn-buffer.so.s: $(DYNBUF_SRC) $(DYNBUF_INC)
+
+llist.a.s: $(LLIST_SRC) $(LLIST_INC)
+llist.so.s: $(LLIST_SRC) $(LLIST_INC)
+
+node.a.s: $(NODE_SRC) $(NODE_INC)
+node.so.s: $(NODE_SRC) $(NODE_INC)
 
 
 PHONY += clean

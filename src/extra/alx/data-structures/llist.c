@@ -61,7 +61,7 @@ int	remove_node		(struct Alx_LinkedList *list,
 				 struct Alx_Node *node);
 
 /*
- * Removes the last node from the list. It should be called only if
+ * Removes the last node from the list. It should be called if and only if
  * the list has only one element (list->nmemb == 1).
  * Updates any necessary metadata.
  * A pointer to the orphan node is passed through `node`.
@@ -80,7 +80,6 @@ int	alx_llist_init			(struct Alx_LinkedList **list)
 
 	if (alx_mallocarrays(list, 1))
 		return	ENOMEM;
-
 	(*list)->head		= NULL;
 	(*list)->tail		= NULL;
 	(*list)->nmemb		= 0;
@@ -102,11 +101,9 @@ int	alx_llist_prepend		(struct Alx_LinkedList *list,
 					 const void *data, size_t size)
 {
 	struct Alx_Node	*node;
-	int			status;
 
-	status	= alx_node_new(&node, data, size);
-	if (status)
-		return	status;
+	if (alx_node_init(&node, data, size))
+		return	ENOMEM;
 	alx_llist_prepend_node(list, node);
 
 	return	0;
@@ -135,11 +132,9 @@ int	alx_llist_append		(struct Alx_LinkedList *list,
 					 const void *data, size_t size)
 {
 	struct Alx_Node	*node;
-	int		status;
 
-	status	= alx_node_new(&node, data, size);
-	if (status)
-		return	status;
+	if (alx_node_init(&node, data, size))
+		return	ENOMEM;
 	alx_llist_append_node(list, node);
 
 	return	0;
@@ -169,11 +164,9 @@ int	alx_llist_insert_before		(struct Alx_LinkedList *list,
 					 struct Alx_Node *ref)
 {
 	struct Alx_Node	*node;
-	int		status;
 
-	status	= alx_node_new(&node, data, size);
-	if (status)
-		return	status;
+	if (alx_node_init(&node, data, size))
+		return	ENOMEM;
 	alx_llist_insert_node_before(list, node, ref);
 
 	return	0;
@@ -206,11 +199,9 @@ int	alx_llist_insert_after		(struct Alx_LinkedList *list,
 					 struct Alx_Node *ref)
 {
 	struct Alx_Node	*node;
-	int		status;
 
-	status	= alx_node_new(&node, data, size);
-	if (status)
-		return	status;
+	if (alx_node_init(&node, data, size))
+		return	ENOMEM;
 	alx_llist_insert_node_after(list, node, ref);
 
 	return	0;
@@ -243,11 +234,9 @@ int	alx_llist_insert_at		(struct Alx_LinkedList *list,
 					 ptrdiff_t pos)
 {
 	struct Alx_Node	*node;
-	int		status;
 
-	status	= alx_node_new(&node, data, size);
-	if (status)
-		return	status;
+	if (alx_node_init(&node, data, size))
+		return	ENOMEM;
 	alx_llist_insert_node_at(list, node, pos);
 
 	return	0;
@@ -281,7 +270,7 @@ int	alx_llist_remove_head		(struct Alx_LinkedList *list,
 		return	ENOENT;
 	}
 
-	(*node)	= list->head;
+	*node	= list->head;
 	remove_node(list, list->head);
 
 	return	0;
@@ -290,12 +279,10 @@ int	alx_llist_remove_head		(struct Alx_LinkedList *list,
 int	alx_llist_delete_head		(struct Alx_LinkedList *list)
 {
 	struct Alx_Node	*node;
-	int		status;
 
-	status	= alx_llist_remove_head(list, &node);
-	if (status)
-		return	status;
-	alx_node_delete(node);
+	if (alx_llist_remove_head(list, &node))
+		return	ENOENT;
+	alx_node_deinit(node);
 
 	return	0;
 }
@@ -309,7 +296,7 @@ int	alx_llist_remove_tail		(struct Alx_LinkedList *list,
 		return	ENOENT;
 	}
 
-	(*node)	= list->tail;
+	*node	= list->tail;
 	remove_node(list, list->tail);
 
 	return	0;
@@ -318,12 +305,10 @@ int	alx_llist_remove_tail		(struct Alx_LinkedList *list,
 int	alx_llist_delete_tail		(struct Alx_LinkedList *list)
 {
 	struct Alx_Node	*node;
-	int		status;
 
-	status	= alx_llist_remove_tail(list, &node);
-	if (status)
-		return	status;
-	alx_node_delete(node);
+	if (alx_llist_remove_tail(list, &node))
+		return	ENOENT;
+	alx_node_deinit(node);
 
 	return	0;
 }
@@ -341,15 +326,10 @@ int	alx_llist_remove_node		(struct Alx_LinkedList *list,
 int	alx_llist_delete_node		(struct Alx_LinkedList *list,
 					 struct Alx_Node *node)
 {
-	int	status;
 
-	if (list) {
-		status	= alx_llist_remove_node(list, node);
-		if (status)
-			return	status;
-	}
-
-	alx_node_delete(node);
+	if (alx_llist_remove_node(list, node))
+			return	ENOENT;
+	alx_node_deinit(node);
 
 	return	0;
 }
@@ -557,7 +537,7 @@ int	remove_node		(struct Alx_LinkedList *list,
 
 	node->left->right	= node->right;
 	node->right->left	= node->left;
-	(list->nmemb)--;
+	list->nmemb--;
 
 	if (node == list->head)
 		list->head	= node->right;

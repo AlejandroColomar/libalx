@@ -56,8 +56,7 @@ int	alx_node_init_empty	(struct Alx_Node **node)
 
 	if (alx_mallocarrays(node, 1))
 		return	ENOMEM;
-	(*node)->size	= 0;
-	(*node)->data	= NULL;
+	(*node)->buf	= NULL;
 	(*node)->left	= NULL;
 	(*node)->right	= NULL;
 
