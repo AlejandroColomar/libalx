@@ -79,7 +79,9 @@ BASE_OBJ	=							\
 		$(TMP_DIR)/base/string/strstr/strsstr.o
 
 ALX_OBJ		=							\
-		$(TMP_DIR)/extra/alx/linked-list.o
+		$(TMP_DIR)/extra/alx/data-structures/dyn-array.o	\
+		$(TMP_DIR)/extra/alx/data-structures/dyn-buffer.o	\
+		$(TMP_DIR)/extra/alx/data-structures/llist.o
 CV_OBJ		=							\
 		$(TMP_DIR)/extra/cv/alx.o				\
 		$(TMP_DIR)/extra/cv/core.o				\

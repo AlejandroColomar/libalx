@@ -12,15 +12,34 @@
 ################################################################################
 # dependencies
 OBJ		=							\
+		dyn-array.o						\
+		dyn-buffer.o						\
 		llist.o
+
+DYNARR_INC	=							\
+		$(INC_DIR)/libalx/base/assert/assert.h			\
+		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.h	\
+		$(INC_DIR)/libalx/extra/alx/data-structures/dyn-array.h
+DYNARR_SRC	=							\
+		$(SRC_DIR)/extra/alx/data-structures/dyn-array.c
+
+DYNBUF_INC	=							\
+		$(INC_DIR)/libalx/base/assert/assert.h			\
+		$(INC_DIR)/libalx/base/stdlib/minimum.h			\
+		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.h	\
+		$(INC_DIR)/libalx/base/stdlib/alloc/mallocs.h		\
+		$(INC_DIR)/libalx/base/stdlib/alloc/reallocs.h		\
+		$(INC_DIR)/libalx/extra/alx/data-structures/dyn-buffer.h
+DYNBUF_SRC	=							\
+		$(SRC_DIR)/extra/alx/data-structures/dyn-buffer.c
 
 LLIST_INC	=							\
 		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.h	\
 		$(INC_DIR)/libalx/base/stdlib/alloc/mallocs.h		\
 		$(INC_DIR)/libalx/base/stdlib/alloc/reallocs.h		\
-		$(INC_DIR)/libalx/extra/alx/linked-list/llist.h
+		$(INC_DIR)/libalx/extra/alx/data-structures/llist.h
 LLIST_SRC	=							\
-		$(SRC_DIR)/extra/alx/linked-list/llist.c
+		$(SRC_DIR)/extra/alx/data-structures/llist.c
 
 ################################################################################
 # target: dependencies
@@ -31,18 +50,24 @@ all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 
 %.a.s:
-	@echo	"	CC	libalx/tmp/extra/alx/linked-list/$@"
+	@echo	"	CC	libalx/tmp/extra/alx/data-structures/$@"
 	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
 %.so.s:
-	@echo	"	CC	libalx/tmp/extra/alx/linked-list/$@"
+	@echo	"	CC	libalx/tmp/extra/alx/data-structures/$@"
 	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
 %.o: %.s
-	@echo	"	AS	libalx/tmp/extra/alx/linked-list/$@"
+	@echo	"	AS	libalx/tmp/extra/alx/data-structures/$@"
 	$(Q)$(AS) $< -o $@
 
 
 llist.a.s: $(LLIST_SRC) $(LLIST_INC)
 llist.so.s: $(LLIST_SRC) $(LLIST_INC)
+
+dyn-array.a.s: $(DYNARR_SRC) $(DYNARR_INC)
+dyn-array.so.s: $(DYNARR_SRC) $(DYNARR_INC)
+
+dyn-buffer.a.s: $(DYNBUF_SRC) $(DYNBUF_INC)
+dyn-buffer.so.s: $(DYNBUF_SRC) $(DYNBUF_INC)
 
 
 PHONY += clean

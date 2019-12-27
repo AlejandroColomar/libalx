@@ -47,6 +47,7 @@ ALLOC_CALLOCS_SRC	=						\
 		$(SRC_DIR)/base/stdlib/alloc/callocs.c
 
 ALLOC_MALLOCARRAY_INC	=						\
+		$(INC_DIR)/libalx/base/assert/assert.h			\
 		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarray.h
 ALLOC_MALLOCARRAY_SRC	=						\
 		$(SRC_DIR)/base/stdlib/alloc/mallocarray.c
