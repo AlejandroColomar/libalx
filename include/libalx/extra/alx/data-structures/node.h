@@ -54,16 +54,18 @@
  ******* struct / union *******************************************************
  ******************************************************************************/
 /*
- * Doubly linked node
+ * Node
  *
  * buf:		Pointer to a dynamic buffer containing useful data.
- * left:	Pointer to the leftious node.
+ * left:	Pointer to the left node.
  * right:	Pointer to the right node.
+ * parent:	Pointer to the parent node (in a tree).
  */
 struct	Alx_Node {
 	struct Alx_Dyn_Buffer	*buf;
 	struct Alx_Node		*left;
 	struct Alx_Node		*right;
+	struct Alx_Node		*parent;
 };
 
 

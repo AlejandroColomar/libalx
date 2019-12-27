@@ -560,7 +560,7 @@ int	remove_node		(struct Alx_LinkedList *list,
 		remove_last_node(list, &foo);
 		if (foo != node)
 			goto err;
-		return	0;
+		goto out;
 	}
 
 	node->left->right	= node->right;
@@ -571,9 +571,10 @@ int	remove_node		(struct Alx_LinkedList *list,
 		list->head	= node->right;
 	if (node == list->tail)
 		list->tail	= node->left;
-
+out:
 	node->left	= NULL;
 	node->right	= NULL;
+	node->parent	= NULL;
 
 	return	0;
 err:
