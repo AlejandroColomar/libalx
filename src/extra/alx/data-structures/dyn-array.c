@@ -15,6 +15,7 @@
 
 #include "libalx/base/assert/assert.h"
 #include "libalx/base/stdlib/alloc/mallocarrays.h"
+#include "libalx/extra/alx/data-structures/llist.h"
 
 
 /******************************************************************************
@@ -101,15 +102,17 @@ int	alx_dynarr_resize	(struct Alx_Dyn_Array *arr,
 {
 	void	*vp;
 
+	if (!nmemb)
+		return	alx_dynarr_reset(arr, elsize);
+
 	if (!elsize)
 		elsize	= arr->elsize;
-	if ((size_t)nmemb > (SIZE_MAX / arr->elsize))
+	if ((size_t)nmemb > (SIZE_MAX / elsize))
 		return	ENOMEM;
 
 	vp	= reallocarray(arr->data, nmemb, elsize);
 	if (!vp)
 		return	ENOMEM;
-
 	arr->data	= vp;
 	arr->elsize	= elsize;
 	arr->nmemb	= nmemb;
@@ -117,6 +120,50 @@ int	alx_dynarr_resize	(struct Alx_Dyn_Array *arr,
 		arr->written	= nmemb;
 
 	return	0;
+}
+
+int	alx_dynarr_reset	(struct Alx_Dyn_Array *arr, size_t elsize)
+{
+	void	*vp;
+
+	if (!elsize)
+		elsize	= arr->elsize;
+
+	vp	= reallocarray(arr->data, 1, elsize);
+	if (!vp)
+		return	ENOMEM;
+	arr->data	= vp;
+	arr->elsize	= elsize;
+	arr->nmemb	= 1;
+	arr->written	= 0;
+
+	return	alx_dynarr_resize(arr, 0, 0);
+}
+
+int	alx_dynarr_fit	(struct Alx_Dyn_Array *arr)
+{
+
+	return	alx_dynarr_resize(arr, arr->written, 0);
+}
+
+int	alx_dynarr_to_llist	(struct Alx_Dyn_Array *arr,
+				 struct Alx_LinkedList *list)
+{
+	const void	*cell;
+
+	alx_llist_delete_all(list);
+
+	cell	= arr->data;
+	for (ptrdiff_t i = 0; i < arr->written; i++) {
+		if (alx_llist_append(list, cell, arr->elsize))
+			goto err;
+		cell	+= arr->elsize;
+	}
+
+	return	0;
+err:
+	alx_llist_delete_all(list);
+	return	ENOMEM;
 }
 
 

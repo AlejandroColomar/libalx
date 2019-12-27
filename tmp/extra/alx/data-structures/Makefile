@@ -20,6 +20,7 @@ OBJ		=							\
 DYNARR_INC	=							\
 		$(INC_DIR)/libalx/base/assert/assert.h			\
 		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.h	\
+		$(INC_DIR)/libalx/extra/alx/data-structures/llist.h	\
 		$(INC_DIR)/libalx/extra/alx/data-structures/dyn-array.h
 DYNARR_SRC	=							\
 		$(SRC_DIR)/extra/alx/data-structures/dyn-array.c

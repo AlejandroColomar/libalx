@@ -38,6 +38,8 @@
  ******************************************************************************/
 #include <stddef.h>
 
+#include "libalx/extra/alx/data-structures/llist.h"
+
 
 /******************************************************************************
  ******* macros ***************************************************************
@@ -80,7 +82,7 @@ struct	Alx_Dyn_Array {
  *
  * return:
  *	0:		OK.
- *	ENOMEM:		Aborted; failure to allocate the buffer.
+ *	ENOMEM:		Aborted; failure to allocate the array.
  */
 __attribute__((nonnull, warn_unused_result))
 int	alx_dynarr_init		(struct Alx_Dyn_Array **arr, size_t elsize);
@@ -119,7 +121,6 @@ int	alx_dynarr_write	(struct Alx_Dyn_Array *arr, ptrdiff_t cell,
  * arr:		Pointer to an array.
  * cell:	Read at arr->data[cell].
  * data:	Copy the read data here.  Should be at least `elsize` bytes.
- * size:	Size of the data to be copied.
  *
  * return:
  *	0:		OK.
@@ -134,15 +135,56 @@ int	alx_dynarr_read		(const struct Alx_Dyn_Array *arr,
  *
  * arr:		Pointer to an array.
  * nmemb:	New array size (in number of elements).
- * size:	New element size.  A value of 0 keeps the old value.
+ * elsize:	New element size.  A value of 0 keeps the old value.
  *
  * return:
  *	0:		OK.
- *	ENOMEM:		Aborted; failure to allocate the array.
+ *	ENOMEM:		Aborted; failure to reallocate the array.
  */
 __attribute__((nonnull, warn_unused_result))
 int	alx_dynarr_resize	(struct Alx_Dyn_Array *arr,
 				 ptrdiff_t nmemb, size_t elsize);
+
+/*
+ * Reset the array as if just initialized.
+ *
+ * arr:		Pointer to an array.
+ * elsize:	New element size.  A value of 0 keeps the old value.
+ *
+ * return:
+ *	0:		OK.
+ *	ENOMEM:		Aborted; failure to reallocate the array.
+ */
+__attribute__((nonnull, warn_unused_result))
+int	alx_dynarr_reset	(struct Alx_Dyn_Array *arr, size_t elsize);
+
+/*
+ * Shrink the array to fit the used space.
+ *
+ * arr:		Pointer to an array.
+ *
+ * return:
+ *	0:		OK.
+ *	ENOMEM:		Aborted; failure to reallocate the array.
+ */
+__attribute__((nonnull, warn_unused_result))
+int	alx_dynarr_fit		(struct Alx_Dyn_Array *arr);
+
+/*
+ * Copy the array data into an empty linked list.  If the list is not empty,
+ * all of its previous nodes will be safely deleted.  Only the `written` part
+ * in the array will be copied.  The dynamic array is unchanged.
+ *
+ * arr:		Pointer to an array.
+ * list:	Pointer to a list.
+ *
+ * return:
+ *	0:		OK.
+ *	ENOMEM:		Aborted; failure to allocate the nodes.
+ */
+__attribute__((nonnull, warn_unused_result))
+int	alx_dynarr_to_llist	(struct Alx_Dyn_Array *arr,
+				 struct Alx_LinkedList *list);
 
 
 /******************************************************************************
