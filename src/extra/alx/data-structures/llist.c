@@ -513,7 +513,7 @@ int	alx_llist_to_dynarr		(struct Alx_LinkedList *list,
 	struct Alx_Node	*node;
 
 	if (alx_dynarr_resize(arr, list->nmemb, list->head->buf->size))
-		return	ENOMEM;
+		goto err_alloc;
 
 	node	= list->head;
 	for (ptrdiff_t i = 0; i < list->nmemb; i++) {
