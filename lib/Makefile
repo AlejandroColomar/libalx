@@ -78,11 +78,13 @@ BASE_OBJ	=							\
 		$(TMP_DIR)/base/string/strstr/strscasestr.o		\
 		$(TMP_DIR)/base/string/strstr/strsstr.o
 
-ALX_OBJ		=							\
+ALX_DS_OBJ	=							\
 		$(TMP_DIR)/extra/alx/data-structures/dyn-array.o	\
 		$(TMP_DIR)/extra/alx/data-structures/dyn-buffer.o	\
 		$(TMP_DIR)/extra/alx/data-structures/llist.o		\
 		$(TMP_DIR)/extra/alx/data-structures/node.o
+ALX_NPC_OBJ	=							\
+		$(TMP_DIR)/extra/alx/npcomplete/solver_lut.o
 CV_OBJ		=							\
 		$(TMP_DIR)/extra/cv/alx.o				\
 		$(TMP_DIR)/extra/cv/core.o				\
@@ -140,8 +142,13 @@ PHONY += base
 base: libalx libalx/libalx-base.a libalx/libalx-base.so
 
 
-PHONY += alx
-alx: libalx libalx/libalx-alx.a libalx/libalx-alx.so
+PHONY += alx-data-structures
+alx-data-structures: libalx libalx/libalx-alx-data-structures.a		\
+				libalx/libalx-alx-data-structures.so
+
+PHONY += alx-npcomplete
+alx-npcomplete: libalx libalx/libalx-alx-npcomplete.a			\
+				libalx/libalx-alx-npcomplete.so
 
 PHONY += cv
 cv: libalx libalx/libalx-cv.a libalx/libalx-cv.so
@@ -178,10 +185,17 @@ libalx/libalx-base.so: $(patsubst %.o,%.so.o,$(BASE_OBJ))
 	$(Q)$(CC) $(LDFLAGS) -o $@ $^ `pkg-config --libs libbsd-overlay`
 
 
-libalx/libalx-alx.a: $(patsubst %.o,%.a.o,$(ALX_OBJ))
-libalx/libalx-alx.so: $(patsubst %.o,%.so.o,$(ALX_OBJ))
+libalx/libalx-alx-data-structures.a: $(patsubst %.o,%.a.o,$(ALX_DS_OBJ))
+libalx/libalx-alx-data-structures.so: $(patsubst %.o,%.so.o,$(ALX_DS_OBJ))
 	@echo	"	CXX	libalx/lib/$@"
 	$(Q)$(CXX) $(LDFLAGS) -o $@ $^ -l alx-base
+
+
+libalx/libalx-alx-npcomplete.a: $(patsubst %.o,%.a.o,$(ALX_NPC_OBJ))
+libalx/libalx-alx-npcomplete.so: $(patsubst %.o,%.so.o,$(ALX_NPC_OBJ))
+	@echo	"	CXX	libalx/lib/$@"
+	$(Q)$(CXX) $(LDFLAGS) -o $@ $^ -fopenmp				\
+						-l alx-base
 
 libalx/libalx-cv.a: $(patsubst %.o,%.a.o,$(CV_OBJ))
 libalx/libalx-cv.so: $(patsubst %.o,%.so.o,$(CV_OBJ))

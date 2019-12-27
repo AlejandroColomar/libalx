@@ -217,7 +217,16 @@ PHONY += extra
 extra: alx cv gmp gsl ncurses ocr zbar
 
 PHONY += alx
-alx: base
+alx: alx-data-structures alx-npcomplete
+
+PHONY += alx-data-structures
+alx-data-structures: base
+	@echo	"	MAKE	$@"
+	$(Q)$(MAKE) $@	-C $(TMP_DIR)
+	$(Q)$(MAKE) $@	-C $(LIB_DIR)
+
+PHONY += alx-npcomplete
+alx-npcomplete: base
 	@echo	"	MAKE	$@"
 	$(Q)$(MAKE) $@	-C $(TMP_DIR)
 	$(Q)$(MAKE) $@	-C $(LIB_DIR)
@@ -320,6 +329,7 @@ install_extra:
 	$(Q)$(MAKE)	libalx-gmp.pc
 	$(Q)$(MAKE)	libalx-gsl.pc
 	$(Q)$(MAKE)	libalx-ncurses.pc
+	$(Q)$(MAKE)	libalx-npcomplete.pc
 	$(Q)$(MAKE)	libalx-ocr.pc
 	$(Q)$(MAKE)	libalx-zbar.pc
 	@echo

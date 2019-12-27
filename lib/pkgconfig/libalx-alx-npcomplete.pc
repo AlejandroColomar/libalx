@@ -1,0 +1,12 @@
+Name: libalx-alx-npcomplete
+Description: The libalx C/C++ library (ALX NP complete extension)
+URL: https://github.com/alejandro-colomar/libalx
+Version: 1~b8
+Requires:
+Requires.private: libalx-base
+
+prefix=/usr/
+libdir=${prefix}/lib/
+
+Cflags: -fopenmp -D_GNU_SOURCE -D_POSIX_C_SOURCE=200809L
+Libs: -fopenmp -L${libdir}/libalx/ -lalx-alx-npcomplete

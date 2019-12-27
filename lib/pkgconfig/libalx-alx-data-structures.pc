@@ -1,5 +1,5 @@
-Name: libalx-alx
-Description: The libalx C/C++ library (ALX extension)
+Name: libalx-alx-data-structures
+Description: The libalx C/C++ library (ALX data structures extension)
 URL: https://github.com/alejandro-colomar/libalx
 Version: 1~b8
 Requires:
@@ -9,4 +9,4 @@ prefix=/usr/
 libdir=${prefix}/lib/
 
 Cflags: -D_GNU_SOURCE -D_POSIX_C_SOURCE=200809L
-Libs: -L${libdir}/libalx/
+Libs: -L${libdir}/libalx/ -lalx-alx-data-structures

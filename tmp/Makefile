@@ -33,10 +33,17 @@ base:
 PHONY += extra
 extra: alx cv gmp gsl ncurses ocr zbar
 
-
 PHONY += alx
-alx:
+alx: alx-data-structures alx-npcomplete
+
+
+PHONY += alx-data-structures
+alx-data-structures:
 	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/alx/data-structures/
+
+PHONY += alx-npcomplete
+alx-npcomplete:
+	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/alx/npcomplete/
 
 PHONY += cv
 cv:
