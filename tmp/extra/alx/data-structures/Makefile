@@ -39,6 +39,8 @@ LLIST_INC	=							\
 		$(INC_DIR)/libalx/base/compiler/unused.h		\
 		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.h	\
 		$(INC_DIR)/libalx/base/stdlib/alloc/mallocs.h		\
+		$(INC_DIR)/libalx/extra/alx/data-structures/dyn-array.h	\
+		$(INC_DIR)/libalx/extra/alx/data-structures/dyn-buffer.h\
 		$(INC_DIR)/libalx/extra/alx/data-structures/node.h	\
 		$(INC_DIR)/libalx/extra/alx/data-structures/llist.h
 LLIST_SRC	=							\
@@ -46,7 +48,7 @@ LLIST_SRC	=							\
 
 NODE_INC	=							\
 		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.h	\
-		$(INC_DIR)/libalx/extra/alx/data-structures/dyn-buffer.h \
+		$(INC_DIR)/libalx/extra/alx/data-structures/dyn-buffer.h\
 		$(INC_DIR)/libalx/extra/alx/data-structures/node.h
 NODE_SRC	=							\
 		$(SRC_DIR)/extra/alx/data-structures/node.c

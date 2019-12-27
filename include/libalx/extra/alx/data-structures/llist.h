@@ -37,6 +37,7 @@
  ******************************************************************************/
 #include <stddef.h>
 
+#include "libalx/extra/alx/data-structures/dyn-array.h"
 #include "libalx/extra/alx/data-structures/node.h"
 
 
@@ -65,6 +66,9 @@ struct	Alx_LinkedList {
 	struct Alx_Node	*tail;
 	ptrdiff_t	nmemb;
 };
+
+/* Avoid circular dependence */
+struct	Alx_Dyn_Array;
 
 
 /******************************************************************************
@@ -518,6 +522,24 @@ int	alx_llist_apply_bwd		(struct Alx_LinkedList *list,
 						  struct Alx_Node *node,
 						  void *state, ptrdiff_t i),
 					 void *state);
+
+/*
+ * Copy the linked list data into an empty dynamic array.  If the array is
+ * not empty, all of its previous data is lost.  The array is resized to fit
+ * the new data.  The linked list is unchanged.  If an error occurs, the array
+ * may be reset.
+ *
+ * list:	Pointer to a list.
+ * arr:		Pointer to an array.
+ *
+ * return:
+ *	0:		OK.
+ *	ENOMEM:		Aborted; failure to reallocate the array.
+ *	ENOBUFS:	Aborted; nodes have different data sizes.
+ */
+__attribute__((nonnull, warn_unused_result))
+int	alx_llist_to_dynarr		(struct Alx_LinkedList *list,
+					 struct Alx_Dyn_Array *arr);
 
 
 /******************************************************************************

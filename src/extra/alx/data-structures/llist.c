@@ -16,6 +16,8 @@
 #include "libalx/base/compiler/unused.h"
 #include "libalx/base/stdlib/alloc/mallocarrays.h"
 #include "libalx/base/stdlib/alloc/mallocs.h"
+#include "libalx/extra/alx/data-structures/dyn-array.h"
+#include "libalx/extra/alx/data-structures/dyn-buffer.h"
 #include "libalx/extra/alx/data-structures/node.h"
 
 
@@ -503,6 +505,32 @@ int	alx_llist_apply_bwd		(struct Alx_LinkedList *list,
 	}
 
 	return	0;
+}
+
+int	alx_llist_to_dynarr		(struct Alx_LinkedList *list,
+					 struct Alx_Dyn_Array *arr)
+{
+	struct Alx_Node	*node;
+
+	if (alx_dynarr_resize(arr, list->nmemb, list->head->buf->size))
+		return	ENOMEM;
+
+	node	= list->head;
+	for (ptrdiff_t i = 0; i < list->nmemb; i++) {
+		if (node->buf->size != arr->elsize)
+			goto err_size;
+		if (alx_dynarr_write(arr, i, node->buf->data))
+			goto err_alloc;
+		node	= node->right;
+	}
+
+	return	0;
+err_alloc:
+	UNUSED(alx_dynarr_reset(arr, 0));
+	return	ENOMEM;
+err_size:
+	UNUSED(alx_dynarr_reset(arr, 0));
+	return	ENOBUFS;
 }
 
 
