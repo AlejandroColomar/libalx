@@ -25,6 +25,8 @@
  ******************************************************************************/
 #include <cstddef>
 
+#include "libalx/base/compiler/restrict.hpp"
+
 
 /******************************************************************************
  ******* macros ***************************************************************
@@ -34,13 +36,6 @@
 /******************************************************************************
  ******* extern "C" ***********************************************************
  ******************************************************************************/
-struct	Alx_LL_Node {
-	void			*data;
-	size_t			size;
-	struct Alx_LL_Node	*prev;
-	struct Alx_LL_Node	*next;
-};
-
 struct	Alx_LinkedList {
 	struct Alx_LL_Node	*head;
 	struct Alx_LL_Node	*tail;
@@ -147,6 +142,12 @@ int	alx_llist_apply_bwd		(struct Alx_LinkedList *list,
 						  struct Alx_LL_Node *node,
 						  void *state, ptrdiff_t i),
 					 void *state);
+[[gnu::nonnull]][[gnu::warn_unused_result]]
+int	alx_llist_to_dynarr		(struct Alx_LinkedList *restrict list,
+					 struct Alx_Dyn_Array *restrict arr);
+[[gnu::nonnull]][[gnu::warn_unused_result]]
+int	alx_llist_to_bst		(struct Alx_LinkedList *restrict list,
+					 struct Alx_Node *restrict buf);
 }
 
 

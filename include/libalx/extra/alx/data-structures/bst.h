@@ -55,21 +55,9 @@
 /******************************************************************************
  ******* struct / union *******************************************************
  ******************************************************************************/
-/*
- * Doubly-linked list
- *
- * head:	Pointer to the first node.
- * tail:	Pointer to the last node.
- * nmemb:	Number of nodes in the list.
- */
-struct	Alx_LinkedList {
-	struct Alx_Node	*head;
-	struct Alx_Node	*tail;
-	ptrdiff_t	nmemb;
-};
-
 /* Avoid circular dependence */
 struct	Alx_Dyn_Array;
+struct	Alx_LinkedList;
 
 
 /******************************************************************************
@@ -95,7 +83,7 @@ struct	Alx_Dyn_Array;
 __attribute__((nonnull, warn_unused_result))
 int	alx_bst_insert			(struct Alx_Node *bst,
 					 const void *data, size_t size,
-					 int (*restrict cmp)
+					 int (*cmp)
 							(const void *bst_data,
 							 const void *node_data));
 
@@ -113,7 +101,7 @@ int	alx_bst_insert			(struct Alx_Node *bst,
 __attribute__((nonnull))
 void	alx_bst_insert_node		(struct Alx_Node *restrict bst,
 					 struct Alx_Node *restrict node,
-					 int (*restrict cmp)
+					 int (*cmp)
 							(const void *bst_data,
 							 const void *node_data));
 
@@ -172,7 +160,7 @@ struct Alx_Node	*alx_bst_remove_node	(struct Alx_Node *restrict node);
  * bst:		Pointer to a BST.
  * list:	Pointer to a list.
  */
-__attribute__((nonnull, warn_unused_result))
+__attribute__((nonnull))
 void	alx_bst_to_llist		(struct Alx_Node *restrict bst,
 					 struct Alx_LinkedList *restrict list);
 

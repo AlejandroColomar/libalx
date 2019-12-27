@@ -16,6 +16,7 @@
 #include "libalx/base/compiler/unused.h"
 #include "libalx/base/stdlib/alloc/mallocarrays.h"
 #include "libalx/base/stdlib/alloc/mallocs.h"
+#include "libalx/extra/alx/data-structures/bst.h"
 #include "libalx/extra/alx/data-structures/dyn-array.h"
 #include "libalx/extra/alx/data-structures/dyn-buffer.h"
 #include "libalx/extra/alx/data-structures/node.h"
@@ -507,8 +508,8 @@ int	alx_llist_apply_bwd		(struct Alx_LinkedList *list,
 	return	0;
 }
 
-int	alx_llist_to_dynarr		(struct Alx_LinkedList *list,
-					 struct Alx_Dyn_Array *arr)
+int	alx_llist_to_dynarr		(struct Alx_LinkedList *restrict list,
+					 struct Alx_Dyn_Array *restrict arr)
 {
 	struct Alx_Node	*node;
 
@@ -531,6 +532,37 @@ err_alloc:
 err_size:
 	UNUSED(alx_dynarr_reset(arr, 0));
 	return	ENOBUFS;
+}
+
+int	alx_llist_to_bst		(struct Alx_LinkedList *restrict list,
+					 struct Alx_Node **restrict bst,
+					 int (*cmp)
+							(const void *bst_data,
+							 const void *node_data))
+{
+	struct Alx_Node	*node;
+
+	if (alx_llist_remove_tail(list, bst))
+		return	ENOENT;
+
+	for (ptrdiff_t i = 0; i < list->nmemb; i++) {
+		UNUSED(alx_llist_remove_tail(list, &node));
+		alx_bst_insert_node(*bst, node, cmp);
+	}
+
+	return	0;
+}
+
+void	alx_llist_treesort		(struct Alx_LinkedList *restrict list,
+					 int (*cmp)
+							(const void *bst_data,
+							 const void *node_data))
+{
+	struct Alx_Node	*bst;
+
+	if (alx_llist_to_bst(list, &bst, cmp))
+		return;
+	alx_bst_to_llist(bst, list);
 }
 
 

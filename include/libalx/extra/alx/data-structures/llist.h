@@ -538,8 +538,45 @@ int	alx_llist_apply_bwd		(struct Alx_LinkedList *list,
  *	ENOBUFS:	Aborted; nodes have different data sizes.
  */
 __attribute__((nonnull, warn_unused_result))
-int	alx_llist_to_dynarr		(struct Alx_LinkedList *list,
-					 struct Alx_Dyn_Array *arr);
+int	alx_llist_to_dynarr		(struct Alx_LinkedList *restrict list,
+					 struct Alx_Dyn_Array *restrict arr);
+
+/*
+ * Copy the linked list data into a new binary search tree.
+ * The linked list is empty afterwards.
+ *
+ * list:	Pointer to a list.
+ * bst:		Pointer to a pointer to a BST (its root node).
+ * cmp:		Comparison function pointer.  This function should return
+ *			0:	The node data compares equal to the bst node.
+ *			< 0:	The node data goes to the left of the bst node.
+ *			> 0:	The node data goes to the right of the bst node.
+ *
+ * return:
+ *	0:		OK.
+ *	ENOENT:		Aborted; the list is empty.
+ */
+__attribute__((nonnull, warn_unused_result))
+int	alx_llist_to_bst		(struct Alx_LinkedList *restrict list,
+					 struct Alx_Node **restrict bst,
+					 int (*cmp)
+							(const void *bst_data,
+							 const void *node_data));
+
+/*
+ * Sort the linked list using a binary search tree (treesort).
+ *
+ * list:	Pointer to a list.
+ * cmp:		Comparison function pointer.  This function should return
+ *			0:	The node data compares equal to the bst node.
+ *			< 0:	The node data goes to the left of the bst node.
+ *			> 0:	The node data goes to the right of the bst node.
+ */
+__attribute__((nonnull))
+void	alx_llist_treesort		(struct Alx_LinkedList *restrict list,
+					 int (*cmp)
+							(const void *bst_data,
+							 const void *node_data));
 
 
 /******************************************************************************
