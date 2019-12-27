@@ -73,8 +73,7 @@ void	alx_dynbuf_deinit	(struct Alx_Dyn_Buffer *buf)
 	free(buf);
 }
 
-int	alx_dynbuf_write	(struct Alx_Dyn_Buffer *buf,
-				 size_t offset,
+int	alx_dynbuf_write	(struct Alx_Dyn_Buffer *buf, size_t offset,
 				 const void *data, size_t size)
 {
 	size_t	written;
@@ -108,8 +107,7 @@ int	alx_dynbuf_read		(const struct Alx_Dyn_Buffer *buf,
 	return	0;
 }
 
-int	alx_dynbuf_resize	(struct Alx_Dyn_Buffer *buf,
-				 size_t size)
+int	alx_dynbuf_resize	(struct Alx_Dyn_Buffer *buf, size_t size)
 {
 
 	if (size > PTRDIFF_MAX  ||  !size)

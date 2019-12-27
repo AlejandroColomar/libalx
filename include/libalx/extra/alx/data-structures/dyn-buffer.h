@@ -99,7 +99,7 @@ void	alx_dynbuf_deinit	(struct Alx_Dyn_Buffer *buf);
  *
  * buf:		Pointer to a buffer.
  * offset:	Start writing at buf->data + offset.
- * data:	Pointer to the start of the data to be copied.
+ * data:	Pointer to the first byte of the data to be copied.
  * size:	Size of the data to be copied.
  *
  * return:

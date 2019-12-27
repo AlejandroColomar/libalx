@@ -7,16 +7,13 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/extra/alx/linked-list/node.h"
+#include "libalx/extra/alx/data-structures/node.h"
 
 #include <errno.h>
 #include <stdlib.h>
-#include <string.h>
 
 #include "libalx/base/stdlib/alloc/mallocarrays.h"
-#include "libalx/base/stdlib/alloc/mallocs.h"
-#include "libalx/base/stdlib/alloc/reallocs.h"
-#include "libalx/extra/alx/data-structures/node.h"
+#include "libalx/extra/alx/data-structures/dyn-buffer.h"
 
 
 /******************************************************************************
@@ -37,24 +34,24 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_node_new		(struct Alx_Node **node,
-				 const void *data, size_t size)
+int	alx_node_init		(struct Alx_Node **restrict node,
+				 const void *restrict data, size_t size)
 {
 
-	if (alx_node_new_empty(node))
-		return	ENOMEM;
-	if (alx_mallocs(&(*node)->data, size))
+	if (alx_node_init_empty(node))
 		goto err;
-	(*node)->size	= size;
-	memcpy((*node)->data, data, size);
+	if (alx_dynbuf_init(&(*node)->buf))
+		goto err;
+	if (alx_node_write(*node, data, size))
+		goto err;
 
 	return	0;
 err:
-	alx_node_delete(*node);
+	alx_node_deinit(*node);
 	return	ENOMEM;
 }
 
-int	alx_node_new_empty	(struct Alx_Node **node)
+int	alx_node_init_empty	(struct Alx_Node **node)
 {
 
 	if (alx_mallocarrays(node, 1))
@@ -67,25 +64,26 @@ int	alx_node_new_empty	(struct Alx_Node **node)
 	return	0;
 }
 
-void	alx_node_delete		(struct Alx_Node *node)
+void	alx_node_deinit		(struct Alx_Node *node)
 {
 
-	if (node)
-		free(node->data);
+	if (!node)
+		return;
+
+	alx_dynbuf_deinit(node->buf);
 	free(node);
 }
 
-int	alx_node_edit_data	(struct Alx_Node *node,
+int	alx_node_write		(struct Alx_Node *node,
 				 const void *data, size_t size)
 {
+	return	alx_dynbuf_write(node->buf, 0, data, size);
+}
 
-	if (alx_reallocs(&node->data, size))
-		return	ENOMEM;
-	node->size	= size;
-
-	memmove(node->data, data, size);
-
-	return	0;
+int	alx_node_read		(const struct Alx_Node *node,
+				 void *data, size_t size)
+{
+	return	alx_dynbuf_read(node->buf, 0, data, size);
 }
 
 

@@ -14,22 +14,22 @@
  ******* about ****************************************************************
  ******************************************************************************/
 /*
- * Node
+ * Doubly linked node
  *
- * A list pointer can be created with `struct Alx_LinkedList *list;`
- * To use the list, it has to be initialized with `alx_llist_init(&list)`.
- * It can be deinitialized with `alx_llist_deinit(list)`.
+ * A node pointer can be created with `struct Alx_Node *node;`
+ * To use the node, it has to be initialized with
+ * `alx_node_init(&node, data, size)` or `alx_node_init_empty(&node)`.
+ * It can be deinitialized with `alx_node_deinit(node)`.
  *
  * Data is copied into `malloc`ed memory, and `free`d or `realloc`ed
  * automatically by the functions.
  *
- * Each node stores a pointer to its allocated data, the size of the data,
- * and pointers to the two connecting nodes.
+ * A node stores a pointer to a dynamic buffer, and pointers to the two
+ * connecting nodes.
  *
- * If any of the list metadata is manually modified by the user, the list may
- * be corrupted, and the behavior is undefined.  The only thing that the user
- * can safely manually modify are the contents of data, being careful of not
- * overrunning the buffer.
+ * If any of the node metadata is manually modified by the user, the node may
+ * be corrupted, and the behavior is undefined.  alx_dynbuf_ functions may
+ * be called with the buffer pointer for lower level management.
  */
 
 
@@ -55,16 +55,14 @@
 /*
  * Doubly linked node
  *
- * data:	Pointer to allocated memory containing useful data.
- * size:	Size of the allocated buffer (in bytes).
+ * buf:		Pointer to a dynamic buffer containing useful data.
  * left:	Pointer to the leftious node.
  * right:	Pointer to the right node.
  */
 struct	Alx_Node {
-	void		*data;
-	size_t		size;
-	struct Alx_Node	*left;
-	struct Alx_Node	*right;
+	struct Alx_Dyn_Buffer	*buf;
+	struct Alx_Node		*left;
+	struct Alx_Node		*right;
 };
 
 
@@ -72,39 +70,53 @@ struct	Alx_Node {
  ******* prototypes ***********************************************************
  ******************************************************************************/
 /*
- * Allocates memory for the node and for the data, copies the data passed
- * by the user to the newly allocated space, and updates any necessary metadata.
+ * Allocates memory for the node and for the buffer, copies the data passed by
+ * the user to the newly allocated space, and updates any necessary metadata.
+ *
+ * node:	Pointer to a pointer to a node.  A node will be allocated,
+ *		and a pointer to it will be stored in *node.
+ * data:	Pointer to the first byte of the data to be copied.
+ * size:	Size of the data to be copied.
  *
  * return:
  *	0:		OK.
- *	ENOMEM:		Aborted; failure to allocate the node.
+ *	ENOMEM:		Aborted; failure to allocate the node or the buffer.
  */
 __attribute__((nonnull, warn_unused_result))
-int	alx_node_new		(struct Alx_Node **node,
-				 const void *data, size_t size);
+int	alx_node_init		(struct Alx_Node **restrict node,
+				 const void *restrict data, size_t size);
 
 /*
- * Allocates memory for the node (not for the data), and updates any
+ * Allocates memory for the node (not for the buffer), and updates any
  * necessary metadata.
+ *
+ * node:	Pointer to a pointer to a node.  A node will be allocated,
+ *		and a pointer to it will be stored in *node.
  *
  * return:
  *	0:		OK.
  *	ENOMEM:		Aborted; failure to allocate the node.
  */
 __attribute__((nonnull, warn_unused_result))
-int	alx_node_new_empty	(struct Alx_Node **node);
+int	alx_node_init_empty	(struct Alx_Node **node);
 
 /*
  * Deletes `node`.
  * Deallocates memory from the node and from the data.
+ * If node is NULL, no operation is performed.
+ *
+ * node:	Pointer to a node.  It is invalid after the call.
  */
-__attribute__((nonnull))
-void	alx_node_delete		(struct Alx_Node *node);
+void	alx_node_deinit		(struct Alx_Node *node);
 
 /*
- * Edits the node data.
- * Reallocates memory for the the data, copies the data passed by the user to
- * the reallocated space, and updates any necessary metadata.
+ * Writes into the buffer.
+ * Reallocates memory for the data if necessary, copies the data passed by the
+ * user to the reallocated space, and updates any necessary metadata.
+ *
+ * node:	Pointer to a node.
+ * data:	Pointer to the first byte of the data to be copied.
+ * size:	Size of the data to be copied.
  *
  * return:
  *	0:		OK.
@@ -112,8 +124,23 @@ void	alx_node_delete		(struct Alx_Node *node);
  *			data is left untouched.
  */
 __attribute__((nonnull, warn_unused_result))
-int	alx_node_edit_data	(struct Alx_Node *node,
+int	alx_node_write		(struct Alx_Node *node,
 				 const void *data, size_t size);
+
+/*
+ * Reads from the buffer.
+ *
+ * node:	Pointer to a node.
+ * data:	Copy the read data here.  Should be at least `size` bytes.
+ * size:	Size of the data to be copied.
+ *
+ * return:
+ *	0:		OK.
+ *	ENOBUFS:	OK. data was truncated.
+ */
+__attribute__((nonnull))
+int	alx_node_read		(const struct Alx_Node *node,
+				 void *data, size_t size);
 
 
 /******************************************************************************
