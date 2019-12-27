@@ -464,11 +464,12 @@ void	alx_llist_set_node_as_head	(struct Alx_LinkedList *list,
 	list->tail	= node->left;
 }
 
-int	alx_llist_apply			(struct Alx_LinkedList *list,
+int	alx_llist_apply			(struct Alx_LinkedList *restrict list,
 					 int (*f)(struct Alx_LinkedList *list,
-						 struct Alx_Node *node,
-						 void *state, ptrdiff_t i),
-					 void *state)
+						  struct Alx_Node *node,
+						  void *restrict state,
+						  ptrdiff_t i),
+					 void *restrict state)
 {
 	struct Alx_Node	*current;
 	struct Alx_Node	*right;
@@ -486,11 +487,12 @@ int	alx_llist_apply			(struct Alx_LinkedList *list,
 	return	0;
 }
 
-int	alx_llist_apply_bwd		(struct Alx_LinkedList *list,
+int	alx_llist_apply_bwd		(struct Alx_LinkedList *restrict list,
 					 int (*f)(struct Alx_LinkedList *list,
-						 struct Alx_Node *node,
-						 void *state, ptrdiff_t i),
-					 void *state)
+						  struct Alx_Node *node,
+						  void *restrict state,
+						  ptrdiff_t i),
+					 void *restrict state)
 {
 	struct Alx_Node	*current;
 	struct Alx_Node	*right;
@@ -536,9 +538,8 @@ err_size:
 
 int	alx_llist_to_bst		(struct Alx_LinkedList *restrict list,
 					 struct Alx_Node **restrict bst,
-					 int (*cmp)
-							(const void *bst_data,
-							 const void *node_data))
+					 int (*cmp)(const void *bst_data,
+						    const void *node_data))
 {
 	struct Alx_Node	*node;
 
@@ -554,9 +555,8 @@ int	alx_llist_to_bst		(struct Alx_LinkedList *restrict list,
 }
 
 void	alx_llist_treesort		(struct Alx_LinkedList *restrict list,
-					 int (*cmp)
-							(const void *bst_data,
-							 const void *node_data))
+					 int (*cmp)(const void *bst_data,
+						    const void *node_data))
 {
 	struct Alx_Node	*bst;
 
