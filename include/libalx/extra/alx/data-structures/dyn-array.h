@@ -69,6 +69,9 @@ struct	Alx_Dyn_Array {
 	ptrdiff_t	written;
 };
 
+/* Avoid circular include dependence */
+struct	Alx_LinkedList;
+
 
 /******************************************************************************
  ******* prototypes ***********************************************************
@@ -124,7 +127,7 @@ int	alx_dynarr_write	(struct Alx_Dyn_Array *arr, ptrdiff_t cell,
  *
  * return:
  *	0:		OK.
- *	ENOENT:		Aborted; cell >= arr->nmemb.
+ *	EBADSLT:	Aborted; cell >= arr->nmemb.
  */
 __attribute__((nonnull))
 int	alx_dynarr_read		(const struct Alx_Dyn_Array *arr,

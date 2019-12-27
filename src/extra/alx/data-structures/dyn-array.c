@@ -91,7 +91,7 @@ int	alx_dynarr_read		(const struct Alx_Dyn_Array *arr,
 {
 
 	if (cell >= arr->nmemb)
-		return	ENOENT;
+		return	EBADSLT;
 	memmove(data, arr->data + (cell * arr->elsize), arr->elsize);
 
 	return	0;
