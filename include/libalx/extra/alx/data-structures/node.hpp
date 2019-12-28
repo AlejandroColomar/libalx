@@ -14,7 +14,7 @@
  ******* about ****************************************************************
  ******************************************************************************/
 /*
- * Doubly linked node
+ * Node
  *
  * Read  <libalx/extra/alx/data-structures/node.h>  for documentation.
  */
@@ -24,6 +24,9 @@
  ******* headers **************************************************************
  ******************************************************************************/
 #include <cstddef>
+
+#include "libalx/base/compiler/restrict.hpp"
+#include "libalx/extra/alx/data-structures/dyn-buffer.hpp"
 
 
 /******************************************************************************
@@ -38,6 +41,7 @@ struct	Alx_Node {
 	struct Alx_Dyn_Buffer	*buf;
 	struct Alx_Node		*left;
 	struct Alx_Node		*right;
+	struct Alx_Node		*parent;
 };
 
 extern	"C"

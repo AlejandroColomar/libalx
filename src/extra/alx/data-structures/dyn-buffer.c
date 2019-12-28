@@ -10,6 +10,7 @@
 #include "libalx/extra/alx/data-structures/dyn-buffer.h"
 
 #include <errno.h>
+#include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -92,8 +93,7 @@ int	alx_dynbuf_write	(struct Alx_Dyn_Buffer *buf, size_t offset,
 }
 
 int	alx_dynbuf_read		(const struct Alx_Dyn_Buffer *buf,
-				 size_t offset,
-				 void *data, size_t size)
+				 size_t offset, void *data, size_t size)
 {
 	size_t	sz;
 

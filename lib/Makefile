@@ -79,6 +79,7 @@ BASE_OBJ	=							\
 		$(TMP_DIR)/base/string/strstr/strsstr.o
 
 ALX_DS_OBJ	=							\
+		$(TMP_DIR)/extra/alx/data-structures/bst.o		\
 		$(TMP_DIR)/extra/alx/data-structures/dyn-array.o	\
 		$(TMP_DIR)/extra/alx/data-structures/dyn-buffer.o	\
 		$(TMP_DIR)/extra/alx/data-structures/llist.o		\

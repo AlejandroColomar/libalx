@@ -10,6 +10,7 @@
 #include "libalx/extra/alx/data-structures/node.h"
 
 #include <errno.h>
+#include <stddef.h>
 #include <stdlib.h>
 
 #include "libalx/base/stdlib/alloc/mallocarrays.h"

@@ -14,7 +14,7 @@
  ******* about ****************************************************************
  ******************************************************************************/
 /*
- * Doubly linked node
+ * Node
  *
  * A node pointer can be created with `struct Alx_Node *node;`
  * To use the node, it has to be initialized with
@@ -24,8 +24,8 @@
  * Data is copied into `malloc`ed memory, and `free`d or `realloc`ed
  * automatically by the functions.
  *
- * A node stores a pointer to a dynamic buffer, and pointers to the two
- * connecting nodes.
+ * A node stores a pointer to a dynamic buffer, and pointers to its connecting
+ * nodes.
  *
  * If any of the node metadata is manually modified by the user, the node may
  * be corrupted, and the behavior is undefined.  Functions in
@@ -38,6 +38,8 @@
  ******* headers **************************************************************
  ******************************************************************************/
 #include <stddef.h>
+
+#include "libalx/extra/alx/data-structures/dyn-buffer.h"
 
 
 /******************************************************************************

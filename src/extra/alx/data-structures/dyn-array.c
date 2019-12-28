@@ -10,6 +10,7 @@
 #include "libalx/extra/alx/data-structures/dyn-array.h"
 
 #include <errno.h>
+#include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -140,7 +141,7 @@ int	alx_dynarr_reset	(struct Alx_Dyn_Array *arr, size_t elsize)
 	return	alx_dynarr_resize(arr, 0, 0);
 }
 
-int	alx_dynarr_fit	(struct Alx_Dyn_Array *arr)
+int	alx_dynarr_fit		(struct Alx_Dyn_Array *arr)
 {
 
 	return	alx_dynarr_resize(arr, arr->written, 0);

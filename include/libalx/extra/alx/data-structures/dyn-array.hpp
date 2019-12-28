@@ -25,6 +25,8 @@
  ******************************************************************************/
 #include <cstddef>
 
+#include "libalx/extra/alx/data-structures/llist.hpp"
+
 
 /******************************************************************************
  ******* macros ***************************************************************
@@ -41,6 +43,9 @@ struct	Alx_Dyn_Array {
 	ptrdiff_t	written;
 };
 
+/* Avoid circular include dependence */
+struct	Alx_LinkedList;
+
 extern	"C"
 {
 [[gnu::nonnull]][[gnu::warn_unused_result]]
@@ -55,6 +60,13 @@ int	alx_dynarr_read		(const struct Alx_Dyn_Array *arr,
 [[gnu::nonnull]][[gnu::warn_unused_result]]
 int	alx_dynarr_resize	(struct Alx_Dyn_Array *arr,
 				 ptrdiff_t nmemb, size_t elsize);
+[[gnu::nonnull]][[gnu::warn_unused_result]]
+int	alx_dynarr_reset	(struct Alx_Dyn_Array *arr, size_t elsize);
+[[gnu::nonnull]][[gnu::warn_unused_result]]
+int	alx_dynarr_fit		(struct Alx_Dyn_Array *arr);
+[[gnu::nonnull]][[gnu::warn_unused_result]]
+int	alx_dynarr_to_llist	(struct Alx_Dyn_Array *arr,
+				 struct Alx_LinkedList *list);
 }
 
 

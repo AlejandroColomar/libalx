@@ -7,17 +7,13 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/extra/alx/linked-list/bst.h"
+#include "libalx/extra/alx/data-structures/bst.h"
 
 #include <errno.h>
-#include <stdlib.h>
-#include <string.h>
+#include <stddef.h>
 
-#include "libalx/base/stdlib/alloc/mallocarrays.h"
-#include "libalx/base/stdlib/alloc/mallocs.h"
-#include "libalx/base/stdlib/alloc/reallocs.h"
-#include "libalx/extra/alx/linked-list/llist.h"
-#include "libalx/extra/alx/linked-list/node.h"
+#include "libalx/extra/alx/data-structures/llist.h"
+#include "libalx/extra/alx/data-structures/node.h"
 
 
 /******************************************************************************
@@ -40,24 +36,22 @@
  ******************************************************************************/
 int	alx_bst_insert			(struct Alx_Node *bst,
 					 const void *data, size_t size,
-					 int (*restrict cmp)
-							(const void *bst_data,
-							 const void *node_data))
+					 int (*cmp)(const void *bst_data,
+						    const void *node_data))
 {
 	struct Alx_Node	*node;
 
 	if (alx_node_init(&node, data, size))
 		return	ENOMEM;
-	alx_bst_insert_node(tree, node, cmp);
+	alx_bst_insert_node(bst, node, cmp);
 
 	return	0;
 }
 
 void	alx_bst_insert_node		(struct Alx_Node *restrict bst,
 					 struct Alx_Node *restrict node,
-					 int (*restrict cmp)
-							(const void *bst_data,
-							 const void *node_data))
+					 int (*cmp)(const void *bst_data,
+						    const void *node_data))
 {
 	enum		{LEFT, RIGHT};
 
@@ -66,9 +60,9 @@ void	alx_bst_insert_node		(struct Alx_Node *restrict bst,
 	int		pos;
 
 	son	= bst;
-	while (son)
+	while (son) {
 		parent	= son;
-		if (cmp(bst->data, node->data) < 0) {
+		if (cmp(bst->buf->data, node->buf->data) < 0) {
 			son	= parent->left;
 			pos	= LEFT;
 		} else {

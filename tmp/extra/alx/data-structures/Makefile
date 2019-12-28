@@ -12,10 +12,18 @@
 ################################################################################
 # dependencies
 OBJ		=							\
+		bst.o							\
 		dyn-array.o						\
 		dyn-buffer.o						\
 		llist.o							\
 		node.o
+
+BST_INC		=							\
+		$(INC_DIR)/libalx/extra/alx/data-structures/llist.h	\
+		$(INC_DIR)/libalx/extra/alx/data-structures/node.h	\
+		$(INC_DIR)/libalx/extra/alx/data-structures/bst.h
+BST_SRC		=							\
+		$(SRC_DIR)/extra/alx/data-structures/bst.c
 
 DYNARR_INC	=							\
 		$(INC_DIR)/libalx/base/assert/assert.h			\
@@ -71,6 +79,9 @@ all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 	@echo	"	AS	libalx/tmp/extra/alx/data-structures/$@"
 	$(Q)$(AS) $< -o $@
 
+
+bst.a.s: $(BST_SRC) $(BST_INC)
+bst.so.s: $(BST_SRC) $(BST_INC)
 
 dyn-array.a.s: $(DYNARR_SRC) $(DYNARR_INC)
 dyn-array.so.s: $(DYNARR_SRC) $(DYNARR_INC)

@@ -17,18 +17,18 @@
  * Binary search tree
  *
  * An orphan node is a BST itself.  A BST can be created by inserting nodes
- * into a single element BST (a node).
- * To use the BST, it has to be initialized with `alx_llist_init(&list)`.
- * It can be deinitialized with `alx_llist_deinit(list)`.
+ * into a single element BST (a node) with
+ * `alx_bst_insert_node(bst, node, cmp)` or
+ * `alx_bst_insert(bst, data, size, cmp)`.
  *
  * Data is copied into `malloc`ed memory, and `free`d or `realloc`ed
  * automatically by the functions.
  *
- * Each node stores a pointer to a dynamic buffer, and pointers to the two
- * connecting nodes.  More info about the nodes can be found in
+ * Each node stores a pointer to a dynamic buffer, and pointers to its two
+ * subtrees and its parent.  More info about the nodes can be found in
  *  <libalx/extra/alx/data-structures/node.h>.
  *
- * If any of the list metadata is manually modified by the user, the list may
+ * If any of the nodes' metadata is manually modified by the user, the list may
  * be corrupted, and the behavior is undefined.
  */
 
@@ -56,7 +56,6 @@
  ******* struct / union *******************************************************
  ******************************************************************************/
 /* Avoid circular dependence */
-struct	Alx_Dyn_Array;
 struct	Alx_LinkedList;
 
 
@@ -83,9 +82,8 @@ struct	Alx_LinkedList;
 __attribute__((nonnull, warn_unused_result))
 int	alx_bst_insert			(struct Alx_Node *bst,
 					 const void *data, size_t size,
-					 int (*cmp)
-							(const void *bst_data,
-							 const void *node_data));
+					 int (*cmp)(const void *bst_data,
+						    const void *node_data));
 
 /*
  * Inserts an already existing node into the BST.
@@ -101,9 +99,8 @@ int	alx_bst_insert			(struct Alx_Node *bst,
 __attribute__((nonnull))
 void	alx_bst_insert_node		(struct Alx_Node *restrict bst,
 					 struct Alx_Node *restrict node,
-					 int (*cmp)
-							(const void *bst_data,
-							 const void *node_data));
+					 int (*cmp)(const void *bst_data,
+						    const void *node_data));
 
 /*
  * Returns the leftmost node in the BST.

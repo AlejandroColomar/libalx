@@ -10,8 +10,8 @@
 #include "libalx/extra/alx/data-structures/llist.h"
 
 #include <errno.h>
+#include <stddef.h>
 #include <stdlib.h>
-#include <string.h>
 
 #include "libalx/base/compiler/unused.h"
 #include "libalx/base/stdlib/alloc/mallocarrays.h"
