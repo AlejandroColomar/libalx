@@ -189,34 +189,6 @@ int	alx_bst_apply_bwd		(struct Alx_Node *restrict bst,
 	return	alx_bst_apply_bwd(left, f, state);
 }
 
-int	alx_bst_to_dynarr		(struct Alx_Node *restrict bst,
-					 struct Alx_Dyn_Array *restrict arr)
-{
-	struct Alx_LinkedList	*list;
-	int			status;
-
-	status	= alx_llist_init(&list);
-	if (status)
-		goto err;
-	alx_bst_to_llist(bst, list);
-
-	status	= alx_dynarr_reset(arr, 0);
-	if (status)
-		goto err;
-	status	= alx_llist_to_dynarr(list, arr);
-	if (status)
-		goto err;
-
-//	UNUSED(alx_llist_to_bst());
-
-	alx_llist_deinit(list);
-	return	0;
-err:
-	alx_llist_deinit(list);
-	UNUSED(alx_dynarr_reset(arr, 0));
-	return	status;
-}
-
 void	alx_bst_to_llist		(struct Alx_Node *restrict bst,
 					 struct Alx_LinkedList *restrict list)
 {

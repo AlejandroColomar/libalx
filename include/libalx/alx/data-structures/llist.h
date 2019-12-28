@@ -94,7 +94,7 @@ int	alx_llist_init			(struct Alx_LinkedList **list);
  * Deinitializes list.
  * The alx_llist_deinit() function frees all the memory space used by the list
  * and all of its remaining nodes.  The list must have been initialized by a
- * leftious call to alx_llist_init().  Otherwise, or if alx_llist_deinit(list)
+ * previous call to alx_llist_init().  Otherwise, or if alx_llist_deinit(list)
  * has already been called before, undefined behavior occurs.
  * If list is NULL, no operation is performed.
  *

@@ -181,24 +181,6 @@ int	alx_bst_apply_bwd		(struct Alx_Node *restrict bst,
 						  void *restrict state),
 					 void *restrict state);
 
-
-/*
- * Copy the BST data into an empty dynamic array.  If the array is
- * not empty, all of its previous data is lost.  The array is resized to fit
- * the new data.  The BST may be restructured, although it will still be
- * ordered.  If an error occurs, the array may be reset.
- *
- * bst:		Pointer to a BST.
- * arr:		Pointer to an array.
- *
- * return:
- *	0:		OK.
- *	ENOMEM:		Aborted; failure to reallocate some data.
- *	ENOBUFS:	Aborted; nodes have different data sizes.
- */
-int	alx_bst_to_dynarr		(struct Alx_Node *restrict bst,
-					 struct Alx_Dyn_Array *restrict arr);
-
 /*
  * Moves the BST nodes into an empty linked list.  If the linked list was not
  * empty, all of its previous nodes are deleted.  The BST is destroyed.
