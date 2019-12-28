@@ -11,6 +11,38 @@
 
 
 /******************************************************************************
+ ******* about ****************************************************************
+ ******************************************************************************/
+/*
+ * [[gnu::nonnull]]
+ * int	callocs(type **restrict ptr, ptrdiff_t nmemb);
+ *
+ * Safe & simple wrapper for `calloc()`.
+ *
+ * Features:
+ * - Safely computes the element size (second argument to `calloc()`)
+ *	so the user can't make mistakes.
+ * - Returns non-zero on error.
+ * - Doesn't cast
+ * - The pointer stored in `*ptr` is always a valid pointer or NULL.
+ *
+ * example:
+ *	#define ALX_NO_PREFIX
+ *	#include <libalx/base/stdlib/alloc/callocs.h>
+ *
+ *		int *arr;
+ *
+ *		if (callocs(&arr, 7))		// int arr[7];
+ *			goto err;
+ *
+ *		// `arr` has been succesfully allocated here
+ *		free(arr);
+ *	err:
+ *		// No memory leaks
+ */
+
+
+/******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
 #include <stdlib.h>
@@ -20,8 +52,15 @@
  ******* macros ***************************************************************
  ******************************************************************************/
 /*
- * [[gnu::nonnull]]
- * int	alx_callocs(type **restrict ptr, ptrdiff_t nmemb);
+ * callocs()
+ *
+ * ptr:		Memory will be allocated, and a pointer to it will be stored
+ *		in *ptr.
+ * nmemb:	First argument to be passed to `calloc()`.
+ *
+ * return:
+ *	0:		OK.
+ *	!= 0:		Failed.
  */
 #define alx_callocs(ptr, nmemb)	(					\
 {									\

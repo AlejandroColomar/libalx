@@ -11,6 +11,40 @@
 
 
 /******************************************************************************
+ ******* about ****************************************************************
+ ******************************************************************************/
+/*
+ * [[gnu::warn_unused_result]]
+ * void	*reallocarrayf(void *ptr, ptrdiff_t nmemb, size_t size);
+ *
+ * Almost equivalent to `reallocarray()`.
+ *
+ * Features:
+ * - Upon failure, the passed pointer is freed, to ease error handling and to
+ *	avoid memory leaks.
+ * - It fails safely if (nmemb < 0).  With `reallocarray()` the array would be
+ *	be allocated (it uses `size_t` instead of `ptrdiff_t`), and it's usage
+ *	would likely produce undefined behavior.
+ *
+ * example:
+ *	#define ALX_NO_PREFIX
+ *	#include <libalx/base/stdlib/alloc/reallocarrayf.h>
+ *
+ *		int *arr;
+ *
+ *		arr	= mallocarray(5, sizeof(*arr);		// int arr[5];
+ *		arr	= reallocarrayf(arr, 7, sizeof(*arr));	// int arr[7];
+ *		if (!arr)
+ *			goto err;
+ *
+ *		// `arr` has been succesfully reallocated here
+ *		free(arr);
+ *	err:
+ *		// No memory leaks
+ */
+
+
+/******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
 #include <errno.h>
@@ -45,7 +79,18 @@ alx_Static_assert_size_ptrdiff();
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((malloc, warn_unused_result))
+/*
+ * reallocarrayf()
+ *
+ * ptr:		Pointer to allocated memory (or NULL).
+ * nmemb:	Number of elements in the array.
+ * size:	Size of each element in the array.
+ *
+ * return:
+ *	!= NULL:	OK.
+ *	NULL:		Failed.
+ */
+__attribute__((warn_unused_result))
 inline
 void	*alx_reallocarrayf	(void *ptr, ptrdiff_t nmemb, size_t size);
 
@@ -55,7 +100,7 @@ void	*alx_reallocarrayf	(void *ptr, ptrdiff_t nmemb, size_t size);
  ******************************************************************************/
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, malloc, warn_unused_result))
+__attribute__((always_inline, warn_unused_result))
 static inline
 void	*reallocarrayf		(void *ptr, ptrdiff_t nmemb, size_t size)
 {

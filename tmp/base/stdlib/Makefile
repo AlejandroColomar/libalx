@@ -21,6 +21,7 @@ OBJ		=							\
 		alloc/mallocarray.o					\
 		alloc/mallocarrays.o					\
 		alloc/mallocs.o						\
+		alloc/reallocarrayf.o					\
 		alloc/reallocarrayfs.o					\
 		alloc/reallocarrays.o					\
 		alloc/reallocfs.o					\
@@ -55,6 +56,7 @@ ALLOC_MALLOCARRAY_SRC	=						\
 		$(SRC_DIR)/base/stdlib/alloc/mallocarray.c
 
 ALLOC_MALLOCARRAYS_INC	=						\
+		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarray.h	\
 		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.h
 ALLOC_MALLOCARRAYS_SRC	=						\
 		$(SRC_DIR)/base/stdlib/alloc/mallocarrays.c
@@ -64,6 +66,12 @@ ALLOC_MALLOCS_INC	=						\
 		$(INC_DIR)/libalx/base/stdlib/alloc/mallocs.h
 ALLOC_MALLOCS_SRC	=						\
 		$(SRC_DIR)/base/stdlib/alloc/mallocs.c
+
+ALLOC_REALLOCARRAYF_INC	=						\
+		$(INC_DIR)/libalx/base/assert/assert.h			\
+		$(INC_DIR)/libalx/base/stdlib/alloc/reallocarrayf.h
+ALLOC_REALLOCARRAYF_SRC	=						\
+		$(SRC_DIR)/base/stdlib/alloc/reallocarrayf.c
 
 ALLOC_REALLOCARRAYFS_INC	=					\
 		$(INC_DIR)/libalx/base/stdlib/alloc/reallocarrayfs.h
@@ -219,6 +227,9 @@ alloc/mallocarrays.so.s: $(ALLOC_MALLOCARRAYS_SRC) $(ALLOC_MALLOCARRAYS_INC)
 
 alloc/mallocs.a.s: $(ALLOC_MALLOCS_SRC) $(ALLOC_MALLOCS_INC)
 alloc/mallocs.so.s: $(ALLOC_MALLOCS_SRC) $(ALLOC_MALLOCS_INC)
+
+alloc/reallocarrayf.a.s: $(ALLOC_REALLOCARRAYF_SRC) $(ALLOC_REALLOCARRAYF_INC)
+alloc/reallocarrayf.so.s: $(ALLOC_REALLOCARRAYF_SRC) $(ALLOC_REALLOCARRAYF_INC)
 
 alloc/reallocarrayfs.a.s: $(ALLOC_REALLOCARRAYFS_SRC) $(ALLOC_REALLOCARRAYFS_INC)
 alloc/reallocarrayfs.so.s: $(ALLOC_REALLOCARRAYFS_SRC) $(ALLOC_REALLOCARRAYFS_INC)

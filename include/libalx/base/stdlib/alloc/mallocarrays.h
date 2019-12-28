@@ -11,6 +11,38 @@
 
 
 /******************************************************************************
+ ******* about ****************************************************************
+ ******************************************************************************/
+/*
+ * [[gnu::nonnull]] [[gnu::warn_unused_result]]
+ * int	mallocarrays(type **restrict ptr, ptrdiff_t nmemb);
+ *
+ * Safe & simple wrapper for `mallocarray()`.
+ *
+ * Features:
+ * - Safely computes the element size (second argument to `mallocarray()`)
+ *	so the user can't make mistakes.
+ * - Returns non-zero on error.
+ * - Doesn't cast
+ * - The pointer stored in `*ptr` is always a valid pointer or NULL.
+ *
+ * example:
+ *	#define ALX_NO_PREFIX
+ *	#include <libalx/base/stdlib/alloc/mallocarrays.h>
+ *
+ *		int *arr;
+ *
+ *		if (mallocarrays(&arr, 7))		// int arr[7];
+ *			goto err;
+ *
+ *		// `arr` has been succesfully allocated here
+ *		free(arr);
+ *	err:
+ *		// No memory leaks
+ */
+
+
+/******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
 #include <errno.h>
@@ -25,8 +57,15 @@
  ******* macros ***************************************************************
  ******************************************************************************/
 /*
- * [[gnu::nonnull]]
- * int	alx_mallocarrays(type **restrict ptr, ptrdiff_t nmemb);
+ * mallocarrays()
+ *
+ * ptr:		Memory will be allocated, and a pointer to it will be stored
+ *		in *ptr.
+ * nmemb:	Number of elements in the array.
+ *
+ * return:
+ *	0:		OK.
+ *	!= 0:		Failed.
  */
 #define alx_mallocarrays(ptr, nmemb)	(				\
 {									\

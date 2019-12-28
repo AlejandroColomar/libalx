@@ -11,6 +11,17 @@
 
 
 /******************************************************************************
+ ******* about ****************************************************************
+ ******************************************************************************/
+/*
+ * [[gnu::nonnull]] [[gnu::warn_unused_result]]
+ * int	reallocfs(void **restrict ptr, size_t size);
+ *
+ * Read  <libalx/base/stdlib/alloc/reallocfs.h>  for documentation.
+ */
+
+
+/******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
 #include <cstddef>
@@ -24,7 +35,7 @@
  ******************************************************************************/
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define reallocfs(ptr, nmemb)	alx_reallocfs(ptr, nmemb)
+#define reallocfs(ptr, size)	alx_reallocfs(ptr, size)
 #endif
 
 
@@ -33,7 +44,7 @@
  ******************************************************************************/
 extern	"C"
 {
-[[gnu::nonnull]][[gnu::warn_unused_result]]
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_reallocfs	(void **restrict ptr, size_t size);
 }
 

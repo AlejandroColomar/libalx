@@ -11,9 +11,19 @@
 
 
 /******************************************************************************
+ ******* about ****************************************************************
+ ******************************************************************************/
+/*
+ * [[gnu::nonnull]] [[gnu::warn_unused_result]]
+ * int	reallocs(void **restrict ptr, size_t size);
+ *
+ * Read  <libalx/base/stdlib/alloc/reallocs.h>  for documentation.
+ */
+
+
+/******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <cstdbool>
 #include <cstddef>
 #include <cstdlib>
 
@@ -34,10 +44,10 @@
  ******************************************************************************/
 extern	"C"
 {
-[[gnu::nonnull]][[gnu::warn_unused_result]]
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_reallocs	(void **restrict ptr, size_t size);
-[[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_reallocs__	(void **restrict ptr, void *restrict vp, bool size);
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+int	alx_reallocs__	(void **restrict ptr, void *restrict vp, size_t size);
 }
 
 

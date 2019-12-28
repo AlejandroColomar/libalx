@@ -11,20 +11,42 @@
 
 
 /******************************************************************************
+ ******* about ****************************************************************
+ ******************************************************************************/
+/*
+ * [[gnu::malloc]] [[gnu::warn_unused_result]]
+ * void	*mallocarray(ptrdiff_t nmemb, size_t size);
+ *
+ * Almost equivalent to `reallocarray(NULL, nmemb, size)`.
+ *
+ * Features:
+ * - It fails safely if (nmemb < 0).  With `reallocarray()` the array would be
+ *	be allocated (it uses `size_t` instead of `ptrdiff_t`), and it's usage
+ *	would likely produce undefined behavior.
+ *
+ * example:
+ *	#define ALX_NO_PREFIX
+ *	#include <libalx/base/stdlib/alloc/mallocarray.h>
+ *
+ *		int *arr;
+ *
+ *		arr	= mallocarray(7, sizeof(*arr));		// int arr[7];
+ *		if (!arr)
+ *			goto err;
+ *
+ *		// `arr` has been succesfully allocated here
+ *		free(arr);
+ *	err:
+ *		// No memory leaks
+ */
+
+
+/******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
 #include <errno.h>
 #include <stddef.h>
-#include <stdint.h>
 #include <stdlib.h>
-
-#include "libalx/base/assert/assert.h"
-
-
-/******************************************************************************
- ******* _Static_assert *******************************************************
- ******************************************************************************/
-alx_Static_assert_size_ptrdiff();
 
 
 /******************************************************************************
@@ -45,6 +67,16 @@ alx_Static_assert_size_ptrdiff();
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
+/*
+ * mallocarray()
+ *
+ * nmemb:	Number of elements in the array.
+ * size:	Size of each element in the array.
+ *
+ * return:
+ *	!= NULL:	OK.
+ *	NULL:		Failed.
+ */
 __attribute__((malloc, warn_unused_result))
 inline
 void	*alx_mallocarray	(ptrdiff_t nmemb, size_t size);
@@ -73,12 +105,8 @@ void	*alx_mallocarray	(ptrdiff_t nmemb, size_t size)
 
 	if (nmemb < 0)
 		goto ovf;
-	if (!size)
-		return	NULL;
-	if ((size_t)nmemb  >  (SIZE_MAX / size))
-		goto ovf;
 
-	return	malloc(size * (size_t)nmemb);
+	return	reallocarray(NULL, nmemb, size);
 ovf:
 	errno	= ENOMEM;
 	return	NULL;

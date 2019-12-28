@@ -11,6 +11,38 @@
 
 
 /******************************************************************************
+ ******* about ****************************************************************
+ ******************************************************************************/
+/*
+ * [[gnu::nonnull]]  [[gnu::warn_unused_result]]
+ * int	mallocs(void **restrict ptr, size_t size);
+ *
+ * Safe & simple wrapper for `malloc()`.
+ * To be used for generic buffers of bytes, and not for arrays (use
+ * `mallocarray()` family of functions for that purpose).
+ *
+ * Features:
+ * - Returns non-zero on error.
+ * - Doesn't cast
+ * - The pointer stored in `*ptr` is always a valid pointer or NULL.
+ *
+ * example:
+ *	#define ALX_NO_PREFIX
+ *	#include <libalx/base/stdlib/alloc/mallocs.h>
+ *
+ *		char *buf;
+ *
+ *		if (mallocs(&buf, 7))		// char buf[7];
+ *			goto err;
+ *
+ *		// `buf` has been succesfully allocated here
+ *		free(buf);
+ *	err:
+ *		// No memory leaks
+ */
+
+
+/******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
 #include <stddef.h>
@@ -35,6 +67,17 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
+/*
+ * mallocs()
+ *
+ * ptr:		Memory will be allocated, and a pointer to it will be stored
+ *		in *ptr.
+ * size:	Size of the buffer (in bytes).
+ *
+ * return:
+ *	0:		OK.
+ *	!= 0:		Failed.
+ */
 __attribute__((nonnull, warn_unused_result))
 inline
 int	alx_mallocs	(void **restrict ptr, size_t size);

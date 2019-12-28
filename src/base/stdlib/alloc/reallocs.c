@@ -9,7 +9,6 @@
  ******************************************************************************/
 #include "libalx/base/stdlib/alloc/reallocs.h"
 
-#include <stdbool.h>
 #include <stddef.h>
 
 
@@ -34,7 +33,7 @@
 extern
 int	alx_reallocs	(void **restrict ptr, size_t size);
 extern
-int	alx_reallocs__	(void **restrict ptr, void *restrict vp, bool size);
+int	alx_reallocs__	(void **restrict ptr, void *restrict vp, size_t size);
 
 
 /******************************************************************************

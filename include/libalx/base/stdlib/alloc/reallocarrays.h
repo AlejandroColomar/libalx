@@ -11,6 +11,41 @@
 
 
 /******************************************************************************
+ ******* about ****************************************************************
+ ******************************************************************************/
+/*
+ * [[gnu::nonnull]][[gnu::warn_unused_result]]
+ * int	reallocarrays(type **restrict ptr, ptrdiff_t nmemb);
+ *
+ * Safe & simple wrapper for `reallocarray()`.
+ *
+ * Features:
+ * - Safely computes the element size (second argument to `reallocarray()`)
+ *	so the user can't make mistakes.
+ * - Returns non-zero on error.
+ * - Doesn't cast.
+ * - Upon failure, the pointer is untouched (no memory leak).
+ * - The pointer stored in `*ptr` is always a valid pointer or NULL.
+ *
+ * example:
+ *	#define ALX_NO_PREFIX
+ *	#include <libalx/base/stdlib/alloc/reallocarrays.h>
+ *
+ *		int *arr;
+ *
+ *		if (mallocarrays(&arr, 5))	// int arr[5];
+ *			goto err;
+ *		if (reallocarrays(&arr, 7))	// int arr[7];
+ *			goto err;
+ *
+ *		// `arr` has been succesfully reallocated here
+ *	err:
+ *		free(arr);
+ *		// No memory leaks
+ */
+
+
+/******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
 #include <stdlib.h>
@@ -22,8 +57,16 @@
  ******* macros ***************************************************************
  ******************************************************************************/
 /*
- * [[gnu::nonnull]][[gnu::warn_unused_result]]
- * int	alx_reallocarrays(type **restrict ptr, ptrdiff_t nmemb);
+ * reallocarrays()
+ *
+ * ptr:		Pointer to a pointer to the memory to be reallocated.
+ *		A pointer to the reallocated memory will be stored
+ *		in *ptr.
+ * nmemb:	Number of elements in the array.
+ *
+ * return:
+ *	0:		OK.
+ *	!= 0:		Failed.
  */
 #define alx_reallocarrays(ptr, nmemb)	(				\
 {									\

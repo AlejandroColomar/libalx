@@ -7,7 +7,18 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/base/stdlib/alloc/mallocarray.hpp */
+#pragma once	/* libalx/base/stdlib/alloc/reallocarrayf.hpp */
+
+
+/******************************************************************************
+ ******* about ****************************************************************
+ ******************************************************************************/
+/*
+ * [[gnu::warn_unused_result]]
+ * void	*reallocarrayf(void *ptr, ptrdiff_t nmemb, size_t size);
+ *
+ * Read  <libalx/base/stdlib/alloc/reallocarrayf.h>  for documentation.
+ */
 
 
 /******************************************************************************
@@ -30,7 +41,7 @@
  ******************************************************************************/
 extern	"C"
 {
-[[gnu::malloc]][[gnu::warn_unused_result]]
+[[gnu::warn_unused_result]]
 void	*alx_reallocarrayf(void *ptr, ptrdiff_t nmemb, size_t size);
 }
 
