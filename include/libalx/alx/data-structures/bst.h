@@ -26,7 +26,7 @@
  *
  * Each node stores a pointer to a dynamic buffer, and pointers to its two
  * subtrees and its parent.  More info about the nodes can be found in
- *  <libalx/extra/alx/data-structures/node.h>.
+ *  <libalx/alx/data-structures/node.h>.
  *
  * If any of the nodes' metadata is manually modified by the user, the list may
  * be corrupted, and the behavior is undefined.
@@ -103,6 +103,14 @@ void	alx_bst_insert_node		(struct Alx_Node *restrict bst,
 						    const void *node_data));
 
 /*
+ * Deletes all the nodes in the BST.
+ * If bst is NULL, no operation is performed.
+ *
+ * bst:		Pointer to a BST.
+ */
+void	alx_bst_delete_all		(struct Alx_Node *restrict bst);
+
+/*
  * Returns the leftmost node in the BST.
  *
  * bst:		Pointer to a BST.
@@ -119,39 +127,62 @@ __attribute__((nonnull, pure, warn_unused_result))
 struct Alx_Node	*alx_bst_rightmost_node	(struct Alx_Node *restrict bst);
 
 /*
- * Returns the parentmost node in the BST.
+ * Removes a node from the BST and updates any necessary metadata.
+ * The return value is `parent`, or if parent is NULL, a pointer to the new BST
+ * formed by merging the two subtrees.
+ *
+ * parent:	Pointer to the parent node of `node` in the BST.
+ *		If `node` is the root of the BST, `parent` should be NULL.
+ * node:	Pointer to the node to be removed from the BST.
+ */
+__attribute__((nonnull(2), warn_unused_result))
+struct Alx_Node	*alx_bst_remove_node	(struct Alx_Node *restrict parent,
+					 struct Alx_Node *restrict node);
+
+/*
+ * Apply function `*f` to each node in the list (in order, starting at the
+ * leftmost and ending at the rightmost).
+ * If bst is NULL, no operation is performed.
  *
  * bst:		Pointer to a BST.
- */
-__attribute__((nonnull, pure, warn_unused_result))
-struct Alx_Node	*alx_bst_parentmost_node(struct Alx_Node *restrict bst);
-
-/*
- * Removes the left and right subtrees of a BST node, and joins them into a
- * new isolated BST.  Updates any necessary metadata.
- * Returns a pointer to the new BST.
- *
- * node:	Pointer to a node.
- */
-__attribute__((nonnull))
-struct Alx_Node	*alx_bst_join_L_R	(struct Alx_Node *restrict node);
-
-/*
- * Removes a node from the BST and updates any necessary metadata.
- *
- * list:	Pointer to a list.
- * data:	Pointer to the first byte of the data to be copied.
- * size:	Size of the data to be copied.
+ * f:		Pointer to the function to be applied.
+ * state:	External data to be used within `*f`.
  *
  * return:
- *	NULL:		OK.  BST is empty.
- *	!= NULL:	OK.
+ *	0:		OK.
+ *	else:		If `*f` fails (returns != 0), the function returns
+ *			immediately and the return value is passed to the
+ *			caller.
  */
-__attribute__((nonnull, warn_unused_result))
-struct Alx_Node	*alx_bst_remove_node	(struct Alx_Node *restrict node);
+__attribute__((nonnull(2)))
+int	alx_bst_apply			(struct Alx_Node *restrict bst,
+					 int (*f)(struct Alx_Node *restrict node,
+						  void *restrict state),
+					 void *restrict state);
 
 /*
- * Moves the BST nodes into an empty linked list.  If the linked list is not
+ * Apply function `*f` to each node in the list (in reverse order, starting
+ * at the rightmost and ending at the leftmost).
+ * If bst is NULL, no operation is performed.
+ *
+ * bst:		Pointer to a BST.
+ * f:		Pointer to the function to be applied.
+ * state:	External data to be used within `*f`.
+ *
+ * return:
+ *	0:		OK.
+ *	else:		If `*f` fails (returns != 0), the function returns
+ *			immediately and the return value is passed to the
+ *			caller.
+ */
+__attribute__((nonnull(2)))
+int	alx_bst_apply_bwd		(struct Alx_Node *restrict bst,
+					 int (*f)(struct Alx_Node *restrict node,
+						  void *restrict state),
+					 void *restrict state);
+
+/*
+ * Moves the BST nodes into an empty linked list.  If the linked list was not
  * empty, all of its previous nodes are deleted.  The BST is destroyed.
  *
  * bst:		Pointer to a BST.
