@@ -53,6 +53,7 @@ int	alx_dynbuf_init		(struct Alx_Dyn_Buffer **buf)
 
 	if (alx_mallocarrays(buf, 1))
 		return	ENOMEM;
+	/* Initial size of 1 (minimum allocation) */
 	if (alx_mallocs(&(*buf)->data, 1))
 		goto err;
 	(*buf)->size	= 1;
