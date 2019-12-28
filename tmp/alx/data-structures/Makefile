@@ -46,7 +46,6 @@ DYNBUF_SRC	=							\
 LLIST_INC	=							\
 		$(INC_DIR)/libalx/base/compiler/unused.h		\
 		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.h	\
-		$(INC_DIR)/libalx/base/stdlib/alloc/mallocs.h		\
 		$(INC_DIR)/libalx/alx/data-structures/dyn-array.h	\
 		$(INC_DIR)/libalx/alx/data-structures/dyn-buffer.h	\
 		$(INC_DIR)/libalx/alx/data-structures/node.h		\

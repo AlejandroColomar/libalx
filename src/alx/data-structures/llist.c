@@ -15,7 +15,6 @@
 
 #include "libalx/base/compiler/unused.h"
 #include "libalx/base/stdlib/alloc/mallocarrays.h"
-#include "libalx/base/stdlib/alloc/mallocs.h"
 #include "libalx/alx/data-structures/bst.h"
 #include "libalx/alx/data-structures/dyn-array.h"
 #include "libalx/alx/data-structures/dyn-buffer.h"

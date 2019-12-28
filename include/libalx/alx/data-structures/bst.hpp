@@ -63,7 +63,8 @@ struct Alx_Node	*alx_bst_parentmost_node(struct Alx_Node *restrict bst);
 struct Alx_Node	*alx_bst_join_L_R	(struct Alx_Node *restrict node);
 [[gnu::nonnull]][[gnu::warn_unused_result]]
 struct Alx_Node	*alx_bst_remove_node	(struct Alx_Node *restrict node);
-[[gnu::nonnull]]
+int	alx_bst_to_dynarr		(struct Alx_Node *restrict bst,
+					 struct Alx_Dyn_Array *restrict arr);
 void	alx_bst_to_llist		(struct Alx_Node *restrict bst,
 					 struct Alx_LinkedList *restrict list);
 }
