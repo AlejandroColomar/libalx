@@ -29,6 +29,9 @@
 /******************************************************************************
  ******* static prototypes ****************************************************
  ******************************************************************************/
+static
+void	bst_to_llist_recursive		(struct Alx_Node *restrict bst,
+					 struct Alx_LinkedList *restrict list);
 
 
 /******************************************************************************
@@ -160,21 +163,28 @@ struct Alx_Node	*alx_bst_remove_node	(struct Alx_Node *restrict node)
 void	alx_bst_to_llist		(struct Alx_Node *restrict bst,
 					 struct Alx_LinkedList *restrict list)
 {
-	struct Alx_Node	*node;
 
 	alx_llist_delete_all(list);
-
-	while (bst) {
-		node	= alx_bst_leftmost_node(bst);
-		bst	= alx_bst_remove_node(node);
-		alx_llist_append_node(list, node);
-	}
+	bst_to_llist_recursive(bst, list);
 }
 
 
 /******************************************************************************
  ******* static function definitions ******************************************
  ******************************************************************************/
+static
+void	bst_to_llist_recursive		(struct Alx_Node *restrict bst,
+					 struct Alx_LinkedList *restrict list)
+{
+	struct Alx_Node	*node;
+
+	if (!bst)
+		return;
+	bst_to_llist_recursive(bst->left, list);
+	node	= bst->right;
+	alx_llist_append_node(list, bst);
+	bst_to_llist_recursive(node, list);
+}
 
 
 /******************************************************************************

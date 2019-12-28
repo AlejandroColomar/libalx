@@ -157,7 +157,6 @@ struct Alx_Node	*alx_bst_remove_node	(struct Alx_Node *restrict node);
  * bst:		Pointer to a BST.
  * list:	Pointer to a list.
  */
-__attribute__((nonnull))
 void	alx_bst_to_llist		(struct Alx_Node *restrict bst,
 					 struct Alx_LinkedList *restrict list);
 
