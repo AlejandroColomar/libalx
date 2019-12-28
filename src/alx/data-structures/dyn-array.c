@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/extra/alx/data-structures/dyn-array.h"
+#include "libalx/alx/data-structures/dyn-array.h"
 
 #include <errno.h>
 #include <stddef.h>
@@ -16,7 +16,7 @@
 
 #include "libalx/base/assert/assert.h"
 #include "libalx/base/stdlib/alloc/mallocarrays.h"
-#include "libalx/extra/alx/data-structures/llist.h"
+#include "libalx/alx/data-structures/llist.h"
 
 
 /******************************************************************************

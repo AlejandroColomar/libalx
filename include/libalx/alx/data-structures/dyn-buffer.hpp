@@ -7,16 +7,16 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/alx/data-structures/dyn-array.hpp */
+#pragma once	/* libalx/alx/data-structures/dyn-buffer.hpp */
 
 
 /******************************************************************************
  ******* about ****************************************************************
  ******************************************************************************/
 /*
- * Dynamic array
+ * Dynamic buffer
  *
- * Read  <libalx/extra/alx/data-structures/dyn-array.h>  for documentation.
+ * Read  <libalx/alx/data-structures/dyn-buffer.h>  for documentation.
  */
 
 
@@ -24,8 +24,6 @@
  ******* headers **************************************************************
  ******************************************************************************/
 #include <cstddef>
-
-#include "libalx/extra/alx/data-structures/llist.hpp"
 
 
 /******************************************************************************
@@ -36,37 +34,25 @@
 /******************************************************************************
  ******* extern "C" ***********************************************************
  ******************************************************************************/
-struct	Alx_Dyn_Array {
-	void		*data;
-	size_t		elsize;
-	ptrdiff_t	nmemb;
-	ptrdiff_t	written;
+struct	Alx_Dyn_Buffer {
+	void	*data;
+	size_t	size;
+	size_t	written;
 };
-
-/* Avoid circular include dependence */
-struct	Alx_LinkedList;
 
 extern	"C"
 {
 [[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_dynarr_init		(struct Alx_Dyn_Array **arr, size_t elsize);
-void	alx_dynarr_deinit	(struct Alx_Dyn_Array *arr);
+int	alx_dynbuf_init		(struct Alx_Dyn_Buffer **buf);
+void	alx_dynbuf_deinit	(struct Alx_Dyn_Buffer *buf);
 [[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_dynarr_write	(struct Alx_Dyn_Array *arr, ptrdiff_t cell,
-				 const void *data);
+int	alx_dynbuf_write	(struct Alx_Dyn_Buffer *buf, size_t offset,
+				 const void *data, size_t size);
+[[gnu::nonnull]]
+int	alx_dynbuf_read		(const struct Alx_Dyn_Buffer *buf,
+				 size_t offset, void *data, size_t size);
 [[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_dynarr_read		(const struct Alx_Dyn_Array *arr,
-				 ptrdiff_t cell, void *data);
-[[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_dynarr_resize	(struct Alx_Dyn_Array *arr,
-				 ptrdiff_t nmemb, size_t elsize);
-[[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_dynarr_reset	(struct Alx_Dyn_Array *arr, size_t elsize);
-[[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_dynarr_fit		(struct Alx_Dyn_Array *arr);
-[[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_dynarr_to_llist	(struct Alx_Dyn_Array *arr,
-				 struct Alx_LinkedList *list);
+int	alx_dynbuf_resize	(struct Alx_Dyn_Buffer *buf, size_t size);
 }
 
 

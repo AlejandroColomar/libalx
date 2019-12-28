@@ -213,23 +213,25 @@ base:
 	$(Q)$(MAKE) $@	-C $(TMP_DIR)
 	$(Q)$(MAKE) $@	-C $(LIB_DIR)
 
-PHONY += extra
-extra: alx cv gmp gsl ncurses ocr zbar
 
 PHONY += alx
-alx: alx-data-structures alx-npcomplete
+alx: data-structures npcomplete
 
-PHONY += alx-data-structures
-alx-data-structures: base
+PHONY += data-structures
+data-structures: base
 	@echo	"	MAKE	$@"
 	$(Q)$(MAKE) $@	-C $(TMP_DIR)
 	$(Q)$(MAKE) $@	-C $(LIB_DIR)
 
-PHONY += alx-npcomplete
-alx-npcomplete: base
+PHONY += npcomplete
+npcomplete: base
 	@echo	"	MAKE	$@"
 	$(Q)$(MAKE) $@	-C $(TMP_DIR)
 	$(Q)$(MAKE) $@	-C $(LIB_DIR)
+
+
+PHONY += extra
+extra: cv gmp gsl ncurses ocr zbar
 
 PHONY += cv
 cv: base gsl
@@ -251,12 +253,6 @@ gsl: base
 
 PHONY += ncurses
 ncurses: base
-	@echo	"	MAKE	$@"
-	$(Q)$(MAKE) $@	-C $(TMP_DIR)
-	$(Q)$(MAKE) $@	-C $(LIB_DIR)
-
-PHONY += npcomplete
-npcomplete: base
 	@echo	"	MAKE	$@"
 	$(Q)$(MAKE) $@	-C $(TMP_DIR)
 	$(Q)$(MAKE) $@	-C $(LIB_DIR)
@@ -330,8 +326,8 @@ install_extra:
 	@echo	"	CP -r	./lib/libalx/*"
 	$(Q)cp -r -f $(v)	./lib/libalx/*				\
 					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
-	$(Q)$(MAKE)	libalx-alx-data-structures.pc
-	$(Q)$(MAKE)	libalx-alx-npcomplete.pc
+	$(Q)$(MAKE)	libalx-data-structures.pc
+	$(Q)$(MAKE)	libalx-npcomplete.pc
 	$(Q)$(MAKE)	libalx-cv.pc
 	$(Q)$(MAKE)	libalx-gmp.pc
 	$(Q)$(MAKE)	libalx-gsl.pc

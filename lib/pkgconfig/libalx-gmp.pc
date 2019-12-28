@@ -1,7 +1,7 @@
 Name: libalx-gmp
 Description: The libalx C/C++ library (GMP extension)
 URL: https://github.com/alejandro-colomar/libalx
-Version: 1~b8
+Version: 1~b9
 Requires:
 Requires.private: libalx-base
 

@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/alx/data-structures/llist.h */
+#pragma once	/* libalx/alx/data-structures/llist.h */
 
 
 /******************************************************************************
@@ -25,7 +25,7 @@
  *
  * Each node stores a pointer to a dynamic buffer, and pointers to the two
  * connecting nodes.  More info about the nodes can be found in
- *  <libalx/extra/alx/data-structures/node.h>.
+ *  <libalx/alx/data-structures/node.h>.
  *
  * If any of the list metadata is manually modified by the user, the list may
  * be corrupted, and the behavior is undefined.
@@ -37,8 +37,8 @@
  ******************************************************************************/
 #include <stddef.h>
 
-#include "libalx/extra/alx/data-structures/dyn-array.h"
-#include "libalx/extra/alx/data-structures/node.h"
+#include "libalx/alx/data-structures/dyn-array.h"
+#include "libalx/alx/data-structures/node.h"
 
 
 /******************************************************************************

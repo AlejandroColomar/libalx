@@ -7,30 +7,29 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/alx/data-structures/node.h */
+#pragma once	/* libalx/alx/data-structures/dyn-buffer.h */
 
 
 /******************************************************************************
  ******* about ****************************************************************
  ******************************************************************************/
 /*
- * Node
+ * Dynamic buffer
  *
- * A node pointer can be created with `struct Alx_Node *node;`
- * To use the node, it has to be initialized with
- * `alx_node_init(&node, data, size)` or `alx_node_init_empty(&node)`.
- * It can be deinitialized with `alx_node_deinit(node)`.
+ * A buffer pointer can be created with `struct Alx_Dyn_Buffer *buf;`
+ * To use the buffer, it has to be initialized with `alx_dynbuf_init(&buf)`.
+ * It can be deinitialized with `alx_dynbuf_deinit(buf)`.
  *
  * Data is copied into `malloc`ed memory, and `free`d or `realloc`ed
  * automatically by the functions.
  *
- * A node stores a pointer to a dynamic buffer, and pointers to its connecting
- * nodes.
+ * A buffer stores a pointer to its allocated data, the size of the buffer,
+ * and the initialized bytes in the buffer.
  *
- * If any of the node metadata is manually modified by the user, the node may
- * be corrupted, and the behavior is undefined.  Functions in
- *  <libalx/extra/alx/data-structures/dyn-buffer.h>  may be called with
- * `node->buf` for lower level management.
+ * If any of the list metadata is manually modified by the user, the buffer
+ * may be corrupted, and the behavior is undefined.  The only thing that the
+ * user can safely manually modify are the contents of data, being careful of
+ * not overrunning the buffer.
  */
 
 
@@ -38,8 +37,6 @@
  ******* headers **************************************************************
  ******************************************************************************/
 #include <stddef.h>
-
-#include "libalx/extra/alx/data-structures/dyn-buffer.h"
 
 
 /******************************************************************************
@@ -56,18 +53,16 @@
  ******* struct / union *******************************************************
  ******************************************************************************/
 /*
- * Node
+ * Dynamic buffer
  *
- * buf:		Pointer to a dynamic buffer containing useful data.
- * left:	Pointer to the left node.
- * right:	Pointer to the right node.
- * parent:	Pointer to the parent node (in a tree).
+ * data:	Pointer to the first byte in the buffer.
+ * size:	Size of the data buffer (in bytes).
+ * written:	Data used (in bytes).
  */
-struct	Alx_Node {
-	struct Alx_Dyn_Buffer	*buf;
-	struct Alx_Node		*left;
-	struct Alx_Node		*right;
-	struct Alx_Node		*parent;
+struct	Alx_Dyn_Buffer {
+	void	*data;
+	size_t	size;
+	size_t	written;
 };
 
 
@@ -75,53 +70,35 @@ struct	Alx_Node {
  ******* prototypes ***********************************************************
  ******************************************************************************/
 /*
- * Initializes node.
- * Allocates memory for the node and for the buffer, copies the data passed by
- * the user to the newly allocated space, and updates any necessary metadata.
+ * Allocates memory for the buffer, and updates any necessary metadata.
+ * The initialized buffer has a size of 1 byte.
  *
- * node:	Pointer to a pointer to a node.  A node will be allocated,
- *		and a pointer to it will be stored in *node.
- * data:	Pointer to the first byte of the data to be copied.
- * size:	Size of the data to be copied.
+ * buf:		Pointer to a pointer to a buffer.  A buffer will be allocated,
+ *		and a pointer to it will be stored in *buf.
  *
  * return:
  *	0:		OK.
- *	ENOMEM:		Aborted; failure to allocate the node or the buffer.
+ *	ENOMEM:		Aborted; failure to allocate the buffer.
  */
 __attribute__((nonnull, warn_unused_result))
-int	alx_node_init		(struct Alx_Node **restrict node,
-				 const void *restrict data, size_t size);
+int	alx_dynbuf_init		(struct Alx_Dyn_Buffer **buf);
 
 /*
- * Initializes empty node.
- * Allocates memory for the node (not for the buffer), and updates any
- * necessary metadata.
+ * Deletes `buf`.
+ * Deallocates memory from the buffer.
+ * If buf is NULL, no operation is performed.
  *
- * node:	Pointer to a pointer to a node.  A node will be allocated,
- *		and a pointer to it will be stored in *node.
- *
- * return:
- *	0:		OK.
- *	ENOMEM:		Aborted; failure to allocate the node.
+ * buf:		Pointer to a buffer.  It is invalid after the call.
  */
-__attribute__((nonnull, warn_unused_result))
-int	alx_node_init_empty	(struct Alx_Node **node);
-
-/*
- * Deinitializes node.
- * Deallocates memory from the node and from the data.
- * If node is NULL, no operation is performed.
- *
- * node:	Pointer to a node.  It is invalid after the call.
- */
-void	alx_node_deinit		(struct Alx_Node *node);
+void	alx_dynbuf_deinit	(struct Alx_Dyn_Buffer *buf);
 
 /*
  * Writes into the buffer.
  * Reallocates memory for the data if necessary, copies the data passed by the
  * user to the reallocated space, and updates any necessary metadata.
  *
- * node:	Pointer to a node.
+ * buf:		Pointer to a buffer.
+ * offset:	Start writing at buf->data + offset.
  * data:	Pointer to the first byte of the data to be copied.
  * size:	Size of the data to be copied.
  *
@@ -131,23 +108,38 @@ void	alx_node_deinit		(struct Alx_Node *node);
  *			data is left untouched.
  */
 __attribute__((nonnull, warn_unused_result))
-int	alx_node_write		(struct Alx_Node *node,
+int	alx_dynbuf_write	(struct Alx_Dyn_Buffer *buf, size_t offset,
 				 const void *data, size_t size);
 
 /*
  * Reads from the buffer.
  *
- * node:	Pointer to a node.
+ * buf:		Pointer to a buffer.
+ * offset:	Start reading at buf->data + offset.
  * data:	Copy the read data here.  Should be at least `size` bytes.
  * size:	Size of the data to be copied.
  *
  * return:
  *	0:		OK.
  *	ENOBUFS:	OK. data was truncated.
+ *	EFAULT:		Aborted; invalid offset.
  */
 __attribute__((nonnull))
-int	alx_node_read		(const struct Alx_Node *node,
-				 void *data, size_t size);
+int	alx_dynbuf_read		(const struct Alx_Dyn_Buffer *buf,
+				 size_t offset, void *data, size_t size);
+
+/*
+ * Reallocates memory for the buffer, and updates any necessary metadata.
+ *
+ * buf:		Pointer to a buffer.
+ * size:	New size.
+ *
+ * return:
+ *	0:		OK.
+ *	ENOMEM:		Aborted; failure to allocate the data.
+ */
+__attribute__((nonnull, warn_unused_result))
+int	alx_dynbuf_resize	(struct Alx_Dyn_Buffer *buf, size_t size);
 
 
 /******************************************************************************

@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/alx/data-structures/bst.h */
+#pragma once	/* libalx/alx/data-structures/bst.h */
 
 
 /******************************************************************************
@@ -38,8 +38,8 @@
  ******************************************************************************/
 #include <stddef.h>
 
-#include "libalx/extra/alx/data-structures/llist.h"
-#include "libalx/extra/alx/data-structures/node.h"
+#include "libalx/alx/data-structures/llist.h"
+#include "libalx/alx/data-structures/node.h"
 
 
 /******************************************************************************

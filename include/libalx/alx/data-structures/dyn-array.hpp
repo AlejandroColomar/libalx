@@ -7,16 +7,16 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/alx/data-structures/bst.hpp */
+#pragma once	/* libalx/alx/data-structures/dyn-array.hpp */
 
 
 /******************************************************************************
  ******* about ****************************************************************
  ******************************************************************************/
 /*
- * Binary search tree
+ * Dynamic array
  *
- * Read  <libalx/extra/alx/data-structures/bst.h>  for documentation.
+ * Read  <libalx/alx/data-structures/dyn-array.h>  for documentation.
  */
 
 
@@ -25,9 +25,7 @@
  ******************************************************************************/
 #include <cstddef>
 
-#include "libalx/base/compiler/restrict.hpp"
-#include "libalx/extra/alx/data-structures/llist.hpp"
-#include "libalx/extra/alx/data-structures/node.hpp"
+#include "libalx/alx/data-structures/llist.hpp"
 
 
 /******************************************************************************
@@ -38,34 +36,37 @@
 /******************************************************************************
  ******* extern "C" ***********************************************************
  ******************************************************************************/
-/* Avoid circular dependence */
+struct	Alx_Dyn_Array {
+	void		*data;
+	size_t		elsize;
+	ptrdiff_t	nmemb;
+	ptrdiff_t	written;
+};
+
+/* Avoid circular include dependence */
 struct	Alx_LinkedList;
 
 extern	"C"
 {
 [[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_bst_insert			(struct Alx_Node *bst,
-					 const void *data, size_t size,
-					 int (*cmp)(const void *bst_data,
-						    const void *node_data));
-[[gnu::nonnull]]
-void	alx_bst_insert_node		(struct Alx_Node *restrict bst,
-					 struct Alx_Node *restrict node,
-					 int (*cmp)(const void *bst_data,
-						    const void *node_data));
+int	alx_dynarr_init		(struct Alx_Dyn_Array **arr, size_t elsize);
+void	alx_dynarr_deinit	(struct Alx_Dyn_Array *arr);
 [[gnu::nonnull]][[gnu::warn_unused_result]]
-struct Alx_Node	*alx_bst_leftmost_node	(struct Alx_Node *restrict bst);
+int	alx_dynarr_write	(struct Alx_Dyn_Array *arr, ptrdiff_t cell,
+				 const void *data);
 [[gnu::nonnull]][[gnu::warn_unused_result]]
-struct Alx_Node	*alx_bst_rightmost_node	(struct Alx_Node *restrict bst);
+int	alx_dynarr_read		(const struct Alx_Dyn_Array *arr,
+				 ptrdiff_t cell, void *data);
 [[gnu::nonnull]][[gnu::warn_unused_result]]
-struct Alx_Node	*alx_bst_parentmost_node(struct Alx_Node *restrict bst);
-[[gnu::nonnull]]
-struct Alx_Node	*alx_bst_join_L_R	(struct Alx_Node *restrict node);
+int	alx_dynarr_resize	(struct Alx_Dyn_Array *arr,
+				 ptrdiff_t nmemb, size_t elsize);
 [[gnu::nonnull]][[gnu::warn_unused_result]]
-struct Alx_Node	*alx_bst_remove_node	(struct Alx_Node *restrict node);
-[[gnu::nonnull]]
-void	alx_bst_to_llist		(struct Alx_Node *restrict bst,
-					 struct Alx_LinkedList *restrict list);
+int	alx_dynarr_reset	(struct Alx_Dyn_Array *arr, size_t elsize);
+[[gnu::nonnull]][[gnu::warn_unused_result]]
+int	alx_dynarr_fit		(struct Alx_Dyn_Array *arr);
+[[gnu::nonnull]][[gnu::warn_unused_result]]
+int	alx_dynarr_to_llist	(struct Alx_Dyn_Array *arr,
+				 struct Alx_LinkedList *list);
 }
 
 

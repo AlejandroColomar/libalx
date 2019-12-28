@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/alx/data-structures/llist.hpp */
+#pragma once	/* libalx/alx/data-structures/llist.hpp */
 
 
 /******************************************************************************
@@ -16,7 +16,7 @@
 /*
  * Circular doubly-linked list
  *
- * Read  <libalx/extra/alx/data-structures/llist.h>  for documentation.
+ * Read  <libalx/alx/data-structures/llist.h>  for documentation.
  */
 
 
@@ -26,8 +26,8 @@
 #include <cstddef>
 
 #include "libalx/base/compiler/restrict.hpp"
-#include "libalx/extra/alx/data-structures/dyn-array.hpp"
-#include "libalx/extra/alx/data-structures/node.hpp"
+#include "libalx/alx/data-structures/dyn-array.hpp"
+#include "libalx/alx/data-structures/node.hpp"
 
 
 /******************************************************************************

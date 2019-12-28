@@ -30,20 +30,20 @@ base:
 	$(Q)$(MAKE)	-C $(TMP_DIR)/base/string/
 
 
-PHONY += extra
-extra: alx cv gmp gsl ncurses ocr zbar
-
 PHONY += alx
-alx: alx-data-structures alx-npcomplete
+alx: data-structures npcomplete
+
+PHONY += data-structures
+data-structures:
+	$(Q)$(MAKE)	-C $(TMP_DIR)/alx/data-structures/
+
+PHONY += npcomplete
+npcomplete:
+	$(Q)$(MAKE)	-C $(TMP_DIR)/alx/npcomplete/
 
 
-PHONY += alx-data-structures
-alx-data-structures:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/alx/data-structures/
-
-PHONY += alx-npcomplete
-alx-npcomplete:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/alx/npcomplete/
+PHONY += extra
+extra: cv gmp gsl ncurses ocr zbar
 
 PHONY += cv
 cv:
@@ -64,10 +64,6 @@ gsl:
 PHONY += ncurses
 ncurses:
 	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/ncurses/
-
-PHONY += npcomplete
-npcomplete:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/npcomplete/
 
 PHONY += ocr
 ocr:

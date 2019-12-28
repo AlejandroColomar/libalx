@@ -7,13 +7,13 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/extra/alx/data-structures/bst.h"
+#include "libalx/alx/data-structures/bst.h"
 
 #include <errno.h>
 #include <stddef.h>
 
-#include "libalx/extra/alx/data-structures/llist.h"
-#include "libalx/extra/alx/data-structures/node.h"
+#include "libalx/alx/data-structures/llist.h"
+#include "libalx/alx/data-structures/node.h"
 
 
 /******************************************************************************

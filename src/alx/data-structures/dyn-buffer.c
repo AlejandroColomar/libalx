@@ -7,14 +7,24 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/extra/alx/data-structures/node.h"
+#include "libalx/alx/data-structures/dyn-buffer.h"
 
 #include <errno.h>
 #include <stddef.h>
 #include <stdlib.h>
+#include <string.h>
 
+#include "libalx/base/assert/assert.h"
+#include "libalx/base/stdlib/minimum.h"
 #include "libalx/base/stdlib/alloc/mallocarrays.h"
-#include "libalx/extra/alx/data-structures/dyn-buffer.h"
+#include "libalx/base/stdlib/alloc/mallocs.h"
+#include "libalx/base/stdlib/alloc/reallocs.h"
+
+
+/******************************************************************************
+ ******* _Static_assert *******************************************************
+ ******************************************************************************/
+alx_Static_assert_size_ptrdiff();
 
 
 /******************************************************************************
@@ -30,67 +40,105 @@
 /******************************************************************************
  ******* static prototypes ****************************************************
  ******************************************************************************/
+__attribute__((nonnull, warn_unused_result))
+static
+int	alx_dynbuf_grow		(struct Alx_Dyn_Buffer *buf);
 
 
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_node_init		(struct Alx_Node **restrict node,
-				 const void *restrict data, size_t size)
+int	alx_dynbuf_init		(struct Alx_Dyn_Buffer **buf)
 {
 
-	if (alx_node_init_empty(node))
+	if (alx_mallocarrays(buf, 1))
+		return	ENOMEM;
+	if (alx_mallocs(&(*buf)->data, 1))
 		goto err;
-	if (alx_dynbuf_init(&(*node)->buf))
-		goto err;
-	if (alx_node_write(*node, data, size))
-		goto err;
+	(*buf)->size	= 1;
+	(*buf)->written	= 0;
 
 	return	0;
 err:
-	alx_node_deinit(*node);
+	free(*buf);
 	return	ENOMEM;
 }
 
-int	alx_node_init_empty	(struct Alx_Node **node)
+void	alx_dynbuf_deinit	(struct Alx_Dyn_Buffer *buf)
 {
 
-	if (alx_mallocarrays(node, 1))
-		return	ENOMEM;
-	(*node)->buf	= NULL;
-	(*node)->left	= NULL;
-	(*node)->right	= NULL;
-	(*node)->parent	= NULL;
+	if (!buf)
+		return;
+
+	free(buf->data);
+	free(buf);
+}
+
+int	alx_dynbuf_write	(struct Alx_Dyn_Buffer *buf, size_t offset,
+				 const void *data, size_t size)
+{
+	size_t	written;
+
+	while ((size + offset) > buf->size) {
+		if (alx_dynbuf_grow(buf))
+			return	ENOMEM;
+	}
+
+	memmove(buf->data + offset, data, size);
+	written	= size + offset;
+	if (written > buf->written)
+		buf->written	= written;
 
 	return	0;
 }
 
-void	alx_node_deinit		(struct Alx_Node *node)
+int	alx_dynbuf_read		(const struct Alx_Dyn_Buffer *buf,
+				 size_t offset, void *data, size_t size)
 {
+	size_t	sz;
 
-	if (!node)
-		return;
+	if (offset > buf->size)
+		return	EFAULT;
+	sz	= ALX_MIN(size, buf->size - offset);
+	memmove(data, buf->data + offset, sz);
 
-	alx_dynbuf_deinit(node->buf);
-	free(node);
+	if (size  <  buf->size - offset)
+		return	ENOBUFS;
+	return	0;
 }
 
-int	alx_node_write		(struct Alx_Node *node,
-				 const void *data, size_t size)
+int	alx_dynbuf_resize	(struct Alx_Dyn_Buffer *buf, size_t size)
 {
-	return	alx_dynbuf_write(node->buf, 0, data, size);
-}
 
-int	alx_node_read		(const struct Alx_Node *node,
-				 void *data, size_t size)
-{
-	return	alx_dynbuf_read(node->buf, 0, data, size);
+	if (size > PTRDIFF_MAX  ||  !size)
+		return	ENOMEM;
+
+	if (alx_reallocs(&buf->data, size))
+		return	ENOMEM;
+	buf->size	= size;
+
+	return	0;
 }
 
 
 /******************************************************************************
  ******* static function definitions ******************************************
  ******************************************************************************/
+static
+int	alx_dynbuf_grow		(struct Alx_Dyn_Buffer *buf)
+{
+	size_t	size;
+
+	if (buf->size >= PTRDIFF_MAX / 2)
+		size	= PTRDIFF_MAX;
+	else
+		size	= buf->size * 2;
+
+	if (size <= buf->size)
+		return	ENOMEM;
+
+	return	alx_dynbuf_resize(buf, size);
+}
 
 
 /******************************************************************************

@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/alx/data-structures/node.hpp */
+#pragma once	/* libalx/alx/data-structures/node.hpp */
 
 
 /******************************************************************************
@@ -16,7 +16,7 @@
 /*
  * Node
  *
- * Read  <libalx/extra/alx/data-structures/node.h>  for documentation.
+ * Read  <libalx/alx/data-structures/node.h>  for documentation.
  */
 
 
@@ -26,7 +26,7 @@
 #include <cstddef>
 
 #include "libalx/base/compiler/restrict.hpp"
-#include "libalx/extra/alx/data-structures/dyn-buffer.hpp"
+#include "libalx/alx/data-structures/dyn-buffer.hpp"
 
 
 /******************************************************************************

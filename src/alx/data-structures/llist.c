@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/extra/alx/data-structures/llist.h"
+#include "libalx/alx/data-structures/llist.h"
 
 #include <errno.h>
 #include <stddef.h>
@@ -16,10 +16,10 @@
 #include "libalx/base/compiler/unused.h"
 #include "libalx/base/stdlib/alloc/mallocarrays.h"
 #include "libalx/base/stdlib/alloc/mallocs.h"
-#include "libalx/extra/alx/data-structures/bst.h"
-#include "libalx/extra/alx/data-structures/dyn-array.h"
-#include "libalx/extra/alx/data-structures/dyn-buffer.h"
-#include "libalx/extra/alx/data-structures/node.h"
+#include "libalx/alx/data-structures/bst.h"
+#include "libalx/alx/data-structures/dyn-array.h"
+#include "libalx/alx/data-structures/dyn-buffer.h"
+#include "libalx/alx/data-structures/node.h"
 
 
 /******************************************************************************
