@@ -14,7 +14,7 @@
 #	action
 
 PHONY := all
-all: base extra
+all: base alx extra
 
 
 PHONY += base
