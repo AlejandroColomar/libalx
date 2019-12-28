@@ -336,7 +336,6 @@ install_extra:
 	$(Q)$(MAKE)	libalx-gmp.pc
 	$(Q)$(MAKE)	libalx-gsl.pc
 	$(Q)$(MAKE)	libalx-ncurses.pc
-	$(Q)$(MAKE)	libalx-npcomplete.pc
 	$(Q)$(MAKE)	libalx-ocr.pc
 	$(Q)$(MAKE)	libalx-zbar.pc
 	@echo
