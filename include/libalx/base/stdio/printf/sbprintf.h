@@ -21,7 +21,7 @@
  ******* macros ***************************************************************
  ******************************************************************************/
 /*
- * __attribute__((nonnull(1, 3), format(printf, 3, 4)))
+ * [[gnu::nonnull(1, 3)]][[gnu::format(printf, 3, 4)]]
  * int	alx_sbprintf	(char buff[restrict], ptrdiff_t *restrict written,
  *			 const char *restrict fmt, ...);
  */
