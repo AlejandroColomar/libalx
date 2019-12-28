@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/alx/linked-list/llist.h */
+#pragma once	/* libalx/extra/alx/data-structures/llist.h */
 
 
 /******************************************************************************
@@ -489,11 +489,12 @@ void	alx_llist_set_node_as_head	(struct Alx_LinkedList *list,
  *			the return value is passed to the caller.
  */
 __attribute__((nonnull(1, 2)))
-int	alx_llist_apply			(struct Alx_LinkedList *list,
+int	alx_llist_apply			(struct Alx_LinkedList *restrict list,
 					 int (*f)(struct Alx_LinkedList *list,
 						  struct Alx_Node *node,
-						  void *state, ptrdiff_t i),
-					 void *state);
+						  void *restrict state,
+						  ptrdiff_t i),
+					 void *restrict state);
 
 /*
  * Apply function `f` to each node in the list (backwards; starting at the
@@ -517,11 +518,12 @@ int	alx_llist_apply			(struct Alx_LinkedList *list,
  *			the return value is passed to the caller.
  */
 __attribute__((nonnull(1, 2)))
-int	alx_llist_apply_bwd		(struct Alx_LinkedList *list,
+int	alx_llist_apply_bwd		(struct Alx_LinkedList *restrict list,
 					 int (*f)(struct Alx_LinkedList *list,
 						  struct Alx_Node *node,
-						  void *state, ptrdiff_t i),
-					 void *state);
+						  void *restrict state,
+						  ptrdiff_t i),
+					 void *restrict state);
 
 /*
  * Copy the linked list data into an empty dynamic array.  If the array is
@@ -559,9 +561,8 @@ int	alx_llist_to_dynarr		(struct Alx_LinkedList *restrict list,
 __attribute__((nonnull, warn_unused_result))
 int	alx_llist_to_bst		(struct Alx_LinkedList *restrict list,
 					 struct Alx_Node **restrict bst,
-					 int (*cmp)
-							(const void *bst_data,
-							 const void *node_data));
+					 int (*cmp)(const void *bst_data,
+						    const void *node_data));
 
 /*
  * Sort the linked list using a binary search tree (treesort).
@@ -574,9 +575,8 @@ int	alx_llist_to_bst		(struct Alx_LinkedList *restrict list,
  */
 __attribute__((nonnull))
 void	alx_llist_treesort		(struct Alx_LinkedList *restrict list,
-					 int (*cmp)
-							(const void *bst_data,
-							 const void *node_data));
+					 int (*cmp)(const void *bst_data,
+						    const void *node_data));
 
 
 /******************************************************************************
