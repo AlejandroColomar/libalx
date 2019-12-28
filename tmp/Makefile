@@ -65,6 +65,10 @@ PHONY += ncurses
 ncurses:
 	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/ncurses/
 
+PHONY += npcomplete
+npcomplete:
+	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/npcomplete/
+
 PHONY += ocr
 ocr:
 	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/ocr/

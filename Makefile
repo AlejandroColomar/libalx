@@ -255,6 +255,12 @@ ncurses: base
 	$(Q)$(MAKE) $@	-C $(TMP_DIR)
 	$(Q)$(MAKE) $@	-C $(LIB_DIR)
 
+PHONY += npcomplete
+npcomplete: base
+	@echo	"	MAKE	$@"
+	$(Q)$(MAKE) $@	-C $(TMP_DIR)
+	$(Q)$(MAKE) $@	-C $(LIB_DIR)
+
 PHONY += ocr
 ocr: base
 	@echo	"	MAKE	$@"
@@ -324,7 +330,8 @@ install_extra:
 	@echo	"	CP -r	./lib/libalx/*"
 	$(Q)cp -r -f $(v)	./lib/libalx/*				\
 					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
-	$(Q)$(MAKE)	libalx-alx.pc
+	$(Q)$(MAKE)	libalx-alx-data-structures.pc
+	$(Q)$(MAKE)	libalx-alx-npcomplete.pc
 	$(Q)$(MAKE)	libalx-cv.pc
 	$(Q)$(MAKE)	libalx-gmp.pc
 	$(Q)$(MAKE)	libalx-gsl.pc

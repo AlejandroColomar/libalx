@@ -121,6 +121,8 @@ NCURSES_OBJ	=							\
 		$(TMP_DIR)/extra/ncurses/get.o				\
 		$(TMP_DIR)/extra/ncurses/menu.o				\
 		$(TMP_DIR)/extra/ncurses/perror.o
+NPCOMPLETE_OBJ	=							\
+		$(TMP_DIR)/extra/npcomplete/solver_lut.o
 OCR_OBJ		=							\
 		$(TMP_DIR)/extra/ocr/ocr.o
 ZBAR_OBJ	=							\
@@ -142,6 +144,10 @@ PHONY += base
 base: libalx libalx/libalx-base.a libalx/libalx-base.so
 
 
+PHONY += alx
+alx: alx-data-structures alx-npcomplete
+
+
 PHONY += alx-data-structures
 alx-data-structures: libalx libalx/libalx-alx-data-structures.a		\
 				libalx/libalx-alx-data-structures.so
@@ -161,6 +167,9 @@ gsl: libalx libalx/libalx-gsl.a libalx/libalx-gsl.so
 
 PHONY += ncurses
 ncurses: libalx libalx/libalx-ncurses.a libalx/libalx-ncurses.so
+
+PHONY += npcomplete
+npcomplete: libalx libalx/libalx-npcomplete.a libalx/libalx-npcomplete.so
 
 PHONY += ocr
 ocr: libalx libalx/libalx-ocr.a libalx/libalx-ocr.so
@@ -187,14 +196,14 @@ libalx/libalx-base.so: $(patsubst %.o,%.so.o,$(BASE_OBJ))
 
 libalx/libalx-alx-data-structures.a: $(patsubst %.o,%.a.o,$(ALX_DS_OBJ))
 libalx/libalx-alx-data-structures.so: $(patsubst %.o,%.so.o,$(ALX_DS_OBJ))
-	@echo	"	CXX	libalx/lib/$@"
-	$(Q)$(CXX) $(LDFLAGS) -o $@ $^ -l alx-base
+	@echo	"	CC	libalx/lib/$@"
+	$(Q)$(CC) $(LDFLAGS) -o $@ $^ -l alx-base
 
 
 libalx/libalx-alx-npcomplete.a: $(patsubst %.o,%.a.o,$(ALX_NPC_OBJ))
 libalx/libalx-alx-npcomplete.so: $(patsubst %.o,%.so.o,$(ALX_NPC_OBJ))
-	@echo	"	CXX	libalx/lib/$@"
-	$(Q)$(CXX) $(LDFLAGS) -o $@ $^ -fopenmp				\
+	@echo	"	CC	libalx/lib/$@"
+	$(Q)$(CC) $(LDFLAGS) -o $@ $^ -fopenmp				\
 						-l alx-base
 
 libalx/libalx-cv.a: $(patsubst %.o,%.a.o,$(CV_OBJ))
@@ -220,6 +229,12 @@ libalx/libalx-ncurses.a: $(patsubst %.o,%.a.o,$(NCURSES_OBJ))
 libalx/libalx-ncurses.so: $(patsubst %.o,%.so.o,$(NCURSES_OBJ))
 	@echo	"	CC	libalx/lib/$@"
 	$(Q)$(CC) $(LDFLAGS) -o $@ $^ `pkg-config --libs ncurses`	\
+						-l alx-base
+
+libalx/libalx-npcomplete.a: $(patsubst %.o,%.a.o,$(NPCOMPLETE_OBJ))
+libalx/libalx-npcomplete.so: $(patsubst %.o,%.so.o,$(NPCOMPLETE_OBJ))
+	@echo	"	CC	libalx/lib/$@"
+	$(Q)$(CC) $(LDFLAGS) -o $@ $^ -fopenmp				\
 						-l alx-base
 
 libalx/libalx-ocr.a: $(patsubst %.o,%.a.o,$(OCR_OBJ))
