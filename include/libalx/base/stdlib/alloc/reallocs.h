@@ -13,6 +13,7 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include <stdbool.h>
 #include <stddef.h>
 #include <stdlib.h>
 
@@ -39,6 +40,10 @@ __attribute__((nonnull, warn_unused_result))
 inline
 int	alx_reallocs	(void **restrict ptr, size_t size);
 
+__attribute__((nonnull(1), warn_unused_result))
+inline
+int	alx_reallocs__	(void **restrict ptr, void *restrict vp, bool size);
+
 
 /******************************************************************************
  ******* static inline ********************************************************
@@ -60,13 +65,23 @@ int	reallocs	(void **restrict ptr, size_t size)
 inline
 int	alx_reallocs	(void **restrict ptr, size_t size)
 {
-	void	*p;
+	void	*vp;
 
-	p	= realloc(*ptr, size);
-	if (p)
-		*ptr	= p;
+	vp	= realloc(*ptr, size);
 
-	return	!p;
+	return	alx_reallocs__(ptr, vp, size);
+}
+
+inline
+int	alx_reallocs__	(void **restrict ptr, void *restrict vp, bool size)
+{
+	bool	err;
+
+	err	= !vp && size;
+	if (!err)
+		*ptr	= vp;
+
+	return	err;
 }
 
 

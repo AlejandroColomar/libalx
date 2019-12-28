@@ -21,7 +21,9 @@ OBJ		=							\
 		alloc/mallocarray.o					\
 		alloc/mallocarrays.o					\
 		alloc/mallocs.o						\
+		alloc/reallocarrayfs.o					\
 		alloc/reallocarrays.o					\
+		alloc/reallocfs.o					\
 		alloc/reallocs.o					\
 		array_split_pos_neg.o					\
 		average.o						\
@@ -63,10 +65,20 @@ ALLOC_MALLOCS_INC	=						\
 ALLOC_MALLOCS_SRC	=						\
 		$(SRC_DIR)/base/stdlib/alloc/mallocs.c
 
+ALLOC_REALLOCARRAYFS_INC	=					\
+		$(INC_DIR)/libalx/base/stdlib/alloc/reallocarrayfs.h
+ALLOC_REALLOCARRAYFS_SRC	=					\
+		$(SRC_DIR)/base/stdlib/alloc/reallocarrayfs.c
+
 ALLOC_REALLOCARRAYS_INC	=						\
 		$(INC_DIR)/libalx/base/stdlib/alloc/reallocarrays.h
 ALLOC_REALLOCARRAYS_SRC	=						\
 		$(SRC_DIR)/base/stdlib/alloc/reallocarrays.c
+
+ALLOC_REALLOCFS_INC	=						\
+		$(INC_DIR)/libalx/base/stdlib/alloc/reallocfs.h
+ALLOC_REALLOCFS_SRC	=						\
+		$(SRC_DIR)/base/stdlib/alloc/reallocfs.c
 
 ALLOC_REALLOCS_INC	=						\
 		$(INC_DIR)/libalx/base/stdlib/alloc/reallocs.h
@@ -208,11 +220,17 @@ alloc/mallocarrays.so.s: $(ALLOC_MALLOCARRAYS_SRC) $(ALLOC_MALLOCARRAYS_INC)
 alloc/mallocs.a.s: $(ALLOC_MALLOCS_SRC) $(ALLOC_MALLOCS_INC)
 alloc/mallocs.so.s: $(ALLOC_MALLOCS_SRC) $(ALLOC_MALLOCS_INC)
 
-alloc/reallocs.a.s: $(ALLOC_REALLOCS_SRC) $(ALLOC_REALLOCS_INC)
-alloc/reallocs.so.s: $(ALLOC_REALLOCS_SRC) $(ALLOC_REALLOCS_INC)
+alloc/reallocarrayfs.a.s: $(ALLOC_REALLOCARRAYFS_SRC) $(ALLOC_REALLOCARRAYFS_INC)
+alloc/reallocarrayfs.so.s: $(ALLOC_REALLOCARRAYFS_SRC) $(ALLOC_REALLOCARRAYFS_INC)
 
 alloc/reallocarrays.a.s: $(ALLOC_REALLOCARRAYS_SRC) $(ALLOC_REALLOCARRAYS_INC)
 alloc/reallocarrays.so.s: $(ALLOC_REALLOCARRAYS_SRC) $(ALLOC_REALLOCARRAYS_INC)
+
+alloc/reallocfs.a.s: $(ALLOC_REALLOCFS_SRC) $(ALLOC_REALLOCFS_INC)
+alloc/reallocfs.so.s: $(ALLOC_REALLOCFS_SRC) $(ALLOC_REALLOCFS_INC)
+
+alloc/reallocs.a.s: $(ALLOC_REALLOCS_SRC) $(ALLOC_REALLOCS_INC)
+alloc/reallocs.so.s: $(ALLOC_REALLOCS_SRC) $(ALLOC_REALLOCS_INC)
 
 array_split_pos_neg.a.s: $(ARRAY_SPLIT_POS_NEG_SRC) $(ARRAY_SPLIT_POS_NEG_INC)
 array_split_pos_neg.so.s: $(ARRAY_SPLIT_POS_NEG_SRC) $(ARRAY_SPLIT_POS_NEG_INC)

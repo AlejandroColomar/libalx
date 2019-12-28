@@ -7,38 +7,44 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/base/stdlib/alloc/reallocs.hpp */
+#pragma once	/* libalx/base/stdlib/alloc/reallocarrayfs.hpp */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <cstdbool>
-#include <cstddef>
-#include <cstdlib>
-
-#include "libalx/base/compiler/restrict.hpp"
+#include "libalx/base/stdlib/alloc/reallocarrayf.hpp"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+/*
+ * [[gnu::warn_unused_result]]
+ * int	alx_reallocarrayfs(type **restrict ptr, ptrdiff_t nmemb);
+ */
+#define alx_reallocarrayfs(ptr, nmemb)	(				\
+{									\
+	auto	ptr_	= (ptr);					\
+	void	*vp;							\
+									\
+	vp	= alx_reallocarrayf(*ptr_, nmemb, sizeof(**ptr_));	\
+	*ptr_	= static_cast<typeof(*ptr_)>(vp);			\
+									\
+	!(vp);								\
+}									\
+)
+
+
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define reallocs(ptr, nmemb)	alx_reallocs(ptr, nmemb)
+#define reallocarrayfs(ptr, nmemb)	alx_reallocarrayfs(ptr, nmemb)
 #endif
 
 
 /******************************************************************************
  ******* extern "C" ***********************************************************
  ******************************************************************************/
-extern	"C"
-{
-[[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_reallocs	(void **restrict ptr, size_t size);
-[[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_reallocs__	(void **restrict ptr, void *restrict vp, bool size);
-}
 
 
 /******************************************************************************

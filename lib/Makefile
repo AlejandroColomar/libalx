@@ -36,7 +36,9 @@ BASE_OBJ	=							\
 		$(TMP_DIR)/base/stdlib/alloc/mallocarray.o		\
 		$(TMP_DIR)/base/stdlib/alloc/mallocarrays.o		\
 		$(TMP_DIR)/base/stdlib/alloc/mallocs.o			\
+		$(TMP_DIR)/base/stdlib/alloc/reallocarrayfs.o		\
 		$(TMP_DIR)/base/stdlib/alloc/reallocarrays.o		\
+		$(TMP_DIR)/base/stdlib/alloc/reallocfs.o		\
 		$(TMP_DIR)/base/stdlib/alloc/reallocs.o			\
 		$(TMP_DIR)/base/stdlib/array_split_pos_neg.o		\
 		$(TMP_DIR)/base/stdlib/average.o			\

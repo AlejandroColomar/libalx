@@ -15,24 +15,25 @@
  ******************************************************************************/
 #include <stdlib.h>
 
+#include "libalx/base/stdlib/alloc/reallocs.h"
+
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
 /*
- * [[gnu::nonnull]]
+ * [[gnu::nonnull]][[gnu::warn_unused_result]]
  * int	alx_reallocarrays(type **restrict ptr, ptrdiff_t nmemb);
  */
 #define alx_reallocarrays(ptr, nmemb)	(				\
 {									\
 	__auto_type	ptr_	= (ptr);				\
+	__auto_type	nmemb_	= (nmemb);				\
 	void		*vp_;						\
 									\
-	vp_	= reallocarray(*ptr_, nmemb, sizeof(**ptr_));		\
-	if (vp_)							\
-		*ptr_	= vp_;						\
+	vp_	= reallocarray(*ptr_, nmemb_, sizeof(**ptr_));		\
 									\
-	!vp_;								\
+	alx_reallocs__(ptr_, vp_, nmemb_);				\
 }									\
 )
 

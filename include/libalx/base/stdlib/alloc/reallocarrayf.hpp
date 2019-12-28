@@ -7,17 +7,13 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/base/stdlib/alloc/reallocs.hpp */
+#pragma once	/* libalx/base/stdlib/alloc/mallocarray.hpp */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <cstdbool>
 #include <cstddef>
-#include <cstdlib>
-
-#include "libalx/base/compiler/restrict.hpp"
 
 
 /******************************************************************************
@@ -25,7 +21,7 @@
  ******************************************************************************/
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define reallocs(ptr, nmemb)	alx_reallocs(ptr, nmemb)
+#define reallocarrayf(ptr, nmemb, size)	alx_reallocarrayf(ptr, nmemb, size)
 #endif
 
 
@@ -34,10 +30,8 @@
  ******************************************************************************/
 extern	"C"
 {
-[[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_reallocs	(void **restrict ptr, size_t size);
-[[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_reallocs__	(void **restrict ptr, void *restrict vp, bool size);
+[[gnu::malloc]][[gnu::warn_unused_result]]
+void	*alx_reallocarrayf(void *ptr, ptrdiff_t nmemb, size_t size);
 }
 
 

@@ -7,13 +7,12 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/base/stdlib/alloc/reallocs.hpp */
+#pragma once	/* libalx/base/stdlib/alloc/reallocfs.hpp */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <cstdbool>
 #include <cstddef>
 #include <cstdlib>
 
@@ -25,7 +24,7 @@
  ******************************************************************************/
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define reallocs(ptr, nmemb)	alx_reallocs(ptr, nmemb)
+#define reallocfs(ptr, nmemb)	alx_reallocfs(ptr, nmemb)
 #endif
 
 
@@ -35,9 +34,7 @@
 extern	"C"
 {
 [[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_reallocs	(void **restrict ptr, size_t size);
-[[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_reallocs__	(void **restrict ptr, void *restrict vp, bool size);
+int	alx_reallocfs	(void **restrict ptr, size_t size);
 }
 
 
