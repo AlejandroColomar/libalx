@@ -89,7 +89,7 @@ int	alx_mallocs	(void **restrict ptr, size_t size);
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 __attribute__((always_inline, nonnull, warn_unused_result))
-static inline
+inline
 int	mallocs		(void **restrict ptr, size_t size)
 {
 	return	alx_mallocs(ptr, size);

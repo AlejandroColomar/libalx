@@ -44,7 +44,7 @@ char	*alx_strnupr	(ptrdiff_t n, char str[static restrict n]);
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 __attribute__((always_inline, nonnull))
-static inline
+inline
 char	*strnupr	(ptrdiff_t n, char str[static restrict n])
 {
 	return	alx_strnupr(n, str);

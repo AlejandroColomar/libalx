@@ -63,7 +63,7 @@ int	alx_strtof_status	(const char *restrict str,
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 __attribute__((always_inline, nonnull(1, 2), warn_unused_result))
-static inline
+inline
 int	strtod_s	(double *restrict num, const char *restrict str,
 			 ptrdiff_t *restrict read)
 {
@@ -71,7 +71,7 @@ int	strtod_s	(double *restrict num, const char *restrict str,
 }
 
 __attribute__((always_inline, nonnull(1, 2), warn_unused_result))
-static inline
+inline
 int	strtof_s	(float *restrict num, const char *restrict str,
 			 ptrdiff_t *restrict read)
 {
@@ -79,7 +79,7 @@ int	strtof_s	(float *restrict num, const char *restrict str,
 }
 
 __attribute__((always_inline, nonnull(1, 2), warn_unused_result))
-static inline
+inline
 int	strtold_s	(long double *restrict num, const char *restrict str,
 			 ptrdiff_t *restrict read)
 {

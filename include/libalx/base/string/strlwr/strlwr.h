@@ -43,7 +43,7 @@ char	*alx_strlwr	(char *restrict str);
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 __attribute__((always_inline, nonnull))
-static inline
+inline
 char	*strlwr		(char *restrict str)
 {
 	return	alx_strlwr(str);

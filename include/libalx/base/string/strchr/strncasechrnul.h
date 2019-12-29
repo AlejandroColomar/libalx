@@ -46,7 +46,7 @@ ptrdiff_t alx_strncasechrnul	(ptrdiff_t size,
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 __attribute__((always_inline, nonnull, pure))
-static inline
+inline
 ptrdiff_t strncasechrnul	(ptrdiff_t size,
 				 const char str[static restrict size],
 				 char c)

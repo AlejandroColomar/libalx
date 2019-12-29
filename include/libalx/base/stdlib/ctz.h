@@ -74,28 +74,28 @@ uint64_t	alx_ctz_u256	(uint256_t n);
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 __attribute__((always_inline, const))
-static inline
+inline
 ptrdiff_t	ctz_u8		(uint8_t n)
 {
 	return	alx_ctz_u8(n);
 }
 
 __attribute__((always_inline, const))
-static inline
+inline
 ptrdiff_t	ctz_u16		(uint16_t n)
 {
 	return	alx_ctz_u16(n);
 }
 
 __attribute__((always_inline, const))
-static inline
+inline
 ptrdiff_t	ctz_u32		(uint32_t n)
 {
 	return	alx_ctz_u32(n);
 }
 
 __attribute__((always_inline, const))
-static inline
+inline
 ptrdiff_t	ctz_u64		(uint64_t n)
 {
 	return	alx_ctz_u64(n);
@@ -103,7 +103,7 @@ ptrdiff_t	ctz_u64		(uint64_t n)
 
 # if defined(uint128_t)
 __attribute__((always_inline, const))
-static inline
+inline
 ptrdiff_t	ctz_u128	(uint128_t n)
 {
 	return	alx_ctz_u128(n);
@@ -112,7 +112,7 @@ ptrdiff_t	ctz_u128	(uint128_t n)
 
 # if defined(uint256_t)
 __attribute__((always_inline, const))
-static inline
+inline
 ptrdiff_t	ctz_u256	(uint256_t n)
 {
 	return	alx_ctz_u256(n);

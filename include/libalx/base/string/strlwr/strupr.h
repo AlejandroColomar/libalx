@@ -43,7 +43,7 @@ char	*alx_strupr	(char *restrict str);
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 __attribute__((always_inline, nonnull))
-static inline
+inline
 char	*strupr		(char *restrict str)
 {
 	return	alx_strupr(str);

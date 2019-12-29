@@ -44,7 +44,7 @@ ptrdiff_t alx_strrcasechrnul	(const char str[restrict], char c);
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 __attribute__((always_inline, nonnull, pure))
-static inline
+inline
 ptrdiff_t strrcasechrnul	(const char str[restrict], char c)
 {
 	return	alx_strrcasechrnul(str, c);

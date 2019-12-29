@@ -64,7 +64,7 @@ int	alx_strtol_status	(const char *restrict str,
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 __attribute__((always_inline, nonnull(1, 2), warn_unused_result))
-static inline
+inline
 int	strtoi8_s		(int8_t *restrict num,
 				 const char *restrict str,
 				 int base, ptrdiff_t *restrict read)
@@ -73,7 +73,7 @@ int	strtoi8_s		(int8_t *restrict num,
 }
 
 __attribute__((always_inline, nonnull(1, 2), warn_unused_result))
-static inline
+inline
 int	strtoi16_s		(int16_t *restrict num,
 				 const char *restrict str,
 				 int base, ptrdiff_t *restrict read)
@@ -82,7 +82,7 @@ int	strtoi16_s		(int16_t *restrict num,
 }
 
 __attribute__((always_inline, nonnull(1, 2), warn_unused_result))
-static inline
+inline
 int	strtoi32_s		(int32_t *restrict num,
 				 const char *restrict str,
 				 int base, ptrdiff_t *restrict read)
@@ -91,7 +91,7 @@ int	strtoi32_s		(int32_t *restrict num,
 }
 
 __attribute__((always_inline, nonnull(1, 2), warn_unused_result))
-static inline
+inline
 int	strtoi64_s		(int64_t *restrict num,
 				 const char *restrict str,
 				 int base, ptrdiff_t *restrict read)

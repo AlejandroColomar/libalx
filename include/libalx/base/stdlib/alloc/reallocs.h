@@ -116,7 +116,7 @@ int	alx_reallocs__	(void **restrict ptr, void *restrict vp, size_t size);
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 __attribute__((always_inline, nonnull, warn_unused_result))
-static inline
+inline
 int	reallocs	(void **restrict ptr, size_t size)
 {
 	return	alx_reallocs(ptr, size);

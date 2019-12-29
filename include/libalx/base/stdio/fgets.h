@@ -48,7 +48,7 @@ int	alx_fgets_nonl	(char buf[restrict /*bufsiz*/], int bufsiz,
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 __attribute__((always_inline, nonnull(1, 3)))
-static inline
+inline
 int	fgets_nonl	(char buf[restrict /*bufsiz*/], int bufsiz,
 			 FILE *restrict stream, ptrdiff_t *restrict len)
 {

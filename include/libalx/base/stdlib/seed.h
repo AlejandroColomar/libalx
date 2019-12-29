@@ -53,14 +53,14 @@ uint32_t alx_seed_mix	(uint32_t a, uint32_t b, uint32_t c);
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 __attribute__((always_inline))
-static inline
+inline
 void	prsrand		(void)
 {
 	alx_prsrand();
 }
 
 __attribute__((always_inline))
-static inline
+inline
 uint32_t prseed		(void)
 {
 	return	alx_prseed();

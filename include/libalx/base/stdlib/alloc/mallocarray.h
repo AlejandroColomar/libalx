@@ -88,7 +88,7 @@ void	*alx_mallocarray	(ptrdiff_t nmemb, size_t size);
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 __attribute__((always_inline, malloc, warn_unused_result))
-static inline
+inline
 void	*mallocarray		(ptrdiff_t nmemb, size_t size)
 {
 	return	alx_mallocarray(nmemb, size);

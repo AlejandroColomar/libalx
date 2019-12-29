@@ -57,7 +57,7 @@ int	alx_vsnprintfs	(char str[restrict /*nmemb*/],
 #if defined(ALX_NO_PREFIX)
 __attribute__((always_inline))
 __attribute__((nonnull(1, 4), format(printf, 4, 0), warn_unused_result))
-static inline
+inline
 int	vsnprintfs	(char str[restrict /*nmemb*/],
 			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
 			 const char *restrict format, va_list ap)

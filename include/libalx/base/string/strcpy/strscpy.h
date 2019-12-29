@@ -46,7 +46,7 @@ ptrdiff_t alx_strscpy		(char dest[restrict /*size*/],
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 __attribute__((always_inline, nonnull))
-static inline
+inline
 ptrdiff_t strscpy		(char dest[restrict /*size*/],
 				 const char src[restrict /*size*/],
 				 ptrdiff_t size)

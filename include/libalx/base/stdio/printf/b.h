@@ -42,7 +42,7 @@ int	alx_printf_b_init	(void);
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 __attribute__((always_inline))
-static inline
+inline
 int	printf_b_init		(void)
 {
 	return	alx_printf_b_init();

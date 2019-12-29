@@ -94,7 +94,7 @@ int	alx_reallocfs	(void **restrict ptr, size_t size);
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 __attribute__((always_inline, nonnull, warn_unused_result))
-static inline
+inline
 int	reallocfs	(void **restrict ptr, size_t size)
 {
 	return	alx_reallocfs(ptr, size);
