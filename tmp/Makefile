@@ -39,7 +39,7 @@ data-structures:
 
 PHONY += npcomplete
 npcomplete:
-	$(Q)$(MAKE)	-C $(TMP_DIR)/alx/npcomplete/
+#	$(Q)$(MAKE)	-C $(TMP_DIR)/alx/npcomplete/
 
 
 PHONY += extra

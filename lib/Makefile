@@ -132,8 +132,7 @@ ZBAR_OBJ	=							\
 		$(TMP_DIR)/extra/zbar/zbar.o
 
 
-ALL	= libalx							\
-	base alx extra
+ALL	= base alx extra
 
 # target: dependencies
 #	action
@@ -143,40 +142,57 @@ all: $(ALL)
 
 
 PHONY += base
-base: libalx libalx/libalx-base.a libalx/libalx-base.so
+base: libalx
+	$(Q)$(MAKE)	libalx/libalx-base.a
+	$(Q)$(MAKE)	libalx/libalx-base.so
 
 
 PHONY += alx
 alx: data-structures npcomplete
 
 PHONY += data-structures
-data-structures: libalx libalx/libalx-data-structures.a			\
-				libalx/libalx-data-structures.so
+data-structures: libalx base
+	$(Q)$(MAKE)	libalx/libalx-data-structures.a
+	$(Q)$(MAKE)	libalx/libalx-data-structures.so
 
 PHONY += npcomplete
-npcomplete: libalx libalx/libalx-npcomplete.a libalx/libalx-npcomplete.so
+npcomplete: libalx base
+#	$(Q)$(MAKE)	libalx/libalx-npcomplete.a
+#	$(Q)$(MAKE)	libalx/libalx-npcomplete.so
 
 
 PHONY += extra
 extra: cv gmp gsl ncurses ocr zbar
 
 PHONY += cv
-cv: libalx libalx/libalx-cv.a libalx/libalx-cv.so
+cv: libalx base gsl
+	$(Q)$(MAKE)	libalx/libalx-cv.a
+	$(Q)$(MAKE)	libalx/libalx-cv.so
 
 PHONY += gmp
-gmp: libalx libalx/libalx-gmp.a libalx/libalx-gmp.so
+gmp: libalx base
+	$(Q)$(MAKE)	libalx/libalx-gmp.a
+	$(Q)$(MAKE)	libalx/libalx-gmp.so
 
 PHONY += gsl
-gsl: libalx libalx/libalx-gsl.a libalx/libalx-gsl.so
+gsl: libalx base
+	$(Q)$(MAKE)	libalx/libalx-gsl.a
+	$(Q)$(MAKE)	libalx/libalx-gsl.so
 
 PHONY += ncurses
-ncurses: libalx libalx/libalx-ncurses.a libalx/libalx-ncurses.so
+ncurses: libalx base
+	$(Q)$(MAKE)	libalx/libalx-ncurses.a
+	$(Q)$(MAKE)	libalx/libalx-ncurses.so
 
 PHONY += ocr
-ocr: libalx libalx/libalx-ocr.a libalx/libalx-ocr.so
+ocr: libalx base
+	$(Q)$(MAKE)	libalx/libalx-ocr.a
+	$(Q)$(MAKE)	libalx/libalx-ocr.so
 
 PHONY += zbar
-zbar: libalx libalx/libalx-zbar.a libalx/libalx-zbar.so
+zbar: libalx base
+	$(Q)$(MAKE)	libalx/libalx-zbar.a
+	$(Q)$(MAKE)	libalx/libalx-zbar.so
 
 
 libalx:

@@ -204,7 +204,10 @@ export	LDFLAGS
 #	action
 
 PHONY := all
-all: base alx extra
+all:
+	@echo	"	MAKE	$@"
+	$(Q)$(MAKE) $@	-C $(TMP_DIR)
+	$(Q)$(MAKE) $@	-C $(LIB_DIR)
 
 
 PHONY += base
@@ -215,56 +218,62 @@ base:
 
 
 PHONY += alx
-alx: data-structures npcomplete
+alx:
+	@echo	"	MAKE	$@"
+	$(Q)$(MAKE) $@	-C $(TMP_DIR)
+	$(Q)$(MAKE) $@	-C $(LIB_DIR)
 
 PHONY += data-structures
-data-structures: base
+data-structures:
 	@echo	"	MAKE	$@"
 	$(Q)$(MAKE) $@	-C $(TMP_DIR)
 	$(Q)$(MAKE) $@	-C $(LIB_DIR)
 
 PHONY += npcomplete
-npcomplete: base
+npcomplete:
 	@echo	"	MAKE	$@"
 	$(Q)$(MAKE) $@	-C $(TMP_DIR)
 	$(Q)$(MAKE) $@	-C $(LIB_DIR)
 
 
 PHONY += extra
-extra: cv gmp gsl ncurses ocr zbar
+extra:
+	@echo	"	MAKE	$@"
+	$(Q)$(MAKE) $@	-C $(TMP_DIR)
+	$(Q)$(MAKE) $@	-C $(LIB_DIR)
 
 PHONY += cv
-cv: base gsl
+cv:
 	@echo	"	MAKE	$@"
 	$(Q)$(MAKE) $@	-C $(TMP_DIR)
 	$(Q)$(MAKE) $@	-C $(LIB_DIR)
 
 PHONY += gmp
-gmp: base
+gmp:
 	@echo	"	MAKE	$@"
 	$(Q)$(MAKE) $@	-C $(TMP_DIR)
 	$(Q)$(MAKE) $@	-C $(LIB_DIR)
 
 PHONY += gsl
-gsl: base
+gsl:
 	@echo	"	MAKE	$@"
 	$(Q)$(MAKE) $@	-C $(TMP_DIR)
 	$(Q)$(MAKE) $@	-C $(LIB_DIR)
 
 PHONY += ncurses
-ncurses: base
+ncurses:
 	@echo	"	MAKE	$@"
 	$(Q)$(MAKE) $@	-C $(TMP_DIR)
 	$(Q)$(MAKE) $@	-C $(LIB_DIR)
 
 PHONY += ocr
-ocr: base
+ocr:
 	@echo	"	MAKE	$@"
 	$(Q)$(MAKE) $@	-C $(TMP_DIR)
 	$(Q)$(MAKE) $@	-C $(LIB_DIR)
 
 PHONY += zbar
-zbar: base
+zbar:
 	@echo	"	MAKE	$@"
 	$(Q)$(MAKE) $@	-C $(TMP_DIR)
 	$(Q)$(MAKE) $@	-C $(LIB_DIR)
@@ -281,6 +290,7 @@ install:
 	@echo	"	Install:"
 	@echo
 	$(Q)$(MAKE)	install_base
+	$(Q)$(MAKE)	install_alx
 	$(Q)$(MAKE)	install_extra
 	$(Q)$(MAKE)	conf_ld
 	@echo	"	Done"
@@ -290,65 +300,84 @@ PHONY += install_base
 install_base:
 	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/base/"
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/base/
-	@echo	"	CP -r	./include/libalx/base/*"
+	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/base/*"
 	$(Q)cp -rf $(v)		./include/libalx/base/*			\
 					$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/base/
-	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/"
-	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
-	@echo	"	CP -r	./lib/libalx/libalx-base.*"
-	$(Q)cp -rf $(v)		./lib/libalx/libalx-base.*		\
-					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
 	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/sh/"
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/sh/
-	@echo	"	CP -r	./lib/libalx/sh/*"
+	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/sh/*"
 	$(Q)cp -rf $(v)		./lib/libalx/sh/*			\
 					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/sh/
 	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/"
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/
-	@echo	"	CP -r	./share/libalx/*"
+	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/*"
 	$(Q)cp -rf $(v)		./share/libalx/*			\
 					$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/
-	$(Q)$(MAKE)	libalx-base.pc
+	$(Q)$(MAKE)	libalx-base.a	libalx-base.so	libalx-base.pc
+	@echo
+
+PHONY += install_alx
+install_alx:
+	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/alx/"
+	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/alx/
+	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/alx/*"
+	$(Q)cp -r -f $(v)	./include/libalx/alx/*			\
+					$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/alx/
+	$(Q)$(MAKE)	libalx-data-structures.a			\
+			libalx-data-structures.so			\
+			libalx-data-structures.pc
+#	$(Q)$(MAKE)	libalx-npcomplete.a				\
+#			libalx-npcomplete.so				\
+#			libalx-npcomplete.pc
 	@echo
 
 PHONY += install_extra
 install_extra:
 	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_ETC_DIR)/libalx/extra/"
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_ETC_DIR)/libalx/extra/
-	@echo	"	CP -r	./etc/libalx/extra/*"
+	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_ETC_DIR)/libalx/extra/*"
 	$(Q)cp -r -f $(v)	./etc/libalx/extra/*			\
 					$(DESTDIR)/$(INSTALL_ETC_DIR)/libalx/extra/
 	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/extra/"
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/extra/
-	@echo	"	CP -r	./include/libalx/extra/*"
+	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/extra/*"
 	$(Q)cp -r -f $(v)	./include/libalx/extra/*		\
 					$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/extra/
-	@echo	"	CP -r	./lib/libalx/*"
-	$(Q)cp -r -f $(v)	./lib/libalx/*				\
-					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
-	$(Q)$(MAKE)	libalx-data-structures.pc
-	$(Q)$(MAKE)	libalx-npcomplete.pc
-	$(Q)$(MAKE)	libalx-cv.pc
-	$(Q)$(MAKE)	libalx-gmp.pc
-	$(Q)$(MAKE)	libalx-gsl.pc
-	$(Q)$(MAKE)	libalx-ncurses.pc
-	$(Q)$(MAKE)	libalx-ocr.pc
-	$(Q)$(MAKE)	libalx-zbar.pc
+	$(Q)$(MAKE)	libalx-cv.a	libalx-cv.so	libalx-cv.pc
+	$(Q)$(MAKE)	libalx-gmp.a	libalx-gmp.so	libalx-gmp.pc
+	$(Q)$(MAKE)	libalx-gsl.a	libalx-gsl.so	libalx-gsl.pc
+	$(Q)$(MAKE)	libalx-ncurses.a libalx-ncurses.so libalx-ncurses.pc
+	$(Q)$(MAKE)	libalx-ocr.a	libalx-ocr.so	libalx-ocr.pc
+	$(Q)$(MAKE)	libalx-zbar.a	libalx-zbar.so	libalx-zbar.pc
 	@echo
 
 PHONY += conf_ld
 conf_ld:
-	@echo	"	CP -r	./ect/ld.so.conf.d/*"
+	@echo	"	CP -r	$(DESTDIR)/etc/ld.so.conf.d/*"
 	$(Q)cp -r -f $(v)	./etc/ld.so.conf.d/*			\
 					$(DESTDIR)/etc/ld.so.conf.d/
 	@echo	"	LDCONFIG"
 	$(Q)ldconfig
 	@echo
 
+PHONY += libalx-%.a
+libalx-%.a:
+	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
+	@echo	"	CP	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/$@"
+	$(Q)cp -f $(v)		./lib/libalx/$@	\
+					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/$@
+
+PHONY += libalx-%.so
+libalx-%.so:
+	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
+	@echo	"	CP	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/$@"
+	$(Q)cp -f $(v)		./lib/libalx/$@	\
+					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/$@
+
 PHONY += libalx-%.pc
 libalx-%.pc:
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/
-	@echo	"	CP	./lib/pkgconfig/$@"
+	@echo	"	CP	$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/$@"
 	$(Q)cp -f $(v)		./lib/pkgconfig/$@			\
 					$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/
 
