@@ -15,7 +15,7 @@
  ******************************************************************************/
 /*
  * [[gnu::nonnull]]
- * int	callocs(type **restrict ptr, ptrdiff_t nmemb);
+ * int	callocs(type **restrict ptr, size_t nmemb);
  *
  * Read  <libalx/base/stdlib/alloc/callocs.h>  for documentation.
  */

@@ -15,7 +15,7 @@
  ******************************************************************************/
 /*
  * [[gnu::nonnull]] [[gnu::warn_unused_result]]
- * int	reallocs(void **restrict ptr, ptrdiff_t nmemb);
+ * int	reallocs(void **restrict ptr, size_t size);
  *
  * Safe & simple wrapper for `reallocf()`.
  * To be used for generic buffers of bytes, and not for arrays (use

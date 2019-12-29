@@ -15,7 +15,7 @@
  ******************************************************************************/
 /*
  * [[gnu::nonnull]]
- * int	callocs(type **restrict ptr, ptrdiff_t nmemb);
+ * int	callocs(type **restrict ptr, size_t nmemb);
  *
  * Safe & simple wrapper for `calloc()`.
  *
@@ -56,7 +56,7 @@
  *
  * ptr:		Memory will be allocated, and a pointer to it will be stored
  *		in *ptr.
- * nmemb:	First argument to be passed to `calloc()`.
+ * nmemb:	Number of elements in the array.
  *
  * return:
  *	0:		OK.

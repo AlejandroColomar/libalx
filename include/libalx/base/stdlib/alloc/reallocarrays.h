@@ -15,7 +15,7 @@
  ******************************************************************************/
 /*
  * [[gnu::nonnull]][[gnu::warn_unused_result]]
- * int	reallocarrays(type **restrict ptr, ptrdiff_t nmemb);
+ * int	reallocarrays(type **restrict ptr, size_t nmemb);
  *
  * Safe & simple wrapper for `reallocarray()`.
  *
