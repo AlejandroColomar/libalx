@@ -116,10 +116,10 @@ inline
 void	*alx_reallocarrayf	(void *ptr, ptrdiff_t nmemb, size_t size)
 {
 
-	if (nmemb < 0)
-		goto ovf;
 	if (!size)
 		goto out;
+	if (nmemb < 0)
+		goto ovf;
 	if ((size_t)nmemb  >  (SIZE_MAX / size))
 		goto ovf;
 
