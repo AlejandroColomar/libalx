@@ -1,7 +1,7 @@
-/******************************************************************************
- *	Copyright (C) 2019	Alejandro Colomar Andrés		      *
- *	SPDX-License-Identifier:	LGPL-2.0-only			      *
- ******************************************************************************/
+
+	Copyright (C) 2019	Alejandro Colomar Andrés
+	SPDX-License-Identifier:	LGPL-2.0-only
+________________________________________________________________________________
 
 <libalx/base/stdlib/alloc/*>
 ============================
