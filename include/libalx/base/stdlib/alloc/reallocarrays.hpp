@@ -15,7 +15,7 @@
  ******************************************************************************/
 /*
  * [[gnu::nonnull]] [[gnu::warn_unused_result]]
- * int	reallocarrays(type **restrict ptr, size_t nmemb);
+ * int	reallocarrays(type **ptr, size_t nmemb);
  *
  * Read  <libalx/base/stdlib/alloc/reallocarrays.h>  for documentation.
  */
@@ -24,9 +24,10 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <cstdlib>
+#include <cstddef>
 
-#include "libalx/base/stdlib/alloc/reallocs.hpp"
+#include "libalx/base/compiler/restrict.hpp"
+#include "libalx/base/compiler/unused.hpp"
 
 
 /******************************************************************************
@@ -35,12 +36,12 @@
 #define alx_reallocarrays(ptr, nmemb)	(				\
 {									\
 	auto	ptr_	= (ptr);					\
-	auto	nmemb_	= (nmemb);					\
 	void	*vp_;							\
+	int	err_;							\
 									\
-	vp_	= reallocarray(*ptr_, nmemb_, sizeof(**ptr_));		\
-									\
-	alx_reallocs__(ptr_, vp_, nmemb_);				\
+	vp_	= alx_reallocarrays__(*ptr_, nmemb, sizeof(**ptr_), &err_); \
+	*ptr_	= static_cast<typeof(*ptr_)>(vp_);			\
+	alx_warn_unused_int(err_);					\
 }									\
 )
 
@@ -54,6 +55,12 @@
 /******************************************************************************
  ******* extern "C" ***********************************************************
  ******************************************************************************/
+extern	"C"
+{
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+void	*alx_reallocarrays__	(void *restrict ptr, ptrdiff_t nmemb,
+				 size_t size, int *restrict error);
+}
 
 
 /******************************************************************************

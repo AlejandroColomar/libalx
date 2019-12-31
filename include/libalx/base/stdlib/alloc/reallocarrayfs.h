@@ -15,23 +15,32 @@
  ******************************************************************************/
 /*
  * [[gnu::nonnull]] [[gnu::warn_unused_result]]
- * int	reallocarrayfs(type **restrict ptr, ptrdiff_t nmemb);
+ * int	reallocarrayfs(type **ptr, ptrdiff_t nmemb);
  *
  * Safe & simple wrapper for `reallocarrayf()`.
  *
- * Features:
- * - Safely computes the element size (second argument to `reallocarrayf()`)
- *	so the user can't make mistakes.
- * - Returns non-zero on error.
- * - Doesn't cast.
- * - Upon failure, the passed pointer is freed, to ease error handling and to
- *	avoid memory leaks.
- * - It fails safely if (nmemb < 0).  With `reallocarray()` the array would be
- *	be allocated (it uses `size_t` instead of `ptrdiff_t`), and it's usage
- *	would likely produce undefined behavior.
- * - The pointer stored in `*ptr` is always a valid pointer or NULL.
+ * PARAMETERS:
+ * ptr:		Pointer to a pointer to the memory to be reallocated.
+ *		A pointer to the reallocated memory will be stored
+ *		in *ptr.
+ * nmemb:	Number of elements in the array.
  *
- * example:
+ * RETURN:
+ *	0:		OK.
+ *	ERRNO:		OK.  nmemb == 0.  *ptr set to NULL.
+ *	-ERRNO:		Failed.  errno set to ENOMEM.  *ptr set to NULL.
+ *
+ * FEATURES:
+ * - Safely computes the element size (second argument to `reallocarrayf()`).
+ * - *ptr is NULL on zero size allocation.
+ * - Fails safely if (nmemb < 0).
+ * - Fails safely if (nmemb * size) would overflow.
+ * - Doesn't cast.
+ * - Upon failure, the passed pointer is freed.
+ * - The pointer stored in `*ptr` is always a valid pointer or NULL.
+ * - Returns non-zero if the resulting pointer is NULL.
+ *
+ * EXAMPLE:
  *	#define ALX_NO_PREFIX
  *	#include <libalx/base/stdlib/alloc/reallocarrayfs.h>
  *
@@ -52,31 +61,21 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/base/stdlib/alloc/reallocarrayf.h"
+#include <stddef.h>
+
+#include "libalx/base/compiler/unused.h"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-/*
- * reallocarrayfs()
- *
- * ptr:		Pointer to a pointer to the memory to be reallocated.
- *		A pointer to the reallocated memory will be stored
- *		in *ptr.
- * nmemb:	Number of elements in the array.
- *
- * return:
- *	0:		OK.
- *	!= 0:		Failed.
- */
 #define alx_reallocarrayfs(ptr, nmemb)	(				\
 {									\
 	__auto_type	ptr_	= (ptr);				\
+	int		err_;						\
 									\
-	*ptr_	= alx_reallocarrayf(*ptr_, nmemb, sizeof(**ptr_));	\
-									\
-	!(*ptr_);							\
+	*ptr_	= alx_reallocarrayfs__(*ptr_, nmemb, sizeof(**ptr_), &err_); \
+	alx_warn_unused_int(err_);					\
 }									\
 )
 
@@ -98,12 +97,41 @@
 
 
 /******************************************************************************
- ******* function prototypes **************************************************
+ ******* prototypes ***********************************************************
  ******************************************************************************/
+/*
+ * [[gnu::nonnull]] [[gnu::warn_unused_result]]
+ * int	alx_reallocarrayfs__(void **ptr, ptrdiff_t nmemb, size_t size);
+ *
+ * Helper function for `reallocarrayfs()`.
+ *
+ * PARAMETERS:
+ * ptr:		Memory will be allocated, and a pointer to it will be stored
+ *		in *ptr.
+ * nmemb:	Number of elements in the array.
+ * size:	Size of each element in the array.
+ *
+ * RETURN:
+ *	0:		OK.
+ *	ERRNO:		OK.  nmemb == 0.  *ptr set to NULL.
+ *	-ERRNO:		Failed.  errno set to ENOMEM.  *ptr set to NULL.
+ *
+ * FEATURES:
+ * - *ptr is NULL on zero size allocation.
+ * - Fails safely if (nmemb < 0).
+ * - Fails safely if (nmemb * size) would overflow.
+ * - Doesn't cast.
+ * - Upon failure, the passed pointer is freed.
+ * - The pointer stored in `*ptr` is always a valid pointer or NULL.
+ * - Returns non-zero if the resulting pointer is NULL.
+ */
+__attribute__((nonnull, warn_unused_result))
+void	*alx_reallocarrayfs__	(void *restrict ptr, ptrdiff_t nmemb,
+				 size_t size, int *restrict error);
 
 
 /******************************************************************************
- ******* inline functions *****************************************************
+ ******* inline ***************************************************************
  ******************************************************************************/
 
 

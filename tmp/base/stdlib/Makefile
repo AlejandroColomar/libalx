@@ -45,23 +45,27 @@ OBJ		=							\
 		swap.o
 
 ALLOC_CALLOCS_INC	=						\
+		$(INC_DIR)/libalx/base/compiler/unused.h		\
 		$(INC_DIR)/libalx/base/stdlib/alloc/callocs.h
 ALLOC_CALLOCS_SRC	=						\
 		$(SRC_DIR)/base/stdlib/alloc/callocs.c
 
 ALLOC_MALLOCARRAY_INC	=						\
 		$(INC_DIR)/libalx/base/assert/assert.h			\
+		$(INC_DIR)/libalx/base/compiler/unused.h		\
 		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarray.h
 ALLOC_MALLOCARRAY_SRC	=						\
 		$(SRC_DIR)/base/stdlib/alloc/mallocarray.c
 
 ALLOC_MALLOCARRAYS_INC	=						\
+		$(INC_DIR)/libalx/base/compiler/unused.h		\
 		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarray.h	\
 		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.h
 ALLOC_MALLOCARRAYS_SRC	=						\
 		$(SRC_DIR)/base/stdlib/alloc/mallocarrays.c
 
 ALLOC_MALLOCS_INC	=						\
+		$(INC_DIR)/libalx/base/compiler/unused.h		\
 		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarray.h	\
 		$(INC_DIR)/libalx/base/stdlib/alloc/mallocs.h
 ALLOC_MALLOCS_SRC	=						\
@@ -69,26 +73,31 @@ ALLOC_MALLOCS_SRC	=						\
 
 ALLOC_REALLOCARRAYF_INC	=						\
 		$(INC_DIR)/libalx/base/assert/assert.h			\
+		$(INC_DIR)/libalx/base/compiler/unused.h		\
 		$(INC_DIR)/libalx/base/stdlib/alloc/reallocarrayf.h
 ALLOC_REALLOCARRAYF_SRC	=						\
 		$(SRC_DIR)/base/stdlib/alloc/reallocarrayf.c
 
 ALLOC_REALLOCARRAYFS_INC	=					\
+		$(INC_DIR)/libalx/base/compiler/unused.h		\
 		$(INC_DIR)/libalx/base/stdlib/alloc/reallocarrayfs.h
 ALLOC_REALLOCARRAYFS_SRC	=					\
 		$(SRC_DIR)/base/stdlib/alloc/reallocarrayfs.c
 
 ALLOC_REALLOCARRAYS_INC	=						\
+		$(INC_DIR)/libalx/base/compiler/unused.h		\
 		$(INC_DIR)/libalx/base/stdlib/alloc/reallocarrays.h
 ALLOC_REALLOCARRAYS_SRC	=						\
 		$(SRC_DIR)/base/stdlib/alloc/reallocarrays.c
 
 ALLOC_REALLOCFS_INC	=						\
+		$(INC_DIR)/libalx/base/compiler/unused.h		\
 		$(INC_DIR)/libalx/base/stdlib/alloc/reallocfs.h
 ALLOC_REALLOCFS_SRC	=						\
 		$(SRC_DIR)/base/stdlib/alloc/reallocfs.c
 
 ALLOC_REALLOCS_INC	=						\
+		$(INC_DIR)/libalx/base/compiler/unused.h		\
 		$(INC_DIR)/libalx/base/stdlib/alloc/reallocs.h
 ALLOC_REALLOCS_SRC	=						\
 		$(SRC_DIR)/base/stdlib/alloc/reallocs.c

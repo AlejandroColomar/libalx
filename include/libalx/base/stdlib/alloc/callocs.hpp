@@ -15,7 +15,7 @@
  ******************************************************************************/
 /*
  * [[gnu::nonnull]]
- * int	callocs(type **restrict ptr, size_t nmemb);
+ * int	callocs(type **ptr, size_t nmemb);
  *
  * Read  <libalx/base/stdlib/alloc/callocs.h>  for documentation.
  */
@@ -24,7 +24,9 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <cstdlib>
+#include <cstddef>
+
+#include "libalx/base/compiler/unused.hpp"
 
 
 /******************************************************************************
@@ -33,12 +35,12 @@
 #define alx_callocs(ptr, nmemb)	(					\
 {									\
 	auto	ptr_	= (ptr);					\
-	void	*vp;							\
+	void	*vp_;							\
+	int	err_;							\
 									\
-	vp	= calloc(nmemb, sizeof(**ptr_));			\
-	*ptr_	= static_cast<typeof(*ptr_)>(vp);			\
-									\
-	!(*ptr_);							\
+	vp_	= alx_callocs__(nmemb, sizeof(**ptr_), &err_);		\
+	*ptr_	= static_cast<typeof(*ptr_)>(vp_);			\
+	alx_warn_unused_int(err_);					\
 }									\
 )
 
@@ -52,6 +54,11 @@
 /******************************************************************************
  ******* extern "C" ***********************************************************
  ******************************************************************************/
+extern	"C"
+{
+[[gnu::malloc]] [[gnu::nonnull]] [[gnu::warn_unused_result]]
+void	*alx_callocs__	(ptrdiff_t nmemb, size_t size, int *error);
+}
 
 
 /******************************************************************************

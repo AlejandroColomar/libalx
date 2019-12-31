@@ -155,8 +155,8 @@ int	b_arginf_sz	(const struct printf_info *info,
 			 size_t n, int *argtypes, int *size)
 {
 
-	UNUSED(info);
-	UNUSED(size);
+	ALX_UNUSED(info);
+	ALX_UNUSED(size);
 
 	if (n > 0)
 		argtypes[0] = PA_INT;

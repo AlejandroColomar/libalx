@@ -9,6 +9,12 @@
  ******************************************************************************/
 #include "libalx/base/stdlib/alloc/reallocarrayfs.h"
 
+#include <errno.h>
+#include <stddef.h>
+#include <stdlib.h>
+
+#include "libalx/base/stdlib/alloc/reallocarrayf.h"
+
 
 /******************************************************************************
  ******* macros ***************************************************************
@@ -28,6 +34,31 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
+void	*alx_reallocarrayfs__	(void *restrict ptr, ptrdiff_t nmemb,
+				 size_t size, int *restrict error)
+{
+
+	if (!nmemb || !size)
+		goto zero;
+	if (nmemb < 0)
+		goto ovf;
+
+	ptr	= alx_reallocarrayf(ptr, nmemb, size);
+	if (!ptr)
+		goto err;
+
+	return	ptr;
+ovf:
+	errno	= ENOMEM;
+	free(ptr);
+err:
+	*error	= -ENOMEM;
+	return	NULL;
+zero:
+	free(ptr);
+	*error	= ENOMEM;
+	return	NULL;
+}
 
 
 /******************************************************************************

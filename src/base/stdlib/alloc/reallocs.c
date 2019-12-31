@@ -9,7 +9,9 @@
  ******************************************************************************/
 #include "libalx/base/stdlib/alloc/reallocs.h"
 
+#include <errno.h>
 #include <stddef.h>
+#include <stdlib.h>
 
 
 /******************************************************************************
@@ -30,10 +32,26 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-extern
-int	alx_reallocs	(void **restrict ptr, size_t size);
-extern
-int	alx_reallocs__	(void **restrict ptr, void *restrict vp, size_t size);
+void	*alx_reallocs__	(void *restrict ptr, size_t size, int *restrict error)
+{
+	void	*p;
+
+	if (!size)
+		goto zero;
+
+	p	= realloc(ptr, size);
+	if (!p)
+		goto err;
+
+	return	p;
+err:
+	*error	= -ENOMEM;
+	return	ptr;
+zero:
+	free(ptr);
+	*error	= ENOMEM;
+	return	NULL;
+}
 
 
 /******************************************************************************

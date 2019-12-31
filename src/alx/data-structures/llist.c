@@ -260,7 +260,7 @@ void	alx_llist_insert_node_at	(struct Alx_LinkedList *list,
 	}
 
 	/* list->nmemb != 0, so it will return 0 */
-	UNUSED(alx_llist_get_node_at(list, &ref, pos));
+	ALX_UNUSED(alx_llist_get_node_at(list, &ref, pos));
 	if (pos >= 0)
 		alx_llist_insert_node_before(list, node, ref);
 	else
@@ -413,7 +413,7 @@ void	alx_llist_move_node_to		(struct Alx_LinkedList *list,
 		alx_llist_prepend_node(list, node);
 	} else {
 		/* list->nmemb != 0, so it will return 0 */
-		UNUSED(alx_llist_get_node_at(list, &ref, pos));
+		ALX_UNUSED(alx_llist_get_node_at(list, &ref, pos));
 		if (pos >= 0)
 			alx_llist_insert_node_before(list, node, ref);
 		else
@@ -433,7 +433,7 @@ void	alx_llist_move_relative		(struct Alx_LinkedList *list,
 		return;
 
 	/* list->nmemb != 0, so it will return 0 */
-	UNUSED(alx_llist_get_relative(list, &ref, node, pos));
+	ALX_UNUSED(alx_llist_get_relative(list, &ref, node, pos));
 	remove_node(list, node);
 
 	if (pos > 0)
@@ -451,7 +451,7 @@ void	alx_llist_set_head		(struct Alx_LinkedList *list,
 		return;
 
 	/* list->nmemb != 0, so it will return 0 */
-	UNUSED(alx_llist_get_node_at(list, &node, pos));
+	ALX_UNUSED(alx_llist_get_node_at(list, &node, pos));
 	list->head	= node;
 	list->tail	= node->left;
 }
@@ -532,10 +532,10 @@ int	alx_llist_to_dynarr		(struct Alx_LinkedList *restrict list,
 
 	return	0;
 err_alloc:
-	UNUSED(alx_dynarr_reset(arr, 0));
+	ALX_UNUSED(alx_dynarr_reset(arr, 0));
 	return	ENOMEM;
 err_size:
-	UNUSED(alx_dynarr_reset(arr, 0));
+	ALX_UNUSED(alx_dynarr_reset(arr, 0));
 	return	ENOBUFS;
 }
 
@@ -550,7 +550,7 @@ int	alx_llist_to_bst		(struct Alx_LinkedList *restrict list,
 		return	ENOENT;
 
 	for (ptrdiff_t i = 0; i < list->nmemb; i++) {
-		UNUSED(alx_llist_remove_tail(list, &node));
+		ALX_UNUSED(alx_llist_remove_tail(list, &node));
 		alx_bst_insert_node(*bst, node, cmp);
 	}
 

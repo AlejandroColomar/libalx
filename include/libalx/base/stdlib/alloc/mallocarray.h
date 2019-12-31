@@ -17,14 +17,22 @@
  * [[gnu::malloc]] [[gnu::warn_unused_result]]
  * void	*mallocarray(ptrdiff_t nmemb, size_t size);
  *
- * Almost equivalent to `reallocarray(NULL, nmemb, size)`.
+ * Almost equivalent to `malloc(nmemb * size)`.
  *
- * Features:
- * - It fails safely if (nmemb < 0).  With `reallocarray()` the array would be
- *	be allocated (it uses `size_t` instead of `ptrdiff_t`), and it's usage
- *	would likely produce undefined behavior.
+ * PARAMETERS:
+ * nmemb:	Number of elements in the array.
+ * size:	Size of each element in the array.
  *
- * example:
+ * RETURN:
+ *	!= NULL:	OK.
+ *	NULL:		Failed  OR  zero size allocation.
+ *
+ * FEATURES:
+ * - Returns NULL on zero size allocation.
+ * - Fails safely if (nmemb < 0).
+ * - Fails safely if (nmemb * size) would overflow.
+ *
+ * EXAMPLE:
  *	#define ALX_NO_PREFIX
  *	#include <libalx/base/stdlib/alloc/mallocarray.h>
  *
@@ -44,9 +52,7 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <errno.h>
 #include <stddef.h>
-#include <stdlib.h>
 
 
 /******************************************************************************
@@ -67,18 +73,7 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-/*
- * mallocarray()
- *
- * nmemb:	Number of elements in the array.
- * size:	Size of each element in the array.
- *
- * return:
- *	!= NULL:	OK.
- *	NULL:		Failed.
- */
 __attribute__((malloc, warn_unused_result))
-inline
 void	*alx_mallocarray	(ptrdiff_t nmemb, size_t size);
 
 
@@ -99,18 +94,6 @@ void	*mallocarray		(ptrdiff_t nmemb, size_t size)
 /******************************************************************************
  ******* inline ***************************************************************
  ******************************************************************************/
-inline
-void	*alx_mallocarray	(ptrdiff_t nmemb, size_t size)
-{
-
-	if (nmemb < 0)
-		goto ovf;
-
-	return	reallocarray(NULL, nmemb, size);
-ovf:
-	errno	= ENOMEM;
-	return	NULL;
-}
 
 
 /******************************************************************************

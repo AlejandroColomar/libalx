@@ -15,7 +15,7 @@
  ******************************************************************************/
 /*
  * [[gnu::nonnull]] [[gnu::warn_unused_result]]
- * int	mallocarrays(type **restrict ptr, ptrdiff_t nmemb);
+ * int	mallocarrays(type **ptr, ptrdiff_t nmemb);
  *
  * Read  <libalx/base/stdlib/alloc/mallocarrays.h>  for documentation.
  */
@@ -24,7 +24,9 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/base/stdlib/alloc/mallocarray.hpp"
+#include <cstddef>
+
+#include "libalx/base/compiler/unused.hpp"
 
 
 /******************************************************************************
@@ -33,12 +35,12 @@
 #define alx_mallocarrays(ptr, nmemb)	(				\
 {									\
 	auto	ptr_	= (ptr);					\
-	void	*vp;							\
+	void	*vp_;							\
+	int	err_;							\
 									\
-	vp	= alx_mallocarray(nmemb, sizeof(**ptr_));		\
-	*ptr_	= static_cast<typeof(*ptr_)>(vp);			\
-									\
-	!(*ptr_);							\
+	vp_	= alx_mallocarrays__(nmemb, sizeof(**ptr_), &err_);	\
+	*ptr_	= static_cast<typeof(*ptr_)>(vp_);			\
+	alx_warn_unused_int(err_);					\
 }									\
 )
 
@@ -52,6 +54,11 @@
 /******************************************************************************
  ******* extern "C" ***********************************************************
  ******************************************************************************/
+extern	"C"
+{
+[[gnu::malloc]] [[gnu::nonnull]] [[gnu::warn_unused_result]]
+void	*alx_mallocarrays__	(ptrdiff_t nmemb, size_t size, int *error);
+}
 
 
 /******************************************************************************

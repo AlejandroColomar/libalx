@@ -42,7 +42,7 @@
 extern	"C"
 {
 [[gnu::warn_unused_result]]
-void	*alx_reallocarrayf(void *ptr, ptrdiff_t nmemb, size_t size);
+void	*alx_reallocarrayf	(void *ptr, ptrdiff_t nmemb, size_t size);
 }
 
 

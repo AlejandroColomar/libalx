@@ -9,6 +9,12 @@
  ******************************************************************************/
 #include "libalx/base/stdlib/alloc/mallocarrays.h"
 
+#include <errno.h>
+#include <stddef.h>
+#include <stdlib.h>
+
+#include "libalx/base/stdlib/alloc/mallocarray.h"
+
 
 /******************************************************************************
  ******* macros ***************************************************************
@@ -28,6 +34,29 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
+void	*alx_mallocarrays__	(ptrdiff_t nmemb, size_t size, int *error)
+{
+	void	*p;
+
+	if (!nmemb || !size)
+		goto zero;
+	if (nmemb < 0)
+		goto ovf;
+
+	p	= alx_mallocarray(nmemb, size);
+	if (!p)
+		goto err;
+
+	return	p;
+ovf:
+	errno	= ENOMEM;
+err:
+	*error	= -ENOMEM;
+	return	NULL;
+zero:
+	*error	= ENOMEM;
+	return	NULL;
+}
 
 
 /******************************************************************************

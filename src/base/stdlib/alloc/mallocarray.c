@@ -9,7 +9,18 @@
  ******************************************************************************/
 #include "libalx/base/stdlib/alloc/mallocarray.h"
 
+#include <errno.h>
 #include <stddef.h>
+#include <stdint.h>
+#include <stdlib.h>
+
+#include "libalx/base/assert/assert.h"
+
+
+/******************************************************************************
+ ******* _Static_assert *******************************************************
+ ******************************************************************************/
+alx_Static_assert_size_ptrdiff();
 
 
 /******************************************************************************
@@ -30,8 +41,22 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-extern
-void	*alx_mallocarray(ptrdiff_t nmemb, size_t size);
+void	*alx_mallocarray	(ptrdiff_t nmemb, size_t size)
+{
+
+	if (!nmemb || !size)
+		goto zero;
+	if (nmemb < 0)
+		goto ovf;
+	if ((size_t)nmemb  >  (SIZE_MAX / size))
+		goto ovf;
+
+	return	malloc((size_t)nmemb * size);
+ovf:
+	errno	= ENOMEM;
+zero:
+	return	NULL;
+}
 
 
 /******************************************************************************

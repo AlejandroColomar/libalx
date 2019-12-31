@@ -15,7 +15,7 @@
  ******************************************************************************/
 /*
  * [[gnu::nonnull]] [[gnu::warn_unused_result]]
- * int	reallocs(void **restrict ptr, size_t size);
+ * int	reallocs(void **ptr, size_t size);
  *
  * Read  <libalx/base/stdlib/alloc/reallocs.h>  for documentation.
  */
@@ -25,14 +25,27 @@
  ******* headers **************************************************************
  ******************************************************************************/
 #include <cstddef>
-#include <cstdlib>
 
 #include "libalx/base/compiler/restrict.hpp"
+#include "libalx/base/compiler/unused.hpp"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+#define alx_reallocs(ptr, size)	(					\
+{									\
+	auto	ptr_	= (ptr);					\
+	void	*vp_;							\
+	int	err_;							\
+									\
+	vp_	= alx_reallocs__(*ptr_, size, &err_);			\
+	*ptr_	= static_cast<typeof(*ptr_)>(vp_);			\
+	alx_warn_unused_int(err_);					\
+}									\
+)
+
+
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 #define reallocs(ptr, nmemb)	alx_reallocs(ptr, nmemb)
@@ -45,9 +58,7 @@
 extern	"C"
 {
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	alx_reallocs	(void **restrict ptr, size_t size);
-[[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	alx_reallocs__	(void **restrict ptr, void *restrict vp, size_t size);
+void	*alx_reallocs__	(void *restrict ptr, size_t size, int *restrict error);
 }
 
 

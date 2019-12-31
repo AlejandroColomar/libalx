@@ -15,18 +15,30 @@
  ******************************************************************************/
 /*
  * [[gnu::nonnull]] [[gnu::warn_unused_result]]
- * int	mallocarrays(type **restrict ptr, ptrdiff_t nmemb);
+ * int	mallocarrays(type **ptr, ptrdiff_t nmemb);
  *
  * Safe & simple wrapper for `mallocarray()`.
  *
- * Features:
- * - Safely computes the element size (second argument to `mallocarray()`)
- *	so the user can't make mistakes.
- * - Returns non-zero on error.
- * - Doesn't cast
- * - The pointer stored in `*ptr` is always a valid pointer or NULL.
+ * PARAMETERS:
+ * ptr:		Memory will be allocated, and a pointer to it will be stored
+ *		in *ptr.
+ * nmemb:	Number of elements in the array.
  *
- * example:
+ * RETURN:
+ *	0:		OK.
+ *	ERRNO:		OK.  nmemb == 0.  *ptr set to NULL.
+ *	-ERRNO:		Failed.  errno set to ENOMEM.  *ptr set to NULL.
+ *
+ * FEATURES:
+ * - Safely computes the element size (second argument to `mallocarray()`).
+ * - *ptr is NULL on zero size allocation.
+ * - Fails safely if (nmemb < 0).
+ * - Fails safely if (nmemb * size) would overflow.
+ * - Doesn't cast.
+ * - The pointer stored in `*ptr` is always a valid pointer or NULL.
+ * - Returns non-zero if the resulting pointer is NULL.
+ *
+ * EXAMPLE:
  *	#define ALX_NO_PREFIX
  *	#include <libalx/base/stdlib/alloc/mallocarrays.h>
  *
@@ -45,35 +57,21 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <errno.h>
 #include <stddef.h>
-#include <stdint.h>
-#include <stdlib.h>
 
-#include "libalx/base/stdlib/alloc/mallocarray.h"
+#include "libalx/base/compiler/unused.h"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-/*
- * mallocarrays()
- *
- * ptr:		Memory will be allocated, and a pointer to it will be stored
- *		in *ptr.
- * nmemb:	Number of elements in the array.
- *
- * return:
- *	0:		OK.
- *	!= 0:		Failed.
- */
 #define alx_mallocarrays(ptr, nmemb)	(				\
 {									\
 	__auto_type	ptr_	= (ptr);				\
+	int		err_;						\
 									\
-	*ptr_	= alx_mallocarray(nmemb, sizeof(**ptr_));		\
-									\
-	!(*ptr_);							\
+	*ptr_	= alx_mallocarrays__(nmemb, sizeof(**ptr_), &err_);	\
+	alx_warn_unused_int(err_);					\
 }									\
 )
 
@@ -95,12 +93,39 @@
 
 
 /******************************************************************************
- ******* function prototypes **************************************************
+ ******* prototypes ***********************************************************
  ******************************************************************************/
+/*
+ * [[gnu::nonnull]] [[gnu::warn_unused_result]]
+ * int	alx_mallocarrays__(void **ptr, ptrdiff_t nmemb, size_t size);
+ *
+ * Helper function for `mallocarrays()`.
+ *
+ * PARAMETERS:
+ * ptr:		Memory will be allocated, and a pointer to it will be stored
+ *		in *ptr.
+ * nmemb:	Number of elements in the array.
+ * size:	Size of each element in the array.
+ *
+ * RETURN:
+ *	0:		OK.
+ *	ERRNO:		OK.  nmemb == 0.  *ptr set to NULL.
+ *	-ERRNO:		Failure.  errno set to ENOMEM.  *ptr set to NULL.
+ *
+ * FEATURES:
+ * - *ptr is NULL on zero size allocation.
+ * - Fails safely if (nmemb < 0).
+ * - Fails safely if (nmemb * size) would overflow.
+ * - Doesn't cast.
+ * - The pointer stored in `*ptr` is always a valid pointer or NULL.
+ * - Returns non-zero if the resulting pointer is NULL.
+ */
+__attribute__((malloc, nonnull, warn_unused_result))
+void	*alx_mallocarrays__	(ptrdiff_t nmemb, size_t size, int *error);
 
 
 /******************************************************************************
- ******* inline functions *****************************************************
+ ******* inline ***************************************************************
  ******************************************************************************/
 
 

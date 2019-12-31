@@ -15,7 +15,7 @@
  ******************************************************************************/
 /*
  * [[gnu::nonnull]] [[gnu::warn_unused_result]]
- * int	reallocfs(void **restrict ptr, size_t size);
+ * int	reallocfs(void **ptr, size_t size);
  *
  * Read  <libalx/base/stdlib/alloc/reallocfs.h>  for documentation.
  */
@@ -25,14 +25,27 @@
  ******* headers **************************************************************
  ******************************************************************************/
 #include <cstddef>
-#include <cstdlib>
 
 #include "libalx/base/compiler/restrict.hpp"
+#include "libalx/base/compiler/unused.hpp"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+#define alx_reallocfs(ptr, size)	(				\
+{									\
+	auto	ptr_	= (ptr);					\
+	void	*vp_;							\
+	int	err_;							\
+									\
+	vp_	= alx_reallocfs__(*ptr_, size, &err_);			\
+	*ptr_	= static_cast<typeof(*ptr_)>(vp_);			\
+	alx_warn_unused_int(err_);					\
+}									\
+)
+
+
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 #define reallocfs(ptr, size)	alx_reallocfs(ptr, size)
@@ -45,7 +58,8 @@
 extern	"C"
 {
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	alx_reallocfs	(void **restrict ptr, size_t size);
+void	*alx_reallocfs__	(void *restrict ptr, size_t size,
+				 int *restrict error);
 }
 
 

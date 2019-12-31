@@ -15,20 +15,29 @@
  ******************************************************************************/
 /*
  * [[gnu::nonnull]] [[gnu::warn_unused_result]]
- * int	reallocfs(void **restrict ptr, size_t size);
+ * int	reallocfs(void **ptr, size_t size);
  *
  * Safe & simple wrapper for `reallocf()`.
  * To be used for generic buffers of bytes, and not for arrays (use
  * `reallocarray()` family of functions for that purpose).
  *
- * Features:
+ * PARAMETERS:
+ * ptr:		Pointer to a pointer to the memory to be reallocated.
+ *		A pointer to the reallocated memory will be stored
+ *		in *ptr.
+ * size:	Size of the buffer (in bytes).
+ *
+ * RETURN:
+ *	0:		OK.
+ *	!= 0:		Failed.
+ *
+ * FEATURES:
  * - Returns non-zero on error.
  * - Doesn't cast.
- * - Upon failure, the passed pointer is freed, to ease error handling and to
- *	avoid memory leaks.
+ * - Upon failure, the passed pointer is freed.
  * - The pointer stored in `*ptr` is always a valid pointer or NULL.
  *
- * example:
+ * EXAMPLE:
  *	#define ALX_NO_PREFIX
  *	#include <libalx/base/stdlib/alloc/reallocfs.h>
  *
@@ -50,12 +59,28 @@
  ******* headers **************************************************************
  ******************************************************************************/
 #include <stddef.h>
-#include <stdlib.h>
+
+#include "libalx/base/compiler/unused.h"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+#define alx_reallocfs(ptr, size)	(				\
+{									\
+	__auto_type	ptr_	= (ptr);				\
+	int		err_;						\
+									\
+	*ptr_	= alx_reallocfs__(*ptr_, size, &err_);			\
+	alx_warn_unused_int(err_);					\
+}									\
+)
+
+
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define reallocfs(ptr, size)	alx_reallocfs(ptr, size)
+#endif
 
 
 /******************************************************************************
@@ -71,48 +96,14 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-/*
- * reallocfs()
- *
- * ptr:		Pointer to a pointer to the memory to be reallocated.
- *		A pointer to the reallocated memory will be stored
- *		in *ptr.
- * size:	Size of the buffer (in bytes).
- *
- * return:
- *	0:		OK.
- *	!= 0:		Failed.
- */
 __attribute__((nonnull, warn_unused_result))
-inline
-int	alx_reallocfs	(void **restrict ptr, size_t size);
-
-
-/******************************************************************************
- ******* always_inline ********************************************************
- ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, nonnull, warn_unused_result))
-inline
-int	reallocfs	(void **restrict ptr, size_t size)
-{
-	return	alx_reallocfs(ptr, size);
-}
-#endif
+void	*alx_reallocfs__	(void *restrict ptr, size_t size,
+				 int *restrict error);
 
 
 /******************************************************************************
  ******* inline ***************************************************************
  ******************************************************************************/
-inline
-int	alx_reallocfs	(void **restrict ptr, size_t size)
-{
-
-	*ptr	= reallocf(*ptr, size);
-
-	return	!*ptr;
-}
 
 
 /******************************************************************************
