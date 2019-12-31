@@ -40,32 +40,32 @@ functions (some of them may be implemented as macros; only when necessary).
 
 .. code-block:: c
 
-	[[gnu::nonnull]]
-	int	callocs(type **restrict ptr, size_t nmemb);
+	[[gnu::nonnull]] [[gnu::warn_unused_result]]
+	int	callocs(type **ptr, ptrdiff_t nmemb);
 
 	[[gnu::malloc]] [[gnu::warn_unused_result]]
 	void	*mallocarray(ptrdiff_t nmemb, size_t size);
 
 	[[gnu::nonnull]] [[gnu::warn_unused_result]]
-	int	mallocarrays(type **restrict ptr, ptrdiff_t nmemb);
+	int	mallocarrays(type **ptr, ptrdiff_t nmemb);
 
 	[[gnu::nonnull]] [[gnu::warn_unused_result]]
-	int	mallocs(void **restrict ptr, size_t size);
+	int	mallocs(type **ptr, size_t size);
 
 	[[gnu::warn_unused_result]]
 	void	*reallocarrayf(void *ptr, ptrdiff_t nmemb, size_t size);
 
 	[[gnu::nonnull]] [[gnu::warn_unused_result]]
-	int	reallocarrayfs(type **restrict ptr, ptrdiff_t nmemb);
+	int	reallocarrayfs(type **ptr, ptrdiff_t nmemb);
 
 	[[gnu::nonnull]][[gnu::warn_unused_result]]
-	int	reallocarrays(type **restrict ptr, ptrdiff_t nmemb);
+	int	reallocarrays(type **ptr, ptrdiff_t nmemb);
 
 	[[gnu::nonnull]] [[gnu::warn_unused_result]]
-	int	reallocfs(void **restrict ptr, size_t nmemb);
+	int	reallocfs(type **ptr, size_t size);
 
 	[[gnu::nonnull]] [[gnu::warn_unused_result]]
-	int	reallocs(void **restrict ptr, size_t nmemb);
+	int	reallocs(type **ptr, size_t size);
 
 To be able to use any of those functions, the corresponding header should be
 included.

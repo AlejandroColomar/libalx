@@ -22,20 +22,21 @@
  * `reallocarray()` family of functions for that purpose).
  *
  * PARAMETERS:
- * ptr:		Pointer to a pointer to the memory to be reallocated.
- *		A pointer to the reallocated memory will be stored
+ * ptr:		Memory will be allocated, and a pointer to it will be stored
  *		in *ptr.
  * size:	Size of the buffer (in bytes).
  *
  * RETURN:
  *	0:		OK.
- *	!= 0:		Failed.
+ *	ERRNO:		OK.  nmemb == 0.  *ptr = NULL.
+ *	-ERRNO:		Failed.  errno = ENOMEM.  *ptr = NULL.
  *
  * FEATURES:
- * - Returns non-zero on error.
+ * - *ptr is NULL on zero size allocation.
  * - Doesn't cast.
  * - Upon failure, the passed pointer is freed.
  * - The pointer stored in `*ptr` is always a valid pointer or NULL.
+ * - Returns non-zero if the resulting pointer is NULL.
  *
  * EXAMPLE:
  *	#define ALX_NO_PREFIX
@@ -96,6 +97,27 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
+/*
+ * [[gnu::nonnull]] [[gnu::warn_unused_result]]
+ * void	*alx_reallocfs__(void *restrict ptr, size_t size, int *restrict error);
+ *
+ * Helper function for `reallocfs()`.
+ *
+ * PARAMETERS:
+ * ptr:		Pointer to allocated memory (or NULL).
+ * size:	Size of the buffer (in bytes).
+ * error:	Variable to pass the error code (through a pointer to it).
+ *
+ * RETURN:
+ *	0:		OK.
+ *	ERRNO:		OK.  nmemb == 0.  return NULL.
+ *	-ERRNO:		Failure.  errno = ENOMEM.  return NULL.
+ *
+ * FEATURES:
+ * - Returns NULL on zero size allocation.
+ * - Upon failure, the passed pointer is freed.
+ * - error is non-zero if the result is NULL.
+ */
 __attribute__((nonnull, warn_unused_result))
 void	*alx_reallocfs__	(void *restrict ptr, size_t size,
 				 int *restrict error);

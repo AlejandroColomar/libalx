@@ -26,8 +26,8 @@
  *
  * RETURN:
  *	0:		OK.
- *	ERRNO:		OK.  nmemb == 0.  *ptr set to NULL.
- *	-ERRNO:		Failed.  errno set to ENOMEM.  *ptr set to NULL.
+ *	ERRNO:		OK.  nmemb == 0.  *ptr = NULL.
+ *	-ERRNO:		Failed.  errno = ENOMEM.  *ptr = NULL.
  *
  * FEATURES:
  * - Safely computes the element size (second argument to `calloc()`).
@@ -96,7 +96,7 @@
  ******* prototypes ***********************************************************
  ******************************************************************************/
 /*
- * [[gnu::nonnull]] [[gnu::warn_unused_result]]
+ * [[gnu::malloc]] [[gnu::nonnull]] [[gnu::warn_unused_result]]
  * void	*alx_callocs__(ptrdiff_t nmemb, size_t size, int *error);
  *
  * Helper function for `callocs()`.

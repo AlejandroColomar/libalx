@@ -28,8 +28,8 @@
  *
  * RETURN:
  *	0:		OK.
- *	ERRNO:		OK.  nmemb == 0.  *ptr set to NULL.
- *	-ERRNO:		Failed.  errno set to ENOMEM.  *ptr set to NULL.
+ *	ERRNO:		OK.  nmemb == 0.  *ptr = NULL.
+ *	-ERRNO:		Failed.  errno = ENOMEM.  *ptr = NULL.
  *
  * FEATURES:
  * - *ptr is NULL on zero size allocation.
@@ -94,6 +94,29 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
+/*
+ * [[gnu::malloc]] [[gnu::nonnull]] [[gnu::warn_unused_result]]
+ * void	*alx_mallocs__(size_t size, int *error);
+ *
+ * Helper function for `mallocs()`.
+ *
+ * PARAMETERS:
+ * size:	Size of the buffer (in bytes).
+ * error:	Variable to pass the error code (through a pointer to it).
+ *
+ * RETURN:
+ *	!= NULL:	OK.
+ *	NULL:		Failed  OR  zero size allocation.
+ *
+ * ERRORS:
+ *	0:		OK.
+ *	ERRNO:		OK.  nmemb == 0.  return NULL.
+ *	-ERRNO:		Failure.  errno = ENOMEM.  return NULL.
+ *
+ * FEATURES:
+ * - Returns NULL on zero size allocation.
+ * - error is non-zero if the result is NULL.
+ */
 __attribute__((malloc, nonnull, warn_unused_result))
 void	*alx_mallocs__	(size_t size, int *error);
 

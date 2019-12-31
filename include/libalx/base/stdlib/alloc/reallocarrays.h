@@ -20,15 +20,14 @@
  * Safe & simple wrapper for `reallocarray()`.
  *
  * PARAMETERS:
- * ptr:		Pointer to a pointer to the memory to be reallocated.
- *		A pointer to the reallocated memory will be stored
+ * ptr:		Memory will be allocated, and a pointer to it will be stored
  *		in *ptr.
  * nmemb:	Number of elements in the array.
  *
  * RETURN:
  *	0:		OK.
- *	ERRNO:		OK.  nmemb == 0.  *ptr set to NULL.
- *	-ERRNO:		Failed.  errno set to ENOMEM.  *ptr untouched.
+ *	ERRNO:		OK.  nmemb == 0.  *ptr = NULL.
+ *	-ERRNO:		Failed.  errno = ENOMEM.  *ptr is untouched.
  *
  * FEATURES:
  * - Safely computes the element size (second argument to `reallocarray()`).
@@ -101,29 +100,28 @@
  ******************************************************************************/
 /*
  * [[gnu::nonnull]] [[gnu::warn_unused_result]]
- * int	alx_reallocarrays__(void **ptr, ptrdiff_t nmemb, size_t size);
+ * void	*alx_reallocarrays__(void *restrict ptr, ptrdiff_t nmemb, size_t size,
+ *			     int *restrict error);
  *
  * Helper function for `reallocarrays()`.
  *
  * PARAMETERS:
- * ptr:		Memory will be allocated, and a pointer to it will be stored
- *		in *ptr.
+ * ptr:		Pointer to allocated memory (or NULL).
  * nmemb:	Number of elements in the array.
  * size:	Size of each element in the array.
+ * error:	Variable to pass the error code (through a pointer to it).
  *
  * RETURN:
  *	0:		OK.
- *	ERRNO:		OK.  nmemb == 0.  *ptr set to NULL.
- *	-ERRNO:		Failed.  errno set to ENOMEM.  *ptr untouched.
+ *	ERRNO:		OK.  nmemb == 0.  return NULL.
+ *	-ERRNO:		Failure.  errno = ENOMEM.  return ptr.
  *
  * FEATURES:
- * - *ptr is NULL on zero size reallocation.
+ * - Returns NULL on zero size allocation.
  * - Fails safely if (nmemb < 0).
  * - Fails safely if (nmemb * size) would overflow.
- * - Doesn't cast.
- * - Upon failure, the pointer is untouched.
- * - The pointer stored in `*ptr` is always a valid pointer or NULL.
- * - Returns non-zero if the resulting pointer is NULL or untouched.
+ * - Upon failure, the pointer is returned untouched.
+ * - error is non-zero if the resulting pointer is NULL or untouched.
  */
 __attribute__((nonnull, warn_unused_result))
 void	*alx_reallocarrays__	(void *restrict ptr, ptrdiff_t nmemb,
