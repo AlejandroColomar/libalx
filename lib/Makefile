@@ -33,6 +33,7 @@ BASE_OBJ	=							\
 		$(TMP_DIR)/base/stdio/seekc.o				\
 		$(TMP_DIR)/base/stdio/sscan.o				\
 		$(TMP_DIR)/base/stdlib/alloc/callocs.o			\
+		$(TMP_DIR)/base/stdlib/alloc/frees.o			\
 		$(TMP_DIR)/base/stdlib/alloc/mallocarray.o		\
 		$(TMP_DIR)/base/stdlib/alloc/mallocarrays.o		\
 		$(TMP_DIR)/base/stdlib/alloc/mallocs.o			\

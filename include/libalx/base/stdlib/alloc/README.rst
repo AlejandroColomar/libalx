@@ -1,20 +1,21 @@
 
-	Copyright (C) 2019	Alejandro Colomar Andrés
-
-	SPDX-License-Identifier:	LGPL-2.0-only
+:Author:	Alejandro Colomar Andrés
 ________________________________________________________________________________
+
 
 <libalx/base/stdlib/alloc/*>
 ============================
 
-The following functions are added to the C / POSIX / GNU / BSD allocation
-functions (some of them may be implemented as macros; only when necessary).
+
+These functions and macros provide a simpler and safer interface that allows
+the user to allocate memory in a single short statement without having to add
+checks for all the different possible errors.
 
 
 1) Headers
 ----------
 
-.. code-block:: c
+::
 
 	<libalx/base/stdlib/alloc/callocs.h>
 	<libalx/base/stdlib/alloc/callocs.hpp>
@@ -34,11 +35,13 @@ functions (some of them may be implemented as macros; only when necessary).
 	<libalx/base/stdlib/alloc/reallocfs.hpp>
 	<libalx/base/stdlib/alloc/reallocs.h>
 	<libalx/base/stdlib/alloc/reallocs.hpp>
+	<libalx/base/stdlib/alloc/frees.h>
+	<libalx/base/stdlib/alloc/frees.hpp>
 
 2) Functions
 ------------
 
-.. code-block:: c
+::
 
 	[[gnu::nonnull]] [[gnu::warn_unused_result]]
 	int	callocs(type **ptr, ptrdiff_t nmemb);
@@ -67,13 +70,20 @@ functions (some of them may be implemented as macros; only when necessary).
 	[[gnu::nonnull]] [[gnu::warn_unused_result]]
 	int	reallocs(type **ptr, size_t size);
 
+	[[gnu::nonnull]]
+	void	frees(type **ptr);
+
 To be able to use any of those functions, the corresponding header should be
 included.
 
-3) When to use each of the functions
-------------------------------------
 
-Functions ending in ``s`` should always be preferred.
+3) Description
+--------------
+
+Functions ending in ``s`` should always be preferred.  These are implemented
+as macros.  These macros use ``sizeof()`` internally and safely assign to
+the pointer as needed, avoiding unsafe usage of memory allocation functions.
+An error code is returned to the user; this error code shall be used.
 
 Reallocation functions ending in ``f`` (or ``fs``) free the memory upon
 failure to ease error handling.
@@ -81,6 +91,10 @@ failure to ease error handling.
 Functions containing ``array`` (and ``callocs()``) should be used when
 allocating arrays, or single elements (arrays of size 1).  The other funtions
 should be used when and only when dealing with buffers of bytes.
+
+``frees()`` stores ``NULL`` in the pointer so that it can be freed more than
+once safely.
+
 
 4) More info
 ------------

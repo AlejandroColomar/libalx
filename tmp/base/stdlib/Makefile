@@ -18,6 +18,7 @@ DIRS		=							\
 
 OBJ		=							\
 		alloc/callocs.o						\
+		alloc/frees.o						\
 		alloc/mallocarray.o					\
 		alloc/mallocarrays.o					\
 		alloc/mallocs.o						\
@@ -49,6 +50,11 @@ ALLOC_CALLOCS_INC	=						\
 		$(INC_DIR)/libalx/base/stdlib/alloc/callocs.h
 ALLOC_CALLOCS_SRC	=						\
 		$(SRC_DIR)/base/stdlib/alloc/callocs.c
+
+ALLOC_FREES_INC	=							\
+		$(INC_DIR)/libalx/base/stdlib/alloc/frees.h
+ALLOC_FREES_SRC	=							\
+		$(SRC_DIR)/base/stdlib/alloc/frees.c
 
 ALLOC_MALLOCARRAY_INC	=						\
 		$(INC_DIR)/libalx/base/assert/assert.h			\
@@ -227,6 +233,9 @@ strto:
 
 alloc/callocs.a.s: $(ALLOC_CALLOCS_SRC) $(ALLOC_CALLOCS_INC)
 alloc/callocs.so.s: $(ALLOC_CALLOCS_SRC) $(ALLOC_CALLOCS_INC)
+
+alloc/frees.a.s: $(ALLOC_FREES_SRC) $(ALLOC_FREES_INC)
+alloc/frees.so.s: $(ALLOC_FREES_SRC) $(ALLOC_FREES_INC)
 
 alloc/mallocarray.a.s: $(ALLOC_MALLOCARRAY_SRC) $(ALLOC_MALLOCARRAY_INC)
 alloc/mallocarray.so.s: $(ALLOC_MALLOCARRAY_SRC) $(ALLOC_MALLOCARRAY_INC)
