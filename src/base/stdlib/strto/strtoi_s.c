@@ -114,6 +114,10 @@ int	alx_strtol_status	(const char *restrict str,
 
 	status	= 0;
 
+	if (errno_after == EINVAL) {
+		status	= -EINVAL;
+		goto out;
+	}
 	if (str == endptr) {
 		status	= -ECANCELED;
 		goto out;
@@ -126,7 +130,7 @@ int	alx_strtol_status	(const char *restrict str,
 		goto out;
 	}
 
-	/* EINVAL or ERANGE */
+	/* should be ERANGE */
 	if (errno_after) {
 		status	= errno_after;
 		goto out;
