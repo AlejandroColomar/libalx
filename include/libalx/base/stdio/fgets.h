@@ -15,7 +15,6 @@
  ******************************************************************************/
 #include <stddef.h>
 #include <stdio.h>
-#include <string.h>
 
 
 /******************************************************************************
@@ -37,7 +36,6 @@
  ******* prototypes ***********************************************************
  ******************************************************************************/
 __attribute__((nonnull(1, 3)))
-inline
 int	alx_fgets_nonl	(char buf[restrict /*bufsiz*/], int bufsiz,
 			 FILE *restrict stream, ptrdiff_t *restrict len);
 
@@ -60,27 +58,6 @@ int	fgets_nonl	(char buf[restrict /*bufsiz*/], int bufsiz,
 /******************************************************************************
  ******* inline ***************************************************************
  ******************************************************************************/
-inline
-int	alx_fgets_nonl	(char buf[restrict /*bufsiz*/], int bufsiz,
-			 FILE *restrict stream, ptrdiff_t *restrict len)
-{
-	ptrdiff_t	l;
-
-	if (!fgets(buf, bufsiz, stream))
-		goto err;
-
-	l	= strlen(buf);
-	if (l > 0  &&  buf[l-1] == '\n')
-		buf[--l] = '\0';
-	if (len)
-		*len	= l;
-
-	return	!l;
-err:
-	if (len)
-		*len	= 0;
-	return	-1;
-}
 
 
 /******************************************************************************

@@ -1,5 +1,5 @@
 /******************************************************************************
- *	Copyright (C) 2017	Alejandro Colomar Andrés		      *
+ *	Copyright (C) 2019	Alejandro Colomar Andrés		      *
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
@@ -9,8 +9,10 @@
  ******************************************************************************/
 #include "libalx/base/stdio/fgets.h"
 
+#include <errno.h>
 #include <stddef.h>
 #include <stdio.h>
+#include <string.h>
 
 
 /******************************************************************************
@@ -31,9 +33,37 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-extern
 int	alx_fgets_nonl	(char buf[restrict /*bufsiz*/], int bufsiz,
-			 FILE *restrict stream, ptrdiff_t *restrict len);
+			 FILE *restrict stream, ptrdiff_t *restrict len)
+{
+	ptrdiff_t	l;
+	int		status;
+
+	status	= 0;
+	if (!fgets(buf, bufsiz, stream))
+		goto err;
+
+	l	= strnlen(buf, bufsiz);
+	if (!l) {
+		status	= ECANCELED;
+		goto out;
+	}
+	if (buf[l-1] != '\n') {
+		status	= ENOBUFS;
+		goto out;
+	}
+	buf[--l] = '\0';
+
+out:
+	if (len)
+		*len	= l;
+
+	return	status;
+err:
+	if (len)
+		*len	= 0;
+	return	-errno;
+}
 
 
 /******************************************************************************
