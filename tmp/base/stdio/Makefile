@@ -17,6 +17,7 @@ DIRS		=							\
 
 OBJ		=							\
 		fgets.o							\
+		freads.o						\
 		get.o							\
 		printf/b.o						\
 		printf/sbprintf.o					\
@@ -28,6 +29,12 @@ FGETS_INC	=							\
 		$(INC_DIR)/libalx/base/stdio/fgets.h
 FGETS_SRC	=							\
 		$(SRC_DIR)/base/stdio/fgets.c
+
+FREADS_INC	=							\
+		$(INC_DIR)/libalx/base/assert/assert.h			\
+		$(INC_DIR)/libalx/base/stdio/freads.h
+FREADS_SRC	=							\
+		$(SRC_DIR)/base/stdio/freads.c
 
 GET_INC		=							\
 		$(INC_DIR)/libalx/base/compiler/size.h			\
@@ -93,6 +100,9 @@ printf:
 
 fgets.a.s: $(FGETS_SRC) $(FGETS_INC)
 fgets.so.s: $(FGETS_SRC) $(FGETS_INC)
+
+freads.a.s: $(FREADS_SRC) $(FREADS_INC)
+freads.so.s: $(FREADS_SRC) $(FREADS_INC)
 
 get.a.s: $(GET_SRC) $(GET_INC)
 get.so.s: $(GET_SRC) $(GET_INC)
