@@ -29,6 +29,7 @@
  ******************************************************************************/
 extern	"C"
 {
+[[gnu::nonnull(2, 3)]]
 int	alx_freads	(ptrdiff_t bufsiz, char *restrict buf,
 			 FILE *restrict stream, ptrdiff_t *restrict len);
 }

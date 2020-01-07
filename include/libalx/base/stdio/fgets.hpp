@@ -29,6 +29,7 @@
  ******************************************************************************/
 extern	"C"
 {
+[[gnu::nonnull(1, 3)]]
 int	alx_fgets_nonl	(char *restrict buf, int bufsiz, FILE *restrict stream,
 			 ptrdiff_t *restrict len);
 }
