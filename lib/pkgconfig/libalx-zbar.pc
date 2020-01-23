@@ -1,7 +1,7 @@
 Name: libalx-zbar
 Description: The libalx C/C++ library (zbar extension)
 URL: https://github.com/alejandro-colomar/libalx
-Version: 1~b9
+Version: 1~b10
 Requires:
 Requires.private: zbar libalx-base
 
