@@ -13,6 +13,7 @@
 # dependencies
 
 DIRS		=							\
+		memchr							\
 		strcat							\
 		strchr							\
 		strcpy							\
@@ -20,6 +21,7 @@ DIRS		=							\
 		strstr
 
 OBJ		=							\
+		memchr/memchrend.o					\
 		strcat/strscat.o					\
 		strchr/strcasechr.o					\
 		strchr/strcasechrnul.o					\
@@ -46,6 +48,11 @@ OBJ		=							\
 
 OBJ_TST		=							\
 		strgrep-test.o
+
+MEMCHR_END_INC	=							\
+		$(INC_DIR)/libalx/base/string/memchr/memchrend.h
+MEMCHR_END_SRC	=							\
+		$(SRC_DIR)/base/string/memchr/memchrend.c
 
 STRCAT_S_INC	=							\
 		$(INC_DIR)/libalx/base/string/strcat/strscat.h
@@ -198,6 +205,9 @@ $(DIRS):
 	@echo	"	CC	libalx/tmp/base/string/$@"
 	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
 
+
+memchr/memchrend.a.s: $(MEMCHR_END_SRC) $(MEMCHR_END_INC)
+memchr/memchrend.so.s: $(MEMCHR_END_SRC) $(MEMCHR_END_INC)
 
 strcat/strscat.a.s: $(STRCAT_S_SRC) $(STRCAT_S_INC)
 strcat/strscat.so.s: $(STRCAT_S_SRC) $(STRCAT_S_INC)

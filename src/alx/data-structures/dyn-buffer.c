@@ -78,14 +78,17 @@ void	alx_dynbuf_deinit	(struct Alx_Dyn_Buffer *buf)
 int	alx_dynbuf_write	(struct Alx_Dyn_Buffer *buf, size_t offset,
 				 const void *data, size_t size)
 {
-	size_t	written;
+	size_t		written;
+	unsigned char	*p;
+
+	p	= buf->data;
 
 	while ((size + offset) > buf->size) {
 		if (alx_dynbuf_grow(buf))
 			return	ENOMEM;
 	}
 
-	memmove(buf->data + offset, data, size);
+	memmove(p + offset, data, size);
 	written	= size + offset;
 	if (written > buf->written)
 		buf->written	= written;
@@ -96,16 +99,35 @@ int	alx_dynbuf_write	(struct Alx_Dyn_Buffer *buf, size_t offset,
 int	alx_dynbuf_read		(const struct Alx_Dyn_Buffer *buf,
 				 size_t offset, void *data, size_t size)
 {
-	size_t	sz;
+	size_t		sz;
+	unsigned char	*p;
+
+	p	= buf->data;
 
 	if (offset > buf->size)
 		return	EFAULT;
 	sz	= ALX_MIN(size, buf->size - offset);
-	memmove(data, buf->data + offset, sz);
+	memmove(data, p + offset, sz);
 
 	if (size  <  buf->size - offset)
 		return	ENOBUFS;
 	return	0;
+}
+
+void	alx_dynbuf_consume	(const struct Alx_Dyn_Buffer *buf, size_t size)
+{
+	size_t		sz;
+	unsigned char	*p;
+
+	p	= buf->data;
+
+	if (size >= buf->written) {
+		buf->written	= 0;
+		return;
+	}
+
+	buf->written	-= size;
+	memmove(p, p + size, buf->written);
 }
 
 int	alx_dynbuf_resize	(struct Alx_Dyn_Buffer *buf, size_t size)

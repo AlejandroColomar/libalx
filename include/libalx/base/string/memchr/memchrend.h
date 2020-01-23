@@ -1,5 +1,5 @@
 /******************************************************************************
- *	Copyright (C) 2019	Alejandro Colomar Andrés		      *
+ *	Copyright (C) 2020	Alejandro Colomar Andrés		      *
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
@@ -7,62 +7,19 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/alx/data-structures/dyn-buffer.hpp */
-
-
-/******************************************************************************
- ******* about ****************************************************************
- ******************************************************************************/
-/*
- * Dynamic buffer
- *
- * Read  <libalx/alx/data-structures/dyn-buffer.h>  for documentation.
- */
+#pragma once	/* libalx/base/string/memchr/memchrend.h */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <cstddef>
+#include <stddef.h>
+#include <string.h>
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-
-
-/******************************************************************************
- ******* extern "C" ***********************************************************
- ******************************************************************************/
-struct	Alx_Dyn_Buffer {
-	void	*data;
-	size_t	size;
-	size_t	written;
-};
-
-extern	"C"
-{
-[[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_dynbuf_init		(struct Alx_Dyn_Buffer **buf);
-void	alx_dynbuf_deinit	(struct Alx_Dyn_Buffer *buf);
-[[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_dynbuf_write	(struct Alx_Dyn_Buffer *buf, size_t offset,
-				 const void *data, size_t size);
-[[gnu::nonnull]]
-int	alx_dynbuf_read		(const struct Alx_Dyn_Buffer *buf,
-				 size_t offset, void *data, size_t size);
-[[gnu::nonnull]]
-void	alx_dynbuf_consume	(const struct Alx_Dyn_Buffer *buf, size_t size);
-[[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_dynbuf_resize	(struct Alx_Dyn_Buffer *buf, size_t size);
-}
-
-
-/******************************************************************************
- ******* namespace ************************************************************
- ******************************************************************************/
-namespace alx {
-namespace CV {
 
 
 /******************************************************************************
@@ -78,13 +35,43 @@ namespace CV {
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
+__attribute__((nonnull, pure))
+inline
+ptrdiff_t alx_memchrend		(ptrdiff_t size,
+				 const char ptr[static restrict size],
+				 char c);
 
 
 /******************************************************************************
- ******* namespace ************************************************************
+ ******* always_inline ********************************************************
  ******************************************************************************/
-}	/* namespace CV */
-}	/* namespace alx */
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+__attribute__((always_inline, nonnull, pure))
+inline
+ptrdiff_t memchrend		(ptrdiff_t size,
+				 const char ptr[static restrict size],
+				 char c)
+{
+	return	alx_memchrend(size, ptr, c);
+}
+#endif
+
+
+/******************************************************************************
+ ******* inline ***************************************************************
+ ******************************************************************************/
+inline
+ptrdiff_t alx_memchrend		(ptrdiff_t size,
+				 const char ptr[static restrict size],
+				 char c)
+{
+	const unsigned char	*p = memchr(ptr, c, size);
+
+	if (!p)
+		return	size - 1;
+	return	p - ptr;
+}
 
 
 /******************************************************************************

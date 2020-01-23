@@ -58,6 +58,7 @@ BASE_OBJ	=							\
 		$(TMP_DIR)/base/stdlib/strto/strtoi_s.o			\
 		$(TMP_DIR)/base/stdlib/strto/strtou_s.o			\
 		$(TMP_DIR)/base/stdlib/swap.o				\
+		$(TMP_DIR)/base/string/memchr/memchrend.o		\
 		$(TMP_DIR)/base/string/strcat/strscat.o			\
 		$(TMP_DIR)/base/string/strchr/strcasechr.o		\
 		$(TMP_DIR)/base/string/strchr/strcasechrnul.o		\

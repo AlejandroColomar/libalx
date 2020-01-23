@@ -1,5 +1,5 @@
 /******************************************************************************
- *	Copyright (C) 2019	Alejandro Colomar Andrés		      *
+ *	Copyright (C) 2020	Alejandro Colomar Andrés		      *
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
@@ -7,17 +7,7 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/alx/data-structures/dyn-buffer.hpp */
-
-
-/******************************************************************************
- ******* about ****************************************************************
- ******************************************************************************/
-/*
- * Dynamic buffer
- *
- * Read  <libalx/alx/data-structures/dyn-buffer.h>  for documentation.
- */
+#pragma once	/* libalx/base/string/memchr/memchrend.hpp */
 
 
 /******************************************************************************
@@ -25,36 +15,26 @@
  ******************************************************************************/
 #include <cstddef>
 
+#include "libalx/base/stddef/restrict.hpp"
+
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define memchrend(size, ptr, c)		alx_memchrend(size, ptr, c)
+#endif
 
 
 /******************************************************************************
  ******* extern "C" ***********************************************************
  ******************************************************************************/
-struct	Alx_Dyn_Buffer {
-	void	*data;
-	size_t	size;
-	size_t	written;
-};
-
 extern	"C"
 {
-[[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_dynbuf_init		(struct Alx_Dyn_Buffer **buf);
-void	alx_dynbuf_deinit	(struct Alx_Dyn_Buffer *buf);
-[[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_dynbuf_write	(struct Alx_Dyn_Buffer *buf, size_t offset,
-				 const void *data, size_t size);
-[[gnu::nonnull]]
-int	alx_dynbuf_read		(const struct Alx_Dyn_Buffer *buf,
-				 size_t offset, void *data, size_t size);
-[[gnu::nonnull]]
-void	alx_dynbuf_consume	(const struct Alx_Dyn_Buffer *buf, size_t size);
-[[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_dynbuf_resize	(struct Alx_Dyn_Buffer *buf, size_t size);
+[[gnu::nonnull]][[gnu::pure]]
+ptrdiff_t alx_memchrend	(ptrdiff_t size, const char *restrict ptr,
+				 char c);
 }
 
 
@@ -62,7 +42,6 @@ int	alx_dynbuf_resize	(struct Alx_Dyn_Buffer *buf, size_t size);
  ******* namespace ************************************************************
  ******************************************************************************/
 namespace alx {
-namespace CV {
 
 
 /******************************************************************************
@@ -83,7 +62,6 @@ namespace CV {
 /******************************************************************************
  ******* namespace ************************************************************
  ******************************************************************************/
-}	/* namespace CV */
 }	/* namespace alx */
 
 
