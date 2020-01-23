@@ -292,23 +292,18 @@ install:
 	$(Q)$(MAKE)	install_base
 	$(Q)$(MAKE)	install_alx
 	$(Q)$(MAKE)	install_extra
+	$(Q)$(MAKE)	install_sh
+	$(Q)$(MAKE)	install_py
 	$(Q)$(MAKE)	conf_ld
 	@echo	"	Done"
 	@echo
 
 PHONY += install_base
 install_base:
-	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/base/"
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/base/
 	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/base/*"
 	$(Q)cp -rf $(v)		./include/libalx/base/*			\
 					$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/base/
-	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/sh/"
-	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/sh/
-	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/sh/*"
-	$(Q)cp -rf $(v)		./lib/libalx/sh/*			\
-					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/sh/
-	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/"
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/
 	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/*"
 	$(Q)cp -rf $(v)		./share/libalx/*			\
@@ -318,7 +313,6 @@ install_base:
 
 PHONY += install_alx
 install_alx:
-	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/alx/"
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/alx/
 	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/alx/*"
 	$(Q)cp -r -f $(v)	./include/libalx/alx/*			\
@@ -333,12 +327,10 @@ install_alx:
 
 PHONY += install_extra
 install_extra:
-	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_ETC_DIR)/libalx/extra/"
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_ETC_DIR)/libalx/extra/
 	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_ETC_DIR)/libalx/extra/*"
 	$(Q)cp -r -f $(v)	./etc/libalx/extra/*			\
 					$(DESTDIR)/$(INSTALL_ETC_DIR)/libalx/extra/
-	@echo	"	MKDIR	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/extra/"
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/extra/
 	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/extra/*"
 	$(Q)cp -r -f $(v)	./include/libalx/extra/*		\
@@ -349,6 +341,22 @@ install_extra:
 	$(Q)$(MAKE)	libalx-ncurses.a libalx-ncurses.so libalx-ncurses.pc
 	$(Q)$(MAKE)	libalx-ocr.a	libalx-ocr.so	libalx-ocr.pc
 	$(Q)$(MAKE)	libalx-zbar.a	libalx-zbar.so	libalx-zbar.pc
+	@echo
+
+PHONY += install_sh
+install_sh:
+	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/sh/
+	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/sh/*"
+	$(Q)cp -rf $(v)		./lib/libalx/sh/*			\
+					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/sh/
+	@echo
+
+PHONY += install_py
+install_py:
+	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/py/
+	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/py/*"
+	$(Q)cp -rf $(v)		./lib/libalx/py/*			\
+					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/py/
 	@echo
 
 PHONY += conf_ld
