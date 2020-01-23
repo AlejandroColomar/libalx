@@ -37,9 +37,7 @@
  ******************************************************************************/
 __attribute__((nonnull, pure))
 inline
-ptrdiff_t alx_memchrend		(ptrdiff_t size,
-				 const char ptr[static restrict size],
-				 char c);
+size_t	alx_memchrend	(const void *ptr, unsigned char c, size_t size);
 
 
 /******************************************************************************
@@ -49,11 +47,9 @@ ptrdiff_t alx_memchrend		(ptrdiff_t size,
 #if defined(ALX_NO_PREFIX)
 __attribute__((always_inline, nonnull, pure))
 inline
-ptrdiff_t memchrend		(ptrdiff_t size,
-				 const char ptr[static restrict size],
-				 char c)
+size_t	memchrend	(const void *ptr, unsigned char c, size_t size)
 {
-	return	alx_memchrend(size, ptr, c);
+	return	alx_memchrend(ptr, c, size);
 }
 #endif
 
@@ -62,15 +58,14 @@ ptrdiff_t memchrend		(ptrdiff_t size,
  ******* inline ***************************************************************
  ******************************************************************************/
 inline
-ptrdiff_t alx_memchrend		(ptrdiff_t size,
-				 const char ptr[static restrict size],
-				 char c)
+size_t	alx_memchrend	(const void *ptr, unsigned char c, size_t size)
 {
-	const unsigned char	*p = memchr(ptr, c, size);
+	const unsigned char	*p0 = ptr;
+	const unsigned char	*pc = memchr(ptr, c, size);
 
-	if (!p)
+	if (!pc)
 		return	size - 1;
-	return	p - ptr;
+	return	pc - p0;
 }
 
 

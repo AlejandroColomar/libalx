@@ -25,6 +25,8 @@
  ******************************************************************************/
 #include <cstddef>
 
+#include "libalx/base/compiler/restrict.hpp"
+
 
 /******************************************************************************
  ******* macros ***************************************************************
@@ -46,13 +48,15 @@ extern	"C"
 int	alx_dynbuf_init		(struct Alx_Dyn_Buffer **buf);
 void	alx_dynbuf_deinit	(struct Alx_Dyn_Buffer *buf);
 [[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_dynbuf_write	(struct Alx_Dyn_Buffer *buf, size_t offset,
-				 const void *data, size_t size);
+int	alx_dynbuf_write	(struct Alx_Dyn_Buffer *restrict buf,
+				 size_t offset,
+				 const void *restrict data, size_t size);
 [[gnu::nonnull]]
-int	alx_dynbuf_read		(const struct Alx_Dyn_Buffer *buf,
-				 size_t offset, void *data, size_t size);
+int	alx_dynbuf_read		(void *restrict data, size_t size,
+				 const struct Alx_Dyn_Buffer *restrict buf,
+				 size_t offset);
 [[gnu::nonnull]]
-void	alx_dynbuf_consume	(const struct Alx_Dyn_Buffer *buf, size_t size);
+void	alx_dynbuf_consume	(struct Alx_Dyn_Buffer *buf, size_t size);
 [[gnu::nonnull]][[gnu::warn_unused_result]]
 int	alx_dynbuf_resize	(struct Alx_Dyn_Buffer *buf, size_t size);
 }

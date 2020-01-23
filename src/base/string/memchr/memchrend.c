@@ -31,9 +31,7 @@
  ******* global functions *****************************************************
  ******************************************************************************/
 extern
-ptrdiff_t alx_memchrend		(ptrdiff_t size,
-				 const char ptr[static restrict size],
-				 char c);
+size_t	alx_memchrend	(const void *ptr, unsigned char c, size_t size);
 
 
 /******************************************************************************

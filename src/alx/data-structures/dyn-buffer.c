@@ -75,8 +75,9 @@ void	alx_dynbuf_deinit	(struct Alx_Dyn_Buffer *buf)
 	free(buf);
 }
 
-int	alx_dynbuf_write	(struct Alx_Dyn_Buffer *buf, size_t offset,
-				 const void *data, size_t size)
+int	alx_dynbuf_write	(struct Alx_Dyn_Buffer *restrict buf,
+				 size_t offset,
+				 const void *restrict data, size_t size)
 {
 	size_t		written;
 	unsigned char	*p;
@@ -96,8 +97,9 @@ int	alx_dynbuf_write	(struct Alx_Dyn_Buffer *buf, size_t offset,
 	return	0;
 }
 
-int	alx_dynbuf_read		(const struct Alx_Dyn_Buffer *buf,
-				 size_t offset, void *data, size_t size)
+int	alx_dynbuf_read		(void *restrict data, size_t size,
+				 const struct Alx_Dyn_Buffer *restrict buf,
+				 size_t offset)
 {
 	size_t		sz;
 	unsigned char	*p;
@@ -114,9 +116,8 @@ int	alx_dynbuf_read		(const struct Alx_Dyn_Buffer *buf,
 	return	0;
 }
 
-void	alx_dynbuf_consume	(const struct Alx_Dyn_Buffer *buf, size_t size)
+void	alx_dynbuf_consume	(struct Alx_Dyn_Buffer *buf, size_t size)
 {
-	size_t		sz;
 	unsigned char	*p;
 
 	p	= buf->data;

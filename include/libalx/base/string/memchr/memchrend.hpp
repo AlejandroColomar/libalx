@@ -15,15 +15,13 @@
  ******************************************************************************/
 #include <cstddef>
 
-#include "libalx/base/stddef/restrict.hpp"
-
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define memchrend(size, ptr, c)		alx_memchrend(size, ptr, c)
+#define memchrend(ptr, c, size)		alx_memchrend(ptr, c, size)
 #endif
 
 
@@ -33,8 +31,7 @@
 extern	"C"
 {
 [[gnu::nonnull]][[gnu::pure]]
-ptrdiff_t alx_memchrend	(ptrdiff_t size, const char *restrict ptr,
-				 char c);
+size_t	alx_memchrend	(const void *ptr, unsigned char c, size_t size);
 }
 
 
