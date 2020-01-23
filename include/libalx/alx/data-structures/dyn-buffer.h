@@ -129,6 +129,16 @@ int	alx_dynbuf_read		(const struct Alx_Dyn_Buffer *buf,
 				 size_t offset, void *data, size_t size);
 
 /*
+ * Consume part of the buffer.
+ * The buffer data is moved down `size` bytes.
+ *
+ * buf:		Pointer to a buffer.
+ * size:	Number of bytes to be consumed.
+ */
+__attribute__((nonnull))
+void	alx_dynbuf_consume	(const struct Alx_Dyn_Buffer *buf, size_t size);
+
+/*
  * Reallocates memory for the buffer, and updates any necessary metadata.
  *
  * buf:		Pointer to a buffer.

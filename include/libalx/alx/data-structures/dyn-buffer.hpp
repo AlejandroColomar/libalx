@@ -51,6 +51,8 @@ int	alx_dynbuf_write	(struct Alx_Dyn_Buffer *buf, size_t offset,
 [[gnu::nonnull]]
 int	alx_dynbuf_read		(const struct Alx_Dyn_Buffer *buf,
 				 size_t offset, void *data, size_t size);
+[[gnu::nonnull]]
+void	alx_dynbuf_consume	(const struct Alx_Dyn_Buffer *buf, size_t size);
 [[gnu::nonnull]][[gnu::warn_unused_result]]
 int	alx_dynbuf_resize	(struct Alx_Dyn_Buffer *buf, size_t size);
 }
