@@ -91,6 +91,14 @@ ALX_DS_OBJ	=							\
 		$(TMP_DIR)/alx/data-structures/node.o
 ALX_NPC_OBJ	=							\
 		$(TMP_DIR)/alx/npcomplete/solver_lut.o
+CURL_OBJ	=							\
+		$(TMP_DIR)/extra/curl/fcurl/fclose.o			\
+		$(TMP_DIR)/extra/curl/fcurl/feof.o			\
+		$(TMP_DIR)/extra/curl/fcurl/fgets.o			\
+		$(TMP_DIR)/extra/curl/fcurl/fopen.o			\
+		$(TMP_DIR)/extra/curl/fcurl/fread.o			\
+		$(TMP_DIR)/extra/curl/fcurl/internal.o			\
+		$(TMP_DIR)/extra/curl/fcurl/rewind.o
 CV_OBJ		=							\
 		$(TMP_DIR)/extra/cv/alx.o				\
 		$(TMP_DIR)/extra/cv/core.o				\
@@ -165,7 +173,12 @@ npcomplete: libalx base
 
 
 PHONY += extra
-extra: cv gmp gsl ncurses ocr zbar
+extra: curl cv gmp gsl ncurses ocr zbar
+
+PHONY += curl
+curl: libalx base
+	$(Q)$(MAKE)	libalx/libalx-curl.a
+	$(Q)$(MAKE)	libalx/libalx-curl.so
 
 PHONY += cv
 cv: libalx base gsl
@@ -224,6 +237,12 @@ libalx/libalx-npcomplete.a: $(patsubst %.o,%.a.o,$(ALX_NPC_OBJ))
 libalx/libalx-npcomplete.so: $(patsubst %.o,%.so.o,$(ALX_NPC_OBJ))
 	@echo	"	CC	libalx/lib/$@"
 	$(Q)$(CC) $(LDFLAGS) -o $@ $^ -fopenmp -l alx-base
+
+libalx/libalx-curl.a: $(patsubst %.o,%.a.o,$(CURL_OBJ))
+libalx/libalx-curl.so: $(patsubst %.o,%.so.o,$(CURL_OBJ))
+	@echo	"	CC	libalx/lib/$@"
+	$(Q)$(CC) $(LDFLAGS) -o $@ $^ `pkg-config --libs libcurl`	\
+					-l alx-data-structures -l alx-base
 
 libalx/libalx-cv.a: $(patsubst %.o,%.a.o,$(CV_OBJ))
 libalx/libalx-cv.so: $(patsubst %.o,%.so.o,$(CV_OBJ))

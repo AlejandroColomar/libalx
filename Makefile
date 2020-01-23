@@ -242,6 +242,12 @@ extra:
 	$(Q)$(MAKE) $@	-C $(TMP_DIR)
 	$(Q)$(MAKE) $@	-C $(LIB_DIR)
 
+PHONY += curl
+curl:
+	@echo	"	MAKE	$@"
+	$(Q)$(MAKE) $@	-C $(TMP_DIR)
+	$(Q)$(MAKE) $@	-C $(LIB_DIR)
+
 PHONY += cv
 cv:
 	@echo	"	MAKE	$@"
@@ -335,6 +341,7 @@ install_extra:
 	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/extra/*"
 	$(Q)cp -r -f $(v)	./include/libalx/extra/*		\
 					$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/extra/
+	$(Q)$(MAKE)	libalx-curl.a	libalx-curl.so	libalx-curl.pc
 	$(Q)$(MAKE)	libalx-cv.a	libalx-cv.so	libalx-cv.pc
 	$(Q)$(MAKE)	libalx-gmp.a	libalx-gmp.so	libalx-gmp.pc
 	$(Q)$(MAKE)	libalx-gsl.a	libalx-gsl.so	libalx-gsl.pc

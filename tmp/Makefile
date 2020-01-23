@@ -43,7 +43,11 @@ npcomplete:
 
 
 PHONY += extra
-extra: cv gmp gsl ncurses ocr zbar
+extra: curl cv gmp gsl ncurses ocr zbar
+
+PHONY += curl
+curl:
+	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/curl/fcurl/
 
 PHONY += cv
 cv:
