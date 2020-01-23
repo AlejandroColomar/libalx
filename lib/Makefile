@@ -228,8 +228,7 @@ libalx/libalx-npcomplete.so: $(patsubst %.o,%.so.o,$(ALX_NPC_OBJ))
 libalx/libalx-cv.a: $(patsubst %.o,%.a.o,$(CV_OBJ))
 libalx/libalx-cv.so: $(patsubst %.o,%.so.o,$(CV_OBJ))
 	@echo	"	CXX	libalx/lib/$@"
-	$(Q)$(CXX) $(LDFLAGS) -o $@ $^ `pkg-config --libs opencv`	\
-					`pkg-config --libs opencv4`	\
+	$(Q)$(CXX) $(LDFLAGS) -o $@ $^ `pkg-config --libs opencv4`	\
 						-l alx-gsl -l alx-base
 
 libalx/libalx-gmp.a: $(patsubst %.o,%.a.o,$(GMP_OBJ))

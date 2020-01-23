@@ -67,9 +67,7 @@ XIMGPROC_SRC	=							\
 
 ################################################################################
 # cflags
-CXXFLAGS_A	+= `pkg-config --cflags opencv`
 CXXFLAGS_A	+= `pkg-config --cflags opencv4`
-CXXFLAGS_SO	+= `pkg-config --cflags opencv`
 CXXFLAGS_SO	+= `pkg-config --cflags opencv4`
 
 ################################################################################

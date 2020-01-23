@@ -3,7 +3,7 @@ Description: The libalx C/C++ library (openCV extension)
 URL: https://github.com/alejandro-colomar/libalx
 Version: 1~b9
 Requires:
-Requires.private: opencv opencv4 libalx-base libalx-gsl
+Requires.private: opencv4 libalx-base libalx-gsl
 
 prefix=/usr/
 libdir=${prefix}/lib/
