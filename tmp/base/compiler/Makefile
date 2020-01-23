@@ -14,7 +14,8 @@
 
 OBJ		=							\
 		size.o							\
-		type.o
+		type.o							\
+		unused.o
 
 SIZE_INC	=							\
 		$(INC_DIR)/libalx/base/compiler/size.h
@@ -25,6 +26,11 @@ TYPE_INC	=							\
 		$(INC_DIR)/libalx/base/compiler/type.h
 TYPE_SRC	=							\
 		$(SRC_DIR)/base/compiler/type.c
+
+UNUSED_INC	=							\
+		$(INC_DIR)/libalx/base/compiler/unused.h
+UNUSED_SRC	=							\
+		$(SRC_DIR)/base/compiler/unused.c
 
 ################################################################################
 # target: dependencies
@@ -50,6 +56,9 @@ size.so.s: $(SIZE_SRC) $(SIZE_INC)
 
 type.a.s: $(TYPE_SRC) $(TYPE_INC)
 type.so.s: $(TYPE_SRC) $(TYPE_INC)
+
+unused.a.s: $(UNUSED_SRC) $(UNUSED_INC)
+unused.so.s: $(UNUSED_SRC) $(UNUSED_INC)
 
 
 PHONY += clean

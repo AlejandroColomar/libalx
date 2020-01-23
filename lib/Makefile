@@ -8,6 +8,7 @@ BASE_OBJ	=							\
 		$(TMP_DIR)/base/assert/assert.o				\
 		$(TMP_DIR)/base/compiler/size.o				\
 		$(TMP_DIR)/base/compiler/type.o				\
+		$(TMP_DIR)/base/compiler/unused.o			\
 		$(TMP_DIR)/base/errno/error.o				\
 		$(TMP_DIR)/base/float/constant.o			\
 		$(TMP_DIR)/base/float/printf.o				\
