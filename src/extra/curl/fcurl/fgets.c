@@ -81,13 +81,15 @@
  ******* static prototypes ****************************************************
  ******************************************************************************/
 static
-char	*url_fgets__	(char *str, size_t size, ALX_URL_FILE *stream);
+char	*url_fgets__	(char *restrict str, size_t size,
+			 ALX_URL_FILE *restrict stream);
 
 
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-char	*alx_url_fgets	(char *str, size_t size, ALX_URL_FILE *stream)
+char	*alx_url_fgets	(char *restrict str, size_t size,
+			 ALX_URL_FILE *restrict stream)
 {
 
 	if (!size)
@@ -109,7 +111,8 @@ char	*alx_url_fgets	(char *str, size_t size, ALX_URL_FILE *stream)
  ******* static function definitions ******************************************
  ******************************************************************************/
 static
-char	*url_fgets__	(char *str, size_t size, ALX_URL_FILE *stream)
+char	*url_fgets__	(char *restrict str, size_t size,
+			 ALX_URL_FILE *restrict stream)
 {
 	size_t	len;
 
