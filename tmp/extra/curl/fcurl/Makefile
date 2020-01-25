@@ -17,8 +17,10 @@ OBJ		=							\
 		fgets.o							\
 		fopen.o							\
 		fread.o							\
+		init.o							\
 		internal.o						\
-		rewind.o
+		rewind.o						\
+		URL_FILE.o
 
 
 FCLOSE_INC	=							\
@@ -66,8 +68,14 @@ FREAD_INC	=							\
 FREAD_SRC	=							\
 		$(SRC_DIR)/extra/curl/fcurl/fread.c
 
+INIT_INC	=							\
+		$(INC_DIR)/libalx/extra/curl/fcurl/init.h
+INIT_SRC	=							\
+		$(SRC_DIR)/extra/curl/fcurl/init.c
+
 INTERNAL_INC	=							\
 		$(INC_DIR)/libalx/alx/data-structures/dyn-buffer.h	\
+		$(INC_DIR)/libalx/base/stdlib/maximum.h			\
 		$(INC_DIR)/libalx/extra/curl/fcurl/URL_FILE.h		\
 		$(SRC_DIR)/extra/curl/fcurl/internal.h
 INTERNAL_SRC	=							\
@@ -80,6 +88,12 @@ REWIND_INC	=							\
 		$(INC_DIR)/libalx/extra/curl/fcurl/rewind.h
 REWIND_SRC	=							\
 		$(SRC_DIR)/extra/curl/fcurl/rewind.c
+
+URLFILE_INC	=							\
+		$(INC_DIR)/libalx/alx/data-structures/dyn-buffer.h	\
+		$(INC_DIR)/libalx/extra/curl/fcurl/URL_FILE.h
+URLFILE_SRC	=							\
+		$(SRC_DIR)/extra/curl/fcurl/URL_FILE.c
 
 ################################################################################
 # cflags
@@ -120,11 +134,17 @@ fopen.so.s: $(FOPEN_SRC) $(FOPEN_INC)
 fread.a.s: $(FREAD_SRC) $(FREAD_INC)
 fread.so.s: $(FREAD_SRC) $(FREAD_INC)
 
+init.a.s: $(INIT_SRC) $(INIT_INC)
+init.so.s: $(INIT_SRC) $(INIT_INC)
+
 internal.a.s: $(INTERNAL_SRC) $(INTERNAL_INC)
 internal.so.s: $(INTERNAL_SRC) $(INTERNAL_INC)
 
 rewind.a.s: $(REWIND_SRC) $(REWIND_INC)
 rewind.so.s: $(REWIND_SRC) $(REWIND_INC)
+
+URL_FILE.a.s: $(URLFILE_SRC) $(URLFILE_INC)
+URL_FILE.so.s: $(URLFILE_SRC) $(URLFILE_INC)
 
 
 PHONY += clean

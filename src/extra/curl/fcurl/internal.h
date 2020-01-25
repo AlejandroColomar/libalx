@@ -42,12 +42,10 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <stdbool.h>
-#include <stdio.h>
+#include <stddef.h>
 
 #include <curl/curl.h>
 
-#include "libalx/alx/data-structures/dyn-buffer.h"
 #include "libalx/extra/curl/fcurl/URL_FILE.h"
 
 
@@ -59,34 +57,16 @@
 /******************************************************************************
  ******* enum *****************************************************************
  ******************************************************************************/
-enum	Alx_URL_Type {
-	CFTYPE_NONE = 0,
-	CFTYPE_FILE = 1,
-	CFTYPE_CURL = 2
-};
 
 
 /******************************************************************************
  ******* struct / union *******************************************************
  ******************************************************************************/
-struct	Alx_URL_Data {
-	enum Alx_URL_Type	type;	/* type of handle */
-	union {
-		CURL	*curl;
-		FILE	*file;
-	} handle;			/* handle */
-	struct Alx_Dyn_Buffer	*buf;	/* buffer to store cached data*/
-	int	still_running;	/* Is background url fetch still in progress */
-};
 
 
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-/* curl calls this routine to get more data */
-size_t	alx_url_write_callback__(const char *buf, size_t size, size_t nitems,
-				 void *userp);
-
 /* use to attempt to fill the read buffer up to requested number of bytes */
 int	alx_url_fill_buffer__	(ALX_URL_FILE *stream, size_t want);
 
@@ -95,7 +75,7 @@ int	alx_url_fill_buffer__	(ALX_URL_FILE *stream, size_t want);
  ******* variables ************************************************************
  ******************************************************************************/
 /* we use a global one for convenience */
-extern	CURLM	*alx_url_multi_handle__;
+extern	CURLM	*alx_url_mhandle__;
 
 
 /******************************************************************************

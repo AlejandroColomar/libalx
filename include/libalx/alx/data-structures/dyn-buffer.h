@@ -60,9 +60,9 @@
  * written:	Data used (in bytes).
  */
 struct	Alx_Dyn_Buffer {
-	void	*data;
-	size_t	size;
-	size_t	written;
+	unsigned char	*data;
+	size_t		size;
+	size_t		written;
 };
 
 

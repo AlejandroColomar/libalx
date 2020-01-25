@@ -36,6 +36,7 @@ void	*alx_callocs__	(ptrdiff_t nmemb, size_t size, int *error)
 {
 	void	*p;
 
+	*error	= 0;
 	if (!nmemb || !size)
 		goto zero;
 	if (nmemb < 0)

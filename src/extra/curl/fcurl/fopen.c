@@ -39,12 +39,10 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * This example requires libcurl 7.9.7 or later.
  */
-/* <DESC>
- * implements an fopen() abstraction allowing reading from URLs
- * </DESC>
+
+/*
+ * TODO: url_fwrite()	- Use CURLOPT_READFUNCTION and CURLOPT_READDATA
  */
 
 
@@ -56,12 +54,14 @@
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include <curl/curl.h>
 
 #include "libalx/alx/data-structures/dyn-buffer.h"
 #include "libalx/base/compiler/unused.h"
 #include "libalx/base/stdlib/alloc/callocs.h"
+#include "libalx/extra/curl/fcurl/init.h"
 #include "libalx/extra/curl/fcurl/URL_FILE.h"
 
 #include "internal.h"
@@ -83,20 +83,20 @@
 static
 int	url_fopen__	(ALX_URL_FILE *stream, const char *url,
 			 const char *mode);
+static
+int	url_fopen_r__	(ALX_URL_FILE *stream, const char *url);
+/* curl calls this routine to get more data */
+static
+size_t	url_write_cb__	(const void *buf, size_t size, size_t nmemb,
+			 void *ostream);
 
 
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-/*
- * This code could check for URLs or types in the 'url' and
- * basically use the real fopen() for standard files
- */
 ALX_URL_FILE	*alx_url_fopen	(const char *url, const char *mode)
 {
 	ALX_URL_FILE	*stream;
-
-	ALX_UNUSED(mode);
 
 	if (alx_callocs(&stream, 1))
 		return	NULL;
@@ -105,7 +105,7 @@ ALX_URL_FILE	*alx_url_fopen	(const char *url, const char *mode)
 
 	stream->handle.file = fopen(url, "r");
 	if (stream->handle.file) {
-		stream->type = CFTYPE_FILE; /* marked as FILE */
+		stream->type = ALX_URL_CFTYPE_FILE; /* marked as FILE */
 		return	stream;
 	}
 
@@ -126,51 +126,82 @@ static
 int	url_fopen__	(ALX_URL_FILE *stream, const char *url,
 			 const char *mode)
 {
+	int	status;
+
+	if (!alx_url_mhandle__) {
+		status = alx_url_init();
+		if (status)
+			return	status;
+	}
+
+	if (!strcmp(mode, "r")  ||  !strcmp(mode, "rb"))
+		status	= url_fopen_r__(stream, url);
+	else
+		status	= EINVAL;
+
+	if (!status)
+		stream->type	= ALX_URL_CFTYPE_CURL; /* marked as URL */
+
+	return	status;
+}
+
+static
+int	url_fopen_r__	(ALX_URL_FILE *stream, const char *url)
+{
 	int	err;
 
-	ALX_UNUSED(mode);
-
-	stream->type		= CFTYPE_CURL; /* marked as URL */
 	stream->handle.curl	= curl_easy_init();
+	if (!stream->handle.curl)
+		return	EAGAIN;
 
 	err = curl_easy_setopt(stream->handle.curl, CURLOPT_URL, url);
 	if (err)
 		goto clean_opt;
-	err = curl_easy_setopt(stream->handle.curl, CURLOPT_WRITEDATA, stream);
-	if (err)
-		goto clean_opt;
-	err = curl_easy_setopt(stream->handle.curl, CURLOPT_VERBOSE, 0L);
-	if (err)
-		goto clean_opt;
-	err = curl_easy_setopt(stream->handle.curl, CURLOPT_WRITEFUNCTION,
-						&alx_url_write_callback__);
-	if (err)
-		goto clean_opt;
+	(void)curl_easy_setopt(stream->handle.curl, CURLOPT_WRITEDATA, stream);
+	(void)curl_easy_setopt(stream->handle.curl, CURLOPT_VERBOSE, 0L);
+	(void)curl_easy_setopt(stream->handle.curl, CURLOPT_WRITEFUNCTION,
+							&url_write_cb__);
 
-	if (!alx_url_multi_handle__)
-		alx_url_multi_handle__ = curl_multi_init();
-	if (!alx_url_multi_handle__)
-		goto clean_opt;
-
-	err = curl_multi_add_handle(alx_url_multi_handle__, stream->handle.curl);
+	err = curl_multi_add_handle(alx_url_mhandle__, stream->handle.curl);
 	if (err)
 		goto clean_opt;
 
 	/* lets start the fetch */
-	err = curl_multi_perform(alx_url_multi_handle__, &stream->still_running);
+	err = curl_multi_perform(alx_url_mhandle__, &stream->still_running);
 	if (err)
 		goto err_fetch;
 	if ((!stream->buf->written) && (!stream->still_running)) {
-		err	= EIO;
+		err	= EREMOTEIO;
 		goto err_fetch;
 	}
 
 	return	0;
 err_fetch:
-	curl_multi_remove_handle(alx_url_multi_handle__, stream->handle.curl);
+	curl_multi_remove_handle(alx_url_mhandle__, stream->handle.curl);
 clean_opt:
 	curl_easy_cleanup(stream->handle.curl);
+	stream->handle.curl	= NULL;
 	return	err;
+}
+
+static
+size_t	url_write_cb__	(const void *buf, size_t size, size_t nmemb,
+			 void *ostream)
+{
+	ALX_URL_FILE *stream;
+
+	if (!nmemb || !size)
+		return	0;
+	if (nmemb  >  (SIZE_MAX / size))
+		return	0;
+
+	stream	= ostream;
+	size	*= nmemb;
+
+	if (alx_dynbuf_write(stream->buf, stream->buf->written, buf, size))
+		return	0;
+
+	return	nmemb;
 }
 
 

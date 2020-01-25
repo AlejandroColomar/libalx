@@ -36,6 +36,7 @@ void	*alx_reallocfs__	(void *restrict ptr, size_t size,
 				 int *restrict error)
 {
 
+	*error	= 0;
 	if (!size)
 		goto zero;
 

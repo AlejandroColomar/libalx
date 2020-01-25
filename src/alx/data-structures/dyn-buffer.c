@@ -15,6 +15,7 @@
 #include <string.h>
 
 #include "libalx/base/assert/assert.h"
+#include "libalx/base/stdlib/maximum.h"
 #include "libalx/base/stdlib/minimum.h"
 #include "libalx/base/stdlib/alloc/mallocarrays.h"
 #include "libalx/base/stdlib/alloc/mallocs.h"
@@ -42,7 +43,7 @@ alx_Static_assert_size_ptrdiff();
  ******************************************************************************/
 __attribute__((nonnull, warn_unused_result))
 static
-int	alx_dynbuf_grow		(struct Alx_Dyn_Buffer *buf);
+int	alx_dynbuf_grow		(struct Alx_Dyn_Buffer *buf, size_t size);
 
 
 /******************************************************************************
@@ -79,17 +80,14 @@ int	alx_dynbuf_write	(struct Alx_Dyn_Buffer *restrict buf,
 				 size_t offset,
 				 const void *restrict data, size_t size)
 {
-	size_t		written;
-	unsigned char	*p;
+	size_t	written;
 
-	p	= buf->data;
-
-	while ((size + offset) > buf->size) {
-		if (alx_dynbuf_grow(buf))
+	if ((size + offset) > buf->size) {
+		if (alx_dynbuf_grow(buf, size + offset))
 			return	ENOMEM;
 	}
 
-	memmove(p + offset, data, size);
+	memmove(&buf->data[offset], data, size);
 	written	= size + offset;
 	if (written > buf->written)
 		buf->written	= written;
@@ -101,26 +99,20 @@ int	alx_dynbuf_read		(void *restrict data, size_t size,
 				 const struct Alx_Dyn_Buffer *restrict buf,
 				 size_t offset)
 {
-	size_t		sz;
-	unsigned char	*p;
+	size_t	sz;
 
-	p	= buf->data;
-
-	if (offset > buf->size)
+	if (offset > buf->written)
 		return	EFAULT;
-	sz	= ALX_MIN(size, buf->size - offset);
-	memmove(data, p + offset, sz);
+	sz	= ALX_MIN(size, buf->written - offset);
+	memmove(data, &buf->data[offset], sz);
 
-	if (size  <  buf->size - offset)
+	if (size  <  buf->written - offset)
 		return	ENOBUFS;
 	return	0;
 }
 
 void	alx_dynbuf_consume	(struct Alx_Dyn_Buffer *buf, size_t size)
 {
-	unsigned char	*p;
-
-	p	= buf->data;
 
 	if (size >= buf->written) {
 		buf->written	= 0;
@@ -128,7 +120,7 @@ void	alx_dynbuf_consume	(struct Alx_Dyn_Buffer *buf, size_t size)
 	}
 
 	buf->written	-= size;
-	memmove(p, p + size, buf->written);
+	memmove(buf->data, &buf->data[size], buf->written);
 }
 
 int	alx_dynbuf_resize	(struct Alx_Dyn_Buffer *buf, size_t size)
@@ -149,16 +141,21 @@ int	alx_dynbuf_resize	(struct Alx_Dyn_Buffer *buf, size_t size)
  ******* static function definitions ******************************************
  ******************************************************************************/
 static
-int	alx_dynbuf_grow		(struct Alx_Dyn_Buffer *buf)
+int	alx_dynbuf_grow		(struct Alx_Dyn_Buffer *buf, size_t size)
 {
-	size_t	size;
+	size_t	sz;
+
+	if (size > PTRDIFF_MAX)
+		return	ENOMEM;
 
 	if (buf->size >= PTRDIFF_MAX / 2)
-		size	= PTRDIFF_MAX;
+		sz	= PTRDIFF_MAX;
 	else
-		size	= buf->size * 2;
+		sz	= buf->size * 2;
 
-	if (size <= buf->size)
+	sz	= ALX_MAX(sz, size);
+
+	if (sz <= buf->size)
 		return	ENOMEM;
 
 	return	alx_dynbuf_resize(buf, size);

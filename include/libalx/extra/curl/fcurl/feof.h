@@ -6,7 +6,7 @@
  * reference to original curl example code
  *
  * Modified by Alejandro Colomar Andrés <colomar.6.4.3@gmail.com> to be
- * used as a library and included in the libalx library.
+ * included in the libalx library.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -40,24 +40,6 @@
 
 
 /******************************************************************************
- ******* about ****************************************************************
- ******************************************************************************/
-/*
- * Implements an fopen() abstraction allowing reading from URLs
- *
- * This example source code introduces a c library buffered I/O interface to
- * URL reads it supports fopen(), fread(), fgets(), feof(), fclose(),
- * rewind(). Supported functions have identical prototypes to their normal c
- * lib namesakes and are preceaded by url_ .
- *
- * Using this code you can replace your program's fopen() with url_fopen()
- * and fread() with url_fread() and it become possible to read remote streams
- * instead of (only) local files. Local files (ie those that can be directly
- * fopened) will drop back to using the underlying clib implementations
- */
-
-
-/******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
 #include <stddef.h>
@@ -83,6 +65,7 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
+__attribute__((nonnull, warn_unused_result))
 int	alx_url_feof	(ALX_URL_FILE *stream);
 
 
@@ -91,7 +74,7 @@ int	alx_url_feof	(ALX_URL_FILE *stream);
  ******************************************************************************/
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-__attribute__((always_inline))
+__attribute__((always_inline, nonnull, warn_unused_result))
 inline
 int	url_feof	(ALX_URL_FILE *stream)
 {

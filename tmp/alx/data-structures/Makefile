@@ -35,6 +35,7 @@ DYNARR_SRC	=							\
 
 DYNBUF_INC	=							\
 		$(INC_DIR)/libalx/base/assert/assert.h			\
+		$(INC_DIR)/libalx/base/stdlib/maximum.h			\
 		$(INC_DIR)/libalx/base/stdlib/minimum.h			\
 		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.h	\
 		$(INC_DIR)/libalx/base/stdlib/alloc/mallocs.h		\

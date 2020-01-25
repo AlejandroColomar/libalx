@@ -87,13 +87,16 @@ int	alx_url_fclose	(ALX_URL_FILE *stream)
 {
 	int	ret = 0;	/* default is good return */
 
+	if (!stream)
+		return	EOF;
+
 	switch (stream->type) {
-	case CFTYPE_FILE:
+	case ALX_URL_CFTYPE_FILE:
 		ret	= fclose(stream->handle.file);
 		break;
 
-	case CFTYPE_CURL:
-		ret	= curl_multi_remove_handle(alx_url_multi_handle__,
+	case ALX_URL_CFTYPE_CURL:
+		ret	= curl_multi_remove_handle(alx_url_mhandle__,
 							stream->handle.curl);
 		curl_easy_cleanup(stream->handle.curl);
 		break;

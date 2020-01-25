@@ -38,6 +38,7 @@ void	*alx_reallocarrayfs__	(void *restrict ptr, ptrdiff_t nmemb,
 				 size_t size, int *restrict error)
 {
 
+	*error	= 0;
 	if (!nmemb || !size)
 		goto zero;
 	if (nmemb < 0)

@@ -6,7 +6,7 @@
  * reference to original curl example code
  *
  * Modified by Alejandro Colomar Andrés <colomar.6.4.3@gmail.com> to be
- * used as a library and included in the libalx library.
+ * included in the libalx library.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -40,24 +40,6 @@
 
 
 /******************************************************************************
- ******* about ****************************************************************
- ******************************************************************************/
-/*
- * Implements an fopen() abstraction allowing reading from URLs
- *
- * This example source code introduces a c library buffered I/O interface to
- * URL reads it supports fopen(), fread(), fgets(), feof(), fclose(),
- * rewind(). Supported functions have identical prototypes to their normal c
- * lib namesakes and are preceaded by url_ .
- *
- * Using this code you can replace your program's fopen() with url_fopen()
- * and fread() with url_fread() and it become possible to read remote streams
- * instead of (only) local files. Local files (ie those that can be directly
- * fopened) will drop back to using the underlying clib implementations
- */
-
-
-/******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
 #include <stddef.h>
@@ -84,8 +66,21 @@
  ******* prototypes ***********************************************************
  ******************************************************************************/
 /*
- * mode is ignored.  Reserved for future implementations.
+ * This function must be the first function to call for each file, and it
+ * returns a `URL_FILE *` easy handle that you must use as input to other
+ * functions in this interface.  This call MUST have a corresponding call to
+ * url_fclose() when the operation is complete.
+ *
+ * If you did not already call url_init(), url_fopen() does it
+ * automatically.
+ *
+ * You are strongly advised to not allow this automatic behaviour, by calling
+ * url_init() yourself properly.  See <libalx/extra/curl/fcurl/init.h>.
+ *
+ * If this function returns NULL, something went wrong and you cannot use the
+ * other url_ functions.
  */
+__attribute__((nonnull, warn_unused_result))
 ALX_URL_FILE	*alx_url_fopen	(const char *url, const char *mode);
 
 
@@ -94,7 +89,7 @@ ALX_URL_FILE	*alx_url_fopen	(const char *url, const char *mode);
  ******************************************************************************/
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-__attribute__((always_inline))
+__attribute__((always_inline, nonnull, warn_unused_result))
 inline
 ALX_URL_FILE	*url_fopen	(const char *url, const char *mode)
 {

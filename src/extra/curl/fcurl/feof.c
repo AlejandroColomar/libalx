@@ -86,10 +86,10 @@ int	alx_url_feof	(ALX_URL_FILE *stream)
 {
 
 	switch (stream->type) {
-	case CFTYPE_FILE:
+	case ALX_URL_CFTYPE_FILE:
 		return	feof(stream->handle.file);
 
-	case CFTYPE_CURL:
+	case ALX_URL_CFTYPE_CURL:
 		if ((!stream->buf->written) && (!stream->still_running))
 			return	EOF;
 		return	0;

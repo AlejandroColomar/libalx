@@ -87,16 +87,16 @@ int	alx_url_rewind	(ALX_URL_FILE *stream)
 
 	ret	= 0;
 	switch (stream->type) {
-	case CFTYPE_FILE:
+	case ALX_URL_CFTYPE_FILE:
 		rewind(stream->handle.file);
 		break;
 
-	case CFTYPE_CURL:
-		ret = curl_multi_remove_handle(alx_url_multi_handle__,
+	case ALX_URL_CFTYPE_CURL:
+		ret = curl_multi_remove_handle(alx_url_mhandle__,
 							stream->handle.curl);
 		if (ret)
 			goto err;
-		ret = curl_multi_add_handle(alx_url_multi_handle__,
+		ret = curl_multi_add_handle(alx_url_mhandle__,
 							stream->handle.curl);
 err:
 		stream->buf->written	= 0;

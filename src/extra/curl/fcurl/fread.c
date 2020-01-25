@@ -99,9 +99,9 @@ ptrdiff_t	alx_url_fread	(void *ptr, size_t size, ptrdiff_t nmemb,
 		return	0;
 
 	switch (stream->type) {
-	case CFTYPE_FILE:
+	case ALX_URL_CFTYPE_FILE:
 		return	fread(ptr, size, nmemb, stream->handle.file);
-	case CFTYPE_CURL:
+	case ALX_URL_CFTYPE_CURL:
 		return	url_fread__(ptr, size, nmemb, stream);
 	default:
 		errno	= EBADF;
@@ -126,7 +126,7 @@ ptrdiff_t	url_fread__	(void *ptr, size_t size, ptrdiff_t nmemb,
 		return	0;
 
 	bytes	= ALX_MIN(bytes, stream->buf->written);
-	alx_dynbuf_read(stream->buf, 0, ptr, bytes);
+	alx_dynbuf_read(ptr, bytes, stream->buf, 0);
 
 	alx_dynbuf_consume(stream->buf, bytes);
 

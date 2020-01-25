@@ -94,9 +94,9 @@ char	*alx_url_fgets	(char *str, size_t size, ALX_URL_FILE *stream)
 		return	NULL;
 
 	switch (stream->type) {
-	case CFTYPE_FILE:
+	case ALX_URL_CFTYPE_FILE:
 		return	fgets(str, (int)size, stream->handle.file);
-	case CFTYPE_CURL:
+	case ALX_URL_CFTYPE_CURL:
 		return	url_fgets__(str, size, stream);
 	default:	/* unknown or supported type */
 		errno	= EBADF;
