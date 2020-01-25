@@ -38,6 +38,7 @@ BASE_OBJ	=							\
 		$(TMP_DIR)/base/stdlib/alloc/mallocarray.o		\
 		$(TMP_DIR)/base/stdlib/alloc/mallocarrays.o		\
 		$(TMP_DIR)/base/stdlib/alloc/mallocs.o			\
+		$(TMP_DIR)/base/stdlib/alloc/reallocarrayf.o		\
 		$(TMP_DIR)/base/stdlib/alloc/reallocarrayfs.o		\
 		$(TMP_DIR)/base/stdlib/alloc/reallocarrays.o		\
 		$(TMP_DIR)/base/stdlib/alloc/reallocfs.o		\
@@ -97,8 +98,10 @@ CURL_OBJ	=							\
 		$(TMP_DIR)/extra/curl/fcurl/fgets.o			\
 		$(TMP_DIR)/extra/curl/fcurl/fopen.o			\
 		$(TMP_DIR)/extra/curl/fcurl/fread.o			\
+		$(TMP_DIR)/extra/curl/fcurl/init.o			\
 		$(TMP_DIR)/extra/curl/fcurl/internal.o			\
-		$(TMP_DIR)/extra/curl/fcurl/rewind.o
+		$(TMP_DIR)/extra/curl/fcurl/rewind.o			\
+		$(TMP_DIR)/extra/curl/fcurl/URL_FILE.o
 CV_OBJ		=							\
 		$(TMP_DIR)/extra/cv/alx.o				\
 		$(TMP_DIR)/extra/cv/core.o				\

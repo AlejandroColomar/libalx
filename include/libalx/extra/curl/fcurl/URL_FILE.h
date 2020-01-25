@@ -6,7 +6,7 @@
  * reference to original curl example code
  *
  * Modified by Alejandro Colomar Andrés <colomar.6.4.3@gmail.com> to be
- * used as a library and included in the libalx library.
+ * included in the libalx library.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -40,43 +40,67 @@
 
 
 /******************************************************************************
- ******* about ****************************************************************
- ******************************************************************************/
-/*
- * Implements an fopen() abstraction allowing reading from URLs
- *
- * This example source code introduces a c library buffered I/O interface to
- * URL reads it supports fopen(), fread(), fgets(), feof(), fclose(),
- * rewind(). Supported functions have identical prototypes to their normal c
- * lib namesakes and are preceaded by url_ .
- *
- * Using this code you can replace your program's fopen() with url_fopen()
- * and fread() with url_fread() and it become possible to read remote streams
- * instead of (only) local files. Local files (ie those that can be directly
- * fopened) will drop back to using the underlying clib implementations
- */
-
-
-/******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
 #include <stddef.h>
+#include <stdio.h>
+
+#include <curl/curl.h>
+
+#include "libalx/alx/data-structures/dyn-buffer.h"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+#define ALX_URL_stdin	(ALX_URL_FILE){					\
+				.type		= ALX_URL_CFTYPE_FILE,	\
+				.handle.file	= stdin,		\
+				.buf		= NULL,			\
+				.still_running	= 0,			\
+			}
+#define ALX_URL_stdout	(ALX_URL_FILE){					\
+				.type		= ALX_URL_CFTYPE_FILE,	\
+				.handle.file	= stdout,		\
+				.buf		= NULL,			\
+				.still_running	= 0,			\
+			}
+#define ALX_URL_stderr	(ALX_URL_FILE){					\
+				.type		= ALX_URL_CFTYPE_FILE,	\
+				.handle.file	= stderr,		\
+				.buf		= NULL,			\
+				.still_running	= 0,			\
+			}
+
+#if defined(ALX_NO_PREFIX)
+#define URL_stdin	ALX_URL_stdin
+#define URL_stdout	ALX_URL_stdout
+#define URL_stderr	ALX_URL_stderr
+#endif
 
 
 /******************************************************************************
  ******* enum *****************************************************************
  ******************************************************************************/
+enum	Alx_URL_Cftype_Type {
+	ALX_URL_CFTYPE_NONE = 0,
+	ALX_URL_CFTYPE_FILE = 1,
+	ALX_URL_CFTYPE_CURL = 2
+};
 
 
 /******************************************************************************
  ******* struct / union *******************************************************
  ******************************************************************************/
-struct	Alx_URL_Data;
+struct	Alx_URL_Data {
+	int	type;	/* type of handle */
+	union {
+		CURL	*curl;
+		FILE	*file;
+	} handle;			/* handle */
+	struct Alx_Dyn_Buffer	*buf;	/* buffer to store cached data*/
+	int	still_running;	/* Is background url fetch still in progress */
+};
 
 
 /******************************************************************************

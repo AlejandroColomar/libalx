@@ -36,15 +36,12 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/curl/fcurl/rewind.h */
+#pragma once	/* libalx/extra/curl/fcurl/init.h */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <stddef.h>
-
-#include "libalx/extra/curl/fcurl/URL_FILE.h"
 
 
 /******************************************************************************
@@ -65,8 +62,27 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull, warn_unused_result))
-int	alx_url_rewind	(ALX_URL_FILE *stream);
+/*
+ * This function must be the first function to call.  This call MUST have a
+ * corresponding call to url_deinit() when the operation is complete.
+ *
+ * If you did not already
+ * call curl_global_init(), url_init() does it automatically.  This may be
+ * lethal in multi-threaded cases, since curl_global_init is not thread-safe,
+ * and it may result in resource problems because there is no corresponding
+ * cleanup.
+ *
+ * You are strongly advised to not allow this automatic behaviour, by calling
+ * curl_global_init() yourself properly.  See the description in libcurl(3)
+ * of global environment requirements for details of how to use that function.
+ *
+ * If this function returns non-zero, something went wrong and you cannot use
+ * the other url_ functions.
+ */
+__attribute__((warn_unused_result))
+int	alx_url_init	(void);
+__attribute__((destructor, warn_unused_result))
+int	alx_url_deinit	(void);
 
 
 /******************************************************************************
@@ -74,11 +90,18 @@ int	alx_url_rewind	(ALX_URL_FILE *stream);
  ******************************************************************************/
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, nonnull, warn_unused_result))
+__attribute__((always_inline, warn_unused_result))
 inline
-int	url_rewind	(ALX_URL_FILE *stream)
+int	url_init	(void)
 {
-	return	alx_url_rewind(stream);
+	return	alx_url_init();
+}
+
+__attribute__((always_inline, warn_unused_result))
+inline
+int	url_deinit	(void)
+{
+	return	alx_url_deinit();
 }
 #endif
 
