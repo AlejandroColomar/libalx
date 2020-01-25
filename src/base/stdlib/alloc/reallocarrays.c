@@ -37,6 +37,7 @@ void	*alx_reallocarrays__	(void *restrict ptr, ptrdiff_t nmemb,
 {
 	void	*p;
 
+	*error	= 0;
 	if (!nmemb || !size)
 		goto zero;
 	if (nmemb < 0)

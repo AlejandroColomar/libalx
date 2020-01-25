@@ -36,6 +36,7 @@ void	*alx_mallocs__	(size_t size, int *error)
 {
 	void	*p;
 
+	*error	= 0;
 	if (!size)
 		goto zero;
 

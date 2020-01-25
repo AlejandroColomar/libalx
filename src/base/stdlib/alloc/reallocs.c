@@ -36,6 +36,7 @@ void	*alx_reallocs__	(void *restrict ptr, size_t size, int *restrict error)
 {
 	void	*p;
 
+	*error	= 0;
 	if (!size)
 		goto zero;
 
