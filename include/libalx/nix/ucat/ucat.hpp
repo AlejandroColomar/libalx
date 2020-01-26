@@ -13,6 +13,7 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include <cstdint>
 #include <cstdio>
 
 #include "libalx/base/compiler/restrict.hpp"
@@ -30,9 +31,10 @@
 extern	"C"
 {
 [[gnu::warn_unused_result]]
-int	alx_nix_ucat	(const char *url);
+int	alx_nix_ucat	(const char *url, uint32_t flags);
 [[gnu::nonnull]]
-void	alx_nix_ucat__	(FILE *restrict ostream, ALX_URL_FILE *restrict istream);
+void	alx_nix_ucat__	(FILE *restrict ostream, ALX_URL_FILE *restrict istream,
+			 uint32_t flags);
 }
 
 
