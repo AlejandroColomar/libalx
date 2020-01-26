@@ -53,10 +53,6 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define url_rewind(stream)	alx_url_rewind(stream)
-#endif
 
 
 /******************************************************************************
@@ -71,6 +67,7 @@ struct	Alx_URL_Data {
 	struct Alx_Dyn_Buffer	*buf;	/* buffer to store cached data*/
 	int	still_running;	/* Is background url fetch still in progress */
 };
+
 
 extern	"C"
 {
