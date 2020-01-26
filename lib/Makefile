@@ -92,6 +92,7 @@ ALX_DS_OBJ	=							\
 		$(TMP_DIR)/alx/data-structures/node.o
 ALX_NPC_OBJ	=							\
 		$(TMP_DIR)/alx/npcomplete/solver_lut.o
+
 CURL_OBJ	=							\
 		$(TMP_DIR)/extra/curl/fcurl/fclose.o			\
 		$(TMP_DIR)/extra/curl/fcurl/feof.o			\
@@ -145,8 +146,11 @@ OCR_OBJ		=							\
 ZBAR_OBJ	=							\
 		$(TMP_DIR)/extra/zbar/zbar.o
 
+NIX_UCAT_OBJ	=							\
+		$(TMP_DIR)/nix/ucat/ucat.o
 
-ALL	= base alx extra
+
+ALL	= base alx extra nix
 
 # target: dependencies
 #	action
@@ -179,7 +183,7 @@ PHONY += extra
 extra: curl cv gmp gsl ncurses ocr zbar
 
 PHONY += curl
-curl: libalx base
+curl: libalx base data-structures
 	$(Q)$(MAKE)	libalx/libalx-curl.a
 	$(Q)$(MAKE)	libalx/libalx-curl.so
 
@@ -212,6 +216,15 @@ PHONY += zbar
 zbar: libalx base
 	$(Q)$(MAKE)	libalx/libalx-zbar.a
 	$(Q)$(MAKE)	libalx/libalx-zbar.so
+
+
+PHONY += nix
+nix: ucat
+
+PHONY += ucat
+ucat: libalx base curl
+	$(Q)$(MAKE)	libalx/libalx-ucat.a
+	$(Q)$(MAKE)	libalx/libalx-ucat.so
 
 
 libalx:
@@ -282,6 +295,11 @@ libalx/libalx-zbar.so: $(patsubst %.o,%.so.o,$(ZBAR_OBJ))
 	@echo	"	CC	libalx/lib/$@"
 	$(Q)$(CC) $(LDFLAGS) -o $@ $^ `pkg-config --libs zbar`		\
 						-l alx-base
+
+libalx/libalx-ucat.a: $(patsubst %.o,%.a.o,$(NIX_UCAT_OBJ))
+libalx/libalx-ucat.so: $(patsubst %.o,%.so.o,$(NIX_UCAT_OBJ))
+	@echo	"	CC	libalx/lib/$@"
+	$(Q)$(CC) $(LDFLAGS) -o $@ $^ -l alx-curl -l alx-base
 
 
 PHONY += clean

@@ -14,7 +14,7 @@
 #	action
 
 PHONY := all
-all: base alx extra
+all: base alx extra nix
 
 
 PHONY += base
@@ -76,6 +76,14 @@ ocr:
 PHONY += zbar
 zbar:
 	$(Q)$(MAKE)	-C $(TMP_DIR)/extra/zbar/
+
+
+PHONY += nix
+nix: ucat
+
+PHONY += ucat
+ucat:
+	$(Q)$(MAKE)	-C $(TMP_DIR)/nix/ucat/
 
 
 PHONY += clean

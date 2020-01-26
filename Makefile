@@ -285,6 +285,19 @@ zbar:
 	$(Q)$(MAKE) $@	-C $(LIB_DIR)
 
 
+PHONY += nix
+nix:
+	@echo	"	MAKE	$@"
+	$(Q)$(MAKE) $@	-C $(TMP_DIR)
+	$(Q)$(MAKE) $@	-C $(LIB_DIR)
+
+PHONY += ucat
+ucat:
+	@echo	"	MAKE	$@"
+	$(Q)$(MAKE) $@	-C $(TMP_DIR)
+	$(Q)$(MAKE) $@	-C $(LIB_DIR)
+
+
 PHONY += tst
 tst: all
 	@echo	"	MAKE	tst"
@@ -298,6 +311,7 @@ install:
 	$(Q)$(MAKE)	install_base
 	$(Q)$(MAKE)	install_alx
 	$(Q)$(MAKE)	install_extra
+	$(Q)$(MAKE)	install_nix
 	$(Q)$(MAKE)	install_sh
 	$(Q)$(MAKE)	install_py
 	$(Q)$(MAKE)	conf_ld
@@ -348,6 +362,15 @@ install_extra:
 	$(Q)$(MAKE)	libalx-ncurses.a libalx-ncurses.so libalx-ncurses.pc
 	$(Q)$(MAKE)	libalx-ocr.a	libalx-ocr.so	libalx-ocr.pc
 	$(Q)$(MAKE)	libalx-zbar.a	libalx-zbar.so	libalx-zbar.pc
+	@echo
+
+PHONY += install_nix
+install_nix:
+	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/nix/
+	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/nix/*"
+	$(Q)cp -r -f $(v)	./include/libalx/nix/*		\
+					$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/nix/
+	$(Q)$(MAKE)	libalx-ucat.a	libalx-ucat.so	libalx-ucat.pc
 	@echo
 
 PHONY += install_sh
