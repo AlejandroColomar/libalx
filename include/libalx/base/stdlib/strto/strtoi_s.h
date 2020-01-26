@@ -38,19 +38,19 @@
 __attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_strtoi8_s		(int8_t *restrict num,
 				 const char *restrict str,
-				 int base, ptrdiff_t *restrict read);
+				 int base, ptrdiff_t *restrict nread);
 __attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_strtoi16_s		(int16_t *restrict num,
 				 const char *restrict str,
-				 int base, ptrdiff_t *restrict read);
+				 int base, ptrdiff_t *restrict nread);
 __attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_strtoi32_s		(int32_t *restrict num,
 				 const char *restrict str,
-				 int base, ptrdiff_t *restrict read);
+				 int base, ptrdiff_t *restrict nread);
 __attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_strtoi64_s		(int64_t *restrict num,
 				 const char *restrict str,
-				 int base, ptrdiff_t *restrict read);
+				 int base, ptrdiff_t *restrict nread);
 
 __attribute__((nonnull, warn_unused_result))
 int	alx_strtol_status	(const char *restrict str,
@@ -67,36 +67,36 @@ __attribute__((always_inline, nonnull(1, 2), warn_unused_result))
 inline
 int	strtoi8_s		(int8_t *restrict num,
 				 const char *restrict str,
-				 int base, ptrdiff_t *restrict read)
+				 int base, ptrdiff_t *restrict nread)
 {
-	return	alx_strtoi8_s(num, str, base, read);
+	return	alx_strtoi8_s(num, str, base, nread);
 }
 
 __attribute__((always_inline, nonnull(1, 2), warn_unused_result))
 inline
 int	strtoi16_s		(int16_t *restrict num,
 				 const char *restrict str,
-				 int base, ptrdiff_t *restrict read)
+				 int base, ptrdiff_t *restrict nread)
 {
-	return	alx_strtoi16_s(num, str, base, read);
+	return	alx_strtoi16_s(num, str, base, nread);
 }
 
 __attribute__((always_inline, nonnull(1, 2), warn_unused_result))
 inline
 int	strtoi32_s		(int32_t *restrict num,
 				 const char *restrict str,
-				 int base, ptrdiff_t *restrict read)
+				 int base, ptrdiff_t *restrict nread)
 {
-	return	alx_strtoi32_s(num, str, base, read);
+	return	alx_strtoi32_s(num, str, base, nread);
 }
 
 __attribute__((always_inline, nonnull(1, 2), warn_unused_result))
 inline
 int	strtoi64_s		(int64_t *restrict num,
 				 const char *restrict str,
-				 int base, ptrdiff_t *restrict read)
+				 int base, ptrdiff_t *restrict nread)
 {
-	return	alx_strtoi64_s(num, str, base, read);
+	return	alx_strtoi64_s(num, str, base, nread);
 }
 #endif	/* defined(ALX_NO_PREFIX) */
 

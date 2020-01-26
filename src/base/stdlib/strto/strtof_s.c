@@ -34,43 +34,43 @@
  ******* global functions *****************************************************
  ******************************************************************************/
 int	alx_strtod_s	(double *restrict num, const char *restrict str,
-			 ptrdiff_t *restrict read)
+			 ptrdiff_t *restrict nread)
 {
 	const int	errno_before = errno;
 	char		*endptr;
 
 	errno	= 0;
 	*num	= strtod(str, &endptr);
-	if (read)
-		*read	= endptr - str;
+	if (nread)
+		*nread	= endptr - str;
 
 	return	alx_strtof_status(str, endptr, errno, errno_before);
 }
 
 int	alx_strtof_s	(float *restrict num, const char *restrict str,
-			 ptrdiff_t *restrict read)
+			 ptrdiff_t *restrict nread)
 {
 	const int	errno_before = errno;
 	char		*endptr;
 
 	errno	= 0;
 	*num	= strtof(str, &endptr);
-	if (read)
-		*read	= endptr - str;
+	if (nread)
+		*nread	= endptr - str;
 
 	return	alx_strtof_status(str, endptr, errno, errno_before);
 }
 
 int	alx_strtold_s	(long double *restrict num, const char *restrict str,
-			 ptrdiff_t *restrict read)
+			 ptrdiff_t *restrict nread)
 {
 	const int	errno_before = errno;
 	char		*endptr;
 
 	errno	= 0;
 	*num	= strtold(str, &endptr);
-	if (read)
-		*read	= endptr - str;
+	if (nread)
+		*nread	= endptr - str;
 
 	return	alx_strtof_status(str, endptr, errno, errno_before);
 }

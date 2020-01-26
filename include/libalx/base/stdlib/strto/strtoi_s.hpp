@@ -24,10 +24,10 @@
  ******************************************************************************/
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define strtoi8_s(num, str, base, read)	  alx_strtoi8_s(num, str, base, read)
-#define strtoi16_s(num, str, base, read)  alx_strtoi16_s(num, str, base, read)
-#define strtoi32_s(num, str, base, read)  alx_strtoi32_s(num, str, base, read)
-#define strtoi64_s(num, str, base, read)  alx_strtoi64_s(num, str, base, read)
+#define strtoi8_s(num, str, base, nread)   alx_strtoi8_s(num, str, base, nread)
+#define strtoi16_s(num, str, base, nread)  alx_strtoi16_s(num, str, base, nread)
+#define strtoi32_s(num, str, base, nread)  alx_strtoi32_s(num, str, base, nread)
+#define strtoi64_s(num, str, base, nread)  alx_strtoi64_s(num, str, base, nread)
 #endif
 
 
@@ -39,19 +39,19 @@ extern	"C"
 [[gnu::nonnull(1, 2)]][[gnu::warn_unused_result]]
 int	alx_strtoi8_s		(int8_t *restrict num,
 				 const char *restrict str,
-				 int base, ptrdiff_t *restrict read);
+				 int base, ptrdiff_t *restrict nread);
 [[gnu::nonnull(1, 2)]][[gnu::warn_unused_result]]
 int	alx_strtoi16_s		(int16_t *restrict num,
 				 const char *restrict str,
-				 int base, ptrdiff_t *restrict read);
+				 int base, ptrdiff_t *restrict nread);
 [[gnu::nonnull(1, 2)]][[gnu::warn_unused_result]]
 int	alx_strtoi32_s		(int32_t *restrict num,
 				 const char *restrict str,
-				 int base, ptrdiff_t *restrict read);
+				 int base, ptrdiff_t *restrict nread);
 [[gnu::nonnull(1, 2)]][[gnu::warn_unused_result]]
 int	alx_strtoi64_s		(int64_t *restrict num,
 				 const char *restrict str,
-				 int base, ptrdiff_t *restrict read);
+				 int base, ptrdiff_t *restrict nread);
 
 [[gnu::nonnull]][[gnu::warn_unused_result]]
 int	alx_strtol_status	(const char *restrict str,
