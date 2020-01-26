@@ -81,20 +81,22 @@
  ******* static prototypes ****************************************************
  ******************************************************************************/
 static
-int	url_fopen__	(ALX_URL_FILE *stream, const char *url,
-			 const char *mode);
+int	url_fopen__	(ALX_URL_FILE *restrict stream,
+			 const char *restrict url, const char *restrict mode);
 static
-int	url_fopen_r__	(ALX_URL_FILE *stream, const char *url);
+int	url_fopen_r__	(ALX_URL_FILE *restrict stream,
+			 const char *restrict url);
 /* curl calls this routine to get more data */
 static
-size_t	url_write_cb__	(const void *buf, size_t size, size_t nmemb,
-			 void *ostream);
+size_t	url_write_cb__	(const void *restrict buf, size_t size, size_t nmemb,
+			 void *restrict ostream);
 
 
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-ALX_URL_FILE	*alx_url_fopen	(const char *url, const char *mode)
+ALX_URL_FILE	*alx_url_fopen	(const char *restrict url,
+				 const char *restrict mode)
 {
 	ALX_URL_FILE	*stream;
 
@@ -123,8 +125,8 @@ err:
  ******* static function definitions ******************************************
  ******************************************************************************/
 static
-int	url_fopen__	(ALX_URL_FILE *stream, const char *url,
-			 const char *mode)
+int	url_fopen__	(ALX_URL_FILE *restrict stream,
+			 const char *restrict url, const char *restrict mode)
 {
 	int	status;
 
@@ -146,7 +148,8 @@ int	url_fopen__	(ALX_URL_FILE *stream, const char *url,
 }
 
 static
-int	url_fopen_r__	(ALX_URL_FILE *stream, const char *url)
+int	url_fopen_r__	(ALX_URL_FILE *restrict stream,
+			 const char *restrict url)
 {
 	int	err;
 
@@ -185,8 +188,8 @@ clean_opt:
 }
 
 static
-size_t	url_write_cb__	(const void *buf, size_t size, size_t nmemb,
-			 void *ostream)
+size_t	url_write_cb__	(const void *restrict buf, size_t size, size_t nmemb,
+			 void *restrict ostream)
 {
 	ALX_URL_FILE *stream;
 

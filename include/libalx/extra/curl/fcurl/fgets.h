@@ -66,7 +66,8 @@
  ******* prototypes ***********************************************************
  ******************************************************************************/
 __attribute__((nonnull, warn_unused_result))
-char	*alx_url_fgets	(char *str, size_t size, ALX_URL_FILE *stream);
+char	*alx_url_fgets	(char *restrict str, size_t size,
+			 ALX_URL_FILE *restrict stream);
 
 
 /******************************************************************************
@@ -76,7 +77,8 @@ char	*alx_url_fgets	(char *str, size_t size, ALX_URL_FILE *stream);
 #if defined(ALX_NO_PREFIX)
 __attribute__((always_inline, nonnull, warn_unused_result))
 inline
-char	*url_fgets	(char *str, size_t size, ALX_URL_FILE *stream)
+char	*url_fgets	(char *restrict str, size_t size,
+			 ALX_URL_FILE *restrict stream)
 {
 	return	alx_url_fgets(str, size, stream);
 }

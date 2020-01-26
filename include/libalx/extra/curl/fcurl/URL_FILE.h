@@ -53,30 +53,6 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-#define ALX_URL_stdin	(ALX_URL_FILE){					\
-				.type		= ALX_URL_CFTYPE_FILE,	\
-				.handle.file	= stdin,		\
-				.buf		= NULL,			\
-				.still_running	= 0,			\
-			}
-#define ALX_URL_stdout	(ALX_URL_FILE){					\
-				.type		= ALX_URL_CFTYPE_FILE,	\
-				.handle.file	= stdout,		\
-				.buf		= NULL,			\
-				.still_running	= 0,			\
-			}
-#define ALX_URL_stderr	(ALX_URL_FILE){					\
-				.type		= ALX_URL_CFTYPE_FILE,	\
-				.handle.file	= stderr,		\
-				.buf		= NULL,			\
-				.still_running	= 0,			\
-			}
-
-#if defined(ALX_NO_PREFIX)
-#define URL_stdin	ALX_URL_stdin
-#define URL_stdout	ALX_URL_stdout
-#define URL_stderr	ALX_URL_stderr
-#endif
 
 
 /******************************************************************************
@@ -93,7 +69,7 @@ enum	Alx_URL_Cftype_Type {
  ******* struct / union *******************************************************
  ******************************************************************************/
 struct	Alx_URL_Data {
-	int	type;	/* type of handle */
+	int	type;	/* type of handle  (enum Alx_URL_Cftype_Type) */
 	union {
 		CURL	*curl;
 		FILE	*file;
@@ -107,6 +83,7 @@ struct	Alx_URL_Data {
  ******* typedef **************************************************************
  ******************************************************************************/
 typedef struct Alx_URL_Data	ALX_URL_FILE;
+
 #if defined(ALX_NO_PREFIX)
 typedef struct Alx_URL_Data	URL_FILE;
 #endif
@@ -115,6 +92,20 @@ typedef struct Alx_URL_Data	URL_FILE;
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
+
+
+/******************************************************************************
+ ******* variables ************************************************************
+ ******************************************************************************/
+extern	ALX_URL_FILE	*alx_url_stdin;
+extern	ALX_URL_FILE	*alx_url_stdout;
+extern	ALX_URL_FILE	*alx_url_stderr;
+
+#if defined(ALX_NO_PREFIX)
+#define url_stdin	alx_url_stdin
+#define url_stdout	alx_url_stdout
+#define url_stderr	alx_url_stderr
+#endif
 
 
 /******************************************************************************

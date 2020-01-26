@@ -66,8 +66,8 @@
  ******* prototypes ***********************************************************
  ******************************************************************************/
 __attribute__((nonnull, warn_unused_result))
-ptrdiff_t	alx_url_fread	(void *ptr, size_t size, ptrdiff_t nmemb,
-				 ALX_URL_FILE *stream);
+ptrdiff_t	alx_url_fread	(void *restrict ptr, size_t size,
+				 ptrdiff_t nmemb, ALX_URL_FILE *restrict stream);
 
 
 /******************************************************************************
@@ -77,8 +77,8 @@ ptrdiff_t	alx_url_fread	(void *ptr, size_t size, ptrdiff_t nmemb,
 #if defined(ALX_NO_PREFIX)
 __attribute__((always_inline, nonnull, warn_unused_result))
 inline
-ptrdiff_t	url_fread	(void *ptr, size_t size, ptrdiff_t nmemb,
-				 ALX_URL_FILE *stream)
+ptrdiff_t	url_fread	(void *restrict ptr, size_t size,
+				 ptrdiff_t nmemb, ALX_URL_FILE *restrict stream)
 {
 	return	alx_url_fread(ptr, size, nmemb, stream);
 }

@@ -1,22 +1,12 @@
-/*****************************************************************************
- *
- * This example source code introduces a c library buffered I/O interface to
- * URL reads it supports fopen(), fread(), fgets(), feof(), fclose(),
- * rewind(). Supported functions have identical prototypes to their normal c
- * lib namesakes and are preceaded by url_ .
- *
- * Using this code you can replace your program's fopen() with url_fopen()
- * and fread() with url_fread() and it become possible to read remote streams
- * instead of (only) local files. Local files (ie those that can be directly
- * fopened) will drop back to using the underlying clib implementations
- *
- * See the main() function at the bottom that shows an app that retrieves from
- * a specified url using fgets() and fread() and saves as two output files.
+/******************************************************************************
  *
  * Copyright (c) 2003 - 2019 Simtec Electronics
  *
  * Re-implemented by Vincent Sanders <vince@kyllikki.org> with extensive
  * reference to original curl example code
+ *
+ * Modified by Alejandro Colomar Andrés <colomar.6.4.3@gmail.com> to be
+ * included in the libalx library.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -39,93 +29,73 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+ *
+ ******************************************************************************/
 
-/*
- * TODO: url_fwrite()	- Use CURLOPT_READFUNCTION and CURLOPT_READDATA
- */
+
+/******************************************************************************
+ ******* include guard ********************************************************
+ ******************************************************************************/
+#pragma once	/* libalx/extra/curl/fcurl/fread.hpp */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/extra/curl/fcurl/init.h"
+#include <cstddef>
 
-#include <errno.h>
-
-#include <curl/curl.h>
-
-#include "libalx/extra/curl/fcurl/URL_FILE.h"
-
-#include "internal.h"
+#include "libalx/base/compiler/restrict.hpp"
+#include "libalx/extra/curl/fcurl/URL_FILE.hpp"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define url_fread(ptr, size, nmemb, stream)	alx_url_fread(ptr, size, \
+							      nmemb, stream)
+#endif
 
 
 /******************************************************************************
- ******* enum / struct / union ************************************************
+ ******* extern "C" ***********************************************************
  ******************************************************************************/
-
-
-/******************************************************************************
- ******* static prototypes ****************************************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* global functions *****************************************************
- ******************************************************************************/
-int	alx_url_init	(void)
+extern	"C"
 {
-
-	if (alx_url_mhandle__)
-		return	ECANCELED;
-
-	*alx_url_stdin	= (ALX_URL_FILE){
-		.type		= ALX_URL_CFTYPE_FILE,
-		.handle.file	= stdin,
-		.buf		= NULL,
-		.still_running	= 0,
-	};
-	*alx_url_stdout	= (ALX_URL_FILE){
-		.type		= ALX_URL_CFTYPE_FILE,
-		.handle.file	= stdout,
-		.buf		= NULL,
-		.still_running	= 0,
-	};
-	*alx_url_stderr	= (ALX_URL_FILE){
-		.type		= ALX_URL_CFTYPE_FILE,
-		.handle.file	= stderr,
-		.buf		= NULL,
-		.still_running	= 0,
-	};
-
-	alx_url_mhandle__ = curl_multi_init();
-	if (!alx_url_mhandle__)
-		return	EAGAIN;
-
-	return	0;
-}
-
-int	alx_url_deinit	(void)
-{
-	int	status;
-
-	status	= curl_multi_cleanup(alx_url_mhandle__);
-	if (status)
-		return	status;
-
-	alx_url_mhandle__	= NULL;
-	return	0;
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+ptrdiff_t	alx_url_fread	(void *restrict ptr, size_t size,
+				 ptrdiff_t nmemb, ALX_URL_FILE *restrict stream);
 }
 
 
 /******************************************************************************
- ******* static function definitions ******************************************
+ ******* namespace ************************************************************
  ******************************************************************************/
+namespace alx {
+namespace url {
+
+
+/******************************************************************************
+ ******* enum *****************************************************************
+ ******************************************************************************/
+
+
+/******************************************************************************
+ ******* struct / union *******************************************************
+ ******************************************************************************/
+
+
+/******************************************************************************
+ ******* prototypes ***********************************************************
+ ******************************************************************************/
+
+
+/******************************************************************************
+ ******* namespace ************************************************************
+ ******************************************************************************/
+}	/* namespace curl */
+}	/* namespace alx */
 
 
 /******************************************************************************

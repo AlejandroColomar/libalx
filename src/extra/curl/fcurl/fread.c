@@ -80,15 +80,15 @@
  ******* static prototypes ****************************************************
  ******************************************************************************/
 static
-ptrdiff_t	url_fread__	(void *ptr, size_t size, ptrdiff_t nmemb,
-				 ALX_URL_FILE *stream);
+ptrdiff_t	url_fread__	(void *restrict ptr, size_t size,
+				 ptrdiff_t nmemb, ALX_URL_FILE *restrict stream);
 
 
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-ptrdiff_t	alx_url_fread	(void *ptr, size_t size, ptrdiff_t nmemb,
-				 ALX_URL_FILE *stream)
+ptrdiff_t	alx_url_fread	(void *restrict ptr, size_t size,
+				 ptrdiff_t nmemb, ALX_URL_FILE *restrict stream)
 {
 
 	if (!nmemb || !size)
@@ -114,8 +114,8 @@ ptrdiff_t	alx_url_fread	(void *ptr, size_t size, ptrdiff_t nmemb,
  ******* static function definitions ******************************************
  ******************************************************************************/
 static
-ptrdiff_t	url_fread__	(void *ptr, size_t size, ptrdiff_t nmemb,
-				 ALX_URL_FILE *stream)
+ptrdiff_t	url_fread__	(void *restrict ptr, size_t size,
+				 ptrdiff_t nmemb, ALX_URL_FILE *restrict stream)
 {
 	size_t	bytes;
 

@@ -81,7 +81,8 @@
  * other url_ functions.
  */
 __attribute__((nonnull, warn_unused_result))
-ALX_URL_FILE	*alx_url_fopen	(const char *url, const char *mode);
+ALX_URL_FILE	*alx_url_fopen	(const char *restrict url,
+				 const char *restrict mode);
 
 
 /******************************************************************************
@@ -91,7 +92,8 @@ ALX_URL_FILE	*alx_url_fopen	(const char *url, const char *mode);
 #if defined(ALX_NO_PREFIX)
 __attribute__((always_inline, nonnull, warn_unused_result))
 inline
-ALX_URL_FILE	*url_fopen	(const char *url, const char *mode)
+ALX_URL_FILE	*url_fopen	(const char *restrict url,
+				 const char *restrict mode)
 {
 	return	alx_url_fopen(url, mode);
 }
