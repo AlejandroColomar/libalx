@@ -96,6 +96,7 @@ ALX_NPC_OBJ	=							\
 CURL_OBJ	=							\
 		$(TMP_DIR)/extra/curl/fcurl/fclose.o			\
 		$(TMP_DIR)/extra/curl/fcurl/feof.o			\
+		$(TMP_DIR)/extra/curl/fcurl/fgetc.o			\
 		$(TMP_DIR)/extra/curl/fcurl/fgets.o			\
 		$(TMP_DIR)/extra/curl/fcurl/fopen.o			\
 		$(TMP_DIR)/extra/curl/fcurl/fread.o			\
