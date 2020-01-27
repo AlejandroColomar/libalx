@@ -14,6 +14,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <sys/types.h>
+
 #include "libalx/base/assert/assert.h"
 #include "libalx/base/stdlib/maximum.h"
 #include "libalx/base/stdlib/minimum.h"
@@ -95,19 +97,37 @@ int	alx_dynbuf_write	(struct Alx_Dyn_Buffer *restrict buf,
 	return	0;
 }
 
-int	alx_dynbuf_read		(void *restrict data, size_t size,
+int	alx_dynbuf_insert	(struct Alx_Dyn_Buffer *restrict buf,
+				 size_t offset,
+				 const void *restrict data, size_t size)
+{
+
+	if ((size + buf->written) > buf->size) {
+		if (alx_dynbuf_grow(buf, size + buf->written))
+			return	ENOMEM;
+	}
+
+	memmove(&buf->data[offset + size], &buf->data[offset],
+							buf->written - offset);
+	memmove(&buf->data[offset], data, size);
+	buf->written	+= size;
+
+	return	0;
+}
+
+ssize_t	alx_dynbuf_read		(void *restrict data, size_t size,
 				 const struct Alx_Dyn_Buffer *restrict buf,
 				 size_t offset)
 {
 	size_t	sz;
 
-	if (offset > buf->written)
-		return	EFAULT;
+	if (offset >= buf->written)
+		return	-1;
 	sz	= ALX_MIN(size, buf->written - offset);
 	memmove(data, &buf->data[offset], sz);
 
 	if (size  <  buf->written - offset)
-		return	ENOBUFS;
+		return	sz;
 	return	0;
 }
 
