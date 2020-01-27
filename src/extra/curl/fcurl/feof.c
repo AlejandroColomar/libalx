@@ -56,8 +56,6 @@
 #include <errno.h>
 #include <stdio.h>
 
-#include <curl/curl.h>
-
 #include "libalx/alx/data-structures/dyn-buffer.h"
 #include "libalx/extra/curl/fcurl/URL_FILE.h"
 
