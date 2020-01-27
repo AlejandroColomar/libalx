@@ -36,8 +36,6 @@
  ******************************************************************************/
 __attribute__((nonnull, warn_unused_result))
 int	alx_url_fgetc	(ALX_URL_FILE *stream);
-__attribute__((nonnull))
-int	alx_url_ungetc	(int c, ALX_URL_FILE *stream);
 
 
 /******************************************************************************
@@ -50,13 +48,6 @@ inline
 int	url_fgetc	(ALX_URL_FILE *stream)
 {
 	return	alx_url_fgetc(stream);
-}
-
-__attribute__((always_inline, nonnull))
-inline
-int	url_ungetc	(int c, ALX_URL_FILE *stream)
-{
-	return	alx_url_ungetc(c, stream);
 }
 #endif
 

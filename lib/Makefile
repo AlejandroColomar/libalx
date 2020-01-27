@@ -103,6 +103,7 @@ CURL_OBJ	=							\
 		$(TMP_DIR)/extra/curl/fcurl/init.o			\
 		$(TMP_DIR)/extra/curl/fcurl/internal.o			\
 		$(TMP_DIR)/extra/curl/fcurl/rewind.o			\
+		$(TMP_DIR)/extra/curl/fcurl/ungetc.o			\
 		$(TMP_DIR)/extra/curl/fcurl/URL_FILE.o
 CV_OBJ		=							\
 		$(TMP_DIR)/extra/cv/alx.o				\

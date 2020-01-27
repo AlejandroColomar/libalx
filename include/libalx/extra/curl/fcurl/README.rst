@@ -22,11 +22,13 @@ lib namesakes and are preceaded by url_ .
 
 	<libalx/extra/curl/fcurl/fclose.h>
 	<libalx/extra/curl/fcurl/feof.h>
+	<libalx/extra/curl/fcurl/fgetc.h>
 	<libalx/extra/curl/fcurl/fgets.h>
 	<libalx/extra/curl/fcurl/fopen.h>
 	<libalx/extra/curl/fcurl/fread.h>
 	<libalx/extra/curl/fcurl/init.h>
 	<libalx/extra/curl/fcurl/rewind.h>
+	<libalx/extra/curl/fcurl/ungetc.h>
 	<libalx/extra/curl/fcurl/URL_FILE.h>
 
 2) Functions
@@ -47,6 +49,9 @@ lib namesakes and are preceaded by url_ .
 	int	url_feof(URL_FILE *stream);
 
 	[[gnu::nonnull]] [[gnu::warn_unused_result]]
+	int	url_fgetc(URL_FILE *stream);
+
+	[[gnu::nonnull]] [[gnu::warn_unused_result]]
 	char	*url_fgets(char *str, size_t size, URL_FILE *stream);
 
 	[[gnu::nonnull]] [[gnu::warn_unused_result]]
@@ -58,6 +63,9 @@ lib namesakes and are preceaded by url_ .
 
 	[[gnu::nonnull]] [[gnu::warn_unused_result]]
 	int	url_rewind(URL_FILE *stream);
+
+	[[gnu::nonnull]]
+	int	url_ungetc(int c, URL_FILE *stream);
 
 To be able to use any of those functions, the corresponding header should be
 included.
@@ -94,8 +102,12 @@ corresponding headers.
 5) Example
 ----------
 
-See a program that uses this library to read a file from an URL (or a path)
+See a function that uses this library to read a file from an URL (or a path)
 in stdout (similar to cat):
 
-<url_cat>
+<https://github.com/alejandro-colomar/libalx/tree/master/src/nix/ucat>
+
+And a program that calls this function:
+
+<https://github.com/alejandro-colomar/ucat>
 

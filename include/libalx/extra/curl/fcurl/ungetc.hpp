@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/curl/fcurl/fgetc.hpp */
+#pragma once	/* libalx/extra/curl/fcurl/ungetc.hpp */
 
 
 /******************************************************************************
@@ -21,7 +21,7 @@
  ******************************************************************************/
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define url_fgetc(stream)	alx_url_fgetc(stream)
+#define url_ungetc(c, stream)	alx_url_ungetc(c, stream)
 #endif
 
 
@@ -30,8 +30,8 @@
  ******************************************************************************/
 extern	"C"
 {
-[[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	alx_url_fgetc	(ALX_URL_FILE *stream);
+[[gnu::nonnull]]
+int	alx_url_ungetc	(int c, ALX_URL_FILE *stream);
 }
 
 

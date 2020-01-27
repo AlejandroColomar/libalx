@@ -21,6 +21,7 @@ OBJ		=							\
 		init.o							\
 		internal.o						\
 		rewind.o						\
+		ungetc.o						\
 		URL_FILE.o
 
 
@@ -98,6 +99,13 @@ REWIND_INC	=							\
 REWIND_SRC	=							\
 		$(SRC_DIR)/extra/curl/fcurl/rewind.c
 
+UNGETC_INC	=							\
+		$(INC_DIR)/libalx/alx/data-structures/dyn-buffer.h	\
+		$(INC_DIR)/libalx/extra/curl/fcurl/URL_FILE.h		\
+		$(INC_DIR)/libalx/extra/curl/fcurl/ungetc.h
+UNGETC_SRC	=							\
+		$(SRC_DIR)/extra/curl/fcurl/ungetc.c
+
 URLFILE_INC	=							\
 		$(INC_DIR)/libalx/alx/data-structures/dyn-buffer.h	\
 		$(INC_DIR)/libalx/extra/curl/fcurl/URL_FILE.h
@@ -154,6 +162,9 @@ internal.so.s: $(INTERNAL_SRC) $(INTERNAL_INC)
 
 rewind.a.s: $(REWIND_SRC) $(REWIND_INC)
 rewind.so.s: $(REWIND_SRC) $(REWIND_INC)
+
+ungetc.a.s: $(UNGETC_SRC) $(UNGETC_INC)
+ungetc.so.s: $(UNGETC_SRC) $(UNGETC_INC)
 
 URL_FILE.a.s: $(URLFILE_SRC) $(URLFILE_INC)
 URL_FILE.so.s: $(URLFILE_SRC) $(URLFILE_INC)
