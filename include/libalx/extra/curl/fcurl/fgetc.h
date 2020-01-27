@@ -49,14 +49,14 @@ __attribute__((always_inline, nonnull, warn_unused_result))
 inline
 int	url_fgetc	(ALX_URL_FILE *stream)
 {
-	return	alx_url_fread(stream);
+	return	alx_url_fgetc(stream);
 }
 
 __attribute__((always_inline, nonnull))
 inline
 int	url_ungetc	(int c, ALX_URL_FILE *stream)
 {
-	return	alx_url_ungetc(stream);
+	return	alx_url_ungetc(c, stream);
 }
 #endif
 

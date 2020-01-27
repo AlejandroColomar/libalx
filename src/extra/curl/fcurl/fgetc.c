@@ -49,7 +49,7 @@ int	alx_url_fgetc	(ALX_URL_FILE *restrict stream)
 	case ALX_URL_CFTYPE_CURL:
 		return	url_fgetc__(stream);
 	default:
-		errno	= EBADF;
+		errno	= EOF;
 		return	0;
 	}
 }
@@ -66,7 +66,7 @@ int	alx_url_ungetc	(int c, ALX_URL_FILE *restrict stream)
 	case ALX_URL_CFTYPE_CURL:
 		return	url_ungetc__(c, stream);
 	default:
-		errno	= EBADF;
+		errno	= EOF;
 		return	0;
 	}
 }
