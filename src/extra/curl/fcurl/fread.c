@@ -57,7 +57,7 @@
 #include <stdint.h>
 #include <stdio.h>
 
-#include <curl/curl.h>
+#include <sys/types.h>
 
 #include "libalx/alx/data-structures/dyn-buffer.h"
 #include "libalx/base/stdlib/minimum.h"
@@ -118,6 +118,7 @@ ptrdiff_t	url_fread__	(void *restrict ptr, size_t size,
 				 ptrdiff_t nmemb, ALX_URL_FILE *restrict stream)
 {
 	size_t	bytes;
+	ssize_t	b;
 
 	bytes	= (size_t)nmemb * size;
 
@@ -126,7 +127,11 @@ ptrdiff_t	url_fread__	(void *restrict ptr, size_t size,
 		return	0;
 
 	bytes	= ALX_MIN(bytes, stream->buf->written);
-	alx_dynbuf_read(ptr, bytes, stream->buf, 0);
+	b	= alx_dynbuf_read(ptr, bytes, stream->buf, 0);
+	if (b < 0)
+		return	0;
+	if (b > 0)
+		bytes	= b;
 
 	alx_dynbuf_consume(stream->buf, bytes);
 
