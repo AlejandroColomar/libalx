@@ -94,8 +94,8 @@ void	alx_nix_ucat__	(FILE *restrict ostream, ALX_URL_FILE *restrict istream,
 /* TODO:  cat flags */
 #if 0
 static
-int	cook_ucat	(FILE *restrict ostream, ALX_URL_FILE *restrict istream,
-			 int flags)
+int	cook_ucat	(FILE *restrict out, ALX_URL_FILE *restrict in,
+			 uint32_t flags)
 {
 	int	c;
 	int	line;
@@ -124,55 +124,52 @@ int	cook_ucat	(FILE *restrict ostream, ALX_URL_FILE *restrict istream,
 			}
 			if (is_set(flags, FLAG_n)) {
 				if (!is_set(flags, FLAG_b) || c != '\n') {
-					(void)fprintf(ostream, "%6i\t", ++line);
-					if (ferror(ostream))
+					(void)fprintf(out, "%6i\t", ++line);
+					if (ferror(out))
 						break;
 				} else if (is_set(flags, FLAG_e)) {
-					(void)fprintf(ostream, "%6s\t", "");
-					if (ferror(ostream))
+					(void)fprintf(out, "%6s\t", "");
+					if (ferror(out))
 						break;
 				}
 			}
 		}
 		if (c == '\n') {
 			if (is_set(flags, FLAG_e)) {
-				if (fputc('$') == EOF)
+				if (fputc('$', out) == EOF)
 					break;
 			}
 		} else if (c == '\t') {
 			if (is_set(flags, FLAG_t)) {
-				if (fputc('^', ) == EOF)
-					break;
-				if (fputc('I') == EOF)
+				if (fputs("^I", out) == EOF))
 					break;
 				continue;
 			}
 		} else if (is_set(flags, FLAG_v)) {
-			(void)alx_url_ungetc(c, fp);
-			wch = alx_url_fgetwc(fp);
-			if (wch == WEOF)
-				break;
-			if (!iswprint(wch)) {
-				if (putchar('M') == EOF || putchar('-') == EOF)
+			/* TODO:  Accept wide characters */
+			if (!isprint(c)) {
+				if (fputs("M-", out) == EOF))
 					break;
-				wch = toascii(wch);
+				c = toascii(c);
 			}
-			if (iswcntrl(wch)) {
-				c = toascii(wch);
+			if (iscntrl(c)) {
+				c = toascii(c);
 				if (c == '\177')
 					c = '?';
 				else
 					c |= 0100;
-				if (putchar('^') == EOF || putchar(c) == EOF)
+				if (fputc('^', out) == EOF)
+					break;
+				if (fputc(c, out) == EOF)
 					break;
 				continue;
 			}
-			if (putwchar(wch) == WEOF)
+			if (fputc(c, out) == EOF)
 				break;
 			c = -1;
 			continue;
 		}
-		if (putchar(c) == EOF)
+		if (fputc(c, out) == EOF)
 			break;
 	}
 	if (alx_url_ferror(fp)) {
@@ -180,7 +177,7 @@ int	cook_ucat	(FILE *restrict ostream, ALX_URL_FILE *restrict istream,
 		rval = 1;
 		alx_url_clearerr(fp);
 	}
-	if (alx_url_ferror(stdout))
+	if (ferror(out))
 		err(1, "stdout");
 
 	return	rval;
