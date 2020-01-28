@@ -96,12 +96,14 @@ ALX_NPC_OBJ	=							\
 CURL_OBJ	=							\
 		$(TMP_DIR)/extra/curl/fcurl/fclose.o			\
 		$(TMP_DIR)/extra/curl/fcurl/feof.o			\
+		$(TMP_DIR)/extra/curl/fcurl/fgetc.o			\
 		$(TMP_DIR)/extra/curl/fcurl/fgets.o			\
 		$(TMP_DIR)/extra/curl/fcurl/fopen.o			\
 		$(TMP_DIR)/extra/curl/fcurl/fread.o			\
 		$(TMP_DIR)/extra/curl/fcurl/init.o			\
 		$(TMP_DIR)/extra/curl/fcurl/internal.o			\
 		$(TMP_DIR)/extra/curl/fcurl/rewind.o			\
+		$(TMP_DIR)/extra/curl/fcurl/ungetc.o			\
 		$(TMP_DIR)/extra/curl/fcurl/URL_FILE.o
 CV_OBJ		=							\
 		$(TMP_DIR)/extra/cv/alx.o				\
@@ -146,11 +148,8 @@ OCR_OBJ		=							\
 ZBAR_OBJ	=							\
 		$(TMP_DIR)/extra/zbar/zbar.o
 
-NIX_UCAT_OBJ	=							\
-		$(TMP_DIR)/nix/ucat/ucat.o
 
-
-ALL	= base alx extra nix
+ALL	= base alx extra
 
 # target: dependencies
 #	action
@@ -216,15 +215,6 @@ PHONY += zbar
 zbar: libalx base
 	$(Q)$(MAKE)	libalx/libalx-zbar.a
 	$(Q)$(MAKE)	libalx/libalx-zbar.so
-
-
-PHONY += nix
-nix: ucat
-
-PHONY += ucat
-ucat: libalx base curl
-	$(Q)$(MAKE)	libalx/libalx-ucat.a
-	$(Q)$(MAKE)	libalx/libalx-ucat.so
 
 
 libalx:
@@ -295,11 +285,6 @@ libalx/libalx-zbar.so: $(patsubst %.o,%.so.o,$(ZBAR_OBJ))
 	@echo	"	CC	libalx/lib/$@"
 	$(Q)$(CC) $(LDFLAGS) -o $@ $^ `pkg-config --libs zbar`		\
 						-l alx-base
-
-libalx/libalx-ucat.a: $(patsubst %.o,%.a.o,$(NIX_UCAT_OBJ))
-libalx/libalx-ucat.so: $(patsubst %.o,%.so.o,$(NIX_UCAT_OBJ))
-	@echo	"	CC	libalx/lib/$@"
-	$(Q)$(CC) $(LDFLAGS) -o $@ $^ -l alx-curl -l alx-base
 
 
 PHONY += clean

@@ -36,7 +36,7 @@
  ******************************************************************************/
 int	alx_strtou8_s		(uint8_t *restrict num,
 				 const char *restrict str,
-				 int base, ptrdiff_t *restrict read)
+				 int base, ptrdiff_t *restrict nread)
 {
 	const int	errno_before = errno;
 	char		*endptr;
@@ -45,8 +45,8 @@ int	alx_strtou8_s		(uint8_t *restrict num,
 	errno	= 0;
 	tmp	= strtoul(str, &endptr, base);
 	*num	= tmp;
-	if (read)
-		*read	= endptr - str;
+	if (nread)
+		*nread	= endptr - str;
 	if (tmp > UINT8_MAX)
 		errno	= ERANGE;
 
@@ -55,7 +55,7 @@ int	alx_strtou8_s		(uint8_t *restrict num,
 
 int	alx_strtou16_s		(uint16_t *restrict num,
 				 const char *restrict str,
-				 int base, ptrdiff_t *restrict read)
+				 int base, ptrdiff_t *restrict nread)
 {
 	const int	errno_before = errno;
 	char		*endptr;
@@ -64,8 +64,8 @@ int	alx_strtou16_s		(uint16_t *restrict num,
 	errno	= 0;
 	tmp	= strtoul(str, &endptr, base);
 	*num	= tmp;
-	if (read)
-		*read	= endptr - str;
+	if (nread)
+		*nread	= endptr - str;
 	if (tmp > UINT16_MAX)
 		errno	= ERANGE;
 
@@ -74,7 +74,7 @@ int	alx_strtou16_s		(uint16_t *restrict num,
 
 int	alx_strtou32_s		(uint32_t *restrict num,
 				 const char *restrict str,
-				 int base, ptrdiff_t *restrict read)
+				 int base, ptrdiff_t *restrict nread)
 {
 	const int	errno_before = errno;
 	char		*endptr;
@@ -83,8 +83,8 @@ int	alx_strtou32_s		(uint32_t *restrict num,
 	errno	= 0;
 	tmp	= strtoul(str, &endptr, base);
 	*num	= tmp;
-	if (read)
-		*read	= endptr - str;
+	if (nread)
+		*nread	= endptr - str;
 	if (tmp > UINT32_MAX)
 		errno	= ERANGE;
 
@@ -93,15 +93,15 @@ int	alx_strtou32_s		(uint32_t *restrict num,
 
 int	alx_strtou64_s		(uint64_t *restrict num,
 				 const char *restrict str,
-				 int base, ptrdiff_t *restrict read)
+				 int base, ptrdiff_t *restrict nread)
 {
 	const int	errno_before = errno;
 	char		*endptr;
 
 	errno	= 0;
 	*num	= strtoul(str, &endptr, base);
-	if (read)
-		*read	= endptr - str;
+	if (nread)
+		*nread	= endptr - str;
 
 	return	alx_strtoul_status(str, endptr, errno, errno_before);
 }

@@ -1,21 +1,19 @@
 /******************************************************************************
- *	Copyright (C) 2019	Alejandro Colomar Andrés		      *
- *	SPDX-License-Identifier:	LGPL-2.0-only			      *
+ *	Copyright (C) 2020	Alejandro Colomar Andrés		      *
+ *	SPDX-License-Identifier:	BSD-2-Clause			      *
  ******************************************************************************/
 
 
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/base/stdlib/strto/strtof_s.hpp */
+#pragma once	/* libalx/extra/curl/fcurl/ungetc.hpp */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <cstddef>
-
-#include "libalx/base/compiler/restrict.hpp"
+#include "libalx/extra/curl/fcurl/URL_FILE.hpp"
 
 
 /******************************************************************************
@@ -23,9 +21,7 @@
  ******************************************************************************/
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define strtod_s(num, str, nread)	alx_strtod_s(num, str, nread)
-#define strtof_s(num, str, nread)	alx_strtof_s(num, str, nread)
-#define strtold_s(num, str, nread)	alx_strtold_s(num, str, nread)
+#define url_ungetc(c, stream)	alx_url_ungetc(c, stream)
 #endif
 
 
@@ -34,20 +30,8 @@
  ******************************************************************************/
 extern	"C"
 {
-[[gnu::nonnull(1, 2)]][[gnu::warn_unused_result]]
-int	alx_strtod_s	(double *restrict num, const char *restrict str,
-			 ptrdiff_t *restrict nread);
-[[gnu::nonnull(1, 2)]][[gnu::warn_unused_result]]
-int	alx_strtof_s	(float *restrict num, const char *restrict str,
-			 ptrdiff_t *restrict nread);
-[[gnu::nonnull(1, 2)]][[gnu::warn_unused_result]]
-int	alx_strtold_s	(long double *restrict num, const char *restrict str,
-			 ptrdiff_t *restrict nread);
-
-[[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_strtof_status	(const char *restrict str,
-				 const char *restrict endptr,
-				 int errno_after, int errno_before);
+[[gnu::nonnull]]
+int	alx_url_ungetc	(int c, ALX_URL_FILE *stream);
 }
 
 
@@ -55,6 +39,7 @@ int	alx_strtof_status	(const char *restrict str,
  ******* namespace ************************************************************
  ******************************************************************************/
 namespace alx {
+namespace url {
 
 
 /******************************************************************************
@@ -75,9 +60,11 @@ namespace alx {
 /******************************************************************************
  ******* namespace ************************************************************
  ******************************************************************************/
+}	/* namespace curl */
 }	/* namespace alx */
 
 
 /******************************************************************************
  ******* end of file **********************************************************
  ******************************************************************************/
+

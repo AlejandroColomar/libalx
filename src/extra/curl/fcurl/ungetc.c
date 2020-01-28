@@ -5,16 +5,14 @@
 
 
 /******************************************************************************
- ******* include guard ********************************************************
- ******************************************************************************/
-#pragma once	/* libalx/nix/ucat/ucat.h */
-
-
-/******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include "libalx/extra/curl/fcurl/ungetc.h"
+
+#include <errno.h>
 #include <stdio.h>
 
+#include "libalx/alx/data-structures/dyn-buffer.h"
 #include "libalx/extra/curl/fcurl/URL_FILE.h"
 
 
@@ -24,47 +22,52 @@
 
 
 /******************************************************************************
- ******* enum *****************************************************************
+ ******* enum / struct / union ************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* struct / union *******************************************************
+ ******* static prototypes ****************************************************
  ******************************************************************************/
+static
+int	url_ungetc__	(int c, ALX_URL_FILE *restrict stream);
 
 
 /******************************************************************************
- ******* prototypes ***********************************************************
+ ******* global functions *****************************************************
  ******************************************************************************/
-__attribute__((warn_unused_result))
-int	alx_nix_ucat	(const char *url);
-__attribute__((nonnull))
-void	alx_nix_ucat__	(FILE *restrict ostream, ALX_URL_FILE *restrict istream);
-
-
-/******************************************************************************
- ******* always_inline ********************************************************
- ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, warn_unused_result))
-inline
-int	nix_ucat	(const char *url)
+int	alx_url_ungetc	(int c, ALX_URL_FILE *restrict stream)
 {
-	return	alx_nix_ucat(url);
+
+	if (c == EOF)
+		return	EOF;
+
+	switch (stream->type) {
+	case ALX_URL_CFTYPE_FILE:
+		return	ungetc(c, stream->handle.file);
+	case ALX_URL_CFTYPE_CURL:
+		return	url_ungetc__(c, stream);
+	default:
+		errno	= EBADF;
+		return	EOF;
+	}
 }
-__attribute__((always_inline, nonnull))
-inline
-void	nix_ucat__	(FILE *restrict ostream, ALX_URL_FILE *restrict istream)
-{
-	return	alx_nix_ucat__(ostream, istream);
-}
-#endif
 
 
 /******************************************************************************
- ******* inline ***************************************************************
+ ******* static function definitions ******************************************
  ******************************************************************************/
+static
+int	url_ungetc__	(int c, ALX_URL_FILE *restrict stream)
+{
+	unsigned char	ch;
+
+	ch	= c;
+	if (alx_dynbuf_insert(stream->buf, 0, &ch, sizeof(ch)))
+		return	EOF;
+
+	return	c;
+}
 
 
 /******************************************************************************

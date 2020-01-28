@@ -36,7 +36,7 @@
  ******************************************************************************/
 int	alx_strtoi8_s		(int8_t *restrict num,
 				 const char *restrict str,
-				 int base, ptrdiff_t *restrict read)
+				 int base, ptrdiff_t *restrict nread)
 {
 	const int	errno_before = errno;
 	char		*endptr;
@@ -44,8 +44,8 @@ int	alx_strtoi8_s		(int8_t *restrict num,
 
 	tmp	= strtol(str, &endptr, base);
 	*num	= tmp;
-	if (read)
-		*read	= endptr - str;
+	if (nread)
+		*nread	= endptr - str;
 	if (tmp < INT8_MIN || tmp > INT8_MAX)
 		errno	= ERANGE;
 
@@ -54,7 +54,7 @@ int	alx_strtoi8_s		(int8_t *restrict num,
 
 int	alx_strtoi16_s		(int16_t *restrict num,
 				 const char *restrict str,
-				 int base, ptrdiff_t *restrict read)
+				 int base, ptrdiff_t *restrict nread)
 {
 	const int	errno_before = errno;
 	char		*endptr;
@@ -63,8 +63,8 @@ int	alx_strtoi16_s		(int16_t *restrict num,
 	errno	= 0;
 	tmp	= strtol(str, &endptr, base);
 	*num	= tmp;
-	if (read)
-		*read	= endptr - str;
+	if (nread)
+		*nread	= endptr - str;
 	if (tmp < INT16_MIN || tmp > INT16_MAX)
 		errno	= ERANGE;
 
@@ -73,7 +73,7 @@ int	alx_strtoi16_s		(int16_t *restrict num,
 
 int	alx_strtoi32_s		(int32_t *restrict num,
 				 const char *restrict str,
-				 int base, ptrdiff_t *restrict read)
+				 int base, ptrdiff_t *restrict nread)
 {
 	const int	errno_before = errno;
 	char		*endptr;
@@ -82,8 +82,8 @@ int	alx_strtoi32_s		(int32_t *restrict num,
 	errno	= 0;
 	tmp	= strtol(str, &endptr, base);
 	*num	= tmp;
-	if (read)
-		*read	= endptr - str;
+	if (nread)
+		*nread	= endptr - str;
 	if (tmp < INT32_MIN || tmp > INT32_MAX)
 		errno	= ERANGE;
 
@@ -92,15 +92,15 @@ int	alx_strtoi32_s		(int32_t *restrict num,
 
 int	alx_strtoi64_s		(int64_t *restrict num,
 				 const char *restrict str,
-				 int base, ptrdiff_t *restrict read)
+				 int base, ptrdiff_t *restrict nread)
 {
 	const int	errno_before = errno;
 	char		*endptr;
 
 	errno	= 0;
 	*num	= strtol(str, &endptr, base);
-	if (read)
-		*read	= endptr - str;
+	if (nread)
+		*nread	= endptr - str;
 
 	return	alx_strtol_status(str, endptr, errno, errno_before);
 }

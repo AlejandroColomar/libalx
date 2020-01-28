@@ -1,60 +1,24 @@
 /******************************************************************************
- *	Copyright (C) 2019	Alejandro Colomar Andrés		      *
- *	SPDX-License-Identifier:	LGPL-2.0-only			      *
+ *	Copyright (C) 2020	Alejandro Colomar Andrés		      *
+ *	SPDX-License-Identifier:	BSD-2-Clause			      *
  ******************************************************************************/
 
 
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/base/stdlib/strto/strtof_s.hpp */
+#pragma once	/* libalx/extra/curl/fcurl/fgetc.h */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <cstddef>
-
-#include "libalx/base/compiler/restrict.hpp"
+#include "libalx/extra/curl/fcurl/URL_FILE.h"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define strtod_s(num, str, nread)	alx_strtod_s(num, str, nread)
-#define strtof_s(num, str, nread)	alx_strtof_s(num, str, nread)
-#define strtold_s(num, str, nread)	alx_strtold_s(num, str, nread)
-#endif
-
-
-/******************************************************************************
- ******* extern "C" ***********************************************************
- ******************************************************************************/
-extern	"C"
-{
-[[gnu::nonnull(1, 2)]][[gnu::warn_unused_result]]
-int	alx_strtod_s	(double *restrict num, const char *restrict str,
-			 ptrdiff_t *restrict nread);
-[[gnu::nonnull(1, 2)]][[gnu::warn_unused_result]]
-int	alx_strtof_s	(float *restrict num, const char *restrict str,
-			 ptrdiff_t *restrict nread);
-[[gnu::nonnull(1, 2)]][[gnu::warn_unused_result]]
-int	alx_strtold_s	(long double *restrict num, const char *restrict str,
-			 ptrdiff_t *restrict nread);
-
-[[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_strtof_status	(const char *restrict str,
-				 const char *restrict endptr,
-				 int errno_after, int errno_before);
-}
-
-
-/******************************************************************************
- ******* namespace ************************************************************
- ******************************************************************************/
-namespace alx {
 
 
 /******************************************************************************
@@ -70,14 +34,30 @@ namespace alx {
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
+__attribute__((nonnull, warn_unused_result))
+int	alx_url_fgetc	(ALX_URL_FILE *stream);
 
 
 /******************************************************************************
- ******* namespace ************************************************************
+ ******* always_inline ********************************************************
  ******************************************************************************/
-}	/* namespace alx */
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+__attribute__((always_inline, nonnull, warn_unused_result))
+inline
+int	url_fgetc	(ALX_URL_FILE *stream)
+{
+	return	alx_url_fgetc(stream);
+}
+#endif
+
+
+/******************************************************************************
+ ******* inline ***************************************************************
+ ******************************************************************************/
 
 
 /******************************************************************************
  ******* end of file **********************************************************
  ******************************************************************************/
+

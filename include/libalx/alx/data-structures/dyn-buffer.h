@@ -38,6 +38,8 @@
  ******************************************************************************/
 #include <stddef.h>
 
+#include <sys/types.h>
+
 
 /******************************************************************************
  ******* macros ***************************************************************
@@ -113,6 +115,28 @@ int	alx_dynbuf_write	(struct Alx_Dyn_Buffer *restrict buf,
 				 const void *restrict data, size_t size);
 
 /*
+ * Inserts into the buffer.
+ * The data that was previously after `offset` bytes is moved so that after
+ * the operation it starts at the end of the new data.
+ * Reallocates memory for the data if necessary, copies the data passed by the
+ * user to the reallocated space, and updates any necessary metadata.
+ *
+ * buf:		Pointer to a buffer.
+ * offset:	Start writing at buf->data + offset.
+ * data:	Pointer to the first byte of the data to be copied.
+ * size:	Size of the data to be copied.
+ *
+ * return:
+ *	0:		OK.
+ *	ENOMEM:		Aborted; failure to reallocate the data.  Previous
+ *			data is left untouched.
+ */
+__attribute__((nonnull, warn_unused_result))
+int	alx_dynbuf_insert	(struct Alx_Dyn_Buffer *restrict buf,
+				 size_t offset,
+				 const void *restrict data, size_t size);
+
+/*
  * Reads from the buffer.
  *
  * buf:		Pointer to a buffer.
@@ -122,11 +146,11 @@ int	alx_dynbuf_write	(struct Alx_Dyn_Buffer *restrict buf,
  *
  * return:
  *	0:		OK.
- *	ENOBUFS:	OK. data was truncated.
- *	EFAULT:		Aborted; invalid offset.
+ *	>0:		OK. data was truncated. number of bytes actually read.
+ *	-1:		Aborted; invalid offset.
  */
-__attribute__((nonnull))
-int	alx_dynbuf_read		(void *restrict data, size_t size,
+__attribute__((nonnull, warn_unused_result))
+ssize_t	alx_dynbuf_read		(void *restrict data, size_t size,
 				 const struct Alx_Dyn_Buffer *restrict buf,
 				 size_t offset);
 

@@ -35,4 +35,4 @@ zbar:
  - libzbar-dev
 
 The majority of the library is licensed with LGPL-2.0-only
-The nix module (not yet available) is licensed with BSD-2-Clause
+Some of it is licensed with BSD-2-Clause

@@ -1,18 +1,21 @@
 /******************************************************************************
- *	Copyright (C) 2019	Alejandro Colomar Andrés		      *
- *	SPDX-License-Identifier:	LGPL-2.0-only			      *
+ *	Copyright (C) 2020	Alejandro Colomar Andrés		      *
+ *	SPDX-License-Identifier:	BSD-2-Clause			      *
  ******************************************************************************/
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/base/stdlib/strto/strtof_s.h"
+#include "libalx/extra/curl/fcurl/fgetc.h"
 
-#include <ctype.h>
 #include <errno.h>
-#include <stddef.h>
-#include <stdlib.h>
+#include <stdio.h>
+
+#include "libalx/alx/data-structures/dyn-buffer.h"
+#include "libalx/extra/curl/fcurl/URL_FILE.h"
+
+#include "internal.h"
 
 
 /******************************************************************************
@@ -28,65 +31,50 @@
 /******************************************************************************
  ******* static prototypes ****************************************************
  ******************************************************************************/
+static
+int	url_fgetc__	(ALX_URL_FILE *restrict stream);
 
 
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_strtod_s	(double *restrict num, const char *restrict str,
-			 ptrdiff_t *restrict nread)
+int	alx_url_fgetc	(ALX_URL_FILE *restrict stream)
 {
-	const int	errno_before = errno;
-	char		*endptr;
 
-	errno	= 0;
-	*num	= strtod(str, &endptr);
-	if (nread)
-		*nread	= endptr - str;
-
-	return	alx_strtof_status(str, endptr, errno, errno_before);
+	switch (stream->type) {
+	case ALX_URL_CFTYPE_FILE:
+		return	fgetc(stream->handle.file);
+	case ALX_URL_CFTYPE_CURL:
+		return	url_fgetc__(stream);
+	default:
+		errno	= EBADF;
+		return	EOF;
+	}
 }
-
-int	alx_strtof_s	(float *restrict num, const char *restrict str,
-			 ptrdiff_t *restrict nread)
-{
-	const int	errno_before = errno;
-	char		*endptr;
-
-	errno	= 0;
-	*num	= strtof(str, &endptr);
-	if (nread)
-		*nread	= endptr - str;
-
-	return	alx_strtof_status(str, endptr, errno, errno_before);
-}
-
-int	alx_strtold_s	(long double *restrict num, const char *restrict str,
-			 ptrdiff_t *restrict nread)
-{
-	const int	errno_before = errno;
-	char		*endptr;
-
-	errno	= 0;
-	*num	= strtold(str, &endptr);
-	if (nread)
-		*nread	= endptr - str;
-
-	return	alx_strtof_status(str, endptr, errno, errno_before);
-}
-
-
-extern
-int	alx_strtof_status	(const char *restrict str,
-				 const char *restrict endptr,
-				 int errno_after, int errno_before);
 
 
 /******************************************************************************
  ******* static function definitions ******************************************
  ******************************************************************************/
+static
+int	url_fgetc__	(ALX_URL_FILE *restrict stream)
+{
+	unsigned char	c;
+
+	alx_url_fill_buffer__(stream, sizeof(c));
+	if (!stream->buf->written)
+		return	EOF;
+
+	if (alx_dynbuf_read(&c, sizeof(c), stream->buf, 0))
+		return	EOF;
+
+	alx_dynbuf_consume(stream->buf, sizeof(c));
+
+	return	c;
+}
 
 
 /******************************************************************************
  ******* end of file **********************************************************
  ******************************************************************************/
+

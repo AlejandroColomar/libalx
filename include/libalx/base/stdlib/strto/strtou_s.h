@@ -40,19 +40,19 @@
 __attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_strtou8_s		(uint8_t *restrict num,
 				 const char *restrict str,
-				 int base, ptrdiff_t *restrict read);
+				 int base, ptrdiff_t *restrict nread);
 __attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_strtou16_s		(uint16_t *restrict num,
 				 const char *restrict str,
-				 int base, ptrdiff_t *restrict read);
+				 int base, ptrdiff_t *restrict nread);
 __attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_strtou32_s		(uint32_t *restrict num,
 				 const char *restrict str,
-				 int base, ptrdiff_t *restrict read);
+				 int base, ptrdiff_t *restrict nread);
 __attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_strtou64_s		(uint64_t *restrict num,
 				 const char *restrict str,
-				 int base, ptrdiff_t *restrict read);
+				 int base, ptrdiff_t *restrict nread);
 
 __attribute__((nonnull, warn_unused_result))
 inline
@@ -70,36 +70,36 @@ __attribute__((always_inline, nonnull(1, 2), warn_unused_result))
 inline
 int	strtou8_s		(uint8_t *restrict num,
 				 const char *restrict str,
-				 int base, ptrdiff_t *restrict read)
+				 int base, ptrdiff_t *restrict nread)
 {
-	return	alx_strtou8_s(num, str, base, read);
+	return	alx_strtou8_s(num, str, base, nread);
 }
 
 __attribute__((always_inline, nonnull(1, 2), warn_unused_result))
 inline
 int	strtou16_s		(uint16_t *restrict num,
 				 const char *restrict str,
-				 int base, ptrdiff_t *restrict read)
+				 int base, ptrdiff_t *restrict nread)
 {
-	return	alx_strtou16_s(num, str, base, read);
+	return	alx_strtou16_s(num, str, base, nread);
 }
 
 __attribute__((always_inline, nonnull(1, 2), warn_unused_result))
 inline
 int	strtou32_s		(uint32_t *restrict num,
 				 const char *restrict str,
-				 int base, ptrdiff_t *restrict read)
+				 int base, ptrdiff_t *restrict nread)
 {
-	return	alx_strtou32_s(num, str, base, read);
+	return	alx_strtou32_s(num, str, base, nread);
 }
 
 __attribute__((always_inline, nonnull(1, 2), warn_unused_result))
 inline
 int	strtou64_s		(uint64_t *restrict num,
 				 const char *restrict str,
-				 int base, ptrdiff_t *restrict read)
+				 int base, ptrdiff_t *restrict nread)
 {
-	return	alx_strtou64_s(num, str, base, read);
+	return	alx_strtou64_s(num, str, base, nread);
 }
 #endif	/* defined(ALX_NO_PREFIX) */
 

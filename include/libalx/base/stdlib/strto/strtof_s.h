@@ -42,13 +42,13 @@
  */
 __attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_strtod_s	(double *restrict num, const char *restrict str,
-			 ptrdiff_t *restrict read);
+			 ptrdiff_t *restrict nread);
 __attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_strtof_s	(float *restrict num, const char *restrict str,
-			 ptrdiff_t *restrict read);
+			 ptrdiff_t *restrict nread);
 __attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_strtold_s	(long double *restrict num, const char *restrict str,
-			 ptrdiff_t *restrict read);
+			 ptrdiff_t *restrict nread);
 
 __attribute__((nonnull, warn_unused_result))
 inline
@@ -65,25 +65,25 @@ int	alx_strtof_status	(const char *restrict str,
 __attribute__((always_inline, nonnull(1, 2), warn_unused_result))
 inline
 int	strtod_s	(double *restrict num, const char *restrict str,
-			 ptrdiff_t *restrict read)
+			 ptrdiff_t *restrict nread)
 {
-	return	alx_strtod_s(num, str, read);
+	return	alx_strtod_s(num, str, nread);
 }
 
 __attribute__((always_inline, nonnull(1, 2), warn_unused_result))
 inline
 int	strtof_s	(float *restrict num, const char *restrict str,
-			 ptrdiff_t *restrict read)
+			 ptrdiff_t *restrict nread)
 {
-	return	alx_strtof_s(num, str, read);
+	return	alx_strtof_s(num, str, nread);
 }
 
 __attribute__((always_inline, nonnull(1, 2), warn_unused_result))
 inline
 int	strtold_s	(long double *restrict num, const char *restrict str,
-			 ptrdiff_t *restrict read)
+			 ptrdiff_t *restrict nread)
 {
-	return	alx_strtold_s(num, str, read);
+	return	alx_strtold_s(num, str, nread);
 }
 #endif	 /* defined(ALX_NO_PREFIX) */
 

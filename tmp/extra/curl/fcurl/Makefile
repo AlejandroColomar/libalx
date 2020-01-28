@@ -14,12 +14,14 @@
 OBJ		=							\
 		fclose.o						\
 		feof.o							\
+		fgetc.o							\
 		fgets.o							\
 		fopen.o							\
 		fread.o							\
 		init.o							\
 		internal.o						\
 		rewind.o						\
+		ungetc.o						\
 		URL_FILE.o
 
 
@@ -38,6 +40,14 @@ FEOF_INC	=							\
 		$(INC_DIR)/libalx/extra/curl/fcurl/feof.h
 FEOF_SRC	=							\
 		$(SRC_DIR)/extra/curl/fcurl/feof.c
+
+FGETC_INC	=							\
+		$(INC_DIR)/libalx/alx/data-structures/dyn-buffer.h	\
+		$(INC_DIR)/libalx/extra/curl/fcurl/URL_FILE.h		\
+		$(SRC_DIR)/extra/curl/fcurl/internal.h			\
+		$(INC_DIR)/libalx/extra/curl/fcurl/fgetc.h
+FGETC_SRC	=							\
+		$(SRC_DIR)/extra/curl/fcurl/fgetc.c
 
 FGETS_INC	=							\
 		$(INC_DIR)/libalx/alx/data-structures/dyn-buffer.h	\
@@ -89,6 +99,13 @@ REWIND_INC	=							\
 REWIND_SRC	=							\
 		$(SRC_DIR)/extra/curl/fcurl/rewind.c
 
+UNGETC_INC	=							\
+		$(INC_DIR)/libalx/alx/data-structures/dyn-buffer.h	\
+		$(INC_DIR)/libalx/extra/curl/fcurl/URL_FILE.h		\
+		$(INC_DIR)/libalx/extra/curl/fcurl/ungetc.h
+UNGETC_SRC	=							\
+		$(SRC_DIR)/extra/curl/fcurl/ungetc.c
+
 URLFILE_INC	=							\
 		$(INC_DIR)/libalx/alx/data-structures/dyn-buffer.h	\
 		$(INC_DIR)/libalx/extra/curl/fcurl/URL_FILE.h
@@ -125,6 +142,9 @@ fclose.so.s: $(FCLOSE_SRC) $(FCLOSE_INC)
 feof.a.s: $(FEOF_SRC) $(FEOF_INC)
 feof.so.s: $(FEOF_SRC) $(FEOF_INC)
 
+fgetc.a.s: $(FGETC_SRC) $(FGETC_INC)
+fgetc.so.s: $(FGETC_SRC) $(FGETC_INC)
+
 fgets.a.s: $(FGETS_SRC) $(FGETS_INC)
 fgets.so.s: $(FGETS_SRC) $(FGETS_INC)
 
@@ -142,6 +162,9 @@ internal.so.s: $(INTERNAL_SRC) $(INTERNAL_INC)
 
 rewind.a.s: $(REWIND_SRC) $(REWIND_INC)
 rewind.so.s: $(REWIND_SRC) $(REWIND_INC)
+
+ungetc.a.s: $(UNGETC_SRC) $(UNGETC_INC)
+ungetc.so.s: $(UNGETC_SRC) $(UNGETC_INC)
 
 URL_FILE.a.s: $(URLFILE_SRC) $(URLFILE_INC)
 URL_FILE.so.s: $(URLFILE_SRC) $(URLFILE_INC)
