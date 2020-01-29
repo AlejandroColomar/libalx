@@ -12,8 +12,8 @@
 #include <libgen.h>
 #include <stdio.h>
 
-#include <libalx/base/stdio/printf/sbprintf.h>
-#include <libalx/base/stdio/printf/snprintfs.h>
+#include "libalx/base/compiler/size.h"
+#include "libalx/base/string/strcpy/strlcpys.h"
 
 
 /******************************************************************************
@@ -40,11 +40,10 @@ int	alx_basename_s	(char dest[static restrict FILENAME_MAX],
 	char	tmp[FILENAME_MAX];
 	int	status;
 
-	status	= alx_sbprintf(tmp, NULL, "%s", path);
+	status	= alx_strlcpys(tmp, path, ARRAY_SIZE(tmp), NULL);
 	if (status)
 		return	status;
-
-	status	= alx_snprintfs(dest, NULL, FILENAME_MAX, "%s", basename(tmp));
+	status	= alx_strlcpys(dest, basename(tmp), FILENAME_MAX, NULL);
 	if (status)
 		return	status;
 
