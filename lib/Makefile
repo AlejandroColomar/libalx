@@ -76,6 +76,7 @@ BASE_OBJ	=							\
 		$(TMP_DIR)/base/string/strchr/strrcasechr.o		\
 		$(TMP_DIR)/base/string/strchr/strrcasechrnul.o		\
 		$(TMP_DIR)/base/string/strchr/strrchrnul.o		\
+		$(TMP_DIR)/base/string/strcpy/strlcpys.o		\
 		$(TMP_DIR)/base/string/strcpy/strscpy.o			\
 		$(TMP_DIR)/base/string/strlwr/strlwr.o			\
 		$(TMP_DIR)/base/string/strlwr/strnlwr.o			\

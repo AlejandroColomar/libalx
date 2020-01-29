@@ -36,6 +36,7 @@ OBJ		=							\
 		strchr/strrcasechr.o					\
 		strchr/strrcasechrnul.o					\
 		strchr/strrchrnul.o					\
+		strcpy/strlcpys.o					\
 		strcpy/strscpy.o					\
 		strlwr/strlwr.o						\
 		strlwr/strnlwr.o					\
@@ -123,6 +124,11 @@ STRCHR_RNUL_INC	=							\
 		$(INC_DIR)/libalx/base/string/strchr/strrchrnul.h
 STRCHR_RNUL_SRC	=							\
 		$(SRC_DIR)/base/string/strchr/strrchrnul.c
+
+STRCPY_LS_INC	=							\
+		$(INC_DIR)/libalx/base/string/strcpy/strlcpys.h
+STRCPY_LS_SRC	=							\
+		$(SRC_DIR)/base/string/strcpy/strlcpys.c
 
 STRCPY_S_INC	=							\
 		$(INC_DIR)/libalx/base/string/strcpy/strscpy.h
@@ -250,6 +256,9 @@ strchr/strrcasechrnul.so.s: $(STRCHR_RCASENUL_SRC) $(STRCHR_RCASENUL_INC)
 
 strchr/strrchrnul.a.s: $(STRCHR_RNUL_SRC) $(STRCHR_RNUL_INC)
 strchr/strrchrnul.so.s: $(STRCHR_RNUL_SRC) $(STRCHR_RNUL_INC)
+
+strcpy/strlcpys.a.s: $(STRCPY_LS_SRC) $(STRCPY_LS_INC)
+strcpy/strlcpys.so.s: $(STRCPY_LS_SRC) $(STRCPY_LS_INC)
 
 strcpy/strscpy.a.s: $(STRCPY_S_SRC) $(STRCPY_S_INC)
 strcpy/strscpy.so.s: $(STRCPY_S_SRC) $(STRCPY_S_INC)
