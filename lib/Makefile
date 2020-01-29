@@ -13,6 +13,8 @@ BASE_OBJ	=							\
 		$(TMP_DIR)/base/float/constant.o			\
 		$(TMP_DIR)/base/float/printf.o				\
 		$(TMP_DIR)/base/float/scanf.o				\
+		$(TMP_DIR)/base/libgen/basename.o			\
+		$(TMP_DIR)/base/libgen/dirname.o			\
 		$(TMP_DIR)/base/math/array_division.o			\
 		$(TMP_DIR)/base/math/array_multiplication.o		\
 		$(TMP_DIR)/base/math/array_sum.o			\

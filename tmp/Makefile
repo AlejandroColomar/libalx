@@ -23,6 +23,7 @@ base:
 	$(Q)$(MAKE)	-C $(TMP_DIR)/base/compiler/
 	$(Q)$(MAKE)	-C $(TMP_DIR)/base/errno/
 	$(Q)$(MAKE)	-C $(TMP_DIR)/base/float/
+	$(Q)$(MAKE)	-C $(TMP_DIR)/base/libgen/
 	$(Q)$(MAKE)	-C $(TMP_DIR)/base/math/
 	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stdint/
 	$(Q)$(MAKE)	-C $(TMP_DIR)/base/stdio/
