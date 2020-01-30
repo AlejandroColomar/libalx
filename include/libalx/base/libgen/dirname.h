@@ -34,7 +34,7 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull))
+__attribute__((nonnull, warn_unused_result))
 int	alx_dirname_s	(char dest[static restrict FILENAME_MAX],
 			 const char *restrict path);
 
@@ -44,7 +44,7 @@ int	alx_dirname_s	(char dest[static restrict FILENAME_MAX],
  ******************************************************************************/
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, nonnull))
+__attribute__((always_inline, nonnull, warn_unused_result))
 inline
 int	dirname_s	(char dest[static restrict FILENAME_MAX],
 			 const char *restrict path)

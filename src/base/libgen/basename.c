@@ -9,6 +9,7 @@
  ******************************************************************************/
 #include "libalx/base/libgen/basename.h"
 
+#include <errno.h>
 #include <libgen.h>
 #include <stdio.h>
 
@@ -38,14 +39,11 @@ int	alx_basename_s	(char dest[static restrict FILENAME_MAX],
 			 const char *restrict path)
 {
 	char	tmp[FILENAME_MAX];
-	int	status;
 
-	status	= alx_strlcpys(tmp, path, ARRAY_SIZE(tmp), NULL);
-	if (status)
-		return	status;
-	status	= alx_strlcpys(dest, basename(tmp), FILENAME_MAX, NULL);
-	if (status)
-		return	status;
+	if (alx_strlcpys(tmp, path, ARRAY_SIZE(tmp), NULL))
+		return	ENAMETOOLONG;
+	if (alx_strlcpys(dest, basename(tmp), FILENAME_MAX, NULL))
+		return	ENAMETOOLONG;
 
 	return	0;
 }

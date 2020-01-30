@@ -32,7 +32,7 @@
  ******************************************************************************/
 extern	"C"
 {
-[[gnu::nonnull]]
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_dirname_s	(char dest[static restrict FILENAME_MAX],
 			 const char *restrict path);
 }
