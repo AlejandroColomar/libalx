@@ -129,6 +129,21 @@ void	*alx_reallocarrays__	(void *restrict ptr, ptrdiff_t nmemb,
 
 
 /******************************************************************************
+ ******* always_inline ********************************************************
+ ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+__attribute__((always_inline, nonnull, warn_unused_result))
+inline
+void	*reallocarrays__	(void *restrict ptr, ptrdiff_t nmemb,
+				 size_t size, int *restrict error)
+{
+	return	alx_reallocarrays__(ptr, nmemb, size, error);
+}
+#endif
+
+
+/******************************************************************************
  ******* inline ***************************************************************
  ******************************************************************************/
 

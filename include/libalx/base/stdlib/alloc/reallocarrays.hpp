@@ -49,6 +49,9 @@
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 #define reallocarrays(ptr, nmemb)	alx_reallocarrays(ptr, nmemb)
+#define reallocarrays__(ptr, nmemb, size, error)			\
+					alx_reallocarrays__(ptr, nmemb,	\
+							    size, error)
 #endif
 
 
