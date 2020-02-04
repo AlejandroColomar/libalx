@@ -25,6 +25,7 @@
  ******************************************************************************/
 #include <cstddef>
 
+#include "libalx/base/compiler/restrict.hpp"
 #include "libalx/alx/data-structures/llist.hpp"
 
 
@@ -37,7 +38,7 @@
  ******* extern "C" ***********************************************************
  ******************************************************************************/
 struct	Alx_Dyn_Array {
-	void		*data;
+	unsigned char	*data;
 	size_t		elsize;
 	ptrdiff_t	nmemb;
 	ptrdiff_t	written;
@@ -52,11 +53,17 @@ extern	"C"
 int	alx_dynarr_init		(struct Alx_Dyn_Array **arr, size_t elsize);
 void	alx_dynarr_deinit	(struct Alx_Dyn_Array *arr);
 [[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_dynarr_write	(struct Alx_Dyn_Array *arr, ptrdiff_t cell,
-				 const void *data);
+int	alx_dynarr_write	(struct Alx_Dyn_Array *restrict arr,
+				 ptrdiff_t cell, const void *restrict data);
 [[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_dynarr_read		(const struct Alx_Dyn_Array *arr,
-				 ptrdiff_t cell, void *data);
+int	alx_dynarr_insert	(struct Alx_Dyn_Array *restrict arr,
+				 ptrdiff_t cell, const void *restrict data);
+[[gnu::nonnull]][[gnu::warn_unused_result]]
+int	alx_dynarr_read		(const struct Alx_Dyn_Array *restrict arr,
+				 ptrdiff_t cell, void *restrict data);
+[[gnu::nonnull]][[gnu::warn_unused_result]]
+int	alx_dynarr_remove	(struct Alx_Dyn_Array *arr,
+				 ptrdiff_t cell);
 [[gnu::nonnull]][[gnu::warn_unused_result]]
 int	alx_dynarr_resize	(struct Alx_Dyn_Array *arr,
 				 ptrdiff_t nmemb, size_t elsize);

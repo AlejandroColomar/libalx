@@ -63,7 +63,7 @@
  * written:	Number of used cells in the array.
  */
 struct	Alx_Dyn_Array {
-	void		*data;
+	unsigned char	*data;
 	size_t		elsize;
 	ptrdiff_t	nmemb;
 	ptrdiff_t	written;
@@ -78,7 +78,7 @@ struct	Alx_LinkedList;
  ******************************************************************************/
 /*
  * Allocates memory for the array, and updates any necessary metadata.
- * The initialized array has a size of 0 elements.
+ * The initialized array has a size of 1 elements.
  *
  * arr:		Pointer to a pointer to an array.  An array will be allocated,
  *		and a pointer to it will be stored in *arr.
@@ -115,8 +115,27 @@ void	alx_dynarr_deinit	(struct Alx_Dyn_Array *arr);
  *			data is left untouched.
  */
 __attribute__((nonnull, warn_unused_result))
-int	alx_dynarr_write	(struct Alx_Dyn_Array *arr, ptrdiff_t cell,
-				 const void *data);
+int	alx_dynarr_write	(struct Alx_Dyn_Array *restrict arr,
+				 ptrdiff_t cell, const void *restrict data);
+
+/*
+ * Insert a cell in the array.
+ * Reallocates memory for the data if necessary, copies the data passed by the
+ * user to the reallocated space, and updates any necessary metadata.
+ *
+ * arr:		Pointer to an array.
+ * cell:	Insert at arr->data[cell].
+ * data:	Pointer to the start of the data to be copied.  Should be at
+ *		least `elsize` bytes.
+ *
+ * return:
+ *	0:		OK.
+ *	ENOMEM:		Aborted; failure to reallocate the data.  Previous
+ *			data is left untouched.
+ */
+__attribute__((nonnull, warn_unused_result))
+int	alx_dynarr_insert	(struct Alx_Dyn_Array *restrict arr,
+				 ptrdiff_t cell, const void *restrict data);
 
 /*
  * Reads from the array.
@@ -129,9 +148,24 @@ int	alx_dynarr_write	(struct Alx_Dyn_Array *arr, ptrdiff_t cell,
  *	0:		OK.
  *	EBADSLT:	Aborted; cell >= arr->nmemb.
  */
-__attribute__((nonnull))
-int	alx_dynarr_read		(const struct Alx_Dyn_Array *arr,
-				 ptrdiff_t cell, void *data);
+__attribute__((nonnull, warn_unused_result))
+int	alx_dynarr_read		(const struct Alx_Dyn_Array *restrict arr,
+				 ptrdiff_t cell, void *restrict data);
+
+/*
+ * Remove a cell from the array.
+ *
+ * arr:		Pointer to an array.
+ * cell:	Read at arr->data[cell].
+ * data:	Copy the read data here.  Should be at least `elsize` bytes.
+ *
+ * return:
+ *	0:		OK.
+ *	EBADSLT:	Aborted; cell >= arr->nmemb.
+ */
+__attribute__((nonnull, warn_unused_result))
+int	alx_dynarr_remove	(struct Alx_Dyn_Array *arr,
+				 ptrdiff_t cell);
 
 /*
  * Reallocates memory for the array, and updates any necessary metadata.

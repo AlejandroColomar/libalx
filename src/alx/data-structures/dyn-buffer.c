@@ -21,6 +21,7 @@
 #include "libalx/base/stdlib/minimum.h"
 #include "libalx/base/stdlib/alloc/mallocarrays.h"
 #include "libalx/base/stdlib/alloc/mallocs.h"
+#include "libalx/base/stdlib/alloc/frees.h"
 #include "libalx/base/stdlib/alloc/reallocs.h"
 
 
@@ -74,7 +75,7 @@ void	alx_dynbuf_deinit	(struct Alx_Dyn_Buffer *buf)
 	if (!buf)
 		return;
 
-	free(buf->data);
+	alx_frees(&buf->data);
 	free(buf);
 }
 
@@ -89,7 +90,7 @@ int	alx_dynbuf_write	(struct Alx_Dyn_Buffer *restrict buf,
 			return	ENOMEM;
 	}
 
-	memmove(&buf->data[offset], data, size);
+	memcpy(&buf->data[offset], data, size);
 	written	= size + offset;
 	if (written > buf->written)
 		buf->written	= written;
@@ -109,7 +110,7 @@ int	alx_dynbuf_insert	(struct Alx_Dyn_Buffer *restrict buf,
 
 	memmove(&buf->data[offset + size], &buf->data[offset],
 							buf->written - offset);
-	memmove(&buf->data[offset], data, size);
+	memcpy(&buf->data[offset], data, size);
 	buf->written	+= size;
 
 	return	0;
@@ -124,7 +125,7 @@ ssize_t	alx_dynbuf_read		(void *restrict data, size_t size,
 	if (offset >= buf->written)
 		return	-1;
 	sz	= ALX_MIN(size, buf->written - offset);
-	memmove(data, &buf->data[offset], sz);
+	memcpy(data, &buf->data[offset], sz);
 
 	if (size  <  buf->written - offset)
 		return	sz;
@@ -178,7 +179,7 @@ int	alx_dynbuf_grow		(struct Alx_Dyn_Buffer *buf, size_t size)
 	if (sz <= buf->size)
 		return	ENOMEM;
 
-	return	alx_dynbuf_resize(buf, size);
+	return	alx_dynbuf_resize(buf, sz);
 }
 
 
