@@ -6,3 +6,5 @@ RUN     apt-get update \
         && apt-get purge $( deborphan ) --yes \
         && apt-get autoclean \
         && apt-get clean
+
+# docker container run --interactive --tty --user $( id -u ):$( id -g ) --volume $PWD:$PWD --rm alejandrocolomar/debian:testing-code bash
