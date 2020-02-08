@@ -8,5 +8,4 @@ RUN     apt-get update \
         && apt-get clean
 
 # docker container run --interactive --tty --volume $PWD:$PWD --workdir $PWD --name code alejandrocolomar/debian:testing-code bash
-# docker container start code
-# docker container exec --user $( id -u ):$( id -g ) --tty --interactive --workdir $PWD code bash
+# docker container start code && docker container exec --user $( id -u ):$( id -g ) --tty --interactive --workdir $PWD code bash
