@@ -122,7 +122,6 @@ void	alx_llist_prepend_node		(struct Alx_LinkedList *list,
 
 	node->left	= list->tail;
 	node->right	= list->head;
-	node->parent	= NULL;
 
 	list->head->left	= node;
 	list->tail->right	= node;
@@ -154,7 +153,6 @@ void	alx_llist_append_node		(struct Alx_LinkedList *list,
 
 	node->left	= list->tail;
 	node->right	= list->head;
-	node->parent	= NULL;
 
 	list->head->left	= node;
 	list->tail->right	= node;
@@ -192,7 +190,6 @@ void	alx_llist_insert_node_before	(struct Alx_LinkedList *list,
 
 	node->left	= ref->left;
 	node->right	= ref;
-	node->parent	= NULL;
 
 	ref->left->right	= node;
 	ref->left		= node;
@@ -228,7 +225,6 @@ void	alx_llist_insert_node_after	(struct Alx_LinkedList *list,
 
 	node->left	= ref;
 	node->right	= ref->right;
-	node->parent	= NULL;
 
 	ref->right->left	= node;
 	ref->right		= node;
@@ -579,7 +575,6 @@ void	add_first_node		(struct Alx_LinkedList *list,
 
 	node->left	= node;
 	node->right	= node;
-	node->parent	= NULL;
 
 	list->head	= node;
 	list->tail	= node;
@@ -610,7 +605,6 @@ int	remove_node		(struct Alx_LinkedList *list,
 out:
 	node->left	= NULL;
 	node->right	= NULL;
-	node->parent	= NULL;
 
 	return	0;
 err:

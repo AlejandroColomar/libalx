@@ -60,7 +60,6 @@ int	alx_node_init_empty	(struct Alx_Node **node)
 	(*node)->buf	= NULL;
 	(*node)->left	= NULL;
 	(*node)->right	= NULL;
-	(*node)->parent	= NULL;
 
 	return	0;
 }
