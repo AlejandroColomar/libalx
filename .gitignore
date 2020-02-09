@@ -1,5 +1,2 @@
-tmp/**/*.o
-tmp/**/*.s
-lib/**/*.a
-lib/**/*.so
+build/*
 test/**/*-test

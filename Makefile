@@ -63,18 +63,26 @@ MAKEFLAGS += --no-print-directory
 
 LIBALX_DIR	= $(CURDIR)
 
-INC_DIR = $(LIBALX_DIR)/include/
-SRC_DIR = $(LIBALX_DIR)/src/
-TMP_DIR	= $(LIBALX_DIR)/tmp/
-LIB_DIR = $(LIBALX_DIR)/lib/
-TST_DIR = $(LIBALX_DIR)/test/
+INC_DIR		= $(LIBALX_DIR)/include/
+SRC_DIR		= $(LIBALX_DIR)/src/
+LIB_DIR		= $(LIBALX_DIR)/lib/
+ETC_DIR		= $(LIBALX_DIR)/etc/
+SHARE_DIR	= $(LIBALX_DIR)/share/
+MK_DIR		= $(LIBALX_DIR)/mk/
+BUILD_DIR	= $(LIBALX_DIR)/build/
+BUILD_TMP_DIR	= $(BUILD_DIR)/tmp/
+BUILD_LIB_DIR	= $(BUILD_DIR)/lib/
+TST_DIR		= $(LIBALX_DIR)/test/
 
 export	LIBALX_DIR
 
 export	INC_DIR
 export	SRC_DIR
-export	TMP_DIR
 export	LIB_DIR
+export	MK_DIR
+export	BUILD_DIR
+export	BUILD_TMP_DIR
+export	BUILD_LIB_DIR
 export	TST_DIR
 
 # XXX: make ... LOCAL=local to build in /usr/local/
@@ -84,12 +92,12 @@ endif
 ifeq ("$(LOCAL)","local")
   INSTALL_ETC_DIR	= /usr/local/etc/
 else
-  INSTALL_ETC_DIR	= /usr/etc/
+  INSTALL_ETC_DIR	= /etc/
 endif
 INSTALL_INC_DIR		= /usr/$(LOCAL)/include/
 INSTALL_LIB_DIR		= /usr/$(LOCAL)/lib/
 INSTALL_SHARE_DIR	= /usr/$(LOCAL)/share/
-INSTALL_PKGCONFIG_DIR	= /usr/$(LOCAL)/lib/pkgconfig/
+INSTALL_PKGCONFIG_DIR	= $(INSTALL_LIB_DIR)/pkgconfig/
 
 export	INSTALL_ETC_DIR
 export	INSTALL_INC_DIR
@@ -191,7 +199,7 @@ LDFLAGS_OPT    += -march=native
 LDFLAGS_OPT    += -flto
 LDFLAGS_OPT    += -fuse-linker-plugin
 
-LDFLAGS_L	= -L $(LIB_DIR)/libalx/
+LDFLAGS_L	= -L $(BUILD_LIB_DIR)/libalx/
 
 LDFLAGS		= -shared
 LDFLAGS        += $(LDFLAGS_OPT)
@@ -204,92 +212,99 @@ export	LDFLAGS
 #	action
 
 PHONY := all
-all:
+all: build_dir
 	@echo	"	MAKE	$@"
-	$(Q)$(MAKE) $@	-C $(TMP_DIR)
-	$(Q)$(MAKE) $@	-C $(LIB_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_TMP_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_LIB_DIR)
+
+
+PHONY := build_dir
+build_dir:
+	@echo	"	CP	build/*"
+	$(Q)mkdir -p	$(BUILD_DIR)/
+	$(Q)cp -rf	$(MK_DIR)/build/*	$(BUILD_DIR)/
 
 
 PHONY += base
-base:
+base: build_dir
 	@echo	"	MAKE	$@"
-	$(Q)$(MAKE) $@	-C $(TMP_DIR)
-	$(Q)$(MAKE) $@	-C $(LIB_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_TMP_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_LIB_DIR)
 
 
 PHONY += alx
-alx:
+alx: build_dir
 	@echo	"	MAKE	$@"
-	$(Q)$(MAKE) $@	-C $(TMP_DIR)
-	$(Q)$(MAKE) $@	-C $(LIB_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_TMP_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_LIB_DIR)
 
 PHONY += data-structures
-data-structures:
+data-structures: build_dir
 	@echo	"	MAKE	$@"
-	$(Q)$(MAKE) $@	-C $(TMP_DIR)
-	$(Q)$(MAKE) $@	-C $(LIB_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_TMP_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_LIB_DIR)
 
 PHONY += npcomplete
-npcomplete:
+npcomplete: build_dir
 	@echo	"	MAKE	$@"
-	$(Q)$(MAKE) $@	-C $(TMP_DIR)
-	$(Q)$(MAKE) $@	-C $(LIB_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_TMP_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_LIB_DIR)
 
 
 PHONY += extra
-extra:
+extra: build_dir
 	@echo	"	MAKE	$@"
-	$(Q)$(MAKE) $@	-C $(TMP_DIR)
-	$(Q)$(MAKE) $@	-C $(LIB_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_TMP_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_LIB_DIR)
 
 PHONY += curl
-curl:
+curl: build_dir
 	@echo	"	MAKE	$@"
-	$(Q)$(MAKE) $@	-C $(TMP_DIR)
-	$(Q)$(MAKE) $@	-C $(LIB_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_TMP_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_LIB_DIR)
 
 PHONY += cv
-cv:
+cv: build_dir
 	@echo	"	MAKE	$@"
-	$(Q)$(MAKE) $@	-C $(TMP_DIR)
-	$(Q)$(MAKE) $@	-C $(LIB_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_TMP_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_LIB_DIR)
 
 PHONY += gmp
-gmp:
+gmp: build_dir
 	@echo	"	MAKE	$@"
-	$(Q)$(MAKE) $@	-C $(TMP_DIR)
-	$(Q)$(MAKE) $@	-C $(LIB_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_TMP_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_LIB_DIR)
 
 PHONY += gsl
-gsl:
+gsl: build_dir
 	@echo	"	MAKE	$@"
-	$(Q)$(MAKE) $@	-C $(TMP_DIR)
-	$(Q)$(MAKE) $@	-C $(LIB_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_TMP_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_LIB_DIR)
 
 PHONY += ncurses
-ncurses:
+ncurses: build_dir
 	@echo	"	MAKE	$@"
-	$(Q)$(MAKE) $@	-C $(TMP_DIR)
-	$(Q)$(MAKE) $@	-C $(LIB_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_TMP_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_LIB_DIR)
 
 PHONY += ocr
-ocr:
+ocr: build_dir
 	@echo	"	MAKE	$@"
-	$(Q)$(MAKE) $@	-C $(TMP_DIR)
-	$(Q)$(MAKE) $@	-C $(LIB_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_TMP_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_LIB_DIR)
 
 PHONY += zbar
-zbar:
+zbar: build_dir
 	@echo	"	MAKE	$@"
-	$(Q)$(MAKE) $@	-C $(TMP_DIR)
-	$(Q)$(MAKE) $@	-C $(LIB_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_TMP_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_LIB_DIR)
 
 
 PHONY += nix
-nix:
+nix: build_dir
 	@echo	"	MAKE	$@"
-	$(Q)$(MAKE) $@	-C $(TMP_DIR)
-	$(Q)$(MAKE) $@	-C $(LIB_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_TMP_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_LIB_DIR)
 
 
 PHONY += tst
@@ -315,11 +330,11 @@ PHONY += install_base
 install_base:
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/base/
 	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/base/*"
-	$(Q)cp -rf $(v)		./include/libalx/base/*			\
+	$(Q)cp -rf $(v)		$(INC_DIR)/libalx/base/*		\
 					$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/base/
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/
 	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/*"
-	$(Q)cp -rf $(v)		./share/libalx/*			\
+	$(Q)cp -rf $(v)		$(SHARE_DIR)/libalx/*			\
 					$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/
 	$(Q)$(MAKE)	libalx-base.a	libalx-base.so	libalx-base.pc
 	@echo
@@ -328,7 +343,7 @@ PHONY += install_alx
 install_alx:
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/alx/
 	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/alx/*"
-	$(Q)cp -r -f $(v)	./include/libalx/alx/*			\
+	$(Q)cp -r -f $(v)	$(INC_DIR)/libalx/alx/*			\
 					$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/alx/
 	$(Q)$(MAKE)	libalx-data-structures.a			\
 			libalx-data-structures.so			\
@@ -342,11 +357,11 @@ PHONY += install_extra
 install_extra:
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_ETC_DIR)/libalx/extra/
 	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_ETC_DIR)/libalx/extra/*"
-	$(Q)cp -r -f $(v)	./etc/libalx/extra/*			\
+	$(Q)cp -r -f $(v)	$(ETC_DIR)/libalx/extra/*		\
 					$(DESTDIR)/$(INSTALL_ETC_DIR)/libalx/extra/
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/extra/
 	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/extra/*"
-	$(Q)cp -r -f $(v)	./include/libalx/extra/*		\
+	$(Q)cp -r -f $(v)	$(INC_DIR)/libalx/extra/*		\
 					$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/extra/
 	$(Q)$(MAKE)	libalx-curl.a	libalx-curl.so	libalx-curl.pc
 	$(Q)$(MAKE)	libalx-cv.a	libalx-cv.so	libalx-cv.pc
@@ -361,7 +376,7 @@ PHONY += install_sh
 install_sh:
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/sh/
 	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/sh/*"
-	$(Q)cp -rf $(v)		./lib/libalx/sh/*			\
+	$(Q)cp -rf $(v)		$(LIB_DIR)/libalx/sh/*			\
 					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/sh/
 	@echo
 
@@ -369,14 +384,14 @@ PHONY += install_py
 install_py:
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/py/
 	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/py/*"
-	$(Q)cp -rf $(v)		./lib/libalx/py/*			\
+	$(Q)cp -rf $(v)		$(LIB_DIR)/libalx/py/*			\
 					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/py/
 	@echo
 
 PHONY += conf_ld
 conf_ld:
 	@echo	"	CP -r	$(DESTDIR)/etc/ld.so.conf.d/*"
-	$(Q)cp -r -f $(v)	./etc/ld.so.conf.d/*			\
+	$(Q)cp -r -f $(v)	$(ETC_DIR)/ld.so.conf.d/*		\
 					$(DESTDIR)/etc/ld.so.conf.d/
 	@echo	"	LDCONFIG"
 	$(Q)ldconfig
@@ -386,21 +401,21 @@ PHONY += libalx-%.a
 libalx-%.a:
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
 	@echo	"	CP	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/$@"
-	$(Q)cp -f $(v)		./lib/libalx/$@	\
+	$(Q)cp -f $(v)		$(BUILD_LIB_DIR)/libalx/$@		\
 					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/$@
 
 PHONY += libalx-%.so
 libalx-%.so:
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
 	@echo	"	CP	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/$@"
-	$(Q)cp -f $(v)		./lib/libalx/$@	\
+	$(Q)cp -f $(v)		$(BUILD_LIB_DIR)/libalx/$@		\
 					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/$@
 
 PHONY += libalx-%.pc
 libalx-%.pc:
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/
 	@echo	"	CP	$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/$@"
-	$(Q)cp -f $(v)		./lib/pkgconfig/$@			\
+	$(Q)cp -f $(v)		$(LIB_DIR)/pkgconfig/$@			\
 					$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/
 
 PHONY += uninstall
@@ -430,11 +445,9 @@ uninstall:
 
 PHONY += clean
 clean:
-	@echo	"	RM	*.o *.s *.a *.so *-test"
-	$(Q)find $(TMP_DIR) -type f -name '*.o' -exec rm '{}' '+'
-	$(Q)find $(TMP_DIR) -type f -name '*.s' -exec rm '{}' '+'
-	$(Q)find $(LIB_DIR) -type f -name '*.a' -exec rm '{}' '+'
-	$(Q)find $(LIB_DIR) -type f -name '*.so' -exec rm '{}' '+'
+	@echo	"	RM	$(BUILD_DIR)"
+	$(Q)rm -rf	$(BUILD_DIR)
+	@echo	"	RM	*-test"
 	$(Q)find $(TST_DIR) -type f -name '*-test' -exec rm '{}' '+'
 
 ################################################################################
