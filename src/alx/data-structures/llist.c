@@ -122,6 +122,7 @@ void	alx_llist_prepend_node		(struct Alx_LinkedList *list,
 
 	node->left	= list->tail;
 	node->right	= list->head;
+	node->parent	= NULL;
 
 	list->head->left	= node;
 	list->tail->right	= node;
@@ -153,6 +154,7 @@ void	alx_llist_append_node		(struct Alx_LinkedList *list,
 
 	node->left	= list->tail;
 	node->right	= list->head;
+	node->parent	= NULL;
 
 	list->head->left	= node;
 	list->tail->right	= node;
@@ -190,6 +192,7 @@ void	alx_llist_insert_node_before	(struct Alx_LinkedList *list,
 
 	node->left	= ref->left;
 	node->right	= ref;
+	node->parent	= NULL;
 
 	ref->left->right	= node;
 	ref->left		= node;
@@ -225,6 +228,7 @@ void	alx_llist_insert_node_after	(struct Alx_LinkedList *list,
 
 	node->left	= ref;
 	node->right	= ref->right;
+	node->parent	= NULL;
 
 	ref->right->left	= node;
 	ref->right		= node;
@@ -535,33 +539,35 @@ err_size:
 	return	ENOBUFS;
 }
 
-int	alx_llist_to_bst		(struct Alx_LinkedList *restrict list,
-					 struct Alx_Node **restrict bst,
+void	alx_llist_to_bst		(struct Alx_BST *restrict bst,
+					 struct Alx_LinkedList *restrict list,
 					 int (*cmp)(const void *bst_data,
 						    const void *node_data))
 {
 	struct Alx_Node	*node;
 
-	if (alx_llist_remove_tail(list, bst))
-		return	ENOENT;
+	alx_bst_delete_all(bst);
 
 	for (ptrdiff_t i = 0; i < list->nmemb; i++) {
 		ALX_UNUSED(alx_llist_remove_tail(list, &node));
-		alx_bst_insert_node(*bst, node, cmp);
+		alx_bst_insert_node(bst, node, cmp);
 	}
-
-	return	0;
 }
 
-void	alx_llist_treesort		(struct Alx_LinkedList *restrict list,
+int	alx_llist_treesort		(struct Alx_LinkedList *restrict list,
 					 int (*cmp)(const void *bst_data,
 						    const void *node_data))
 {
-	struct Alx_Node	*bst;
+	struct Alx_BST	*bst;
 
-	if (alx_llist_to_bst(list, &bst, cmp))
-		return;
-	alx_bst_to_llist(bst, list);
+	if (alx_bst_init(&bst))
+		return	ENOMEM;
+
+	alx_llist_to_bst(bst, list, cmp);
+	alx_bst_to_llist(list, bst);
+
+	alx_bst_deinit(bst);
+	return	0;
 }
 
 
@@ -575,6 +581,7 @@ void	add_first_node		(struct Alx_LinkedList *list,
 
 	node->left	= node;
 	node->right	= node;
+	node->parent	= NULL;
 
 	list->head	= node;
 	list->tail	= node;
@@ -605,6 +612,7 @@ int	remove_node		(struct Alx_LinkedList *list,
 out:
 	node->left	= NULL;
 	node->right	= NULL;
+	node->parent	= NULL;
 
 	return	0;
 err:

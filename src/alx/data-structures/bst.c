@@ -11,8 +11,10 @@
 
 #include <errno.h>
 #include <stddef.h>
+#include <stdlib.h>
 
 #include "libalx/base/compiler/unused.h"
+#include "libalx/base/stdlib/alloc/mallocarrays.h"
 #include "libalx/alx/data-structures/llist.h"
 #include "libalx/alx/data-structures/node.h"
 
@@ -31,6 +33,33 @@
  ******* static prototypes ****************************************************
  ******************************************************************************/
 /*
+ * Deletes all the nodes below `node`.
+ * If node is NULL, no operation is performed.
+ *
+ * node:	Pointer to a node in a BST.
+ */
+static
+void	bst_delete_all			(struct Alx_Node *restrict node);
+
+/*
+ * Returns the leftmost node in the BST.
+ *
+ * node:	Pointer to a node.
+ */
+__attribute__((nonnull, pure, warn_unused_result))
+static
+struct Alx_Node	*bst_leftmost_node	(struct Alx_Node *node);
+
+/*
+ * Returns the rightmost node in the BST.
+ *
+ * node:	Pointer to a node.
+ */
+__attribute__((nonnull, pure, warn_unused_result))
+static
+struct Alx_Node	*bst_rightmost_node	(struct Alx_Node *node);
+
+/*
  * Removes the left and right subtrees of a BST node, and joins them into a
  * new isolated BST.  Updates any necessary metadata.
  * Returns a pointer to the new BST.
@@ -39,23 +68,62 @@
  */
 __attribute__((nonnull))
 static
-struct Alx_Node	*bst_join_L_R	(struct Alx_Node *restrict node);
+struct Alx_Node	*bst_join_L_R		(struct Alx_Node *restrict node);
+
+/*
+ * Helper function for alx_bst_apply()
+ */
+static
+int	bst_apply_recursive		(struct Alx_Node *restrict node,
+					 int (*f)(struct Alx_Node *restrict node,
+						  void *restrict state),
+					 void *restrict state);
+
+/*
+ * Helper function for alx_bst_apply_bwd()
+ */
+static
+int	bst_apply_bwd_recursive		(struct Alx_Node *restrict node,
+					 int (*f)(struct Alx_Node *restrict node,
+						  void *restrict state),
+					 void *restrict state);
 
 /*
  * Helper function for alx_bst_to_llist()
  */
 static
-void	bst_to_llist_recursive	(struct Alx_Node *restrict bst,
-				 struct Alx_LinkedList *restrict list);
+void	bst_to_llist_recursive		(struct Alx_Node *restrict bst,
+					 struct Alx_LinkedList *restrict list);
 
 
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_bst_insert			(struct Alx_Node *bst,
-					 const void *data, size_t size,
-					 int (*cmp)(const void *bst_data,
-						    const void *node_data))
+int	alx_bst_init		(struct Alx_BST **bst)
+{
+
+	if (alx_mallocarrays(bst, 1))
+		return	ENOMEM;
+	(*bst)->root	= NULL;
+	(*bst)->nmemb	= 0;
+
+	return	0;
+}
+
+void	alx_bst_deinit		(struct Alx_BST *bst)
+{
+
+	if (!bst)
+		return;
+
+	alx_bst_delete_all(bst);
+	free(bst);
+}
+
+int	alx_bst_insert		(struct Alx_BST *bst,
+				 const void *data, size_t size,
+				 int (*cmp)(const void *bst_data,
+					    const void *node_data))
 {
 	struct Alx_Node	*node;
 
@@ -66,10 +134,10 @@ int	alx_bst_insert			(struct Alx_Node *bst,
 	return	0;
 }
 
-void	alx_bst_insert_node		(struct Alx_Node *restrict bst,
-					 struct Alx_Node *restrict node,
-					 int (*cmp)(const void *bst_data,
-						    const void *node_data))
+void	alx_bst_insert_node	(struct Alx_BST *restrict bst,
+				 struct Alx_Node *restrict node,
+				 int (*cmp)(const void *bst_data,
+					    const void *node_data))
 {
 	enum		{LEFT, RIGHT};
 
@@ -77,7 +145,15 @@ void	alx_bst_insert_node		(struct Alx_Node *restrict bst,
 	struct Alx_Node	*son;
 	int		pos;
 
-	son	= bst;
+	node->left	= NULL;
+	node->right	= NULL;
+
+	if (!bst->root) {
+		bst->root	= node;
+		return;
+	}
+
+	son	= bst->root;
 	while (son) {
 		parent	= son;
 		if (cmp(parent->buf->data, node->buf->data) < 0) {
@@ -93,55 +169,56 @@ void	alx_bst_insert_node		(struct Alx_Node *restrict bst,
 		parent->left	= node;
 	else
 		parent->right	= node;
+	node->parent	= parent;
 }
 
-void	alx_bst_delete_all		(struct Alx_Node *restrict bst)
+void	alx_bst_delete_all	(struct Alx_BST *bst)
 {
-	struct Alx_Node	*right;
 
-	if (!bst)
-		return;
-
-	alx_bst_delete_all(bst->left);
-	right	= bst->right;
-	alx_node_deinit(bst);
-	alx_bst_delete_all(right);
+	bst_delete_all(bst->root);
+	bst->nmemb	= 0;
 }
 
-struct Alx_Node	*alx_bst_leftmost_node	(struct Alx_Node *restrict bst)
+int	alx_bst_leftmost_node	(struct Alx_Node **restrict node,
+				 struct Alx_BST *restrict bst)
 {
 
-	while (bst->left)
-		bst	= bst->left;
+	*node	= bst->root;
+	if (!bst->root)
+		return	ENOENT;
 
-	return	bst;
+	*node	= bst_leftmost_node(bst->root);
+
+	return	0;
 }
 
-struct Alx_Node	*alx_bst_rightmost_node	(struct Alx_Node *restrict bst)
+int	alx_bst_rightmost_node	(struct Alx_Node **restrict node,
+				 struct Alx_BST *restrict bst)
 {
 
-	while (bst->right)
-		bst	= bst->right;
+	*node	= bst->root;
+	if (!bst->root)
+		return	ENOENT;
 
-	return	bst;
+	*node	= bst_rightmost_node(bst->root);
+
+	return	0;
 }
 
-int	alx_bst_find_node		(struct Alx_Node **restrict node,
-					 struct Alx_Node *restrict bst,
-					 const void *restrict data,
-					 int (*cmp)(const void *bst_data,
-						    const void *node_data))
+int	alx_bst_find		(struct Alx_Node **restrict node,
+				 struct Alx_BST *restrict bst,
+				 const void *restrict data,
+				 int (*cmp)(const void *bst_data,
+					    const void *node_data))
 {
-	enum		{LEFT, RIGHT};
-
 	struct Alx_Node	*parent;
 	struct Alx_Node	*son;
 	int		cmp_res;
 
-	if (!bst)
+	if (!bst->root)
 		goto enoent;
 
-	son	= bst;
+	son	= bst->root;
 	while (son) {
 		parent	= son;
 		cmp_res	= cmp(parent->buf->data, data);
@@ -160,75 +237,62 @@ enoent:
 	return	ENOENT;
 }
 
-struct Alx_Node	*alx_bst_remove_node	(struct Alx_Node *restrict parent,
-					 struct Alx_Node *restrict node)
+int	alx_bst_remove		(struct Alx_Node **restrict node,
+				 struct Alx_BST *restrict bst,
+				 const void *restrict data,
+				 int (*cmp)(const void *bst_data,
+					    const void *node_data))
 {
 
-	if (!parent)
-		parent	= bst_join_L_R(node);
-	else if (node == parent->left)
-		parent->left	= bst_join_L_R(node);
-	else
-		parent->right	= bst_join_L_R(node);
+	if (alx_bst_find(node, bst, data, cmp))
+		return	ENOENT;
+	alx_bst_remove_node(bst, *node);
+
+	return	0;
+}
+
+void	alx_bst_remove_node	(struct Alx_BST *restrict bst,
+				 struct Alx_Node *restrict node)
+{
+
+	if (!node)
+		return;
+
+	if (node == bst->root) {
+		bst->root		= bst_join_L_R(node);
+	} else if (node == node->parent->left) {
+		node->parent->left	= bst_join_L_R(node);
+	} else {	/* (node == node->parent->right) */
+		node->parent->right	= bst_join_L_R(node);
+	}
 
 	node->left	= NULL;
 	node->right	= NULL;
-
-	return	parent;
+	node->parent	= NULL;
 }
 
-int	alx_bst_apply			(struct Alx_Node *restrict bst,
-					 int (*f)(struct Alx_Node *restrict node,
-						  void *restrict state),
-					 void *restrict state)
+int	alx_bst_apply		(struct Alx_BST *restrict bst,
+				 int (*f)(struct Alx_Node *restrict node,
+					  void *restrict state),
+				 void *restrict state)
 {
-	struct Alx_Node	*right;
-	int		status;
-
-	if (!bst)
-		return	0;
-
-	status	= alx_bst_apply(bst->left, f, state);
-	if (status)
-		return	status;
-
-	right	= bst->right;
-	status	= f(bst, state);
-	if (status)
-		return	status;
-
-	return	alx_bst_apply(right, f, state);
+	return	bst_apply_recursive(bst->root, f, state);
 }
 
-int	alx_bst_apply_bwd		(struct Alx_Node *restrict bst,
-					 int (*f)(struct Alx_Node *restrict node,
-						  void *restrict state),
-					 void *restrict state)
+int	alx_bst_apply_bwd	(struct Alx_BST *restrict bst,
+				 int (*f)(struct Alx_Node *restrict node,
+					  void *restrict state),
+				 void *restrict state)
 {
-	struct Alx_Node	*left;
-	int		status;
-
-	if (!bst)
-		return	0;
-
-	status	= alx_bst_apply(bst->right, f, state);
-	if (status)
-		return	status;
-
-	left	= bst->left;
-	status	= f(bst, state);
-	if (status)
-		return	status;
-
-	return	alx_bst_apply_bwd(left, f, state);
+	return	bst_apply_bwd_recursive(bst->root, f, state);
 }
 
-void	alx_bst_to_llist		(struct Alx_Node *restrict bst,
-					 struct Alx_LinkedList *restrict list)
+void	alx_bst_to_llist	(struct Alx_LinkedList *restrict list,
+				 struct Alx_BST *restrict bst)
 {
 
 	alx_llist_delete_all(list);
-	bst_to_llist_recursive(bst, list);
+	bst_to_llist_recursive(bst->root, list);
 }
 
 
@@ -236,45 +300,131 @@ void	alx_bst_to_llist		(struct Alx_Node *restrict bst,
  ******* static function definitions ******************************************
  ******************************************************************************/
 static
-struct Alx_Node	*bst_join_L_R	(struct Alx_Node *restrict node)
+void	bst_delete_all			(struct Alx_Node *restrict node)
+{
+	struct Alx_Node	*right;
+
+	if (!node)
+		return;
+
+	bst_delete_all(node->left);
+	right	= node->right;
+	alx_node_deinit(node);
+	bst_delete_all(right);
+}
+
+static
+struct Alx_Node	*bst_leftmost_node	(struct Alx_Node *node)
+{
+
+	while (node->left)
+		node	= node->left;
+
+	return	node;
+}
+
+static
+struct Alx_Node	*bst_rightmost_node	(struct Alx_Node *node)
+{
+
+	while (node->right)
+		node	= node->right;
+
+	return	node;
+}
+
+static
+struct Alx_Node	*bst_join_L_R		(struct Alx_Node *restrict node)
 {
 	struct Alx_Node	*tmp;
-	struct Alx_Node	*bst;
+	struct Alx_Node	*new;
 
 	if (!node->left  &&  !node->right)
 		return	NULL;
 	if (!node->left) {
-		bst		= node->right;
+		new		= node->right;
+		new->parent	= NULL;
 		node->right	= NULL;
-		return	bst;
+		return	new;
 	}
 	if (!node->right) {
-		bst		= node->left;
+		new		= node->left;
+		new->parent	= NULL;
 		node->left	= NULL;
-		return	bst;
+		return	new;
 	}
 
-	bst		= node->left;
-	tmp		= alx_bst_rightmost_node(node->left);
+	new		= node->left;
+	new->parent	= NULL;
+	tmp		= bst_rightmost_node(new);
 	tmp->right	= node->right;
+	node->right->parent	= tmp;
 
 	node->left	= NULL;
 	node->right	= NULL;
 
-	return	bst;
+	return	new;
 }
 
 static
-void	bst_to_llist_recursive	(struct Alx_Node *restrict bst,
-				 struct Alx_LinkedList *restrict list)
+int	bst_apply_recursive		(struct Alx_Node *restrict node,
+					 int (*f)(struct Alx_Node *restrict node,
+						  void *restrict state),
+					 void *restrict state)
+{
+	struct Alx_Node	*right;
+	int		status;
+
+	if (!node)
+		return	0;
+
+	status	= bst_apply_recursive(node->left, f, state);
+	if (status)
+		return	status;
+
+	right	= node->right;
+	status	= f(node, state);
+	if (status)
+		return	status;
+
+	return	bst_apply_recursive(right, f, state);
+}
+
+static
+int	bst_apply_bwd_recursive		(struct Alx_Node *restrict node,
+					 int (*f)(struct Alx_Node *restrict node,
+						  void *restrict state),
+					 void *restrict state)
+{
+	struct Alx_Node	*left;
+	int		status;
+
+	if (!node)
+		return	0;
+
+	status	= bst_apply_bwd_recursive(node->right, f, state);
+	if (status)
+		return	status;
+
+	left	= node->left;
+	status	= f(node, state);
+	if (status)
+		return	status;
+
+	return	bst_apply_bwd_recursive(left, f, state);
+}
+
+static
+void	bst_to_llist_recursive		(struct Alx_Node *restrict node,
+					 struct Alx_LinkedList *restrict list)
 {
 	struct Alx_Node	*right;
 
-	if (!bst)
+	if (!node)
 		return;
-	bst_to_llist_recursive(bst->left, list);
-	right	= bst->right;
-	alx_llist_append_node(list, bst);
+	bst_to_llist_recursive(node->left, list);
+	right	= node->right;
+	alx_llist_append_node(list, node);
 	bst_to_llist_recursive(right, list);
 }
 

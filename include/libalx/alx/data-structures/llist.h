@@ -68,6 +68,7 @@ struct	Alx_LinkedList {
 };
 
 /* Avoid circular dependence */
+struct	Alx_BST;
 struct	Alx_Dyn_Array;
 
 
@@ -98,7 +99,7 @@ int	alx_llist_init			(struct Alx_LinkedList **list);
  * has already been called before, undefined behavior occurs.
  * If list is NULL, no operation is performed.
  *
- * node:	Pointer to a node.  It is invalid after the call.
+ * list:	Pointer to a list.  It is invalid after the call.
  */
 void	alx_llist_deinit		(struct Alx_LinkedList *list);
 
@@ -558,9 +559,9 @@ int	alx_llist_to_dynarr		(struct Alx_LinkedList *restrict list,
  *	0:		OK.
  *	ENOENT:		Aborted; the list is empty.
  */
-__attribute__((nonnull, warn_unused_result))
-int	alx_llist_to_bst		(struct Alx_LinkedList *restrict list,
-					 struct Alx_Node **restrict bst,
+__attribute__((nonnull))
+void	alx_llist_to_bst		(struct Alx_BST *restrict bst,
+					 struct Alx_LinkedList *restrict list,
 					 int (*cmp)(const void *bst_data,
 						    const void *node_data));
 
@@ -573,8 +574,8 @@ int	alx_llist_to_bst		(struct Alx_LinkedList *restrict list,
  *			< 0:	The node data goes to the left of the bst node.
  *			> 0:	The node data goes to the right of the bst node.
  */
-__attribute__((nonnull))
-void	alx_llist_treesort		(struct Alx_LinkedList *restrict list,
+__attribute__((nonnull, warn_unused_result))
+int	alx_llist_treesort		(struct Alx_LinkedList *restrict list,
 					 int (*cmp)(const void *bst_data,
 						    const void *node_data));
 
