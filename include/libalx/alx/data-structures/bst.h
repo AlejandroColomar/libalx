@@ -55,6 +55,14 @@
 /******************************************************************************
  ******* struct / union *******************************************************
  ******************************************************************************/
+/*
+ * Binary search tree
+ */
+struct	Alx_BST {
+	ptrdiff_t	cnt;
+	struct Alx_Node	*root;
+};
+
 /* Avoid circular dependence */
 struct	Alx_LinkedList;
 
@@ -125,6 +133,25 @@ struct Alx_Node	*alx_bst_leftmost_node	(struct Alx_Node *restrict bst);
  */
 __attribute__((nonnull, pure, warn_unused_result))
 struct Alx_Node	*alx_bst_rightmost_node	(struct Alx_Node *restrict bst);
+
+/*
+ * Finds a node in the BST.  Returns 0 if found.
+ *
+ * bst:		Pointer to a BST.
+ * node:	Pointer to a pointer to a node.  The pointer to the found node
+ *		will be stored here.
+ * data:	Data to search for.
+ * cmp:		Comparison function pointer.  This function should return
+ *			0:	The node data compares equal to the bst node.
+ *			< 0:	The node data goes to the left of the bst node.
+ *			> 0:	The node data goes to the right of the bst node.
+ */
+__attribute__((nonnull(1, 3, 4), pure, warn_unused_result))
+int	alx_bst_find_node		(struct Alx_Node **restrict node,
+					 struct Alx_Node *restrict bst,
+					 const void *restrict data,
+					 int (*cmp)(const void *bst_data,
+						    const void *node_data));
 
 /*
  * Removes a node from the BST and updates any necessary metadata.
