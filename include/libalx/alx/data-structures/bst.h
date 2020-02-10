@@ -36,7 +36,9 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include <stdbool.h>
 #include <stddef.h>
+#include <stdint.h>
 
 #include "libalx/alx/data-structures/llist.h"
 #include "libalx/alx/data-structures/node.h"
@@ -55,6 +57,17 @@
 /******************************************************************************
  ******* struct / union *******************************************************
  ******************************************************************************/
+/*
+ * Binary search tree
+ */
+struct	Alx_BST {
+	struct Alx_Node	*root;
+	ptrdiff_t	nmemb;
+	int64_t		key_min;	/* minimum key in the BST */
+	int64_t		key_max;	/* maximum key in the BST */
+	bool		dup;		/* Allow for duplicate members? */
+};
+
 /* Avoid circular dependence */
 struct	Alx_LinkedList;
 
@@ -62,6 +75,35 @@ struct	Alx_LinkedList;
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
+/*
+ * Initializes bst.
+ * The alx_bst_init() function allocates a binary search tree and assigns a
+ * pointer to it to `*bst`.  On error, the function assigns NULL, which can
+ * later be successfully passed to alx_bst_deinit().
+ *
+ * bst:		Pointer to a pointer to a binary search tree.  A BST will be
+ *		allocated, and a pointer to it will be stored in *bst.
+ * dup:		Does the BST accept duplicate members?
+ *
+ * return:
+ *	0:		OK.
+ *	ENOMEM:		Aborted; failure to allocate the bst.
+ */
+__attribute__((nonnull, warn_unused_result))
+int	alx_bst_init		(struct Alx_BST **bst, bool dup);
+
+/*
+ * Deinitializes bst.
+ * The alx_bst_deinit() function frees all the memory space used by the BST
+ * and all of its remaining nodes.  The BST must have been initialized by a
+ * previous call to alx_bst_init().  Otherwise, or if alx_bst_deinit(bst)
+ * has already been called before, undefined behavior occurs.
+ * If bst is NULL, no operation is performed.
+ *
+ * bst:		Pointer to a bst.  It is invalid after the call.
+ */
+void	alx_bst_deinit		(struct Alx_BST *bst);
+
 /*
  * Inserts a new node into the BST.
  * Allocates memory for the node and for the data, copies the data passed by
@@ -78,16 +120,21 @@ struct	Alx_LinkedList;
  * return:
  *	0:		OK.
  *	ENOMEM:		Aborted; failure to allocate the node.
+ *	EEXIST:		Aborted; existing equivalent node in the BST.
  */
-__attribute__((nonnull, warn_unused_result))
-int	alx_bst_insert			(struct Alx_Node *bst,
-					 const void *data, size_t size,
-					 int (*cmp)(const void *bst_data,
-						    const void *node_data));
+__attribute__((nonnull(1, 5), warn_unused_result))
+int	alx_bst_insert		(struct Alx_BST *restrict bst,
+				 int64_t key,
+				 const void *restrict data, size_t size,
+				 int (*cmp)(int64_t bst_key, int64_t user_key,
+					    const void *bst_data,
+					    const void *user_data));
 
 /*
  * Inserts an already existing node into the BST.
- * Updates any necessary metadata.
+ * Updates any necessary metadata.  If the node compares equal to a node in
+ * the BST, if (bst->dup), the node is not inserted; else, the node is
+ * inserted to the right.
  *
  * bst:		Pointer to a BST.
  * node:	Pointer to the node to be prepended.
@@ -95,12 +142,17 @@ int	alx_bst_insert			(struct Alx_Node *bst,
  *			0:	The node data compares equal to the bst node.
  *			< 0:	The node data goes to the left of the bst node.
  *			> 0:	The node data goes to the right of the bst node.
+ *
+ * return:
+ *	0:		OK.
+ *	EEXIST:		Aborted; existing equivalent node in the BST.
  */
-__attribute__((nonnull))
-void	alx_bst_insert_node		(struct Alx_Node *restrict bst,
-					 struct Alx_Node *restrict node,
-					 int (*cmp)(const void *bst_data,
-						    const void *node_data));
+__attribute__((nonnull, warn_unused_result))
+int	alx_bst_insert_node	(struct Alx_BST *restrict bst,
+				 struct Alx_Node *restrict node,
+				 int (*cmp)(int64_t bst_key, int64_t user_key,
+					    const void *bst_data,
+					    const void *user_data));
 
 /*
  * Deletes all the nodes in the BST.
@@ -108,36 +160,86 @@ void	alx_bst_insert_node		(struct Alx_Node *restrict bst,
  *
  * bst:		Pointer to a BST.
  */
-void	alx_bst_delete_all		(struct Alx_Node *restrict bst);
+__attribute__((nonnull))
+void	alx_bst_delete_all	(struct Alx_BST *bst);
 
 /*
- * Returns the leftmost node in the BST.
+ * Gets the leftmost node in the BST.
+ * Returns non-zero if the BST is empty.
  *
+ * node:	Pointer to a pointer to a node.  The pointer to the leftmost
+ *		node will be stored here.
  * bst:		Pointer to a BST.
  */
-__attribute__((nonnull, pure, warn_unused_result))
-struct Alx_Node	*alx_bst_leftmost_node	(struct Alx_Node *restrict bst);
+__attribute__((nonnull, warn_unused_result))
+int	alx_bst_leftmost_node	(struct Alx_Node **restrict node,
+				 struct Alx_BST *restrict bst);
 
 /*
- * Returns the rightmost node in the BST.
+ * Gets the rightmost node in the BST.
+ * Returns non-zero if the BST is empty.
  *
+ * node:	Pointer to a pointer to a node.  The pointer to the rightmost
+ *		node will be stored here.
  * bst:		Pointer to a BST.
  */
-__attribute__((nonnull, pure, warn_unused_result))
-struct Alx_Node	*alx_bst_rightmost_node	(struct Alx_Node *restrict bst);
+__attribute__((nonnull, warn_unused_result))
+int	alx_bst_rightmost_node	(struct Alx_Node **restrict node,
+				 struct Alx_BST *restrict bst);
+
+/*
+ * Finds a node in the BST.  Returns ENOENT if not found.
+ * If more than one node would compare equal to the data, the leftmost one is
+ * found.
+ *
+ * node:	Pointer to a pointer to a node.  The pointer to the found node
+ *		will be stored here.
+ * bst:		Pointer to a BST.
+ * data:	Data to search for.
+ * cmp:		Comparison function pointer.  This function should return
+ *			0:	The data compares equal to the bst node.
+ *			< 0:	The data goes to the left of the bst node.
+ *			> 0:	The data goes to the right of the bst node.
+ */
+__attribute__((nonnull(1, 2, 5), warn_unused_result))
+int	alx_bst_find		(struct Alx_Node **restrict node,
+				 struct Alx_BST *restrict bst,
+				 int64_t key, const void *restrict data,
+				 int (*cmp)(int64_t bst_key, int64_t user_key,
+					    const void *bst_data,
+					    const void *user_data));
+
+/*
+ * Removes a node (found by its data) from the BST and updates any necessary
+ * metadata.  If more than one node would compare equal to the data, only the
+ * leftmost one is removed.
+ *
+ * node:	Pointer to a pointer to a node.  The pointer to the removed
+ *		node will be stored here.
+ * bst:		Pointer to a BST.
+ * data:	Data to search for.
+ * cmp:		Comparison function pointer.  This function should return
+ *			0:	The data compares equal to the bst node.
+ *			< 0:	The data goes to the left of the bst node.
+ *			> 0:	The data goes to the right of the bst node.
+ */
+__attribute__((nonnull(1, 2, 5), warn_unused_result))
+int	alx_bst_remove		(struct Alx_Node **restrict node,
+				 struct Alx_BST *restrict bst,
+				 int64_t key, const void *restrict data,
+				 int (*cmp)(int64_t bst_key, int64_t user_key,
+					    const void *bst_data,
+					    const void *user_data));
 
 /*
  * Removes a node from the BST and updates any necessary metadata.
- * The return value is `parent`, or if parent is NULL, a pointer to the new BST
- * formed by merging the two subtrees.
  *
- * parent:	Pointer to the parent node of `node` in the BST.
- *		If `node` is the root of the BST, `parent` should be NULL.
+ * bst:		Pointer to a BST.
  * node:	Pointer to the node to be removed from the BST.
  */
-__attribute__((nonnull(2), warn_unused_result))
-struct Alx_Node	*alx_bst_remove_node	(struct Alx_Node *restrict parent,
-					 struct Alx_Node *restrict node);
+__attribute__((nonnull(1)))
+void	alx_bst_remove_node	(struct Alx_BST *restrict bst,
+				 struct Alx_Node *restrict node);
 
 /*
  * Apply function `*f` to each node in the list (in order, starting at the
@@ -154,11 +256,11 @@ struct Alx_Node	*alx_bst_remove_node	(struct Alx_Node *restrict parent,
  *			immediately and the return value is passed to the
  *			caller.
  */
-__attribute__((nonnull(2)))
-int	alx_bst_apply			(struct Alx_Node *restrict bst,
-					 int (*f)(struct Alx_Node *restrict node,
-						  void *restrict state),
-					 void *restrict state);
+__attribute__((nonnull(1, 2)))
+int	alx_bst_apply		(struct Alx_BST *restrict bst,
+				 int (*f)(struct Alx_Node *restrict node,
+					  void *restrict state),
+				 void *restrict state);
 
 /*
  * Apply function `*f` to each node in the list (in reverse order, starting
@@ -175,21 +277,21 @@ int	alx_bst_apply			(struct Alx_Node *restrict bst,
  *			immediately and the return value is passed to the
  *			caller.
  */
-__attribute__((nonnull(2)))
-int	alx_bst_apply_bwd		(struct Alx_Node *restrict bst,
-					 int (*f)(struct Alx_Node *restrict node,
-						  void *restrict state),
-					 void *restrict state);
+__attribute__((nonnull(1, 2)))
+int	alx_bst_apply_bwd	(struct Alx_BST *restrict bst,
+				 int (*f)(struct Alx_Node *restrict node,
+					  void *restrict state),
+				 void *restrict state);
 
 /*
- * Moves the BST nodes into an empty linked list.  If the linked list was not
- * empty, all of its previous nodes are deleted.  The BST is destroyed.
+ * Moves the BST nodes into an empty linked list.  The BST is empty afterwards.
  *
- * bst:		Pointer to a BST.
  * list:	Pointer to a list.
+ * bst:		Pointer to a BST.
  */
-void	alx_bst_to_llist		(struct Alx_Node *restrict bst,
-					 struct Alx_LinkedList *restrict list);
+__attribute__((nonnull))
+void	alx_bst_to_llist	(struct Alx_LinkedList *restrict list,
+				 struct Alx_BST *restrict bst);
 
 
 /******************************************************************************

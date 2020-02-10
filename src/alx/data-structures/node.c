@@ -11,6 +11,7 @@
 
 #include <errno.h>
 #include <stddef.h>
+#include <stdint.h>
 #include <stdlib.h>
 
 #include "libalx/base/stdlib/alloc/mallocarrays.h"
@@ -35,12 +36,16 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_node_init		(struct Alx_Node **restrict node,
+int	alx_node_init		(struct Alx_Node **restrict node, int64_t key,
 				 const void *restrict data, size_t size)
 {
 
 	if (alx_node_init_empty(node))
 		goto err;
+	(*node)->key	= key;
+	if (!data)
+		return	0;
+
 	if (alx_dynbuf_init(&(*node)->buf))
 		goto err;
 	if (alx_node_write(*node, data, size))
@@ -57,6 +62,7 @@ int	alx_node_init_empty	(struct Alx_Node **node)
 
 	if (alx_mallocarrays(node, 1))
 		return	ENOMEM;
+	(*node)->key	= 0;
 	(*node)->buf	= NULL;
 	(*node)->left	= NULL;
 	(*node)->right	= NULL;

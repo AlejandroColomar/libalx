@@ -19,6 +19,8 @@ OBJ		=							\
 		node.o
 
 BST_INC		=							\
+		$(INC_DIR)/libalx/base/compiler/unused.h		\
+		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.h	\
 		$(INC_DIR)/libalx/alx/data-structures/llist.h		\
 		$(INC_DIR)/libalx/alx/data-structures/node.h		\
 		$(INC_DIR)/libalx/alx/data-structures/bst.h
@@ -27,7 +29,10 @@ BST_SRC		=							\
 
 DYNARR_INC	=							\
 		$(INC_DIR)/libalx/base/assert/assert.h			\
+		$(INC_DIR)/libalx/base/stdlib/maximum.h			\
 		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.h	\
+		$(INC_DIR)/libalx/base/stdlib/alloc/frees.h		\
+		$(INC_DIR)/libalx/base/stdlib/alloc/reallocarrays.h	\
 		$(INC_DIR)/libalx/alx/data-structures/llist.h		\
 		$(INC_DIR)/libalx/alx/data-structures/dyn-array.h
 DYNARR_SRC	=							\
@@ -39,6 +44,7 @@ DYNBUF_INC	=							\
 		$(INC_DIR)/libalx/base/stdlib/minimum.h			\
 		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.h	\
 		$(INC_DIR)/libalx/base/stdlib/alloc/mallocs.h		\
+		$(INC_DIR)/libalx/base/stdlib/alloc/frees.h		\
 		$(INC_DIR)/libalx/base/stdlib/alloc/reallocs.h		\
 		$(INC_DIR)/libalx/alx/data-structures/dyn-buffer.h
 DYNBUF_SRC	=							\
@@ -47,6 +53,7 @@ DYNBUF_SRC	=							\
 LLIST_INC	=							\
 		$(INC_DIR)/libalx/base/compiler/unused.h		\
 		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.h	\
+		$(INC_DIR)/libalx/alx/data-structures/bst.h		\
 		$(INC_DIR)/libalx/alx/data-structures/dyn-array.h	\
 		$(INC_DIR)/libalx/alx/data-structures/dyn-buffer.h	\
 		$(INC_DIR)/libalx/alx/data-structures/node.h		\

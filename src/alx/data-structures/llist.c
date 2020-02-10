@@ -10,6 +10,7 @@
 #include "libalx/alx/data-structures/llist.h"
 
 #include <errno.h>
+#include <stdbool.h>
 #include <stddef.h>
 #include <stdlib.h>
 
@@ -100,11 +101,12 @@ void	alx_llist_deinit		(struct Alx_LinkedList *list)
 }
 
 int	alx_llist_prepend		(struct Alx_LinkedList *list,
+					 int64_t key,
 					 const void *data, size_t size)
 {
 	struct Alx_Node	*node;
 
-	if (alx_node_init(&node, data, size))
+	if (alx_node_init(&node, key, data, size))
 		return	ENOMEM;
 	alx_llist_prepend_node(list, node);
 
@@ -132,11 +134,12 @@ void	alx_llist_prepend_node		(struct Alx_LinkedList *list,
 }
 
 int	alx_llist_append		(struct Alx_LinkedList *list,
+					 int64_t key,
 					 const void *data, size_t size)
 {
 	struct Alx_Node	*node;
 
-	if (alx_node_init(&node, data, size))
+	if (alx_node_init(&node, key, data, size))
 		return	ENOMEM;
 	alx_llist_append_node(list, node);
 
@@ -164,12 +167,13 @@ void	alx_llist_append_node		(struct Alx_LinkedList *list,
 }
 
 int	alx_llist_insert_before		(struct Alx_LinkedList *list,
+					 int64_t key,
 					 const void *data, size_t size,
 					 struct Alx_Node *ref)
 {
 	struct Alx_Node	*node;
 
-	if (alx_node_init(&node, data, size))
+	if (alx_node_init(&node, key, data, size))
 		return	ENOMEM;
 	alx_llist_insert_node_before(list, node, ref);
 
@@ -200,12 +204,13 @@ void	alx_llist_insert_node_before	(struct Alx_LinkedList *list,
 }
 
 int	alx_llist_insert_after		(struct Alx_LinkedList *list,
+					 int64_t key,
 					 const void *data, size_t size,
 					 struct Alx_Node *ref)
 {
 	struct Alx_Node	*node;
 
-	if (alx_node_init(&node, data, size))
+	if (alx_node_init(&node, key, data, size))
 		return	ENOMEM;
 	alx_llist_insert_node_after(list, node, ref);
 
@@ -236,12 +241,13 @@ void	alx_llist_insert_node_after	(struct Alx_LinkedList *list,
 }
 
 int	alx_llist_insert_at		(struct Alx_LinkedList *list,
+					 int64_t key,
 					 const void *data, size_t size,
 					 ptrdiff_t pos)
 {
 	struct Alx_Node	*node;
 
-	if (alx_node_init(&node, data, size))
+	if (alx_node_init(&node, key, data, size))
 		return	ENOMEM;
 	alx_llist_insert_node_at(list, node, pos);
 
@@ -539,33 +545,38 @@ err_size:
 	return	ENOBUFS;
 }
 
-int	alx_llist_to_bst		(struct Alx_LinkedList *restrict list,
-					 struct Alx_Node **restrict bst,
-					 int (*cmp)(const void *bst_data,
+void	alx_llist_to_bst		(struct Alx_BST *restrict bst,
+					 struct Alx_LinkedList *restrict list,
+					 int (*cmp)(int64_t bst_key,
+						    int64_t user_key,
+						    const void *bst_data,
 						    const void *node_data))
 {
 	struct Alx_Node	*node;
 
-	if (alx_llist_remove_tail(list, bst))
-		return	ENOENT;
-
 	for (ptrdiff_t i = 0; i < list->nmemb; i++) {
-		ALX_UNUSED(alx_llist_remove_tail(list, &node));
-		alx_bst_insert_node(*bst, node, cmp);
+		ALX_UNUSED(alx_llist_remove_head(list, &node));
+		if (alx_bst_insert_node(bst, node, cmp))
+			alx_node_deinit(node);
 	}
-
-	return	0;
 }
 
-void	alx_llist_treesort		(struct Alx_LinkedList *restrict list,
-					 int (*cmp)(const void *bst_data,
+int	alx_llist_treesort		(struct Alx_LinkedList *restrict list,
+					 int (*cmp)(int64_t list_key,
+						    int64_t user_key,
+						    const void *list_data,
 						    const void *node_data))
 {
-	struct Alx_Node	*bst;
+	struct Alx_BST	*bst;
 
-	if (alx_llist_to_bst(list, &bst, cmp))
-		return;
-	alx_bst_to_llist(bst, list);
+	if (alx_bst_init(&bst, true))
+		return	ENOMEM;
+
+	alx_llist_to_bst(bst, list, cmp);
+	alx_bst_to_llist(list, bst);
+
+	alx_bst_deinit(bst);
+	return	0;
 }
 
 
