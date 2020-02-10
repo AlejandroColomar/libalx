@@ -113,6 +113,22 @@ __attribute__((nonnull, warn_unused_result))
 int	alx_node_init_empty	(struct Alx_Node **node);
 
 /*
+ * Allocates memory for the node, and clones the ref node into it.
+ *
+ * clone:	Pointer to a pointer to a node.  A node will be allocated,
+ *		and a pointer to it will be stored in *clone.
+ * ref:		Pointer to a node to clone from.
+ *
+ * return:
+ *	0:		OK.
+ *	ENOANO:		Aborted; ref was NULL.
+ *	ENOMEM:		Aborted; failure to allocate the node.
+ */
+__attribute__((nonnull(1), warn_unused_result))
+int	alx_node_init_clone	(struct Alx_Node **restrict clone,
+				 const struct Alx_Node *restrict ref);
+
+/*
  * Deinitializes node.
  * Deallocates memory from the node and from the data.
  * If node is NULL, no operation is performed.

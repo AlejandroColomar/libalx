@@ -59,13 +59,34 @@ int	alx_dynbuf_init		(struct Alx_Dyn_Buffer **buf)
 		return	ENOMEM;
 	/* Initial size of 1 (minimum allocation) */
 	if (alx_mallocs(&(*buf)->data, 1))
-		goto err;
+		goto enomem;
 	(*buf)->size	= 1;
 	(*buf)->written	= 0;
 
 	return	0;
-err:
-	free(*buf);
+enomem:
+	alx_frees(buf);
+	return	ENOMEM;
+}
+
+int	alx_dynbuf_init_clone	(struct Alx_Dyn_Buffer **restrict clone,
+				 const struct Alx_Dyn_Buffer *restrict ref)
+{
+
+	if (!ref) {
+		*clone	= NULL;
+		return	ENOANO;
+	}
+
+	if (alx_dynbuf_init(clone))
+		goto enomem;
+	if (alx_dynbuf_write(*clone, 0, ref->data, ref->written))
+		goto enomem;
+
+	return	0;
+enomem:
+	alx_dynbuf_deinit(*clone);
+	*clone	= NULL;
 	return	ENOMEM;
 }
 

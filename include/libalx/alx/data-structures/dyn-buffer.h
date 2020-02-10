@@ -86,6 +86,22 @@ __attribute__((nonnull, warn_unused_result))
 int	alx_dynbuf_init		(struct Alx_Dyn_Buffer **buf);
 
 /*
+ * Allocates memory for the buffer, and clones the ref buffer into it.
+ *
+ * clone:	Pointer to a pointer to a buffer.  A buffer will be allocated,
+ *		and a pointer to it will be stored in *clone.
+ * ref:		Pointer to a buffer to clone from.
+ *
+ * return:
+ *	0:		OK.
+ *	ENOANO:		Aborted; ref was NULL.
+ *	ENOMEM:		Aborted; failure to allocate the buffer.
+ */
+__attribute__((nonnull(1), warn_unused_result))
+int	alx_dynbuf_init_clone	(struct Alx_Dyn_Buffer **restrict clone,
+				 const struct Alx_Dyn_Buffer *restrict ref);
+
+/*
  * Deletes `buf`.
  * Deallocates memory from the buffer.
  * If buf is NULL, no operation is performed.

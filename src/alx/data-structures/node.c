@@ -41,19 +41,20 @@ int	alx_node_init		(struct Alx_Node **restrict node, int64_t key,
 {
 
 	if (alx_node_init_empty(node))
-		goto err;
+		goto enomem;
 	(*node)->key	= key;
 	if (!data)
 		return	0;
 
 	if (alx_dynbuf_init(&(*node)->buf))
-		goto err;
+		goto enomem;
 	if (alx_node_write(*node, data, size))
-		goto err;
+		goto enomem;
 
 	return	0;
-err:
+enomem:
 	alx_node_deinit(*node);
+	*node	= NULL;
 	return	ENOMEM;
 }
 
@@ -71,6 +72,29 @@ int	alx_node_init_empty	(struct Alx_Node **node)
 	return	0;
 }
 
+int	alx_node_init_clone	(struct Alx_Node **restrict clone,
+				 const struct Alx_Node *restrict ref)
+{
+
+	if (!ref) {
+		*clone	= NULL;
+		return	ENOANO;
+	}
+
+	if (alx_node_init_empty(clone))
+		goto enomem;
+
+	(*clone)->key	= ref->key;
+	if (alx_dynbuf_init_clone(&(*clone)->buf, ref->buf) == ENOMEM)
+		goto enomem;
+
+	return	0;
+enomem:
+	alx_node_deinit(*clone);
+	*clone	= NULL;
+	return	ENOMEM;
+}
+
 void	alx_node_deinit		(struct Alx_Node *node)
 {
 
@@ -78,6 +102,7 @@ void	alx_node_deinit		(struct Alx_Node *node)
 		return;
 
 	alx_dynbuf_deinit(node->buf);
+	node->buf	= NULL;
 	free(node);
 }
 
