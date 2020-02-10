@@ -10,6 +10,7 @@
 #include "libalx/alx/data-structures/llist.h"
 
 #include <errno.h>
+#include <stdbool.h>
 #include <stddef.h>
 #include <stdlib.h>
 
@@ -553,11 +554,10 @@ void	alx_llist_to_bst		(struct Alx_BST *restrict bst,
 {
 	struct Alx_Node	*node;
 
-	alx_bst_delete_all(bst);
-
 	for (ptrdiff_t i = 0; i < list->nmemb; i++) {
-		ALX_UNUSED(alx_llist_remove_tail(list, &node));
-		alx_bst_insert_node(bst, node, cmp);
+		ALX_UNUSED(alx_llist_remove_head(list, &node));
+		if (alx_bst_insert_node(bst, node, cmp))
+			alx_node_deinit(node);
 	}
 }
 
@@ -569,7 +569,7 @@ int	alx_llist_treesort		(struct Alx_LinkedList *restrict list,
 {
 	struct Alx_BST	*bst;
 
-	if (alx_bst_init(&bst))
+	if (alx_bst_init(&bst, true))
 		return	ENOMEM;
 
 	alx_llist_to_bst(bst, list, cmp);

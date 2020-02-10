@@ -10,6 +10,7 @@
 #include "libalx/alx/data-structures/bst.h"
 
 #include <errno.h>
+#include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -100,13 +101,16 @@ void	bst_to_llist_recursive		(struct Alx_Node *restrict bst,
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_bst_init		(struct Alx_BST **bst)
+int	alx_bst_init		(struct Alx_BST **bst, bool dup)
 {
 
 	if (alx_mallocarrays(bst, 1))
 		return	ENOMEM;
 	(*bst)->root	= NULL;
 	(*bst)->nmemb	= 0;
+	(*bst)->key_min	= 0;
+	(*bst)->key_max	= 0;
+	(*bst)->dup	= dup;
 
 	return	0;
 }
@@ -131,12 +135,10 @@ int	alx_bst_insert		(struct Alx_BST *bst,
 
 	if (alx_node_init(&node, key, data, size))
 		return	ENOMEM;
-	alx_bst_insert_node(bst, node, cmp);
-
-	return	0;
+	return	alx_bst_insert_node(bst, node, cmp);
 }
 
-void	alx_bst_insert_node	(struct Alx_BST *restrict bst,
+int	alx_bst_insert_node	(struct Alx_BST *restrict bst,
 				 struct Alx_Node *restrict node,
 				 int (*cmp)(int64_t bst_key, int64_t user_key,
 					    const void *bst_data,
@@ -149,12 +151,18 @@ void	alx_bst_insert_node	(struct Alx_BST *restrict bst,
 	int		pos;
 	int		cmp_res;
 
+	bst->nmemb++;
+	if (node->key > bst->key_max)
+		bst->key_max	= node->key;
+	else if (node->key < bst->key_min)
+		bst->key_min	= node->key;
+
 	node->left	= NULL;
 	node->right	= NULL;
 
 	if (!bst->root) {
 		bst->root	= node;
-		return;
+		return	0;
 	}
 
 	son	= bst->root;
@@ -165,7 +173,12 @@ void	alx_bst_insert_node	(struct Alx_BST *restrict bst,
 		if (cmp_res < 0) {
 			son	= parent->left;
 			pos	= LEFT;
+		} else if (cmp_res > 0) {
+			son	= parent->right;
+			pos	= RIGHT;
 		} else {
+			if (!bst->dup)
+				goto eexist;
 			son	= parent->right;
 			pos	= RIGHT;
 		}
@@ -176,6 +189,12 @@ void	alx_bst_insert_node	(struct Alx_BST *restrict bst,
 	else
 		parent->right	= node;
 	node->parent	= parent;
+
+	return	0;
+
+eexist:
+	bst->nmemb--;
+	return	EEXIST;
 }
 
 void	alx_bst_delete_all	(struct Alx_BST *bst)
@@ -277,6 +296,8 @@ void	alx_bst_remove_node	(struct Alx_BST *restrict bst,
 	node->left	= NULL;
 	node->right	= NULL;
 	node->parent	= NULL;
+
+	bst->nmemb--;
 }
 
 int	alx_bst_apply		(struct Alx_BST *restrict bst,
@@ -299,7 +320,6 @@ void	alx_bst_to_llist	(struct Alx_LinkedList *restrict list,
 				 struct Alx_BST *restrict bst)
 {
 
-	alx_llist_delete_all(list);
 	bst_to_llist_recursive(bst->root, list);
 }
 

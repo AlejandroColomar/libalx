@@ -36,6 +36,7 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
 
@@ -60,8 +61,11 @@
  * Binary search tree
  */
 struct	Alx_BST {
-	ptrdiff_t	nmemb;
 	struct Alx_Node	*root;
+	ptrdiff_t	nmemb;
+	int64_t		key_min;	/* minimum key in the BST */
+	int64_t		key_max;	/* maximum key in the BST */
+	bool		dup;		/* Allow for duplicate members? */
 };
 
 /* Avoid circular dependence */
@@ -79,13 +83,14 @@ struct	Alx_LinkedList;
  *
  * bst:		Pointer to a pointer to a binary search tree.  A BST will be
  *		allocated, and a pointer to it will be stored in *bst.
+ * dup:		Does the BST accept duplicate members?
  *
  * return:
  *	0:		OK.
  *	ENOMEM:		Aborted; failure to allocate the bst.
  */
 __attribute__((nonnull, warn_unused_result))
-int	alx_bst_init		(struct Alx_BST **bst);
+int	alx_bst_init		(struct Alx_BST **bst, bool dup);
 
 /*
  * Deinitializes bst.
@@ -115,6 +120,7 @@ void	alx_bst_deinit		(struct Alx_BST *bst);
  * return:
  *	0:		OK.
  *	ENOMEM:		Aborted; failure to allocate the node.
+ *	EEXIST:		Aborted; existing equivalent node in the BST.
  */
 __attribute__((nonnull(1, 5), warn_unused_result))
 int	alx_bst_insert		(struct Alx_BST *restrict bst,
@@ -126,7 +132,9 @@ int	alx_bst_insert		(struct Alx_BST *restrict bst,
 
 /*
  * Inserts an already existing node into the BST.
- * Updates any necessary metadata.
+ * Updates any necessary metadata.  If the node compares equal to a node in
+ * the BST, if (bst->dup), the node is not inserted; else, the node is
+ * inserted to the right.
  *
  * bst:		Pointer to a BST.
  * node:	Pointer to the node to be prepended.
@@ -134,9 +142,13 @@ int	alx_bst_insert		(struct Alx_BST *restrict bst,
  *			0:	The node data compares equal to the bst node.
  *			< 0:	The node data goes to the left of the bst node.
  *			> 0:	The node data goes to the right of the bst node.
+ *
+ * return:
+ *	0:		OK.
+ *	EEXIST:		Aborted; existing equivalent node in the BST.
  */
-__attribute__((nonnull))
-void	alx_bst_insert_node	(struct Alx_BST *restrict bst,
+__attribute__((nonnull, warn_unused_result))
+int	alx_bst_insert_node	(struct Alx_BST *restrict bst,
 				 struct Alx_Node *restrict node,
 				 int (*cmp)(int64_t bst_key, int64_t user_key,
 					    const void *bst_data,
@@ -272,8 +284,7 @@ int	alx_bst_apply_bwd	(struct Alx_BST *restrict bst,
 				 void *restrict state);
 
 /*
- * Moves the BST nodes into an empty linked list.  If the linked list was not
- * empty, all of its previous nodes are deleted.  The BST is empty afterwards.
+ * Moves the BST nodes into an empty linked list.  The BST is empty afterwards.
  *
  * list:	Pointer to a list.
  * bst:		Pointer to a BST.

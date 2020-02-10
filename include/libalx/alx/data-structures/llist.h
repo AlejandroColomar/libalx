@@ -551,7 +551,9 @@ int	alx_llist_to_dynarr		(struct Alx_LinkedList *restrict list,
 
 /*
  * Copy the linked list data into a new binary search tree.
- * The linked list is empty afterwards.
+ * The linked list is empty afterwards.  If the BST doesn't accept duplicate
+ * members, the headmost (leftmost) one is kept, and the rest are safely
+ * deinitialized.
  *
  * list:	Pointer to a list.
  * bst:		Pointer to a pointer to a BST (its root node).
