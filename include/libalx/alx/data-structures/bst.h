@@ -37,6 +37,7 @@
  ******* headers **************************************************************
  ******************************************************************************/
 #include <stddef.h>
+#include <stdint.h>
 
 #include "libalx/alx/data-structures/llist.h"
 #include "libalx/alx/data-structures/node.h"
@@ -115,11 +116,13 @@ void	alx_bst_deinit		(struct Alx_BST *bst);
  *	0:		OK.
  *	ENOMEM:		Aborted; failure to allocate the node.
  */
-__attribute__((nonnull, warn_unused_result))
-int	alx_bst_insert		(struct Alx_BST *bst,
-				 const void *data, size_t size,
-				 int (*cmp)(const void *bst_data,
-					    const void *node_data));
+__attribute__((nonnull(1, 5), warn_unused_result))
+int	alx_bst_insert		(struct Alx_BST *restrict bst,
+				 int64_t key,
+				 const void *restrict data, size_t size,
+				 int (*cmp)(int64_t bst_key, int64_t user_key,
+					    const void *bst_data,
+					    const void *user_data));
 
 /*
  * Inserts an already existing node into the BST.
@@ -135,8 +138,9 @@ int	alx_bst_insert		(struct Alx_BST *bst,
 __attribute__((nonnull))
 void	alx_bst_insert_node	(struct Alx_BST *restrict bst,
 				 struct Alx_Node *restrict node,
-				 int (*cmp)(const void *bst_data,
-					    const void *node_data));
+				 int (*cmp)(int64_t bst_key, int64_t user_key,
+					    const void *bst_data,
+					    const void *user_data));
 
 /*
  * Deletes all the nodes in the BST.
@@ -144,6 +148,7 @@ void	alx_bst_insert_node	(struct Alx_BST *restrict bst,
  *
  * bst:		Pointer to a BST.
  */
+__attribute__((nonnull))
 void	alx_bst_delete_all	(struct Alx_BST *bst);
 
 /*
@@ -166,7 +171,7 @@ int	alx_bst_leftmost_node	(struct Alx_Node **restrict node,
  *		node will be stored here.
  * bst:		Pointer to a BST.
  */
-__attribute__((nonnull, pure, warn_unused_result))
+__attribute__((nonnull, warn_unused_result))
 int	alx_bst_rightmost_node	(struct Alx_Node **restrict node,
 				 struct Alx_BST *restrict bst);
 
@@ -184,12 +189,13 @@ int	alx_bst_rightmost_node	(struct Alx_Node **restrict node,
  *			< 0:	The data goes to the left of the bst node.
  *			> 0:	The data goes to the right of the bst node.
  */
-__attribute__((nonnull(1, 3, 4), pure, warn_unused_result))
+__attribute__((nonnull(1, 2, 5), warn_unused_result))
 int	alx_bst_find		(struct Alx_Node **restrict node,
 				 struct Alx_BST *restrict bst,
-				 const void *restrict data,
-				 int (*cmp)(const void *bst_data,
-					    const void *node_data));
+				 int64_t key, const void *restrict data,
+				 int (*cmp)(int64_t bst_key, int64_t user_key,
+					    const void *bst_data,
+					    const void *user_data));
 
 /*
  * Removes a node (found by its data) from the BST and updates any necessary
@@ -205,11 +211,13 @@ int	alx_bst_find		(struct Alx_Node **restrict node,
  *			< 0:	The data goes to the left of the bst node.
  *			> 0:	The data goes to the right of the bst node.
  */
+__attribute__((nonnull(1, 2, 5), warn_unused_result))
 int	alx_bst_remove		(struct Alx_Node **restrict node,
 				 struct Alx_BST *restrict bst,
-				 const void *restrict data,
-				 int (*cmp)(const void *bst_data,
-					    const void *node_data));
+				 int64_t key, const void *restrict data,
+				 int (*cmp)(int64_t bst_key, int64_t user_key,
+					    const void *bst_data,
+					    const void *user_data));
 
 /*
  * Removes a node from the BST and updates any necessary metadata.
@@ -236,7 +244,7 @@ void	alx_bst_remove_node	(struct Alx_BST *restrict bst,
  *			immediately and the return value is passed to the
  *			caller.
  */
-__attribute__((nonnull(2)))
+__attribute__((nonnull(1, 2)))
 int	alx_bst_apply		(struct Alx_BST *restrict bst,
 				 int (*f)(struct Alx_Node *restrict node,
 					  void *restrict state),
@@ -257,7 +265,7 @@ int	alx_bst_apply		(struct Alx_BST *restrict bst,
  *			immediately and the return value is passed to the
  *			caller.
  */
-__attribute__((nonnull(2)))
+__attribute__((nonnull(1, 2)))
 int	alx_bst_apply_bwd	(struct Alx_BST *restrict bst,
 				 int (*f)(struct Alx_Node *restrict node,
 					  void *restrict state),
@@ -270,6 +278,7 @@ int	alx_bst_apply_bwd	(struct Alx_BST *restrict bst,
  * list:	Pointer to a list.
  * bst:		Pointer to a BST.
  */
+__attribute__((nonnull))
 void	alx_bst_to_llist	(struct Alx_LinkedList *restrict list,
 				 struct Alx_BST *restrict bst);
 

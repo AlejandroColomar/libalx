@@ -11,6 +11,7 @@
 
 #include <errno.h>
 #include <stddef.h>
+#include <stdint.h>
 #include <stdlib.h>
 
 #include "libalx/base/compiler/unused.h"
@@ -121,13 +122,14 @@ void	alx_bst_deinit		(struct Alx_BST *bst)
 }
 
 int	alx_bst_insert		(struct Alx_BST *bst,
-				 const void *data, size_t size,
-				 int (*cmp)(const void *bst_data,
-					    const void *node_data))
+				 int64_t key, const void *data, size_t size,
+				 int (*cmp)(int64_t bst_key, int64_t user_key,
+					    const void *bst_data,
+					    const void *user_data))
 {
 	struct Alx_Node	*node;
 
-	if (alx_node_init(&node, data, size))
+	if (alx_node_init(&node, key, data, size))
 		return	ENOMEM;
 	alx_bst_insert_node(bst, node, cmp);
 
@@ -136,14 +138,16 @@ int	alx_bst_insert		(struct Alx_BST *bst,
 
 void	alx_bst_insert_node	(struct Alx_BST *restrict bst,
 				 struct Alx_Node *restrict node,
-				 int (*cmp)(const void *bst_data,
-					    const void *node_data))
+				 int (*cmp)(int64_t bst_key, int64_t user_key,
+					    const void *bst_data,
+					    const void *user_data))
 {
 	enum		{LEFT, RIGHT};
 
 	struct Alx_Node	*parent;
 	struct Alx_Node	*son;
 	int		pos;
+	int		cmp_res;
 
 	node->left	= NULL;
 	node->right	= NULL;
@@ -156,7 +160,9 @@ void	alx_bst_insert_node	(struct Alx_BST *restrict bst,
 	son	= bst->root;
 	while (son) {
 		parent	= son;
-		if (cmp(parent->buf->data, node->buf->data) < 0) {
+		cmp_res = cmp(parent->key, node->key, parent->buf->data,
+							node->buf->data);
+		if (cmp_res < 0) {
 			son	= parent->left;
 			pos	= LEFT;
 		} else {
@@ -207,9 +213,10 @@ int	alx_bst_rightmost_node	(struct Alx_Node **restrict node,
 
 int	alx_bst_find		(struct Alx_Node **restrict node,
 				 struct Alx_BST *restrict bst,
-				 const void *restrict data,
-				 int (*cmp)(const void *bst_data,
-					    const void *node_data))
+				 int64_t key, const void *restrict data,
+				 int (*cmp)(int64_t bst_key, int64_t user_key,
+					    const void *bst_data,
+					    const void *user_data))
 {
 	struct Alx_Node	*parent;
 	struct Alx_Node	*son;
@@ -221,7 +228,7 @@ int	alx_bst_find		(struct Alx_Node **restrict node,
 	son	= bst->root;
 	while (son) {
 		parent	= son;
-		cmp_res	= cmp(parent->buf->data, data);
+		cmp_res	= cmp(parent->key, key, parent->buf->data, data);
 		if (cmp_res < 0) {
 			son	= parent->left;
 		} else if (cmp_res > 0) {
@@ -239,12 +246,13 @@ enoent:
 
 int	alx_bst_remove		(struct Alx_Node **restrict node,
 				 struct Alx_BST *restrict bst,
-				 const void *restrict data,
-				 int (*cmp)(const void *bst_data,
-					    const void *node_data))
+				 int64_t key, const void *restrict data,
+				 int (*cmp)(int64_t bst_key, int64_t user_key,
+					    const void *bst_data,
+					    const void *user_data))
 {
 
-	if (alx_bst_find(node, bst, data, cmp))
+	if (alx_bst_find(node, bst, key, data, cmp))
 		return	ENOENT;
 	alx_bst_remove_node(bst, *node);
 

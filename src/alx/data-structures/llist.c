@@ -100,11 +100,12 @@ void	alx_llist_deinit		(struct Alx_LinkedList *list)
 }
 
 int	alx_llist_prepend		(struct Alx_LinkedList *list,
+					 int64_t key,
 					 const void *data, size_t size)
 {
 	struct Alx_Node	*node;
 
-	if (alx_node_init(&node, data, size))
+	if (alx_node_init(&node, key, data, size))
 		return	ENOMEM;
 	alx_llist_prepend_node(list, node);
 
@@ -132,11 +133,12 @@ void	alx_llist_prepend_node		(struct Alx_LinkedList *list,
 }
 
 int	alx_llist_append		(struct Alx_LinkedList *list,
+					 int64_t key,
 					 const void *data, size_t size)
 {
 	struct Alx_Node	*node;
 
-	if (alx_node_init(&node, data, size))
+	if (alx_node_init(&node, key, data, size))
 		return	ENOMEM;
 	alx_llist_append_node(list, node);
 
@@ -164,12 +166,13 @@ void	alx_llist_append_node		(struct Alx_LinkedList *list,
 }
 
 int	alx_llist_insert_before		(struct Alx_LinkedList *list,
+					 int64_t key,
 					 const void *data, size_t size,
 					 struct Alx_Node *ref)
 {
 	struct Alx_Node	*node;
 
-	if (alx_node_init(&node, data, size))
+	if (alx_node_init(&node, key, data, size))
 		return	ENOMEM;
 	alx_llist_insert_node_before(list, node, ref);
 
@@ -200,12 +203,13 @@ void	alx_llist_insert_node_before	(struct Alx_LinkedList *list,
 }
 
 int	alx_llist_insert_after		(struct Alx_LinkedList *list,
+					 int64_t key,
 					 const void *data, size_t size,
 					 struct Alx_Node *ref)
 {
 	struct Alx_Node	*node;
 
-	if (alx_node_init(&node, data, size))
+	if (alx_node_init(&node, key, data, size))
 		return	ENOMEM;
 	alx_llist_insert_node_after(list, node, ref);
 
@@ -236,12 +240,13 @@ void	alx_llist_insert_node_after	(struct Alx_LinkedList *list,
 }
 
 int	alx_llist_insert_at		(struct Alx_LinkedList *list,
+					 int64_t key,
 					 const void *data, size_t size,
 					 ptrdiff_t pos)
 {
 	struct Alx_Node	*node;
 
-	if (alx_node_init(&node, data, size))
+	if (alx_node_init(&node, key, data, size))
 		return	ENOMEM;
 	alx_llist_insert_node_at(list, node, pos);
 
@@ -541,7 +546,9 @@ err_size:
 
 void	alx_llist_to_bst		(struct Alx_BST *restrict bst,
 					 struct Alx_LinkedList *restrict list,
-					 int (*cmp)(const void *bst_data,
+					 int (*cmp)(int64_t bst_key,
+						    int64_t user_key,
+						    const void *bst_data,
 						    const void *node_data))
 {
 	struct Alx_Node	*node;
@@ -555,7 +562,9 @@ void	alx_llist_to_bst		(struct Alx_BST *restrict bst,
 }
 
 int	alx_llist_treesort		(struct Alx_LinkedList *restrict list,
-					 int (*cmp)(const void *bst_data,
+					 int (*cmp)(int64_t list_key,
+						    int64_t user_key,
+						    const void *list_data,
 						    const void *node_data))
 {
 	struct Alx_BST	*bst;

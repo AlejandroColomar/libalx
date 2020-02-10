@@ -90,6 +90,9 @@ int	alx_dynbuf_write	(struct Alx_Dyn_Buffer *restrict buf,
 			return	ENOMEM;
 	}
 
+	if (!size)
+		return	0;
+
 	memcpy(&buf->data[offset], data, size);
 	written	= size + offset;
 	if (written > buf->written)

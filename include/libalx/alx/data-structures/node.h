@@ -38,6 +38,7 @@
  ******* headers **************************************************************
  ******************************************************************************/
 #include <stddef.h>
+#include <stdint.h>
 
 #include "libalx/alx/data-structures/dyn-buffer.h"
 
@@ -58,12 +59,14 @@
 /*
  * Node
  *
+ * key:		Key value.
  * buf:		Pointer to a dynamic buffer containing useful data.
  * left:	Pointer to the left node.
  * right:	Pointer to the right node.
  * parent:	Pointer to the parent node (in a tree).
  */
 struct	Alx_Node {
+	int64_t			key;
 	struct Alx_Dyn_Buffer	*buf;
 	struct Alx_Node		*left;
 	struct Alx_Node		*right;
@@ -78,9 +81,11 @@ struct	Alx_Node {
  * Initializes node.
  * Allocates memory for the node and for the buffer, copies the data passed by
  * the user to the newly allocated space, and updates any necessary metadata.
+ * If data is NULL, no buffer is allocated.
  *
  * node:	Pointer to a pointer to a node.  A node will be allocated,
  *		and a pointer to it will be stored in *node.
+ * key:		Node key value.
  * data:	Pointer to the first byte of the data to be copied.
  * size:	Size of the data to be copied.
  *
@@ -88,8 +93,8 @@ struct	Alx_Node {
  *	0:		OK.
  *	ENOMEM:		Aborted; failure to allocate the node or the buffer.
  */
-__attribute__((nonnull, warn_unused_result))
-int	alx_node_init		(struct Alx_Node **restrict node,
+__attribute__((nonnull(1), warn_unused_result))
+int	alx_node_init		(struct Alx_Node **restrict node, int64_t key,
 				 const void *restrict data, size_t size);
 
 /*
