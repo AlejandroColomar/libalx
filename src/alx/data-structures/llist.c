@@ -546,33 +546,26 @@ err_size:
 }
 
 void	alx_llist_to_bst		(struct Alx_BST *restrict bst,
-					 struct Alx_LinkedList *restrict list,
-					 int (*cmp)(int64_t bst_key,
-						    int64_t user_key,
-						    const void *bst_data,
-						    const void *node_data))
+					 struct Alx_LinkedList *restrict list)
 {
 	struct Alx_Node	*node;
 
 	for (ptrdiff_t i = 0; i < list->nmemb; i++) {
 		ALX_UNUSED(alx_llist_remove_head(list, &node));
-		if (alx_bst_insert_node(bst, node, cmp))
+		if (alx_bst_insert_node(bst, node))
 			alx_node_deinit(node);
 	}
 }
 
 int	alx_llist_treesort		(struct Alx_LinkedList *restrict list,
-					 int (*cmp)(int64_t list_key,
-						    int64_t user_key,
-						    const void *list_data,
-						    const void *node_data))
+					 cmp_f *cmp)
 {
 	struct Alx_BST	*bst;
 
-	if (alx_bst_init(&bst, true))
+	if (alx_bst_init(&bst, cmp, true))
 		return	ENOMEM;
 
-	alx_llist_to_bst(bst, list, cmp);
+	alx_llist_to_bst(bst, list);
 	alx_bst_to_llist(list, bst);
 
 	alx_bst_deinit(bst);

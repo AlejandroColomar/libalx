@@ -568,11 +568,7 @@ int	alx_llist_to_dynarr		(struct Alx_LinkedList *restrict list,
  */
 __attribute__((nonnull))
 void	alx_llist_to_bst		(struct Alx_BST *restrict bst,
-					 struct Alx_LinkedList *restrict list,
-					 int (*cmp)(int64_t bst_key,
-						    int64_t user_key,
-						    const void *bst_data,
-						    const void *node_data));
+					 struct Alx_LinkedList *restrict list);
 
 /*
  * Sort the linked list using a binary search tree (treesort).
@@ -585,10 +581,7 @@ void	alx_llist_to_bst		(struct Alx_BST *restrict bst,
  */
 __attribute__((nonnull, warn_unused_result))
 int	alx_llist_treesort		(struct Alx_LinkedList *restrict list,
-					 int (*cmp)(int64_t list_key,
-						    int64_t user_key,
-						    const void *list_data,
-						    const void *node_data));
+					 cmp_f *cmp);
 
 
 /******************************************************************************

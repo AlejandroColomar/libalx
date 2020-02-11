@@ -49,6 +49,19 @@
 
 
 /******************************************************************************
+ ******* typedef **************************************************************
+ ******************************************************************************/
+/*
+ * Comparison function.  This function should return
+ *		0:	The user_node compares equal to the compared ds_node.
+ *		< 0:	The user_node goes to the left of the compared ds_node.
+ *		> 0:	The user_node goes to the right of the compared ds_node.
+ */
+typedef	int	cmp_f	(int64_t user_key, int64_t ds_key,
+			 const void *user_data, const void *ds_data);
+
+
+/******************************************************************************
  ******* enum *****************************************************************
  ******************************************************************************/
 
