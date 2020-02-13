@@ -115,10 +115,10 @@ int	alx_node_write		(struct Alx_Node *node,
 	return	alx_dynbuf_write(node->buf, 0, data, size);
 }
 
-int	alx_node_read		(const struct Alx_Node *node,
-				 void *data, size_t size)
+int	alx_node_read		(void *data, size_t size,
+				 const struct Alx_Node *node)
 {
-	return	alx_dynbuf_read(node->buf, 0, data, size);
+	return	alx_dynbuf_read(data, size, node->buf, 0);
 }
 
 

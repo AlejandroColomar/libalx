@@ -56,8 +56,8 @@ void	alx_node_deinit		(struct Alx_Node *node);
 int	alx_node_write		(struct Alx_Node *node,
 				 const void *data, size_t size);
 [[gnu::nonnull]]
-int	alx_node_read		(const struct Alx_Node *node,
-				 void *data, size_t size);
+int	alx_node_read		(void *data, size_t size
+				 const struct Alx_Node *node);
 }
 
 

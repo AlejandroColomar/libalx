@@ -156,8 +156,8 @@ int	alx_node_write		(struct Alx_Node *node,
  *	ENOBUFS:	OK. data was truncated.
  */
 __attribute__((nonnull))
-int	alx_node_read		(const struct Alx_Node *node,
-				 void *data, size_t size);
+int	alx_node_read		(void *data, size_t size,
+				 const struct Alx_Node *node);
 
 
 /******************************************************************************
