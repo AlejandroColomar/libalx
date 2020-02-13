@@ -47,13 +47,13 @@ alx_Static_assert_size_ptrdiff();
  ******************************************************************************/
 __attribute__((nonnull, warn_unused_result))
 static
-int	alx_dynbuf_grow		(struct Alx_Dyn_Buffer *buf, size_t size);
+int	alx_dynbuf_grow		(struct Alx_DynBuf *buf, size_t size);
 
 
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_dynbuf_init		(struct Alx_Dyn_Buffer **buf)
+int	alx_dynbuf_init		(struct Alx_DynBuf **buf)
 {
 
 	if (alx_mallocarrays(buf, 1))
@@ -70,8 +70,8 @@ enomem:
 	return	ENOMEM;
 }
 
-int	alx_dynbuf_init_clone	(struct Alx_Dyn_Buffer **restrict clone,
-				 const struct Alx_Dyn_Buffer *restrict ref)
+int	alx_dynbuf_init_clone	(struct Alx_DynBuf **restrict clone,
+				 const struct Alx_DynBuf *restrict ref)
 {
 
 	if (!ref) {
@@ -91,7 +91,7 @@ enomem:
 	return	ENOMEM;
 }
 
-void	alx_dynbuf_deinit	(struct Alx_Dyn_Buffer *buf)
+void	alx_dynbuf_deinit	(struct Alx_DynBuf *buf)
 {
 
 	if (!buf)
@@ -101,7 +101,7 @@ void	alx_dynbuf_deinit	(struct Alx_Dyn_Buffer *buf)
 	free(buf);
 }
 
-int	alx_dynbuf_write	(struct Alx_Dyn_Buffer *restrict buf,
+int	alx_dynbuf_write	(struct Alx_DynBuf *restrict buf,
 				 size_t offset,
 				 const void *restrict data, size_t size)
 {
@@ -123,7 +123,7 @@ int	alx_dynbuf_write	(struct Alx_Dyn_Buffer *restrict buf,
 	return	0;
 }
 
-int	alx_dynbuf_insert	(struct Alx_Dyn_Buffer *restrict buf,
+int	alx_dynbuf_insert	(struct Alx_DynBuf *restrict buf,
 				 size_t offset,
 				 const void *restrict data, size_t size)
 {
@@ -142,7 +142,7 @@ int	alx_dynbuf_insert	(struct Alx_Dyn_Buffer *restrict buf,
 }
 
 ssize_t	alx_dynbuf_read		(void *restrict data, size_t size,
-				 const struct Alx_Dyn_Buffer *restrict buf,
+				 const struct Alx_DynBuf *restrict buf,
 				 size_t offset)
 {
 	size_t	sz;
@@ -157,7 +157,7 @@ ssize_t	alx_dynbuf_read		(void *restrict data, size_t size,
 	return	0;
 }
 
-void	alx_dynbuf_consume	(struct Alx_Dyn_Buffer *buf, size_t size)
+void	alx_dynbuf_consume	(struct Alx_DynBuf *buf, size_t size)
 {
 
 	if (size >= buf->written) {
@@ -169,7 +169,7 @@ void	alx_dynbuf_consume	(struct Alx_Dyn_Buffer *buf, size_t size)
 	memmove(buf->data, &((char *)buf->data)[size], buf->written);
 }
 
-int	alx_dynbuf_resize	(struct Alx_Dyn_Buffer *buf, size_t size)
+int	alx_dynbuf_resize	(struct Alx_DynBuf *buf, size_t size)
 {
 
 	if (size > PTRDIFF_MAX  ||  !size)
@@ -187,7 +187,7 @@ int	alx_dynbuf_resize	(struct Alx_Dyn_Buffer *buf, size_t size)
  ******* static function definitions ******************************************
  ******************************************************************************/
 static
-int	alx_dynbuf_grow		(struct Alx_Dyn_Buffer *buf, size_t size)
+int	alx_dynbuf_grow		(struct Alx_DynBuf *buf, size_t size)
 {
 	size_t	sz;
 

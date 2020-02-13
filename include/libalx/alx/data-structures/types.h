@@ -37,8 +37,7 @@ enum	Alx_Generic_Type {
 	ALX_TYPE_S64,
 	ALX_TYPE_U64,
 	ALX_TYPE_DBL,
-	ALX_TYPE_STR,
-	ALX_TYPE_VP,
+	ALX_TYPE_BUF,
 
 	ALX_TYPES
 };
@@ -48,15 +47,15 @@ enum	Alx_Generic_Type {
  ******* struct / union *******************************************************
  ******************************************************************************/
 struct	Alx_Generic {
-	bool	cnst;
-	int	type;
 	union {
 		int64_t			i64;
 		uint64_t			u64;
 		double				lf;
-		struct Alx_Dyn_Buffer		*buf;
-		const struct Alx_Dyn_Buffer	*cbuf;
+		struct Alx_DynBuf		*buf;
+		const struct Alx_DynBuf	*cbuf;
 	};
+	bool	cnst;
+	int	type;
 };
 
 /*
@@ -76,7 +75,7 @@ typedef int	cmp_f	(int64_t user_key, int64_t ds_key,
  * size:	Size of the data buffer (in bytes).
  * written:	Data used (in bytes).
  */
-struct	Alx_Dyn_Buffer {
+struct	Alx_DynBuf {
 	void		*data;
 	size_t		size;
 	size_t		written;
@@ -90,8 +89,8 @@ struct	Alx_Dyn_Buffer {
  * nmemb:	Number of cells in the array.
  * written:	Number of used cells in the array.
  */
-struct	Alx_Dyn_Array {
-	unsigned char	*data;
+struct	Alx_DynArr {
+	void		*data;
 	size_t		elsize;
 	ptrdiff_t	nmemb;
 	ptrdiff_t	written;
@@ -109,7 +108,7 @@ struct	Alx_Dyn_Array {
  */
 struct	Alx_Node {
 	int64_t		key;
-	struct Alx_Dyn_Buffer	*buf;
+	struct Alx_DynBuf	*buf;
 	struct Alx_Node	*left;
 	struct Alx_Node	*right;
 	struct Alx_Node	*parent;

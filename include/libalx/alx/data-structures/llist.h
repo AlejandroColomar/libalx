@@ -531,7 +531,7 @@ int	alx_llist_apply_bwd		(struct Alx_LinkedList *restrict list,
  */
 __attribute__((nonnull, warn_unused_result))
 int	alx_llist_to_dynarr		(struct Alx_LinkedList *restrict list,
-					 struct Alx_Dyn_Array *restrict arr);
+					 struct Alx_DynArr *restrict arr);
 
 /*
  * Copy the linked list data into a new binary search tree.

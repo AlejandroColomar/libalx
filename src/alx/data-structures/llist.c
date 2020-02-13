@@ -521,7 +521,7 @@ int	alx_llist_apply_bwd		(struct Alx_LinkedList *restrict list,
 }
 
 int	alx_llist_to_dynarr		(struct Alx_LinkedList *restrict list,
-					 struct Alx_Dyn_Array *restrict arr)
+					 struct Alx_DynArr *restrict arr)
 {
 	struct Alx_Node	*node;
 
