@@ -14,12 +14,13 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "libalx/alx/data-structures/llist.h"
+#include "libalx/alx/data-structures/types.h"
 #include "libalx/base/assert/assert.h"
 #include "libalx/base/stdlib/maximum.h"
 #include "libalx/base/stdlib/alloc/mallocarrays.h"
 #include "libalx/base/stdlib/alloc/frees.h"
 #include "libalx/base/stdlib/alloc/reallocarrays.h"
-#include "libalx/alx/data-structures/llist.h"
 
 
 /******************************************************************************
@@ -105,6 +106,8 @@ int	alx_dynarr_insert	(struct Alx_Dyn_Array *restrict arr,
 
 	elsz	= arr->elsize;
 
+	if (cell >= arr->nmemb)
+		return	alx_dynarr_write(arr, cell, data);
 	if (arr->written == arr->nmemb) {
 		if (alx_dynarr_grow(arr, arr->nmemb + 1))
 			return	ENOMEM;

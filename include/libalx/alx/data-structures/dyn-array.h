@@ -39,6 +39,7 @@
 #include <stddef.h>
 
 #include "libalx/alx/data-structures/llist.h"
+#include "libalx/alx/data-structures/types.h"
 
 
 /******************************************************************************
@@ -54,23 +55,6 @@
 /******************************************************************************
  ******* struct / union *******************************************************
  ******************************************************************************/
-/*
- * Dynamic array
- *
- * data:	Pointer to the first element in the array.
- * elsize:	Size of each cell (in bytes).
- * nmemb:	Number of cells in the array.
- * written:	Number of used cells in the array.
- */
-struct	Alx_Dyn_Array {
-	unsigned char	*data;
-	size_t		elsize;
-	ptrdiff_t	nmemb;
-	ptrdiff_t	written;
-};
-
-/* Avoid circular include dependence */
-struct	Alx_LinkedList;
 
 
 /******************************************************************************

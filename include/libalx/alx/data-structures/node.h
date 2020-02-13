@@ -40,7 +40,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#include "libalx/alx/data-structures/dyn-buffer.h"
+#include "libalx/alx/data-structures/types.h"
 
 
 /******************************************************************************
@@ -51,14 +51,6 @@
 /******************************************************************************
  ******* typedef **************************************************************
  ******************************************************************************/
-/*
- * Comparison function.  This function should return
- *		0:	The user_node compares equal to the compared ds_node.
- *		< 0:	The user_node goes to the left of the compared ds_node.
- *		> 0:	The user_node goes to the right of the compared ds_node.
- */
-typedef	int	cmp_f	(int64_t user_key, int64_t ds_key,
-			 const void *user_data, const void *ds_data);
 
 
 /******************************************************************************
@@ -69,24 +61,6 @@ typedef	int	cmp_f	(int64_t user_key, int64_t ds_key,
 /******************************************************************************
  ******* struct / union *******************************************************
  ******************************************************************************/
-/*
- * Node
- *
- * key:		Key value.
- * buf:		Pointer to a dynamic buffer containing useful data.
- * left:	Pointer to the left node.
- * right:	Pointer to the right node.
- * parent:	Pointer to the parent node (in a tree).
- * count:	Count (for repeated nodes in trees that don't accept duplicates).
- */
-struct	Alx_Node {
-	int64_t		key;
-	struct Alx_Dyn_Buffer	*buf;
-	struct Alx_Node	*left;
-	struct Alx_Node	*right;
-	struct Alx_Node	*parent;
-	ptrdiff_t		dup;
-};
 
 
 /******************************************************************************

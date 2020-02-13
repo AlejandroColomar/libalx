@@ -15,10 +15,11 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-#include "libalx/base/compiler/unused.h"
-#include "libalx/base/stdlib/alloc/mallocarrays.h"
 #include "libalx/alx/data-structures/llist.h"
 #include "libalx/alx/data-structures/node.h"
+#include "libalx/alx/data-structures/types.h"
+#include "libalx/base/compiler/unused.h"
+#include "libalx/base/stdlib/alloc/mallocarrays.h"
 
 
 /******************************************************************************

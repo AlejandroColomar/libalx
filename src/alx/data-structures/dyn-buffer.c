@@ -16,6 +16,7 @@
 
 #include <sys/types.h>
 
+#include "libalx/alx/data-structures/types.h"
 #include "libalx/base/assert/assert.h"
 #include "libalx/base/stdlib/maximum.h"
 #include "libalx/base/stdlib/minimum.h"
@@ -114,7 +115,7 @@ int	alx_dynbuf_write	(struct Alx_Dyn_Buffer *restrict buf,
 	if (!size)
 		return	0;
 
-	memcpy(&buf->data[offset], data, size);
+	memcpy(&((char *)buf->data)[offset], data, size);
 	written	= size + offset;
 	if (written > buf->written)
 		buf->written	= written;
@@ -132,9 +133,9 @@ int	alx_dynbuf_insert	(struct Alx_Dyn_Buffer *restrict buf,
 			return	ENOMEM;
 	}
 
-	memmove(&buf->data[offset + size], &buf->data[offset],
-							buf->written - offset);
-	memcpy(&buf->data[offset], data, size);
+	memmove(&((char *)buf->data)[offset + size],
+			&((char *)buf->data)[offset], buf->written - offset);
+	memcpy(&((char *)buf->data)[offset], data, size);
 	buf->written	+= size;
 
 	return	0;
@@ -149,7 +150,7 @@ ssize_t	alx_dynbuf_read		(void *restrict data, size_t size,
 	if (offset >= buf->written)
 		return	-1;
 	sz	= ALX_MIN(size, buf->written - offset);
-	memcpy(data, &buf->data[offset], sz);
+	memcpy(data, &((char *)buf->data)[offset], sz);
 
 	if (size  <  buf->written - offset)
 		return	sz;
@@ -165,7 +166,7 @@ void	alx_dynbuf_consume	(struct Alx_Dyn_Buffer *buf, size_t size)
 	}
 
 	buf->written	-= size;
-	memmove(buf->data, &buf->data[size], buf->written);
+	memmove(buf->data, &((char *)buf->data)[size], buf->written);
 }
 
 int	alx_dynbuf_resize	(struct Alx_Dyn_Buffer *buf, size_t size)

@@ -38,7 +38,7 @@
 #include <stddef.h>
 
 #include "libalx/alx/data-structures/dyn-array.h"
-#include "libalx/alx/data-structures/node.h"
+#include "libalx/alx/data-structures/types.h"
 
 
 /******************************************************************************
@@ -54,22 +54,6 @@
 /******************************************************************************
  ******* struct / union *******************************************************
  ******************************************************************************/
-/*
- * Doubly-linked list
- *
- * head:	Pointer to the first node.
- * tail:	Pointer to the last node.
- * nmemb:	Number of nodes in the list.
- */
-struct	Alx_LinkedList {
-	struct Alx_Node	*head;
-	struct Alx_Node	*tail;
-	ptrdiff_t	nmemb;
-};
-
-/* Avoid circular dependence */
-struct	Alx_BST;
-struct	Alx_Dyn_Array;
 
 
 /******************************************************************************
