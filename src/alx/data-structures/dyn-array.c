@@ -87,6 +87,9 @@ int	alx_dynarr_write	(struct Alx_DynArr *restrict arr,
 				 ptrdiff_t cell, const void *restrict data)
 {
 
+	if (cell < 0)
+		return	EBADSLT;
+
 	if (cell >= arr->nmemb) {
 		if (alx_dynarr_grow(arr, cell + 1))
 			return	ENOMEM;
@@ -104,7 +107,8 @@ int	alx_dynarr_insert	(struct Alx_DynArr *restrict arr,
 {
 	size_t	elsz;
 
-	elsz	= arr->elsize;
+	if (cell < 0)
+		return	EBADSLT;
 
 	if (cell >= arr->nmemb)
 		return	alx_dynarr_write(arr, cell, data);
@@ -113,6 +117,7 @@ int	alx_dynarr_insert	(struct Alx_DynArr *restrict arr,
 			return	ENOMEM;
 	}
 
+	elsz	= arr->elsize;
 	memmove(&((char *)arr->data)[(cell + 1) * elsz],
 					&((char *)arr->data)[cell * elsz],
 					(arr->written - cell) * elsz);
