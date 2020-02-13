@@ -133,8 +133,9 @@ int	alx_dynarr_insert	(struct Alx_DynArr *restrict arr,
  *	EBADSLT:	Aborted; cell >= arr->nmemb.
  */
 __attribute__((nonnull, warn_unused_result))
-int	alx_dynarr_read		(const struct Alx_DynArr *restrict arr,
-				 ptrdiff_t cell, void *restrict data);
+int	alx_dynarr_read		(void *restrict data,
+				 const struct Alx_DynArr *restrict arr,
+				 ptrdiff_t cell);
 
 /*
  * Remove a cell from the array.

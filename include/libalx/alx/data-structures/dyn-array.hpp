@@ -59,8 +59,9 @@ int	alx_dynarr_write	(struct Alx_Dyn_Array *restrict arr,
 int	alx_dynarr_insert	(struct Alx_Dyn_Array *restrict arr,
 				 ptrdiff_t cell, const void *restrict data);
 [[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_dynarr_read		(const struct Alx_Dyn_Array *restrict arr,
-				 ptrdiff_t cell, void *restrict data);
+int	alx_dynarr_read		(void *restrict data,
+				 const struct Alx_DynArr *restrict arr,
+				 ptrdiff_t cell);
 [[gnu::nonnull]][[gnu::warn_unused_result]]
 int	alx_dynarr_remove	(struct Alx_Dyn_Array *arr,
 				 ptrdiff_t cell);

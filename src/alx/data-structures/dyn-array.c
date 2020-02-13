@@ -127,8 +127,9 @@ int	alx_dynarr_insert	(struct Alx_DynArr *restrict arr,
 	return	0;
 }
 
-int	alx_dynarr_read		(const struct Alx_DynArr *restrict arr,
-				 ptrdiff_t cell, void *restrict data)
+int	alx_dynarr_read		(void *restrict data,
+				 const struct Alx_DynArr *restrict arr,
+				 ptrdiff_t cell)
 {
 
 	if (cell >= arr->written)
