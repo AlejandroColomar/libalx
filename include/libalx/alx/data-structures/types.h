@@ -31,22 +31,22 @@
 /******************************************************************************
  ******* enum *****************************************************************
  ******************************************************************************/
-enum	Alx_Generic_Type {
-	ALX_TYPE_NONE,
+enum	Alx_DF_Generic_Type {
+	ALX_DF_TYPE_NONE,
 
-	ALX_TYPE_S64,
-	ALX_TYPE_U64,
-	ALX_TYPE_DBL,
-	ALX_TYPE_BUF,
+	ALX_DF_TYPE_S64,
+	ALX_DF_TYPE_U64,
+	ALX_DF_TYPE_DBL,
+	ALX_DF_TYPE_BUF,
 
-	ALX_TYPES
+	ALX_DF_TYPES
 };
 
 
 /******************************************************************************
  ******* struct / union *******************************************************
  ******************************************************************************/
-struct	Alx_Generic {
+struct	Alx_DF_Generic {
 	union {
 		int64_t			i64;
 		uint64_t			u64;
@@ -65,8 +65,8 @@ struct	Alx_Generic {
  *		> 0:	The user_node goes to the right of the compared ds_node.
  */
 typedef int	cmp_f	(int64_t user_key, int64_t ds_key,
-			 const struct Alx_Generic *user_data,
-			 const struct Alx_Generic *ds_data);
+			 const struct Alx_DF_Generic *user_data,
+			 const struct Alx_DF_Generic *ds_data);
 
 /*
  * Dynamic buffer

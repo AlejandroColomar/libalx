@@ -26,19 +26,19 @@
 /******************************************************************************
  ******* extern "C" ***********************************************************
  ******************************************************************************/
-enum	Alx_Generic_Type {
-	ALX_TYPE_NONE,
+enum	Alx_DF_Generic_Type {
+	ALX_DF_TYPE_NONE,
 
-	ALX_TYPE_S64,
-	ALX_TYPE_U64,
-	ALX_TYPE_DBL,
-	ALX_TYPE_STR,
-	ALX_TYPE_VP,
+	ALX_DF_TYPE_S64,
+	ALX_DF_TYPE_U64,
+	ALX_DF_TYPE_DBL,
+	ALX_DF_TYPE_STR,
+	ALX_DF_TYPE_VP,
 
-	ALX_TYPES
+	ALX_DF_TYPES
 };
 
-struct	Alx_Generic {
+struct	Alx_DF_Generic {
 	union {
 		int64_t			i64;
 		uint64_t			u64;
