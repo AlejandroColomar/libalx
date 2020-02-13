@@ -114,6 +114,7 @@ CV_OBJ		=							\
 		$(BUILD_TMP_DIR)/extra/cv/features2d.o			\
 		$(BUILD_TMP_DIR)/extra/cv/highgui.o			\
 		$(BUILD_TMP_DIR)/extra/cv/imgproc.o			\
+		$(BUILD_TMP_DIR)/extra/cv/videoio.o			\
 		$(BUILD_TMP_DIR)/extra/cv/ximgproc.o
 GMP_OBJ		=							\
 		$(BUILD_TMP_DIR)/extra/gmp/mpq/cmp.o			\
