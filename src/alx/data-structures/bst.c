@@ -172,8 +172,11 @@ int	alx_bst_insert_node	(struct Alx_BST *restrict bst,
 			son	= parent->right;
 			pos	= RIGHT;
 		} else {
-			if (!bst->dup)
-				goto eexist;
+			if (!bst->dup) {
+				parent->dup += node->dup + 1;
+				bst->nmemb--;
+				return	EEXIST;
+			}
 			son	= parent->right;
 			pos	= RIGHT;
 		}
@@ -186,10 +189,6 @@ int	alx_bst_insert_node	(struct Alx_BST *restrict bst,
 	node->parent	= parent;
 
 	return	0;
-
-eexist:
-	bst->nmemb--;
-	return	EEXIST;
 }
 
 void	alx_bst_delete_all	(struct Alx_BST *bst)
@@ -231,7 +230,7 @@ int	alx_bst_find		(struct Alx_Node **restrict node,
 {
 	struct Alx_Node	*parent;
 	struct Alx_Node	*son;
-	int		cmp_res;
+	int			cmp_res;
 
 	if (!bst->root)
 		goto enoent;
@@ -305,7 +304,7 @@ int	alx_bst_apply_bwd	(struct Alx_BST *restrict bst,
 	return	bst_apply_bwd_recursive(bst->root, f, state);
 }
 
-int	alx_bst_reorder		(struct Alx_BST *restrict bst, cmp_f *cmp)
+int	alx_bst_reorder	(struct Alx_BST *restrict bst, cmp_f *cmp)
 {
 	struct Alx_LinkedList	*list;
 
@@ -325,6 +324,10 @@ void	alx_bst_to_llist	(struct Alx_LinkedList *restrict list,
 {
 
 	bst_to_llist_recursive(bst->root, list);
+	bst->root	= NULL;
+	bst->nmemb	= 0;
+	bst->key_min	= 0;
+	bst->key_max	= 0;
 }
 
 

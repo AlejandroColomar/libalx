@@ -62,11 +62,11 @@
  */
 struct	Alx_BST {
 	struct Alx_Node	*root;
-	ptrdiff_t	nmemb;
-	cmp_f		*cmp;		/* comparison function pointer */
+	ptrdiff_t		nmemb;
+	cmp_f			*cmp;		/* comparison function pointer */
 	int64_t		key_min;	/* minimum key in the BST */
 	int64_t		key_max;	/* maximum key in the BST */
-	bool		dup;		/* Allow for duplicate members? */
+	bool			dup;		/* Allow for duplicate members? */
 };
 
 /* Avoid circular dependence */

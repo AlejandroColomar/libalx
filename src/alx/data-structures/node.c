@@ -68,6 +68,7 @@ int	alx_node_init_empty	(struct Alx_Node **node)
 	(*node)->left	= NULL;
 	(*node)->right	= NULL;
 	(*node)->parent	= NULL;
+	(*node)->dup	= 0;
 
 	return	0;
 }
@@ -87,6 +88,7 @@ int	alx_node_init_clone	(struct Alx_Node **restrict clone,
 	(*clone)->key	= ref->key;
 	if (alx_dynbuf_init_clone(&(*clone)->buf, ref->buf) == ENOMEM)
 		goto enomem;
+	(*clone)->dup	= ref->dup;
 
 	return	0;
 enomem:

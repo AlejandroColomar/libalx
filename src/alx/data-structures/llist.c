@@ -550,7 +550,7 @@ void	alx_llist_to_bst		(struct Alx_BST *restrict bst,
 {
 	struct Alx_Node	*node;
 
-	for (ptrdiff_t i = 0; i < list->nmemb; i++) {
+	while (list->nmemb) {
 		ALX_UNUSED(alx_llist_remove_head(list, &node));
 		if (alx_bst_insert_node(bst, node))
 			alx_node_deinit(node);

@@ -77,13 +77,15 @@ typedef	int	cmp_f	(int64_t user_key, int64_t ds_key,
  * left:	Pointer to the left node.
  * right:	Pointer to the right node.
  * parent:	Pointer to the parent node (in a tree).
+ * count:	Count (for repeated nodes in trees that don't accept duplicates).
  */
 struct	Alx_Node {
-	int64_t			key;
+	int64_t		key;
 	struct Alx_Dyn_Buffer	*buf;
-	struct Alx_Node		*left;
-	struct Alx_Node		*right;
-	struct Alx_Node		*parent;
+	struct Alx_Node	*left;
+	struct Alx_Node	*right;
+	struct Alx_Node	*parent;
+	ptrdiff_t		dup;
 };
 
 
