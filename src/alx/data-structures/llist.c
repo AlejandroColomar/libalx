@@ -87,6 +87,8 @@ int	alx_llist_init			(struct Alx_LinkedList **list)
 	(*list)->head		= NULL;
 	(*list)->tail		= NULL;
 	(*list)->nmemb		= 0;
+	(*list)->key_min	= 0;
+	(*list)->key_max	= 0;
 
 	return	0;
 }
@@ -165,6 +167,10 @@ void	alx_llist_append_node		(struct Alx_LinkedList *list,
 
 	list->tail	= node;
 	(list->nmemb)++;
+	if (node->key > list->key_max)
+		list->key_max	= node->key;
+	else if (node->key < list->key_min)
+		list->key_min	= node->key;
 }
 
 int	alx_llist_insert_before		(struct Alx_LinkedList *list,
@@ -202,6 +208,10 @@ void	alx_llist_insert_node_before	(struct Alx_LinkedList *list,
 	ref->left->right	= node;
 	ref->left		= node;
 	(list->nmemb)++;
+	if (node->key > list->key_max)
+		list->key_max	= node->key;
+	else if (node->key < list->key_min)
+		list->key_min	= node->key;
 }
 
 int	alx_llist_insert_after		(struct Alx_LinkedList *list,
@@ -239,6 +249,10 @@ void	alx_llist_insert_node_after	(struct Alx_LinkedList *list,
 	ref->right->left	= node;
 	ref->right		= node;
 	(list->nmemb)++;
+	if (node->key > list->key_max)
+		list->key_max	= node->key;
+	else if (node->key < list->key_min)
+		list->key_min	= node->key;
 }
 
 int	alx_llist_insert_at		(struct Alx_LinkedList *list,
@@ -589,6 +603,10 @@ void	add_first_node		(struct Alx_LinkedList *list,
 	list->head	= node;
 	list->tail	= node;
 	list->nmemb	= 1;
+	if (node->key > list->key_max)
+		list->key_max	= node->key;
+	else if (node->key < list->key_min)
+		list->key_min	= node->key;
 }
 
 static

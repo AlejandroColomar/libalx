@@ -126,6 +126,8 @@ struct	Alx_LinkedList {
 	struct Alx_Node	*head;
 	struct Alx_Node	*tail;
 	ptrdiff_t		nmemb;
+	int64_t		key_min;	/* minimum key in the BST */
+	int64_t		key_max;	/* maximum key in the BST */
 };
 
 /*
