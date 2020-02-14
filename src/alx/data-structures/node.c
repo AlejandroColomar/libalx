@@ -121,6 +121,12 @@ int	alx_node_read		(void *data, size_t size,
 	return	alx_dynbuf_read(data, size, node->buf, 0);
 }
 
+int	alx_node_getdata	(void **restrict data,
+				 const struct Alx_Node *node)
+{
+	return	alx_dynbuf_getdata(data, node->buf);
+}
+
 
 /******************************************************************************
  ******* static function definitions ******************************************

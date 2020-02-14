@@ -159,6 +159,20 @@ __attribute__((nonnull))
 int	alx_node_read		(void *data, size_t size,
 				 const struct Alx_Node *node);
 
+/*
+ * Get data pointer from the node.
+ *
+ * data:	Store the data pointer here.
+ * node:	Pointer to a node.
+ *
+ * return:
+ *	0:		OK.
+ *	ENOANO:	No data pointer in the node.
+ */
+__attribute__((nonnull))
+int	alx_node_getdata	(void **restrict data,
+				 const struct Alx_Node *node);
+
 
 /******************************************************************************
  ******* inline ***************************************************************
