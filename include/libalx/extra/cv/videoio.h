@@ -1,5 +1,5 @@
 /******************************************************************************
- *	Copyright (C) 2019	Alejandro Colomar Andrés		      *
+ *	Copyright (C) 2020	Alejandro Colomar Andrés		      *
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
@@ -7,26 +7,13 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/alx/data-structures/node.hpp */
-
-
-/******************************************************************************
- ******* about ****************************************************************
- ******************************************************************************/
-/*
- * Node
- *
- * Read  <libalx/alx/data-structures/node.h>  for documentation.
- */
+#pragma once	/* libalx/extra/cv/videoio.h */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <cstddef>
-
-#include "libalx/base/compiler/restrict.hpp"
-#include "libalx/alx/data-structures/dyn-buffer.hpp"
+#include "libalx/extra/cv/core.h"
 
 
 /******************************************************************************
@@ -35,37 +22,15 @@
 
 
 /******************************************************************************
- ******* extern "C" ***********************************************************
+ ******* typedef **************************************************************
  ******************************************************************************/
-struct	Alx_Node {
-	struct Alx_Dyn_Buffer	*buf;
-	struct Alx_Node		*left;
-	struct Alx_Node		*right;
-	struct Alx_Node		*parent;
-};
-
-extern	"C"
-{
-[[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_node_init		(struct Alx_Node **restrict node,
-				 const void *restrict data, size_t size);
-[[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_node_init_empty	(struct Alx_Node **node);
-void	alx_node_deinit		(struct Alx_Node *node);
-[[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_node_write		(struct Alx_Node *node,
-				 const void *data, size_t size);
-[[gnu::nonnull]]
-int	alx_node_read		(void *data, size_t size
-				 const struct Alx_Node *node);
-}
-
-
-/******************************************************************************
- ******* namespace ************************************************************
- ******************************************************************************/
-namespace alx {
-namespace CV {
+/*
+ * These are C++ classes which are accessed through a `void *`.
+ * We just pass them around calls to C++  functions wrapped with `void *`,
+ * so all the logic is in C++, and we just can't access them in C.
+ * These types help visually differentiate between all the `void *`.
+ */
+typedef	void	cam_s;
 
 
 /******************************************************************************
@@ -81,13 +46,26 @@ namespace CV {
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
+/* ----- alloc / free */
+__attribute__((nonnull, warn_unused_result))
+int	alx_cv_alloc_cam	(cam_s **cam);
+__attribute__((nonnull))
+void	alx_cv_free_cam		(cam_s *cam);
+/* ----- init / deinit */
+__attribute__((nonnull(1)))
+void	alx_cv_init_cam		(cam_s *restrict cam,
+				 const char *restrict dev, int index, int api);
+__attribute__((nonnull))
+void	alx_cv_deinit_cam	(cam_s *cam);
+/* ----- read */
+__attribute__((nonnull))
+int	alx_cv_cam_read	(img_s *restrict img,
+				 cam_s *restrict cam);
 
 
 /******************************************************************************
- ******* namespace ************************************************************
+ ******* inline ***************************************************************
  ******************************************************************************/
-}	/* namespace CV */
-}	/* namespace alx */
 
 
 /******************************************************************************

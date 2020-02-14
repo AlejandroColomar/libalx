@@ -1,5 +1,5 @@
 /******************************************************************************
- *	Copyright (C) 2019	Alejandro Colomar Andrés		      *
+ *	Copyright (C) 2020	Alejandro Colomar Andrés		      *
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
@@ -7,16 +7,15 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/alx/data-structures/node.h"
+#include "libalx/extra/cv/videoio.hpp"
 
-#include <errno.h>
-#include <stddef.h>
-#include <stdint.h>
-#include <stdlib.h>
+#include <memory>
 
-#include "libalx/alx/data-structures/dyn-buffer.h"
-#include "libalx/alx/data-structures/types.h"
-#include "libalx/base/stdlib/alloc/mallocarrays.h"
+#include <opencv2/core.hpp>
+#include <opencv2/videoio.hpp>
+
+#include "libalx/base/compiler/restrict.hpp"
+#include "libalx/base/stdlib/alloc/mallocarrays.hpp"
 
 
 /******************************************************************************
@@ -37,88 +36,69 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_node_init		(struct Alx_Node **restrict node, int64_t key,
-				 const void *restrict data, size_t size)
+/* ----- alloc / free */
+int	alx::CV::alloc_cam	(class cv::VideoCapture **cam)
 {
-
-	if (alx_node_init_empty(node))
-		goto enomem;
-	(*node)->key	= key;
-	if (!data)
-		return	0;
-
-	if (alx_dynbuf_init(&(*node)->buf))
-		goto enomem;
-	if (alx_node_write(*node, data, size))
-		goto enomem;
-
-	return	0;
-enomem:
-	alx_node_deinit(*node);
-	*node	= NULL;
-	return	ENOMEM;
+	return	alx_mallocarrays(cam, 1);
 }
 
-int	alx_node_init_empty	(struct Alx_Node **node)
+int	alx_cv_alloc_cam	(void **cam)
 {
-
-	if (alx_mallocarrays(node, 1))
-		return	ENOMEM;
-	(*node)->key	= 0;
-	(*node)->buf	= NULL;
-	(*node)->left	= NULL;
-	(*node)->right	= NULL;
-	(*node)->parent	= NULL;
-	(*node)->dup	= 0;
-
-	return	0;
+	return	alx::CV::alloc_cam((class cv::VideoCapture **)cam);
 }
 
-int	alx_node_init_clone	(struct Alx_Node **restrict clone,
-				 const struct Alx_Node *restrict ref)
+void	alx::CV::free_cam	(class cv::VideoCapture *cam)
 {
 
-	if (!ref) {
-		*clone	= NULL;
-		return	ENOANO;
+	cam->release();
+	free(cam);
+}
+
+void	alx_cv_free_cam		(void *cam)
+{
+	alx::CV::free_cam((class cv::VideoCapture *)cam);
+}
+
+/* ----- init / deinit */
+void	alx::CV::init_cam	(class cv::VideoCapture *cam,
+				 const char *restrict dev, int index, int api)
+{
+
+	if (dev) {
+		new (cam)	cv::VideoCapture(dev, api);
+	} else {
+		new (cam)	cv::VideoCapture(index, api);
 	}
-
-	if (alx_node_init_empty(clone))
-		goto enomem;
-
-	(*clone)->key	= ref->key;
-	if (alx_dynbuf_init_clone(&(*clone)->buf, ref->buf) == ENOMEM)
-		goto enomem;
-	(*clone)->dup	= ref->dup;
-
-	return	0;
-enomem:
-	alx_node_deinit(*clone);
-	*clone	= NULL;
-	return	ENOMEM;
 }
 
-void	alx_node_deinit		(struct Alx_Node *node)
+void	alx_cv_init_cam		(void *restrict cam,
+				 const char *restrict dev, int index, int api)
 {
-
-	if (!node)
-		return;
-
-	alx_dynbuf_deinit(node->buf);
-	node->buf	= NULL;
-	free(node);
+	alx::CV::init_cam((class cv::VideoCapture *)cam, dev, index, api);
 }
 
-int	alx_node_write		(struct Alx_Node *node,
-				 const void *data, size_t size)
+void	alx::CV::deinit_cam	(class cv::VideoCapture *cam)
 {
-	return	alx_dynbuf_write(node->buf, 0, data, size);
+	std::destroy_at(cam);
 }
 
-int	alx_node_read		(void *data, size_t size,
-				 const struct Alx_Node *node)
+void	alx_cv_deinit_cam	(void *cam)
 {
-	return	alx_dynbuf_read(data, size, node->buf, 0);
+	alx::CV::deinit_cam((class cv::VideoCapture *)cam);
+}
+
+/* ----- read */
+int	alx::CV::cam_read	(class cv::Mat *restrict img,
+				 class cv::VideoCapture *restrict cam)
+{
+	return	!cam->read(*img);
+}
+
+int	alx_cv_cam_read	(void *restrict img,
+				 void *restrict cam)
+{
+	return	alx::CV::cam_read((class cv::Mat *)img,
+						(class cv::VideoCapture *)cam);
 }
 
 

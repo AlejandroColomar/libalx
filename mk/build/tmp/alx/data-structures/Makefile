@@ -16,13 +16,15 @@ OBJ		=							\
 		dyn-array.o						\
 		dyn-buffer.o						\
 		llist.o							\
-		node.o
+		node.o							\
+		types.o
 
 BST_INC		=							\
 		$(INC_DIR)/libalx/base/compiler/unused.h		\
 		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.h	\
 		$(INC_DIR)/libalx/alx/data-structures/llist.h		\
 		$(INC_DIR)/libalx/alx/data-structures/node.h		\
+		$(INC_DIR)/libalx/alx/data-structures/types.h		\
 		$(INC_DIR)/libalx/alx/data-structures/bst.h
 BST_SRC		=							\
 		$(SRC_DIR)/alx/data-structures/bst.c
@@ -34,6 +36,7 @@ DYNARR_INC	=							\
 		$(INC_DIR)/libalx/base/stdlib/alloc/frees.h		\
 		$(INC_DIR)/libalx/base/stdlib/alloc/reallocarrays.h	\
 		$(INC_DIR)/libalx/alx/data-structures/llist.h		\
+		$(INC_DIR)/libalx/alx/data-structures/types.h		\
 		$(INC_DIR)/libalx/alx/data-structures/dyn-array.h
 DYNARR_SRC	=							\
 		$(SRC_DIR)/alx/data-structures/dyn-array.c
@@ -46,6 +49,7 @@ DYNBUF_INC	=							\
 		$(INC_DIR)/libalx/base/stdlib/alloc/mallocs.h		\
 		$(INC_DIR)/libalx/base/stdlib/alloc/frees.h		\
 		$(INC_DIR)/libalx/base/stdlib/alloc/reallocs.h		\
+		$(INC_DIR)/libalx/alx/data-structures/types.h		\
 		$(INC_DIR)/libalx/alx/data-structures/dyn-buffer.h
 DYNBUF_SRC	=							\
 		$(SRC_DIR)/alx/data-structures/dyn-buffer.c
@@ -57,6 +61,7 @@ LLIST_INC	=							\
 		$(INC_DIR)/libalx/alx/data-structures/dyn-array.h	\
 		$(INC_DIR)/libalx/alx/data-structures/dyn-buffer.h	\
 		$(INC_DIR)/libalx/alx/data-structures/node.h		\
+		$(INC_DIR)/libalx/alx/data-structures/types.h		\
 		$(INC_DIR)/libalx/alx/data-structures/llist.h
 LLIST_SRC	=							\
 		$(SRC_DIR)/alx/data-structures/llist.c
@@ -64,9 +69,15 @@ LLIST_SRC	=							\
 NODE_INC	=							\
 		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.h	\
 		$(INC_DIR)/libalx/alx/data-structures/dyn-buffer.h	\
+		$(INC_DIR)/libalx/alx/data-structures/types.h		\
 		$(INC_DIR)/libalx/alx/data-structures/node.h
 NODE_SRC	=							\
 		$(SRC_DIR)/alx/data-structures/node.c
+
+TYPES_INC	=							\
+		$(INC_DIR)/libalx/alx/data-structures/types.h
+TYPES_SRC	=							\
+		$(SRC_DIR)/alx/data-structures/types.c
 
 ################################################################################
 # target: dependencies
@@ -101,6 +112,9 @@ llist.so.s: $(LLIST_SRC) $(LLIST_INC)
 
 node.a.s: $(NODE_SRC) $(NODE_INC)
 node.so.s: $(NODE_SRC) $(NODE_INC)
+
+types.a.s: $(TYPES_SRC) $(TYPES_INC)
+types.so.s: $(TYPES_SRC) $(TYPES_INC)
 
 
 PHONY += clean

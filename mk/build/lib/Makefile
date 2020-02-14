@@ -92,7 +92,8 @@ ALX_DS_OBJ	=							\
 		$(BUILD_TMP_DIR)/alx/data-structures/dyn-array.o	\
 		$(BUILD_TMP_DIR)/alx/data-structures/dyn-buffer.o	\
 		$(BUILD_TMP_DIR)/alx/data-structures/llist.o		\
-		$(BUILD_TMP_DIR)/alx/data-structures/node.o
+		$(BUILD_TMP_DIR)/alx/data-structures/node.o		\
+		$(BUILD_TMP_DIR)/alx/data-structures/types.o
 ALX_NPC_OBJ	=							\
 		$(BUILD_TMP_DIR)/alx/npcomplete/solver_lut.o
 
@@ -114,6 +115,7 @@ CV_OBJ		=							\
 		$(BUILD_TMP_DIR)/extra/cv/features2d.o			\
 		$(BUILD_TMP_DIR)/extra/cv/highgui.o			\
 		$(BUILD_TMP_DIR)/extra/cv/imgproc.o			\
+		$(BUILD_TMP_DIR)/extra/cv/videoio.o			\
 		$(BUILD_TMP_DIR)/extra/cv/ximgproc.o
 GMP_OBJ		=							\
 		$(BUILD_TMP_DIR)/extra/gmp/mpq/cmp.o			\

@@ -1,5 +1,5 @@
 /******************************************************************************
- *	Copyright (C) 2019	Alejandro Colomar Andrés		      *
+ *	Copyright (C) 2020	Alejandro Colomar Andrés		      *
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
@@ -7,26 +7,16 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/alx/data-structures/dyn-array.hpp */
-
-
-/******************************************************************************
- ******* about ****************************************************************
- ******************************************************************************/
-/*
- * Dynamic array
- *
- * Read  <libalx/alx/data-structures/dyn-array.h>  for documentation.
- */
+#pragma once	/* libalx/extra/cv/videoio.hpp */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <cstddef>
+#include <opencv2/core.hpp>
+#include <opencv2/videoio.hpp>
 
 #include "libalx/base/compiler/restrict.hpp"
-#include "libalx/alx/data-structures/llist.hpp"
 
 
 /******************************************************************************
@@ -37,44 +27,23 @@
 /******************************************************************************
  ******* extern "C" ***********************************************************
  ******************************************************************************/
-struct	Alx_Dyn_Array {
-	unsigned char	*data;
-	size_t		elsize;
-	ptrdiff_t	nmemb;
-	ptrdiff_t	written;
-};
-
-/* Avoid circular include dependence */
-struct	Alx_LinkedList;
-
 extern	"C"
 {
-[[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_dynarr_init		(struct Alx_Dyn_Array **arr, size_t elsize);
-void	alx_dynarr_deinit	(struct Alx_Dyn_Array *arr);
-[[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_dynarr_write	(struct Alx_Dyn_Array *restrict arr,
-				 ptrdiff_t cell, const void *restrict data);
-[[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_dynarr_insert	(struct Alx_Dyn_Array *restrict arr,
-				 ptrdiff_t cell, const void *restrict data);
-[[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_dynarr_read		(void *restrict data,
-				 const struct Alx_DynArr *restrict arr,
-				 ptrdiff_t cell);
-[[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_dynarr_remove	(struct Alx_Dyn_Array *arr,
-				 ptrdiff_t cell);
-[[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_dynarr_resize	(struct Alx_Dyn_Array *arr,
-				 ptrdiff_t nmemb, size_t elsize);
-[[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_dynarr_reset	(struct Alx_Dyn_Array *arr, size_t elsize);
-[[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_dynarr_fit		(struct Alx_Dyn_Array *arr);
-[[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_dynarr_to_llist	(struct Alx_Dyn_Array *arr,
-				 struct Alx_LinkedList *list);
+/* ----- alloc / free */
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+int	alx_cv_alloc_cam	(void **cam);
+[[gnu::nonnull]]
+void	alx_cv_free_cam		(void *cam);
+/* ----- init / deinit */
+[[gnu::nonnull(1)]]
+void	alx_cv_init_cam		(void *restrict cam,
+				 const char *restrict dev, int index, int api);
+[[gnu::nonnull]]
+void	alx_cv_deinit_cam	(void *cam);
+/* ----- read */
+[[gnu::nonnull]]
+int	alx_cv_cam_read	(void *restrict img,
+				 void *restrict cam);
 }
 
 
@@ -98,6 +67,21 @@ namespace CV {
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
+/* ----- alloc / free */
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+int	alloc_cam	(class cv::VideoCapture **cam);
+[[gnu::nonnull]]
+void	free_cam	(class cv::VideoCapture *cam);
+/* ----- init / deinit */
+[[gnu::nonnull(1)]]
+void	init_cam	(class cv::VideoCapture *cam,
+			 const char *restrict dev, int index, int api);
+[[gnu::nonnull]]
+void	deinit_cam	(class cv::VideoCapture *cam);
+/* ----- read */
+[[gnu::nonnull]]
+int	cam_read	(class cv::Mat *restrict img,
+			 class cv::VideoCapture *restrict cam);
 
 
 /******************************************************************************

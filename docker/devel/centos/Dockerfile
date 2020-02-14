@@ -1,14 +1,28 @@
-FROM	debian:testing
+FROM	centos:centos8
 RUN	apt-get update							&& \
 	apt-get upgrade --yes						&& \
-	apt-get install gcc g++ make git pkg-config libbsd-dev --yes	&& \
-	apt-get install libcurl4-openssl-dev libgmp3-dev --yes		&& \
-	apt-get install libgsl-dev libncurses-dev libopencv-dev --yes	&& \
-	apt-get install libtesseract-dev libzbar-dev deborphan --yes	&& \
+	apt-get install -V \
+			gcc \
+			gcc-c++ \
+			make \
+			git \
+			pkgconf-pkg-config \
+			libbsd-devel \
+			libcurl-devel \
+			libgmp-devel \
+			libgsl-devel \
+			libncurses-devel \
+			libopencv-devel \
+			tesseract-devel \
+			zbar-devel \
+			deborphan \
+			--yes						&& \
 	apt-get autoremove --purge --yes				&& \
 	apt-get purge $(deborphan) --yes				&& \
 	apt-get autoclean						&& \
 	apt-get clean
+
+## centos8 doesn't have Opencv4, which is required by libalx-cv
 
 ##
 ## Use the container to build programs that depend on libalx

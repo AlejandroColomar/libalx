@@ -39,6 +39,7 @@
 #include <stddef.h>
 
 #include "libalx/alx/data-structures/llist.h"
+#include "libalx/alx/data-structures/types.h"
 
 
 /******************************************************************************
@@ -54,23 +55,6 @@
 /******************************************************************************
  ******* struct / union *******************************************************
  ******************************************************************************/
-/*
- * Dynamic array
- *
- * data:	Pointer to the first element in the array.
- * elsize:	Size of each cell (in bytes).
- * nmemb:	Number of cells in the array.
- * written:	Number of used cells in the array.
- */
-struct	Alx_Dyn_Array {
-	unsigned char	*data;
-	size_t		elsize;
-	ptrdiff_t	nmemb;
-	ptrdiff_t	written;
-};
-
-/* Avoid circular include dependence */
-struct	Alx_LinkedList;
 
 
 /******************************************************************************
@@ -88,7 +72,7 @@ struct	Alx_LinkedList;
  *	ENOMEM:		Aborted; failure to allocate the array.
  */
 __attribute__((nonnull, warn_unused_result))
-int	alx_dynarr_init		(struct Alx_Dyn_Array **arr, size_t elsize);
+int	alx_dynarr_init		(struct Alx_DynArr **arr, size_t elsize);
 
 /*
  * Deletes `arr`.
@@ -97,7 +81,7 @@ int	alx_dynarr_init		(struct Alx_Dyn_Array **arr, size_t elsize);
  *
  * arr:		Pointer to an array.  It is invalid after the call.
  */
-void	alx_dynarr_deinit	(struct Alx_Dyn_Array *arr);
+void	alx_dynarr_deinit	(struct Alx_DynArr *arr);
 
 /*
  * Writes into the array.
@@ -115,7 +99,7 @@ void	alx_dynarr_deinit	(struct Alx_Dyn_Array *arr);
  *			data is left untouched.
  */
 __attribute__((nonnull, warn_unused_result))
-int	alx_dynarr_write	(struct Alx_Dyn_Array *restrict arr,
+int	alx_dynarr_write	(struct Alx_DynArr *restrict arr,
 				 ptrdiff_t cell, const void *restrict data);
 
 /*
@@ -134,7 +118,7 @@ int	alx_dynarr_write	(struct Alx_Dyn_Array *restrict arr,
  *			data is left untouched.
  */
 __attribute__((nonnull, warn_unused_result))
-int	alx_dynarr_insert	(struct Alx_Dyn_Array *restrict arr,
+int	alx_dynarr_insert	(struct Alx_DynArr *restrict arr,
 				 ptrdiff_t cell, const void *restrict data);
 
 /*
@@ -149,8 +133,9 @@ int	alx_dynarr_insert	(struct Alx_Dyn_Array *restrict arr,
  *	EBADSLT:	Aborted; cell >= arr->nmemb.
  */
 __attribute__((nonnull, warn_unused_result))
-int	alx_dynarr_read		(const struct Alx_Dyn_Array *restrict arr,
-				 ptrdiff_t cell, void *restrict data);
+int	alx_dynarr_read		(void *restrict data,
+				 const struct Alx_DynArr *restrict arr,
+				 ptrdiff_t cell);
 
 /*
  * Remove a cell from the array.
@@ -164,7 +149,7 @@ int	alx_dynarr_read		(const struct Alx_Dyn_Array *restrict arr,
  *	EBADSLT:	Aborted; cell >= arr->nmemb.
  */
 __attribute__((nonnull, warn_unused_result))
-int	alx_dynarr_remove	(struct Alx_Dyn_Array *arr,
+int	alx_dynarr_remove	(struct Alx_DynArr *arr,
 				 ptrdiff_t cell);
 
 /*
@@ -179,7 +164,7 @@ int	alx_dynarr_remove	(struct Alx_Dyn_Array *arr,
  *	ENOMEM:		Aborted; failure to reallocate the array.
  */
 __attribute__((nonnull, warn_unused_result))
-int	alx_dynarr_resize	(struct Alx_Dyn_Array *arr,
+int	alx_dynarr_resize	(struct Alx_DynArr *arr,
 				 ptrdiff_t nmemb, size_t elsize);
 
 /*
@@ -193,7 +178,7 @@ int	alx_dynarr_resize	(struct Alx_Dyn_Array *arr,
  *	ENOMEM:		Aborted; failure to reallocate the array.
  */
 __attribute__((nonnull, warn_unused_result))
-int	alx_dynarr_reset	(struct Alx_Dyn_Array *arr, size_t elsize);
+int	alx_dynarr_reset	(struct Alx_DynArr *arr, size_t elsize);
 
 /*
  * Shrink the array to fit the used space.
@@ -205,7 +190,7 @@ int	alx_dynarr_reset	(struct Alx_Dyn_Array *arr, size_t elsize);
  *	ENOMEM:		Aborted; failure to reallocate the array.
  */
 __attribute__((nonnull, warn_unused_result))
-int	alx_dynarr_fit		(struct Alx_Dyn_Array *arr);
+int	alx_dynarr_fit		(struct Alx_DynArr *arr);
 
 /*
  * Copy the array data into an empty linked list.  If the list is not empty,
@@ -220,7 +205,7 @@ int	alx_dynarr_fit		(struct Alx_Dyn_Array *arr);
  *	ENOMEM:		Aborted; failure to allocate the nodes.
  */
 __attribute__((nonnull, warn_unused_result))
-int	alx_dynarr_to_llist	(struct Alx_Dyn_Array *arr,
+int	alx_dynarr_to_llist	(struct Alx_DynArr *arr,
 				 struct Alx_LinkedList *list);
 
 

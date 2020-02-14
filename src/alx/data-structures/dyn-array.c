@@ -14,12 +14,13 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "libalx/alx/data-structures/llist.h"
+#include "libalx/alx/data-structures/types.h"
 #include "libalx/base/assert/assert.h"
 #include "libalx/base/stdlib/maximum.h"
 #include "libalx/base/stdlib/alloc/mallocarrays.h"
 #include "libalx/base/stdlib/alloc/frees.h"
 #include "libalx/base/stdlib/alloc/reallocarrays.h"
-#include "libalx/alx/data-structures/llist.h"
 
 
 /******************************************************************************
@@ -43,13 +44,13 @@ alx_Static_assert_size_ptrdiff();
  ******************************************************************************/
 __attribute__((nonnull, warn_unused_result))
 static
-int	alx_dynarr_grow		(struct Alx_Dyn_Array *arr, ptrdiff_t nmemb);
+int	alx_dynarr_grow		(struct Alx_DynArr *arr, ptrdiff_t nmemb);
 
 
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_dynarr_init		(struct Alx_Dyn_Array **arr, size_t elsize)
+int	alx_dynarr_init		(struct Alx_DynArr **arr, size_t elsize)
 {
 	int	err;
 
@@ -72,7 +73,7 @@ err:
 	return	ENOMEM;
 }
 
-void	alx_dynarr_deinit	(struct Alx_Dyn_Array *arr)
+void	alx_dynarr_deinit	(struct Alx_DynArr *arr)
 {
 
 	if (!arr)
@@ -82,44 +83,53 @@ void	alx_dynarr_deinit	(struct Alx_Dyn_Array *arr)
 	free(arr);
 }
 
-int	alx_dynarr_write	(struct Alx_Dyn_Array *restrict arr,
+int	alx_dynarr_write	(struct Alx_DynArr *restrict arr,
 				 ptrdiff_t cell, const void *restrict data)
 {
+
+	if (cell < 0)
+		return	EBADSLT;
 
 	if (cell >= arr->nmemb) {
 		if (alx_dynarr_grow(arr, cell + 1))
 			return	ENOMEM;
 	}
 
-	memcpy(&arr->data[cell * arr->elsize], data, arr->elsize);
+	memcpy(&((char *)arr->data)[cell * arr->elsize], data, arr->elsize);
 	if (cell >= arr->written)
 		arr->written	= cell + 1;
 
 	return	0;
 }
 
-int	alx_dynarr_insert	(struct Alx_Dyn_Array *restrict arr,
+int	alx_dynarr_insert	(struct Alx_DynArr *restrict arr,
 				 ptrdiff_t cell, const void *restrict data)
 {
 	size_t	elsz;
 
-	elsz	= arr->elsize;
+	if (cell < 0)
+		return	EBADSLT;
 
+	if (cell >= arr->nmemb)
+		return	alx_dynarr_write(arr, cell, data);
 	if (arr->written == arr->nmemb) {
 		if (alx_dynarr_grow(arr, arr->nmemb + 1))
 			return	ENOMEM;
 	}
 
-	memmove(&arr->data[(cell + 1) * elsz], &arr->data[cell * elsz],
-						(arr->written - cell) * elsz);
-	memcpy(&arr->data[cell * elsz], data, elsz);
+	elsz	= arr->elsize;
+	memmove(&((char *)arr->data)[(cell + 1) * elsz],
+					&((char *)arr->data)[cell * elsz],
+					(arr->written - cell) * elsz);
+	memcpy(&((char *)arr->data)[cell * elsz], data, elsz);
 	arr->written++;
 
 	return	0;
 }
 
-int	alx_dynarr_read		(const struct Alx_Dyn_Array *restrict arr,
-				 ptrdiff_t cell, void *restrict data)
+int	alx_dynarr_read		(void *restrict data,
+				 const struct Alx_DynArr *restrict arr,
+				 ptrdiff_t cell)
 {
 
 	if (cell >= arr->written)
@@ -127,12 +137,12 @@ int	alx_dynarr_read		(const struct Alx_Dyn_Array *restrict arr,
 	if (cell < 0)
 		return	EBADSLT;
 
-	memcpy(data, &arr->data[cell * arr->elsize], arr->elsize);
+	memcpy(data, &((char *)arr->data)[cell * arr->elsize], arr->elsize);
 
 	return	0;
 }
 
-int	alx_dynarr_remove	(struct Alx_Dyn_Array *arr,
+int	alx_dynarr_remove	(struct Alx_DynArr *arr,
 				 ptrdiff_t cell)
 {
 	size_t	elsz;
@@ -144,14 +154,15 @@ int	alx_dynarr_remove	(struct Alx_Dyn_Array *arr,
 	if (cell < 0)
 		return	EBADSLT;
 
-	memmove(&arr->data[(cell) * elsz], &arr->data[(cell + 1) * elsz],
+	memmove(&((char *)arr->data)[(cell) * elsz],
+					&((char *)arr->data)[(cell + 1) * elsz],
 					(arr->written - cell - 1) * elsz);
 	arr->written--;
 
 	return	0;
 }
 
-int	alx_dynarr_resize	(struct Alx_Dyn_Array *arr,
+int	alx_dynarr_resize	(struct Alx_DynArr *arr,
 				 ptrdiff_t nmemb, size_t elsize)
 {
 	int	err;
@@ -175,7 +186,7 @@ int	alx_dynarr_resize	(struct Alx_Dyn_Array *arr,
 	return	0;
 }
 
-int	alx_dynarr_reset	(struct Alx_Dyn_Array *arr, size_t elsize)
+int	alx_dynarr_reset	(struct Alx_DynArr *arr, size_t elsize)
 {
 	int	err;
 
@@ -192,13 +203,13 @@ int	alx_dynarr_reset	(struct Alx_Dyn_Array *arr, size_t elsize)
 	return	alx_dynarr_resize(arr, 0, 0);
 }
 
-int	alx_dynarr_fit		(struct Alx_Dyn_Array *arr)
+int	alx_dynarr_fit		(struct Alx_DynArr *arr)
 {
 
 	return	alx_dynarr_resize(arr, arr->written, 0);
 }
 
-int	alx_dynarr_to_llist	(struct Alx_Dyn_Array *arr,
+int	alx_dynarr_to_llist	(struct Alx_DynArr *arr,
 				 struct Alx_LinkedList *list)
 {
 	const void	*cell;
@@ -223,7 +234,7 @@ err:
  ******* static function definitions ******************************************
  ******************************************************************************/
 static
-int	alx_dynarr_grow		(struct Alx_Dyn_Array *arr, ptrdiff_t nmemb)
+int	alx_dynarr_grow		(struct Alx_DynArr *arr, ptrdiff_t nmemb)
 {
 	ptrdiff_t	n;
 

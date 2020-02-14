@@ -64,7 +64,7 @@ struct	Alx_URL_Data {
 		CURL	*curl;
 		FILE	*file;
 	} handle;			/* handle */
-	struct Alx_Dyn_Buffer	*buf;	/* buffer to store cached data*/
+	struct Alx_DynBuf	*buf;	/* buffer to store cached data*/
 	int	still_running;	/* Is background url fetch still in progress */
 };
 

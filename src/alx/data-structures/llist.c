@@ -14,12 +14,13 @@
 #include <stddef.h>
 #include <stdlib.h>
 
-#include "libalx/base/compiler/unused.h"
-#include "libalx/base/stdlib/alloc/mallocarrays.h"
 #include "libalx/alx/data-structures/bst.h"
 #include "libalx/alx/data-structures/dyn-array.h"
 #include "libalx/alx/data-structures/dyn-buffer.h"
 #include "libalx/alx/data-structures/node.h"
+#include "libalx/alx/data-structures/types.h"
+#include "libalx/base/compiler/unused.h"
+#include "libalx/base/stdlib/alloc/mallocarrays.h"
 
 
 /******************************************************************************
@@ -86,6 +87,8 @@ int	alx_llist_init			(struct Alx_LinkedList **list)
 	(*list)->head		= NULL;
 	(*list)->tail		= NULL;
 	(*list)->nmemb		= 0;
+	(*list)->key_min	= 0;
+	(*list)->key_max	= 0;
 
 	return	0;
 }
@@ -164,6 +167,10 @@ void	alx_llist_append_node		(struct Alx_LinkedList *list,
 
 	list->tail	= node;
 	(list->nmemb)++;
+	if (node->key > list->key_max)
+		list->key_max	= node->key;
+	else if (node->key < list->key_min)
+		list->key_min	= node->key;
 }
 
 int	alx_llist_insert_before		(struct Alx_LinkedList *list,
@@ -201,6 +208,10 @@ void	alx_llist_insert_node_before	(struct Alx_LinkedList *list,
 	ref->left->right	= node;
 	ref->left		= node;
 	(list->nmemb)++;
+	if (node->key > list->key_max)
+		list->key_max	= node->key;
+	else if (node->key < list->key_min)
+		list->key_min	= node->key;
 }
 
 int	alx_llist_insert_after		(struct Alx_LinkedList *list,
@@ -238,6 +249,10 @@ void	alx_llist_insert_node_after	(struct Alx_LinkedList *list,
 	ref->right->left	= node;
 	ref->right		= node;
 	(list->nmemb)++;
+	if (node->key > list->key_max)
+		list->key_max	= node->key;
+	else if (node->key < list->key_min)
+		list->key_min	= node->key;
 }
 
 int	alx_llist_insert_at		(struct Alx_LinkedList *list,
@@ -520,7 +535,7 @@ int	alx_llist_apply_bwd		(struct Alx_LinkedList *restrict list,
 }
 
 int	alx_llist_to_dynarr		(struct Alx_LinkedList *restrict list,
-					 struct Alx_Dyn_Array *restrict arr)
+					 struct Alx_DynArr *restrict arr)
 {
 	struct Alx_Node	*node;
 
@@ -546,33 +561,26 @@ err_size:
 }
 
 void	alx_llist_to_bst		(struct Alx_BST *restrict bst,
-					 struct Alx_LinkedList *restrict list,
-					 int (*cmp)(int64_t bst_key,
-						    int64_t user_key,
-						    const void *bst_data,
-						    const void *node_data))
+					 struct Alx_LinkedList *restrict list)
 {
 	struct Alx_Node	*node;
 
-	for (ptrdiff_t i = 0; i < list->nmemb; i++) {
+	while (list->nmemb) {
 		ALX_UNUSED(alx_llist_remove_head(list, &node));
-		if (alx_bst_insert_node(bst, node, cmp))
+		if (alx_bst_insert_node(bst, node))
 			alx_node_deinit(node);
 	}
 }
 
 int	alx_llist_treesort		(struct Alx_LinkedList *restrict list,
-					 int (*cmp)(int64_t list_key,
-						    int64_t user_key,
-						    const void *list_data,
-						    const void *node_data))
+					 cmp_f *cmp)
 {
 	struct Alx_BST	*bst;
 
-	if (alx_bst_init(&bst, true))
+	if (alx_bst_init(&bst, cmp, true))
 		return	ENOMEM;
 
-	alx_llist_to_bst(bst, list, cmp);
+	alx_llist_to_bst(bst, list);
 	alx_bst_to_llist(list, bst);
 
 	alx_bst_deinit(bst);
@@ -595,6 +603,10 @@ void	add_first_node		(struct Alx_LinkedList *list,
 	list->head	= node;
 	list->tail	= node;
 	list->nmemb	= 1;
+	if (node->key > list->key_max)
+		list->key_max	= node->key;
+	else if (node->key < list->key_min)
+		list->key_min	= node->key;
 }
 
 static

@@ -15,10 +15,11 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-#include "libalx/base/compiler/unused.h"
-#include "libalx/base/stdlib/alloc/mallocarrays.h"
 #include "libalx/alx/data-structures/llist.h"
 #include "libalx/alx/data-structures/node.h"
+#include "libalx/alx/data-structures/types.h"
+#include "libalx/base/compiler/unused.h"
+#include "libalx/base/stdlib/alloc/mallocarrays.h"
 
 
 /******************************************************************************
@@ -101,13 +102,14 @@ void	bst_to_llist_recursive		(struct Alx_Node *restrict bst,
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_bst_init		(struct Alx_BST **bst, bool dup)
+int	alx_bst_init		(struct Alx_BST **bst, cmp_f *cmp, bool dup)
 {
 
 	if (alx_mallocarrays(bst, 1))
 		return	ENOMEM;
 	(*bst)->root	= NULL;
 	(*bst)->nmemb	= 0;
+	(*bst)->cmp	= cmp;
 	(*bst)->key_min	= 0;
 	(*bst)->key_max	= 0;
 	(*bst)->dup	= dup;
@@ -126,23 +128,17 @@ void	alx_bst_deinit		(struct Alx_BST *bst)
 }
 
 int	alx_bst_insert		(struct Alx_BST *bst,
-				 int64_t key, const void *data, size_t size,
-				 int (*cmp)(int64_t bst_key, int64_t user_key,
-					    const void *bst_data,
-					    const void *user_data))
+				 int64_t key, const void *data, size_t size)
 {
 	struct Alx_Node	*node;
 
 	if (alx_node_init(&node, key, data, size))
 		return	ENOMEM;
-	return	alx_bst_insert_node(bst, node, cmp);
+	return	alx_bst_insert_node(bst, node);
 }
 
 int	alx_bst_insert_node	(struct Alx_BST *restrict bst,
-				 struct Alx_Node *restrict node,
-				 int (*cmp)(int64_t bst_key, int64_t user_key,
-					    const void *bst_data,
-					    const void *user_data))
+				 struct Alx_Node *restrict node)
 {
 	enum		{LEFT, RIGHT};
 
@@ -168,7 +164,7 @@ int	alx_bst_insert_node	(struct Alx_BST *restrict bst,
 	son	= bst->root;
 	while (son) {
 		parent	= son;
-		cmp_res = cmp(parent->key, node->key, parent->buf->data,
+		cmp_res = bst->cmp(parent->key, node->key, parent->buf->data,
 							node->buf->data);
 		if (cmp_res < 0) {
 			son	= parent->left;
@@ -177,8 +173,11 @@ int	alx_bst_insert_node	(struct Alx_BST *restrict bst,
 			son	= parent->right;
 			pos	= RIGHT;
 		} else {
-			if (!bst->dup)
-				goto eexist;
+			if (!bst->dup) {
+				parent->dup += node->dup + 1;
+				bst->nmemb--;
+				return	EEXIST;
+			}
 			son	= parent->right;
 			pos	= RIGHT;
 		}
@@ -191,10 +190,6 @@ int	alx_bst_insert_node	(struct Alx_BST *restrict bst,
 	node->parent	= parent;
 
 	return	0;
-
-eexist:
-	bst->nmemb--;
-	return	EEXIST;
 }
 
 void	alx_bst_delete_all	(struct Alx_BST *bst)
@@ -232,14 +227,11 @@ int	alx_bst_rightmost_node	(struct Alx_Node **restrict node,
 
 int	alx_bst_find		(struct Alx_Node **restrict node,
 				 struct Alx_BST *restrict bst,
-				 int64_t key, const void *restrict data,
-				 int (*cmp)(int64_t bst_key, int64_t user_key,
-					    const void *bst_data,
-					    const void *user_data))
+				 int64_t key, const void *restrict data)
 {
 	struct Alx_Node	*parent;
 	struct Alx_Node	*son;
-	int		cmp_res;
+	int			cmp_res;
 
 	if (!bst->root)
 		goto enoent;
@@ -247,7 +239,7 @@ int	alx_bst_find		(struct Alx_Node **restrict node,
 	son	= bst->root;
 	while (son) {
 		parent	= son;
-		cmp_res	= cmp(parent->key, key, parent->buf->data, data);
+		cmp_res	= bst->cmp(parent->key, key, parent->buf->data, data);
 		if (cmp_res < 0) {
 			son	= parent->left;
 		} else if (cmp_res > 0) {
@@ -265,13 +257,10 @@ enoent:
 
 int	alx_bst_remove		(struct Alx_Node **restrict node,
 				 struct Alx_BST *restrict bst,
-				 int64_t key, const void *restrict data,
-				 int (*cmp)(int64_t bst_key, int64_t user_key,
-					    const void *bst_data,
-					    const void *user_data))
+				 int64_t key, const void *restrict data)
 {
 
-	if (alx_bst_find(node, bst, key, data, cmp))
+	if (alx_bst_find(node, bst, key, data))
 		return	ENOENT;
 	alx_bst_remove_node(bst, *node);
 
@@ -316,11 +305,30 @@ int	alx_bst_apply_bwd	(struct Alx_BST *restrict bst,
 	return	bst_apply_bwd_recursive(bst->root, f, state);
 }
 
+int	alx_bst_reorder	(struct Alx_BST *restrict bst, cmp_f *cmp)
+{
+	struct Alx_LinkedList	*list;
+
+	if (alx_llist_init(&list))
+		return	ENOMEM;
+
+	alx_bst_to_llist(list, bst);
+	bst->cmp	= cmp;
+	alx_llist_to_bst(bst, list);
+
+	alx_llist_deinit(list);
+	return	0;
+}
+
 void	alx_bst_to_llist	(struct Alx_LinkedList *restrict list,
 				 struct Alx_BST *restrict bst)
 {
 
 	bst_to_llist_recursive(bst->root, list);
+	bst->root	= NULL;
+	bst->nmemb	= 0;
+	bst->key_min	= 0;
+	bst->key_max	= 0;
 }
 
 

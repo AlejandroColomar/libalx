@@ -17,6 +17,7 @@ OBJ		=							\
 		features2d.o						\
 		highgui.o						\
 		imgproc.o						\
+		videoio.o						\
 		ximgproc.o
 
 ALX_INC	=								\
@@ -57,6 +58,14 @@ IMGPROC_INC	=							\
 		$(INC_DIR)/libalx/extra/cv/imgproc.hpp
 IMGPROC_SRC	=							\
 		$(SRC_DIR)/extra/cv/imgproc.cpp
+
+VIDEOIO_INC	=							\
+		$(INC_DIR)/libalx/extra/cv/core.hpp			\
+		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
+		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.hpp	\
+		$(INC_DIR)/libalx/extra/cv/videoio.hpp
+VIDEOIO_SRC	=							\
+		$(SRC_DIR)/extra/cv/videoio.cpp
 
 XIMGPROC_INC	=							\
 		$(INC_DIR)/libalx/extra/cv/core.hpp			\
@@ -103,6 +112,9 @@ highgui.so.s: $(HIGHGUI_SRC) $(HIGHGUI_INC)
 
 imgproc.a.s: $(IMGPROC_SRC) $(IMGPROC_INC)
 imgproc.so.s: $(IMGPROC_SRC) $(IMGPROC_INC)
+
+videoio.a.s: $(VIDEOIO_SRC) $(VIDEOIO_INC)
+videoio.so.s: $(VIDEOIO_SRC) $(VIDEOIO_INC)
 
 ximgproc.a.s: $(XIMGPROC_SRC) $(XIMGPROC_INC)
 ximgproc.so.s: $(XIMGPROC_SRC) $(XIMGPROC_INC)

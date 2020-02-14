@@ -16,7 +16,7 @@
 /*
  * Dynamic buffer
  *
- * A buffer pointer can be created with `struct Alx_Dyn_Buffer *buf;`
+ * A buffer pointer can be created with `struct Alx_DynBuf *buf;`
  * To use the buffer, it has to be initialized with `alx_dynbuf_init(&buf)`.
  * It can be deinitialized with `alx_dynbuf_deinit(buf)`.
  *
@@ -40,6 +40,8 @@
 
 #include <sys/types.h>
 
+#include "libalx/alx/data-structures/types.h"
+
 
 /******************************************************************************
  ******* macros ***************************************************************
@@ -54,18 +56,6 @@
 /******************************************************************************
  ******* struct / union *******************************************************
  ******************************************************************************/
-/*
- * Dynamic buffer
- *
- * data:	Pointer to the first byte in the buffer.
- * size:	Size of the data buffer (in bytes).
- * written:	Data used (in bytes).
- */
-struct	Alx_Dyn_Buffer {
-	unsigned char	*data;
-	size_t		size;
-	size_t		written;
-};
 
 
 /******************************************************************************
@@ -83,7 +73,23 @@ struct	Alx_Dyn_Buffer {
  *	ENOMEM:		Aborted; failure to allocate the buffer.
  */
 __attribute__((nonnull, warn_unused_result))
-int	alx_dynbuf_init		(struct Alx_Dyn_Buffer **buf);
+int	alx_dynbuf_init		(struct Alx_DynBuf **buf);
+
+/*
+ * Allocates memory for the buffer, and clones the ref buffer into it.
+ *
+ * clone:	Pointer to a pointer to a buffer.  A buffer will be allocated,
+ *		and a pointer to it will be stored in *clone.
+ * ref:		Pointer to a buffer to clone from.
+ *
+ * return:
+ *	0:		OK.
+ *	ENOANO:		Aborted; ref was NULL.
+ *	ENOMEM:		Aborted; failure to allocate the buffer.
+ */
+__attribute__((nonnull(1), warn_unused_result))
+int	alx_dynbuf_init_clone	(struct Alx_DynBuf **restrict clone,
+				 const struct Alx_DynBuf *restrict ref);
 
 /*
  * Deletes `buf`.
@@ -92,7 +98,7 @@ int	alx_dynbuf_init		(struct Alx_Dyn_Buffer **buf);
  *
  * buf:		Pointer to a buffer.  It is invalid after the call.
  */
-void	alx_dynbuf_deinit	(struct Alx_Dyn_Buffer *buf);
+void	alx_dynbuf_deinit	(struct Alx_DynBuf *buf);
 
 /*
  * Writes into the buffer.
@@ -110,7 +116,7 @@ void	alx_dynbuf_deinit	(struct Alx_Dyn_Buffer *buf);
  *			data is left untouched.
  */
 __attribute__((nonnull, warn_unused_result))
-int	alx_dynbuf_write	(struct Alx_Dyn_Buffer *restrict buf,
+int	alx_dynbuf_write	(struct Alx_DynBuf *restrict buf,
 				 size_t offset,
 				 const void *restrict data, size_t size);
 
@@ -132,7 +138,7 @@ int	alx_dynbuf_write	(struct Alx_Dyn_Buffer *restrict buf,
  *			data is left untouched.
  */
 __attribute__((nonnull, warn_unused_result))
-int	alx_dynbuf_insert	(struct Alx_Dyn_Buffer *restrict buf,
+int	alx_dynbuf_insert	(struct Alx_DynBuf *restrict buf,
 				 size_t offset,
 				 const void *restrict data, size_t size);
 
@@ -151,7 +157,7 @@ int	alx_dynbuf_insert	(struct Alx_Dyn_Buffer *restrict buf,
  */
 __attribute__((nonnull, warn_unused_result))
 ssize_t	alx_dynbuf_read		(void *restrict data, size_t size,
-				 const struct Alx_Dyn_Buffer *restrict buf,
+				 const struct Alx_DynBuf *restrict buf,
 				 size_t offset);
 
 /*
@@ -162,7 +168,7 @@ ssize_t	alx_dynbuf_read		(void *restrict data, size_t size,
  * size:	Number of bytes to be consumed.
  */
 __attribute__((nonnull))
-void	alx_dynbuf_consume	(struct Alx_Dyn_Buffer *buf, size_t size);
+void	alx_dynbuf_consume	(struct Alx_DynBuf *buf, size_t size);
 
 /*
  * Reallocates memory for the buffer, and updates any necessary metadata.
@@ -175,7 +181,7 @@ void	alx_dynbuf_consume	(struct Alx_Dyn_Buffer *buf, size_t size);
  *	ENOMEM:		Aborted; failure to allocate the data.
  */
 __attribute__((nonnull, warn_unused_result))
-int	alx_dynbuf_resize	(struct Alx_Dyn_Buffer *buf, size_t size);
+int	alx_dynbuf_resize	(struct Alx_DynBuf *buf, size_t size);
 
 
 /******************************************************************************
