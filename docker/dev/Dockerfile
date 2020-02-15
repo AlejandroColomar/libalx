@@ -1,4 +1,27 @@
-FROM		alejandrocolomar/libalx:devel
+FROM	debian:testing
+RUN	apt-get update							&& \
+	apt-get upgrade --yes						&& \
+	apt-get install -V \
+			gcc \
+			g++ \
+			make \
+			git \
+			pkg-config \
+			libbsd-dev \
+			libcurl4-openssl-dev \
+			libgmp3-dev \
+			libgsl-dev \
+			libncurses-dev \
+			libopencv-dev \
+			libtesseract-dev \
+			libzbar-dev \
+			deborphan \
+			--yes						&& \
+	apt-get autoremove --purge --yes				&& \
+	apt-get purge $(deborphan) --yes				&& \
+	apt-get autoclean						&& \
+	apt-get clean
+
 WORKDIR	/tmp
 RUN		git clone https://github.com/alejandro-colomar/libalx.git	&& \
 		make		-C libalx	-j 8				&& \
